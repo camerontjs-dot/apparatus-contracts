@@ -1,0 +1,29 @@
+# macOS / local editor noise
+.DS_Store
+*.swp
+*.swo
+
+# Python and tooling caches
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local virtual environments
+.venv/
+venv/
+
+# Build and package outputs
+build/
+dist/
+*.egg-info/
+
+# Internal-only project files (kept locally for ongoing work, not published)
+AGENTS.md
+CHANGELOG.md
+planning/
+scratch/
