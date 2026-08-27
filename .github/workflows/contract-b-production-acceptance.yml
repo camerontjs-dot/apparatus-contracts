@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: camerontjs-dot/evidence-bundler
-          ref: 6e0c3130c62003150f1b49ccd73a6058bba1edb5
+          ref: a75da32d22560fee9cf8b4e2c94e769c6e42998f
           path: _deps/evidence-bundler
 
       - name: Checkout pinned Claim Audit Lab promotion head
@@ -34,7 +34,7 @@ jobs:
 
       - name: Verify exact repository heads
         run: |
-          test "$(git -C _deps/evidence-bundler rev-parse HEAD)" = "6e0c3130c62003150f1b49ccd73a6058bba1edb5"
+          test "$(git -C _deps/evidence-bundler rev-parse HEAD)" = "a75da32d22560fee9cf8b4e2c94e769c6e42998f"
           test "$(git -C _deps/claim-audit-lab rev-parse HEAD)" = "5c5be3580685322adb287b84d1539ec6fd9803d0"
           printf 'APPARATUS_SHA=%s\n' "$(git rev-parse HEAD)" | tee acceptance-heads.txt
           printf 'EVIDENCE_BUNDLER_SHA=%s\n' "$(git -C _deps/evidence-bundler rev-parse HEAD)" | tee -a acceptance-heads.txt
@@ -58,15 +58,18 @@ jobs:
 
       - name: Run cross-repository production gates 1-17
         run: |
+          set -o pipefail
           mkdir -p production-acceptance
           python tests/contract_b_production_acceptance.py 2>&1 | tee production-acceptance/cross-repo-gates.log
 
       - name: Gate 18 - Apparatus production tests
         run: |
-          python -m pytest -q 2>&1 | tee production-acceptance/apparatus-pytest.log
+          set -o pipefail
+          python -m pytest -q tests 2>&1 | tee production-acceptance/apparatus-pytest.log
 
       - name: Gate 19 - Evidence Bundler relevant production tests
         run: |
+          set -o pipefail
           python -m pytest -q \
             _deps/evidence-bundler/tests/test_bundle_writer.py \
             _deps/evidence-bundler/tests/test_hashing.py \
@@ -77,15 +80,22 @@ jobs:
 
       - name: Gate 20 - Claim Audit Lab relevant production tests
         run: |
+          set -o pipefail
           python -m pytest -q \
             _deps/claim-audit-lab/tests/test_cb_bundle_loader.py \
             _deps/claim-audit-lab/tests/test_cb_models.py \
             _deps/claim-audit-lab/tests/test_cb_adapter.py \
             2>&1 | tee production-acceptance/claim-audit-lab-pytest.log
 
-      - name: Verify CAL canonical and packaged vocabulary bytes
+      - name: Verify canonical contract distribution bytes and pins
         run: |
-          cmp _deps/claim-audit-lab/schema/vocabulary.yaml _deps/claim-audit-lab/src/claim_audit_lab/schema/vocabulary.yaml
+          cmp schema/vocabulary.yaml _deps/evidence-bundler/schema/vocabulary.yaml
+          cmp schema/vocabulary.yaml _deps/claim-audit-lab/schema/vocabulary.yaml
+          cmp schema/vocabulary.yaml _deps/claim-audit-lab/src/claim_audit_lab/schema/vocabulary.yaml
+          test "$(cat schema/.contract-version)" = "1.2.0"
+          test "$(cat _deps/evidence-bundler/schema/.contract-version)" = "1.2.0"
+          test "$(cat _deps/claim-audit-lab/schema/.contract-version)" = "1.2.0"
+          test "$(cat _deps/claim-audit-lab/src/claim_audit_lab/schema/.contract-version)" = "1.2.0"
 
       - name: Upload production acceptance evidence
         if: always()
