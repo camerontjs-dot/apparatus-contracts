@@ -1,0 +1,152 @@
+name: Contract B V0 V1 V2 conformance research run 2
+
+on:
+  push:
+    branches:
+      - research/contract-b-v0-v1-v2-conformance-r2
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  conformance-r2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout Apparatus experiment branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout pinned Evidence Bundler research head
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: b4ca9111f5957ef7e7955e2c5024f2280ee19eb5
+          path: _deps/evidence-bundler
+
+      - name: Checkout pinned Claim Audit Lab research head
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: 6acc3462dad73959ccec6bccf8407215f5274cf6
+          path: _deps/claim-audit-lab
+
+      - name: Checkout pinned Decision Engine downstream baseline
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: 55f108c196ead020b5965c7d4d737464c92bc4a0
+          path: _deps/decision-engine
+
+      - name: Verify and record exact heads
+        id: pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p experiment-results/contract-b-v0-v1-v2-r2
+          APPARATUS_HEAD="$(git rev-parse HEAD)"
+          EB_HEAD="$(git -C _deps/evidence-bundler rev-parse HEAD)"
+          CAL_HEAD="$(git -C _deps/claim-audit-lab rev-parse HEAD)"
+          DE_HEAD="$(git -C _deps/decision-engine rev-parse HEAD)"
+          printf 'apparatus_experiment=%s\nevidence_bundler=%s\nclaim_audit_lab=%s\ndecision_engine=%s\n' \
+            "$APPARATUS_HEAD" "$EB_HEAD" "$CAL_HEAD" "$DE_HEAD" | tee experiment-results/contract-b-v0-v1-v2-r2/pins.txt
+          test "$EB_HEAD" = "b4ca9111f5957ef7e7955e2c5024f2280ee19eb5"
+          test "$CAL_HEAD" = "6acc3462dad73959ccec6bccf8407215f5274cf6"
+          test "$DE_HEAD" = "55f108c196ead020b5965c7d4d737464c92bc4a0"
+          git merge-base --is-ancestor 63e8506396132a44ebc0e6c2312047e99b1125eb HEAD
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: |
+            pyproject.toml
+            _deps/claim-audit-lab/pyproject.toml
+
+      - name: Install research test dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[dev]'
+          python -m pip install -e '_deps/claim-audit-lab[dev,v1]'
+
+      - name: Run Apparatus locked verifier suite only
+        id: apparatus
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          pytest -q tests 2>&1 | tee experiment-results/contract-b-v0-v1-v2-r2/apparatus-pytest.log
+
+      - name: Run Evidence Bundler Contract-B seam controls
+        id: eb
+        continue-on-error: true
+        shell: bash
+        env:
+          PYTHONPATH: _deps/evidence-bundler/src
+        run: |
+          set -o pipefail
+          pytest -q _deps/evidence-bundler/tests/test_contract_b_seam_probe.py 2>&1 | tee experiment-results/contract-b-v0-v1-v2-r2/eb-seam-pytest.log
+
+      - name: Run CAL consumer and preservation research controls
+        id: cal_research
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          cd _deps/claim-audit-lab
+          PYTHONPATH="$PWD" python -m pytest -q \
+            tests/v1/test_rung04_realistic_apparatus_bundles.py \
+            tests/v1/test_rung05_cal_consumer_seam.py \
+            2>&1 | tee ../../experiment-results/contract-b-v0-v1-v2-r2/cal-rung04-rung05-pytest.log
+
+      - name: Run CAL resealed-C-B packaging mechanism controls
+        id: cal_writeback
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          cd _deps/claim-audit-lab
+          PYTHONPATH="$PWD" python -m pytest -q tests/v1/test_cb_writeback.py \
+            2>&1 | tee ../../experiment-results/contract-b-v0-v1-v2-r2/cal-writeback-pytest.log
+
+      - name: Execute corrected cross-repo V0 V1 V2 runner
+        id: custom
+        continue-on-error: true
+        shell: bash
+        env:
+          EB_ROOT: ${{ github.workspace }}/_deps/evidence-bundler
+          CAL_ROOT: ${{ github.workspace }}/_deps/claim-audit-lab
+          RESULTS_DIR: ${{ github.workspace }}/experiment-results/contract-b-v0-v1-v2-r2
+        run: |
+          set -o pipefail
+          python experiments/contract_b_v0_v1_v2_conformance_r2.py \
+            2>&1 | tee experiment-results/contract-b-v0-v1-v2-r2/custom-run-r2.log
+
+      - name: Record workflow outcomes
+        if: always()
+        shell: bash
+        run: |
+          cat > experiment-results/contract-b-v0-v1-v2-r2/workflow-outcomes.json <<'JSON'
+          {
+            "pin_verification": "${{ steps.pins.outcome }}",
+            "apparatus_verifier": "${{ steps.apparatus.outcome }}",
+            "evidence_bundler_seam": "${{ steps.eb.outcome }}",
+            "cal_rung04_rung05": "${{ steps.cal_research.outcome }}",
+            "cal_writeback": "${{ steps.cal_writeback.outcome }}",
+            "custom_cross_repo_runner": "${{ steps.custom.outcome }}"
+          }
+          JSON
+          cat experiment-results/contract-b-v0-v1-v2-r2/workflow-outcomes.json
+
+      - name: Upload experiment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-b-v0-v1-v2-conformance-r2-${{ github.run_id }}
+          path: experiment-results/contract-b-v0-v1-v2-r2/
+          if-no-files-found: error
+          retention-days: 90
