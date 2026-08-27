@@ -129,6 +129,6 @@ The v1 package closed clean on 2026-05-22: 20/20 pytest, ruff clean, and the int
 
 ## Known limits
 
-The Research Scaffold Harness has no executable surface yet. It carries an in-sync embedded vocabulary copy and pin, so `verify-vocabulary` treats it as a present consumer. No Harness-produced C-A has been validated through `verify-contract-integrity` because none exists.
+The sibling Research Scaffold Harness repository has an executable CLI that can write provenance-sealed C-A artifacts. Apparatus Contracts has not yet validated a Harness-produced C-A through `verify-contract-integrity`; that end-to-end boundary check is still pending.
 
 The verifier suite enforces structural and vocabulary integrity. It does not validate methodological correctness of any specific scaffold run or evidence bundle. That is the research proposal's experimental design, not the contract's job.
