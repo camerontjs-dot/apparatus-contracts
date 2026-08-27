@@ -46,8 +46,8 @@ jobs:
       - name: Verify frozen RC1 consumers unchanged from parent
         shell: bash
         run: |
-          test "$(git rev-parse aa016bcebd57dd09870a9cd4cc129ea7f7f5fc43:experiments/contract_b_rc1_consumer_a.py)" = "$(git rev-parse HEAD:experiments/contract_b_rc1_consumer_a.py)"
-          test "$(git rev-parse aa016bcebd57dd09870a9cd4cc129ea7f7f5fc43:experiments/contract_b_rc1_consumer_b.mjs)" = "$(git rev-parse HEAD:experiments/contract_b_rc1_consumer_b.mjs)"
+          test "$(git rev-parse HEAD:experiments/contract_b_rc1_consumer_a.py)" = "2df5419ce8ca138f27ac381e246e864411bb8587"
+          test "$(git rev-parse HEAD:experiments/contract_b_rc1_consumer_b.mjs)" = "230c86dd2d84d1d2618cbf4f92291d6da596e597"
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
