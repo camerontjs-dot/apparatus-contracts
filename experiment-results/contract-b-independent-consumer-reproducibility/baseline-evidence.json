@@ -1,0 +1,54 @@
+{
+  "experiment": "Contract B Independent-Consumer Reproducibility",
+  "date": "2026-08-27",
+  "research_only": true,
+  "disposition": "NOT_REPRODUCIBLE",
+  "pins": {
+    "evidence_bundler": "b4ca9111f5957ef7e7955e2c5024f2280ee19eb5",
+    "claim_audit_lab": "6acc3462dad73959ccec6bccf8407215f5274cf6",
+    "apparatus_candidate": "63e8506396132a44ebc0e6c2312047e99b1125eb",
+    "prior_report": "f4ee2dbd853821ba54328156bbab1c71235fae55"
+  },
+  "frozen_prior": {
+    "fixture_sha256": "sha256:4d5a900232cd243d82fffdc6a5422d32287e9496f3e9728ae684e1ef04fdc7cf",
+    "v1_sha256": "sha256:a861eeafe9a360e9280e2d2c092bd2bbcdee6661c55412802be6fecbf8c7b2d7",
+    "consumer_a_measurement_view_sha256": "sha256:b18715b861343a541fd8317d38cfa3b4f6acf2efdcb9578fac55313bf721f8db"
+  },
+  "consumer_a": {
+    "fresh_checkout_imported": false,
+    "evidence_basis": [
+      "prior pinned GitHub Actions execution from the completed V0/V1/V2 experiment",
+      "fresh local re-evaluation of the exact inspected pure projection logic against the hash-matched regenerated V1"
+    ],
+    "observed_measurement_view_sha256": "sha256:b18715b861343a541fd8317d38cfa3b4f6acf2efdcb9578fac55313bf721f8db"
+  },
+  "consumer_b": {
+    "isolation": "sequential freeze before Consumer A source inspection; separate Conduit agent unavailable",
+    "source_sha256": "sha256:da218d8030b0c9eae3f79345c5f6b5f035a8c1cd4bd79cb5d9b7e7e4994d099a",
+    "baseline_status": "FAIL_INTAKE",
+    "error_type": "IntakeError",
+    "error": "bundle must be an object",
+    "ledger_hash": null,
+    "patched_after_difference": false
+  },
+  "baseline": {
+    "regenerated_v1_sha256": "sha256:a861eeafe9a360e9280e2d2c092bd2bbcdee6661c55412802be6fecbf8c7b2d7",
+    "matches_frozen_prior_v1": true,
+    "canonical_ledger_equivalence_reached": false
+  },
+  "metamorphic_controls": {
+    "M1_nomination_mutation": "NOT_RUN_BASELINE_GATE_FAILED",
+    "M2_downstream_sidecar_injection": "NOT_RUN_BASELINE_GATE_FAILED",
+    "M3_optional_field_absence": "NOT_RUN_BASELINE_GATE_FAILED",
+    "M4_integrity_corruption": "NOT_RUN_BASELINE_GATE_FAILED"
+  },
+  "classification": {
+    "physical_v1_shape": "SPECIFICATION_PROFILE_UNDERSPECIFIED_AND_B_GUESSED_WRONG",
+    "normalized_ledger_target": "UNDERSPECIFIED",
+    "canonicalization": "UNDERSPECIFIED",
+    "absence_vs_unknown_encoding": "UNDERSPECIFIED",
+    "research_v1_integrity_envelope": "UNDERSPECIFIED"
+  },
+  "canonical_contract_b_modified": false,
+  "contract_c_touched": false
+}
