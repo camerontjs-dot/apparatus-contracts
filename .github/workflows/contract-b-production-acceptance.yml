@@ -19,24 +19,24 @@ jobs:
       - name: Checkout Apparatus promotion branch
         uses: actions/checkout@v4
 
-      - name: Checkout pinned Evidence Bundler promotion head
+      - name: Checkout pinned Evidence Bundler production main
         uses: actions/checkout@v4
         with:
           repository: camerontjs-dot/evidence-bundler
-          ref: a75da32d22560fee9cf8b4e2c94e769c6e42998f
+          ref: c8189c31adbab11729c31430c2070126224a2d42
           path: _deps/evidence-bundler
 
-      - name: Checkout pinned Claim Audit Lab promotion head
+      - name: Checkout pinned Claim Audit Lab production main
         uses: actions/checkout@v4
         with:
           repository: camerontjs-dot/claim-audit-lab
-          ref: 05a07847eba6ecf200757d2043c769e2b64d4b86
+          ref: 33a928db97316a3652d57df9cafb8ca240305233
           path: _deps/claim-audit-lab
 
       - name: Verify exact repository heads
         run: |
-          test "$(git -C _deps/evidence-bundler rev-parse HEAD)" = "a75da32d22560fee9cf8b4e2c94e769c6e42998f"
-          test "$(git -C _deps/claim-audit-lab rev-parse HEAD)" = "05a07847eba6ecf200757d2043c769e2b64d4b86"
+          test "$(git -C _deps/evidence-bundler rev-parse HEAD)" = "c8189c31adbab11729c31430c2070126224a2d42"
+          test "$(git -C _deps/claim-audit-lab rev-parse HEAD)" = "33a928db97316a3652d57df9cafb8ca240305233"
           printf 'APPARATUS_SHA=%s\n' "$(git rev-parse HEAD)" | tee acceptance-heads.txt
           printf 'EVIDENCE_BUNDLER_SHA=%s\n' "$(git -C _deps/evidence-bundler rev-parse HEAD)" | tee -a acceptance-heads.txt
           printf 'CLAIM_AUDIT_LAB_SHA=%s\n' "$(git -C _deps/claim-audit-lab rev-parse HEAD)" | tee -a acceptance-heads.txt
