@@ -55,11 +55,11 @@ jobs:
           cache: pip
           cache-dependency-path: _deps/claim-audit-lab/pyproject.toml
 
-      - name: Install minimal pinned consumer dependencies
+      - name: Install pinned CAL v1 dependencies
         shell: bash
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e _deps/claim-audit-lab
+          python -m pip install -e '_deps/claim-audit-lab[v1]'
 
       - name: Execute temporal/version applicability runner
         shell: bash
