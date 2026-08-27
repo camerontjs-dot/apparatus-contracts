@@ -1,0 +1,101 @@
+name: Contract B CAL seam environment correction run 3
+
+on:
+  push:
+    branches:
+      - research/contract-b-v0-v1-v2-conformance-r3
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cal-seam-r3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout Apparatus experiment branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout pinned Evidence Bundler research head
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: b4ca9111f5957ef7e7955e2c5024f2280ee19eb5
+          path: _deps/evidence-bundler
+
+      - name: Checkout pinned Claim Audit Lab research head
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: 6acc3462dad73959ccec6bccf8407215f5274cf6
+          path: _deps/claim-audit-lab
+
+      - name: Checkout pinned Decision Engine downstream baseline
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: 55f108c196ead020b5965c7d4d737464c92bc4a0
+          path: _deps/decision-engine
+
+      - name: Verify and record exact heads
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p experiment-results/contract-b-v0-v1-v2-r3
+          APPARATUS_HEAD="$(git rev-parse HEAD)"
+          EB_HEAD="$(git -C _deps/evidence-bundler rev-parse HEAD)"
+          CAL_HEAD="$(git -C _deps/claim-audit-lab rev-parse HEAD)"
+          DE_HEAD="$(git -C _deps/decision-engine rev-parse HEAD)"
+          printf 'apparatus_experiment=%s\nevidence_bundler=%s\nclaim_audit_lab=%s\ndecision_engine=%s\n' \
+            "$APPARATUS_HEAD" "$EB_HEAD" "$CAL_HEAD" "$DE_HEAD" | tee experiment-results/contract-b-v0-v1-v2-r3/pins.txt
+          test "$EB_HEAD" = "b4ca9111f5957ef7e7955e2c5024f2280ee19eb5"
+          test "$CAL_HEAD" = "6acc3462dad73959ccec6bccf8407215f5274cf6"
+          test "$DE_HEAD" = "55f108c196ead020b5965c7d4d737464c92bc4a0"
+          git merge-base --is-ancestor 63e8506396132a44ebc0e6c2312047e99b1125eb HEAD
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: _deps/claim-audit-lab/pyproject.toml
+
+      - name: Install pinned CAL research environment
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '_deps/claim-audit-lab[dev,v1]'
+          python -m spacy download en_core_web_sm
+
+      - name: Run pinned CAL Rung 04 and Rung 05 controls
+        id: cal
+        shell: bash
+        run: |
+          set -o pipefail
+          cd _deps/claim-audit-lab
+          PYTHONPATH="$PWD" python -m pytest -q \
+            tests/v1/test_rung04_realistic_apparatus_bundles.py \
+            tests/v1/test_rung05_cal_consumer_seam.py \
+            2>&1 | tee ../../experiment-results/contract-b-v0-v1-v2-r3/cal-rung04-rung05-pytest.log
+
+      - name: Record correction provenance
+        if: always()
+        shell: bash
+        run: |
+          cat > experiment-results/contract-b-v0-v1-v2-r3/deviation.md <<'EOF'
+          # Run 3 environment correction
+
+          Run 2 executed the pinned CAL Rung-04/Rung-05 suite with the `v1` package extra installed but omitted the separately documented `python -m spacy download en_core_web_sm` post-install step. H05_2 and H05_3 therefore failed before their assertions at spaCy model load. Run 3 changes only that execution environment requirement and reruns the same pinned CAL tests at the same CAL SHA.
+          EOF
+
+      - name: Upload correction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-b-cal-seam-r3-${{ github.run_id }}
+          path: experiment-results/contract-b-v0-v1-v2-r3/
+          if-no-files-found: error
+          retention-days: 90
