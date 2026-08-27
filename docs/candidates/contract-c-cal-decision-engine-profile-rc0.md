@@ -3,7 +3,7 @@
 **Status:** research candidate, not locked  
 **Label:** Contract C / C-C  
 **Producer:** Claim Audit Lab (CAL)  
-**Consumer:** Decision Engine  
+**Consumer:** Decision Engine Gate head  
 **Depends on:** Contract-B CAL consumer candidate and its conformance work
 
 ## Purpose
@@ -21,7 +21,7 @@ Evidence Bundler facts
   -> Contract B
   -> CAL audit judgment
   -> Contract C
-  -> Decision Engine policy judgment
+  -> Decision Engine Gate/bar policy judgment
   -> downstream operator/system authority
 ```
 
@@ -77,11 +77,12 @@ Decision Engine must:
 - fail closed on malformed/incompatible input;
 - verify identity/integrity before applying policy;
 - treat C-C as a record of CAL's audit, not proof of reality;
-- apply a separately versioned destination policy;
+- adapt C-C into a separately versioned Gate/bar policy rather than creating a second audit layer;
+- preserve the Gate distinction between `fail` and `unknown`;
 - never silently infer missing favorable or adverse state;
 - never rewrite the audited claim while retaining the old audit identity;
 - never re-run semantic audit from incidental CAL internals;
-- bind its decision receipt back to claim, C-B bundle, CAL result, and policy;
+- bind its decision receipt back to claim, C-B bundle, CAL result, and Gate/bar version;
 - preserve a human-review path.
 
 ## Excluded from the stable seam unless testing proves otherwise
@@ -104,21 +105,47 @@ If `support_verdict == not_checkable`, `support_verdict_reason` is required. Mis
 
 Decision-relevant unknown state remains first-class. `unknown` must never collapse into favorable or adverse default behavior merely because a field is missing.
 
+For the current Gate consumer, an unresolved blocking criterion becomes a `hold`, not a fabricated `reject`.
+
 ## Decision basis preservation
 
 The decision-basis passage IDs/hashes identify what CAL relied on for its current result. They do not replace or prune the retained Contract-B evidence record.
 
+## Decision Engine Gate alignment
+
+The first tested consumer is the generic Decision Engine Gate head.
+
+Contract C is projected into an audited-claim Gate item and evaluated against a destination-specific bar. The bar may produce:
+
+```text
+promote | hold | reject
+```
+
+These are Gate recommendations, not Contract-C vocabulary and not CAL verdicts.
+
+The distinction is deliberate:
+
+- a known bar failure may produce `reject`;
+- unresolved audit state may produce `hold`;
+- advisory findings may remain caveats on a `promote` recommendation;
+- the Gate may not reinterpret a CAL abstention as evidence of falsity.
+
 ## MainFrame implication
 
-For the first MainFrame integration, Decision Engine may emit a `promotion_candidate`, but it must not directly set a `10_knowledge/` note to `stable`.
+For the first MainFrame integration, a Gate `promote` result is only a recommendation to proceed to operator review. It must not directly set a `10_knowledge/` note to `stable`.
 
 The intended sequence is:
 
 ```text
-Contract C -> Decision Engine receipt -> MainFrame/operator gate -> separate lifecycle mutation referencing the receipt
+Contract C
+  -> Decision Engine Gate receipt
+  -> MainFrame/operator gate
+  -> separate lifecycle mutation referencing the receipt
 ```
 
 Raw evidence remains immutable.
+
+The current structural shadow also composes the existing MainFrame note-promotion bar with one audited-claim Gate decision per supplied claim. Missing claim-audit coverage produces a hold rather than allowing a passing subset to stand in for the whole note.
 
 ## Contract-B alignment requirement
 
@@ -136,12 +163,13 @@ C-C must use the live semantic separation only after the Contract-B/CAL conforma
 
 Do not lock C-C until:
 
-1. the Decision Engine Contract-C shadow passes;
+1. the Decision Engine Contract-C/Gate shadow passes;
 2. Contract-B/CAL conformance establishes the upstream seam;
 3. a real CAL result projects to C-C without invented defaults;
-4. the minimal C-C and full CAL package produce the same downstream policy disposition where they should;
+4. the minimal C-C and full CAL package produce the same downstream Gate disposition where they should;
 5. irrelevant CAL telemetry is non-controlling;
 6. decision-relevant state mutations are visible;
-7. MainFrame integration preserves raw-source immutability and the operator promotion gate.
+7. a real MainFrame note/source fixture preserves complete claim-audit coverage;
+8. MainFrame integration preserves raw-source immutability and the operator promotion gate.
 
 RC0 is a testable candidate, not production authority.
