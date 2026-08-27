@@ -19,11 +19,7 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-# ---------------------------------------------------------------------------
-# Controlled-vocabulary literal types (kept in sync with schema/vocabulary.yaml).
-# ---------------------------------------------------------------------------
-
-ContractVersion = Literal["1.0.0", "1.1.0"]
+ContractVersion = Literal["1.0.0", "1.1.0", "1.2.0"]
 WorkflowCondition = Literal[
     "baseline",
     "format_only",
@@ -60,14 +56,7 @@ DeviationType = Literal[
 
 
 class _Strict(BaseModel):
-    """Base class: forbid undeclared fields and validate on assignment."""
-
     model_config = ConfigDict(extra="forbid", validate_assignment=True)
-
-
-# ---------------------------------------------------------------------------
-# C-A: scaffold_run.yaml
-# ---------------------------------------------------------------------------
 
 
 class ScaffoldInfo(_Strict):
@@ -106,8 +95,6 @@ class RunMetadata(_Strict):
 
 
 class ScaffoldRun(_Strict):
-    """C-A frozen state manifest (``scaffold_run.yaml``)."""
-
     run_id: str
     task_id: str
     workflow_condition: WorkflowCondition
@@ -120,19 +107,12 @@ class ScaffoldRun(_Strict):
     run_metadata: RunMetadata
 
 
-# ---------------------------------------------------------------------------
-# C-A: claims.yaml
-# ---------------------------------------------------------------------------
-
-
 class SourceRef(_Strict):
     source_id: str
     passage_id: str
 
 
 class ClaimRecord(_Strict):
-    """One entry in C-A ``claims.yaml`` (all claims, including downgraded)."""
-
     claim_id: str
     claim_type: ClaimType
     claim_text: str
@@ -148,17 +128,10 @@ class ClaimRecord(_Strict):
 
 
 class ClaimsRegistry(_Strict):
-    """C-A ``claims.yaml`` top-level shape."""
-
     schema_version: ContractVersion
     run_id: str
     generated_at_utc: str
     claims: list[ClaimRecord]
-
-
-# ---------------------------------------------------------------------------
-# C-A: corpus/{source_id}/metadata.yaml
-# ---------------------------------------------------------------------------
 
 
 class BibliographicInfo(_Strict):
@@ -179,8 +152,6 @@ class RetrievalInfo(_Strict):
 
 
 class SourceMetadata(_Strict):
-    """Per-source metadata at ``corpus/{source_id}/metadata.yaml``."""
-
     source_id: str
     schema_version: ContractVersion
     bibliographic: BibliographicInfo
@@ -188,11 +159,6 @@ class SourceMetadata(_Strict):
     content_hash: str
     retrieval: RetrievalInfo
     notes: str = ""
-
-
-# ---------------------------------------------------------------------------
-# C-A: corpus/{source_id}/passages.yaml
-# ---------------------------------------------------------------------------
 
 
 class PassageEntry(_Strict):
@@ -207,26 +173,12 @@ class PassageEntry(_Strict):
 
 
 class PassagesFile(_Strict):
-    """Per-source passages at ``corpus/{source_id}/passages.yaml``."""
-
     source_id: str
     schema_version: ContractVersion
     passages: list[PassageEntry]
 
 
-# ---------------------------------------------------------------------------
-# C-B: bundle_manifest.yaml
-# ---------------------------------------------------------------------------
-
-
 class EvidenceBuilderInfo(_Strict):
-    """Producer block on the bundle manifest.
-
-    Field name retains the historical "evidence_builder" identifier per the
-    locked v1.0.0 contract roles. The project component is now called
-    "Evidence Bundler"; see ``DECISIONS.md``.
-    """
-
     version: str
     config_hash: str
     operator: str
@@ -256,8 +208,6 @@ class QualityGates(_Strict):
 
 
 class ReviewerSignOff(_Strict):
-    """21 CFR Part 11 e-signature surface. Null fields for demo runs."""
-
     required: bool
     signed_by: Optional[str] = None
     signature_timestamp_utc: Optional[str] = None
@@ -265,8 +215,6 @@ class ReviewerSignOff(_Strict):
 
 
 class BundleManifest(_Strict):
-    """C-B certificate of analysis (``bundle_manifest.yaml``)."""
-
     bundle_id: str
     schema_version: ContractVersion
     generated_at_utc: str
@@ -282,11 +230,6 @@ class BundleManifest(_Strict):
     validation_set_version: str
     validation_set_hash: str
     reviewer_sign_off: ReviewerSignOff
-
-
-# ---------------------------------------------------------------------------
-# C-B: claims/{claim_id}.yaml
-# ---------------------------------------------------------------------------
 
 
 class EvidencePassageEntry(_Strict):
@@ -312,8 +255,6 @@ class CounterevidencePassageEntry(_Strict):
 
 
 class AuditBlock(_Strict):
-    """Audit fields populated by Claim Audit Lab. Null at handoff."""
-
     audit_run_id: Optional[str] = None
     audited_at_utc: Optional[str] = None
     audit_support_verdict: Optional[AuditSupportVerdict] = None
@@ -325,8 +266,6 @@ class AuditBlock(_Strict):
 
 
 class ClaimAuditUnit(_Strict):
-    """Self-contained audit unit at ``claims/{claim_id}.yaml``."""
-
     claim_id: str
     bundle_id: str
     schema_version: ContractVersion
@@ -344,11 +283,6 @@ class ClaimAuditUnit(_Strict):
     audit: AuditBlock
 
 
-# ---------------------------------------------------------------------------
-# C-B: evidence/{source_id}/passages/{passage_id}.yaml
-# ---------------------------------------------------------------------------
-
-
 class ProvenanceBlock(_Strict):
     source_url: str
     source_access_date_utc: str
@@ -359,8 +293,6 @@ class ProvenanceBlock(_Strict):
 
 
 class PassageRecord(_Strict):
-    """One passage at ``evidence/{source_id}/passages/{passage_id}.yaml``."""
-
     passage_id: str
     source_id: str
     bundle_id: str
@@ -374,11 +306,6 @@ class PassageRecord(_Strict):
     cited_by_claims: list[str]
     extraction_method: ExtractionMethod
     provenance: ProvenanceBlock
-
-
-# ---------------------------------------------------------------------------
-# C-B: audit_config.yaml
-# ---------------------------------------------------------------------------
 
 
 class ScoringConfig(_Strict):
@@ -404,8 +331,6 @@ class ChangeLogEntry(_Strict):
 
 
 class AuditConfig(_Strict):
-    """Frozen audit rules at ``audit_config.yaml``."""
-
     config_id: str
     config_hash: str
     schema_version: ContractVersion
@@ -416,14 +341,7 @@ class AuditConfig(_Strict):
     change_log: list[ChangeLogEntry]
 
 
-# ---------------------------------------------------------------------------
-# Deviation record (used by the integrity verifier when it emits one).
-# ---------------------------------------------------------------------------
-
-
 class DeviationRecord(_Strict):
-    """A formal deviation per the spec's Deviation Handling section."""
-
     deviation_id: str
     deviation_type: DeviationType
     artifact_id: str
