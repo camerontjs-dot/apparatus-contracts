@@ -3,6 +3,7 @@ name: Contract B 1.2 production acceptance
 on:
   push:
     branches:
+      - main
       - promotion/contract-b-factual-context-extension-v1.2
   pull_request:
     branches:
@@ -29,13 +30,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: camerontjs-dot/claim-audit-lab
-          ref: 5c5be3580685322adb287b84d1539ec6fd9803d0
+          ref: 680e7af4ae21efc0689a72d5de46fecb9d0991ce
           path: _deps/claim-audit-lab
 
       - name: Verify exact repository heads
         run: |
           test "$(git -C _deps/evidence-bundler rev-parse HEAD)" = "a75da32d22560fee9cf8b4e2c94e769c6e42998f"
-          test "$(git -C _deps/claim-audit-lab rev-parse HEAD)" = "5c5be3580685322adb287b84d1539ec6fd9803d0"
+          test "$(git -C _deps/claim-audit-lab rev-parse HEAD)" = "680e7af4ae21efc0689a72d5de46fecb9d0991ce"
           printf 'APPARATUS_SHA=%s\n' "$(git rev-parse HEAD)" | tee acceptance-heads.txt
           printf 'EVIDENCE_BUNDLER_SHA=%s\n' "$(git -C _deps/evidence-bundler rev-parse HEAD)" | tee -a acceptance-heads.txt
           printf 'CLAIM_AUDIT_LAB_SHA=%s\n' "$(git -C _deps/claim-audit-lab rev-parse HEAD)" | tee -a acceptance-heads.txt
