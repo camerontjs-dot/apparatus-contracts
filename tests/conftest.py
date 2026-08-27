@@ -55,8 +55,12 @@ def ca_tree_copy(handoff_demo_ca: Path, tmp_path: Path) -> Path:
 
 
 @pytest.fixture
-def consumer_layout(tmp_path: Path, canonical_vocab_path: Path) -> Path:
-    """Build a tmp sibling-layout root with three consumers each pinning 1.1.0.
+def consumer_layout(
+    tmp_path: Path,
+    canonical_vocab_path: Path,
+    canonical_pin_path: Path,
+) -> Path:
+    """Build a tmp sibling layout with consumers matching the canonical pin.
 
     Returns the sibling-root path. Inside it: ``apparatus-contracts/`` mirrors
     canonical and each consumer directory carries a byte-identical
@@ -65,14 +69,15 @@ def consumer_layout(tmp_path: Path, canonical_vocab_path: Path) -> Path:
     sibling_root = tmp_path / "live-asset"
     sibling_root.mkdir()
 
+    pin_bytes = canonical_pin_path.read_bytes()
     ac_root = sibling_root / "apparatus-contracts"
     (ac_root / "schema").mkdir(parents=True)
     shutil.copy(canonical_vocab_path, ac_root / "schema" / "vocabulary.yaml")
-    (ac_root / "schema" / ".contract-version").write_text("1.1.0\n", encoding="utf-8")
+    (ac_root / "schema" / ".contract-version").write_bytes(pin_bytes)
 
     for name in ("claim-audit-lab", "evidence-bundler", "research-scaffold-harness"):
         schema_dir = sibling_root / name / "schema"
         schema_dir.mkdir(parents=True)
         shutil.copy(canonical_vocab_path, schema_dir / "vocabulary.yaml")
-        (schema_dir / ".contract-version").write_text("1.1.0\n", encoding="utf-8")
+        (schema_dir / ".contract-version").write_bytes(pin_bytes)
     return ac_root
