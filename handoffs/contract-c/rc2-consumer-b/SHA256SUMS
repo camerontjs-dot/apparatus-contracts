@@ -1,8 +1,9 @@
 0eec05adae3038a5e86eb18e76a4b9b9cdd11ea6a915efa876dd0ea029e42f7e  INTERFACE-NOTES.md
-a4d9bc996c71acbad3b66a1b8f0bf03b108de4aecd84247f42f6f22fc7ec30d6  MANIFEST.json
+d68203d485d54c69098c007afdb3f6facabc76f9544be42a56eb2dec053d47a8  MANIFEST.json
 96a5f9e3bcca71dfdba41c8c9ebd6a896adb73e9b0e1a164f9cb285b2314191f  contract-b-1.2.0-input.zip.b64.part-001
 f0b9d8dd9d7ab3ae1bc16679b4fedd9bb1e82f7eeafb1c3d7ccaecfae0eb5419  contract-b-1.2.0-input.zip.b64.part-002
 9ee2d050e6a8df0817fdbf900d9e78794d5063d1da1a00e4184406af2f81d5e7  contract-b-1.2.0-input.zip.b64.part-003
 e744985790f94f53f975b38d98cd32685f4ca1fc6025f2b25eeb34a835cd70e8  contract-b-1.2.0-input.zip.b64.part-004
 68a46a517aff4feb9e23a45fedc37bb039dc248ed20762bf5a2bb1134a8ac885  contract-b-1.2.0-input.zip.b64.part-005
 e142f4aab119751dc201bca7994c0f97636c65647489f7edbee823a7f8aee3b4  contract-c-rc2-producer-candidate.json
+e8d49523913581393f4644ccdc26f41872230e8b83528f02fb1b439a2748c6dd  verify_handoff.py
