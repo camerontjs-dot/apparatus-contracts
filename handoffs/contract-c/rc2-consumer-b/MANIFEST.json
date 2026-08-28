@@ -1,9 +1,11 @@
 {
   "allowed_consumer_inputs": [
     "this manifest",
+    "INTERFACE-NOTES.md",
+    "SHA256SUMS",
+    "verify_handoff.py",
     "contract-c-rc2-producer-candidate.json",
-    "the listed Contract-B base64 part files",
-    "INTERFACE-NOTES.md"
+    "the listed Contract-B base64 part files"
   ],
   "candidate": {
     "path": "contract-c-rc2-producer-candidate.json",
@@ -33,6 +35,11 @@
     "Claim Audit Lab production implementation or traces beyond bytes present in this handoff",
     "expected Consumer B outputs or producer-side reasoning about how the candidate should be consumed"
   ],
+  "integrity_verifier": {
+    "path": "verify_handoff.py",
+    "scope": "transport and identity verification only; it does not evaluate Contract-C semantics or Consumer B correctness",
+    "sha256": "e8d49523913581393f4644ccdc26f41872230e8b83528f02fb1b439a2748c6dd"
+  },
   "non_claims": [
     "not a Contract-C version or production schema",
     "not a production exporter",
