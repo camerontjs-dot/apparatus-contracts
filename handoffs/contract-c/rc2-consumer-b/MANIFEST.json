@@ -1,0 +1,55 @@
+{
+  "allowed_consumer_inputs": [
+    "this manifest",
+    "contract-c-rc2-producer-candidate.json",
+    "the listed Contract-B base64 part files",
+    "INTERFACE-NOTES.md"
+  ],
+  "candidate": {
+    "path": "contract-c-rc2-producer-candidate.json",
+    "result_set_id": "result-set:80d5837106f14c87f60624f9c48561f3b6e95f6332d5cddbf7c63d811f452a3d",
+    "sha256": "e142f4aab119751dc201bca7994c0f97636c65647489f7edbee823a7f8aee3b4"
+  },
+  "contract_b_input": {
+    "base64_parts": [
+      "contract-b-1.2.0-input.zip.b64.part-001",
+      "contract-b-1.2.0-input.zip.b64.part-002",
+      "contract-b-1.2.0-input.zip.b64.part-003",
+      "contract-b-1.2.0-input.zip.b64.part-004",
+      "contract-b-1.2.0-input.zip.b64.part-005"
+    ],
+    "bundle_hash": "sha256:a40fe687c19944248fe77d044801dca02bba56259198b297b897f6a5a304f2fa",
+    "bundle_id": "85f8f6dc-f46f-5efa-b7e7-6e049da84591",
+    "concatenation_rule": "read parts in lexical order, strip trailing newline from each, concatenate, then base64-decode",
+    "contract_version": "1.2.0",
+    "decoded_zip_sha256": "6b67085e29357375bd43fcf27f376f4aa373507d5c615b75ba0070e4e78052d1",
+    "note": "The decoded ZIP is a neutral deterministic transport wrapper. Validate extracted Contract-B SHA256SUMS, bundle identity and bundle hash.",
+    "original_artifact_tree_sha256": "5fc54985c7b3f58a3721de0ef35c5e6888ebbe00d58ff9daa3bb82bc18c79ea7",
+    "sha256sums_sha256": "6e8ea67e6d744e68f395c952f2cb0f0ad4f6fc2b1ffafbb5cd356af697445c25"
+  },
+  "forbidden_consumer_inputs": [
+    "Apparatus PR #13 implementation files, tests, workflow code, comments, field-source map, field-justification registry, ablation matrix, weak-candidate controls, producer-boundary capture, semantic-firewall results, telemetry-invariance results, or summary.json",
+    "CAL RC2-C / RC2-D implementation or evaluator internals",
+    "Claim Audit Lab production implementation or traces beyond bytes present in this handoff",
+    "expected Consumer B outputs or producer-side reasoning about how the candidate should be consumed"
+  ],
+  "non_claims": [
+    "not a Contract-C version or production schema",
+    "not a production exporter",
+    "not Consumer B execution",
+    "not a Contract-C promotion decision",
+    "not Decision Engine authorization"
+  ],
+  "purpose": "Durably hand the exact frozen Contract-C RC2 producer candidate and its bound Contract-B input to a later independent Consumer B experiment without producer implementation or producer-side reasoning.",
+  "record": "contract-c-rc2-consumer-b-clean-room-handoff",
+  "source": {
+    "artifact_digest": "sha256:35119827d4ede3b3f1654b943be7d25f5b73c87fc1c5ac773f33b51e8c6e533b",
+    "artifact_id": 9700925949,
+    "producer_research_head": "e844852d20b1dae204943ea8fa8f3373cef81b1a",
+    "producer_research_pr": 13,
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "workflow_job": 98978086319,
+    "workflow_run": 33209242561
+  },
+  "state": "FROZEN_INPUT_HANDOFF_ONLY"
+}
