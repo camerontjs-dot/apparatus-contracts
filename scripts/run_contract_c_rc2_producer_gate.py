@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Run the preregistered Contract-C RC2 producer information-sufficiency gate."""
 
 from __future__ import annotations
