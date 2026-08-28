@@ -14,9 +14,10 @@ import copy
 import hashlib
 import json
 import shutil
+from collections.abc import Iterable
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 CAL_PRODUCTION_SHA = "33a928db97316a3652d57df9cafb8ca240305233"
 EB_PRODUCTION_SHA = "c8189c31adbab11729c31430c2070126224a2d42"
@@ -201,7 +202,9 @@ def _outcome(assessment: Any, policy: Any) -> dict[str, Any]:
     }
 
 
-def _contribution_ref(candidate: Any, passage_lookup: dict[tuple[str, str], Any]) -> dict[str, Any]:
+def _contribution_ref(
+    candidate: Any, passage_lookup: dict[tuple[str, str], Any]
+) -> dict[str, Any]:
     key = (candidate.source_id, candidate.excerpt_id)
     passage = passage_lookup.get(key)
     if passage is None:
@@ -243,7 +246,9 @@ def _replace_candidate_reliability(candidate: Any, value: str) -> Any:
 
 
 def _replace_bundle_reliability(bundle: Any, value: str) -> Any:
-    sources = [source.model_copy(update={"reliability": value}) for source in bundle.sources]
+    sources = [
+        source.model_copy(update={"reliability": value}) for source in bundle.sources
+    ]
     return bundle.model_copy(update={"sources": sources})
 
 
@@ -298,7 +303,8 @@ def _rule_role_controls(
             for item in assessment.candidate_evidence
         ]
         high_counters = [
-            _replace_candidate_reliability(item, "high") for item in assessment.counterevidence
+            _replace_candidate_reliability(item, "high")
+            for item in assessment.counterevidence
         ]
         high_bundle = _replace_bundle_reliability(evidence_bundle, "high")
         mutated = _observe_production(
@@ -343,7 +349,9 @@ def _real_proposition_projection(
         ref = _contribution_ref(candidate, passage_lookup)
         support_rows.append(
             {
-                "contribution_id": _contribution_id(assessment.claim.id, "support", ref),
+                "contribution_id": _contribution_id(
+                    assessment.claim.id, "support", ref
+                ),
                 "channel": "support",
                 "evidence_ref": ref,
                 "_source_candidate": candidate,
@@ -353,7 +361,9 @@ def _real_proposition_projection(
         ref = _contribution_ref(candidate, passage_lookup)
         counter_rows.append(
             {
-                "contribution_id": _contribution_id(assessment.claim.id, "counterevidence", ref),
+                "contribution_id": _contribution_id(
+                    assessment.claim.id, "counterevidence", ref
+                ),
                 "channel": "counterevidence",
                 "evidence_ref": ref,
                 "_source_candidate": candidate,
@@ -534,9 +544,13 @@ def _real_proposition_projection(
     return result, unresolved, control_record
 
 
-def _binding(contents: Any, bundle_dir: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+def _binding(
+    contents: Any, bundle_dir: Path
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     files, artifact_sha = _file_manifest(bundle_dir)
-    contract_version = (bundle_dir / "CONTRACT_VERSION").read_text(encoding="utf-8").strip()
+    contract_version = (bundle_dir / "CONTRACT_VERSION").read_text(
+        encoding="utf-8"
+    ).strip()
     return (
         {
             "contract_version": contract_version,
@@ -592,7 +606,9 @@ def make_candidate(
     engine: str,
     results: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    body = _candidate_body(binding=binding, policy=policy, engine=engine, results=results)
+    body = _candidate_body(
+        binding=binding, policy=policy, engine=engine, results=results
+    )
     candidate = copy.deepcopy(body)
     candidate["result_set_id"] = stable_id("result-set", body)
     return candidate
@@ -605,10 +621,14 @@ def validate_candidate(candidate: dict[str, Any]) -> list[str]:
     if candidate.get("candidate_profile") != PROFILE_ID:
         errors.append("unexpected candidate profile")
 
-    forbidden_destination = sorted(FORBIDDEN_DESTINATION_KEYS & set(_walk_keys(candidate)))
+    forbidden_destination = sorted(
+        FORBIDDEN_DESTINATION_KEYS & set(_walk_keys(candidate))
+    )
     if forbidden_destination:
         errors.append("destination-policy leakage: " + ",".join(forbidden_destination))
-    forbidden_telemetry = sorted(FORBIDDEN_TELEMETRY_KEYS & set(_walk_keys(candidate)))
+    forbidden_telemetry = sorted(
+        FORBIDDEN_TELEMETRY_KEYS & set(_walk_keys(candidate))
+    )
     if forbidden_telemetry:
         errors.append("unnecessary telemetry leakage: " + ",".join(forbidden_telemetry))
 
@@ -668,7 +688,9 @@ def validate_candidate(candidate: dict[str, Any]) -> list[str]:
                 continue
             contribution_ids.add(cid)
             ref = row.get("evidence_ref", {})
-            if not all(ref.get(key) for key in ("source_id", "passage_id", "passage_sha256")):
+            if not all(
+                ref.get(key) for key in ("source_id", "passage_id", "passage_sha256")
+            ):
                 errors.append(f"proposition[{index}] unresolved evidence reference")
             if row.get("terminal_role") not in {"necessary", "residual"}:
                 errors.append(f"proposition[{index}] invalid terminal contribution role")
@@ -682,7 +704,9 @@ def validate_candidate(candidate: dict[str, Any]) -> list[str]:
             errors.append(f"proposition[{index}] aggregate measurement missing")
         for cid in measurement.get("basis_contribution_ids", []):
             if cid not in contribution_ids:
-                errors.append(f"proposition[{index}] measurement basis reference missing")
+                errors.append(
+                    f"proposition[{index}] measurement basis reference missing"
+                )
 
         generic = result.get("generic_assessments", {})
         for name in GENERIC_ASSESSMENTS:
@@ -710,7 +734,9 @@ def validate_candidate(candidate: dict[str, Any]) -> list[str]:
             if cid not in contribution_ids:
                 errors.append(f"proposition[{index}] terminal basis reference missing")
         if causal_form == "single_necessary" and len(necessary) != 1:
-            errors.append(f"proposition[{index}] single necessary basis is not singular")
+            errors.append(
+                f"proposition[{index}] single necessary basis is not singular"
+            )
         if causal_form == "redundant_non_deciding" and necessary:
             errors.append(f"proposition[{index}] redundant basis has necessary members")
 
@@ -893,7 +919,9 @@ def targeted_ablation_matrix(candidate: dict[str, Any]) -> list[dict[str, Any]]:
         ),
         (
             "propositions[0].generic_assessments.eligibility",
-            lambda c: c["propositions"][0]["generic_assessments"].pop("eligibility", None),
+            lambda c: c["propositions"][0]["generic_assessments"].pop(
+                "eligibility", None
+            ),
         ),
         (
             "propositions[0].conclusion.terminal_branch",
@@ -941,27 +969,35 @@ def profile_controls_from_rc2d(
 
     tied = copy.deepcopy(suite)
     tied_row = next(
-        item for item in tied["receipts"] if item.get("family_id") == "tied_independent_support"
+        item
+        for item in tied["receipts"]
+        if item.get("family_id") == "tied_independent_support"
     )
     tied_row["co_maximal_support_refs"] = tied_row["co_maximal_support_refs"][:1]
     controls["collapse_tied_alternatives"] = validate_suite(tied)
 
     joint = copy.deepcopy(suite)
     joint_row = next(
-        item for item in joint["receipts"] if item.get("family_id") == "absolute_wording_joint"
+        item
+        for item in joint["receipts"]
+        if item.get("family_id") == "absolute_wording_joint"
     )
     joint_row["causal_claim"]["classification"] = "independent_sufficient_alternatives"
     controls["mislabel_joint_as_independent"] = validate_suite(joint)
 
     residual = copy.deepcopy(suite)
     residual_row = next(
-        item for item in residual["receipts"] if item.get("family_id") == "low_reliability_residual"
+        item
+        for item in residual["receipts"]
+        if item.get("family_id") == "low_reliability_residual"
     )
     residual_row["residual_non_deciding"] = []
     controls["erase_residual_state"] = validate_suite(residual)
 
     generic = copy.deepcopy(suite)
-    generic["receipts"][0]["generic_assessments"]["eligibility"] = {"state": "performed"}
+    generic["receipts"][0]["generic_assessments"]["eligibility"] = {
+        "state": "performed"
+    }
     controls["convert_not_performed_to_assessment"] = validate_suite(generic)
 
     policy = copy.deepcopy(suite)
@@ -1061,7 +1097,7 @@ def _tamper_control(bundle_dir: Path, out_dir: Path) -> dict[str, Any]:
 
     target = out_dir / "tampered-contract-b"
     shutil.copytree(bundle_dir, target)
-    first_claim = sorted((target / "claims").glob("*.yaml"))[0]
+    first_claim = min((target / "claims").glob("*.yaml"))
     first_claim.write_text(
         first_claim.read_text(encoding="utf-8") + "\n# rc2 producer-gate tamper\n",
         encoding="utf-8",
@@ -1103,7 +1139,9 @@ def run_experiment(
 
     b_dir = out_dir / "real-contract-b-1.2.0"
     build_retrieval_bundle(fixture.resolve(), b_dir)
-    intake = load_contract_b_intake(b_dir, deviations_dir=out_dir / "intake-deviations")
+    intake = load_contract_b_intake(
+        b_dir, deviations_dir=out_dir / "intake-deviations"
+    )
     contents = intake.bundle
 
     binding, files = _binding(contents, b_dir)
@@ -1153,7 +1191,9 @@ def run_experiment(
         )
         return value, local_unresolved, controls
 
-    candidate, unresolved, real_attribution_controls = build_from_assessments(assessments)
+    candidate, unresolved, real_attribution_controls = build_from_assessments(
+        assessments
+    )
     candidate_errors = validate_candidate(candidate)
 
     reproduced, reproduced_unresolved, reproduced_controls = build_from_assessments(
@@ -1162,7 +1202,8 @@ def run_experiment(
     deterministic = (
         canonical_bytes(reproduced) == canonical_bytes(candidate)
         and reproduced_unresolved == unresolved
-        and canonical_bytes(reproduced_controls) == canonical_bytes(real_attribution_controls)
+        and canonical_bytes(reproduced_controls)
+        == canonical_bytes(real_attribution_controls)
     )
 
     telemetry = _telemetry_invariance(
@@ -1204,21 +1245,31 @@ def run_experiment(
     if not deterministic:
         apparatus_blockers.append("candidate projection is not deterministic")
     if not telemetry["invariant"]:
-        apparatus_blockers.append("excluded presentation telemetry changed candidate bytes")
+        apparatus_blockers.append(
+            "excluded presentation telemetry changed candidate bytes"
+        )
     if not firewall["invariant"]:
         scientific_blockers.append("downstream policy changed candidate bytes")
     if not tamper["tamper_detected"]:
         scientific_blockers.append("tampered Contract-B state did not fail closed")
     if not rc2d_identity_matches:
-        apparatus_blockers.append("rerun CAL #22 suite bytes differ from frozen decisive receipt")
+        apparatus_blockers.append(
+            "rerun CAL #22 suite bytes differ from frozen decisive receipt"
+        )
     if profile_controls["baseline_validator_errors"]:
-        apparatus_blockers.append("frozen CAL #22 receipt no longer passes its independent validator")
+        apparatus_blockers.append(
+            "frozen CAL #22 receipt no longer passes its independent validator"
+        )
     if not profile_controls["required_families_present"]:
         apparatus_blockers.append("CAL #22 required attribution families missing")
     if not profile_controls["all_weak_controls_rejected"]:
-        apparatus_blockers.append("CAL #22 validator failed a weak/gaming discrimination control")
+        apparatus_blockers.append(
+            "CAL #22 validator failed a weak/gaming discrimination control"
+        )
     if not weak_discrimination:
-        apparatus_blockers.append("producer candidate validator accepts a weak/gaming candidate")
+        apparatus_blockers.append(
+            "producer candidate validator accepts a weak/gaming candidate"
+        )
     if not ablation_enforced:
         apparatus_blockers.append("targeted missing-state ablation did not fail closed")
 
@@ -1244,7 +1295,9 @@ def run_experiment(
         "semantic_fingerprint": fingerprint,
         "expected_predecessor_fingerprint": RC2A_PREDECESSOR_SEMANTIC_FINGERPRINT,
         "semantic_fingerprint_matches": fingerprint_matches,
-        "claim_assessments": [item.model_dump(mode="json") for item in assessments],
+        "claim_assessments": [
+            item.model_dump(mode="json") for item in assessments
+        ],
     }
 
     source_map = {
@@ -1320,7 +1373,9 @@ def run_experiment(
     _write_json(out_dir / "real-attribution-controls.json", real_attribution_controls)
     _write_json(out_dir / "contract-c-rc2-producer-candidate.json", candidate)
     _write_json(out_dir / "field-source-map.json", source_map)
-    _write_json(out_dir / "field-justification-registry.json", field_justification_registry())
+    _write_json(
+        out_dir / "field-justification-registry.json", field_justification_registry()
+    )
     _write_json(out_dir / "field-ablation-matrix.json", ablation)
     _write_json(out_dir / "telemetry-invariance.json", telemetry)
     _write_json(out_dir / "semantic-firewall.json", firewall)
