@@ -1,0 +1,143 @@
+name: Contract C RC2 producer information sufficiency
+
+on:
+  push:
+    branches:
+      - research/contract-c-information-sufficiency-rc2
+
+permissions:
+  contents: read
+
+jobs:
+  producer-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Apparatus research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout frozen CAL production semantics
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: 33a928db97316a3652d57df9cafb8ca240305233
+          path: _external/cal-production
+          fetch-depth: 0
+
+      - name: Checkout frozen Evidence Bundler production
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: c8189c31adbab11729c31430c2070126224a2d42
+          path: _external/evidence-bundler
+          fetch-depth: 0
+
+      - name: Checkout decisive CAL RC2-D evidence apparatus
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: 967fb164b7087a0d03bdd170b5b3a5b63568c6f7
+          path: _external/cal-rc2d
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install frozen CAL, EB, and research test dependencies
+        run: |
+          uv sync --project _external/cal-production --all-extras
+          uv pip install --python _external/cal-production/.venv/bin/python -e _external/evidence-bundler -e '.[dev]'
+
+      - name: Verify immutable semantic pins and research-only Apparatus mutation surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _external/cal-production rev-parse HEAD)" = "33a928db97316a3652d57df9cafb8ca240305233"
+          test "$(git -C _external/evidence-bundler rev-parse HEAD)" = "c8189c31adbab11729c31430c2070126224a2d42"
+          test "$(git -C _external/cal-rc2d rev-parse HEAD)" = "967fb164b7087a0d03bdd170b5b3a5b63568c6f7"
+          test "$(cat schema/.contract-version)" = "1.2.0"
+          git -C _external/cal-rc2d diff --exit-code 33a928db97316a3652d57df9cafb8ca240305233 -- src
+          git diff --name-only c314e53bd91c0736aa4370a364673b069aceb43e...HEAD | while read -r path; do
+            case "$path" in
+              docs/research/*|research_contract_c_rc2/*|scripts/run_contract_c_rc2_producer_gate.py|tests/research/test_contract_c_rc2_producer_gate.py|.github/workflows/contract-c-rc2-producer-sufficiency.yml) ;;
+              *) echo "unexpected non-research mutation: $path" >&2; exit 1 ;;
+            esac
+          done
+
+      - name: Reproduce decisive CAL RC2-D attribution suite unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd _external/cal-rc2d
+          PYTHONPATH="$PWD" ../cal-production/.venv/bin/python -m research_contract_c_rc2_d.sweep
+          echo 'a953a14b8bf9a5bd9cf9060e7fb58c868df9b15c8b578d88f13a1090c4eca5fa  build/research/contract-c-rc2-d/attribution-sweep.json' | sha256sum -c -
+
+      - name: Execute real Contract-B to CAL producer gate
+        shell: bash
+        env:
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/_external/cal-rc2d
+        run: |
+          set -euo pipefail
+          _external/cal-production/.venv/bin/python scripts/run_contract_c_rc2_producer_gate.py \
+            --eb-root _external/evidence-bundler \
+            --fixture _external/evidence-bundler/tests/fixtures/scaffold-run-mixed-formats \
+            --rc2d-suite _external/cal-rc2d/build/research/contract-c-rc2-d/attribution-sweep.json \
+            --out build/research/contract-c-rc2-producer-sufficiency
+
+      - name: Validate evaluator and weak-system discrimination
+        shell: bash
+        env:
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/_external/cal-rc2d
+        run: |
+          set -euo pipefail
+          _external/cal-production/.venv/bin/python -m pytest -q tests/research/test_contract_c_rc2_producer_gate.py
+          _external/cal-production/.venv/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          from research_contract_c_rc2.producer_gate import validate_candidate
+
+          root = Path('build/research/contract-c-rc2-producer-sufficiency')
+          summary = json.loads((root / 'summary.json').read_text())
+          candidate = json.loads((root / 'contract-c-rc2-producer-candidate.json').read_text())
+          weak = json.loads((root / 'weak-candidate-controls.json').read_text())
+          assert summary['producer_gate'] in {'SATISFIED', 'FAILED', 'INCONCLUSIVE'}
+          assert not validate_candidate(candidate)
+          assert all(errors for errors in weak.values())
+          if summary['producer_gate'] == 'SATISFIED':
+              assert not summary['scientific_blockers']
+              assert not summary['apparatus_blockers']
+          elif summary['producer_gate'] == 'FAILED':
+              assert summary['scientific_blockers']
+          else:
+              assert not summary['scientific_blockers']
+              assert summary['apparatus_blockers']
+          PY
+
+      - name: Code hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          _external/cal-production/.venv/bin/ruff check research_contract_c_rc2 scripts/run_contract_c_rc2_producer_gate.py tests/research/test_contract_c_rc2_producer_gate.py
+          _external/cal-production/.venv/bin/ruff format --check research_contract_c_rc2 scripts/run_contract_c_rc2_producer_gate.py tests/research/test_contract_c_rc2_producer_gate.py
+
+      - name: Emit decisive receipts
+        if: always()
+        shell: bash
+        run: |
+          if test -d build/research/contract-c-rc2-producer-sufficiency; then
+            find build/research/contract-c-rc2-producer-sufficiency -maxdepth 1 -type f -print0 | sort -z | xargs -0 sha256sum || true
+            test ! -f build/research/contract-c-rc2-producer-sufficiency/summary.json || cat build/research/contract-c-rc2-producer-sufficiency/summary.json
+          fi
+
+      - name: Upload producer-gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-rc2-producer-sufficiency-evidence
+          path: build/research/contract-c-rc2-producer-sufficiency
+          if-no-files-found: warn
+          retention-days: 90
