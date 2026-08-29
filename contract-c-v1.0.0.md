@@ -1,6 +1,6 @@
 # Apparatus Contract C 1.0.0
 
-**Status:** production promotion candidate, not yet released  
+**Status:** production release tree for Contract C 1.0.0  
 **Canonical owner:** `camerontjs-dot/apparatus-contracts`  
 **Decision authority:** EDR-002 / issue #17
 
@@ -258,7 +258,7 @@ Additional conformance tests exercise the RC2-D multiplicity forms that do not a
 
 Contract C 1.0.0 is the first canonical Contract-C compatibility surface. There is no prior production Contract-C version to migrate.
 
-This promotion candidate does not create an immutable release/tag. Publication of Contract C 1.0.0 remains gated on the separately promoted CAL exporter/producer conformance, clean consumer conformance against the exact candidate, compatibility assertions, and post-merge lock evidence required by EDR-002.
+This release tree is publishable only after the release-lock workflow passes on the exact merged commit. That lock revalidates schema/spec/validator agreement, the frozen whole-object hash, the exact CAL producer path, and the isolated clean consumer before creating the immutable namespaced tag `contract-c-v1.0.0` and its GitHub Release. A pre-existing namespaced tag must resolve to the exact same release commit or publication fails closed.
 
 An incompatible required shape or semantic reinterpretation requires a later MAJOR-version decision. An additive capability is MINOR only after legitimate v1 consumer compatibility is demonstrated.
 
@@ -277,7 +277,7 @@ Contract C 1.0.0 does not establish:
 
 ## Evidence lineage
 
-Primary immutable/review identities for this promotion candidate:
+Primary immutable/review identities for Contract C 1.0.0:
 
 - EDR-002 / Apparatus issue #17;
 - Apparatus producer-sufficiency PR #13, head `e844852d20b1dae204943ea8fa8f3373cef81b1a`;
@@ -286,4 +286,6 @@ Primary immutable/review identities for this promotion candidate:
 - CAL RC2-D decisive receipt SHA-256 `a953a14b8bf9a5bd9cf9060e7fb58c868df9b15c8b578d88f13a1090c4eca5fa`;
 - CAL production semantic identity `33a928db97316a3652d57df9cafb8ca240305233`;
 - CAL policy SHA-256 `88f007c96f3acf63a191556fe7fa46b80b37e9fcb5224ec1e90fb626a061104d`;
-- Decision Engine clean-room Consumer B PR #8 terminal record `ec66ebd5e05b85f4541fe3ea5ea57f4f66d7c8a2`.
+- Apparatus promotion candidate `5759985ee0ae82c469a129152b2eac278b30e919` and production promotion merge `b804958be9da841b7fb1541b0535767a933a2769`;
+- CAL producer candidate `095d0fc0d4a8746a1b5296d9414ba9e6e173dc96` and production exporter merge `a069707e5031cef5b82af02d08b0f1a47ea8752e`;
+- Decision Engine clean-consumer release-conformance head `a488c1b8058b5cda8766e670eb2b18d65e4e504e`.
