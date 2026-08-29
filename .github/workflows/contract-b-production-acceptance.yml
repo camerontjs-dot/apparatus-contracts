@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - main
-      - promotion/contract-b-factual-context-extension-v1.2
   pull_request:
     branches:
       - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
