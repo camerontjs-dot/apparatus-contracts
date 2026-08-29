@@ -56,6 +56,7 @@ jobs:
           uv run ruff check \
             validators/contract_c.py \
             tests/test_contract_c_v1.py \
+            --per-file-ignores 'tests/test_contract_c_v1.py:UP012' \
             --output-format=json > ruff-findings.json
           status=$?
           set -e
