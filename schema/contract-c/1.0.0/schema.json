@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/camerontjs-dot/apparatus-contracts/schema/contract-c/1.0.0/schema.json",
+  "title": "Apparatus Contract C 1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_c_version", "input", "producer", "execution", "propositions", "result_set_id"],
+  "properties": {
+    "contract_c_version": {"const": "1.0.0"},
+    "input": {"$ref": "#/$defs/input"},
+    "producer": {"$ref": "#/$defs/producer"},
+    "execution": {"$ref": "#/$defs/result_set_execution"},
+    "propositions": {"type": "array", "items": {"$ref": "#/$defs/proposition_result"}},
+    "result_set_id": {"type": "string", "pattern": "^result-set:[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_b"],
+      "properties": {"contract_b": {"$ref": "#/$defs/contract_b_binding"}}
+    },
+    "contract_b_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_version", "bundle_id", "bundle_hash"],
+      "properties": {
+        "contract_version": {"type": "string", "minLength": 1},
+        "bundle_id": {"type": "string", "minLength": 1},
+        "bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["semantic_implementation_sha", "policy"],
+      "properties": {
+        "semantic_implementation_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "policy": {"$ref": "#/$defs/policy"}
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "canonical"],
+      "properties": {
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "canonical": {"type": "object"}
+      }
+    },
+    "result_set_execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {"state": {"enum": ["completed", "failed", "incomplete"]}}
+    },
+    "proposition_execution": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "completion"],
+          "properties": {
+            "state": {"const": "completed"},
+            "completion": {"enum": ["assessed", "not_checkable"]}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state"],
+          "properties": {"state": {"const": "failed"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state"],
+          "properties": {"state": {"const": "incomplete"}}
+        }
+      ]
+    },
+    "assessment_state": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state"],
+          "properties": {"state": {"const": "not_performed"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "value"],
+          "properties": {
+            "state": {"const": "performed"},
+            "value": {"enum": ["unknown", "adverse"]}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state"],
+          "properties": {"state": {"const": "not_applicable"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state"],
+          "properties": {"state": {"const": "failed"}}
+        }
+      ]
+    },
+    "assessments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eligibility", "semantic_validity", "aperture_completeness", "temporal_applicability"],
+      "properties": {
+        "eligibility": {"$ref": "#/$defs/assessment_state"},
+        "semantic_validity": {"$ref": "#/$defs/assessment_state"},
+        "aperture_completeness": {"$ref": "#/$defs/assessment_state"},
+        "temporal_applicability": {"$ref": "#/$defs/assessment_state"}
+      }
+    },
+    "proposition_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposition_id", "text_sha256"],
+      "properties": {
+        "proposition_id": {"type": "string", "minLength": 1},
+        "text_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "evidence_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "passage_id", "passage_sha256"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "passage_id": {"type": "string", "minLength": 1},
+        "passage_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "contribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contribution_id", "channel", "evidence_ref"],
+      "properties": {
+        "contribution_id": {"type": "string", "pattern": "^contribution:[0-9a-f]{64}$"},
+        "channel": {"enum": ["support", "counterevidence"]},
+        "evidence_ref": {"$ref": "#/$defs/evidence_ref"}
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "value", "basis_contribution_ids"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1},
+        "value": {"type": ["number", "null"]},
+        "basis_contribution_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^contribution:[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "basis_member": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["namespace", "id"],
+      "properties": {
+        "namespace": {"enum": ["contribution", "rule", "state"]},
+        "id": {"type": "string", "minLength": 1}
+      }
+    },
+    "rule_role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "code", "terminal_role"],
+      "properties": {
+        "rule_id": {"type": "string", "pattern": "^rule-role:.+"},
+        "code": {"type": "string", "minLength": 1},
+        "terminal_role": {"enum": ["causal", "residual"]}
+      }
+    },
+    "conclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reported_verdict", "terminal_branch", "causal_form", "basis_members", "residual_contribution_ids", "rule_roles"],
+      "properties": {
+        "reported_verdict": {"type": "string", "minLength": 1},
+        "terminal_branch": {"type": "string", "minLength": 1},
+        "causal_form": {
+          "enum": ["single_necessary", "independent_sufficient_alternatives", "jointly_sufficient", "redundant_non_deciding"]
+        },
+        "basis_members": {"type": "array", "items": {"$ref": "#/$defs/basis_member"}},
+        "residual_contribution_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^contribution:[0-9a-f]{64}$"}
+        },
+        "rule_roles": {"type": "array", "items": {"$ref": "#/$defs/rule_role"}}
+      }
+    },
+    "proposition_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposition", "execution", "assessments", "contributions", "measurement", "conclusion"],
+      "properties": {
+        "proposition": {"$ref": "#/$defs/proposition_binding"},
+        "execution": {"$ref": "#/$defs/proposition_execution"},
+        "assessments": {"$ref": "#/$defs/assessments"},
+        "contributions": {"type": "array", "items": {"$ref": "#/$defs/contribution"}},
+        "measurement": {"anyOf": [{"$ref": "#/$defs/measurement"}, {"type": "null"}]},
+        "conclusion": {"anyOf": [{"$ref": "#/$defs/conclusion"}, {"type": "null"}]}
+      }
+    }
+  }
+}
