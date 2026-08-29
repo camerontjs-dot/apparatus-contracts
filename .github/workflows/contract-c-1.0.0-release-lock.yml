@@ -1,0 +1,282 @@
+name: Contract C 1.0.0 release lock
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'CHANGELOG.md'
+      - 'contract-c-v1.0.0.md'
+      - 'releases/contract-c/1.0.0.md'
+      - '.github/workflows/contract-c-1.0.0-release-lock.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'CHANGELOG.md'
+      - 'contract-c-v1.0.0.md'
+      - 'releases/contract-c/1.0.0.md'
+      - '.github/workflows/contract-c-1.0.0-release-lock.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  APPARATUS_PROMOTION_MAIN: b804958be9da841b7fb1541b0535767a933a2769
+  CAL_EXPORTER_MAIN: a069707e5031cef5b82af02d08b0f1a47ea8752e
+  CLEAN_CONSUMER_HEAD: a488c1b8058b5cda8766e670eb2b18d65e4e504e
+  HANDOFF_COMMIT: 213ed9e912b922bd5c57ef58009eb6b0d7fff398
+  CONTRACT_C_FIXTURE_SHA256: 7a66583e332be4901d13ba9f2d7e12419938c77a41b83223a4b0946ad529b7a1
+  CONTRACT_C_TAG: contract-c-v1.0.0
+
+jobs:
+  release-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release tree
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact CAL producer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CAL_EXPORTER_MAIN }}
+          path: _external/cal
+
+      - name: Checkout exact frozen handoff
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.HANDOFF_COMMIT }}
+          path: _external/handoff
+
+      - name: Checkout exact clean consumer evidence
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: ${{ env.CLEAN_CONSUMER_HEAD }}
+          path: _external/decision-engine
+
+      - name: Verify release-only mutation surface and pinned identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _external/cal rev-parse HEAD)" = "$CAL_EXPORTER_MAIN"
+          test "$(git -C _external/handoff rev-parse HEAD)" = "$HANDOFF_COMMIT"
+          test "$(git -C _external/decision-engine rev-parse HEAD)" = "$CLEAN_CONSUMER_HEAD"
+
+          git diff --exit-code "$APPARATUS_PROMOTION_MAIN" -- \
+            schema/contract-c \
+            fixtures/contract-c \
+            validators/contract_c.py \
+            tests/test_contract_c_v1.py
+
+          unexpected="$({ git diff --name-only "$APPARATUS_PROMOTION_MAIN"...HEAD || true; } | \
+            grep -Ev '^(CHANGELOG\.md|contract-c-v1\.0\.0\.md|releases/contract-c/1\.0\.0\.md|\.github/workflows/contract-c-1\.0\.0-release-lock\.yml)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected release-tree mutation:" >&2
+            echo "$unexpected" >&2
+            exit 1
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install Apparatus release-test dependencies
+        run: uv sync --all-extras
+
+      - name: Verify version metadata, canonical fixture, and spec release posture
+        shell: bash
+        run: |
+          set -euo pipefail
+          .venv/bin/python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          versions = json.loads(Path('schema/contract-c/versions.json').read_text())
+          assert versions == {
+              'canonical_version': '1.0.0',
+              'supported_versions': ['1.0.0'],
+          }
+          spec = Path('contract-c-v1.0.0.md').read_text()
+          assert 'production release tree for Contract C 1.0.0' in spec
+          raw = Path('fixtures/contract-c/1.0.0/valid-canonical.json').read_bytes()
+          observed = hashlib.sha256(raw).hexdigest()
+          assert observed == '7a66583e332be4901d13ba9f2d7e12419938c77a41b83223a4b0946ad529b7a1'
+          assert Path('releases/contract-c/1.0.0.md').exists()
+          assert Path('CHANGELOG.md').exists()
+          PY
+
+      - name: Run full Apparatus regression and Contract C conformance
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv run pytest -q tests/
+          uv run pytest -q tests/test_contract_c_v1.py
+          expected="$(awk '{print $1}' fixtures/contract-c/1.0.0/valid-canonical.sha256)"
+          test "$expected" = "$CONTRACT_C_FIXTURE_SHA256"
+          uv run python -m validators.contract_c \
+            fixtures/contract-c/1.0.0/valid-canonical.json \
+            --expected-sha256 "$expected" \
+            --contract-b-index fixtures/contract-c/1.0.0/contract-b-index.json
+
+      - name: Install exact CAL producer into the release-test environment
+        run: uv pip install -e _external/cal
+
+      - name: Reconstruct frozen Contract B and prove real CAL byte identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/contract-b /tmp/cal-deviations
+          .venv/bin/python - <<'PY'
+          import base64
+          import hashlib
+          import io
+          import json
+          import pathlib
+          import zipfile
+
+          from claim_audit_lab.auditor import audit_claims
+          from claim_audit_lab.contracts.adapter import (
+              adapt_bundle_to_pipeline,
+              build_claim_evidence_scopes,
+          )
+          from claim_audit_lab.contracts.bundle_loader import load_bundle
+          from claim_audit_lab.contracts.contract_c import export_contract_c_bytes
+
+          handoff = pathlib.Path('_external/handoff/handoffs/contract-c/rc2-consumer-b')
+          manifest = json.loads((handoff / 'MANIFEST.json').read_text())
+          parts = sorted(manifest['contract_b_input']['base64_parts'])
+          encoded = ''.join((handoff / part).read_text().rstrip('\n') for part in parts)
+          raw_zip = base64.b64decode(encoded, validate=True)
+          out = pathlib.Path('/tmp/contract-b')
+          out.mkdir(parents=True, exist_ok=True)
+          with zipfile.ZipFile(io.BytesIO(raw_zip)) as archive:
+              archive.extractall(out)
+
+          bundle_dir = next(out.glob('contract-b-*'))
+          contents = load_bundle(bundle_dir, deviations_dir=pathlib.Path('/tmp/cal-deviations'))
+          claims, evidence_bundle, audit_config = adapt_bundle_to_pipeline(contents)
+          assessments = audit_claims(
+              claims,
+              evidence_bundle,
+              audit_config,
+              evidence_scopes=build_claim_evidence_scopes(contents),
+          )
+          emitted = export_contract_c_bytes(
+              contents=contents,
+              assessments=assessments,
+              evidence_bundle=evidence_bundle,
+              audit_config=audit_config,
+          )
+          frozen = pathlib.Path('fixtures/contract-c/1.0.0/valid-canonical.json').read_bytes()
+          assert emitted == frozen
+          assert hashlib.sha256(emitted).hexdigest() == (
+              '7a66583e332be4901d13ba9f2d7e12419938c77a41b83223a4b0946ad529b7a1'
+          )
+          PY
+
+      - name: Remove producer internals before independent consumer check
+        run: rm -rf _external/cal _external/handoff /tmp/contract-b /tmp/cal-deviations
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run isolated clean-consumer release conformance against this tree
+        env:
+          APPARATUS_CONTRACT_C_DIR: ${{ github.workspace }}
+        run: node _external/decision-engine/research/contract-c-1.0.0-clean-consumer-release/validate.mjs
+
+      - name: Write exact release-lock receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/contract-c-1.0.0-release-lock
+          cat > build/contract-c-1.0.0-release-lock/release-lock-receipt.json <<JSON
+          {
+            "status": "PASS",
+            "contract_c_version": "1.0.0",
+            "release_commit": "${GITHUB_SHA}",
+            "namespaced_tag": "${CONTRACT_C_TAG}",
+            "apparatus_promotion_main": "${APPARATUS_PROMOTION_MAIN}",
+            "cal_exporter_main": "${CAL_EXPORTER_MAIN}",
+            "clean_consumer_head": "${CLEAN_CONSUMER_HEAD}",
+            "handoff_commit": "${HANDOFF_COMMIT}",
+            "canonical_fixture_sha256": "${CONTRACT_C_FIXTURE_SHA256}",
+            "schema_spec_validator_agreement": true,
+            "real_cal_byte_identity": true,
+            "clean_consumer_conformance": true,
+            "producer_internals_removed_before_consumer": true
+          }
+          JSON
+          cat build/contract-c-1.0.0-release-lock/release-lock-receipt.json
+
+      - name: Upload release-lock receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-1.0.0-release-lock
+          path: build/contract-c-1.0.0-release-lock/release-lock-receipt.json
+          if-no-files-found: error
+          retention-days: 90
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: release-lock
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout exact locked release commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download release-lock receipt
+        uses: actions/download-artifact@v4
+        with:
+          name: contract-c-1.0.0-release-lock
+          path: release-evidence
+
+      - name: Create or verify immutable namespaced tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          if git ls-remote --exit-code --tags origin "refs/tags/$CONTRACT_C_TAG" >/dev/null 2>&1; then
+            git fetch --force origin "refs/tags/$CONTRACT_C_TAG:refs/tags/$CONTRACT_C_TAG"
+            target="$(git rev-list -n 1 "$CONTRACT_C_TAG")"
+            test "$target" = "$GITHUB_SHA" || {
+              echo "Existing immutable tag points to $target, not $GITHUB_SHA" >&2
+              exit 1
+            }
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git tag -a "$CONTRACT_C_TAG" "$GITHUB_SHA" -m 'Contract C 1.0.0'
+            git push origin "refs/tags/$CONTRACT_C_TAG"
+          fi
+
+      - name: Create or verify GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v gh >/dev/null
+          if gh release view "$CONTRACT_C_TAG" >/dev/null 2>&1; then
+            echo "GitHub Release already exists for $CONTRACT_C_TAG"
+          else
+            gh release create "$CONTRACT_C_TAG" \
+              --verify-tag \
+              --title 'Contract C 1.0.0' \
+              --notes-file releases/contract-c/1.0.0.md
+          fi
+          gh release upload "$CONTRACT_C_TAG" \
+            release-evidence/release-lock-receipt.json \
+            --clobber
