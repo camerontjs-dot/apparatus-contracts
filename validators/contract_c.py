@@ -12,7 +12,14 @@ import sys
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, ValidationError, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictFloat,
+    ValidationError,
+    model_validator,
+)
 
 CONTRACT_C_VERSION = "1.0.0"
 CONTRACT_C_SUPPORTED_VERSIONS: tuple[str, ...] = (CONTRACT_C_VERSION,)
@@ -120,7 +127,7 @@ class Measurement(_StrictModel):
     basis_contribution_ids: list[str] = Field(min_length=1)
 
     @model_validator(mode="after")
-    def validate_measurement(self) -> "Measurement":
+    def validate_measurement(self) -> Measurement:
         if self.value is not None and not math.isfinite(self.value):
             raise ValueError("measurement value must be finite")
         if len(set(self.basis_contribution_ids)) != len(self.basis_contribution_ids):
@@ -136,7 +143,7 @@ class BasisMember(_StrictModel):
     id: str = Field(min_length=1)
 
     @model_validator(mode="after")
-    def validate_namespace_prefix(self) -> "BasisMember":
+    def validate_namespace_prefix(self) -> BasisMember:
         if self.namespace == "contribution" and not _CONTRIBUTION_ID.fullmatch(self.id):
             raise ValueError("contribution basis member must use contribution:<sha256>")
         if self.namespace == "rule" and not self.id.startswith("rule-role:"):
@@ -166,7 +173,7 @@ class Conclusion(_StrictModel):
     rule_roles: list[RuleRole]
 
     @model_validator(mode="after")
-    def validate_conclusion(self) -> "Conclusion":
+    def validate_conclusion(self) -> Conclusion:
         basis_pairs = [(item.namespace, item.id) for item in self.basis_members]
         if len(set(basis_pairs)) != len(basis_pairs):
             raise ValueError("basis members must be unique")
@@ -198,7 +205,7 @@ class PropositionResult(_StrictModel):
     conclusion: Conclusion | None
 
     @model_validator(mode="after")
-    def validate_result(self) -> "PropositionResult":
+    def validate_result(self) -> PropositionResult:
         contribution_ids = [item.contribution_id for item in self.contributions]
         if len(set(contribution_ids)) != len(contribution_ids):
             raise ValueError("contribution ids must be unique within a proposition")
@@ -268,7 +275,7 @@ class ContractCResultSet(_StrictModel):
     result_set_id: str = Field(pattern=r"^result-set:[0-9a-f]{64}$")
 
     @model_validator(mode="after")
-    def validate_result_set(self) -> "ContractCResultSet":
+    def validate_result_set(self) -> ContractCResultSet:
         proposition_ids = [item.proposition.proposition_id for item in self.propositions]
         if len(set(proposition_ids)) != len(proposition_ids):
             raise ValueError("proposition ids must be unique")
@@ -290,7 +297,7 @@ class ContractBIndex(_StrictModel):
     passages: dict[str, ContractBIndexPassage]
 
     @model_validator(mode="after")
-    def validate_index(self) -> "ContractBIndex":
+    def validate_index(self) -> ContractBIndex:
         for digest in self.propositions.values():
             if not _HEX64.fullmatch(digest):
                 raise ValueError("invalid proposition text hash in Contract-B index")
@@ -324,7 +331,7 @@ def parse_json_bytes(raw: bytes) -> dict[str, Any]:
     except (json.JSONDecodeError, ValueError) as exc:
         raise ValueError(f"invalid Contract-C JSON: {exc}") from exc
     if not isinstance(value, dict):
-        raise ValueError("Contract C top level must be an object")
+        raise ValueError("Contract C top level must be an object")  # noqa: TRY004
     return value
 
 
@@ -383,8 +390,10 @@ def _validate_policy_hash(value: ContractCResultSet) -> list[str]:
     actual = sha256_hex(canonical_bytes(value.producer.policy.canonical))
     if actual != value.producer.policy.sha256:
         return [
-            "CAL policy hash mismatch: "
-            f"expected {value.producer.policy.sha256}, computed {actual}"
+            (
+                "CAL policy hash mismatch: "
+                f"expected {value.producer.policy.sha256}, computed {actual}"
+            )
         ]
     return []
 
