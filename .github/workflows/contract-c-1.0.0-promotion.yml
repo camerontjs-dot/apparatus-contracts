@@ -1,0 +1,72 @@
+name: Contract C 1.0.0 promotion conformance
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'contract-c-v1.0.0.md'
+      - 'schema/contract-c/**'
+      - 'fixtures/contract-c/**'
+      - 'validators/contract_c.py'
+      - 'tests/test_contract_c_v1.py'
+      - '.github/workflows/contract-c-1.0.0-promotion.yml'
+  push:
+    branches:
+      - promotion/contract-c-1.0.0
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install package and test dependencies
+        run: uv sync --all-extras
+
+      - name: Run full repository regression suite
+        run: uv run pytest -q tests/
+
+      - name: Run frozen Contract C 1.0.0 conformance suite
+        run: uv run pytest -q tests/test_contract_c_v1.py
+
+      - name: Verify frozen canonical fixture through public validator CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(awk '{print $1}' fixtures/contract-c/1.0.0/valid-canonical.sha256)"
+          uv run python -m validators.contract_c \
+            fixtures/contract-c/1.0.0/valid-canonical.json \
+            --expected-sha256 "$expected" \
+            --contract-b-index fixtures/contract-c/1.0.0/contract-b-index.json
+
+      - name: Static code hygiene for promotion surface
+        shell: bash
+        run: |
+          set +e
+          uv run ruff check \
+            validators/contract_c.py \
+            tests/test_contract_c_v1.py \
+            --per-file-ignores 'tests/test_contract_c_v1.py:UP012' \
+            --output-format=json > ruff-findings.json
+          status=$?
+          set -e
+          cat ruff-findings.json
+          exit "$status"
+
+      - name: Upload Ruff findings receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-1.0.0-ruff-findings
+          path: ruff-findings.json
+          if-no-files-found: error
