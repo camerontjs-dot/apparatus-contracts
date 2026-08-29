@@ -50,7 +50,22 @@ jobs:
             --contract-b-index fixtures/contract-c/1.0.0/contract-b-index.json
 
       - name: Static code hygiene for promotion surface
-        run: >-
-          uv run ruff check
-          validators/contract_c.py
-          tests/test_contract_c_v1.py
+        shell: bash
+        run: |
+          set +e
+          uv run ruff check \
+            validators/contract_c.py \
+            tests/test_contract_c_v1.py \
+            --output-format=json > ruff-findings.json
+          status=$?
+          set -e
+          cat ruff-findings.json
+          exit "$status"
+
+      - name: Upload Ruff findings receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-1.0.0-ruff-findings
+          path: ruff-findings.json
+          if-no-files-found: error
