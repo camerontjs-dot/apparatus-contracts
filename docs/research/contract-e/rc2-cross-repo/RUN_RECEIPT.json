@@ -1,0 +1,36 @@
+{
+  "schema": "authority-interface-cross-repo-rc2-receipt",
+  "authority": "research_only",
+  "accepted_science_head": "c9ec5242818755c3e92c92e75412b84cef0eaa50",
+  "push_run": 33321565839,
+  "pr_run": 33321569306,
+  "artifact": 9735022958,
+  "artifact_digest": "sha256:4e0cdde9a7dee465438c4dab6e7e9c4341422d56c23abfab8ee5ff172965a965",
+  "producer_evidence": {
+    "evidence_bundler": {
+      "pr": 46,
+      "head": "45702fc80f529654d4745760b071132131d3a509",
+      "run": 33321329523,
+      "artifact": 9734965892
+    },
+    "claim_audit_lab": {
+      "pr": 46,
+      "head": "4000f37b1f861cca696cb9852722fee8f4f50f0b",
+      "run": 33321461944,
+      "artifact": 9735000430
+    },
+    "decision_engine": {
+      "pr": 22,
+      "head": "e4d96071e2870d3edbb87140f23824e1d4dee580",
+      "run": 33321116949,
+      "artifact": 9734907411
+    }
+  },
+  "independent_consumer": "PASS",
+  "stage_descriptors": 6,
+  "semantic_receipts": 6,
+  "cross_domain_laundering_rejected": 7,
+  "common_structural_envelope": true,
+  "universal_authority_evaluator_claimed": false,
+  "disposition": "SUPPORTED_FOR_RESEARCH_SPECIFICATION"
+}
