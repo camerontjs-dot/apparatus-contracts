@@ -45,6 +45,7 @@ jobs:
           test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/BASIS-BINDING-SPEC.json)" = "63c952c9c28f1be2173e69c79976c7dfe5880c10"
           test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/AUTHORITY-BASIS-REGISTRY.json)" = "76ea333ee0460d9614e9899edb69e6865e48eccb"
           test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/FROZEN-BASIS-ATTACKS.json)" = "c726fb0ef914a850620e545131a70d427f4027bd"
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/HARDENING-PREREGISTRATION.md)" = "1d85e2036d410b3af08d4b2b8926586da8fe6088"
 
       - uses: actions/setup-node@v4
         with:
@@ -56,12 +57,20 @@ jobs:
           node docs/research/contract-e/rc3b-authority-basis-binding/validate.mjs \
             | tee rc3b-authority-basis.txt
 
+      - name: Run preregistered authority-basis compatibility matrix
+        run: |
+          set -o pipefail
+          node docs/research/contract-e/rc3b-authority-basis-binding/hardening.mjs \
+            | tee rc3b-authority-basis-hardening.txt
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: contract-e-authority-basis-rc3b-${{ github.sha }}
           path: |
             rc3b-authority-basis.txt
+            rc3b-authority-basis-hardening.txt
             docs/research/contract-e/rc3b-authority-basis-binding/RESULTS.json
+            docs/research/contract-e/rc3b-authority-basis-binding/HARDENING-RESULTS.json
           if-no-files-found: warn
           retention-days: 30
