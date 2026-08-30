@@ -1,0 +1,232 @@
+{
+  "schema": "contract-e-authority-warrant-rc3a-cases",
+  "frozen_before_validator": true,
+  "baselines": {
+    "source_access_ok": {
+      "participant": "evidence-bundler",
+      "subject": {"id": "evidence-bundler", "kind": "system"},
+      "authority_domain": "source_access",
+      "operation": "source.read",
+      "target": {"class": "source_material", "id": "source:reg-001", "current_hash": "sha256:1111"},
+      "jurisdiction": {"scope": "research-corpus-A", "applicable": true, "current": true},
+      "authority_basis": [{"type": "grant", "id": "grant:source-read", "current": true}],
+      "competence": [],
+      "propagation": {"mode": "identity_provenance_only"},
+      "non_implications": ["evidence_admission", "semantic_relevance", "semantic_support"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "read_allowed"}
+    },
+    "evidence_admission_ok": {
+      "participant": "evidence-bundler",
+      "subject": {"id": "evidence-bundler", "kind": "system"},
+      "authority_domain": "evidence_admission",
+      "operation": "evidence.admit_passage",
+      "target": {"class": "evidence_passage", "id": "passage:001", "current_hash": "sha256:2222"},
+      "jurisdiction": {"scope": "research-corpus-A", "applicable": true, "current": true},
+      "authority_basis": [{"type": "policy", "id": "policy:evidence-admission", "current": true}],
+      "competence": [],
+      "propagation": {"mode": "identity_provenance_only"},
+      "non_implications": ["semantic_relevance", "semantic_support", "assessment_mandate"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "admitted"}
+    },
+    "assessment_ok": {
+      "participant": "claim-audit-lab",
+      "subject": {"id": "claim-audit-lab", "kind": "system"},
+      "authority_domain": "assessment_mandate",
+      "operation": "assessment.issue",
+      "target": {"class": "contract_b_claim", "id": "bundle:001::claim:001", "current_hash": "sha256:3333"},
+      "jurisdiction": {"scope": "claim-audit", "applicable": true, "current": true},
+      "authority_basis": [{"type": "policy", "id": "policy:cal-assessment", "current": true}],
+      "competence": [],
+      "propagation": {"mode": "none"},
+      "non_implications": ["numeric_relation", "decision_mandate", "citation_use", "task_dispatch"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "issued", "reported_verdict": "supported"}
+    },
+    "numeric_ok": {
+      "participant": "numeric-validator",
+      "subject": {"id": "numeric-validator", "kind": "apparatus"},
+      "authority_domain": "numeric_relation",
+      "operation": "semantic.validate_numeric",
+      "target": {"class": "semantic_relation", "id": "relation:temp-threshold-001", "current_hash": "sha256:4444"},
+      "jurisdiction": {"scope": "numeric-threshold", "applicable": true, "current": true},
+      "authority_basis": [{"type": "grant", "id": "grant:numeric-validation", "current": true}],
+      "competence": [{"type": "numeric_relation_validator", "id": "qualification:numeric-v1", "subject_id": "numeric-validator", "scope": "numeric-threshold", "current": true}],
+      "warrant": {"type": "numeric-threshold-v1", "id": "warrant:num-001", "authority_domain": "numeric_relation", "operation": "semantic.validate_numeric", "input_artifact_ids": ["measurement:001", "specification:001"], "target_id": "relation:temp-threshold-001", "target_hash": "sha256:4444", "applicable": true, "current": true},
+      "propagation": {"mode": "none"},
+      "non_implications": ["source_boundary", "decision_mandate", "citation_use", "task_dispatch"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "invalid", "confidence": 0.999}
+    },
+    "source_boundary_ok": {
+      "participant": "source-boundary-validator",
+      "subject": {"id": "source-boundary-validator", "kind": "apparatus"},
+      "authority_domain": "source_boundary",
+      "operation": "semantic.validate_absence",
+      "target": {"class": "aperture_claim", "id": "absence:retention-sample", "current_hash": "sha256:5555"},
+      "jurisdiction": {"scope": "frozen-aperture-A", "applicable": true, "current": true},
+      "authority_basis": [{"type": "policy", "id": "policy:source-boundary", "current": true}],
+      "competence": [{"type": "source_boundary_validator", "id": "qualification:boundary-v1", "subject_id": "source-boundary-validator", "scope": "frozen-aperture-A", "current": true}],
+      "warrant": {"type": "source-boundary-v1", "id": "warrant:boundary-001", "authority_domain": "source_boundary", "operation": "semantic.validate_absence", "input_artifact_ids": ["aperture:001"], "target_id": "absence:retention-sample", "target_hash": "sha256:5555", "applicable": true, "current": true},
+      "propagation": {"mode": "none"},
+      "non_implications": ["numeric_relation", "semantic_support", "decision_mandate", "task_dispatch"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "valid"}
+    },
+    "decision_ok": {
+      "participant": "decision-engine-policy",
+      "subject": {"id": "decision-engine-policy", "kind": "system"},
+      "authority_domain": "decision_mandate",
+      "operation": "decision.make",
+      "target": {"class": "contract_c_result", "id": "result-set:001", "current_hash": "sha256:6666"},
+      "jurisdiction": {"scope": "source-audit-policy", "applicable": true, "current": true},
+      "authority_basis": [{"type": "policy", "id": "policy:decision-v1", "current": true}],
+      "competence": [],
+      "warrant": {"type": "decision-policy-v1", "id": "warrant:decision-001", "authority_domain": "decision_mandate", "operation": "decision.make", "input_artifact_ids": ["contract-c:001"], "target_id": "result-set:001", "target_hash": "sha256:6666", "applicable": true, "current": true},
+      "propagation": {"mode": "none"},
+      "non_implications": ["epistemic_truth", "citation_use", "task_dispatch"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "eligible", "effect": "cite_as_evidence"}
+    },
+    "citation_ok": {
+      "participant": "citation-agent",
+      "subject": {"id": "citation-agent", "kind": "agent"},
+      "authority_domain": "citation_use",
+      "operation": "citation.use",
+      "target": {"class": "retrieval_result", "id": "result:citable-001", "current_hash": "sha256:7777"},
+      "jurisdiction": {"scope": "research-output", "applicable": true, "current": true},
+      "authority_basis": [{"type": "grant", "id": "grant:citation-use", "current": true}, {"type": "artifact", "id": "decision:typed-citation-001", "current": true}],
+      "competence": [],
+      "propagation": {"mode": "none"},
+      "non_implications": ["task_dispatch", "outcome_verification"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "permit"}
+    },
+    "task_ok": {
+      "participant": "task-agent",
+      "subject": {"id": "task-agent", "kind": "agent"},
+      "authority_domain": "task_dispatch",
+      "operation": "task.dispatch",
+      "target": {"class": "mainframe_task", "id": "task:001", "current_hash": "sha256:8888"},
+      "jurisdiction": {"scope": "research-task", "applicable": true, "current": true},
+      "authority_basis": [{"type": "grant", "id": "grant:task-dispatch", "current": true}, {"type": "artifact", "id": "decision:typed-task-001", "current": true}],
+      "competence": [],
+      "propagation": {"mode": "none"},
+      "non_implications": ["outcome_verification"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "permit", "execution_report": "success"}
+    },
+    "verify_ok": {
+      "participant": "outcome-verifier",
+      "subject": {"id": "outcome-verifier", "kind": "apparatus"},
+      "authority_domain": "outcome_verification",
+      "operation": "outcome.verify",
+      "target": {"class": "postcondition", "id": "task:001::post", "current_hash": "sha256:9999"},
+      "jurisdiction": {"scope": "research-task", "applicable": true, "current": true},
+      "authority_basis": [{"type": "grant", "id": "grant:verify", "current": true}],
+      "competence": [{"type": "outcome_verifier", "id": "qualification:verify-v1", "subject_id": "outcome-verifier", "scope": "research-task", "current": true}],
+      "warrant": {"type": "postcondition-observation-v1", "id": "warrant:verify-001", "authority_domain": "outcome_verification", "operation": "outcome.verify", "input_artifact_ids": ["execution:001", "readback:001"], "target_id": "task:001::post", "target_hash": "sha256:9999", "applicable": true, "current": true},
+      "propagation": {"mode": "none"},
+      "non_implications": ["decision_correctness", "execution_permission"],
+      "evaluated_at": "2026-08-30T19:10:00Z",
+      "result": {"status": "not_applied"}
+    }
+  },
+  "envelope_cases": [
+    {"id": "P01-source-access", "base": "source_access_ok", "expected": "accept"},
+    {"id": "P02-evidence-admission", "base": "evidence_admission_ok", "expected": "accept"},
+    {"id": "P03-assessment", "base": "assessment_ok", "expected": "accept"},
+    {"id": "P04-numeric", "base": "numeric_ok", "expected": "accept"},
+    {"id": "P05-source-boundary", "base": "source_boundary_ok", "expected": "accept"},
+    {"id": "P06-decision", "base": "decision_ok", "expected": "accept"},
+    {"id": "P07-citation", "base": "citation_ok", "expected": "accept"},
+    {"id": "P08-task", "base": "task_ok", "expected": "accept"},
+    {"id": "P09-verify", "base": "verify_ok", "expected": "accept"},
+
+    {"id": "N01-qualified-no-mandate", "base": "numeric_ok", "remove_authority_basis_types": ["grant", "policy"], "expected": "reject", "reason": "missing_domain_authority_basis"},
+    {"id": "N02-mandate-no-competence", "base": "numeric_ok", "set": {"competence": []}, "expected": "reject", "reason": "missing_required_qualification"},
+    {"id": "N03-wrong-qualification", "base": "numeric_ok", "set_path": {"competence.0.type": "source_boundary_validator"}, "expected": "reject", "reason": "qualification_type_mismatch"},
+    {"id": "N04-warrant-cross-domain", "base": "numeric_ok", "set_path": {"warrant.type": "source-boundary-v1", "warrant.authority_domain": "source_boundary", "warrant.operation": "semantic.validate_absence"}, "expected": "reject", "reason": "warrant_domain_mismatch"},
+    {"id": "N05-warrant-wrong-target", "base": "numeric_ok", "set_path": {"warrant.target_id": "relation:other"}, "expected": "reject", "reason": "warrant_target_mismatch"},
+    {"id": "N06-warrant-stale", "base": "numeric_ok", "set_path": {"warrant.current": false}, "expected": "reject", "reason": "warrant_not_current"},
+    {"id": "N07-jurisdiction-inapplicable", "base": "numeric_ok", "set_path": {"jurisdiction.applicable": false}, "expected": "reject", "reason": "jurisdiction_inapplicable"},
+    {"id": "N08-target-stale", "base": "numeric_ok", "set_path": {"jurisdiction.current": false}, "expected": "reject", "reason": "jurisdiction_not_current"},
+    {"id": "N09-participant-domain-substitution", "base": "numeric_ok", "set": {"participant": "claim-audit-lab"}, "expected": "reject", "reason": "participant_domain_out_of_scope"},
+    {"id": "N10-participant-operation-substitution", "base": "citation_ok", "set_path": {"operation": "task.dispatch"}, "expected": "reject", "reason": "domain_operation_mismatch"},
+    {"id": "N11-unknown-domain", "base": "numeric_ok", "set": {"authority_domain": "generic_truth"}, "expected": "reject", "reason": "unknown_authority_domain"},
+    {"id": "N12-positive-result-no-authority", "base": "assessment_ok", "remove_authority_basis_types": ["grant", "policy"], "expected": "reject", "reason": "missing_domain_authority_basis"},
+    {"id": "N13-supported-does-not-cite", "base": "assessment_ok", "set": {"participant": "citation-agent", "authority_domain": "citation_use", "operation": "citation.use"}, "expected": "reject", "reason": "missing_domain_authority_basis"},
+    {"id": "N14-decision-does-not-execute", "base": "decision_ok", "set": {"participant": "task-agent", "authority_domain": "task_dispatch", "operation": "task.dispatch"}, "expected": "reject", "reason": "missing_domain_authority_basis"},
+    {"id": "N15-success-does-not-verify", "base": "task_ok", "set": {"participant": "outcome-verifier", "authority_domain": "outcome_verification", "operation": "outcome.verify"}, "expected": "reject", "reason": "missing_required_qualification"},
+    {"id": "N16-authentication-does-not-relevance", "base": "source_access_ok", "set": {"authority_domain": "semantic_relevance", "operation": "semantic.relevance"}, "expected": "reject", "reason": "unknown_authority_domain"},
+    {"id": "N17-admission-does-not-support", "base": "evidence_admission_ok", "set": {"authority_domain": "semantic_support", "operation": "semantic.support"}, "expected": "reject", "reason": "unknown_authority_domain"},
+    {"id": "N18-generic-authorized-flag", "base": "task_ok", "remove_authority_basis_types": ["grant", "policy"], "set": {"authorized": true}, "expected": "reject", "reason": "generic_authorized_forbidden"},
+    {"id": "N19-revoked-new-action", "base": "task_ok", "set_path": {"authority_basis.0.current": false}, "expected": "reject", "reason": "authority_basis_not_current"},
+    {"id": "N20-wrong-target-hash", "base": "numeric_ok", "set_path": {"warrant.target_hash": "sha256:wrong"}, "expected": "reject", "reason": "warrant_target_hash_mismatch"},
+    {"id": "N21-warrant-missing", "base": "numeric_ok", "remove": ["warrant"], "expected": "reject", "reason": "missing_required_warrant"},
+    {"id": "N22-correct-semantics-wrong-responsibility", "base": "source_boundary_ok", "set": {"participant": "numeric-validator"}, "expected": "reject", "reason": "participant_domain_out_of_scope"}
+  ],
+  "propagation_cases": [
+    {"id": "PROP-P01-identity-provenance", "mode": "identity_provenance_only", "requested_fields": ["source_id", "artifact_id", "content_hash"], "expected": "accept"},
+    {"id": "PROP-N01-semantic-authority", "mode": "identity_provenance_only", "requested_fields": ["source_id", "semantic_validity"], "expected": "reject", "reason": "forbidden_authority_propagation"},
+    {"id": "PROP-N02-decision-mandate", "mode": "explicit", "requested_fields": ["decision_mandate"], "expected": "reject", "reason": "authority_requires_reestablishment"},
+    {"id": "PROP-N03-task-dispatch", "mode": "explicit", "requested_fields": ["task_dispatch"], "expected": "reject", "reason": "authority_requires_reestablishment"}
+  ],
+  "delegation_cases": [
+    {
+      "id": "DEL-P01-narrower-child",
+      "parent": {"id": "grant:parent", "authority_domain": "task_dispatch", "operations": ["task.dispatch"], "scope": ["research-task-A", "research-task-B"], "valid_until": "2026-09-01T00:00:00Z", "current": true},
+      "child": {"id": "delegation:child", "delegator": "operator", "delegate": "task-agent", "authority_domain": "task_dispatch", "operations": ["task.dispatch"], "scope": ["research-task-A"], "valid_until": "2026-08-31T00:00:00Z", "current": true, "parent_authority_id": "grant:parent"},
+      "expected": "accept"
+    },
+    {
+      "id": "DEL-N01-operation-amplification",
+      "parent": {"id": "grant:parent", "authority_domain": "citation_use", "operations": ["citation.use"], "scope": ["research-output"], "valid_until": "2026-09-01T00:00:00Z", "current": true},
+      "child": {"id": "delegation:child", "delegator": "citation-agent", "delegate": "task-agent", "authority_domain": "citation_use", "operations": ["citation.use", "task.dispatch"], "scope": ["research-output"], "valid_until": "2026-08-31T00:00:00Z", "current": true, "parent_authority_id": "grant:parent"},
+      "expected": "reject",
+      "reason": "delegation_operation_amplification"
+    },
+    {
+      "id": "DEL-N02-scope-amplification",
+      "parent": {"id": "grant:parent", "authority_domain": "task_dispatch", "operations": ["task.dispatch"], "scope": ["research-task-A"], "valid_until": "2026-09-01T00:00:00Z", "current": true},
+      "child": {"id": "delegation:child", "delegator": "operator", "delegate": "task-agent", "authority_domain": "task_dispatch", "operations": ["task.dispatch"], "scope": ["research-task-A", "production-task"], "valid_until": "2026-08-31T00:00:00Z", "current": true, "parent_authority_id": "grant:parent"},
+      "expected": "reject",
+      "reason": "delegation_scope_amplification"
+    },
+    {
+      "id": "DEL-N03-expiry-amplification",
+      "parent": {"id": "grant:parent", "authority_domain": "task_dispatch", "operations": ["task.dispatch"], "scope": ["research-task-A"], "valid_until": "2026-08-31T00:00:00Z", "current": true},
+      "child": {"id": "delegation:child", "delegator": "operator", "delegate": "task-agent", "authority_domain": "task_dispatch", "operations": ["task.dispatch"], "scope": ["research-task-A"], "valid_until": "2026-09-02T00:00:00Z", "current": true, "parent_authority_id": "grant:parent"},
+      "expected": "reject",
+      "reason": "delegation_expiry_amplification"
+    }
+  ],
+  "historical_cases": [
+    {
+      "id": "HIST-P01-prior-valid-later-revoked",
+      "historical_record": {"evaluated_at": "2026-08-29T12:00:00Z", "authority_was_valid_at_time": true, "authority_basis_ids": ["grant:task-dispatch"]},
+      "current_authority": {"id": "grant:task-dispatch", "current": false, "revoked_at": "2026-08-30T12:00:00Z"},
+      "mode": "historical_record",
+      "expected": "accept"
+    },
+    {
+      "id": "HIST-N01-revoked-new-exercise",
+      "historical_record": {"evaluated_at": "2026-08-29T12:00:00Z", "authority_was_valid_at_time": true, "authority_basis_ids": ["grant:task-dispatch"]},
+      "current_authority": {"id": "grant:task-dispatch", "current": false, "revoked_at": "2026-08-30T12:00:00Z"},
+      "mode": "new_exercise",
+      "expected": "reject",
+      "reason": "current_authority_required"
+    }
+  ],
+  "negative_controls": {
+    "collapsed_objects": [
+      {"id": "COLLAPSED-01", "trusted": true, "authorized": true, "confidence": 0.999, "success": true, "semantic_status": "supported", "requested_operation": "task.dispatch", "protected": true},
+      {"id": "COLLAPSED-02", "trusted": true, "authorized": true, "confidence": 0.95, "success": true, "semantic_status": "valid", "requested_operation": "citation.use", "protected": true}
+    ],
+    "transitive_chain": {
+      "upstream_authority_fields": ["source_access", "evidence_admission", "assessment_mandate", "numeric_relation", "decision_mandate"],
+      "downstream_requested": ["citation_use", "task_dispatch", "outcome_verification"]
+    }
+  }
+}
