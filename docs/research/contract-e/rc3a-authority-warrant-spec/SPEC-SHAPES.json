@@ -1,0 +1,59 @@
+{
+  "schema": "contract-e-authority-warrant-research-spec-shapes",
+  "version": "0.0.0-rc3a-research",
+  "authority_basis_types": ["grant", "policy", "credential", "receipt", "artifact", "delegation"],
+  "domain_basis_requirements": {
+    "source_access": {"any_of": ["grant", "policy"]},
+    "evidence_admission": {"any_of": ["grant", "policy"]},
+    "assessment_mandate": {"any_of": ["grant", "policy"]},
+    "numeric_relation": {"any_of": ["grant", "policy"], "qualification": "numeric_relation_validator", "warrant": "numeric-threshold-v1"},
+    "source_boundary": {"any_of": ["grant", "policy"], "qualification": "source_boundary_validator", "warrant": "source-boundary-v1"},
+    "decision_mandate": {"any_of": ["policy"], "warrant": "decision-policy-v1"},
+    "citation_use": {"any_of": ["grant", "policy"]},
+    "task_dispatch": {"any_of": ["grant", "policy"]},
+    "outcome_verification": {"any_of": ["grant", "policy"], "qualification": "outcome_verifier", "warrant": "postcondition-observation-v1"}
+  },
+  "qualification_shape": {
+    "required": ["type", "id", "subject_id", "scope", "current"],
+    "current_required_for_new_exercise": true,
+    "qualification_is_not_authority_basis_by_itself": true
+  },
+  "warrant_shape": {
+    "required": ["type", "id", "authority_domain", "operation", "input_artifact_ids", "target_id", "target_hash", "applicable", "current"],
+    "must_match_envelope_domain": true,
+    "must_match_envelope_operation": true,
+    "must_match_envelope_target": true,
+    "applicable_required": true,
+    "current_required": true,
+    "warrant_is_not_operational_permission": true
+  },
+  "delegation_shape": {
+    "required": ["id", "delegator", "delegate", "authority_domain", "operations", "scope", "current", "parent_authority_id"],
+    "child_must_be_subset_of_parent": true,
+    "cannot_extend_parent_expiry": true,
+    "cannot_add_operation_not_in_parent": true,
+    "cannot_expand_scope": true
+  },
+  "result_shape": {
+    "opaque_to_common_validator": true,
+    "positive_status_has_no_authority_effect": true,
+    "success_has_no_authority_effect": true,
+    "confidence_has_no_authority_effect": true
+  },
+  "non_implication_shape": {
+    "values_are_typed_authority_domains_or_relations": true,
+    "common_validator_may_check_attempted_cross_use_against_list": true,
+    "common_validator_must_not_infer_missing_non_implications_from_domain_semantics": true
+  },
+  "propagation_shape": {
+    "none": {"allowed_fields": []},
+    "identity_provenance_only": {"allowed_fields_source": "SPEC-CANDIDATE.json#/propagation/identity_provenance_fields"},
+    "explicit": {"requires": ["fields"], "authority_fields_still_forbidden_unless_separately_reauthorized": true}
+  },
+  "historical_record_shape": {
+    "required": ["evaluated_at", "authority_was_valid_at_time", "authority_basis_ids"],
+    "later_currentness_may_be_false": true,
+    "later_revocation_does_not_rewrite_authority_was_valid_at_time": true,
+    "new_exercise_requires_current_recheck": true
+  }
+}
