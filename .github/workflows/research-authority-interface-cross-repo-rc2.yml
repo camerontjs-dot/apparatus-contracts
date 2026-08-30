@@ -1,0 +1,31 @@
+name: Research - Cross-repo authority interface RC2
+
+on:
+  push:
+    branches: [research/authority-interface-cross-repo-rc2-20260830]
+  pull_request:
+    paths:
+      - "docs/research/contract-e/rc2-cross-repo/**"
+      - ".github/workflows/research-authority-interface-cross-repo-rc2.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Independent cross-repo consumer
+        run: |
+          set -o pipefail
+          node docs/research/contract-e/rc2-cross-repo/validate.mjs \
+            | tee authority-interface-rc2.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: authority-interface-cross-repo-rc2-${{ github.sha }}
+          path: authority-interface-rc2.txt
+          retention-days: 30
