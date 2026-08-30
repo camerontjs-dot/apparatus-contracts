@@ -1,0 +1,29 @@
+name: Research Contract D RC3 Candidate
+
+on:
+  push:
+    branches:
+      - research/contract-d-independent-authority-rc3
+  pull_request:
+    paths:
+      - "research/contract-d-independent-authority-rc3/**"
+      - ".github/workflows/research-contract-d-independent-authority-rc3.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  rc3-conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Run frozen RC3 adversarial suite
+        working-directory: research/contract-d-independent-authority-rc3/candidate
+        run: python -m pytest -q tests/test_rc3.py
