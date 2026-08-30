@@ -1,0 +1,95 @@
+{
+  "schema": "contract-e-authority-basis-rc3b-attacks",
+  "frozen_before_validator": true,
+  "cases": [
+    {
+      "id": "BASIS-P01-canonical-task-grant",
+      "base": "task_ok",
+      "expected": "accept"
+    },
+    {
+      "id": "BASIS-N01-cal-policy-as-citation",
+      "base": "citation_ok",
+      "replace_authority_reference": {"old_id": "grant:citation-use", "new_ref": {"type": "policy", "id": "policy:cal-assessment", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_subject_mismatch"
+    },
+    {
+      "id": "BASIS-N02-decision-policy-as-task",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "policy", "id": "policy:decision-v1", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_subject_mismatch"
+    },
+    {
+      "id": "BASIS-N03-wrong-subject",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "grant", "id": "grant:task-wrong-subject", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_subject_mismatch"
+    },
+    {
+      "id": "BASIS-N04-wrong-scope",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "grant", "id": "grant:task-wrong-scope", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_scope_mismatch"
+    },
+    {
+      "id": "BASIS-N05-wrong-target-class",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "grant", "id": "grant:task-wrong-class", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_target_class_mismatch"
+    },
+    {
+      "id": "BASIS-N06-exact-target-mismatch",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "grant", "id": "grant:task-exact-other", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_target_id_mismatch"
+    },
+    {
+      "id": "BASIS-N07-revoked-record-envelope-claims-current",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "grant", "id": "grant:task-revoked", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_not_current"
+    },
+    {
+      "id": "BASIS-N08-unresolvable",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "grant", "id": "grant:does-not-exist", "current": true}},
+      "expected": "reject",
+      "reason": "unresolvable_authority_basis"
+    },
+    {
+      "id": "BASIS-N09-reference-type-mismatch",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "policy", "id": "grant:task-dispatch", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_type_mismatch"
+    },
+    {
+      "id": "BASIS-N10-wrong-operation",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "grant", "id": "grant:task-wrong-operation", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_operation_mismatch"
+    },
+    {
+      "id": "BASIS-N11-valid-warrant-cannot-repair-wrong-mandate",
+      "base": "numeric_ok",
+      "replace_authority_reference": {"old_id": "grant:numeric-validation", "new_ref": {"type": "policy", "id": "policy:source-boundary", "current": true}},
+      "expected": "reject",
+      "reason": "authority_basis_subject_mismatch"
+    },
+    {
+      "id": "BASIS-N12-envelope-current-false",
+      "base": "task_ok",
+      "replace_authority_reference": {"old_id": "grant:task-dispatch", "new_ref": {"type": "grant", "id": "grant:task-dispatch", "current": false}},
+      "expected": "reject",
+      "reason": "authority_basis_not_current"
+    }
+  ]
+}
