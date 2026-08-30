@@ -1,0 +1,67 @@
+name: Research - Contract E authority basis RC3B
+
+on:
+  push:
+    branches:
+      - research/contract-e-authority-basis-binding-rc3b-20260830
+  pull_request:
+    paths:
+      - "docs/research/contract-e/rc3b-authority-basis-binding/**"
+      - ".github/workflows/research-contract-e-authority-basis-rc3b.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  authority-basis-binding:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Protect RC3B mutation surface
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only d6561975ef395bc7cfe96d599d118bc901feb5f6...HEAD | grep -v -E '^(docs/research/contract-e/rc3b-authority-basis-binding/|\.github/workflows/research-contract-e-authority-basis-rc3b\.yml$)' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected mutation surface:"
+            echo "$unexpected"
+            exit 1
+          fi
+
+      - name: Verify inherited RC3A freeze
+        run: |
+          set -euo pipefail
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-CANDIDATE.json)" = "9c1090335d87eb5e4885a755542923b453c45317"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-SHAPES.json)" = "c3f293430ae6ddb87523d83ea6e5380b8b832136"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-PARTICIPANT-BOUNDARY.json)" = "8b1d292a240300388949d502e7b656e7a23a0b8e"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/FROZEN-CASES.json)" = "85bc7805d02a04c5a10b48b43a5f5a89f4e2f32a"
+
+      - name: Verify frozen RC3B candidate and attacks
+        run: |
+          set -euo pipefail
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/PREREGISTRATION.md)" = "3d106af0f0e6b569452270fe1cd83673a88f95ef"
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/BASIS-BINDING-SPEC.json)" = "63c952c9c28f1be2173e69c79976c7dfe5880c10"
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/AUTHORITY-BASIS-REGISTRY.json)" = "76ea333ee0460d9614e9899edb69e6865e48eccb"
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/FROZEN-BASIS-ATTACKS.json)" = "c726fb0ef914a850620e545131a70d427f4027bd"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run frozen RC3B falsifiers
+        run: |
+          set -o pipefail
+          node docs/research/contract-e/rc3b-authority-basis-binding/validate.mjs \
+            | tee rc3b-authority-basis.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: contract-e-authority-basis-rc3b-${{ github.sha }}
+          path: |
+            rc3b-authority-basis.txt
+            docs/research/contract-e/rc3b-authority-basis-binding/RESULTS.json
+          if-no-files-found: warn
+          retention-days: 30
