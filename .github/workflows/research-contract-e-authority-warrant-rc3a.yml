@@ -1,0 +1,60 @@
+name: Research - Contract E authority warrant RC3A
+
+on:
+  push:
+    branches:
+      - research/contract-e-authority-warrant-spec-rc3a-20260830
+  pull_request:
+    paths:
+      - "docs/research/contract-e/rc3a-authority-warrant-spec/**"
+      - ".github/workflows/research-contract-e-authority-warrant-rc3a.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  authority-warrant-falsification:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Protect RC3A mutation surface
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only cfb717304388d2997f86f85850a6c32c3c0758f8...HEAD | grep -v -E '^(docs/research/contract-e/rc3a-authority-warrant-spec/|\.github/workflows/research-contract-e-authority-warrant-rc3a\.yml$)' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected mutation surface:"
+            echo "$unexpected"
+            exit 1
+          fi
+
+      - name: Verify frozen specification and cases
+        run: |
+          set -euo pipefail
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/PREREGISTRATION.md)" = "7cb70808fe7e8099129ddb56d5de523435922814"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-CANDIDATE.json)" = "9c1090335d87eb5e4885a755542923b453c45317"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-SHAPES.json)" = "c3f293430ae6ddb87523d83ea6e5380b8b832136"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-PARTICIPANT-BOUNDARY.json)" = "8b1d292a240300388949d502e7b656e7a23a0b8e"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/FROZEN-CASES.json)" = "85bc7805d02a04c5a10b48b43a5f5a89f4e2f32a"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run frozen RC3A falsifiers
+        run: |
+          set -o pipefail
+          node docs/research/contract-e/rc3a-authority-warrant-spec/validate.mjs \
+            | tee rc3a-authority-warrant.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: contract-e-authority-warrant-rc3a-${{ github.sha }}
+          path: |
+            rc3a-authority-warrant.txt
+            docs/research/contract-e/rc3a-authority-warrant-spec/RESULTS.json
+          if-no-files-found: warn
+          retention-days: 30
