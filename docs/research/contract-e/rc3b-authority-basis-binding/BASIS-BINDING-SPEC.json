@@ -1,0 +1,60 @@
+{
+  "schema": "contract-e-authority-basis-binding-research-spec",
+  "version": "0.0.0-rc3b-research",
+  "representation_note": "The frozen registry is a research resolver. Production representation may be embedded, signed, capability-based, policy-query-backed, or registry-backed if it preserves these bindings.",
+  "authority_reference": {
+    "required": ["type", "id", "current"],
+    "authority_conferring_types": ["grant", "policy", "delegation"]
+  },
+  "resolved_basis_record": {
+    "required": [
+      "id",
+      "type",
+      "subject_ids",
+      "authority_domain",
+      "operations",
+      "scopes",
+      "target_classes",
+      "current",
+      "valid_from",
+      "valid_until"
+    ],
+    "optional": ["target_ids", "parent_authority_id", "revoked_at"]
+  },
+  "matching_rules": {
+    "reference_id_must_resolve": true,
+    "reference_type_must_match_record_type": true,
+    "reference_current_must_not_override_record_currentness": true,
+    "record_must_be_current_for_new_exercise": true,
+    "subject_id_must_be_in_record_subject_ids": true,
+    "authority_domain_must_equal_record_authority_domain": true,
+    "operation_must_be_in_record_operations": true,
+    "jurisdiction_scope_must_be_in_record_scopes": true,
+    "target_class_must_be_in_record_target_classes": true,
+    "target_id_must_match_when_record_target_ids_is_nonempty": true,
+    "evaluated_at_must_be_within_validity_interval": true,
+    "supporting_artifact_reference_never_satisfies_authority_requirement": true
+  },
+  "ordering": {
+    "basis_binding_checked_before_warrant_or_result_payload": true,
+    "reason_precedence": [
+      "unresolvable_authority_basis",
+      "authority_basis_type_mismatch",
+      "authority_basis_not_current",
+      "authority_basis_subject_mismatch",
+      "authority_basis_domain_mismatch",
+      "authority_basis_operation_mismatch",
+      "authority_basis_scope_mismatch",
+      "authority_basis_target_class_mismatch",
+      "authority_basis_target_id_mismatch",
+      "authority_basis_outside_validity_interval"
+    ]
+  },
+  "non_implications": [
+    "A current policy identifier without matching bound record is not authority.",
+    "A valid warrant does not repair a missing or mismatched authority basis.",
+    "A positive semantic result does not repair a missing or mismatched authority basis.",
+    "A typed Decision artifact does not itself satisfy an execution grant requirement.",
+    "A supporting artifact may be part of the basis chain without being an authority-conferring record."
+  ]
+}
