@@ -1,0 +1,12 @@
+{
+  "schema": "contract-e-participant-boundary-research-spec",
+  "version": "0.0.0-rc3a-research",
+  "common_envelope_additional_required": ["participant"],
+  "rules": {
+    "participant_must_be_declared": true,
+    "participant_must_accept_authority_domain": true,
+    "participant_must_accept_operation": true,
+    "participant_responsibility_domain_is_not_inferred_from_subject_identity": true,
+    "participant_declaration_cannot_be_bypassed_by_positive_semantic_result": true
+  }
+}
