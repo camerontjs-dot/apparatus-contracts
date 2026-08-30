@@ -1,0 +1,30 @@
+{
+  "effect_registry_version": "1",
+  "effects": {
+    "knowledge.add_verified_tag": {
+      "1": {
+        "params": {
+          "scope": {
+            "default": "claim",
+            "enum": [
+              "claim",
+              "object"
+            ],
+            "required": false,
+            "type": "string"
+          }
+        }
+      }
+    },
+    "knowledge.cite_as_evidence": {
+      "1": {
+        "params": {}
+      }
+    },
+    "task.dispatch": {
+      "1": {
+        "params": {}
+      }
+    }
+  }
+}
