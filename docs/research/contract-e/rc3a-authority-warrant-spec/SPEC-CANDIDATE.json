@@ -1,0 +1,209 @@
+{
+  "schema": "contract-e-authority-warrant-research-spec",
+  "version": "0.0.0-rc3a-research",
+  "status": "non-canonical-research-candidate",
+  "normative_rules": {
+    "default_authority_propagation": "none",
+    "semantic_payload_authority_effect": "none_unless_explicitly_bound_by_domain_warrant",
+    "generic_authorized_boolean_forbidden": true,
+    "positive_result_self_authorizes": false,
+    "competence_implies_jurisdiction": false,
+    "jurisdiction_implies_competence": false,
+    "warrant_implies_operational_permission": false,
+    "decision_implies_execution_permission": false,
+    "execution_report_implies_verified_outcome": false,
+    "historical_validity_rewritten_by_later_revocation": false,
+    "unknown_domain_behavior": "reject",
+    "unknown_operation_behavior": "reject",
+    "missing_required_basis_behavior": "reject",
+    "inapplicable_behavior": "reject",
+    "stale_target_behavior": "reject"
+  },
+  "common_envelope": {
+    "required": [
+      "subject",
+      "authority_domain",
+      "operation",
+      "target",
+      "jurisdiction",
+      "authority_basis",
+      "propagation",
+      "non_implications",
+      "evaluated_at"
+    ],
+    "subject_required": ["id", "kind"],
+    "target_required": ["class", "id", "current_hash"],
+    "jurisdiction_required": ["scope", "applicable", "current"],
+    "authority_basis_entry_required": ["type", "id", "current"],
+    "propagation_modes": ["none", "identity_provenance_only", "explicit"]
+  },
+  "authority_domains": {
+    "source_access": {
+      "kind": "operational",
+      "operations": ["source.read"],
+      "competence_required": false,
+      "warrant_allowed": false
+    },
+    "evidence_admission": {
+      "kind": "operational",
+      "operations": ["evidence.admit_passage"],
+      "competence_required": false,
+      "warrant_allowed": false
+    },
+    "assessment_mandate": {
+      "kind": "mandate",
+      "operations": ["assessment.issue"],
+      "competence_required": false,
+      "warrant_allowed": false
+    },
+    "numeric_relation": {
+      "kind": "informational",
+      "operations": ["semantic.validate_numeric"],
+      "competence_required": true,
+      "accepted_qualification_types": ["numeric_relation_validator"],
+      "warrant_allowed": true,
+      "accepted_warrant_types": ["numeric-threshold-v1"]
+    },
+    "source_boundary": {
+      "kind": "informational",
+      "operations": ["semantic.validate_absence"],
+      "competence_required": true,
+      "accepted_qualification_types": ["source_boundary_validator"],
+      "warrant_allowed": true,
+      "accepted_warrant_types": ["source-boundary-v1"]
+    },
+    "decision_mandate": {
+      "kind": "mandate",
+      "operations": ["decision.make"],
+      "competence_required": false,
+      "warrant_allowed": true,
+      "accepted_warrant_types": ["decision-policy-v1"]
+    },
+    "citation_use": {
+      "kind": "operational",
+      "operations": ["citation.use"],
+      "competence_required": false,
+      "warrant_allowed": false
+    },
+    "task_dispatch": {
+      "kind": "operational",
+      "operations": ["task.dispatch"],
+      "competence_required": false,
+      "warrant_allowed": false
+    },
+    "outcome_verification": {
+      "kind": "informational",
+      "operations": ["outcome.verify"],
+      "competence_required": true,
+      "accepted_qualification_types": ["outcome_verifier"],
+      "warrant_allowed": true,
+      "accepted_warrant_types": ["postcondition-observation-v1"]
+    }
+  },
+  "participant_declarations": {
+    "evidence-bundler": {
+      "accepted_domains": ["source_access", "evidence_admission"],
+      "accepted_operations": ["source.read", "evidence.admit_passage"],
+      "responsibilities": ["source_acquisition", "passage_admission"],
+      "excluded_responsibilities": ["semantic_support", "decision_mandate", "citation_use", "task_dispatch"]
+    },
+    "claim-audit-lab": {
+      "accepted_domains": ["assessment_mandate"],
+      "accepted_operations": ["assessment.issue"],
+      "responsibilities": ["epistemic_assessment_issuance"],
+      "excluded_responsibilities": ["source_access", "decision_mandate", "citation_use", "task_dispatch"]
+    },
+    "numeric-validator": {
+      "accepted_domains": ["numeric_relation"],
+      "accepted_operations": ["semantic.validate_numeric"],
+      "responsibilities": ["numeric_relation_validation"],
+      "excluded_responsibilities": ["source_boundary", "decision_mandate", "citation_use", "task_dispatch"]
+    },
+    "source-boundary-validator": {
+      "accepted_domains": ["source_boundary"],
+      "accepted_operations": ["semantic.validate_absence"],
+      "responsibilities": ["source_boundary_validation"],
+      "excluded_responsibilities": ["numeric_relation", "decision_mandate", "citation_use", "task_dispatch"]
+    },
+    "decision-engine-policy": {
+      "accepted_domains": ["decision_mandate"],
+      "accepted_operations": ["decision.make"],
+      "responsibilities": ["policy_decision"],
+      "excluded_responsibilities": ["epistemic_truth", "citation_use", "task_dispatch", "outcome_verification"]
+    },
+    "citation-agent": {
+      "accepted_domains": ["citation_use"],
+      "accepted_operations": ["citation.use"],
+      "responsibilities": ["citation_operation"],
+      "excluded_responsibilities": ["semantic_support", "decision_mandate", "task_dispatch"]
+    },
+    "task-agent": {
+      "accepted_domains": ["task_dispatch"],
+      "accepted_operations": ["task.dispatch"],
+      "responsibilities": ["task_execution_request"],
+      "excluded_responsibilities": ["decision_correctness", "citation_use", "outcome_verification"]
+    },
+    "outcome-verifier": {
+      "accepted_domains": ["outcome_verification"],
+      "accepted_operations": ["outcome.verify"],
+      "responsibilities": ["postcondition_observation"],
+      "excluded_responsibilities": ["decision_correctness", "execution_permission"]
+    }
+  },
+  "warrant_types": {
+    "numeric-threshold-v1": {
+      "authority_domain": "numeric_relation",
+      "operation": "semantic.validate_numeric",
+      "licenses": ["numeric_relation.validity"],
+      "required_bindings": ["input_artifact_ids", "target_id", "target_hash", "applicable", "current"],
+      "non_implications": ["source_boundary.validity", "decision_mandate", "citation_use", "task_dispatch"]
+    },
+    "source-boundary-v1": {
+      "authority_domain": "source_boundary",
+      "operation": "semantic.validate_absence",
+      "licenses": ["source_boundary.validity"],
+      "required_bindings": ["input_artifact_ids", "target_id", "target_hash", "applicable", "current"],
+      "non_implications": ["numeric_relation.validity", "semantic_support", "decision_mandate", "citation_use", "task_dispatch"]
+    },
+    "decision-policy-v1": {
+      "authority_domain": "decision_mandate",
+      "operation": "decision.make",
+      "licenses": ["policy_decision"],
+      "required_bindings": ["input_artifact_ids", "target_id", "target_hash", "applicable", "current"],
+      "non_implications": ["epistemic_truth", "citation_use", "task_dispatch"]
+    },
+    "postcondition-observation-v1": {
+      "authority_domain": "outcome_verification",
+      "operation": "outcome.verify",
+      "licenses": ["observed_postcondition"],
+      "required_bindings": ["input_artifact_ids", "target_id", "target_hash", "applicable", "current"],
+      "non_implications": ["decision_correctness", "execution_permission"]
+    }
+  },
+  "propagation": {
+    "identity_provenance_fields": [
+      "source_id",
+      "artifact_id",
+      "content_hash",
+      "producer_id",
+      "policy_id",
+      "policy_version"
+    ],
+    "never_implicit": [
+      "competence",
+      "authority_domain",
+      "jurisdiction",
+      "warrant",
+      "semantic_validity",
+      "decision_mandate",
+      "citation_use",
+      "task_dispatch",
+      "outcome_verification"
+    ]
+  },
+  "historical_validity": {
+    "required_for_exercised_authority": ["evaluated_at", "authority_basis"],
+    "current_recheck_required_for_new_action": true,
+    "later_revocation_rewrites_prior_valid_at_time": false
+  }
+}
