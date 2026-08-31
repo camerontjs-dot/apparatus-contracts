@@ -1,0 +1,57 @@
+{
+  "schema": "contract-e-semantic-interpretation-record-v1",
+  "purpose": "fixed output shape for interpretation-only independent readers",
+  "required_top_level": [
+    "metadata",
+    "global_model",
+    "domain_interpretations",
+    "authority_basis_interpretation",
+    "qualification_interpretation",
+    "warrant_interpretation",
+    "currentness_interpretation",
+    "participant_interpretation",
+    "propagation_interpretation",
+    "delegation_interpretation",
+    "historical_interpretation",
+    "result_payload_interpretation",
+    "interface_interpretation",
+    "reason_semantics_interpretation",
+    "underdeterminations",
+    "claimed_contradictions",
+    "load_bearing_assumptions",
+    "falsifiers",
+    "freeze_marker"
+  ],
+  "metadata": {
+    "required": ["reader_runtime", "model_identity", "session_identity", "resolved_contract_sha256", "contamination_status"]
+  },
+  "answer_vocabulary": ["REQUIRED", "FORBIDDEN", "ALLOWED", "UNDERDETERMINED"],
+  "rule_statement_shape": {
+    "required": ["statement", "status", "contract_refs"],
+    "contract_refs": "one or more JSON pointers into RESOLVED-CONTRACT.json",
+    "notes": "notes may distinguish direct text from inference"
+  },
+  "domain_interpretation_shape": {
+    "required": ["kind", "operations", "competence_required", "warrant_allowed", "accepted_qualification_types", "accepted_warrant_types", "contract_refs"]
+  },
+  "underdetermination_shape": {
+    "required": ["id", "question", "why_not_decided", "contract_refs"]
+  },
+  "claimed_contradiction_shape": {
+    "required": ["description", "contract_refs", "material_effect"]
+  },
+  "load_bearing_assumption_shape": {
+    "required": ["assumption", "needed_for", "contract_refs_or_null"]
+  },
+  "falsifier_shape": {
+    "required": ["claim", "observation_that_would_falsify_it"]
+  },
+  "freeze_marker": "FRESH_CONTRACT_E_INTERPRETATION_FROZEN_BEFORE_SEMANTIC_QUESTIONS_REVEAL",
+  "prohibitions": [
+    "no implementation code",
+    "no reference-validator guessing",
+    "no hidden-test speculation",
+    "no resolving an explicit UNDERDETERMINED point by preference",
+    "no external project retrieval"
+  ]
+}
