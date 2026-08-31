@@ -60,6 +60,32 @@ def test_json_ingress_and_host_values_fail_closed():
     with pytest.raises(ContractDError,match="invalid_utf8"): parse_json_bytes(b"\xff")
     with pytest.raises(ContractDError,match="duplicate_json_key"): parse_json_bytes(b'{"contract_d_version":"0.3.0-rc4","contract_d_version":"0.3.0-rc4"}')
 
+def test_cyclic_host_container_fails_closed():
+    d=load("source-audit-clear.json")
+    cycle={}
+    cycle["self"]=cycle
+    d["metadata"]["diagnostics"]=cycle
+    with pytest.raises(ContractDError,match="non_json_value"): validate_decision(d)
+    got=consume(d,exp(load("source-audit-clear.json")))
+    assert got["outcome"]=="cannot_establish"
+    assert got["reason"]=="non_json_value"
+
+def test_mutual_host_container_cycle_fails_closed():
+    d=load("source-audit-clear.json")
+    left=[]
+    right={"left":left}
+    left.append(right)
+    d["metadata"]["diagnostics"]={"cycle":left}
+    with pytest.raises(ContractDError,match="non_json_value"): validate_decision(d)
+
+def test_shared_acyclic_host_container_remains_valid():
+    d=load("source-audit-clear.json")
+    shared={"values":[1,2,3]}
+    d["metadata"]["diagnostics"]={"a":shared,"b":shared}
+    validate_decision(d)
+    canonical_json_bytes(d)
+    assert consume(d,exp(d))["outcome"]=="candidate_for_authorization"
+
 def test_metadata_invariance():
     d=load("source-audit-clear.json"); ident=semantic_identity(d)
     x=copy.deepcopy(d); x["metadata"]["diagnostics"]={"actor":"root","approval":True}
