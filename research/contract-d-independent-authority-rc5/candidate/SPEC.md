@@ -101,11 +101,13 @@ For a completed Decision, including HOLD, the consumer must:
 6. if external requested machine-semantic parameters are supplied, treat only those supplied keys as constraints and compare them exactly to the normalized Decision effect parameters;
 7. only after those applicability checks return `hold` for HOLD or `candidate_for_authorization` for CLEAR.
 
+The external applicability expectation is itself a typed input boundary. Its upstream, policy, target, requested-operation, and requested-parameter values must be RC5-valid interoperable finite JSON; its expected target `content_sha256` must have the same `sha256:` + 64 lowercase-hex shape required by the Decision target. Host-language-only values, non-finite/non-interoperable numbers, invalid Unicode scalars, malformed containers, missing/extra binding keys, or malformed target hashes make the expectation invalid rather than merely nonmatching.
+
 Therefore a completed HOLD reused for a different requested operation or conflicting requested parameter is `not_applicable`, not `hold`.
 
 If external requested effect parameters are absent or `{}`, that means **no parameter constraint was requested**. Registry defaults are not injected into the external request.
 
-Malformed external applicability expectation containers do not gain meaning through truthiness or partial-key matching. They produce `cannot_establish` with reason `invalid_expectation`.
+Malformed external applicability expectation containers or values do not gain meaning through truthiness, coercion, or partial-key matching. They produce `cannot_establish` with reason `invalid_expectation`.
 
 A failed evaluation has no effect to match; after upstream/policy/target applicability succeeds, its outcome is `evaluation_failed`.
 
