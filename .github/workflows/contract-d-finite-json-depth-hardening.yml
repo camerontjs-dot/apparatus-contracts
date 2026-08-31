@@ -1,0 +1,51 @@
+name: Contract D finite-JSON depth hardening
+
+on:
+  push:
+    branches:
+      - research/contract-d-finite-json-depth-hardening-v1
+  workflow_dispatch:
+
+jobs:
+  discriminate:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Verify frozen predecessor identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected='fd6923115116b0ced0f9feb5c005099d2e51ea88'
+          test "$(git rev-list --max-parents=0 HEAD | head -n1)" != ''
+          git merge-base --is-ancestor "$expected" HEAD
+          test "$(git rev-parse "${expected}:research/contract-d-independent-authority-rc4/candidate")" = 'fe449f9ec27eeddb434276ded375f9dc16b48e29'
+          test "$(git rev-parse "${expected}:research/contract-d-independent-authority-rc4/candidate/contract_d_core.py")" = '589e3f1c31a21d305402e5750605d25be682a336'
+
+      - name: Run catch-only versus iterative discriminator
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-finite-json-depth-hardening-v1
+        run: |
+          set -euo pipefail
+          python research/contract-d-finite-json-depth-hardening-v1/run_experiment.py
+
+      - name: Preserve result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-d-depth-hardening-py${{ matrix.python }}
+          path: research/contract-d-finite-json-depth-hardening-v1/results/
+          if-no-files-found: error
