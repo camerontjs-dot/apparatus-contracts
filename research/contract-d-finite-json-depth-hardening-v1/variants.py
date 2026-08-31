@@ -83,9 +83,9 @@ def iterative_canonical_json_bytes(value: Any, error_type) -> bytes:
             chunks.append("[")
             stack.append(("raw", "]"))
             for index in range(len(current) - 1, -1, -1):
-                stack.append(("value", current[index]))
-                if index:
+                if index < len(current) - 1:
                     stack.append(("raw", ","))
+                stack.append(("value", current[index]))
             continue
 
         if isinstance(current, dict):
@@ -97,11 +97,11 @@ def iterative_canonical_json_bytes(value: Any, error_type) -> bytes:
             items = sorted(current.items(), key=lambda item: item[0])
             for index in range(len(items) - 1, -1, -1):
                 key, child = items[index]
+                if index < len(items) - 1:
+                    stack.append(("raw", ","))
                 stack.append(("value", child))
                 stack.append(("raw", ":"))
                 stack.append(("raw", json.dumps(key, ensure_ascii=False)))
-                if index:
-                    stack.append(("raw", ","))
             continue
 
         raise AssertionError(f"unreachable non-JSON value: {type(current).__name__}")
