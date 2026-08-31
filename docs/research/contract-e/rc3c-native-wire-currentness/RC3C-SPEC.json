@@ -1,0 +1,169 @@
+{
+  "schema": "contract-e-authority-warrant-rc3c-amendment",
+  "version": "0.0.0-rc3c-research",
+  "status": "non-canonical-research-candidate",
+  "inherits": {
+    "authority_warrant_spec_blob": "9c1090335d87eb5e4885a755542923b453c45317",
+    "structural_shapes_blob": "c3f293430ae6ddb87523d83ea6e5380b8b832136",
+    "participant_boundary_blob": "8b1d292a240300388949d502e7b656e7a23a0b8e",
+    "authority_basis_binding_blob": "63c952c9c28f1be2173e69c79976c7dfe5880c10"
+  },
+  "scope_of_amendment": [
+    "authority_currentness_composition",
+    "canonical_wire_cardinality",
+    "delegation_wire_shape",
+    "bounded_normative_reason_semantics"
+  ],
+  "unchanged_invariants": {
+    "authority_domains_unchanged": true,
+    "participant_responsibility_boundaries_unchanged": true,
+    "authority_basis_subject_domain_operation_scope_target_binding_unchanged": true,
+    "competence_implies_jurisdiction": false,
+    "jurisdiction_implies_competence": false,
+    "warrant_implies_operational_permission": false,
+    "decision_implies_execution_permission": false,
+    "semantic_result_payload_is_opaque_to_common_authority": true,
+    "default_authority_propagation": "none",
+    "historical_validity_rewritten_by_later_revocation": false
+  },
+  "currentness": {
+    "applies_to": "new_exercise",
+    "authority_reference_current_semantics": "fail_closed_freshness_veto",
+    "resolved_record_current_semantics": "authoritative_lifecycle_state",
+    "required_conjunction": [
+      "authority_reference.current == true",
+      "resolved_basis_record.current == true",
+      "evaluated_at >= resolved_basis_record.valid_from",
+      "evaluated_at <= resolved_basis_record.valid_until",
+      "resolved_basis_record.revoked_at is absent OR evaluated_at < resolved_basis_record.revoked_at"
+    ],
+    "validity_interval_bounds": "inclusive",
+    "reference_true_cannot_override_noncurrent_record": true,
+    "reference_false_must_reject_even_when_record_current": true,
+    "reference_false_does_not_rewrite_record_state": true,
+    "record_false_must_reject_even_when_reference_current": true,
+    "revoked_at_at_or_before_evaluated_at_must_reject": true,
+    "canonical_primary_reason": {
+      "reference_false": "authority_basis_not_current",
+      "record_false": "authority_basis_not_current",
+      "revoked_at_reached": "authority_basis_not_current",
+      "outside_validity_interval": "authority_basis_outside_validity_interval"
+    }
+  },
+  "canonical_wire": {
+    "silent_singular_plural_coercion_forbidden": true,
+    "common_envelope": {
+      "authority_basis": {"json_type": "array", "item_type": "AuthorityReference", "min_items": 1, "required": true},
+      "competence": {"json_type": "array", "item_type": "Qualification", "min_items": 0, "required": true},
+      "jurisdiction.scope": {"json_type": "string", "required": true},
+      "non_implications": {"json_type": "array", "item_type": "string", "required": true},
+      "evaluated_at": {"json_type": "string", "format": "date-time", "required": true}
+    },
+    "AuthorityReference": {
+      "json_type": "object",
+      "required": ["type", "id", "current"],
+      "type": {"json_type": "string"},
+      "id": {"json_type": "string"},
+      "current": {"json_type": "boolean"}
+    },
+    "Qualification": {
+      "json_type": "object",
+      "required": ["type", "id", "subject_id", "scope", "current"],
+      "type": {"json_type": "string"},
+      "id": {"json_type": "string"},
+      "subject_id": {"json_type": "string"},
+      "scope": {"json_type": "string"},
+      "current": {"json_type": "boolean"}
+    },
+    "ResolvedBasisRecord": {
+      "json_type": "object",
+      "subject_ids": {"json_type": "array", "item_type": "string"},
+      "operations": {"json_type": "array", "item_type": "string"},
+      "scopes": {"json_type": "array", "item_type": "string"},
+      "target_classes": {"json_type": "array", "item_type": "string"},
+      "target_ids": {"json_type": "array", "item_type": "string"},
+      "current": {"json_type": "boolean"}
+    },
+    "Delegation": {
+      "json_type": "object",
+      "required": ["id", "delegator", "delegate", "authority_domain", "operations", "scope", "current", "parent_authority_id"],
+      "operations": {"json_type": "array", "item_type": "string", "min_items": 1},
+      "scope": {"json_type": "array", "item_type": "string", "min_items": 1},
+      "current": {"json_type": "boolean"},
+      "parent_authority_id": {"json_type": "string"},
+      "subset_rule": "child.operations subset parent.operations AND child.scope subset parent.scope",
+      "expiry_rule": "child.valid_until <= parent.valid_until when both are present"
+    }
+  },
+  "malformed_wire_reasons": {
+    "authority_basis_not_array": "malformed_authority_basis_shape",
+    "competence_not_array": "malformed_competence_shape",
+    "jurisdiction_scope_not_string": "malformed_jurisdiction_scope_shape",
+    "qualification_scope_not_string": "malformed_qualification_scope_shape",
+    "delegation_operations_not_array": "malformed_delegation_operations_shape",
+    "delegation_scope_not_array": "malformed_delegation_scope_shape"
+  },
+  "reason_contract": {
+    "decision_is_normative": true,
+    "canonical_primary_reason_is_normative_only_when_listed_by_this_amendment_or_rc3b_basis_binding": true,
+    "single_primary_reason": true,
+    "inherited_rc3a_reason_strings": "historical_non_normative_unless_explicitly_relisted",
+    "whole_envelope_precedence": [
+      "malformed_authority_basis_shape",
+      "malformed_competence_shape",
+      "malformed_jurisdiction_scope_shape",
+      "malformed_qualification_scope_shape",
+      "generic_authorized_forbidden",
+      "missing_required_field",
+      "unknown_authority_domain",
+      "domain_operation_mismatch",
+      "unknown_participant",
+      "participant_domain_out_of_scope",
+      "participant_operation_out_of_scope",
+      "jurisdiction_inapplicable",
+      "jurisdiction_not_current",
+      "unresolvable_authority_basis",
+      "authority_basis_type_mismatch",
+      "authority_basis_not_current",
+      "authority_basis_subject_mismatch",
+      "authority_basis_domain_mismatch",
+      "authority_basis_operation_mismatch",
+      "authority_basis_scope_mismatch",
+      "authority_basis_target_class_mismatch",
+      "authority_basis_target_id_mismatch",
+      "authority_basis_outside_validity_interval",
+      "missing_domain_authority_basis",
+      "missing_required_qualification",
+      "qualification_type_mismatch",
+      "qualification_not_current",
+      "qualification_subject_mismatch",
+      "qualification_scope_mismatch",
+      "missing_required_warrant",
+      "warrant_domain_mismatch",
+      "warrant_operation_mismatch",
+      "warrant_type_mismatch",
+      "warrant_inapplicable",
+      "warrant_not_current",
+      "warrant_target_mismatch",
+      "warrant_target_hash_mismatch",
+      "warrant_not_allowed_for_domain",
+      "unknown_propagation_mode"
+    ],
+    "relisted_cross_domain_primary_reasons": {
+      "assessment_mandate_used_as_citation_use": "authority_basis_domain_mismatch",
+      "decision_mandate_used_as_task_dispatch": "authority_basis_domain_mismatch",
+      "explicit_decision_mandate_propagation": "authority_requires_reestablishment",
+      "explicit_task_dispatch_propagation": "authority_requires_reestablishment",
+      "delegation_operation_amplification": "delegation_operation_amplification",
+      "delegation_scope_amplification": "delegation_scope_amplification",
+      "delegation_expiry_amplification": "delegation_expiry_amplification"
+    }
+  },
+  "consumer_requirements": {
+    "must_consume_canonical_wire_natively": true,
+    "must_not_require_bespoke_hidden_vector_adapter": true,
+    "must_preserve_opaque_result_invariance": true,
+    "must_reject_malformed_cardinality": true,
+    "must_not_infer_authority_from_positive_result_or_success": true
+  }
+}
