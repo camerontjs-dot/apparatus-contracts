@@ -3,7 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from contract_d_core import ContractDError, semantic_identity, validate_decision, validate_effect
+from contract_d_core import (
+    ContractDError,
+    is_sha256_value,
+    semantic_identity,
+    validate_decision,
+    validate_effect,
+    validate_json_value,
+)
 
 
 @dataclass(frozen=True)
@@ -36,13 +43,22 @@ def _valid_expectation(expected: Any) -> bool:
         return False
     if not _exact_string_mapping(expected.target, {"kind", "id", "content_sha256"}):
         return False
+    if not is_sha256_value(expected.target["content_sha256"]):
+        return False
     if not isinstance(expected.requested_operation, str) or not expected.requested_operation:
         return False
-    if expected.effect_params is not None:
-        if not isinstance(expected.effect_params, dict):
-            return False
-        if not all(isinstance(key, str) for key in expected.effect_params):
-            return False
+
+    try:
+        validate_json_value(expected.input_authority, "$.expected.input_authority")
+        validate_json_value(expected.policy, "$.expected.policy")
+        validate_json_value(expected.target, "$.expected.target")
+        validate_json_value(expected.requested_operation, "$.expected.requested_operation")
+        if expected.effect_params is not None:
+            if not isinstance(expected.effect_params, dict):
+                return False
+            validate_json_value(expected.effect_params, "$.expected.effect_params")
+    except ContractDError:
+        return False
     return True
 
 
