@@ -104,6 +104,18 @@ def _json_value(
     raise ContractDError("non_json_value", path, type(value).__name__)
 
 
+def validate_json_value(value: Any, path: str = "$") -> None:
+    """Validate one RC5 interoperable finite-JSON value using the normative bounds."""
+    try:
+        _json_value(value, path)
+    except RecursionError as exc:
+        raise ContractDError("resource_limit", path, "recursion") from exc
+
+
+def is_sha256_value(value: Any) -> bool:
+    return isinstance(value, str) and _SHA256.fullmatch(value) is not None
+
+
 def _object(value: Any, path: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ContractDError("expected_object", path)
@@ -127,7 +139,7 @@ def _nonempty_string(value: Any, path: str) -> str:
 
 
 def validate_effect(effect: Any) -> dict[str, Any]:
-    _json_value(effect, "$.effect")
+    validate_json_value(effect, "$.effect")
     effect = _object(effect, "$.effect")
     _exact_keys(effect, {"type", "version"}, {"params"}, "$.effect")
     etype = _nonempty_string(effect["type"], "$.effect.type")
@@ -174,10 +186,7 @@ def validate_effect(effect: Any) -> dict[str, Any]:
 
 
 def validate_decision(decision: Any) -> dict[str, Any]:
-    try:
-        _json_value(decision)
-    except RecursionError as exc:
-        raise ContractDError("resource_limit", "$", "recursion") from exc
+    validate_json_value(decision)
 
     decision = _object(decision, "$")
     _exact_keys(
@@ -208,7 +217,7 @@ def validate_decision(decision: Any) -> dict[str, Any]:
     _nonempty_string(target["kind"], "$.target.kind")
     _nonempty_string(target["id"], "$.target.id")
     content = _nonempty_string(target["content_sha256"], "$.target.content_sha256")
-    if not _SHA256.fullmatch(content):
+    if not is_sha256_value(content):
         raise ContractDError("invalid_target_content_sha256", "$.target.content_sha256")
 
     evaluation = _object(decision["evaluation"], "$.evaluation")
@@ -256,7 +265,7 @@ def validate_decision(decision: Any) -> dict[str, Any]:
 
 def canonical_json_bytes(value: Any) -> bytes:
     try:
-        _json_value(value)
+        validate_json_value(value)
         return rfc8785.dumps(value) + b"\n"
     except ContractDError:
         raise
