@@ -1,9 +1,9 @@
-name: Research - Contract E consumer request surface RC3D
+name: Research - Contract E consumer request surface RC3D R1
 
 on:
   push:
     branches:
-      - research/contract-e-consumer-request-surface-rc3d-20260831
+      - research/contract-e-consumer-request-surface-rc3d-r1-20260831
   pull_request:
     paths:
       - "docs/research/contract-e/rc3d-consumer-request-surface/**"
@@ -13,19 +13,19 @@ permissions:
   contents: read
 
 jobs:
-  rc3d-hardening:
+  rc3d-r1-hardening:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Protect RC3D mutation surface
+      - name: Protect RC3D R1 mutation surface
         run: |
           set -euo pipefail
-          unexpected="$(git diff --name-only 6d49615acd85ca6439f9ae723570dde1fdb8dcae...HEAD | grep -v -E '^(docs/research/contract-e/rc3d-consumer-request-surface/|\.github/workflows/research-contract-e-consumer-request-surface-rc3d\.yml$)' || true)"
+          unexpected="$(git diff --name-only 5f424b29b27c0af1a2b821ae8dd85e4843baba51...HEAD | grep -v -E '^(docs/research/contract-e/rc3d-consumer-request-surface/(R1-PREREGISTRATION\.md|FROZEN-CASES\.json)|\.github/workflows/research-contract-e-consumer-request-surface-rc3d\.yml$)' || true)"
           if [ -n "$unexpected" ]; then
-            echo "Unexpected mutation surface:"
+            echo "Unexpected R1 mutation surface:"
             echo "$unexpected"
             exit 1
           fi
@@ -44,14 +44,21 @@ jobs:
           test "$(git hash-object docs/research/contract-e/rc3c-native-wire-currentness/RC3C-SPEC.json)" = "f05feac88128fd693cca2fb25a0b2951654377eb"
           test "$(git hash-object docs/research/contract-e/rc3c-native-wire-currentness/FROZEN-CASES.json)" = "17d45524125814478b987bb8e91d23f545fb514e"
 
-      - name: Verify frozen RC3D apparatus
+      - name: Verify frozen RC3D public candidate and R1 apparatus
         run: |
           set -euo pipefail
           test "$(git hash-object docs/research/contract-e/rc3d-consumer-request-surface/PREREGISTRATION.md)" = "38568073bb62f26a6969e0820eeeb4a88f5a6702"
+          test "$(git hash-object docs/research/contract-e/rc3d-consumer-request-surface/R1-PREREGISTRATION.md)" = "ca414f52077b34e1335cdc7e160926241ecf59c5"
           test "$(git hash-object docs/research/contract-e/rc3d-consumer-request-surface/RC3D-INTERFACE-SPEC.json)" = "61f46b09d391e7da4aed2491e428ec2ed226fe93"
           test "$(git hash-object docs/research/contract-e/rc3d-consumer-request-surface/VECTOR-MATERIALIZATION-SPEC.json)" = "5c75e46a8eb4d7346128d84e21c25bdcea454ec4"
-          test "$(git hash-object docs/research/contract-e/rc3d-consumer-request-surface/FROZEN-CASES.json)" = "7baf8e846bd655619464be773f486916a6193d1f"
+          test "$(git hash-object docs/research/contract-e/rc3d-consumer-request-surface/FROZEN-CASES.json)" = "728b308d6eca0ebdf384e7de312c8a62b2f25577"
           test "$(git hash-object docs/research/contract-e/rc3d-consumer-request-surface/validate.mjs)" = "824916c40c863fd1e6e7f4d35943fd6e1077590b"
+
+      - name: Verify R1 correction is apparatus-only
+        run: |
+          set -euo pipefail
+          test "$(git diff --name-only 5f424b29b27c0af1a2b821ae8dd85e4843baba51...HEAD | grep -E '^docs/research/contract-e/rc3d-consumer-request-surface/(RC3D-INTERFACE-SPEC\.json|VECTOR-MATERIALIZATION-SPEC\.json|validate\.mjs)$' | wc -l | tr -d ' ')" = "0"
+          git diff 5f424b29b27c0af1a2b821ae8dd85e4843baba51...HEAD -- docs/research/contract-e/rc3d-consumer-request-surface/FROZEN-CASES.json | grep -q 'HIST-N01-revoked-new-exercise'
 
       - uses: actions/setup-node@v4
         with:
@@ -75,21 +82,21 @@ jobs:
           node docs/research/contract-e/rc3c-native-wire-currentness/validate.mjs \
             | tee rc3c-regression.txt
 
-      - name: Run frozen RC3D materialized/interface falsifiers
+      - name: Run corrected frozen RC3D R1 materialized/interface falsifiers
         run: |
           set -o pipefail
           node docs/research/contract-e/rc3d-consumer-request-surface/validate.mjs \
-            | tee rc3d-consumer-request-surface.txt
+            | tee rc3d-r1-consumer-request-surface.txt
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: contract-e-consumer-request-surface-rc3d-${{ github.sha }}
+          name: contract-e-consumer-request-surface-rc3d-r1-${{ github.sha }}
           path: |
             rc3b-regression.txt
             rc3b-matrix-regression.txt
             rc3c-regression.txt
-            rc3d-consumer-request-surface.txt
+            rc3d-r1-consumer-request-surface.txt
             docs/research/contract-e/rc3b-authority-basis-binding/RESULTS.json
             docs/research/contract-e/rc3b-authority-basis-binding/HARDENING-RESULTS.json
             docs/research/contract-e/rc3c-native-wire-currentness/RESULTS.json
