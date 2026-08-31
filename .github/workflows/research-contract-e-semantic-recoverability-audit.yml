@@ -24,20 +24,27 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Verify frozen source blobs and build resolved semantic view
+      - name: Verify frozen source blobs and rebuild resolved semantic view
         run: |
           set -euo pipefail
-          node docs/research/contract-e/semantic-recoverability-audit/build-resolved.mjs /tmp/RESOLVED-CONTRACT.json
-          node -e 'JSON.parse(require("fs").readFileSync("/tmp/RESOLVED-CONTRACT.json","utf8")); console.log("resolved JSON valid")'
-          cp /tmp/RESOLVED-CONTRACT.json RESOLVED-CONTRACT.json
-          sha256sum RESOLVED-CONTRACT.json | tee resolved.sha256
+          node docs/research/contract-e/semantic-recoverability-audit/build-resolved.mjs /tmp/RESOLVED-CONTRACT.generated.json
+          node -e 'JSON.parse(require("fs").readFileSync("/tmp/RESOLVED-CONTRACT.generated.json","utf8")); console.log("generated JSON valid")'
 
-      - name: Verify committed resolved artifact when present
+      - name: Materialize committed frozen resolved artifact
         run: |
           set -euo pipefail
-          if [ -f docs/research/contract-e/semantic-recoverability-audit/RESOLVED-CONTRACT.json ]; then
-            cmp -s RESOLVED-CONTRACT.json docs/research/contract-e/semantic-recoverability-audit/RESOLVED-CONTRACT.json
-          fi
+          node docs/research/contract-e/semantic-recoverability-audit/materialize-resolved.mjs \
+            docs/research/contract-e/semantic-recoverability-audit/RESOLVED-CONTRACT.json.gz.b64 \
+            /tmp/RESOLVED-CONTRACT.frozen.json
+          node -e 'JSON.parse(require("fs").readFileSync("/tmp/RESOLVED-CONTRACT.frozen.json","utf8")); console.log("frozen JSON valid")'
+
+      - name: Verify deterministic byte identity
+        run: |
+          set -euo pipefail
+          cmp -s /tmp/RESOLVED-CONTRACT.generated.json /tmp/RESOLVED-CONTRACT.frozen.json
+          cp /tmp/RESOLVED-CONTRACT.frozen.json RESOLVED-CONTRACT.json
+          sha256sum RESOLVED-CONTRACT.json | tee resolved.sha256
+          test "$(cut -d' ' -f1 resolved.sha256)" = "d883e5678aa7d39db6bd98d9607c94ee74ae68cd4c17a1def5cd00e6468634f9"
 
       - uses: actions/upload-artifact@v4
         with:
