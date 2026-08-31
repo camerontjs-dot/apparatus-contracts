@@ -52,8 +52,6 @@ def consume(decision: Any, expected: ApplicabilityExpectation) -> dict[str, Any]
         identity = semantic_identity(decision)
     except ContractDError as exc:
         return {"outcome": "cannot_establish", "reason": exc.code}
-    except Exception:
-        return {"outcome": "cannot_establish", "reason": "controlled_runtime_failure"}
 
     if not _valid_expectation(expected):
         return {
