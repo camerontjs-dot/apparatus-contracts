@@ -93,6 +93,16 @@ jobs:
             --reference "$ref" --independent "$ind" \
             --out "contract-d-adversarial-report/depth-comparison-py${{ matrix.python }}.md"
 
+      - name: Probe Unicode scalar and cross-language numeric canonicalization
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
+        run: |
+          set -euo pipefail
+          python research/contract-d-adversarial-harness-v1/probe_unicode_numeric.py \
+            --target /tmp/contract-d-target \
+            --report-dir contract-d-adversarial-report
+
       - name: Self-test harness reporting
         shell: bash
         env:
@@ -113,6 +123,9 @@ jobs:
           fi
           if test -f "contract-d-adversarial-report/depth-comparison-py${{ matrix.python }}.md"; then
             cat "contract-d-adversarial-report/depth-comparison-py${{ matrix.python }}.md"
+          fi
+          if test -f contract-d-adversarial-report/unicode-numeric.md; then
+            cat contract-d-adversarial-report/unicode-numeric.md
           fi
 
       - name: Upload adversarial evidence
