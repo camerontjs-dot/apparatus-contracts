@@ -23,6 +23,6 @@ jobs:
       - name: Install exact RC5 research dependencies
         run: |
           python -m pip install --disable-pip-version-check -r research/contract-d-independent-authority-rc5/candidate/requirements.txt pytest
-      - name: Run exact RC5 suite
+      - name: Run complete RC5 suite
         run: |
-          python -m pytest -q research/contract-d-independent-authority-rc5/candidate/tests/test_rc5.py
+          python -m pytest -q research/contract-d-independent-authority-rc5/candidate/tests
