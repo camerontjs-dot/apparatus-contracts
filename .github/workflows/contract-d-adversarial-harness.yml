@@ -37,9 +37,14 @@ jobs:
 
       - name: Run adversarial attacks in evidence mode
         shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
         run: |
           set -euo pipefail
-          python research/contract-d-adversarial-harness-v1/attack_contract_d.py \
+          # Baseline run 33347839365 is preserved: attack_contract_d.py attempted
+          # to mutate a frozen ApplicabilityExpectation and failed before report
+          # emission. run_harness.py corrects only attack construction.
+          python research/contract-d-adversarial-harness-v1/run_harness.py \
             --target /tmp/contract-d-target \
             --report-dir contract-d-adversarial-report
 
