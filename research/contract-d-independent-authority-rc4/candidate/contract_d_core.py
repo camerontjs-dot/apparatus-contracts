@@ -23,22 +23,38 @@ class ContractDError(ValueError):
 
 REGISTRY = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
 
-def _json_value(value: Any, path: str = "$") -> None:
+def _json_value(value: Any, path: str = "$", active: set[int] | None = None) -> None:
     if value is None or isinstance(value, (str, bool, int)):
         return
     if isinstance(value, float):
         if not math.isfinite(value):
             raise ContractDError("non_finite_number", path)
         return
+    if active is None:
+        active = set()
     if isinstance(value, list):
-        for i, child in enumerate(value):
-            _json_value(child, f"{path}[{i}]")
+        marker = id(value)
+        if marker in active:
+            raise ContractDError("non_json_value", path, "cyclic_container")
+        active.add(marker)
+        try:
+            for i, child in enumerate(value):
+                _json_value(child, f"{path}[{i}]", active)
+        finally:
+            active.remove(marker)
         return
     if isinstance(value, dict):
-        for key, child in value.items():
-            if not isinstance(key, str):
-                raise ContractDError("non_json_object_key", path)
-            _json_value(child, f"{path}.{key}")
+        marker = id(value)
+        if marker in active:
+            raise ContractDError("non_json_value", path, "cyclic_container")
+        active.add(marker)
+        try:
+            for key, child in value.items():
+                if not isinstance(key, str):
+                    raise ContractDError("non_json_object_key", path)
+                _json_value(child, f"{path}.{key}", active)
+        finally:
+            active.remove(marker)
         return
     raise ContractDError("non_json_value", path, type(value).__name__)
 
