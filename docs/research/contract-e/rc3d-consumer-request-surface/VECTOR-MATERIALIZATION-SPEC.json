@@ -11,7 +11,7 @@
     "rc3b_hardening_prereg_blob": "1d85e2036d410b3af08d4b2b8926586da8fe6088",
     "rc3c_frozen_cases_blob": "17d45524125814478b987bb8e91d23f545fb514e"
   },
-  "canonical_interface_blob": "TO_BE_REPLACED_BY_FROZEN_RC3D_INTERFACE_BLOB",
+  "canonical_interface_blob": "61f46b09d391e7da4aed2491e428ec2ed226fe93",
   "rules": {
     "envelope_case": {
       "steps": [
