@@ -1,0 +1,87 @@
+name: Research - Contract E native wire currentness RC3C
+
+on:
+  push:
+    branches:
+      - research/contract-e-native-wire-currentness-rc3c-20260830
+  pull_request:
+    paths:
+      - "docs/research/contract-e/rc3c-native-wire-currentness/**"
+      - ".github/workflows/research-contract-e-native-wire-currentness-rc3c.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  rc3c-hardening:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Protect RC3C mutation surface
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only f7e41ff09b7f8c33dd908ff1696a8b62b4851b6e...HEAD | grep -v -E '^(docs/research/contract-e/rc3c-native-wire-currentness/|\.github/workflows/research-contract-e-native-wire-currentness-rc3c\.yml$)' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected mutation surface:"
+            echo "$unexpected"
+            exit 1
+          fi
+
+      - name: Verify inherited RC3A/RC3B authority
+        run: |
+          set -euo pipefail
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-CANDIDATE.json)" = "9c1090335d87eb5e4885a755542923b453c45317"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-SHAPES.json)" = "c3f293430ae6ddb87523d83ea6e5380b8b832136"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/SPEC-PARTICIPANT-BOUNDARY.json)" = "8b1d292a240300388949d502e7b656e7a23a0b8e"
+          test "$(git hash-object docs/research/contract-e/rc3a-authority-warrant-spec/FROZEN-CASES.json)" = "85bc7805d02a04c5a10b48b43a5f5a89f4e2f32a"
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/BASIS-BINDING-SPEC.json)" = "63c952c9c28f1be2173e69c79976c7dfe5880c10"
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/AUTHORITY-BASIS-REGISTRY.json)" = "76ea333ee0460d9614e9899edb69e6865e48eccb"
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/FROZEN-BASIS-ATTACKS.json)" = "c726fb0ef914a850620e545131a70d427f4027bd"
+          test "$(git hash-object docs/research/contract-e/rc3b-authority-basis-binding/HARDENING-PREREGISTRATION.md)" = "1d85e2036d410b3af08d4b2b8926586da8fe6088"
+
+      - name: Verify frozen RC3C apparatus
+        run: |
+          set -euo pipefail
+          test "$(git hash-object docs/research/contract-e/rc3c-native-wire-currentness/PREREGISTRATION.md)" = "eb5534a4baf2d296df042c860625c7615120ca56"
+          test "$(git hash-object docs/research/contract-e/rc3c-native-wire-currentness/RC3C-SPEC.json)" = "f05feac88128fd693cca2fb25a0b2951654377eb"
+          test "$(git hash-object docs/research/contract-e/rc3c-native-wire-currentness/FROZEN-CASES.json)" = "17d45524125814478b987bb8e91d23f545fb514e"
+          test "$(git hash-object docs/research/contract-e/rc3c-native-wire-currentness/validate.mjs)" = "db10563a0eb669e2b881e4c3f33f95a1cea19965"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run inherited RC3B falsifiers unchanged
+        run: |
+          set -o pipefail
+          node docs/research/contract-e/rc3b-authority-basis-binding/validate.mjs \
+            | tee rc3b-regression.txt
+
+      - name: Run inherited RC3B compatibility matrix unchanged
+        run: |
+          set -o pipefail
+          node docs/research/contract-e/rc3b-authority-basis-binding/hardening.mjs \
+            | tee rc3b-matrix-regression.txt
+
+      - name: Run frozen RC3C successor falsifiers
+        run: |
+          set -o pipefail
+          node docs/research/contract-e/rc3c-native-wire-currentness/validate.mjs \
+            | tee rc3c-native-wire-currentness.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: contract-e-native-wire-currentness-rc3c-${{ github.sha }}
+          path: |
+            rc3b-regression.txt
+            rc3b-matrix-regression.txt
+            rc3c-native-wire-currentness.txt
+            docs/research/contract-e/rc3b-authority-basis-binding/RESULTS.json
+            docs/research/contract-e/rc3b-authority-basis-binding/HARDENING-RESULTS.json
+            docs/research/contract-e/rc3c-native-wire-currentness/RESULTS.json
+          if-no-files-found: warn
+          retention-days: 30
