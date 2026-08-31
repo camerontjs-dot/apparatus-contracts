@@ -43,7 +43,7 @@
       "id": "PROP-P01-native-fields",
       "request": {
         "kind": "propagation",
-        "request": {"mode": "identity_provenance_only", "fields": ["source_identity"]}
+        "request": {"mode": "identity_provenance_only", "fields": ["source_id"]}
       },
       "expected": "accept"
     },
