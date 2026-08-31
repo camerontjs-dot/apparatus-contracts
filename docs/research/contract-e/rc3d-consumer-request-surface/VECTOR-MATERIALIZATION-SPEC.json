@@ -1,0 +1,110 @@
+{
+  "schema": "contract-e-rc3d-evaluator-vector-materialization",
+  "status": "hidden-evaluator-apparatus-research-only",
+  "purpose": "Map frozen test-case construction DSL into the canonical RC3D EvaluationRequest surface without changing authority semantics.",
+  "frozen_before_fresh_implementation": true,
+  "independent_implementer_visibility_pre_freeze": "denied",
+  "source_vectors": {
+    "rc3a_frozen_cases_blob": "85bc7805d02a04c5a10b48b43a5f5a89f4e2f32a",
+    "rc3b_registry_blob": "76ea333ee0460d9614e9899edb69e6865e48eccb",
+    "rc3b_attacks_blob": "c726fb0ef914a850620e545131a70d427f4027bd",
+    "rc3b_hardening_prereg_blob": "1d85e2036d410b3af08d4b2b8926586da8fe6088",
+    "rc3c_frozen_cases_blob": "17d45524125814478b987bb8e91d23f545fb514e"
+  },
+  "canonical_interface_blob": "TO_BE_REPLACED_BY_FROZEN_RC3D_INTERFACE_BLOB",
+  "rules": {
+    "envelope_case": {
+      "steps": [
+        "clone referenced rc3a baseline",
+        "apply frozen set/set_path/remove/remove_authority_basis_types/replace_authority_reference/replace_path_with_first_item/record_override operations exactly",
+        "construct EvaluationRequest kind=envelope",
+        "pass registry as full canonical RegistryDocument wrapper, not extracted records map",
+        "set mode=new_exercise unless the frozen case explicitly tests another canonical mode"
+      ],
+      "semantic_rewrite_forbidden": true
+    },
+    "propagation_case": {
+      "fixture_fields": ["mode", "requested_fields"],
+      "canonical_request": {
+        "kind": "propagation",
+        "request": {
+          "mode": "fixture.mode",
+          "fields": "fixture.requested_fields"
+        }
+      },
+      "note": "requested_fields is frozen fixture DSL and is never passed directly as native propagation wire"
+    },
+    "delegation_case": {
+      "canonical_request": {
+        "kind": "delegation",
+        "parent": "fixture.parent byte-for-byte",
+        "child": "fixture.child byte-for-byte",
+        "mode": "new_exercise"
+      },
+      "parent_interpretation": "fixture.parent is ParentAuthorityRecord, not DelegationChild",
+      "missing_field_invention_forbidden": true
+    },
+    "historical_case": {
+      "mode_mapping": {
+        "historical_record": "historical_inspection",
+        "new_exercise": "new_exercise"
+      },
+      "canonical_request": {
+        "kind": "historical",
+        "record": "fixture.historical_record byte-for-byte",
+        "registry": "canonical RegistryDocument wrapper when supplied/required by evaluator",
+        "mode": "mapped fixture.mode"
+      },
+      "unknown_fixture_mode_behavior": "evaluator apparatus failure; do not guess"
+    },
+    "rc3c_delegation_wire_case": {
+      "steps": [
+        "clone rc3a delegation source_case",
+        "apply frozen set_path operations exactly",
+        "materialize as canonical delegation request using ParentAuthorityRecord parent semantics"
+      ]
+    },
+    "rc3c_reason_case": {
+      "source_envelope_case": "materialize using envelope_case rule",
+      "source_propagation_case": "materialize using propagation_case rule"
+    },
+    "rc3b_compatibility_matrix": {
+      "steps": [
+        "clone each of nine positive rc3a baselines",
+        "replace only canonical authority-conferring reference with each frozen authority-conferring registry record reference",
+        "preserve supporting artifact references",
+        "pass full RegistryDocument wrapper to consumer"
+      ]
+    },
+    "rc3b_type_mutation": {
+      "steps": [
+        "clone each canonical positive baseline",
+        "replace only authority reference type while preserving id",
+        "pass full RegistryDocument wrapper"
+      ]
+    },
+    "semantic_metamorphic": {
+      "steps": [
+        "clone canonical positive request",
+        "replace only opaque domain-local result payload",
+        "do not touch wrapper, authority fields, registry, mode, or target"
+      ]
+    }
+  },
+  "prohibited_materializer_behavior": [
+    "observe consumer result before deciding transformation",
+    "rename canonical consumer fields after reveal except mappings frozen here",
+    "insert authority grants, qualifications, warrants, participant identities, target ids, or currentness facts",
+    "repair malformed canonical vector payloads",
+    "convert singular/plural canonical wire",
+    "change expected outcomes or normative reasons",
+    "consult reference validator implementation"
+  ],
+  "audit_output_required": [
+    "source case id",
+    "materialization rule id",
+    "canonical request kind",
+    "list of fixture-to-wire token mappings applied",
+    "hash of materialized request"
+  ]
+}
