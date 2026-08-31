@@ -126,7 +126,7 @@
     },
     {
       "id": "HIST-N02-new-exercise-recheck",
-      "source_historical_case": "HIST-N01-new-action-after-revocation",
+      "source_historical_case": "HIST-N01-revoked-new-exercise",
       "mode": "new_exercise",
       "expected": "reject",
       "reason": "authority_basis_not_current"
