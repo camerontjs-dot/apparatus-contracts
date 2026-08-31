@@ -135,3 +135,76 @@ jobs:
           name: contract-d-adversarial-report-py${{ matrix.python }}
           path: contract-d-adversarial-report/
           if-no-files-found: error
+
+  attack-rc5-successor:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Materialize exact RC5 successor target
+        shell: bash
+        run: |
+          set -euo pipefail
+          target_commit='ce38c962562ccb42d50d27e3190fd4a6f1898bcb'
+          prefix='research/contract-d-independent-authority-rc5/candidate'
+          git fetch --no-tags --depth=1 origin "$target_commit"
+          test "$(git rev-parse FETCH_HEAD)" = "$target_commit"
+          mkdir -p /tmp/contract-d-rc5/fixtures
+          for path in contract_d_core.py contract_d_validate.py contract_d_consume.py effect-registry.json requirements.txt; do
+            git show "FETCH_HEAD:${prefix}/${path}" > "/tmp/contract-d-rc5/${path}"
+          done
+          git show "FETCH_HEAD:${prefix}/fixtures/valid.json" > /tmp/contract-d-rc5/fixtures/valid.json
+          printf '%s\n' "$target_commit" > /tmp/contract-d-rc5/TARGET_COMMIT
+
+      - name: Install exact RC5 canonicalizer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -r /tmp/contract-d-rc5/requirements.txt
+
+      - name: Run RC5 adversarial attacks in gate mode
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
+        run: |
+          set -euo pipefail
+          python research/contract-d-adversarial-harness-v1/run_rc5_harness.py \
+            --target /tmp/contract-d-rc5 \
+            --report-dir contract-d-rc5-adversarial-report \
+            --gate
+
+      - name: Self-test harness reporting
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
+        run: |
+          set -euo pipefail
+          python -m unittest -v research/contract-d-adversarial-harness-v1/test_harness_self.py
+
+      - name: Show RC5 summary
+        if: always()
+        shell: bash
+        run: |
+          if test -f contract-d-rc5-adversarial-report/report.md; then
+            cat contract-d-rc5-adversarial-report/report.md
+          fi
+
+      - name: Upload RC5 adversarial evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-d-rc5-adversarial-report-py${{ matrix.python }}
+          path: contract-d-rc5-adversarial-report/
+          if-no-files-found: error
