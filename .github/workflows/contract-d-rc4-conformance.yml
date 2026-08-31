@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - research/contract-d-independent-authority-rc4
+      - research/contract-d-independent-authority-rc4-successor-v1
   workflow_dispatch:
 
 jobs:
