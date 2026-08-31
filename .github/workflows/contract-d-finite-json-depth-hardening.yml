@@ -24,15 +24,18 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Verify frozen predecessor identity
+      - name: Verify frozen predecessor candidate identity
         shell: bash
         run: |
           set -euo pipefail
-          expected='fd6923115116b0ced0f9feb5c005099d2e51ea88'
-          test "$(git rev-list --max-parents=0 HEAD | head -n1)" != ''
-          git merge-base --is-ancestor "$expected" HEAD
-          test "$(git rev-parse "${expected}:research/contract-d-independent-authority-rc4/candidate")" = 'fe449f9ec27eeddb434276ded375f9dc16b48e29'
-          test "$(git rev-parse "${expected}:research/contract-d-independent-authority-rc4/candidate/contract_d_core.py")" = '589e3f1c31a21d305402e5750605d25be682a336'
+          # Run 33348487547 is preserved as a harness failure: it attempted an
+          # ancestry check against history absent from a depth-1 checkout.
+          # The experiment only needs proof that the inherited frozen candidate
+          # itself is byte/tree-identical at the current research head.
+          test "$(git rev-parse 'HEAD:research/contract-d-independent-authority-rc4/candidate')" = 'fe449f9ec27eeddb434276ded375f9dc16b48e29'
+          test "$(git rev-parse 'HEAD:research/contract-d-independent-authority-rc4/candidate/contract_d_core.py')" = '589e3f1c31a21d305402e5750605d25be682a336'
+          test "$(git rev-parse 'HEAD:research/contract-d-independent-authority-rc4/candidate/contract_d_validate.py')" = 'd9d621df1e817adbb5468be25ef65272c457e8cc'
+          test "$(git rev-parse 'HEAD:research/contract-d-independent-authority-rc4/candidate/contract_d_consume.py')" = 'ad5126922ea4dd8a38df6c08f53e3bc687f2c4d4'
 
       - name: Run catch-only versus iterative discriminator
         shell: bash
