@@ -1,0 +1,45 @@
+{
+  "schema": "contract-e-authority-warrant-rc3c-successor-cases",
+  "frozen_before_validator": true,
+  "currentness_cases": [
+    {"id": "CUR-P01-canonical-current", "base": "task_ok", "expected": "accept"},
+    {"id": "CUR-N01-reference-current-false", "base": "task_ok", "set_path": {"authority_basis.0.current": false}, "expected": "reject", "reason": "authority_basis_not_current"},
+    {"id": "CUR-N02-record-current-false", "base": "task_ok", "record_override": {"id": "grant:task-dispatch", "set": {"current": false}}, "expected": "reject", "reason": "authority_basis_not_current"},
+    {"id": "CUR-N03-revoked-before-evaluation", "base": "task_ok", "record_override": {"id": "grant:task-dispatch", "set": {"current": true, "revoked_at": "2026-08-30T19:00:00Z"}}, "expected": "reject", "reason": "authority_basis_not_current"},
+    {"id": "CUR-P02-revoked-after-evaluation", "base": "task_ok", "record_override": {"id": "grant:task-dispatch", "set": {"current": true, "revoked_at": "2026-08-30T20:00:00Z"}}, "expected": "accept"},
+    {"id": "CUR-P03-valid-from-inclusive", "base": "task_ok", "set": {"evaluated_at": "2026-08-01T00:00:00Z"}, "expected": "accept"},
+    {"id": "CUR-P04-valid-until-inclusive", "base": "task_ok", "set": {"evaluated_at": "2026-09-30T23:59:59Z"}, "expected": "accept"},
+    {"id": "CUR-N04-before-valid-from", "base": "task_ok", "set": {"evaluated_at": "2026-07-31T23:59:59Z"}, "expected": "reject", "reason": "authority_basis_outside_validity_interval"},
+    {"id": "CUR-N05-after-valid-until", "base": "task_ok", "set": {"evaluated_at": "2026-10-01T00:00:00Z"}, "expected": "reject", "reason": "authority_basis_outside_validity_interval"}
+  ],
+  "wire_cases": [
+    {"id": "WIRE-P01-competence-array", "base": "numeric_ok", "expected": "accept"},
+    {"id": "WIRE-N01-competence-singular", "base": "numeric_ok", "replace_path_with_first_item": "competence", "expected": "reject", "reason": "malformed_competence_shape"},
+    {"id": "WIRE-N02-authority-basis-singular", "base": "task_ok", "replace_path_with_first_item": "authority_basis", "expected": "reject", "reason": "malformed_authority_basis_shape"},
+    {"id": "WIRE-N03-jurisdiction-scope-array", "base": "task_ok", "set_path": {"jurisdiction.scope": ["research-task"]}, "expected": "reject", "reason": "malformed_jurisdiction_scope_shape"},
+    {"id": "WIRE-N04-qualification-scope-array", "base": "numeric_ok", "set_path": {"competence.0.scope": ["numeric-threshold"]}, "expected": "reject", "reason": "malformed_qualification_scope_shape"}
+  ],
+  "delegation_wire_cases": [
+    {"id": "DELWIRE-P01-canonical", "source_case": "DEL-P01-narrower-child", "expected": "accept"},
+    {"id": "DELWIRE-N01-operations-singular", "source_case": "DEL-P01-narrower-child", "set_path": {"child.operations": "task.dispatch"}, "expected": "reject", "reason": "malformed_delegation_operations_shape"},
+    {"id": "DELWIRE-N02-scope-singular", "source_case": "DEL-P01-narrower-child", "set_path": {"child.scope": "research-task-A"}, "expected": "reject", "reason": "malformed_delegation_scope_shape"},
+    {"id": "DELWIRE-N03-operation-amplification", "source_case": "DEL-N01-operation-amplification", "expected": "reject", "reason": "delegation_operation_amplification"},
+    {"id": "DELWIRE-N04-scope-amplification", "source_case": "DEL-N02-scope-amplification", "expected": "reject", "reason": "delegation_scope_amplification"},
+    {"id": "DELWIRE-N05-expiry-amplification", "source_case": "DEL-N03-expiry-amplification", "expected": "reject", "reason": "delegation_expiry_amplification"}
+  ],
+  "reason_cases": [
+    {"id": "REASON-N01-assessment-does-not-cite", "source_envelope_case": "N13-supported-does-not-cite", "expected": "reject", "reason": "authority_basis_domain_mismatch"},
+    {"id": "REASON-N02-decision-does-not-dispatch", "source_envelope_case": "N14-decision-does-not-execute", "expected": "reject", "reason": "authority_basis_domain_mismatch"},
+    {"id": "REASON-N03-explicit-decision-authority-propagation", "source_propagation_case": "PROP-N02-decision-mandate", "expected": "reject", "reason": "authority_requires_reestablishment"},
+    {"id": "REASON-N04-explicit-task-authority-propagation", "source_propagation_case": "PROP-N03-task-dispatch", "expected": "reject", "reason": "authority_requires_reestablishment"}
+  ],
+  "semantic_metamorphic": {
+    "bases": ["numeric_ok", "source_boundary_ok", "verify_ok"],
+    "variants": [
+      {"status": "positive", "confidence": 1.0, "success": true},
+      {"status": "negative", "confidence": 0.0, "success": false},
+      {"status": "indeterminate", "opaque": {"arbitrary": [1, 2, 3]}}
+    ],
+    "expected_authority_signature_change_count": 0
+  }
+}
