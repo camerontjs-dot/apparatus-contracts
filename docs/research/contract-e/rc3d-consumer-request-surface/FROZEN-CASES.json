@@ -1,0 +1,171 @@
+{
+  "schema": "contract-e-rc3d-consumer-request-surface-cases",
+  "frozen_before_validator_execution": true,
+  "interface_cases": [
+    {
+      "id": "KIND-N01-unknown-kind",
+      "request": {"kind": "generic_authority"},
+      "expected": "reject",
+      "reason": "unknown_evaluation_kind"
+    },
+    {
+      "id": "MODE-N01-envelope-unknown-mode",
+      "source_envelope_baseline": "source_access_ok",
+      "mode": "historical_record",
+      "expected": "reject",
+      "reason": "unknown_evaluation_mode"
+    },
+    {
+      "id": "REG-P01-wrapper-native",
+      "source_envelope_baseline": "source_access_ok",
+      "mode": "new_exercise",
+      "expected": "accept"
+    },
+    {
+      "id": "REG-N01-missing-schema",
+      "source_envelope_baseline": "source_access_ok",
+      "registry_mutation": {"remove": ["schema"]},
+      "mode": "new_exercise",
+      "expected": "reject",
+      "reason": "malformed_registry_document"
+    },
+    {
+      "id": "REG-N02-record-key-id-mismatch",
+      "source_envelope_baseline": "source_access_ok",
+      "registry_mutation": {
+        "set_path": {"records.grant:source-read.id": "grant:renamed"}
+      },
+      "mode": "new_exercise",
+      "expected": "reject",
+      "reason": "malformed_registry_document"
+    },
+    {
+      "id": "PROP-P01-native-fields",
+      "request": {
+        "kind": "propagation",
+        "request": {"mode": "identity_provenance_only", "fields": ["source_identity"]}
+      },
+      "expected": "accept"
+    },
+    {
+      "id": "PROP-N01-requested-fields-alias",
+      "request": {
+        "kind": "propagation",
+        "request": {"mode": "identity_provenance_only", "requested_fields": ["semantic_validity"]}
+      },
+      "expected": "reject",
+      "reason": "malformed_propagation_request"
+    },
+    {
+      "id": "PROP-N02-explicit-missing-fields",
+      "request": {
+        "kind": "propagation",
+        "request": {"mode": "explicit"}
+      },
+      "expected": "reject",
+      "reason": "malformed_propagation_request"
+    },
+    {
+      "id": "PROP-N03-unknown-mode",
+      "request": {
+        "kind": "propagation",
+        "request": {"mode": "copy_everything", "fields": []}
+      },
+      "expected": "reject",
+      "reason": "unknown_propagation_mode"
+    },
+    {
+      "id": "DEL-P01-parent-authority-record",
+      "source_delegation_case": "DEL-P01-narrower-child",
+      "expected": "accept"
+    },
+    {
+      "id": "DEL-N01-parent-link-mismatch",
+      "source_delegation_case": "DEL-P01-narrower-child",
+      "set_path": {"child.parent_authority_id": "grant:not-parent"},
+      "expected": "reject",
+      "reason": "delegation_parent_mismatch"
+    },
+    {
+      "id": "DEL-N02-parent-not-current",
+      "source_delegation_case": "DEL-P01-narrower-child",
+      "set_path": {"parent.current": false},
+      "expected": "reject",
+      "reason": "delegation_not_current"
+    },
+    {
+      "id": "DEL-N03-operation-amplification",
+      "source_delegation_case": "DEL-N01-operation-amplification",
+      "expected": "reject",
+      "reason": "delegation_operation_amplification"
+    },
+    {
+      "id": "DEL-N04-scope-amplification",
+      "source_delegation_case": "DEL-N02-scope-amplification",
+      "expected": "reject",
+      "reason": "delegation_scope_amplification"
+    },
+    {
+      "id": "DEL-N05-expiry-amplification",
+      "source_delegation_case": "DEL-N03-expiry-amplification",
+      "expected": "reject",
+      "reason": "delegation_expiry_amplification"
+    },
+    {
+      "id": "HIST-P01-inspection-token",
+      "source_historical_case": "HIST-P01-prior-valid-later-revoked",
+      "mode": "historical_inspection",
+      "expected": "accept"
+    },
+    {
+      "id": "HIST-N01-fixture-token-not-native",
+      "source_historical_case": "HIST-P01-prior-valid-later-revoked",
+      "mode": "historical_record",
+      "expected": "reject",
+      "reason": "unknown_evaluation_mode"
+    },
+    {
+      "id": "HIST-N02-new-exercise-recheck",
+      "source_historical_case": "HIST-N01-new-action-after-revocation",
+      "mode": "new_exercise",
+      "expected": "reject",
+      "reason": "authority_basis_not_current"
+    }
+  ],
+  "materializer_assertions": [
+    {
+      "id": "MAT-PROP-01",
+      "source_propagation_case": "PROP-N01-semantic-authority",
+      "expected_mapping": {"requested_fields": "fields"},
+      "expected": "reject"
+    },
+    {
+      "id": "MAT-DEL-01",
+      "source_delegation_case": "DEL-P01-narrower-child",
+      "expected_parent_type": "ParentAuthorityRecord",
+      "missing_field_invention_allowed": false,
+      "expected": "accept"
+    },
+    {
+      "id": "MAT-HIST-01",
+      "source_historical_case": "HIST-P01-prior-valid-later-revoked",
+      "expected_mapping": {"historical_record": "historical_inspection"},
+      "expected": "accept"
+    },
+    {
+      "id": "MAT-REG-01",
+      "source_registry": "RC3B AUTHORITY-BASIS-REGISTRY.json",
+      "pass_wrapper_intact": true,
+      "expected": "native"
+    }
+  ],
+  "semantic_metamorphic": {
+    "bases": ["numeric_ok", "source_boundary_ok", "verify_ok"],
+    "variants": [
+      {"status": "positive", "confidence": 1.0, "success": true},
+      {"status": "negative", "confidence": 0.0, "success": false},
+      {"status": "indeterminate", "opaque": {"arbitrary": [1, 2, 3]}}
+    ],
+    "expected_authority_signature_change_count": 0
+  }
+}
