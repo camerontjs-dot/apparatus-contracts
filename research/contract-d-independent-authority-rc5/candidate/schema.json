@@ -1,0 +1,22 @@
+{
+  "$id": "https://github.com/camerontjs-dot/apparatus-contracts/research/contract-d-independent-authority-rc5/candidate/schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {"if":{"properties":{"evaluation":{"properties":{"state":{"const":"completed"}},"required":["state"]}}},"then":{"required":["effect"]}},
+    {"if":{"properties":{"evaluation":{"properties":{"state":{"const":"failed"}},"required":["state"]}}},"then":{"not":{"required":["effect"]}}}
+  ],
+  "description": "Structural Contract D RC5 schema. RFC 8785/JCS, Unicode-scalar, safe-number, cycle, and depth constraints are enforced by the normative validator.",
+  "properties": {
+    "contract_d_version": {"const":"0.3.0-rc5"},
+    "effect": {"additionalProperties":false,"properties":{"params":{"type":"object"},"type":{"minLength":1,"type":"string"},"version":{"minLength":1,"type":"string"}},"required":["type","version"],"type":"object"},
+    "evaluation": {"oneOf":[{"additionalProperties":false,"properties":{"disposition":{"enum":["clear","hold"]},"state":{"const":"completed"}},"required":["state","disposition"],"type":"object"},{"additionalProperties":false,"properties":{"state":{"const":"failed"}},"required":["state"],"type":"object"}]},
+    "input_authority": {"additionalProperties":false,"properties":{"id":{"minLength":1,"type":"string"},"immutable_id":{"minLength":1,"type":"string"},"kind":{"minLength":1,"type":"string"}},"required":["kind","id","immutable_id"],"type":"object"},
+    "metadata": {"additionalProperties":false,"properties":{"diagnostics":{},"explanation":{"minLength":1,"type":"string"},"reason_codes":{"items":{"minLength":1,"type":"string"},"type":"array"}},"type":"object"},
+    "policy": {"additionalProperties":false,"properties":{"id":{"minLength":1,"type":"string"},"version":{"minLength":1,"type":"string"}},"required":["id","version"],"type":"object"},
+    "target": {"additionalProperties":false,"properties":{"content_sha256":{"pattern":"^sha256:[0-9a-f]{64}$","type":"string"},"id":{"minLength":1,"type":"string"},"kind":{"minLength":1,"type":"string"}},"required":["kind","id","content_sha256"],"type":"object"}
+  },
+  "required":["contract_d_version","input_authority","policy","target","evaluation"],
+  "title":"Contract D RC5 research candidate",
+  "type":"object"
+}
