@@ -27,13 +27,18 @@ def _reject_constant(value: str) -> None:
 
 
 def _parse_integer_token(token: str) -> int | float:
-    """Parse JSON integer syntax without precision loss.
+    """Parse JSON integer syntax into the RC5/JCS binary64 domain.
 
-    Safe-range integers remain host ints. Outside that range, accept only values
-    exactly representable as IEEE-754 binary64 and materialize them as floats.
-    This permits JCS canonical output of accepted binary64 values such as 1e20
-    to round-trip while rejecting precision-losing integer tokens such as
-    9007199254740993.
+    Safe-range integers remain host ints. Outside that range, a token is accepted
+    only if either:
+
+    1. the decimal integer is exactly representable as binary64; or
+    2. the token itself is the JCS canonical decimal serialization of the
+       binary64 value it maps to.
+
+    The second case is required for RFC 8785 shortest-roundtrip integer-looking
+    serializations such as the Appendix-B 2**68 sample. Precision-losing tokens
+    such as 9007199254740993 satisfy neither condition and fail closed.
     """
     value = int(token)
     if SAFE_INTEGER_MIN <= value <= SAFE_INTEGER_MAX:
@@ -42,7 +47,12 @@ def _parse_integer_token(token: str) -> int | float:
         binary64 = float(value)
     except OverflowError as exc:
         raise ContractDError("non_interoperable_integer", "$", token) from exc
-    if not math.isfinite(binary64) or int(binary64) != value:
+    if not math.isfinite(binary64):
+        raise ContractDError("non_interoperable_integer", "$", token)
+
+    exact = int(binary64) == value
+    canonical_token = canonical_json_bytes(binary64)[:-1].decode("ascii") == token
+    if not exact and not canonical_token:
         raise ContractDError("non_interoperable_integer", "$", token)
     return binary64
 
