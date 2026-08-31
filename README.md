@@ -1,134 +1,118 @@
 # Apparatus Contracts
 
-This asset is the canonical home for the two handoff contracts that connect the three components of the research scaffold evaluation apparatus:
+This repository is the canonical home for shared contracts and contract-level research across the evidence-to-decision pipeline.
 
-- **C-A:** Research Scaffold Harness → Evidence Bundler
-- **C-B:** Evidence Bundler → Claim Audit Lab
+The maintained architecture is intentionally asymmetric. A contract exists only where producer/consumer evidence supports one; research candidates do not become canonical because they are convenient to draw as a pipeline.
 
-The apparatus is the experimental measurement instrument behind a research question: do scaffolds reduce unsupported claims in AI research workflows?
+## Current contract surfaces
 
-A naming note. The locked v1.0.0 spec refers to the middle component as "Evidence Builder," which was the original contract role name. Active project docs and the sibling asset call it "Evidence Bundler." Both refer to the same component.
+### Contract A — upstream work object → Evidence Bundler
 
-## Why this is a live-asset
+The legacy v1.0 handoff remains the maintained upstream contract authority while modernization research continues. Current research is testing the smallest upstream representation Evidence Bundler actually needs, including proposition identity and decomposition lineage, without treating upstream semantic assertions as downstream truth.
 
-Most live-asset folders carry executable tools. This one carries a *contract*: a versioned, schema-defined, integrity-verified specification that three other tools must satisfy. It earns live-asset status because:
+Canonical legacy specification: [`handoff-contract-v1.0.0.md`](handoff-contract-v1.0.0.md)
 
-- All three apparatus components reference it as their I/O specification.
-- It has a versioning lifecycle (semver plus change-control) independent of any single tool.
-- The vocabulary file is consumed at runtime by every component's CI as a hash-verified copy.
-- Without it, the apparatus claim (a small empirical study on AI workflow reliability) collapses.
+### Contract B — Evidence Bundler → Claim Audit Lab
 
-It is not a tool you run. It is a tool the other tools comply with.
+Contract B 1.2.0 is the canonical production handoff. Its additive factual-context/history extension carries provenance-bound evidence-world facts, explicit history and aperture observations, and preserved nomination/admission state without converting those fields into proposition-specific semantic judgments.
 
-## Layout
+Specification: [`contract-b-factual-context-extension-v1.2.0.md`](contract-b-factual-context-extension-v1.2.0.md)
 
-```
-apparatus-contracts/
-├── README.md                          # this file
-├── DECISIONS.md                       # ADR log for the contract itself
-├── LICENSE                            # MIT
-├── Makefile                           # install / verify / test targets
-├── pyproject.toml                     # package metadata for the verifier suite
-├── handoff-contract-v1.0.0.md         # canonical spec (v1.0.0 locked; v1.1.0 amendments appended)
-├── schema/
-│   ├── vocabulary.yaml                # canonical machine-readable controlled vocabulary
-│   └── .contract-version              # plain-text version pin (currently 1.1.0)
-├── validators/                        # verifier suite (Python)
-│   ├── README.md
-│   ├── _models.py                     # Pydantic models for the eight YAML types
-│   ├── _hashing.py
-│   ├── _vocabulary.py
-│   ├── verify_vocabulary.py
-│   ├── verify_spec_vocabulary.py
-│   └── verify_contract_integrity.py
-├── tests/                             # pytest suite covering all three verifiers
-├── validation/                        # IQ/OQ/PQ qualification package
-│   ├── README.md
-│   ├── qualification-plan.md
-│   ├── iq-installation.md
-│   ├── oq-operational.md
-│   ├── pq-performance.md
-│   └── deviation-log.md
-└── docs/
-    └── verification.md                # release verification with command transcripts
-```
+The production/version decision and exact cross-repository evidence are recorded in EDR-001, GitHub issue #14.
 
-## What this asset demonstrates
+### Contract C — Claim Audit Lab → downstream decision consumer
 
-Versioned contracts as load-bearing infrastructure. Three components that do not share code share a controlled, hash-verified specification instead.
+Contract C 1.0.0 is the first canonical CAL result contract. It is decision-agnostic: it exports CAL-attributable epistemic state, exact Contract-B binding, producer/policy identity, retained contribution state, explicit unknown/failure state, and deterministic object identity without granting operational authorization.
 
-Regulated-industry data-integrity grammar applied to AI workflow tooling. ALCOA+, 21 CFR Part 11, ICH Q10, and ISO 9001 dimensions are mapped onto the schemas, not bolted on as compliance theater.
+Specification: [`contract-c-v1.0.0.md`](contract-c-v1.0.0.md)
 
-Asymmetric contract design. C-A is a production artifact (a batch record). C-B is a measurement-ready artifact (a certificate of analysis with a prepared sample). The split mirrors the GMP separation between manufacturing and QC.
+The immutable public release is tagged `contract-c-v1.0.0`. Its release record contains the exact promotion, producer, clean-consumer, and release-lock lineage.
 
-A forward-compatible regulated-deployment surface. The schema carries 21 CFR Part 11 e-signature fields with deferred population, ready for any future regulated-customer demo without a schema change.
+### Contract D — Decision output
 
-## Vocabulary distribution model
+Contract D remains research-only. No canonical Contract D release exists. Candidate and adversarial work lives under the research surfaces and must not be interpreted as production authority.
 
-Each consumer (Claim Audit Lab, Evidence Bundler, future Harness) embeds its own copy of `schema/vocabulary.yaml` plus a `schema/.contract-version` pin file. The verifier under `validators/` hashes all consumer copies against this canonical and fails on drift.
+A Decision is not automatic permission to execute an effect.
 
-Components are designed to be cloneable independently, so an install-time dependency would break "clone and run." Explicit duplication with hash verification is also more on-brand for the regulated-industry framing than a hidden Python import.
+### Contract E / authority control plane
 
-## How to use this asset
+Contract E is also research-only, and the current question is deliberately broader than "what should the next serialized contract look like?" Research is testing standing authority state, typed jurisdiction, authority-basis binding, delegation/currentness, participant declarations, transient authorization receipts, and local enforcement as potentially cross-cutting machinery.
 
-You do not run it. You read it before designing or modifying any of:
+No canonical Contract E schema or production authority control plane is established here.
 
-- Research Scaffold Harness output (C-A)
-- Evidence Bundler input or output (C-A consumer, C-B producer)
-- Claim Audit Lab input (C-B consumer)
+## Boundary rules
 
-Read order for a cold session:
+The contracts preserve several pipeline invariants:
 
-1. This README
-2. `handoff-contract-v1.0.0.md` (the spec)
-3. `DECISIONS.md` (why the spec made the choices it did, and what changed after v1.0.0 lock)
-4. `schema/vocabulary.yaml` (the controlled-vocabulary canonical)
-5. `validators/README.md` (verifier suite invocation)
+- evidence-world facts do not silently become semantic conclusions;
+- CAL epistemic conclusions do not silently become Decision Engine policy;
+- a valid Decision does not automatically become execution permission;
+- missing or unestablished state remains explicit rather than being filled with a convenient default;
+- exact upstream identity is preserved where substitution could change authority;
+- research candidates, validators, and harnesses remain distinguishable from canonical contract authority.
 
-## Try the verifier
+## Repository structure
 
-The verifier suite enforces every drift claim the spec makes. From the asset root:
+The repository contains five different kinds of material. They should not be conflated:
 
-```bash
-make install                    # one-time: creates .venv and installs deps
-make verify                     # canonical-vs-consumer drift + spec/YAML parity
-make test                       # pytest suite (passing + negative cases)
-make verify-integrity \
-  ARTIFACT=../evidence-bundler/examples/handoff-demo/scaffold-run-bm25-handoff-demo
+- **Canonical authority:** maintained specifications, schemas, validators, fixtures, and release records.
+- **Candidate authority:** explicitly non-canonical contract candidates awaiting evidence.
+- **Research:** preregistrations, attacks, reproductions, results, and preserved failures.
+- **Research infrastructure:** evaluators, validators, harnesses, hidden fixtures, and workflows used to test claims.
+- **Historical authority:** superseded or legacy contract objects retained for reconstruction and compatibility.
+
+Important top-level surfaces include:
+
+```text
+handoff-contract-v1.0.0.md                  legacy Contract A / original A+B authority
+contract-b-factual-context-extension-v1.2.0.md
+contract-c-v1.0.0.md
+schema/                                      canonical machine-readable contract material
+validators/                                  contract validators
+fixtures/                                    canonical/public fixtures where applicable
+docs/research/                               research records and frozen candidates
+DECISIONS.md                                 durable contract decision history
+CHANGELOG.md                                 maintained contract history
 ```
 
-Three verifiers, all in `validators/`:
+## How to use this repository
 
-- `verify_vocabulary.py` hashes `schema/vocabulary.yaml` against every consumer's embedded copy and confirms their `.contract-version` pin matches the canonical.
-- `verify_spec_vocabulary.py` cross-checks the spec's controlled-vocabulary table against `schema/vocabulary.yaml`.
-- `verify_contract_integrity.py` validates a C-A or C-B artifact tree (CONTRACT_VERSION presence, SHA256SUMS recompute, Pydantic-model schema validation per YAML).
+Start from the contract that owns the boundary you are changing, then follow its exact schema/validator/fixture and decision lineage.
 
-## Example artifacts
+For cross-repository work, pin the producer, contract authority, and consumer identities. A passing test in only one repository is not evidence that the shared boundary works.
 
-The sibling Evidence Bundler asset ships a real C-A fixture at `../evidence-bundler/examples/handoff-demo/scaffold-run-bm25-handoff-demo/`. Committed contents: `scaffold_run.yaml`, `claims.yaml`, `corpus/` (three sources), `SHA256SUMS`, `CONTRACT_VERSION`. The matching C-B bundle is generated on demand by Evidence Bundler's `scripts/run_phase_4_unit1_handoff_demo.py` rather than committed. The committed C-A is sufficient to exercise `verify-integrity` end-to-end.
+Research branches may contain newer-looking schemas or richer objects. They are not canonical unless a separate promotion decision establishes that status.
+
+## Verification
+
+The repository's verifier and acceptance workflows protect structural, vocabulary, identity, integrity, and cross-repository conformance properties appropriate to each maintained contract.
+
+These checks are intentionally narrower than semantic truth. Structural validation does not establish source legitimacy, retrieval completeness, CAL semantic correctness, Decision policy correctness, or execution authorization.
+
+When a contract claim depends on independent recoverability, the independent implementation is executed in a separate fresh context and frozen before reference reveal. Failed or disagreeing reproductions remain part of the research record.
 
 ## Change control
 
-Any change to the contract or vocabulary requires:
+Shared contract changes require evidence at the real producer/consumer boundary. Version changes follow compatibility consequences rather than milestone aesthetics.
 
-1. A decision-log entry stating the change, the affected schema version, and the rationale.
-2. A semver bump per the spec's Schema Version Control section.
-3. Updated copies in every consumer (CAL, Evidence Bundler, Harness) under their own `schema/` folder.
-4. A re-run of the canonical-vocabulary verifier to confirm no drift.
+For a canonical change:
 
-## Validation
+1. identify the exact producer/consumer need;
+2. establish the smallest authority that must cross the boundary;
+3. test missing/hostile/unknown state and compatibility where relevant;
+4. preserve failed candidates and deviations;
+5. make a separate promotion decision;
+6. update canonical specification/schema/validator/fixtures coherently;
+7. publish a release only when an immutable named checkpoint is justified.
 
-The verifier suite was qualified under an IQ/OQ/PQ-style validation package adapted from pharma equipment qualification (no GxP claim). The package is visible in the repo:
-
-- `validation/README.md`: package overview, boundary, validation matrix, pass standard.
-- `validation/iq-installation.md`, `oq-operational.md`, `pq-performance.md`: dated protocols with per-step expected results and evidence references.
-- `validation/deviation-log.md`: accepted limitations and future-use gates (real-corpus calibration, e-signature human-review qualification).
-- `docs/verification.md`: release verification summary with the actual commands run and their results.
-
-The v1 package closed clean on 2026-05-22: 20/20 pytest, ruff clean, and the integrity verifier validated against one real C-A and four real C-B artifact trees from the sibling consumers (including a CAL-audited bundle with populated `audit.*` fields). The v1.1.0 vocabulary path was verified separately.
+A research result does not become production behavior merely because its branch is green.
 
 ## Known limits
 
-The Research Scaffold Harness has no executable surface yet. It carries an in-sync embedded vocabulary copy and pin, so `verify-vocabulary` treats it as a present consumer. No Harness-produced C-A has been validated through `verify-contract-integrity` because none exists.
+The legacy Contract A surface predates the current proposition/decomposition ownership research and is being revalidated rather than silently reinterpreted.
 
-The verifier suite enforces structural and vocabulary integrity. It does not validate methodological correctness of any specific scaffold run or evidence bundle. That is the research proposal's experimental design, not the contract's job.
+Contract B 1.2.0 is production-locked, but its contract-specific release identity is tracked separately from that behavioral lock.
+
+Contract C 1.0.0 is canonical and released, but that does not establish maintained Decision Engine production integration or correctness of CAL's semantic judgments.
+
+Contract D and Contract E remain research programs. Their frozen candidates, attack harnesses, clean-room reproductions, and failures are evidence, not production authorization.
