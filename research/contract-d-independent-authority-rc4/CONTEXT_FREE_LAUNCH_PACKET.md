@@ -162,7 +162,7 @@ Before independent freeze do not inspect, search, retrieve, summarize, or use:
 - research/contract-d-independent-authority-rc4/candidate/contract_d_consume.py
 - research/contract-d-independent-authority-rc4/candidate/tests/test_rc4.py
 - research/contract-d-independent-authority-rc4/FREEZE_RECEIPT.md
-- research/contract-d-independent-authority-rc4/CONTEXT_FREE_LAUNCH_PACKET.md
+- any other revision or copy of the RC4 launch packet beyond the immutable packet supplied as this task input
 - any RC4 PR, issue, workflow log, check output, review, discussion, or correspondence
 
 ### Prior Contract D material
