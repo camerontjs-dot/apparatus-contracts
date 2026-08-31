@@ -51,7 +51,7 @@ RC5 adopts the RFC 8785 / JCS input constraints needed for deterministic cross-l
 - shared-but-acyclic decoded containers remain valid;
 - maximum object/array container nesting depth is **128**, counting the root object as depth 1. A value that would exceed depth 128 fails closed with `json_depth_exceeded`.
 
-At JSON-byte ingress, an integer-form token outside the safe-integer range may be accepted only when that exact integer is representable as an IEEE-754 binary64 value. Such a token is interpreted in the binary64 domain for JCS. A precision-losing token such as `9007199254740993` is rejected with `non_interoperable_integer`. This rule permits canonical JCS bytes of accepted binary64 values such as `1e20` to parse and canonicalize back to identical bytes without silently admitting integer precision loss.
+At JSON-byte ingress, an integer-form token outside the safe-integer range is interpreted only when it can enter the JCS binary64 domain without admitting an ambiguous precision-losing spelling. RC5 accepts such a token when either (a) the decimal integer is exactly representable as binary64, or (b) the token is already the RFC 8785/JCS canonical shortest-roundtrip decimal serialization of the binary64 value it maps to. A token such as `9007199254740993` satisfies neither condition and is rejected with `non_interoperable_integer`. This also permits canonical RFC 8785 samples such as `295147905179352830000` to parse and canonicalize back to identical bytes.
 
 The depth limit is a deterministic contract processing bound, not an authority-bearing field. It exists so acceptance does not depend on a language runtime's recursion limit.
 
