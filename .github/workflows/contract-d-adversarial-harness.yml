@@ -48,6 +48,16 @@ jobs:
             --target /tmp/contract-d-target \
             --report-dir contract-d-adversarial-report
 
+      - name: Discriminate finite-JSON depth boundary
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
+        run: |
+          set -euo pipefail
+          python research/contract-d-adversarial-harness-v1/probe_depth_boundary.py \
+            --target /tmp/contract-d-target \
+            --report-dir contract-d-adversarial-report
+
       - name: Self-test harness reporting
         shell: bash
         env:
@@ -62,6 +72,9 @@ jobs:
         run: |
           if test -f contract-d-adversarial-report/report.md; then
             cat contract-d-adversarial-report/report.md
+          fi
+          if test -f contract-d-adversarial-report/depth-boundary.md; then
+            cat contract-d-adversarial-report/depth-boundary.md
           fi
 
       - name: Upload adversarial evidence
