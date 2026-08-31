@@ -82,15 +82,16 @@ jobs:
           PYTHONPATH: research/contract-d-adversarial-harness-v1
         run: |
           set -euo pipefail
+          ref="contract-d-adversarial-report/reference-depth-py${{ matrix.python }}.json"
+          ind="contract-d-adversarial-report/independent-depth-py${{ matrix.python }}.json"
           python research/contract-d-adversarial-harness-v1/probe_depth_implementation.py \
-            --kind reference \
-            --target /tmp/contract-d-target \
-            --out "contract-d-adversarial-report/reference-depth-py${{ matrix.python }}.json"
+            --kind reference --target /tmp/contract-d-target --out "$ref"
           python research/contract-d-adversarial-harness-v1/probe_depth_implementation.py \
-            --kind independent \
-            --target /tmp/contract-d-independent \
-            --fixture /tmp/contract-d-target/fixtures/valid.json \
-            --out "contract-d-adversarial-report/independent-depth-py${{ matrix.python }}.json"
+            --kind independent --target /tmp/contract-d-independent \
+            --fixture /tmp/contract-d-target/fixtures/valid.json --out "$ind"
+          python research/contract-d-adversarial-harness-v1/summarize_depth_comparison.py \
+            --reference "$ref" --independent "$ind" \
+            --out "contract-d-adversarial-report/depth-comparison-py${{ matrix.python }}.md"
 
       - name: Self-test harness reporting
         shell: bash
@@ -109,6 +110,9 @@ jobs:
           fi
           if test -f contract-d-adversarial-report/depth-boundary.md; then
             cat contract-d-adversarial-report/depth-boundary.md
+          fi
+          if test -f "contract-d-adversarial-report/depth-comparison-py${{ matrix.python }}.md"; then
+            cat "contract-d-adversarial-report/depth-comparison-py${{ matrix.python }}.md"
           fi
 
       - name: Upload adversarial evidence
