@@ -174,13 +174,15 @@ jobs:
           set -euo pipefail
           python -m pip install --disable-pip-version-check -r /tmp/contract-d-rc5/requirements.txt
 
-      - name: Run RC5 adversarial attacks in gate mode
+      - name: Run corrected RC5 adversarial attacks in gate mode
         shell: bash
         env:
           PYTHONPATH: research/contract-d-adversarial-harness-v1
         run: |
           set -euo pipefail
-          python research/contract-d-adversarial-harness-v1/run_rc5_harness.py \
+          # Run 33354603157 is preserved as an evaluator defect: the first RC5
+          # lane inherited RC4's stale assumption that depth 256 must remain valid.
+          python research/contract-d-adversarial-harness-v1/run_rc5_harness_v2.py \
             --target /tmp/contract-d-rc5 \
             --report-dir contract-d-rc5-adversarial-report \
             --gate
