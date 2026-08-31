@@ -1,0 +1,28 @@
+name: Contract D RC5 research conformance
+
+on:
+  push:
+    branches:
+      - research/contract-d-independent-authority-rc5
+  workflow_dispatch:
+
+jobs:
+  test-rc5:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install exact RC5 research dependencies
+        run: |
+          python -m pip install --disable-pip-version-check -r research/contract-d-independent-authority-rc5/candidate/requirements.txt pytest
+      - name: Run exact RC5 suite
+        run: |
+          python -m pytest -q research/contract-d-independent-authority-rc5/candidate/tests/test_rc5.py
