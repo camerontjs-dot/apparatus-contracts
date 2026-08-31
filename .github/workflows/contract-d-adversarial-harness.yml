@@ -8,6 +8,10 @@ on:
 
 jobs:
   attack-frozen-rc4:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,9 +22,9 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: ${{ matrix.python }}
 
-      - name: Materialize exact frozen Contract D target
+      - name: Materialize exact frozen Contract D reference target
         shell: bash
         run: |
           set -euo pipefail
@@ -34,6 +38,20 @@ jobs:
           done
           git show "FETCH_HEAD:${prefix}/fixtures/valid.json" > /tmp/contract-d-target/fixtures/valid.json
           printf '%s\n' "$target_commit" > /tmp/contract-d-target/TARGET_COMMIT
+
+      - name: Materialize exact frozen independent implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          independent_commit='79e94e7f3795472e31620cdbc4279dc399882ed5'
+          independent_path='research/contract-d-rc4-fresh-reproduction-v2/contract_d_independent.py'
+          mkdir -p /tmp/contract-d-independent /tmp/independent-git
+          git -C /tmp/independent-git init
+          git -C /tmp/independent-git fetch --no-tags --depth=1 \
+            https://github.com/camerontjs-dot/research-scaffold-harness.git "$independent_commit"
+          test "$(git -C /tmp/independent-git rev-parse FETCH_HEAD)" = "$independent_commit"
+          git -C /tmp/independent-git show "FETCH_HEAD:${independent_path}" > /tmp/contract-d-independent/contract_d_independent.py
+          test "$(git hash-object /tmp/contract-d-independent/contract_d_independent.py)" = 'bf4ea3eb9a5cf379d5923198225fed542cc6345e'
 
       - name: Run adversarial attacks in evidence mode
         shell: bash
@@ -58,6 +76,22 @@ jobs:
             --target /tmp/contract-d-target \
             --report-dir contract-d-adversarial-report
 
+      - name: Compare frozen reference and frozen independent depth behavior
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
+        run: |
+          set -euo pipefail
+          python research/contract-d-adversarial-harness-v1/probe_depth_implementation.py \
+            --kind reference \
+            --target /tmp/contract-d-target \
+            --out "contract-d-adversarial-report/reference-depth-py${{ matrix.python }}.json"
+          python research/contract-d-adversarial-harness-v1/probe_depth_implementation.py \
+            --kind independent \
+            --target /tmp/contract-d-independent \
+            --fixture /tmp/contract-d-target/fixtures/valid.json \
+            --out "contract-d-adversarial-report/independent-depth-py${{ matrix.python }}.json"
+
       - name: Self-test harness reporting
         shell: bash
         env:
@@ -81,6 +115,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: contract-d-adversarial-report
+          name: contract-d-adversarial-report-py${{ matrix.python }}
           path: contract-d-adversarial-report/
           if-no-files-found: error
