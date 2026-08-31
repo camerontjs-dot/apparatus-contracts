@@ -1,0 +1,219 @@
+{
+  "schema": "contract-e-consumer-request-interface-rc3d",
+  "version": "0.0.0-rc3d-research",
+  "status": "non-canonical-research-candidate",
+  "inherits": {
+    "authority_warrant_spec_blob": "9c1090335d87eb5e4885a755542923b453c45317",
+    "structural_shapes_blob": "c3f293430ae6ddb87523d83ea6e5380b8b832136",
+    "participant_boundary_blob": "8b1d292a240300388949d502e7b656e7a23a0b8e",
+    "authority_basis_binding_blob": "63c952c9c28f1be2173e69c79976c7dfe5880c10",
+    "rc3c_amendment_blob": "f05feac88128fd693cca2fb25a0b2951654377eb"
+  },
+  "scope_of_amendment": [
+    "consumer_evaluation_wrapper",
+    "propagation_request_vocabulary",
+    "delegation_parent_authority_shape",
+    "historical_evaluation_mode_vocabulary",
+    "registry_document_native_consumption",
+    "fixture_dsl_vs_native_wire_boundary"
+  ],
+  "unchanged_invariants": {
+    "authority_domains_unchanged": true,
+    "participant_boundaries_unchanged": true,
+    "authority_basis_binding_unchanged": true,
+    "rc3c_currentness_unchanged": true,
+    "competence_and_warrant_semantics_unchanged": true,
+    "semantic_result_payload_is_opaque": true,
+    "default_authority_propagation": "none",
+    "delegation_subset_and_non_amplification_semantics_unchanged": true,
+    "historical_validity_rewritten_by_later_revocation": false
+  },
+  "EvaluationRequest": {
+    "json_type": "object",
+    "required": ["kind"],
+    "kind": {
+      "json_type": "string",
+      "enum": ["envelope", "propagation", "delegation", "historical"]
+    },
+    "unknown_kind_behavior": {
+      "decision": "reject",
+      "reason": "unknown_evaluation_kind",
+      "silent_default_forbidden": true
+    }
+  },
+  "envelope_request": {
+    "when_kind": "envelope",
+    "required": ["envelope", "registry", "mode"],
+    "mode": {
+      "json_type": "string",
+      "enum": ["new_exercise", "historical_inspection"]
+    },
+    "registry": {"type": "RegistryDocument"},
+    "unknown_mode_behavior": {
+      "decision": "reject",
+      "reason": "unknown_evaluation_mode",
+      "silent_default_forbidden": true
+    }
+  },
+  "RegistryDocument": {
+    "json_type": "object",
+    "required": ["schema", "records"],
+    "schema": {"json_type": "string", "min_length": 1},
+    "records": {
+      "json_type": "object",
+      "keys": "authority_record_id",
+      "values": "ResolvedBasisRecord"
+    },
+    "record_id_consistency": "map_key == record.id",
+    "native_document_wrapper_required_for_cross_repository_conformance": true,
+    "bare_record_map_may_be_internal_representation": true,
+    "comparison_must_not_extract_records_before_consumer_call": true,
+    "malformed_reason": "malformed_registry_document"
+  },
+  "PropagationRequest": {
+    "when_kind": "propagation",
+    "request_container_key": "request",
+    "required": ["mode"],
+    "mode": {
+      "json_type": "string",
+      "enum": ["none", "identity_provenance_only", "explicit"]
+    },
+    "fields": {
+      "json_type": "array",
+      "item_type": "string",
+      "required_when_mode": "explicit",
+      "default_when_absent_for_other_modes": []
+    },
+    "separately_reauthorized": {
+      "json_type": "boolean",
+      "required": false
+    },
+    "forbidden_native_aliases": ["requested_fields"],
+    "forbidden_alias_behavior": {
+      "decision": "reject",
+      "reason": "malformed_propagation_request"
+    },
+    "unknown_mode_behavior": {
+      "decision": "reject",
+      "reason": "unknown_propagation_mode"
+    },
+    "semantic_rules": "inherit SPEC-CANDIDATE propagation rules and RC3C relisted reasons"
+  },
+  "ParentAuthorityRecord": {
+    "json_type": "object",
+    "required": ["id", "authority_domain", "operations", "scope", "current"],
+    "id": {"json_type": "string"},
+    "authority_domain": {"json_type": "string"},
+    "operations": {"json_type": "array", "item_type": "string", "min_items": 1},
+    "scope": {"json_type": "array", "item_type": "string", "min_items": 1},
+    "current": {"json_type": "boolean"},
+    "valid_until": {"json_type": "string", "format": "date-time", "required": false},
+    "not_required": ["delegator", "delegate", "parent_authority_id"],
+    "semantic_role": "upstream authority whose delegated child must not amplify domain, operation, scope, currentness, or expiry"
+  },
+  "DelegationChild": {
+    "json_type": "object",
+    "required": [
+      "id",
+      "delegator",
+      "delegate",
+      "authority_domain",
+      "operations",
+      "scope",
+      "current",
+      "parent_authority_id"
+    ],
+    "operations": {"json_type": "array", "item_type": "string", "min_items": 1},
+    "scope": {"json_type": "array", "item_type": "string", "min_items": 1},
+    "valid_until": {"json_type": "string", "format": "date-time", "required": false}
+  },
+  "delegation_request": {
+    "when_kind": "delegation",
+    "required": ["parent", "child", "mode"],
+    "parent": {"type": "ParentAuthorityRecord"},
+    "child": {"type": "DelegationChild"},
+    "mode": {
+      "json_type": "string",
+      "enum": ["new_exercise", "historical_inspection"]
+    },
+    "linkage_rule": "child.parent_authority_id == parent.id",
+    "linkage_failure_reason": "delegation_parent_mismatch",
+    "domain_rule": "child.authority_domain == parent.authority_domain",
+    "domain_failure_reason": "delegation_domain_amplification",
+    "operation_rule": "child.operations subset parent.operations",
+    "operation_failure_reason": "delegation_operation_amplification",
+    "scope_rule": "child.scope subset parent.scope",
+    "scope_failure_reason": "delegation_scope_amplification",
+    "currentness_rule_for_new_exercise": "parent.current == true AND child.current == true",
+    "currentness_failure_reason": "delegation_not_current",
+    "expiry_rule": "if parent.valid_until exists, child.valid_until must exist and be <= parent.valid_until",
+    "expiry_failure_reason": "delegation_expiry_amplification",
+    "unknown_mode_behavior": {
+      "decision": "reject",
+      "reason": "unknown_evaluation_mode"
+    },
+    "nonclaim": "RC3D does not infer delegator/principal equality because no authoritative parent-principal field is frozen"
+  },
+  "HistoricalRequest": {
+    "when_kind": "historical",
+    "required": ["record", "mode"],
+    "record": {"type": "historical_record_shape from SPEC-SHAPES"},
+    "mode": {
+      "json_type": "string",
+      "enum": ["historical_inspection", "new_exercise"]
+    },
+    "fixture_only_tokens": ["historical_record"],
+    "fixture_token_is_not_native_mode": true,
+    "unknown_mode_behavior": {
+      "decision": "reject",
+      "reason": "unknown_evaluation_mode",
+      "silent_default_forbidden": true
+    },
+    "historical_inspection_semantics": "authority_was_valid_at_time is evaluated as stored; later currentness/revocation does not rewrite it",
+    "new_exercise_semantics": "historical validity alone cannot authorize; current authority is required",
+    "new_exercise_rejection_when_only_historical_record_present": "authority_basis_not_current"
+  },
+  "fixture_materialization_boundary": {
+    "fixture_dsl_is_not_native_consumer_wire": true,
+    "evaluator_materializer_must_be_frozen_before_fresh_implementation": true,
+    "materializer_must_not_change_authority_semantics": true,
+    "materializer_may_only": [
+      "apply frozen baseline overlays",
+      "map fixture construction field names to canonical request field names",
+      "map fixture case-mode labels to canonical evaluation mode tokens",
+      "construct the EvaluationRequest wrapper",
+      "preserve canonical payload bytes otherwise"
+    ],
+    "materializer_must_not": [
+      "repair consumer output",
+      "coerce malformed canonical wire into valid wire",
+      "invent missing authority semantics",
+      "inspect consumer implementation",
+      "select transformations based on observed consumer result"
+    ]
+  },
+  "interface_reason_contract": {
+    "decision_is_normative": true,
+    "canonical_primary_reasons": [
+      "unknown_evaluation_kind",
+      "unknown_evaluation_mode",
+      "malformed_registry_document",
+      "malformed_propagation_request",
+      "delegation_parent_mismatch",
+      "delegation_domain_amplification",
+      "delegation_operation_amplification",
+      "delegation_scope_amplification",
+      "delegation_not_current",
+      "delegation_expiry_amplification"
+    ],
+    "inherited_authority_reasons_remain_governed_by_rc3b_rc3c": true
+  },
+  "consumer_requirements": {
+    "must_consume_registry_document_natively": true,
+    "must_consume_canonical_request_wrapper_natively": true,
+    "must_reject_unknown_kind_or_mode": true,
+    "must_reject_requested_fields_alias_on_native_propagation_request": true,
+    "must_not_require_hidden_fixture_dsl_knowledge": true,
+    "must_not_require_bespoke_post_reveal_adapter": true
+  }
+}
