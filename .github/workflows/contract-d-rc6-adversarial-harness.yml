@@ -1,0 +1,99 @@
+name: Contract D RC6 adversarial successor gate
+
+on:
+  push:
+    branches:
+      - research-infra/contract-d-adversarial-harness-v1
+  workflow_dispatch:
+
+jobs:
+  attack-rc6-successor:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Materialize exact RC6 successor target
+        shell: bash
+        run: |
+          set -euo pipefail
+          target_commit='bb656fc50806c344fda1ddeaf08a9878f5cb460e'
+          prefix='research/contract-d-independent-authority-rc6/candidate'
+          git fetch --no-tags --depth=1 origin "$target_commit"
+          test "$(git rev-parse FETCH_HEAD)" = "$target_commit"
+          mkdir -p /tmp/contract-d-rc6/fixtures
+          for path in contract_d_core.py contract_d_validate.py contract_d_consume.py effect-registry.json requirements.txt; do
+            git show "FETCH_HEAD:${prefix}/${path}" > "/tmp/contract-d-rc6/${path}"
+          done
+          git show "FETCH_HEAD:${prefix}/fixtures/valid.json" > /tmp/contract-d-rc6/fixtures/valid.json
+          printf '%s\n' "$target_commit" > /tmp/contract-d-rc6/TARGET_COMMIT
+      - name: Install exact RC6 canonicalizer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -r /tmp/contract-d-rc6/requirements.txt
+      - name: Run standards-expanded successor attacks in gate mode
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
+        run: |
+          set -euo pipefail
+          python research/contract-d-adversarial-harness-v1/run_rc5_harness_v3.py \
+            --target /tmp/contract-d-rc6 \
+            --report-dir contract-d-rc6-adversarial-report \
+            --gate
+      - name: Probe RC6 normalized empty-parameter authority shape
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=/tmp/contract-d-rc6 python - <<'PY'
+          import copy, json
+          from pathlib import Path
+          from contract_d_core import semantic_identity, semantic_projection, validate_effect
+
+          fixtures = json.loads(Path('/tmp/contract-d-rc6/fixtures/valid.json').read_text())['fixtures']
+          checked = 0
+          for name, effect_type in (
+              ('citation-use-clear.json', 'knowledge.cite_as_evidence'),
+              ('task-dispatch-clear.json', 'task.dispatch'),
+          ):
+              omitted = copy.deepcopy(fixtures[name])
+              explicit = copy.deepcopy(fixtures[name])
+              explicit['effect']['params'] = {}
+              wanted = {'type': effect_type, 'version': '1', 'params': {}}
+              assert validate_effect(omitted['effect']) == wanted
+              assert validate_effect(explicit['effect']) == wanted
+              assert semantic_projection(omitted)['effect'] == wanted
+              assert semantic_projection(explicit)['effect'] == wanted
+              assert semantic_identity(omitted) == semantic_identity(explicit)
+              checked += 1
+          print(f'normalized-empty-param authority probes: {checked}/2 passed')
+          PY
+      - name: Self-test harness reporting
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
+        run: |
+          set -euo pipefail
+          python -m unittest -v research/contract-d-adversarial-harness-v1/test_harness_self.py
+      - name: Show RC6 summary
+        if: always()
+        shell: bash
+        run: |
+          if test -f contract-d-rc6-adversarial-report/report.md; then cat contract-d-rc6-adversarial-report/report.md; fi
+      - name: Upload RC6 adversarial evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-d-rc6-adversarial-report-py${{ matrix.python }}
+          path: contract-d-rc6-adversarial-report/
+          if-no-files-found: error
