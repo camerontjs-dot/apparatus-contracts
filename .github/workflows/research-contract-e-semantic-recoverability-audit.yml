@@ -1,0 +1,47 @@
+name: Research - Contract E semantic recoverability audit
+
+on:
+  push:
+    branches:
+      - research/contract-e-semantic-recoverability-audit-20260831
+  pull_request:
+    paths:
+      - "docs/research/contract-e/semantic-recoverability-audit/**"
+      - ".github/workflows/research-contract-e-semantic-recoverability-audit.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify frozen source blobs and build resolved semantic view
+        run: |
+          set -euo pipefail
+          node docs/research/contract-e/semantic-recoverability-audit/build-resolved.mjs /tmp/RESOLVED-CONTRACT.json
+          node -e 'JSON.parse(require("fs").readFileSync("/tmp/RESOLVED-CONTRACT.json","utf8")); console.log("resolved JSON valid")'
+          cp /tmp/RESOLVED-CONTRACT.json RESOLVED-CONTRACT.json
+          sha256sum RESOLVED-CONTRACT.json | tee resolved.sha256
+
+      - name: Verify committed resolved artifact when present
+        run: |
+          set -euo pipefail
+          if [ -f docs/research/contract-e/semantic-recoverability-audit/RESOLVED-CONTRACT.json ]; then
+            cmp -s RESOLVED-CONTRACT.json docs/research/contract-e/semantic-recoverability-audit/RESOLVED-CONTRACT.json
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-resolved-semantic-view-${{ github.sha }}
+          path: |
+            RESOLVED-CONTRACT.json
+            resolved.sha256
