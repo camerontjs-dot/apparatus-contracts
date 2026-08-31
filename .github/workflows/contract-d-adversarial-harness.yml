@@ -1,0 +1,68 @@
+name: Contract D adversarial harness
+
+on:
+  push:
+    branches:
+      - research-infra/contract-d-adversarial-harness-v1
+  workflow_dispatch:
+
+jobs:
+  attack-frozen-rc4:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Materialize exact frozen Contract D target
+        shell: bash
+        run: |
+          set -euo pipefail
+          target_commit='fd6923115116b0ced0f9feb5c005099d2e51ea88'
+          prefix='research/contract-d-independent-authority-rc4/candidate'
+          git fetch --no-tags --depth=1 origin "$target_commit"
+          test "$(git rev-parse FETCH_HEAD)" = "$target_commit"
+          mkdir -p /tmp/contract-d-target/fixtures
+          for path in contract_d_core.py contract_d_validate.py contract_d_consume.py effect-registry.json; do
+            git show "FETCH_HEAD:${prefix}/${path}" > "/tmp/contract-d-target/${path}"
+          done
+          git show "FETCH_HEAD:${prefix}/fixtures/valid.json" > /tmp/contract-d-target/fixtures/valid.json
+          printf '%s\n' "$target_commit" > /tmp/contract-d-target/TARGET_COMMIT
+
+      - name: Run adversarial attacks in evidence mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/contract-d-adversarial-harness-v1/attack_contract_d.py \
+            --target /tmp/contract-d-target \
+            --report-dir contract-d-adversarial-report
+
+      - name: Self-test harness reporting
+        shell: bash
+        env:
+          PYTHONPATH: research/contract-d-adversarial-harness-v1
+        run: |
+          set -euo pipefail
+          python -m unittest -v research/contract-d-adversarial-harness-v1/test_harness_self.py
+
+      - name: Show summary
+        if: always()
+        shell: bash
+        run: |
+          if test -f contract-d-adversarial-report/report.md; then
+            cat contract-d-adversarial-report/report.md
+          fi
+
+      - name: Upload adversarial evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-d-adversarial-report
+          path: contract-d-adversarial-report/
+          if-no-files-found: error
