@@ -134,7 +134,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          target_commit='8f41d46e0fb78b49da981d5c8b1b8df61c80528e'
+          target_commit='f0f7a9684cf114159ca1cfe1c9f11b626a07e6c8'
           prefix='research/contract-d-independent-authority-rc5/candidate'
           git fetch --no-tags --depth=1 origin "$target_commit"
           test "$(git rev-parse FETCH_HEAD)" = "$target_commit"
