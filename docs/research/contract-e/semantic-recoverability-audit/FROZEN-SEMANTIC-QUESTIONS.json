@@ -1,0 +1,70 @@
+{
+  "schema": "contract-e-semantic-question-set-v1",
+  "status": "frozen-before-first-reader",
+  "purpose": "interpretation-only semantic probes; no implementation fixtures and no privileged answer key",
+  "global_convention": "Each scenario begins from a canonical valid positive request for the named domain and operation. Unless the question states otherwise, all required fields are present, the participant is declared and in scope, jurisdiction is applicable/current, the conferring authority source resolves and matches subject/domain/operation/scope/target, currentness/validity checks pass, required qualification and warrant are present and valid, and the result payload has no independent authority effect. Apply only the stated mutation(s).",
+  "permitted_answers": ["PERMIT", "REJECT", "UNDERDETERMINED"],
+  "answer_requirements": ["answer", "supporting_contract_refs", "brief_reason"],
+  "questions": [
+    {"id":"Q-GLOBAL-01","category":"non_implication","prompt":"A result payload changes from negative to success/high-confidence while every authority-relevant field is unchanged. Does that change a previously rejected authority outcome into a permit?"},
+    {"id":"Q-GLOBAL-02","category":"non_implication","prompt":"A valid warrant is present, but there is no matching authority-conferring basis for the requested domain. May the warrant itself authorize the operation?"},
+    {"id":"Q-GLOBAL-03","category":"non_implication","prompt":"A participant has the required competence/qualification but lacks matching jurisdiction. May competence alone authorize the operation?"},
+    {"id":"Q-GLOBAL-04","category":"non_implication","prompt":"A typed Decision artifact is valid, but no task-dispatch authority is established. May the Decision itself authorize task execution?"},
+    {"id":"Q-GLOBAL-05","category":"non_implication","prompt":"An execution report states that an action succeeded. Does that alone establish authoritative outcome verification?"},
+
+    {"id":"Q-BASIS-01","category":"basis_binding","prompt":"The conferring authority reference resolves, but its type differs from the resolved record type. What is the authority outcome?"},
+    {"id":"Q-BASIS-02","category":"basis_binding","prompt":"The conferring authority record matches domain/operation/scope/target but its subject_ids does not include the envelope subject. What is the authority outcome?"},
+    {"id":"Q-BASIS-03","category":"basis_binding","prompt":"The conferring authority record is for the correct subject and operation but a different authority_domain. What is the outcome?"},
+    {"id":"Q-BASIS-04","category":"basis_binding","prompt":"The conferring authority record matches subject/domain/scope/target but does not include the requested operation. What is the outcome?"},
+    {"id":"Q-BASIS-05","category":"basis_binding","prompt":"The envelope jurisdiction scope is absent from the conferring record's scopes list. What is the outcome?"},
+    {"id":"Q-BASIS-06","category":"basis_binding","prompt":"The target class is not included in the conferring record's target_classes. What is the outcome?"},
+    {"id":"Q-BASIS-07","category":"basis_binding","prompt":"The conferring record has a nonempty target_ids list and the request target id is not in it. What is the outcome?"},
+    {"id":"Q-BASIS-08","category":"basis_binding","prompt":"A task-dispatch envelope contains a valid task-dispatch grant plus a supporting Decision artifact reference. The supporting artifact is not itself an authority-conferring type and is not present in RegistryDocument.records. The six-source resolved contract supplies no additional rule beyond RESOLVED-CONTRACT.json. What outcome is determined?"},
+    {"id":"Q-BASIS-09","category":"basis_binding","prompt":"A citation-use envelope has only a supporting artifact reference and no grant or policy matching citation_use. What is the outcome?"},
+
+    {"id":"Q-CURRENT-01","category":"currentness","prompt":"For new_exercise, AuthorityReference.current=false while the resolved authority record is current and otherwise valid. What is the outcome?"},
+    {"id":"Q-CURRENT-02","category":"currentness","prompt":"For new_exercise, AuthorityReference.current=true while resolved_basis_record.current=false. What is the outcome?"},
+    {"id":"Q-CURRENT-03","category":"currentness","prompt":"evaluated_at equals valid_from exactly and all other currentness conditions pass. Is the authority inside the validity interval?"},
+    {"id":"Q-CURRENT-04","category":"currentness","prompt":"evaluated_at equals valid_until exactly and all other currentness conditions pass. Is the authority inside the validity interval?"},
+    {"id":"Q-CURRENT-05","category":"currentness","prompt":"revoked_at equals evaluated_at for a new exercise. What is the outcome?"},
+    {"id":"Q-CURRENT-06","category":"currentness","prompt":"The record is current now, but evaluated_at is before valid_from. What is the outcome?"},
+
+    {"id":"Q-PART-01","category":"participant","prompt":"The participant identifier is unknown to the participant declarations, while all basis, jurisdiction, qualification, and warrant facts otherwise match. What is the outcome?"},
+    {"id":"Q-PART-02","category":"participant","prompt":"A declared participant is asked to exercise an authority domain not in its accepted_domains. What is the outcome?"},
+    {"id":"Q-PART-03","category":"participant","prompt":"A declared participant accepts the domain but not the requested operation. What is the outcome?"},
+    {"id":"Q-PART-04","category":"participant","prompt":"A positive semantic result is present for a participant whose declared responsibility does not cover the requested domain/operation. May the result bypass the participant boundary?"},
+
+    {"id":"Q-QUAL-01","category":"qualification","prompt":"numeric_relation is requested with matching authority but no Qualification. What is the outcome?"},
+    {"id":"Q-QUAL-02","category":"qualification","prompt":"numeric_relation includes a current Qualification for the same subject and scope, but its type is not numeric_relation_validator. What is the outcome?"},
+    {"id":"Q-QUAL-03","category":"qualification","prompt":"source_boundary includes the required qualification type, but Qualification.current=false. What is the outcome?"},
+    {"id":"Q-QUAL-04","category":"qualification","prompt":"outcome_verification includes a valid outcome_verifier qualification, but for a different subject. What is the outcome?"},
+
+    {"id":"Q-WARRANT-01","category":"warrant","prompt":"numeric_relation has matching authority and competence but no warrant. What is the outcome?"},
+    {"id":"Q-WARRANT-02","category":"warrant","prompt":"A numeric-threshold-v1 warrant is otherwise valid but names a different authority_domain than the envelope. What is the outcome?"},
+    {"id":"Q-WARRANT-03","category":"warrant","prompt":"A valid warrant matches the domain and target but names a different operation. What is the outcome?"},
+    {"id":"Q-WARRANT-04","category":"warrant","prompt":"A required warrant has applicable=false. What is the outcome?"},
+    {"id":"Q-WARRANT-05","category":"warrant","prompt":"A required warrant is current and applicable but its target_hash does not match target.current_hash. What is the outcome?"},
+    {"id":"Q-WARRANT-06","category":"warrant","prompt":"The envelope contains one structurally valid Warrant object. Does the resolved contract determine whether that exact envelope representation is canonical, malformed, or merely one of multiple allowed cardinalities?"},
+
+    {"id":"Q-PROP-01","category":"propagation","prompt":"Propagation mode is none and no fields are propagated. Is any semantic or operational authority inherited downstream by default?"},
+    {"id":"Q-PROP-02","category":"propagation","prompt":"Propagation mode is identity_provenance_only and fields are limited to source_id, artifact_id, content_hash, producer_id, policy_id, and policy_version. Does this propagation itself confer semantic validity or operational authority?"},
+    {"id":"Q-PROP-03","category":"propagation","prompt":"Propagation mode is explicit and semantic_validity is requested, but there is no separate reauthorization. What is the authority outcome?"},
+    {"id":"Q-PROP-04","category":"propagation","prompt":"A native propagation request uses requested_fields instead of the canonical fields member. What is the contract outcome for the request shape?"},
+    {"id":"Q-PROP-05","category":"propagation","prompt":"Propagation uses an unknown mode token. What is the outcome?"},
+
+    {"id":"Q-DEL-01","category":"delegation","prompt":"A child delegation references the correct parent, same authority domain, is current, expires no later than the parent, and has operations/scope that are strict subsets of the parent. What is the outcome?"},
+    {"id":"Q-DEL-02","category":"delegation","prompt":"The child parent_authority_id does not equal parent.id. What is the outcome?"},
+    {"id":"Q-DEL-03","category":"delegation","prompt":"The child authority_domain differs from the parent's domain. What is the outcome?"},
+    {"id":"Q-DEL-04","category":"delegation","prompt":"The child adds one operation not present in parent.operations. What is the outcome?"},
+    {"id":"Q-DEL-05","category":"delegation","prompt":"The child scope contains one scope not present in parent.scope. What is the outcome?"},
+    {"id":"Q-DEL-06","category":"delegation","prompt":"For new_exercise, parent.current=true but child.current=false. What is the outcome?"},
+    {"id":"Q-DEL-07","category":"delegation","prompt":"The parent has valid_until and the child expires later than the parent. What is the outcome?"},
+
+    {"id":"Q-HIST-01","category":"historical","prompt":"Authority was valid when exercised at T1. It is revoked at T2. At T3, a historical_inspection asks whether authority_was_valid_at_time at T1. Does the later revocation rewrite the stored historical validity?"},
+    {"id":"Q-HIST-02","category":"historical","prompt":"A new exercise at T3 relies only on a historical record that says authority was valid at T1, with no current authority recheck establishing present authority. What is the outcome?"},
+    {"id":"Q-HIST-03","category":"historical","prompt":"A native historical request uses the fixture-only mode token historical_record instead of historical_inspection or new_exercise. What is the outcome?"},
+
+    {"id":"Q-REASON-01","category":"reason_semantics","prompt":"An envelope simultaneously has malformed competence cardinality and a non-current authority basis. Which class of failure has primary precedence according to the resolved contract?"},
+    {"id":"Q-REASON-02","category":"reason_semantics","prompt":"A basis reference both fails to resolve and would have the wrong domain if it did resolve. Which basis-binding failure has primary precedence?"}
+  ]
+}
