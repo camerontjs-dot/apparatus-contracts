@@ -30,13 +30,17 @@ The immutable public release is tagged `contract-c-v1.0.0`. Its release record c
 
 ### Contract D — Decision output
 
-Contract D remains research-only. No canonical Contract D release exists. Candidate and adversarial work lives under the research surfaces and must not be interpreted as production authority.
+Contract D 1.0.0 is the first canonical production Decision contract. It binds exact upstream authority, Decision policy, target/content identity, evaluation state, and a typed requested effect while stopping at outcomes such as `candidate_for_authorization`, `hold`, `evaluation_failed`, `not_applicable`, or `cannot_establish`.
+
+Specification: [`contract-d-v1.0.0.md`](contract-d-v1.0.0.md)
+
+The immutable public release is tagged `contract-d-v1.0.0`. Its post-merge release lock reruns the exact Decision Engine producer, frozen independent consumer, frozen adversarial apparatus, and full conformance before publication.
 
 A Decision is not automatic permission to execute an effect.
 
 ### Contract E / authority control plane
 
-Contract E is also research-only, and the current question is deliberately broader than "what should the next serialized contract look like?" Research is testing standing authority state, typed jurisdiction, authority-basis binding, delegation/currentness, participant declarations, transient authorization receipts, and local enforcement as potentially cross-cutting machinery.
+Contract E is research-only, and the current question is deliberately broader than "what should the next serialized contract look like?" Research is testing standing authority state, typed jurisdiction, authority-basis binding, delegation/currentness, participant declarations, transient authorization receipts, and local enforcement as potentially cross-cutting machinery.
 
 No canonical Contract E schema or production authority control plane is established here.
 
@@ -67,6 +71,7 @@ Important top-level surfaces include:
 handoff-contract-v1.0.0.md                  legacy Contract A / original A+B authority
 contract-b-factual-context-extension-v1.2.0.md
 contract-c-v1.0.0.md
+contract-d-v1.0.0.md
 schema/                                      canonical machine-readable contract material
 validators/                                  contract validators
 fixtures/                                    canonical/public fixtures where applicable
@@ -113,6 +118,8 @@ The legacy Contract A surface predates the current proposition/decomposition own
 
 Contract B 1.2.0 is production-locked, but its contract-specific release identity is tracked separately from that behavioral lock.
 
-Contract C 1.0.0 is canonical and released, but that does not establish maintained Decision Engine production integration or correctness of CAL's semantic judgments.
+Contract C 1.0.0 is canonical and released, but that does not establish correctness of CAL's semantic judgments.
 
-Contract D and Contract E remain research programs. Their frozen candidates, attack harnesses, clean-room reproductions, and failures are evidence, not production authorization.
+Contract D 1.0.0 is canonical and released, but it deliberately stops before operational Authorization or execution and does not establish correctness of upstream epistemic judgments or Decision policy outside the tested domain.
+
+Contract E remains a research program. Its frozen candidates, attack harnesses, clean-room reproductions, interpretation audits, and failures are evidence, not production authority.
