@@ -1,0 +1,135 @@
+{
+  "schema": "contract-e-authority-basis-aggregation-candidate-matrix-v1",
+  "status": "research-only-no-normative-authority",
+  "preregistration_commit": "14250a13534a04ab51f511e9f68cdce711d01dcc",
+  "source_registry_blob": "76ea333ee0460d9614e9899edb69e6865e48eccb",
+  "source_rc3a_cases_blob": "85bc7805d02a04c5a10b48b43a5f5a89f4e2f32a",
+  "materialization_note": "The matrix structure and candidate models were preregistered before held-out independent-consumer inspection. Exact frozen registry record IDs were selected afterward to materialize those already-preregistered case classes. This file contains no claimed normative expected outcomes and is not a blind consumer-evaluation corpus.",
+  "primary_cases": [
+    {
+      "id": "AGG-C01-single-complete-match",
+      "base": "task_ok",
+      "authority_basis_conferring": [
+        {"type": "grant", "id": "grant:task-dispatch", "current": true}
+      ],
+      "discriminates": ["baseline"]
+    },
+    {
+      "id": "AGG-C02-duplicate-complete-match",
+      "base": "task_ok",
+      "authority_basis_conferring": [
+        {"type": "grant", "id": "grant:task-dispatch", "current": true},
+        {"type": "grant", "id": "grant:task-dispatch", "current": true}
+      ],
+      "discriminates": ["M4_single_conferring_constraint"]
+    },
+    {
+      "id": "AGG-C03-complete-plus-wrong-subject",
+      "base": "task_ok",
+      "authority_basis_conferring": [
+        {"type": "grant", "id": "grant:task-dispatch", "current": true},
+        {"type": "grant", "id": "grant:task-wrong-subject", "current": true}
+      ],
+      "discriminates": ["M1_existential_complete_match", "M2_universal_conferring_match", "M3_universal_domain_eligible_match"]
+    },
+    {
+      "id": "AGG-C04-complete-plus-wrong-scope",
+      "base": "task_ok",
+      "authority_basis_conferring": [
+        {"type": "grant", "id": "grant:task-dispatch", "current": true},
+        {"type": "grant", "id": "grant:task-wrong-scope", "current": true}
+      ],
+      "discriminates": ["M1_existential_complete_match", "M2_universal_conferring_match", "M3_universal_domain_eligible_match"]
+    },
+    {
+      "id": "AGG-C05-complete-plus-wrong-domain",
+      "base": "task_ok",
+      "authority_basis_conferring": [
+        {"type": "grant", "id": "grant:task-dispatch", "current": true},
+        {"type": "grant", "id": "grant:citation-use", "current": true}
+      ],
+      "discriminates": ["M1_existential_complete_match", "M2_universal_conferring_match", "M3_universal_domain_eligible_match"]
+    },
+    {
+      "id": "AGG-C06-partial-union-subject-scope",
+      "base": "task_ok",
+      "authority_basis_conferring": [
+        {"type": "grant", "id": "grant:task-wrong-subject", "current": true},
+        {"type": "grant", "id": "grant:task-wrong-scope", "current": true}
+      ],
+      "discriminates": ["M5_compositional_partial_union", "complete_record_requirement"]
+    },
+    {
+      "id": "AGG-C07-two-nonmatching-no-complete-record",
+      "base": "task_ok",
+      "authority_basis_conferring": [
+        {"type": "grant", "id": "grant:task-wrong-operation", "current": true},
+        {"type": "grant", "id": "grant:task-wrong-class", "current": true}
+      ],
+      "discriminates": ["complete_record_requirement", "failure_precedence_after_aggregation"]
+    },
+    {
+      "id": "AGG-C08-policy-match-plus-ineligible-grant",
+      "base": "decision_ok",
+      "authority_basis_conferring": [
+        {"type": "policy", "id": "policy:decision-v1", "current": true},
+        {"type": "grant", "id": "grant:task-dispatch", "current": true}
+      ],
+      "discriminates": ["M2_universal_conferring_match", "M3_universal_domain_eligible_match", "M1_existential_complete_match"],
+      "note": "decision_mandate domain any_of is policy only; the additional grant is conferring but type-ineligible for this domain. No delegation semantics are required."
+    }
+  ],
+  "supporting_artifact_control": {
+    "id": "AGG-CTRL-supporting-artifact-chain",
+    "base": "task_ok",
+    "use_frozen_baseline_authority_basis_unchanged": true,
+    "primary_scoring": false,
+    "reason": "This control preserves the separate OPEN-SUPPORTING-ARTIFACT-RESOLUTION uncertainty and must not decide the multiple-conferring quantifier."
+  },
+  "candidate_predictions": {
+    "M1_existential_complete_match": {
+      "AGG-C01-single-complete-match": "ACCEPT",
+      "AGG-C02-duplicate-complete-match": "ACCEPT",
+      "AGG-C03-complete-plus-wrong-subject": "ACCEPT",
+      "AGG-C04-complete-plus-wrong-scope": "ACCEPT",
+      "AGG-C05-complete-plus-wrong-domain": "ACCEPT",
+      "AGG-C06-partial-union-subject-scope": "REJECT",
+      "AGG-C07-two-nonmatching-no-complete-record": "REJECT",
+      "AGG-C08-policy-match-plus-ineligible-grant": "ACCEPT"
+    },
+    "M2_universal_conferring_match": {
+      "AGG-C01-single-complete-match": "ACCEPT",
+      "AGG-C02-duplicate-complete-match": "ACCEPT",
+      "AGG-C03-complete-plus-wrong-subject": "REJECT",
+      "AGG-C04-complete-plus-wrong-scope": "REJECT",
+      "AGG-C05-complete-plus-wrong-domain": "REJECT",
+      "AGG-C06-partial-union-subject-scope": "REJECT",
+      "AGG-C07-two-nonmatching-no-complete-record": "REJECT",
+      "AGG-C08-policy-match-plus-ineligible-grant": "REJECT"
+    },
+    "M3_universal_domain_eligible_match": {
+      "AGG-C01-single-complete-match": "ACCEPT",
+      "AGG-C02-duplicate-complete-match": "ACCEPT",
+      "AGG-C03-complete-plus-wrong-subject": "REJECT",
+      "AGG-C04-complete-plus-wrong-scope": "REJECT",
+      "AGG-C05-complete-plus-wrong-domain": "REJECT",
+      "AGG-C06-partial-union-subject-scope": "REJECT",
+      "AGG-C07-two-nonmatching-no-complete-record": "REJECT",
+      "AGG-C08-policy-match-plus-ineligible-grant": "ACCEPT"
+    },
+    "M4_single_conferring_reference_required": {
+      "AGG-C01-single-complete-match": "ACCEPT",
+      "AGG-C02-duplicate-complete-match": "REJECT",
+      "AGG-C03-complete-plus-wrong-subject": "REJECT",
+      "AGG-C04-complete-plus-wrong-scope": "REJECT",
+      "AGG-C05-complete-plus-wrong-domain": "REJECT",
+      "AGG-C06-partial-union-subject-scope": "REJECT",
+      "AGG-C07-two-nonmatching-no-complete-record": "REJECT",
+      "AGG-C08-policy-match-plus-ineligible-grant": "REJECT"
+    },
+    "M5_compositional_partial_union": {
+      "AGG-C06-partial-union-subject-scope": "POTENTIALLY_ACCEPT",
+      "note": "Other cases do not uniquely define a partial-union algorithm; C06 is the decisive falsifier for permitting authority assembled from incomplete records."
+    }
+  }
+}
