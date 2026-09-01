@@ -22,6 +22,11 @@ jobs:
     steps:
       - name: Checkout Apparatus research branch
         uses: actions/checkout@v4
+        with:
+          # The ancestry gate below intentionally names the exact production base.
+          # Fetch history so that SHA remains addressable when pull_request checks
+          # run on GitHub's synthetic merge commit.
+          fetch-depth: 0
 
       - name: Checkout pinned Research Scaffold Harness
         uses: actions/checkout@v4
