@@ -194,7 +194,7 @@ jobs:
             "cal_exporter_main": "${CAL_EXPORTER_MAIN}",
             "clean_consumer_head": "${CLEAN_CONSUMER_HEAD}",
             "handoff_commit": "${HANDOFF_COMMIT}",
-            "canonical_fixture_sha256": "${CONTRACT_C_FIXTURE_SHA256",
+            "canonical_fixture_sha256": "${CONTRACT_C_FIXTURE_SHA256}",
             "schema_spec_validator_agreement": true,
             "real_cal_byte_identity": true,
             "clean_consumer_conformance": true,
