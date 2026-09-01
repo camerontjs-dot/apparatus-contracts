@@ -1,0 +1,238 @@
+name: Contract A 2.0.0 sealed publication
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/contract-a-2.0.0-publish.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/contract-a-2.0.0-publish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  RELEASE_COMMIT: 529c92b49a34d5c610618551a8737f019f9fa332
+  APPARATUS_PROMOTION_MAIN: b59c2fbe38bae78a3a35699362c0e67d17152e4b
+  RELEASE_LOCK_RUN: '33560178778'
+  RELEASE_LOCK_ARTIFACT_ID: '9820940755'
+  RELEASE_LOCK_ARTIFACT_NAME: contract-a-2.0.0-release-lock
+  RELEASE_LOCK_ARTIFACT_DIGEST: sha256:f50d92d1dbd733c600c7de1b6b7a3acd0473e6339e21e58778392a0319087930
+  CONTRACT_A_TAG: contract-a-v2.0.0
+  CONTRACT_A_VERSION: 2.0.0
+  WIRE_SCHEMA_TOKEN: contract-a-wire-candidate-rc2
+
+jobs:
+  verify-sealed-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout publication apparatus
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prove publication cannot redefine Contract A release authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          git cat-file -e "$RELEASE_COMMIT^{commit}"
+          git cat-file -e "$APPARATUS_PROMOTION_MAIN^{commit}"
+          git merge-base --is-ancestor "$APPARATUS_PROMOTION_MAIN" "$RELEASE_COMMIT"
+          git diff --exit-code "$RELEASE_COMMIT" -- \
+            contract-a-v2.0.0.md \
+            schema/contract-a \
+            fixtures/contract-a \
+            validators/contract_a.py \
+            validators/contract_a_rc2.py \
+            tests/test_contract_a_v2.py \
+            .github/workflows/contract-a-2.0.0-promotion.yml \
+            .github/workflows/contract-a-2.0.0-release-lock.yml \
+            releases/contract-a/2.0.0.md
+          test "$(git hash-object "$RELEASE_COMMIT:schema/contract-a/2.0.0/wire-spec.md" 2>/dev/null || true)" != '' || true
+          test "$(git show "$RELEASE_COMMIT:schema/contract-a/versions.json" | python -c 'import json,sys; d=json.load(sys.stdin); print(d["canonical_version"])')" = "$CONTRACT_A_VERSION"
+          test "$(git show "$RELEASE_COMMIT:schema/contract-a/versions.json" | python -c 'import json,sys; d=json.load(sys.stdin); print(d["wire_schema_token"])')" = "$WIRE_SCHEMA_TOKEN"
+
+      - name: Verify exact post-merge release-lock run and artifact identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RELEASE_LOCK_RUN}" > /tmp/release-run.json
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RELEASE_LOCK_RUN}/artifacts" > /tmp/release-artifacts.json
+          python - <<'PY'
+          import json, os
+          run=json.load(open('/tmp/release-run.json'))
+          assert str(run['id']) == os.environ['RELEASE_LOCK_RUN']
+          assert run['head_branch'] == 'main'
+          assert run['head_sha'] == os.environ['RELEASE_COMMIT']
+          assert run['event'] == 'push'
+          assert run['status'] == 'completed'
+          assert run['conclusion'] == 'success'
+          artifacts=json.load(open('/tmp/release-artifacts.json'))['artifacts']
+          matches=[a for a in artifacts if str(a['id']) == os.environ['RELEASE_LOCK_ARTIFACT_ID']]
+          assert len(matches) == 1, matches
+          a=matches[0]
+          assert a['name'] == os.environ['RELEASE_LOCK_ARTIFACT_NAME']
+          assert a['digest'] == os.environ['RELEASE_LOCK_ARTIFACT_DIGEST']
+          assert a['expired'] is False
+          assert a['workflow_run']['head_sha'] == os.environ['RELEASE_COMMIT']
+          print('SEALED_RELEASE_ARTIFACT_VERIFIED', a['id'], a['digest'])
+          PY
+
+      - name: Download and validate exact sealed release receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf release-evidence
+          gh run download "$RELEASE_LOCK_RUN" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "$RELEASE_LOCK_ARTIFACT_NAME" \
+            --dir release-evidence
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path('release-evidence/release-lock-receipt.json')
+          assert p.is_file(), list(Path('release-evidence').rglob('*'))
+          d=json.loads(p.read_text())
+          assert d['status'] == 'PASS'
+          assert d['contract_a_version'] == os.environ['CONTRACT_A_VERSION']
+          assert d['release_commit'] == os.environ['RELEASE_COMMIT']
+          assert d['namespaced_tag'] == os.environ['CONTRACT_A_TAG']
+          assert d['apparatus_promotion_main'] == os.environ['APPARATUS_PROMOTION_MAIN']
+          assert d['wire_schema_token'] == os.environ['WIRE_SCHEMA_TOKEN']
+          assert d['production_machine_surface_byte_unchanged'] is True
+          assert d['full_regression_python_311_312_313'] is True
+          assert d['frozen_independent_consumer_agreement'] is True
+          assert d['exact_real_pilot_consumption'] is True
+          assert d['contract_e_or_authorization_promoted'] is False
+          print('SEALED_RELEASE_RECEIPT_VERIFIED', d['release_commit'])
+          PY
+
+      - name: Verify existing tag, if any, cannot disagree
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --tags origin "refs/tags/$CONTRACT_A_TAG" >/dev/null 2>&1; then
+            git fetch --force origin "refs/tags/$CONTRACT_A_TAG:refs/tags/$CONTRACT_A_TAG"
+            target="$(git rev-list -n 1 "$CONTRACT_A_TAG")"
+            test "$target" = "$RELEASE_COMMIT" || {
+              echo "Existing immutable tag points to $target, expected $RELEASE_COMMIT" >&2
+              exit 1
+            }
+            echo "EXISTING_TAG_VERIFIED $CONTRACT_A_TAG $target"
+          else
+            echo "TAG_ABSENT_READY_FOR_PUBLICATION $CONTRACT_A_TAG $RELEASE_COMMIT"
+          fi
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify-sealed-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout publication apparatus with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Re-verify exact sealed release run and download receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RELEASE_LOCK_RUN}" > /tmp/release-run.json
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RELEASE_LOCK_RUN}/artifacts" > /tmp/release-artifacts.json
+          python - <<'PY'
+          import json, os
+          run=json.load(open('/tmp/release-run.json'))
+          assert run['head_sha'] == os.environ['RELEASE_COMMIT']
+          assert run['event'] == 'push' and run['status'] == 'completed' and run['conclusion'] == 'success'
+          artifacts=json.load(open('/tmp/release-artifacts.json'))['artifacts']
+          a=next(x for x in artifacts if str(x['id']) == os.environ['RELEASE_LOCK_ARTIFACT_ID'])
+          assert a['name'] == os.environ['RELEASE_LOCK_ARTIFACT_NAME']
+          assert a['digest'] == os.environ['RELEASE_LOCK_ARTIFACT_DIGEST']
+          assert a['expired'] is False
+          PY
+          rm -rf release-evidence
+          gh run download "$RELEASE_LOCK_RUN" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "$RELEASE_LOCK_ARTIFACT_NAME" \
+            --dir release-evidence
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          d=json.loads(Path('release-evidence/release-lock-receipt.json').read_text())
+          assert d['status'] == 'PASS'
+          assert d['contract_a_version'] == os.environ['CONTRACT_A_VERSION']
+          assert d['release_commit'] == os.environ['RELEASE_COMMIT']
+          assert d['namespaced_tag'] == os.environ['CONTRACT_A_TAG']
+          assert d['production_machine_surface_byte_unchanged'] is True
+          assert d['frozen_independent_consumer_agreement'] is True
+          assert d['exact_real_pilot_consumption'] is True
+          assert d['contract_e_or_authorization_promoted'] is False
+          PY
+
+      - name: Create or verify immutable Contract A tag at sealed release commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git cat-file -e "$RELEASE_COMMIT^{commit}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$CONTRACT_A_TAG" >/dev/null 2>&1; then
+            git fetch --force origin "refs/tags/$CONTRACT_A_TAG:refs/tags/$CONTRACT_A_TAG"
+            target="$(git rev-list -n 1 "$CONTRACT_A_TAG")"
+            test "$target" = "$RELEASE_COMMIT" || {
+              echo "Existing immutable tag points to $target, not sealed release $RELEASE_COMMIT" >&2
+              exit 1
+            }
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git tag -a "$CONTRACT_A_TAG" "$RELEASE_COMMIT" -m 'Contract A 2.0.0'
+            git push origin "refs/tags/$CONTRACT_A_TAG"
+          fi
+          git fetch --force origin "refs/tags/$CONTRACT_A_TAG:refs/tags/$CONTRACT_A_TAG"
+          test "$(git rev-list -n 1 "$CONTRACT_A_TAG")" = "$RELEASE_COMMIT"
+          echo "IMMUTABLE_TAG_VERIFIED $CONTRACT_A_TAG $RELEASE_COMMIT"
+
+      - name: Create or verify matching GitHub Release and attach sealed receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git show "$RELEASE_COMMIT:releases/contract-a/2.0.0.md" > /tmp/contract-a-2.0.0-release-notes.md
+          if gh release view "$CONTRACT_A_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "GitHub Release already exists for $CONTRACT_A_TAG"
+          else
+            gh release create "$CONTRACT_A_TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --verify-tag \
+              --title 'Contract A 2.0.0' \
+              --notes-file /tmp/contract-a-2.0.0-release-notes.md
+          fi
+          gh release upload "$CONTRACT_A_TAG" \
+            release-evidence/release-lock-receipt.json \
+            --repo "$GITHUB_REPOSITORY" \
+            --clobber
+          gh release view "$CONTRACT_A_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --json tagName,name,isDraft,isPrerelease > /tmp/release.json
+          python - <<'PY'
+          import json, os
+          d=json.load(open('/tmp/release.json'))
+          assert d['tagName'] == os.environ['CONTRACT_A_TAG']
+          assert d['name'] == 'Contract A 2.0.0'
+          assert d['isDraft'] is False
+          assert d['isPrerelease'] is False
+          PY
+          echo "GITHUB_RELEASE_VERIFIED $CONTRACT_A_TAG"
