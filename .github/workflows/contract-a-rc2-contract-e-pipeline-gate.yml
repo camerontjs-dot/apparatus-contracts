@@ -17,6 +17,7 @@ concurrency:
 
 env:
   PREREGISTRATION_COMMIT: b13ba252bb2a48336402baebbdf854f7874f52b7
+  PRESSURE_PREREGISTRATION_COMMIT: 44e8a714596423fb372257e150be02c1ea8e8533
   APPARATUS_BASE: 6a45ab2de09370f3048ffb083e25b487f81117e4
   A_RESEARCH_HEAD: 2e50567c4da2a4046a15bddfc3feee31296da3fb
   A_CANDIDATE_TREE: 54e5cfc659c574a1520ebc119d66e93d4f71ce34
@@ -118,6 +119,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse "$PREREGISTRATION_COMMIT")" = "$PREREGISTRATION_COMMIT"
+          test "$(git rev-parse "$PRESSURE_PREREGISTRATION_COMMIT")" = "$PRESSURE_PREREGISTRATION_COMMIT"
           git merge-base --is-ancestor "$APPARATUS_BASE" HEAD
           test "$(git -C _external/a rev-parse HEAD)" = "$A_RESEARCH_HEAD"
           test "$(git -C _external/a rev-parse HEAD:research/contract-a-minimality-rc2-20260901/candidate)" = "$A_CANDIDATE_TREE"
@@ -242,6 +244,7 @@ jobs:
               'schema':'contract-a-rc2-contract-e-pressure-run-receipt-v1',
               'experiment_head':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
               'original_preregistration_commit':os.environ['PREREGISTRATION_COMMIT'],
+              'pressure_preregistration_commit':os.environ['PRESSURE_PREREGISTRATION_COMMIT'],
               'github_run_id':os.environ.get('GITHUB_RUN_ID'),
               'github_run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),
               'files':files,
