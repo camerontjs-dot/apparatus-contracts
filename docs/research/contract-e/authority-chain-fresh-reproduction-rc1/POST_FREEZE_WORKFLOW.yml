@@ -54,8 +54,11 @@ jobs:
                   raise SystemExit(f'freeze receipt mismatch for {key}: {receipt.get(key)!r} != {value!r}')
 
           implementation_commit = receipt['implementation_commit']
-          if subprocess.check_output(['git','merge-base','--is-ancestor','548bfa81f65290eda15af658f647497679b840ef',implementation_commit]).strip() not in {b'', b'0'}:
-              pass
+          subprocess.run(
+              ['git','merge-base','--is-ancestor','548bfa81f65290eda15af658f647497679b840ef',implementation_commit],
+              check=True,
+          )
+          subprocess.run(['git','merge-base','--is-ancestor',implementation_commit,'HEAD'], check=True)
 
           for path_key, blob_key, sha_key in [
               ('implementation_path','implementation_blob','implementation_sha256'),
@@ -146,7 +149,7 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import hashlib, json, os
+          import hashlib, json, os, subprocess
           from pathlib import Path
           root = Path('research/contract_e_authority_chain_fresh_rc1')
           out = root/'post_reveal_results'
@@ -159,7 +162,7 @@ jobs:
               'context_free_required': True,
               'production_authorization': False,
               'clean_base': '548bfa81f65290eda15af658f647497679b840ef',
-              'freeze_receipt_commit': subprocess_output := None,
+              'freeze_receipt_commit': None,
               'implementation_commit': freeze['implementation_commit'],
               'implementation_blob': freeze['implementation_blob'],
               'implementation_sha256': freeze['implementation_sha256'],
@@ -180,11 +183,12 @@ jobs:
               'pre_reveal_uncertainties': freeze.get('uncertainties', []),
               'post_reveal_implementation_modified': False,
           }
-          # Freeze receipt commit is the first commit containing the receipt file.
-          import subprocess
-          receipt['freeze_receipt_commit'] = subprocess.check_output(
+          commits = subprocess.check_output(
               ['git','log','--format=%H','--diff-filter=A','--',str(root/'FREEZE_RECEIPT.json')], text=True
-          ).strip().splitlines()[-1]
+          ).strip().splitlines()
+          if len(commits) != 1:
+              raise SystemExit(f'expected exactly one receipt-creation commit, got {commits}')
+          receipt['freeze_receipt_commit'] = commits[0]
           (out/'TERMINAL_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+'\n')
           terminal = f"""# Contract E Authority-Chain Fresh Independent Reproduction RC1 — Terminal Record
 
