@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://apparatus-contracts.invalid/research/contract-a-wire-candidate-rc2.schema.json",
+  "title": "Contract A Wire Candidate RC2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "handoff_id",
+    "producer",
+    "work",
+    "root_proposition",
+    "decomposition",
+    "sources",
+    "handoff_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "contract-a-wire-candidate-rc2"},
+    "handoff_id": {"$ref": "#/$defs/nonblank"},
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["producer_id", "producer_version"],
+      "properties": {
+        "producer_id": {"$ref": "#/$defs/nonblank"},
+        "producer_version": {"$ref": "#/$defs/nonblank"}
+      }
+    },
+    "work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["work_id"],
+      "properties": {
+        "work_id": {"$ref": "#/$defs/nonblank"}
+      }
+    },
+    "root_proposition": {"$ref": "#/$defs/proposition"},
+    "decomposition": {
+      "oneOf": [
+        {"$ref": "#/$defs/not_decomposed"},
+        {"$ref": "#/$defs/failed"},
+        {"$ref": "#/$defs/unknown"},
+        {"$ref": "#/$defs/declared"}
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "handoff_sha256": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {
+    "nonblank": {
+      "type": "string",
+      "pattern": ".*\\S.*"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "proposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposition_id", "text", "text_sha256"],
+      "properties": {
+        "proposition_id": {"$ref": "#/$defs/nonblank"},
+        "text": {"$ref": "#/$defs/nonblank"},
+        "text_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "child": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposition_id", "text", "text_sha256", "sequence"],
+      "properties": {
+        "proposition_id": {"$ref": "#/$defs/nonblank"},
+        "text": {"$ref": "#/$defs/nonblank"},
+        "text_sha256": {"$ref": "#/$defs/hash"},
+        "sequence": {"type": "integer", "minimum": 1}
+      }
+    },
+    "not_decomposed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {"state": {"const": "not_decomposed"}}
+    },
+    "failed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {"state": {"const": "failed"}}
+    },
+    "unknown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {"state": {"const": "unknown"}}
+    },
+    "declared": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "decomposition_id", "operator", "children"],
+      "properties": {
+        "state": {"const": "declared"},
+        "decomposition_id": {"$ref": "#/$defs/nonblank"},
+        "operator": {"const": "all_of"},
+        "children": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"$ref": "#/$defs/child"}
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "media_type", "content", "content_sha256"],
+      "properties": {
+        "source_id": {"$ref": "#/$defs/nonblank"},
+        "media_type": {
+          "enum": [
+            "text/plain; charset=utf-8",
+            "text/markdown; charset=utf-8"
+          ]
+        },
+        "content": {"type": "string"},
+        "content_sha256": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}
