@@ -1,20 +1,6 @@
 name: Contract C 1.0.0 release lock
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'CHANGELOG.md'
-      - 'contract-c-v1.0.0.md'
-      - 'releases/contract-c/1.0.0.md'
-      - '.github/workflows/contract-c-1.0.0-release-lock.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'CHANGELOG.md'
-      - 'contract-c-v1.0.0.md'
-      - 'releases/contract-c/1.0.0.md'
-      - '.github/workflows/contract-c-1.0.0-release-lock.yml'
   workflow_dispatch:
 
 permissions:
