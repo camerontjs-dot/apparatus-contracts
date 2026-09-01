@@ -142,7 +142,7 @@ def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     candidate = rc2.make_candidate("declared")
     rc2.validate_candidate(candidate)
-    template = rc2.build_fixture_write_input(rc2.PILOT, "pressure")
+    template = rc2.build_fixture_write_input(rc2.PILOT, "baseline")
     parent = candidate["root_proposition"]
     atoms = list(candidate["decomposition"]["children"])
     projections = [
