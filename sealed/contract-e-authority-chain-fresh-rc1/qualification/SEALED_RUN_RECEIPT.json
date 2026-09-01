@@ -3,7 +3,7 @@
   "aperture_contract_blob": "9a82515391beb8ca57fc5ab861c5c389b7750914",
   "aperture_head_before_seal": "da3f7fd2664f9037452ca001b3c816a73ace79d7",
   "canonical_case_json_sha256": "5d34dc72a3175c6c4390d07219cb2f06a8e18c1b09bd16cff079ffd52a6ae241",
-  "case_count": 0,
+  "case_count": 94,
   "classification": "sealed_before_fresh_implementation",
   "compressed_case_payload_sha256": "aa3cd4e3162f0f457d684b9c1d57ec76aa27c32ee87df14c33cd052c2829f34e",
   "deviations": [
@@ -12,14 +12,14 @@
   "evaluator_file_sha256": {
     "EVALUATOR-CONTRACT.md": "317f89f2d59e2059d686737d2d4ddbc65119ea3b9732fa11ca3383ce4c317691",
     "evaluate_fresh.py": "de092bc4d48264c437959dd7dfe9f2335935f70c2999dedbc863e303204426fe",
-    "qualify.py": "67b19982d8edb707b414822dd171e66bad6e1205b53375e8158c093202ede0f5",
+    "qualify.py": "ae898cef276d1b3cb1a0c861b25a624bd03fb2a61576dcb540cf91dfe3d10b0d",
     "reference.py": "f3a06ddb73020da4879605a0fe75947c32a9b8d28cac6d6cbf1cc209622df25a",
     "sealed_cases.py": "faf7c03714f66871088e65c56d71181f6f3d3f15b12f355fd45916dd8b3f58bb"
   },
   "production_authorization": false,
-  "qualification_sha256": "38ffce5dbc54084b10f59aa74f0c9586fb58a1faa05e2b498711626e7da615dc",
-  "qualified": false,
+  "qualification_sha256": "9f10c98e3603966139caa7418e5bf6a5572f908e806069432aeff63b4305f773",
+  "qualified": true,
   "schema": "contract-e-authority-chain-fresh-rc1-sealed-receipt-v1",
-  "workflow_head": "4d18ad9ed8379c8bb1ebbc8e114e4b4e370041ef",
-  "workflow_run_id": 33467402345
+  "workflow_head": "e0c216b05370a4cc8d42fb4a40697c1f44036e23",
+  "workflow_run_id": 33467464302
 }

@@ -1,1 +1,45 @@
-{"qualified":false,"case_count":0,"failures":["qualifier_failed_before_result"]}
+{
+  "any_basis_control_false_permits": [
+    "MEAS-NEG-BASIS",
+    "RES-NEG-NONCONF",
+    "COMP-NEG-BASIS",
+    "DEC-NEG-BASIS",
+    "ACT-NEG-NONCONF",
+    "VER-NEG-NONCONF"
+  ],
+  "bare_resolution_control_false_permits": [
+    "RES-NEG-PROD",
+    "RES-NEG-DOMAIN",
+    "RES-NEG-NONCONF",
+    "RES-NEG-TARGETS",
+    "RES-NEG-WRONGDEP",
+    "RES-NEG-SOURCE",
+    "RES-NEG-BARE-ID"
+  ],
+  "case_count": 94,
+  "expected_negative": 64,
+  "expected_positive": 30,
+  "failures": [],
+  "pair_count": 13,
+  "qualified": true,
+  "reference_exact_matches": 94,
+  "request_kind_counts": {
+    "action": 9,
+    "bogus": 1,
+    "comparison": 8,
+    "composition": 8,
+    "decision": 7,
+    "measurement": 10,
+    "observation": 7,
+    "resolution": 10,
+    "semantic": 24,
+    "verification": 10
+  },
+  "schema": "contract-e-authority-chain-fresh-rc1-sealed-evaluator-qualification-v1",
+  "status_flag_control_false_permits": [
+    "SEM-NEG-AGREEMENT",
+    "RES-NEG-FORGED-RECEIPT",
+    "ACT-NEG-ANCESTOR",
+    "VER-NEG-ANCESTOR"
+  ]
+}
