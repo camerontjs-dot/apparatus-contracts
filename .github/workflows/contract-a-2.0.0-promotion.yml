@@ -114,12 +114,14 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import importlib.util, json
+          import importlib.util, json, sys
           from pathlib import Path
           from validators.contract_a import ContractAValidationError, compute_handoff_sha256, validate_candidate
           p=Path('_independent/research/contract-a-rc2-fresh-reproduction/independent/contract_a_rc2.py')
           spec=importlib.util.spec_from_file_location('independent_a',p)
-          independent=importlib.util.module_from_spec(spec); spec.loader.exec_module(independent)
+          independent=importlib.util.module_from_spec(spec)
+          sys.modules[spec.name]=independent
+          spec.loader.exec_module(independent)
           root=Path('fixtures/contract-a/2.0.0')
           valid=['valid-all-of.json','valid-failed-decomposition.json','valid-undecomposed.json','valid-unknown-decomposition.json']
           invalid=['invalid-forbidden-semantic-field.json','invalid-missing-proposition-id.json','invalid-source-content-hash.json']
