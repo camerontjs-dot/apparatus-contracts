@@ -1,0 +1,311 @@
+{
+  "authority_kinds": [
+    "observation",
+    "measurement",
+    "semantic",
+    "comparison",
+    "resolution",
+    "composition",
+    "decision",
+    "action",
+    "verification"
+  ],
+  "basis": {
+    "conferring_conditions": {
+      "authority_conferring": true,
+      "basis_type": "must be one of conferring_types",
+      "current": true,
+      "valid": true
+    },
+    "conferring_types": [
+      "grant",
+      "policy",
+      "delegation"
+    ],
+    "matching_rule": "For each of subject, domain, operation, scope, target_class: if the node field is non-null, basis field must equal it. If basis.target is non-null it must equal node.target. A complete current/valid supporting artifact or other nonconferring basis never grants authority.",
+    "nonconferring_examples": [
+      "supporting_artifact",
+      "citation",
+      "warrant",
+      "competence",
+      "evidence_receipt",
+      "comparison_receipt",
+      "result_payload",
+      "execution_report"
+    ],
+    "required_fields": [
+      "basis_type",
+      "authority_conferring",
+      "subject",
+      "domain",
+      "operation",
+      "scope",
+      "target_class",
+      "current",
+      "valid"
+    ]
+  },
+  "blocking_uncertainty": {
+    "authorized_resolution": "A resolver receipt contributes its resolves_ids only if that receipt recursively validates and its authority_kind is resolution.",
+    "bare_resolution_fields": "request.resolved_residue_ids and request.resolved_conflict_ids, if present, have no authority effect and must be ignored.",
+    "blocking_conflict": "For blocking kinds, any case.conflicts item with relevant absent/true, status in {unresolved,contested}, and id not discharged blocks the request.",
+    "blocking_kinds": [
+      "semantic",
+      "composition",
+      "decision",
+      "action",
+      "verification"
+    ],
+    "blocking_residue": "For blocking kinds, any case.residues item with relevant absent/true, status in {unresolved,contested}, and id not discharged blocks the request.",
+    "irrelevant_uncertainty": "Items with relevant=false remain preserved but do not block.",
+    "request_resolver_receipt_ids": "Only receipt ids listed in request.resolver_receipt_ids are considered for discharge."
+  },
+  "canonical_failure_reasons": {
+    "action_requires_decision": "action deps empty or include non-decision",
+    "agreement_has_no_truth_authority": "semantic promotion_source is comparison_agreement",
+    "authority_conferring_basis_invalid": "basis is missing, nonconferring, stale/invalid, incomplete, or does not match node bounds",
+    "authority_lineage_cycle": "recursive dependency cycle",
+    "authority_lineage_missing_dependency": "a dependency id is absent from case.receipts",
+    "comparison_relation_unknown": "comparison relation is outside comparison_relations",
+    "comparison_requires_measurements": "comparison has <2 deps or a non-measurement dependency",
+    "composition_dimensions_not_covered": "component dimension sets differ",
+    "composition_requires_semantics": "composition deps empty or outside semantic/composition",
+    "composition_rule_missing": "basis.composition_rule absent/false",
+    "decision_does_not_confer_execution_authority": "action basis.authority_domain outside action/execution",
+    "decision_requires_semantics": "decision deps empty or outside semantic/composition",
+    "embedding_not_covered_by_basis": "embedded proposal's embedding is outside basis.allowed_embeddings",
+    "embedding_scope_laundering": "embedded proposal is promoted to narrator_fact or preserves_embedding is not true",
+    "executor_report_not_verification_authority": "verification depends on executor_reporter observation/measurement",
+    "measurement_requires_observation": "measurement dependency set is empty or contains non-observation",
+    "observation_root_has_dependencies": "observation has dependencies",
+    "observation_root_not_independent": "observation producer is not source_observer",
+    "producer_authority_ceiling": "producer_type is not permitted to emit authority_kind",
+    "relevant_conflict_unresolved": "blocking relevant conflict remains",
+    "relevant_residue_unresolved": "blocking relevant residue remains",
+    "resolution_dependency_invalid": "resolution deps empty or outside measurement/semantic/comparison",
+    "resolver_basis_mismatch": "resolution basis domain/operation is not resolution/resolve",
+    "resolver_producer_invalid": "resolution producer is not authority_resolver",
+    "resolver_targets_missing": "resolution resolves_ids empty/missing",
+    "semantic_dimension_not_covered": "proposal.dimension not covered by basis.semantic_dimensions",
+    "semantic_proposal_missing": "semantic proposal_id is absent",
+    "semantic_requires_measurement": "semantic dependency set is empty or contains non-measurement",
+    "source_identity_mismatch": "node/source_hash differs from case.source_hash",
+    "unsupported_authority_kind": "authority kind is unsupported",
+    "verification_domain_mismatch": "verification basis.authority_domain is not verification",
+    "verification_requires_observation": "verification deps empty or include non-observation"
+  },
+  "case_shape": {
+    "proposal_fields": {
+      "embedding_values_when_present": [
+        "quantifier",
+        "modality",
+        "probability",
+        "permission",
+        "conditional",
+        "attribution",
+        "temporal",
+        "quantitative",
+        "exception",
+        "negation"
+      ],
+      "optional": [
+        "embedding",
+        "payload"
+      ],
+      "required": [
+        "id",
+        "dimension"
+      ]
+    },
+    "receipt_common_fields": {
+      "basis_required_except": [
+        "observation",
+        "comparison"
+      ],
+      "required": [
+        "id",
+        "authority_kind",
+        "producer_type",
+        "source_hash",
+        "dependencies"
+      ],
+      "status_field": "may be present but is never trusted as proof of authority"
+    },
+    "request": "same semantic shape as a receipt except its id may be absent; evaluator must treat it as a node to validate and must not insert it into the receipt graph",
+    "required_top_level": [
+      "id",
+      "raw_source",
+      "source_hash",
+      "proposals",
+      "receipts",
+      "conflicts",
+      "residues",
+      "comparison_receipts",
+      "request"
+    ]
+  },
+  "classification": "research-only-normative-aperture",
+  "comparison_relations": [
+    "EXACT_AGREEMENT",
+    "SEMANTIC_EQUIVALENCE",
+    "COMPATIBLE_PARTIAL_OVERLAP",
+    "COMPLEMENTARY_ORTHOGONAL",
+    "GRANULARITY_MISMATCH",
+    "SLOT_BOUNDARY_DISAGREEMENT",
+    "SCOPE_ATTACHMENT_DISAGREEMENT",
+    "ROLE_BINDING_DISAGREEMENT",
+    "OPERATOR_VALUE_DISAGREEMENT",
+    "POLARITY_DISAGREEMENT",
+    "JURISDICTION_DISAGREEMENT",
+    "PROVENANCE_OR_VISIBILITY_DISAGREEMENT",
+    "CONTRADICTION",
+    "INCOMMENSURABLE"
+  ],
+  "evaluation_order": [
+    "Copy request and give it an internal id only if needed for implementation bookkeeping; do not insert it into case.receipts.",
+    "Recursively validate only resolver receipts explicitly named by request.resolver_receipt_ids and collect exact resolved ids.",
+    "For semantic/composition/decision/action/verification requests, fail first on remaining blocking residue, then on remaining blocking conflict.",
+    "Validate the request node recursively under lineage and kind rules.",
+    "Return preserved evidence snapshot with allowed/status/reason/authority_kind."
+  ],
+  "interface": {
+    "entrypoint": "evaluate(case: dict) -> dict",
+    "implementation_path": "research/contract_e_authority_chain_fresh_rc1/authority_chain.py",
+    "language": "Python",
+    "output": {
+      "allowed": "boolean",
+      "authority_kind": "request.authority_kind when allowed=true, otherwise null",
+      "preservation": "raw_source, proposals, conflicts, residues, and comparison_receipts must be returned as deep structural copies equal to the corresponding input values",
+      "reason": "canonical reason token from this contract",
+      "required_fields": [
+        "allowed",
+        "status",
+        "reason",
+        "authority_kind",
+        "raw_source",
+        "proposals",
+        "conflicts",
+        "residues",
+        "comparison_receipts"
+      ],
+      "status": {
+        "allowed_false": "insufficient_authority",
+        "allowed_true": "established"
+      }
+    }
+  },
+  "kind_rules": {
+    "action": {
+      "authority_domain": "basis.authority_domain must be action or execution",
+      "basis": "required and matching",
+      "boundary": "decision authority never substitutes for action/execution authority",
+      "canonical_success_reason": "action_lineage_valid",
+      "dependencies": "one or more; every dependency must be recursively valid and have authority_kind=decision"
+    },
+    "comparison": {
+      "authority_boundary": "may establish a relation among measurements only; it cannot promote semantic truth or select a winner",
+      "basis": "not required",
+      "canonical_success_reason": "comparison_lineage_valid",
+      "dependencies": "at least two; every dependency must be authority_kind=measurement and recursively valid",
+      "relation": "must be one of comparison_relations"
+    },
+    "composition": {
+      "basis": "required and matching",
+      "canonical_success_reason": "composition_lineage_valid",
+      "component_dimensions": "set(node.component_dimensions) must equal set(basis.component_dimensions)",
+      "composition_rule": "basis.composition_rule must be present and truthy",
+      "dependencies": "one or more; every dependency must be recursively valid and have authority_kind in {semantic,composition}"
+    },
+    "decision": {
+      "basis": "required and matching",
+      "canonical_success_reason": "decision_lineage_valid",
+      "dependencies": "one or more; every dependency must be recursively valid and have authority_kind in {semantic,composition}"
+    },
+    "measurement": {
+      "basis": "required and matching",
+      "canonical_success_reason": "measurement_lineage_valid",
+      "dependencies": "one or more; every dependency must be authority_kind=observation and recursively valid"
+    },
+    "observation": {
+      "basis": "not required",
+      "canonical_success_reason": "observation_lineage_valid",
+      "dependencies": "must be empty",
+      "producer": "source_observer"
+    },
+    "resolution": {
+      "basis": "required and matching; additionally basis.domain=resolution and basis.operation=resolve",
+      "canonical_success_reason": "resolution_lineage_valid",
+      "dependencies": "one or more; every dependency must be recursively valid and have authority_kind in {measurement,semantic,comparison}",
+      "effect": "Only exact ids present in resolves_ids may be discharged",
+      "producer": "authority_resolver",
+      "resolves_ids": "must contain at least one id"
+    },
+    "semantic": {
+      "agreement": "promotion_source=comparison_agreement is forbidden",
+      "basis": "required and matching",
+      "canonical_success_reason": "semantic_lineage_valid",
+      "dependencies": "one or more; every dependency must be authority_kind=measurement and recursively valid",
+      "dimension": "proposal.dimension must be contained in basis.semantic_dimensions",
+      "embedding": "If proposal.embedding is one of the listed embedding operators: claim_level must not equal narrator_fact; preserves_embedding must be true; and proposal.embedding must be contained in basis.allowed_embeddings.",
+      "proposal": "proposal_id must resolve to case.proposals"
+    },
+    "verification": {
+      "authority_domain": "basis.authority_domain must equal verification",
+      "basis": "required and matching",
+      "canonical_success_reason": "verification_lineage_valid",
+      "dependencies": "one or more; every dependency must be recursively valid and have authority_kind=observation",
+      "executor_report_rule": "No dependency may have producer_type=executor_reporter"
+    }
+  },
+  "lineage": {
+    "cycle_rule": "Any dependency cycle invalidates the lineage.",
+    "dependency_resolution": "Every id in dependencies must resolve to exactly one receipt in case.receipts. A missing id invalidates the node.",
+    "recursive_rule": "Every non-root authority-conferring dependency is recursively revalidated from producer ceiling, source identity, dependencies, basis, and kind-specific rules.",
+    "root_rule": "Only authority_kind=observation produced by source_observer with zero dependencies may be a lineage root without a basis.",
+    "source_identity_rule": "Every node and request must have source_hash exactly equal to case.source_hash.",
+    "status_rule": "status=established is never sufficient and does not shorten recursive validation."
+  },
+  "nonclaims": [
+    "This contract does not establish source legitimacy, cryptographic provenance, semantic correctness of proposals, production Contract E 1.0.0, production execution permission, or universal authority ontology.",
+    "Information preservation is not semantic or action authorization.",
+    "Agreement count, confidence, status strings, and supporting artifacts do not raise authority ceilings."
+  ],
+  "producer_allowed_kinds": {
+    "action_authorizer": [
+      "action"
+    ],
+    "authority_resolver": [
+      "resolution"
+    ],
+    "comparison_engine": [
+      "comparison"
+    ],
+    "composition_governor": [
+      "composition"
+    ],
+    "decision_engine": [
+      "decision"
+    ],
+    "executor_reporter": [
+      "measurement"
+    ],
+    "language_instrument": [
+      "measurement"
+    ],
+    "outcome_verifier": [
+      "verification"
+    ],
+    "semantic_validator": [
+      "semantic"
+    ],
+    "source_observer": [
+      "observation"
+    ]
+  },
+  "purpose": "Define the complete pre-freeze normative authority-chain behavior for an independent consumer reproduction. No reference implementation, held-out case, expected outcome, weak control, prior failure record, or result is included.",
+  "reason_precedence": {
+    "blocking": "For blocking request kinds, relevant_residue_unresolved precedes relevant_conflict_unresolved and both precede request-node validation.",
+    "node": "Within node validation, apply rules in this order: producer ceiling; source identity; observation-root rule if observation; recursive dependency completeness/validity; comparison-specific rule if comparison; basis matching; then kind-specific rules in the order listed in kind_rules."
+  },
+  "schema": "contract-e-authority-chain-fresh-reproduction-rc1-v1"
+}
