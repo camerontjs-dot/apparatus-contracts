@@ -2,41 +2,6 @@
 
 This repository contains independently versioned public artifacts. Changelog entries identify the artifact and its own compatibility version; repository-level tags must not be used to infer a contract version.
 
-## Contract D 1.0.0 — proposed / unreleased
-
-### Proposed
-
-- First canonical Contract D compatibility surface: `1.0.0`.
-- Exact upstream-authority, Decision-policy, and target/content binding.
-- Distinct completed CLEAR, completed HOLD, and failed-evaluation states.
-- Typed/versioned effect registry with safe stored-effect defaults.
-- Total normalized effect shape with exactly `type`, `version`, and `params`, including explicit `params: {}` for empty parameter schemas.
-- Exact requested-operation and explicitly supplied requested-parameter applicability before any authority-bearing outcome.
-- RFC 8785/JCS canonicalization with Contract-D trailing-LF framing, finite/interoperable JSON controls, Unicode-scalar validation, duplicate-key rejection, safe-number ingress handling, deterministic depth-128 processing, and controlled fail-closed behavior.
-- Semantic Decision identity excluding metadata and Authorization-only context.
-- Production validator/canonicalizer/consumer helpers, fixtures, conformance cases, and promotion CI.
-
-### Compatibility
-
-- This is the proposed first canonical Contract D release; there is no prior Contract D production version to migrate.
-- Research identifiers such as `0.3.0-rc6` remain evidence identities and are not supported production versions.
-- Exact `1.0.0` objects reject unknown Contract-D fields and unknown/future Contract-D versions fail closed.
-- Incompatible removal or reinterpretation of a required v1 obligation requires a later major-version decision.
-- Additive capability is minor only after semantic compatibility is demonstrated against legitimate v1 producers and consumers.
-
-### Evidence and release gate
-
-- Decision authority: EDR-003 / issue #28.
-- RC6 research candidate: `bb656fc50806c344fda1ddeaf08a9878f5cb460e`.
-- Terminal fresh independent reproduction: `camerontjs-dot/research-scaffold-harness@1b51b421b96fb10f260f58a087c8376b35afdb5d`.
-- Terminal record blob: `08ebd8af17b6029274c282fb803a373a25e9b081`.
-- Differential: 166 comparisons; 159 authority-relevant agreements; 0 authority-relevant disagreements; 0 public-authority ambiguities.
-- This entry remains **unreleased** until the production producer/consumer/adversarial gates, merge acceptance, immutable `contract-d-v1.0.0` tag, GitHub Release, and post-merge lock evidence are complete.
-
-### Known limits / non-claims
-
-Contract D 1.0.0 does not itself establish actor identity, approval, delegation, autonomy/trust state, operational Authorization, execution permission or occurrence, execution receipts, correctness of upstream epistemic judgments, universal language/runtime interoperability, arbitrary future producers/consumers/transports, or unlimited resource behavior.
-
 ## Contract C 1.0.0 — 2026-08-29
 
 ### Added
