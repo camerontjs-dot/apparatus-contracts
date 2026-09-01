@@ -19,7 +19,9 @@ env:
   PREREGISTRATION_COMMIT: b13ba252bb2a48336402baebbdf854f7874f52b7
   PRESSURE_PREREGISTRATION_COMMIT: 44e8a714596423fb372257e150be02c1ea8e8533
   PRESSURE_R3_PREREGISTRATION_COMMIT: 28e61f51a217f25b028018dc7432477f327864f9
+  PRESSURE_R4_PREREGISTRATION_COMMIT: 7275c67dceefe2f23005e6b5f4bfc509a3c874cb
   SUBJECT_IDENTITY_BLOB: f9b7c7fc389c4e852c5406ecab3e09ac9f6f3171
+  PRESSURE_PROJECTION_BLOB: 40bd6981ea08479b7e47475ad6a3678697b71794
   A_REFERENCE_GENERATOR_BLOB: 1765b489590fca10462ad451847e0ddcb249f77f
   RSH_SOURCE_LOADER_BLOB: 0f7dd438df770239137b7ab11f796390b45155fe
   RSH_PRIMARY_CONTENT_BLOB: 616634d68b0b9026222eabe94696a56bf8d93140
@@ -127,7 +129,9 @@ jobs:
           test "$(git rev-parse "$PREREGISTRATION_COMMIT")" = "$PREREGISTRATION_COMMIT"
           test "$(git rev-parse "$PRESSURE_PREREGISTRATION_COMMIT")" = "$PRESSURE_PREREGISTRATION_COMMIT"
           test "$(git rev-parse "$PRESSURE_R3_PREREGISTRATION_COMMIT")" = "$PRESSURE_R3_PREREGISTRATION_COMMIT"
+          test "$(git rev-parse "$PRESSURE_R4_PREREGISTRATION_COMMIT")" = "$PRESSURE_R4_PREREGISTRATION_COMMIT"
           test "$(git hash-object research/contract-a-rc2-contract-e-pipeline-20260901/SUBJECT-IDENTITY-R3.json)" = "$SUBJECT_IDENTITY_BLOB"
+          test "$(git hash-object research/contract-a-rc2-contract-e-pipeline-20260901/pressure_projection.py)" = "$PRESSURE_PROJECTION_BLOB"
           git merge-base --is-ancestor "$APPARATUS_BASE" HEAD
           test "$(git -C _external/a rev-parse HEAD)" = "$A_RESEARCH_HEAD"
           test "$(git -C _external/a rev-parse HEAD:research/contract-a-minimality-rc2-20260901/candidate)" = "$A_CANDIDATE_TREE"
@@ -301,7 +305,9 @@ jobs:
               'original_preregistration_commit':os.environ['PREREGISTRATION_COMMIT'],
               'pressure_preregistration_commit':os.environ['PRESSURE_PREREGISTRATION_COMMIT'],
               'pressure_r3_preregistration_commit':os.environ['PRESSURE_R3_PREREGISTRATION_COMMIT'],
+              'pressure_r4_preregistration_commit':os.environ['PRESSURE_R4_PREREGISTRATION_COMMIT'],
               'subject_identity_blob':os.environ['SUBJECT_IDENTITY_BLOB'],
+              'pressure_projection_blob':os.environ['PRESSURE_PROJECTION_BLOB'],
               'github_run_id':os.environ.get('GITHUB_RUN_ID'),
               'github_run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),
               'files':files,
