@@ -1,0 +1,227 @@
+name: Research - Contract E Authority Chain Fresh RC1 Post-Reveal
+
+on:
+  push:
+    branches:
+      - research/contract-e-authority-chain-fresh-reproduction-rc1-20260901
+    paths-ignore:
+      - "research/contract_e_authority_chain_fresh_rc1/post_reveal_results/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout frozen fresh implementation branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify immutable pre-reveal freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+
+          root = Path('research/contract_e_authority_chain_fresh_rc1')
+          receipt_path = root / 'FREEZE_RECEIPT.json'
+          receipt = json.loads(receipt_path.read_text())
+
+          expected = {
+              'schema': 'contract-e-authority-chain-fresh-rc1-freeze-receipt-v1',
+              'marker': 'FRESH_CONTRACT_E_AUTHORITY_CHAIN_RC1_FROZEN_BEFORE_REVEAL',
+              'clean_base': '548bfa81f65290eda15af658f647497679b840ef',
+              'aperture_head': 'da3f7fd2664f9037452ca001b3c816a73ace79d7',
+              'aperture_contract_blob': '9a82515391beb8ca57fc5ab861c5c389b7750914',
+              'aperture_contract_sha256': 'f012826c1f2b54b534ddace6a38be270e5bd94bcf0fc539f024bcb12c62bf381',
+              'aperture_bootstrap_blob': 'ed59344c6471404d49bba3f9c4a5e362f875976e',
+              'aperture_bootstrap_sha256': '7cf083daff12b05a08c1d04f4edc259b2e673ddf723e348b794ba996217a4372',
+              'implementation_path': 'research/contract_e_authority_chain_fresh_rc1/authority_chain.py',
+              'test_path': 'research/contract_e_authority_chain_fresh_rc1/test_authority_chain.py',
+              'contamination_status': 'CLEAN_PRE_FREEZE_APERTURE',
+          }
+          for key, value in expected.items():
+              if receipt.get(key) != value:
+                  raise SystemExit(f'freeze receipt mismatch for {key}: {receipt.get(key)!r} != {value!r}')
+
+          implementation_commit = receipt['implementation_commit']
+          if subprocess.check_output(['git','merge-base','--is-ancestor','548bfa81f65290eda15af658f647497679b840ef',implementation_commit]).strip() not in {b'', b'0'}:
+              pass
+
+          for path_key, blob_key, sha_key in [
+              ('implementation_path','implementation_blob','implementation_sha256'),
+              ('test_path','test_blob','test_sha256'),
+          ]:
+              path = receipt[path_key]
+              frozen_blob = subprocess.check_output(['git','rev-parse',f'{implementation_commit}:{path}'], text=True).strip()
+              if frozen_blob != receipt[blob_key]:
+                  raise SystemExit(f'frozen blob mismatch for {path}')
+              frozen_bytes = subprocess.check_output(['git','show',f'{implementation_commit}:{path}'])
+              if hashlib.sha256(frozen_bytes).hexdigest() != receipt[sha_key]:
+                  raise SystemExit(f'frozen SHA-256 mismatch for {path}')
+              current = Path(path).read_bytes()
+              if hashlib.sha256(current).hexdigest() != receipt[sha_key]:
+                  raise SystemExit(f'post-freeze mutation detected for {path}')
+
+          changed = subprocess.run(
+              ['git','diff','--exit-code',implementation_commit,'HEAD','--',receipt['implementation_path'],receipt['test_path']],
+              stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
+          )
+          if changed.returncode != 0:
+              raise SystemExit('frozen implementation/tests changed after implementation commit:\n'+changed.stdout)
+
+          if receipt.get('prereveal_test_result') != 'PASS':
+              raise SystemExit('freeze receipt does not record prereveal tests PASS')
+          if receipt.get('deviations') is None or receipt.get('uncertainties') is None:
+              raise SystemExit('freeze receipt must explicitly preserve deviations and uncertainties arrays')
+          print('immutable pre-reveal freeze verified')
+          PY
+
+      - name: Re-run frozen prereveal tests without modification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/contract_e_authority_chain_fresh_rc1/test_authority_chain.py
+
+      - name: Checkout exact sealed evaluator
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 396ffbb07d403032a45545d696046466a9ed2561
+          path: _apparatus
+          fetch-depth: 1
+
+      - name: Verify exact sealed evaluator identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _apparatus rev-parse HEAD)" = "396ffbb07d403032a45545d696046466a9ed2561"
+          test "$(git -C _apparatus rev-parse HEAD:sealed/contract-e-authority-chain-fresh-rc1/reference.py)" = "25cec740262b76738ccd9baeac964dc460ac4652"
+          test "$(git -C _apparatus rev-parse HEAD:sealed/contract-e-authority-chain-fresh-rc1/sealed_cases.py)" = "4aef3e0673b74e3a681222ec395e2c47f880ebd9"
+          test "$(git -C _apparatus rev-parse HEAD:sealed/contract-e-authority-chain-fresh-rc1/evaluate_fresh.py)" = "d9c36fadef62737302ec800f44dd80fe5f7cd071"
+          test "$(git -C _apparatus rev-parse HEAD:sealed/contract-e-authority-chain-fresh-rc1/qualify.py)" = "d83680e04d40b96847f7a4157b7a10561506c347"
+          test "$(git -C _apparatus rev-parse HEAD:sealed/contract-e-authority-chain-fresh-rc1/EVALUATOR-CONTRACT.md)" = "71b0c4873d4e38245793bc4724acbc93843dc93e"
+          test "$(git -C _apparatus rev-parse HEAD:sealed/contract-e-authority-chain-fresh-rc1/qualification/FINAL_SEAL_RECEIPT.json)" != ""
+          test "$(sha256sum _apparatus/sealed/contract-e-authority-chain-fresh-rc1/reference.py | cut -d' ' -f1)" = "f3a06ddb73020da4879605a0fe75947c32a9b8d28cac6d6cbf1cc209622df25a"
+          test "$(sha256sum _apparatus/sealed/contract-e-authority-chain-fresh-rc1/sealed_cases.py | cut -d' ' -f1)" = "faf7c03714f66871088e65c56d71181f6f3d3f15b12f355fd45916dd8b3f58bb"
+          test "$(sha256sum _apparatus/sealed/contract-e-authority-chain-fresh-rc1/evaluate_fresh.py | cut -d' ' -f1)" = "de092bc4d48264c437959dd7dfe9f2335935f70c2999dedbc863e303204426fe"
+          test "$(sha256sum _apparatus/sealed/contract-e-authority-chain-fresh-rc1/EVALUATOR-CONTRACT.md | cut -d' ' -f1)" = "317f89f2d59e2059d686737d2d4ddbc65119ea3b9732fa11ca3383ce4c317691"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt = json.loads(Path('_apparatus/sealed/contract-e-authority-chain-fresh-rc1/qualification/FINAL_SEAL_RECEIPT.json').read_text())
+          assert receipt['accepted_qualification']['workflow_run_id'] == 33467464302
+          assert receipt['accepted_qualification']['reference_exact_matches'] == 94
+          assert receipt['accepted_qualification']['qualification_failures'] == []
+          assert receipt['fresh_implementation_existed_at_seal'] is False
+          print('sealed evaluator receipt verified')
+          PY
+
+      - name: Run immutable post-reveal differential comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="research/contract_e_authority_chain_fresh_rc1/post_reveal_results"
+          rm -rf "$out"
+          mkdir -p "$out"
+          python _apparatus/sealed/contract-e-authority-chain-fresh-rc1/evaluate_fresh.py \
+            --implementation research/contract_e_authority_chain_fresh_rc1/authority_chain.py \
+            --output-dir "$out" \
+            > "$out/STDOUT.json"
+
+      - name: Write immutable terminal receipt and record
+        shell: bash
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root = Path('research/contract_e_authority_chain_fresh_rc1')
+          out = root/'post_reveal_results'
+          freeze = json.loads((root/'FREEZE_RECEIPT.json').read_text())
+          result = json.loads((out/'RESULTS.json').read_text())
+          outputs = ['RESULTS.json','ROWS.json','REPORT.md','STDOUT.json']
+          receipt = {
+              'schema': 'contract-e-authority-chain-fresh-rc1-terminal-receipt-v1',
+              'classification': 'fresh_context_independent_reproduction',
+              'context_free_required': True,
+              'production_authorization': False,
+              'clean_base': '548bfa81f65290eda15af658f647497679b840ef',
+              'freeze_receipt_commit': subprocess_output := None,
+              'implementation_commit': freeze['implementation_commit'],
+              'implementation_blob': freeze['implementation_blob'],
+              'implementation_sha256': freeze['implementation_sha256'],
+              'test_blob': freeze['test_blob'],
+              'test_sha256': freeze['test_sha256'],
+              'aperture_head': 'da3f7fd2664f9037452ca001b3c816a73ace79d7',
+              'sealed_evaluator_commit': '396ffbb07d403032a45545d696046466a9ed2561',
+              'sealed_qualification_run': 33467464302,
+              'sealed_qualification_artifact': 9785351749,
+              'sealed_qualification_artifact_digest': 'sha256:8b886e4445f47c6a63b1fefbb8e54b29600609b988ea81c3d68b034fc95af6de',
+              'comparison_workflow_run_id': int(os.environ['RUN_ID']),
+              'comparison_workflow_head': os.environ['RUN_SHA'],
+              'scientific_state': result['scientific_state'],
+              'primary_research_disposition': result['primary_research_disposition'],
+              'metrics': result['metrics'],
+              'output_sha256': {name: hashlib.sha256((out/name).read_bytes()).hexdigest() for name in outputs},
+              'pre_reveal_deviations': freeze.get('deviations', []),
+              'pre_reveal_uncertainties': freeze.get('uncertainties', []),
+              'post_reveal_implementation_modified': False,
+          }
+          # Freeze receipt commit is the first commit containing the receipt file.
+          import subprocess
+          receipt['freeze_receipt_commit'] = subprocess.check_output(
+              ['git','log','--format=%H','--diff-filter=A','--',str(root/'FREEZE_RECEIPT.json')], text=True
+          ).strip().splitlines()[-1]
+          (out/'TERMINAL_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+'\n')
+          terminal = f"""# Contract E Authority-Chain Fresh Independent Reproduction RC1 — Terminal Record
+
+Thread state: **TERMINAL**
+
+Scientific state: **{result['scientific_state']}**
+
+Primary research disposition: **{result['primary_research_disposition']}**
+
+Cases: {result['case_count']}
+
+- exact contract match: {result['metrics']['exact_contract_match']:.6f}
+- false permits: {result['metrics']['false_permits']}
+- false rejects: {result['metrics']['false_rejects']}
+- exceptions: {result['metrics']['exceptions']}
+- preservation rate: {result['metrics']['preservation_rate']:.6f}
+- metamorphic pairs: {result['metrics']['metamorphic_pairs_passed']}/{result['metrics']['metamorphic_pairs_total']}
+
+The frozen implementation and prereveal tests were not modified after reveal.
+
+This is a bounded research disposition only. It does not authorize Contract E 1.0.0, production integration, merge, release, Authorization, execution, or downstream mutation.
+"""
+          (out/'TERMINAL_RECORD.md').write_text(terminal)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-authority-chain-fresh-rc1-${{ github.sha }}
+          path: research/contract_e_authority_chain_fresh_rc1/post_reveal_results/
+          if-no-files-found: error
+
+      - name: Commit terminal evidence without touching frozen implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/contract_e_authority_chain_fresh_rc1/post_reveal_results/
+          git commit -m "Research evidence: Contract E authority-chain fresh RC1 terminal comparison"
+          git push origin HEAD:research/contract-e-authority-chain-fresh-reproduction-rc1-20260901
