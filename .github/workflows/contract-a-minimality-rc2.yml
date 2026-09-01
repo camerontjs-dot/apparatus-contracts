@@ -23,9 +23,6 @@ jobs:
       - name: Checkout Apparatus research branch
         uses: actions/checkout@v4
         with:
-          # The ancestry gate below intentionally names the exact production base.
-          # Fetch history so that SHA remains addressable when pull_request checks
-          # run on GitHub's synthetic merge commit.
           fetch-depth: 0
 
       - name: Checkout pinned Research Scaffold Harness
@@ -49,20 +46,28 @@ jobs:
           ref: 53f0885b111676794d1bd20e10b91aa58b07e9d4
           path: _deps/claim-audit-lab
 
-      - name: Record exact heads
+      - name: Record exact heads and authority subtree identities
         run: |
-          mkdir -p research/contract-a-minimality-rc2-20260901/evidence
+          set -euo pipefail
+          LANE=research/contract-a-minimality-rc2-20260901
+          mkdir -p "$LANE/evidence"
           {
             printf 'APPARATUS_RESEARCH_HEAD=%s\n' "$(git rev-parse HEAD)"
             printf 'APPARATUS_LIVE_MAIN_BASE=6a45ab2de09370f3048ffb083e25b487f81117e4\n'
             printf 'RESEARCH_SCAFFOLD_HARNESS_SHA=%s\n' "$(git -C _deps/research-scaffold-harness rev-parse HEAD)"
             printf 'EVIDENCE_BUNDLER_SHA=%s\n' "$(git -C _deps/evidence-bundler rev-parse HEAD)"
             printf 'CLAIM_AUDIT_LAB_SHA=%s\n' "$(git -C _deps/claim-audit-lab rev-parse HEAD)"
-          } | tee research/contract-a-minimality-rc2-20260901/evidence/heads.txt
+            printf 'CANDIDATE_TREE=%s\n' "$(git rev-parse HEAD:$LANE/candidate)"
+            printf 'REFERENCE_TREE=%s\n' "$(git rev-parse HEAD:$LANE/reference)"
+            printf 'EVALUATOR_TREE=%s\n' "$(git rev-parse HEAD:$LANE/evaluator)"
+          } | tee "$LANE/evidence/heads.txt"
           test "$(git -C _deps/research-scaffold-harness rev-parse HEAD)" = "548bfa81f65290eda15af658f647497679b840ef"
           test "$(git -C _deps/evidence-bundler rev-parse HEAD)" = "6011789957f3294f97bff260069cfb5bb1c5772f"
           test "$(git -C _deps/claim-audit-lab rev-parse HEAD)" = "53f0885b111676794d1bd20e10b91aa58b07e9d4"
           git merge-base --is-ancestor 6a45ab2de09370f3048ffb083e25b487f81117e4 HEAD
+          for surface in candidate reference evaluator; do
+            find "$LANE/$surface" -type f -print0 | sort -z | xargs -0 sha256sum > "$LANE/evidence/${surface}-sha256sums.txt"
+          done
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -82,11 +87,11 @@ jobs:
           python -m pip install --no-deps -e _deps/evidence-bundler
           python -m pip install --no-deps -e _deps/claim-audit-lab
 
-      - name: Validate public candidate and positive/negative fixtures
+      - name: Validate public candidate with separate evaluator
         run: |
           set -o pipefail
-          cd research/contract-a-minimality-rc2-20260901/candidate
-          python test_candidate.py 2>&1 | tee ../evidence/candidate-conformance.log
+          python research/contract-a-minimality-rc2-20260901/evaluator/test_candidate.py \
+            2>&1 | tee research/contract-a-minimality-rc2-20260901/evidence/candidate-conformance.log
 
       - name: Run pinned cross-repository minimality experiment
         run: |
