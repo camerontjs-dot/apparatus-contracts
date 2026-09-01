@@ -22,6 +22,7 @@ COMPARISON_RELATIONS = {
     "JURISDICTION_DISAGREEMENT", "PROVENANCE_OR_VISIBILITY_DISAGREEMENT", "CONTRADICTION", "INCOMMENSURABLE",
 }
 
+
 def _idx(case):
     return {r["id"]: r for r in case.get("receipts", [])}
 
@@ -216,4 +217,4 @@ def evaluate(case):
         if blocking_conflicts:
             return _snapshot(case, False, "relevant_conflict_unresolved", request)
     ok, why = _validate_node(case, request, memo, set())
-    return _snapshot(case, ok, f"{request['authority_kind']}_authority_established" if ok else why, request)
+    return _snapshot(case, ok, why, request)
