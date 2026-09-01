@@ -1,0 +1,72 @@
+{
+  "schema": "contract-e-authority-chain-fresh-rc1-final-seal-receipt-v1",
+  "classification": "sealed_and_qualified_before_fresh_implementation",
+  "production_authorization": false,
+  "fresh_implementation_existed_at_seal": false,
+  "pre_freeze_aperture": {
+    "head": "da3f7fd2664f9037452ca001b3c816a73ace79d7",
+    "contract_blob": "9a82515391beb8ca57fc5ab861c5c389b7750914",
+    "contract_sha256": "f012826c1f2b54b534ddace6a38be270e5bd94bcf0fc539f024bcb12c62bf381",
+    "bootstrap_blob": "ed59344c6471404d49bba3f9c4a5e362f875976e",
+    "bootstrap_sha256": "7cf083daff12b05a08c1d04f4edc259b2e673ddf723e348b794ba996217a4372"
+  },
+  "accepted_qualification": {
+    "workflow_head": "e0c216b05370a4cc8d42fb4a40697c1f44036e23",
+    "evidence_commit": "f8c71038f48e027ee956105f0c11b040fd78da24",
+    "workflow_run_id": 33467464302,
+    "artifact_id": 9785351749,
+    "artifact_digest": "sha256:8b886e4445f47c6a63b1fefbb8e54b29600609b988ea81c3d68b034fc95af6de",
+    "qualification_blob": "d89c1a5387b567dc2eaefb1c0be1aec56e0fc9a8",
+    "qualification_sha256": "9f10c98e3603966139caa7418e5bf6a5572f908e806069432aeff63b4305f773",
+    "case_count": 94,
+    "reference_exact_matches": 94,
+    "expected_positive": 30,
+    "expected_negative": 64,
+    "metamorphic_pair_count": 13,
+    "qualification_failures": []
+  },
+  "sealed_files": {
+    "reference.py": {
+      "blob": "25cec740262b76738ccd9baeac964dc460ac4652",
+      "sha256": "f3a06ddb73020da4879605a0fe75947c32a9b8d28cac6d6cbf1cc209622df25a"
+    },
+    "sealed_cases.py": {
+      "blob": "4aef3e0673b74e3a681222ec395e2c47f880ebd9",
+      "sha256": "faf7c03714f66871088e65c56d71181f6f3d3f15b12f355fd45916dd8b3f58bb",
+      "transport": "deterministic_plain_python_construction",
+      "supersedes": "initial damaged Base64 transport only; case semantics were re-sealed before any fresh implementation existed"
+    },
+    "evaluate_fresh.py": {
+      "blob": "d9c36fadef62737302ec800f44dd80fe5f7cd071",
+      "sha256": "de092bc4d48264c437959dd7dfe9f2335935f70c2999dedbc863e303204426fe"
+    },
+    "qualify.py": {
+      "blob": "d83680e04d40b96847f7a4157b7a10561506c347",
+      "sha256": "ae898cef276d1b3cb1a0c861b25a624bd03fb2a61576dcb540cf91dfe3d10b0d"
+    },
+    "EVALUATOR-CONTRACT.md": {
+      "blob": "71b0c4873d4e38245793bc4724acbc93843dc93e",
+      "sha256": "317f89f2d59e2059d686737d2d4ddbc65119ea3b9732fa11ca3383ce4c317691"
+    }
+  },
+  "weak_control_witnesses": {
+    "status_flag_false_permits": ["SEM-NEG-AGREEMENT", "RES-NEG-FORGED-RECEIPT", "ACT-NEG-ANCESTOR", "VER-NEG-ANCESTOR"],
+    "any_basis_false_permits": ["MEAS-NEG-BASIS", "RES-NEG-NONCONF", "COMP-NEG-BASIS", "DEC-NEG-BASIS", "ACT-NEG-NONCONF", "VER-NEG-NONCONF"],
+    "bare_resolution_false_permits": ["RES-NEG-PROD", "RES-NEG-DOMAIN", "RES-NEG-NONCONF", "RES-NEG-TARGETS", "RES-NEG-WRONGDEP", "RES-NEG-SOURCE", "RES-NEG-BARE-ID"]
+  },
+  "apparatus_deviations_preserved": [
+    "run 33466872751: initial sealed case Base64 transport failed before case parsing; aperture verification and compilation passed; no fresh implementation existed",
+    "run 33466959493: diagnostic-preservation rerun still exposed the same Base64 transport defect; no fresh implementation existed",
+    "run 33467355620: deterministic case transport exposed an evaluator/reference success-reason mismatch; sealed reference was aligned to the already-frozen normative contract before any fresh implementation existed",
+    "run 33467402345: qualifier scientific checks passed 94/94 but workflow final gate read a fallback result because qualify.py wrote to an incorrect nested output path; no evaluator semantics or aperture changed",
+    "run 33467464302: accepted fully qualified sealed evaluator"
+  ],
+  "superseded_receipt_fields": {
+    "note": "SEALED_RUN_RECEIPT.json on the accepted run still contains the obsolete initial Base64 semantic-payload hash fields. Those fields are non-authoritative after transport replacement. This FINAL_SEAL_RECEIPT and the exact sealed file blobs above are authoritative for the evaluator seal."
+  },
+  "nonclaims": [
+    "No fresh independent implementation has been evaluated.",
+    "This seal does not establish independent recoverability.",
+    "This seal does not establish Contract E 1.0.0, production authority, merge, release, Authorization, or execution permission."
+  ]
+}
