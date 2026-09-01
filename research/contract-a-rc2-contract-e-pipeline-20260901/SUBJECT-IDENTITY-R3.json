@@ -1,0 +1,78 @@
+{
+  "schema": "contract-a-rc2-pressure-subject-identity-r3",
+  "status": "FROZEN_PRE_EXECUTION",
+  "purpose": "Disambiguate the exact Contract A scientific subject before any Contract E parent/atom pressure target is executed.",
+  "subject_kind": "real_pilot_generated_declaration",
+  "contract_a": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "research_head": "2e50567c4da2a4046a15bddfc3feee31296da3fb",
+    "candidate_tree": "54e5cfc659c574a1520ebc119d66e93d4f71ce34",
+    "reference_tree": "18b9cec2bc3063ecad17d12d55e49ea4dcb61ff8",
+    "generator": {
+      "path": "research/contract-a-minimality-rc2-20260901/reference/run_conformance.py",
+      "blob": "1765b489590fca10462ad451847e0ddcb249f77f",
+      "function": "make_candidate",
+      "argument": "declared"
+    },
+    "validator_blob": "42e5f5b3bf38d677445e9d01ea130ba604e53409"
+  },
+  "source_packet": {
+    "repository": "camerontjs-dot/research-scaffold-harness",
+    "commit": "548bfa81f65290eda15af658f647497679b840ef",
+    "loader_path": "src/research_scaffold_harness/runner/source_packet.py",
+    "loader_blob": "0f7dd438df770239137b7ab11f796390b45155fe",
+    "sources": [
+      {
+        "source_id": "src-cgmp-quality-systems",
+        "content_path": "pilots/pilot-001-rsh-001/sources/src-cgmp-quality-systems/content.md",
+        "content_blob": "616634d68b0b9026222eabe94696a56bf8d93140"
+      },
+      {
+        "source_id": "src-fictional-compliance-review-note",
+        "content_path": "pilots/pilot-001-rsh-001/sources/src-fictional-compliance-review-note/content.md",
+        "content_blob": "51e538a85c8501c055393396c2bece121ccb0795"
+      }
+    ]
+  },
+  "expected_subject": {
+    "schema": "contract-a-wire-candidate-rc2",
+    "handoff_id": "contract-a-rc2-rsh-supplier-declared",
+    "handoff_sha256": "sha256:de23b0eb66b3316e85bd9fbc73f4dfe2b6525a1e73783fca8d6e1fbd9bb0189d",
+    "producer_id": "research-scaffold-harness",
+    "producer_version": "548bfa81f65290eda15af658f647497679b840ef",
+    "work_id": "pilot-001-rsh-001:clm-supplier-qualification",
+    "root_proposition": {
+      "proposition_id": "clm-supplier-qualification",
+      "text_sha256": "sha256:a3cc8b8ce899f14c8dec00e768aa867287c492aa82e59647c06df804868f06a8"
+    },
+    "decomposition": {
+      "state": "declared",
+      "decomposition_id": "decomp-supplier-all-of-001",
+      "operator": "all_of",
+      "children": [
+        {
+          "proposition_id": "clm-supplier-qualification-a",
+          "text_sha256": "sha256:5fc1d3d66aaac30d1502966576d536370ba82f8433260693ea13152a9a228712",
+          "sequence": 1
+        },
+        {
+          "proposition_id": "clm-supplier-qualification-b",
+          "text_sha256": "sha256:de2a33eea8a1bd8c42864f2d77bf67faa391e088f0fb1ef6c633ea8d6b10bff9",
+          "sequence": 2
+        }
+      ]
+    },
+    "source_ids_in_generator_order": [
+      "src-cgmp-quality-systems",
+      "src-fictional-compliance-review-note"
+    ]
+  },
+  "distinct_non_subject_fixture": {
+    "path": "research/contract-a-minimality-rc2-20260901/candidate/fixtures/valid-all-of.json",
+    "blob": "c9e2e886d7fa2bcd3d979bfc6cdebd0de2763ce0",
+    "handoff_sha256": "sha256:f9d2f7be6eaaa21bcc032d3d91a9f9b42d645b15ed5130fc4b69807ba0ed6142",
+    "note": "This public candidate conformance fixture is valid Contract A RC2 material but is not the real-pilot pressure-test subject. R2/readiness text incorrectly placed its blob beside the real-pilot de23... handoff."
+  },
+  "scientific_assertions_changed_from_r2": false,
+  "scoring_changed_from_r2": false
+}
