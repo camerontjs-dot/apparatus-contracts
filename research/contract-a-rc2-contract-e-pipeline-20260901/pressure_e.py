@@ -137,6 +137,24 @@ def main() -> int:
             }
         )
 
+    atom_cross_use = []
+    for source_atom_id in atom_ids:
+        source_row = by_key[("declared-parent-plus-atoms", source_atom_id)]
+        source_grant = exact_grant(source_row)
+        for target_atom_id in atom_ids:
+            if target_atom_id == source_atom_id:
+                continue
+            target_shape = row_as_gate_shape(by_key[("declared-parent-plus-atoms", target_atom_id)])
+            got = eg.e_eval(eg.lineage_case(target_shape, request_basis=source_grant))
+            assert got["allowed"] is False
+            atom_cross_use.append(
+                {
+                    "source_atom_id": source_atom_id,
+                    "target_atom_id": target_atom_id,
+                    "cross_atom_grant_rejected": True,
+                }
+            )
+
     assert all(r["a_only_rejected"] for r in results)
 
     reorder = projections["resealed_reorder_control"]
@@ -155,6 +173,7 @@ def main() -> int:
         "terminal_gate": "SUPPORTED_FOR_PROMOTION",
         "results": results,
         "cross_use": cross_use,
+        "atom_cross_use": atom_cross_use,
         "projection_invariance": {
             "parent_identity_same_alone_and_joint": True,
             "atom_identity_same_alone_and_joint": True,
