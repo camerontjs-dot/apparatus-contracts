@@ -25,6 +25,7 @@ classifiers = [
 dependencies = [
     "PyYAML>=6.0,<7",
     "pydantic>=2.6,<3",
+    "rfc8785==0.1.4",
 ]
 
 [project.optional-dependencies]

@@ -1,0 +1,131 @@
+name: Contract D 1.0.0 independent consumer gate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'contract-d-v1.0.0.md'
+      - 'schema/contract-d/**'
+      - 'fixtures/contract-d/**'
+      - 'validators/contract_d_*.py'
+      - '.github/workflows/contract-d-1.0.0-independent-consumer.yml'
+  push:
+    branches:
+      - promotion/contract-d-1.0.0
+
+permissions:
+  contents: read
+
+jobs:
+  mechanically-retargeted-frozen-independent-consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout proposed Contract D v1 production tree
+        uses: actions/checkout@v4
+      - name: Checkout immutable RC6 independent freeze
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: f5ce28cef76808e390e016d63dec3d50a28fbda2
+          path: _independent
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify frozen independent implementation identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='_independent/research/contract-d-rc6-fresh-reproduction-v1/contract_d_rc6_consumer.mjs'
+          test "$(git -C _independent hash-object research/contract-d-rc6-fresh-reproduction-v1/contract_d_rc6_consumer.mjs)" = '26058b7901347c6e7e3c207de2195a0ab529aa08'
+          test "$(grep -o "0.3.0-rc6" "$src" | wc -l | tr -d ' ')" = '1'
+      - name: Retarget only the exact version token
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          src = Path('_independent/research/contract-d-rc6-fresh-reproduction-v1/contract_d_rc6_consumer.mjs').read_text()
+          old = "export const CONTRACT_D_VERSION = '0.3.0-rc6';"
+          new = "export const CONTRACT_D_VERSION = '1.0.0';"
+          assert src.count(old) == 1
+          out = src.replace(old, new)
+          assert out.count('0.3.0-rc6') == 0
+          assert len(out) == len(src) - len(old) + len(new)
+          Path('/tmp/contract_d_v1_independent.mjs').write_text(out)
+          PY
+          printf 'frozen_blob=%s\n' '26058b7901347c6e7e3c207de2195a0ab529aa08' | tee independent-retarget-receipt.txt
+          printf 'retargeted_sha256=%s\n' "$(sha256sum /tmp/contract_d_v1_independent.mjs | awk '{print $1}')" | tee -a independent-retarget-receipt.txt
+          printf 'only_semantic_edit=%s\n' 'contract_d_version: 0.3.0-rc6 -> 1.0.0' | tee -a independent-retarget-receipt.txt
+      - name: Consume production fixtures and conformance cases independently
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/check-independent.mjs <<'JS'
+          import fs from 'node:fs';
+          import {
+            CONTRACT_D_VERSION,
+            canonicalJson,
+            consume,
+            normalizeEffect,
+            semanticIdentity,
+            semanticProjection,
+            validateDecision,
+          } from 'file:///tmp/contract_d_v1_independent.mjs';
+
+          const valid = JSON.parse(fs.readFileSync('fixtures/contract-d/1.0.0/valid.json', 'utf8')).fixtures;
+          const invalid = JSON.parse(fs.readFileSync('fixtures/contract-d/1.0.0/invalid.json', 'utf8')).fixtures;
+          const cases = JSON.parse(fs.readFileSync('fixtures/contract-d/1.0.0/conformance-cases.json', 'utf8')).cases;
+          if (CONTRACT_D_VERSION !== '1.0.0') throw new Error('retarget failed');
+
+          for (const [name, decision] of Object.entries(valid)) {
+            const result = validateDecision(structuredClone(decision));
+            if (!result.ok) throw new Error(`valid fixture rejected ${name}: ${result.error}`);
+            canonicalJson(structuredClone(decision));
+            semanticIdentity(structuredClone(decision));
+          }
+          for (const [name, decision] of Object.entries(invalid)) {
+            const result = validateDecision(structuredClone(decision));
+            if (result.ok) throw new Error(`invalid fixture accepted ${name}`);
+          }
+          for (const c of cases) {
+            const decision = structuredClone(valid[c.decision_fixture]);
+            const got = consume(decision, structuredClone(c.expect));
+            if (got.outcome !== c.outcome) throw new Error(`${c.id}: ${got.outcome} != ${c.outcome}`);
+          }
+
+          for (const name of ['citation-use-clear.json', 'task-dispatch-clear.json']) {
+            const omitted = structuredClone(valid[name]);
+            const explicit = structuredClone(valid[name]);
+            explicit.effect.params = {};
+            const a = normalizeEffect(omitted.effect);
+            const b = normalizeEffect(explicit.effect);
+            if (JSON.stringify(a) !== JSON.stringify(b)) throw new Error(`${name}: normalized shapes differ`);
+            if (JSON.stringify(Object.keys(a).sort()) !== JSON.stringify(['params','type','version'])) throw new Error(`${name}: non-total effect shape`);
+            if (JSON.stringify(a.params) !== '{}') throw new Error(`${name}: empty params not explicit`);
+            if (semanticIdentity(omitted) !== semanticIdentity(explicit)) throw new Error(`${name}: semantic identity differs`);
+            if (JSON.stringify(semanticProjection(omitted).effect) !== JSON.stringify(a)) throw new Error(`${name}: projection mismatch`);
+          }
+
+          const metadata = structuredClone(valid['source-audit-clear.json']);
+          const baseId = semanticIdentity(metadata);
+          metadata.metadata.diagnostics = {actor: 'root', approval: true, delegation: 'not-authority'};
+          if (semanticIdentity(metadata) !== baseId) throw new Error('metadata changed authority identity');
+
+          console.log(JSON.stringify({
+            frozen_blob: '26058b7901347c6e7e3c207de2195a0ab529aa08',
+            retarget: 'version-token-only',
+            valid_fixtures: Object.keys(valid).length,
+            invalid_fixtures: Object.keys(invalid).length,
+            conformance_cases: cases.length,
+            result: 'PASS'
+          }));
+          JS
+          node /tmp/check-independent.mjs | tee independent-consumer-result.json
+      - name: Upload independent-consumer evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-d-v1-independent-consumer-${{ github.run_id }}
+          path: |
+            independent-retarget-receipt.txt
+            independent-consumer-result.json
+          retention-days: 90

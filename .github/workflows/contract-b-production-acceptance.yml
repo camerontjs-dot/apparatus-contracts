@@ -55,7 +55,7 @@ jobs:
           python -m pip install \
             'pydantic>=2.6,<3' 'PyYAML>=6,<7' 'click>=8.1,<9' \
             'pdfminer.six>=20231228' 'pypdf>=4,<7' 'rank-bm25>=0.2.2,<0.3' \
-            'typer>=0.12' 'pytest>=8,<10'
+            'typer>=0.12' 'pytest>=8,<10' 'rfc8785==0.1.4'
           python -m pip install --no-deps -e .
           python -m pip install --no-deps -e _deps/evidence-bundler
           python -m pip install --no-deps -e _deps/claim-audit-lab
