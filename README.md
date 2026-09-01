@@ -46,6 +46,10 @@ No canonical Contract E schema or production authority control plane is establis
 
 ## Boundary rules
 
+**Repository-wide architectural invariant:** every apparatus is built, tested, and reasoned about from its governing contract, not from the incidental output shape of the current neighboring apparatus. Producer implementation, contract authority, and consumer implementation remain separate. The full rule and its apparatus-by-apparatus application are normative repository governance in [`APPARATUS-CONTRACT-SEPARATION.md`](APPARATUS-CONTRACT-SEPARATION.md).
+
+A current output object is a concrete contract instance, not the definition of the contract. Unused contract states do not disappear because today's producer does not populate them, and producer-private behavior does not become downstream authority merely because today's consumer can observe it.
+
 The contracts preserve several pipeline invariants:
 
 - evidence-world facts do not silently become semantic conclusions;
@@ -53,7 +57,8 @@ The contracts preserve several pipeline invariants:
 - a valid Decision does not automatically become execution permission;
 - missing or unestablished state remains explicit rather than being filled with a convenient default;
 - exact upstream identity is preserved where substitution could change authority;
-- research candidates, validators, and harnesses remain distinguishable from canonical contract authority.
+- research candidates, validators, and harnesses remain distinguishable from canonical contract authority;
+- producer conformance, contract sufficiency, and consumer conformance/recoverability are tested as distinct claims.
 
 ## Repository structure
 
@@ -68,6 +73,7 @@ The repository contains five different kinds of material. They should not be con
 Important top-level surfaces include:
 
 ```text
+APPARATUS-CONTRACT-SEPARATION.md             repository-wide boundary governance
 handoff-contract-v1.0.0.md                  legacy Contract A / original A+B authority
 contract-b-factual-context-extension-v1.2.0.md
 contract-c-v1.0.0.md
@@ -82,7 +88,7 @@ CHANGELOG.md                                 maintained contract history
 
 ## How to use this repository
 
-Start from the contract that owns the boundary you are changing, then follow its exact schema/validator/fixture and decision lineage.
+Start from the contract that owns the boundary you are changing, then follow its exact schema/validator/fixture and decision lineage. Do not start from a current producer output and infer that its populated subset defines the contract. See [`APPARATUS-CONTRACT-SEPARATION.md`](APPARATUS-CONTRACT-SEPARATION.md).
 
 For cross-repository work, pin the producer, contract authority, and consumer identities. A passing test in only one repository is not evidence that the shared boundary works.
 
@@ -109,6 +115,8 @@ For a canonical change:
 5. make a separate promotion decision;
 6. update canonical specification/schema/validator/fixtures coherently;
 7. publish a release only when an immutable named checkpoint is justified.
+
+Changing an apparatus does not itself change its contract. Changing a contract requires a separate evidence and promotion decision.
 
 A research result does not become production behavior merely because its branch is green.
 
