@@ -1,6 +1,6 @@
 # Contract D v1.0.0
 
-**Status:** proposed canonical production contract; not released until the Contract D v1.0.0 release gate is complete.
+**Status:** canonical production contract; released only at the immutable `contract-d-v1.0.0` release identity after the Contract D v1.0.0 release gate completes.
 
 ## Purpose
 

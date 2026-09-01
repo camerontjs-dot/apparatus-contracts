@@ -1,0 +1,405 @@
+name: Contract D 1.0.0 release lock
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'contract-d-v1.0.0.md'
+      - 'releases/contract-d/1.0.0.md'
+      - '.github/workflows/contract-d-1.0.0-release-lock.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'contract-d-v1.0.0.md'
+      - 'releases/contract-d/1.0.0.md'
+      - '.github/workflows/contract-d-1.0.0-release-lock.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  APPARATUS_PROMOTION_MAIN: 68d0cd82def0faaadd3ad5410fb40ec68675b8bd
+  APPARATUS_RELEASE_BASE: 0b647b154d6b8c16743fae0eadc18146fe6f11eb
+  DECISION_ENGINE_MAIN: 31f1ab75109446842953ac808cb7b194e57e985c
+  INDEPENDENT_FREEZE: f5ce28cef76808e390e016d63dec3d50a28fbda2
+  INDEPENDENT_BLOB: 26058b7901347c6e7e3c207de2195a0ab529aa08
+  ADVERSARIAL_COMMIT: 3367037d83a3a1f9ece536406017afcab8940a92
+  TERMINAL_RECORD_COMMIT: 1b51b421b96fb10f260f58a087c8376b35afdb5d
+  CONTRACT_D_TAG: contract-d-v1.0.0
+
+jobs:
+  release-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release tree
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify release-only mutation surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$({ git diff --name-only "$APPARATUS_RELEASE_BASE"...HEAD || true; } | \
+            grep -Ev '^(contract-d-v1\.0\.0\.md|releases/contract-d/1\.0\.0\.md|\.github/workflows/contract-d-1\.0\.0-release-lock\.yml)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo 'Unexpected release-tree mutation:' >&2
+            echo "$unexpected" >&2
+            exit 1
+          fi
+
+      - name: Prove promoted Contract D machinery is byte-unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code "$APPARATUS_PROMOTION_MAIN" -- \
+            schema/contract-d \
+            fixtures/contract-d \
+            validators/contract_d_core.py \
+            validators/contract_d_validate.py \
+            validators/contract_d_consume.py \
+            tests/test_contract_d_v1.py \
+            pyproject.toml \
+            .github/workflows/contract-d-1.0.0-promotion.yml \
+            .github/workflows/contract-d-1.0.0-independent-consumer.yml \
+            .github/workflows/contract-d-1.0.0-adversarial.yml
+
+          git show "$APPARATUS_PROMOTION_MAIN:contract-d-v1.0.0.md" > /tmp/contract-d-promoted.md
+          python - <<'PY'
+          from pathlib import Path
+          def normalized(path):
+              lines = Path(path).read_text().splitlines()
+              assert lines[2].startswith('**Status:**')
+              lines[2] = '**Status:** <release-posture-only>'
+              return '\n'.join(lines) + '\n'
+          assert normalized('/tmp/contract-d-promoted.md') == normalized('contract-d-v1.0.0.md')
+          PY
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install exact production dependencies
+        run: python -m pip install --disable-pip-version-check -e '.[dev]'
+
+      - name: Re-run full Apparatus and Contract D conformance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q tests/
+          python -m pytest -q tests/test_contract_d_v1.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from validators.contract_d_core import CONTRACT_D_VERSION
+          assert CONTRACT_D_VERSION == '1.0.0'
+          assert json.loads(Path('schema/contract-d/versions.json').read_text()) == {
+              'canonical_version': '1.0.0',
+              'supported_versions': ['1.0.0'],
+          }
+          schema = json.loads(Path('schema/contract-d/1.0.0/schema.json').read_text())
+          assert schema['properties']['contract_d_version']['const'] == '1.0.0'
+          spec = Path('contract-d-v1.0.0.md').read_text()
+          assert 'canonical production contract' in spec
+          assert 'operational Authorization' in spec
+          assert Path('releases/contract-d/1.0.0.md').exists()
+          PY
+
+  exact-production-producer:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release tree
+        uses: actions/checkout@v4
+      - name: Checkout exact Decision Engine production producer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: ${{ env.DECISION_ENGINE_MAIN }}
+          path: _decision_engine
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Verify exact producer identity
+        shell: bash
+        run: test "$(git -C _decision_engine rev-parse HEAD)" = "$DECISION_ENGINE_MAIN"
+      - name: Run bounded producer tests
+        run: node --test _decision_engine/tests/contractDProducer.test.mjs
+      - name: Install release-tree Contract D dependencies
+        run: python -m pip install --disable-pip-version-check -e '.[dev]'
+      - name: Emit and consume exact production decisions
+        shell: bash
+        run: |
+          set -euo pipefail
+          node _decision_engine/scripts/emit-contract-d-v1-conformance.mjs > /tmp/contract-d-v1.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from validators.contract_d_consume import ApplicabilityExpectation, consume
+          from validators.contract_d_core import validate_decision
+
+          payload = json.loads(Path('/tmp/contract-d-v1.json').read_text())
+          expected_outcomes = {
+              'source-audit-clear': 'candidate_for_authorization',
+              'citation-use-clear': 'candidate_for_authorization',
+              'task-dispatch-clear': 'candidate_for_authorization',
+              'completed-hold': 'hold',
+              'evaluation-failed': 'evaluation_failed',
+          }
+          assert set(payload['decisions']) == set(expected_outcomes)
+          for name, decision in payload['decisions'].items():
+              validate_decision(decision)
+              requested_operation = decision.get('effect', {}).get('type', 'knowledge.add_verified_tag')
+              result = consume(
+                  decision,
+                  ApplicabilityExpectation(
+                      decision['input_authority'],
+                      decision['policy'],
+                      decision['target'],
+                      requested_operation,
+                      None,
+                  ),
+              )
+              assert result['outcome'] == expected_outcomes[name], (name, result)
+          PY
+
+  frozen-independent-consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release tree
+        uses: actions/checkout@v4
+      - name: Checkout immutable RC6 independent freeze
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.INDEPENDENT_FREEZE }}
+          path: _independent
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify frozen implementation and retarget only version token
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='_independent/research/contract-d-rc6-fresh-reproduction-v1/contract_d_rc6_consumer.mjs'
+          test "$(git -C _independent hash-object research/contract-d-rc6-fresh-reproduction-v1/contract_d_rc6_consumer.mjs)" = "$INDEPENDENT_BLOB"
+          python - <<'PY'
+          from pathlib import Path
+          src = Path('_independent/research/contract-d-rc6-fresh-reproduction-v1/contract_d_rc6_consumer.mjs').read_text()
+          old = "export const CONTRACT_D_VERSION = '0.3.0-rc6';"
+          new = "export const CONTRACT_D_VERSION = '1.0.0';"
+          assert src.count(old) == 1
+          out = src.replace(old, new)
+          assert out.count('0.3.0-rc6') == 0
+          Path('/tmp/contract_d_v1_independent.mjs').write_text(out)
+          PY
+      - name: Consume release fixtures independently
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/check-independent.mjs <<'JS'
+          import fs from 'node:fs';
+          import {
+            CONTRACT_D_VERSION,
+            canonicalJson,
+            consume,
+            normalizeEffect,
+            semanticIdentity,
+            semanticProjection,
+            validateDecision,
+          } from 'file:///tmp/contract_d_v1_independent.mjs';
+          const valid = JSON.parse(fs.readFileSync('fixtures/contract-d/1.0.0/valid.json', 'utf8')).fixtures;
+          const invalid = JSON.parse(fs.readFileSync('fixtures/contract-d/1.0.0/invalid.json', 'utf8')).fixtures;
+          const cases = JSON.parse(fs.readFileSync('fixtures/contract-d/1.0.0/conformance-cases.json', 'utf8')).cases;
+          if (CONTRACT_D_VERSION !== '1.0.0') throw new Error('retarget failed');
+          for (const [name, decision] of Object.entries(valid)) {
+            const result = validateDecision(structuredClone(decision));
+            if (!result.ok) throw new Error(`valid fixture rejected ${name}: ${result.error}`);
+            canonicalJson(structuredClone(decision));
+            semanticIdentity(structuredClone(decision));
+          }
+          for (const [name, decision] of Object.entries(invalid)) {
+            const result = validateDecision(structuredClone(decision));
+            if (result.ok) throw new Error(`invalid fixture accepted ${name}`);
+          }
+          for (const c of cases) {
+            const decision = structuredClone(valid[c.decision_fixture]);
+            const got = consume(decision, structuredClone(c.expect));
+            if (got.outcome !== c.outcome) throw new Error(`${c.id}: ${got.outcome} != ${c.outcome}`);
+          }
+          for (const name of ['citation-use-clear.json', 'task-dispatch-clear.json']) {
+            const omitted = structuredClone(valid[name]);
+            const explicit = structuredClone(valid[name]);
+            explicit.effect.params = {};
+            const a = normalizeEffect(omitted.effect);
+            const b = normalizeEffect(explicit.effect);
+            if (JSON.stringify(a) !== JSON.stringify(b)) throw new Error(`${name}: normalized shapes differ`);
+            if (semanticIdentity(omitted) !== semanticIdentity(explicit)) throw new Error(`${name}: semantic identity differs`);
+            if (JSON.stringify(semanticProjection(omitted).effect) !== JSON.stringify(a)) throw new Error(`${name}: projection mismatch`);
+          }
+          console.log(JSON.stringify({
+            frozen_blob: '26058b7901347c6e7e3c207de2195a0ab529aa08',
+            retarget: 'version-token-only',
+            valid_fixtures: Object.keys(valid).length,
+            invalid_fixtures: Object.keys(invalid).length,
+            conformance_cases: cases.length,
+            result: 'PASS'
+          }));
+          JS
+          node /tmp/check-independent.mjs
+
+  frozen-adversarial:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release tree
+        uses: actions/checkout@v4
+      - name: Checkout frozen adversarial apparatus
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.ADVERSARIAL_COMMIT }}
+          path: _adversarial
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install exact release dependencies
+        run: python -m pip install --disable-pip-version-check -e '.[dev]'
+      - name: Materialize production target wrappers
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/contract-d-production/fixtures
+          cat > /tmp/contract-d-production/contract_d_core.py <<'PY'
+          from validators.contract_d_core import *
+          PY
+          cat > /tmp/contract-d-production/contract_d_validate.py <<'PY'
+          from validators.contract_d_validate import *
+          PY
+          cat > /tmp/contract-d-production/contract_d_consume.py <<'PY'
+          from validators.contract_d_consume import *
+          PY
+          cp schema/contract-d/1.0.0/effect-registry.json /tmp/contract-d-production/effect-registry.json
+          cp fixtures/contract-d/1.0.0/valid.json /tmp/contract-d-production/fixtures/valid.json
+      - name: Self-test frozen attack apparatus
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_adversarial/research/contract-d-adversarial-harness-v1
+        run: python -m unittest -v _adversarial/research/contract-d-adversarial-harness-v1/test_harness_self.py
+      - name: Attack release tree
+        shell: bash
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_adversarial/research/contract-d-adversarial-harness-v1:${{ github.workspace }}
+        run: |
+          set -euo pipefail
+          python _adversarial/research/contract-d-adversarial-harness-v1/run_rc5_harness_v3.py \
+            --target /tmp/contract-d-production \
+            --report-dir contract-d-v1-adversarial-report \
+            --gate
+          cat contract-d-v1-adversarial-report/report.md
+
+  seal:
+    needs: [release-lock, exact-production-producer, frozen-independent-consumer, frozen-adversarial]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact locked tree
+        uses: actions/checkout@v4
+      - name: Write machine-readable release-lock receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/contract-d-1.0.0-release-lock
+          cat > build/contract-d-1.0.0-release-lock/release-lock-receipt.json <<JSON
+          {
+            "status": "PASS",
+            "contract_d_version": "1.0.0",
+            "release_commit": "${GITHUB_SHA}",
+            "namespaced_tag": "${CONTRACT_D_TAG}",
+            "apparatus_promotion_main": "${APPARATUS_PROMOTION_MAIN}",
+            "apparatus_release_base": "${APPARATUS_RELEASE_BASE}",
+            "decision_engine_main": "${DECISION_ENGINE_MAIN}",
+            "independent_freeze": "${INDEPENDENT_FREEZE}",
+            "independent_blob": "${INDEPENDENT_BLOB}",
+            "adversarial_commit": "${ADVERSARIAL_COMMIT}",
+            "terminal_record_commit": "${TERMINAL_RECORD_COMMIT}",
+            "production_machinery_byte_unchanged": true,
+            "spec_semantics_unchanged_except_release_posture": true,
+            "full_regression": true,
+            "exact_producer_conformance": true,
+            "frozen_independent_consumer": true,
+            "frozen_adversarial_gate": true,
+            "authorization_or_execution_added": false
+          }
+          JSON
+          cat build/contract-d-1.0.0-release-lock/release-lock-receipt.json
+      - name: Upload release-lock receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-d-1.0.0-release-lock
+          path: build/contract-d-1.0.0-release-lock/release-lock-receipt.json
+          if-no-files-found: error
+          retention-days: 90
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: seal
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout exact locked release commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download release-lock receipt
+        uses: actions/download-artifact@v4
+        with:
+          name: contract-d-1.0.0-release-lock
+          path: release-evidence
+      - name: Create or verify immutable namespaced tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          if git ls-remote --exit-code --tags origin "refs/tags/$CONTRACT_D_TAG" >/dev/null 2>&1; then
+            git fetch --force origin "refs/tags/$CONTRACT_D_TAG:refs/tags/$CONTRACT_D_TAG"
+            target="$(git rev-list -n 1 "$CONTRACT_D_TAG")"
+            test "$target" = "$GITHUB_SHA" || {
+              echo "Existing immutable tag points to $target, not $GITHUB_SHA" >&2
+              exit 1
+            }
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git tag -a "$CONTRACT_D_TAG" "$GITHUB_SHA" -m 'Contract D 1.0.0'
+            git push origin "refs/tags/$CONTRACT_D_TAG"
+          fi
+      - name: Create or verify GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$CONTRACT_D_TAG" >/dev/null 2>&1; then
+            echo "GitHub Release already exists for $CONTRACT_D_TAG"
+          else
+            gh release create "$CONTRACT_D_TAG" \
+              --verify-tag \
+              --title 'Contract D 1.0.0' \
+              --notes-file releases/contract-d/1.0.0.md
+          fi
+          gh release upload "$CONTRACT_D_TAG" \
+            release-evidence/release-lock-receipt.json \
+            --clobber
