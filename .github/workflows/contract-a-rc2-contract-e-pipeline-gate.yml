@@ -1,0 +1,320 @@
+name: Contract A RC2 to Contract E pressure test
+
+on:
+  workflow_dispatch:
+    inputs:
+      execute_pressure_test:
+        description: Type RUN_CONTRACT_E_PRESSURE_TEST to execute the frozen pressure test
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contract-a-rc2-contract-e-pressure-test
+  cancel-in-progress: false
+
+env:
+  PREREGISTRATION_COMMIT: b13ba252bb2a48336402baebbdf854f7874f52b7
+  PRESSURE_PREREGISTRATION_COMMIT: 44e8a714596423fb372257e150be02c1ea8e8533
+  PRESSURE_R3_PREREGISTRATION_COMMIT: 28e61f51a217f25b028018dc7432477f327864f9
+  SUBJECT_IDENTITY_BLOB: f9b7c7fc389c4e852c5406ecab3e09ac9f6f3171
+  A_REFERENCE_GENERATOR_BLOB: 1765b489590fca10462ad451847e0ddcb249f77f
+  RSH_SOURCE_LOADER_BLOB: 0f7dd438df770239137b7ab11f796390b45155fe
+  RSH_PRIMARY_CONTENT_BLOB: 616634d68b0b9026222eabe94696a56bf8d93140
+  RSH_SYNTHETIC_CONTENT_BLOB: 51e538a85c8501c055393396c2bece121ccb0795
+  APPARATUS_BASE: 6a45ab2de09370f3048ffb083e25b487f81117e4
+  A_RESEARCH_HEAD: 2e50567c4da2a4046a15bddfc3feee31296da3fb
+  A_CANDIDATE_TREE: 54e5cfc659c574a1520ebc119d66e93d4f71ce34
+  A_REFERENCE_TREE: 18b9cec2bc3063ecad17d12d55e49ea4dcb61ff8
+  A_EVALUATOR_TREE: 5d7eb3e3a9a98ba1626118a5e06a018c02fa81ec
+  RSH_SHA: 548bfa81f65290eda15af658f647497679b840ef
+  EB_SHA: 6011789957f3294f97bff260069cfb5bb1c5772f
+  CAL_SHA: 53f0885b111676794d1bd20e10b91aa58b07e9d4
+  DECISION_SHA: 9f5ffc04a0184abe44dc49509058a7ff88893e30
+  CONTRACT_C_RELEASE: 5fe55f9ed5d0ee9f026ca1b077e9d70ce0487ea1
+  CONTRACT_C_TAG_OBJECT: 6bd135a948e407212b2e77ec18ac5c402f93565e
+  CONTRACT_C_VALIDATOR_BLOB: 9c75ccfbf2223578a8d1a7bf0c39673b394fbea4
+  CONTRACT_D_RELEASE: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+  CONTRACT_D_TAG_OBJECT: 6eadd688b482f3c9fce2ce5e7a2841089d852096
+  E_HELDOUT_FREEZE: a937f85aa5ebd6c9ae118b28828580684ff2986d
+  E_CANDIDATE_BLOB: b33f1da1400385470b4cfc6bf54061eae7051c9d
+  E_PROTOCOL_BLOB: 73d09ecfb56ad26296ae261db1328ec7af9ea5b8
+  E_EVALUATOR_BLOB: afaeba44f794d142517af7c000e0100391300d33
+  E_HELDOUT_BLOB: 33bdbd39c5e7e9564c358dbac80e148637216e43
+
+jobs:
+  pressure:
+    name: Frozen A to E parent/atom pressure test
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Require explicit pressure-test authorization
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ inputs.execute_pressure_test }}" = "RUN_CONTRACT_E_PRESSURE_TEST"
+
+      - name: Checkout experiment branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact frozen Contract A research
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.A_RESEARCH_HEAD }}
+          path: _external/a
+          fetch-depth: 0
+
+      - name: Checkout exact pipeline producers
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.RSH_SHA }}
+          path: _external/a/_deps/research-scaffold-harness
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: ${{ env.EB_SHA }}
+          path: _external/a/_deps/evidence-bundler
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CAL_SHA }}
+          path: _external/a/_deps/claim-audit-lab
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: ${{ env.DECISION_SHA }}
+          path: _external/decision
+          fetch-depth: 0
+
+      - name: Checkout immutable Contract C and D releases
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.CONTRACT_C_RELEASE }}
+          path: _external/apparatus-c
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.CONTRACT_D_RELEASE }}
+          path: _external/apparatus-d
+          fetch-depth: 0
+
+      - name: Checkout exact bounded Contract E held-out freeze
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.E_HELDOUT_FREEZE }}
+          path: _external/e
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify frozen identities and research-only aperture
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse "$PREREGISTRATION_COMMIT")" = "$PREREGISTRATION_COMMIT"
+          test "$(git rev-parse "$PRESSURE_PREREGISTRATION_COMMIT")" = "$PRESSURE_PREREGISTRATION_COMMIT"
+          test "$(git rev-parse "$PRESSURE_R3_PREREGISTRATION_COMMIT")" = "$PRESSURE_R3_PREREGISTRATION_COMMIT"
+          test "$(git hash-object research/contract-a-rc2-contract-e-pipeline-20260901/SUBJECT-IDENTITY-R3.json)" = "$SUBJECT_IDENTITY_BLOB"
+          git merge-base --is-ancestor "$APPARATUS_BASE" HEAD
+          test "$(git -C _external/a rev-parse HEAD)" = "$A_RESEARCH_HEAD"
+          test "$(git -C _external/a rev-parse HEAD:research/contract-a-minimality-rc2-20260901/candidate)" = "$A_CANDIDATE_TREE"
+          test "$(git -C _external/a rev-parse HEAD:research/contract-a-minimality-rc2-20260901/reference)" = "$A_REFERENCE_TREE"
+          test "$(git -C _external/a rev-parse HEAD:research/contract-a-minimality-rc2-20260901/evaluator)" = "$A_EVALUATOR_TREE"
+          test "$(git -C _external/a hash-object research/contract-a-minimality-rc2-20260901/reference/run_conformance.py)" = "$A_REFERENCE_GENERATOR_BLOB"
+          test "$(git -C _external/a/_deps/research-scaffold-harness rev-parse HEAD)" = "$RSH_SHA"
+          test "$(git -C _external/a/_deps/research-scaffold-harness hash-object src/research_scaffold_harness/runner/source_packet.py)" = "$RSH_SOURCE_LOADER_BLOB"
+          test "$(git -C _external/a/_deps/research-scaffold-harness hash-object pilots/pilot-001-rsh-001/sources/src-cgmp-quality-systems/content.md)" = "$RSH_PRIMARY_CONTENT_BLOB"
+          test "$(git -C _external/a/_deps/research-scaffold-harness hash-object pilots/pilot-001-rsh-001/sources/src-fictional-compliance-review-note/content.md)" = "$RSH_SYNTHETIC_CONTENT_BLOB"
+          test "$(git -C _external/a/_deps/evidence-bundler rev-parse HEAD)" = "$EB_SHA"
+          test "$(git -C _external/a/_deps/claim-audit-lab rev-parse HEAD)" = "$CAL_SHA"
+          test "$(git -C _external/decision rev-parse HEAD)" = "$DECISION_SHA"
+          test "$(git -C _external/apparatus-c rev-parse HEAD)" = "$CONTRACT_C_RELEASE"
+          test "$(git -C _external/apparatus-c rev-parse refs/tags/contract-c-v1.0.0)" = "$CONTRACT_C_TAG_OBJECT"
+          test "$(git -C _external/apparatus-c hash-object validators/contract_c.py)" = "$CONTRACT_C_VALIDATOR_BLOB"
+          test "$(git -C _external/apparatus-d rev-parse HEAD)" = "$CONTRACT_D_RELEASE"
+          test "$(git -C _external/apparatus-d rev-parse refs/tags/contract-d-v1.0.0)" = "$CONTRACT_D_TAG_OBJECT"
+          test "$(git -C _external/e rev-parse HEAD)" = "$E_HELDOUT_FREEZE"
+          EDIR=docs/research/contract-e/epistemic-authority-propagation-rc0b
+          test "$(git -C _external/e hash-object "$EDIR/AUTHORITY-CHAIN-CANDIDATE.json")" = "$E_CANDIDATE_BLOB"
+          test "$(git -C _external/e hash-object "$EDIR/authority_chain.py")" = "$E_PROTOCOL_BLOB"
+          test "$(git -C _external/e hash-object "$EDIR/evaluate.py")" = "$E_EVALUATOR_BLOB"
+          test "$(git -C _external/e hash-object "$EDIR/heldout_cases.py")" = "$E_HELDOUT_BLOB"
+          unexpected="$({ git diff --name-only "$APPARATUS_BASE"...HEAD || true; } | grep -Ev '^(research/contract-a-rc2-contract-e-pipeline-20260901/|\.github/workflows/contract-a-rc2-contract-e-pipeline-gate\.yml$)' || true)"
+          test -z "$unexpected" || { echo "unexpected non-research mutation:" >&2; echo "$unexpected" >&2; exit 1; }
+
+      - name: Install bounded Python dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install \
+            'pydantic>=2.6,<3' 'PyYAML>=6,<7' 'click>=8.1,<9' \
+            'pdfminer.six>=20231228' 'pypdf>=4,<7' 'rank-bm25>=0.2.2,<0.3' \
+            'typer>=0.12' 'pytest>=8,<10' 'rfc8785==0.1.4' \
+            'spacy>=3.7' 'quantulum3>=0.4'
+          python -m pip install --no-deps -e _external/a
+          python -m pip install --no-deps -e _external/a/_deps/research-scaffold-harness
+          python -m pip install --no-deps -e _external/a/_deps/evidence-bundler
+          python -m pip install --no-deps -e _external/a/_deps/claim-audit-lab
+          python -m pip install --disable-pip-version-check -e './_external/apparatus-d[dev]'
+
+      - name: Verify exact R3 Contract A scientific subject
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/a:${{ github.workspace }}/_external/a/_deps/research-scaffold-harness:${{ github.workspace }}/_external/a/_deps/evidence-bundler:${{ github.workspace }}/_external/a/_deps/claim-audit-lab
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          root = pathlib.Path.cwd()
+          manifest = json.loads((root / 'research/contract-a-rc2-contract-e-pipeline-20260901/SUBJECT-IDENTITY-R3.json').read_text())
+          ref = root / '_external/a/research/contract-a-minimality-rc2-20260901/reference'
+          sys.path.insert(0, str(ref))
+          import run_conformance_v3 as v3
+
+          candidate = v3.rc2.make_candidate('declared')
+          expected = manifest['expected_subject']
+          assert candidate['schema'] == expected['schema']
+          assert candidate['handoff_id'] == expected['handoff_id']
+          assert candidate['handoff_sha256'] == expected['handoff_sha256']
+          assert candidate['producer']['producer_id'] == expected['producer_id']
+          assert candidate['producer']['producer_version'] == expected['producer_version']
+          assert candidate['work']['work_id'] == expected['work_id']
+          assert candidate['root_proposition']['proposition_id'] == expected['root_proposition']['proposition_id']
+          assert candidate['root_proposition']['text_sha256'] == expected['root_proposition']['text_sha256']
+          assert candidate['decomposition']['state'] == expected['decomposition']['state']
+          assert candidate['decomposition']['decomposition_id'] == expected['decomposition']['decomposition_id']
+          assert candidate['decomposition']['operator'] == expected['decomposition']['operator']
+          observed_children = [
+              {
+                  'proposition_id': row['proposition_id'],
+                  'text_sha256': row['text_sha256'],
+                  'sequence': row['sequence'],
+              }
+              for row in candidate['decomposition']['children']
+          ]
+          assert observed_children == expected['decomposition']['children']
+          assert [row['source_id'] for row in candidate['sources']] == expected['source_ids_in_generator_order']
+          print(json.dumps({'status': 'PASS', 'handoff_sha256': candidate['handoff_sha256'], 'subject_kind': manifest['subject_kind']}, sort_keys=True))
+          PY
+
+      - name: Self-test frozen Contract A evaluator
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/a
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/contract-a-rc2-contract-e-gate
+          python _external/a/research/contract-a-minimality-rc2-20260901/evaluator/test_candidate.py | tee artifacts/contract-a-rc2-contract-e-gate/A-EVALUATOR-SELFTEST.txt
+
+      - name: Self-test frozen Contract E evaluator
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/contract-a-rc2-contract-e-gate/e-selftest
+          EDIR=_external/e/docs/research/contract-e/epistemic-authority-propagation-rc0b
+          OUT_DIR="$PWD/artifacts/contract-a-rc2-contract-e-gate/e-selftest" python "$EDIR/evaluate.py" | tee artifacts/contract-a-rc2-contract-e-gate/E-EVALUATOR-SELFTEST.txt
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('artifacts/contract-a-rc2-contract-e-gate/e-selftest/RESULTS.json').read_text())
+          assert d['terminal_state']=='AUTHORITY_CHAIN_PROTOCOL_SUPPORTED_WITH_BOUNDS', d
+          assert d['candidate']['cases']==82, d['candidate']['cases']
+          assert d['candidate']['false_permits']==0
+          assert d['candidate']['false_rejects']==0
+          PY
+
+      - name: Run frozen A through Evidence Bundler and real CAL into Contract C
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/a:${{ github.workspace }}/_external/a/_deps/research-scaffold-harness:${{ github.workspace }}/_external/a/_deps/evidence-bundler:${{ github.workspace }}/_external/a/_deps/claim-audit-lab
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/contract-a-rc2-contract-e-pipeline-20260901/pipeline_gate.py | tee artifacts/contract-a-rc2-contract-e-gate/PIPELINE-STAGE.txt
+
+      - name: Run maintained Decision Engine into Contract D
+        shell: bash
+        run: |
+          set -euo pipefail
+          node research/contract-a-rc2-contract-e-pipeline-20260901/decision_gate.mjs | tee artifacts/contract-a-rc2-contract-e-gate/DECISION-STAGE.txt
+
+      - name: Validate Contract D and run bounded Contract E authority controls
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/apparatus-d
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/contract-a-rc2-contract-e-pipeline-20260901/e_gate.py | tee artifacts/contract-a-rc2-contract-e-gate/E-GATE.txt
+
+      - name: Build parent-only, atoms-only, and parent-plus-atoms projections
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/a:${{ github.workspace }}/_external/a/_deps/research-scaffold-harness:${{ github.workspace }}/_external/a/_deps/evidence-bundler:${{ github.workspace }}/_external/a/_deps/claim-audit-lab
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/contract-a-rc2-contract-e-pipeline-20260901/pressure_projection.py | tee artifacts/contract-a-rc2-contract-e-gate/PRESSURE-PROJECTION-STAGE.txt
+
+      - name: Run Decision Engine across pressure projections
+        shell: bash
+        run: |
+          set -euo pipefail
+          node research/contract-a-rc2-contract-e-pipeline-20260901/pressure_decision.mjs | tee artifacts/contract-a-rc2-contract-e-gate/PRESSURE-DECISION-STAGE.txt
+
+      - name: Run Contract E parent/atom cross-use pressure matrix
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/apparatus-d
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/contract-a-rc2-contract-e-pipeline-20260901/pressure_e.py | tee artifacts/contract-a-rc2-contract-e-gate/PRESSURE-E-STAGE.txt
+
+      - name: Seal hosted pressure-test receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          root=pathlib.Path('artifacts/contract-a-rc2-contract-e-gate')
+          files={}
+          for p in sorted(root.rglob('*')):
+              if p.is_file():
+                  files[str(p.relative_to(root))]='sha256:'+hashlib.sha256(p.read_bytes()).hexdigest()
+          receipt={
+              'schema':'contract-a-rc2-contract-e-pressure-run-receipt-v1',
+              'experiment_head':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+              'original_preregistration_commit':os.environ['PREREGISTRATION_COMMIT'],
+              'pressure_preregistration_commit':os.environ['PRESSURE_PREREGISTRATION_COMMIT'],
+              'pressure_r3_preregistration_commit':os.environ['PRESSURE_R3_PREREGISTRATION_COMMIT'],
+              'subject_identity_blob':os.environ['SUBJECT_IDENTITY_BLOB'],
+              'github_run_id':os.environ.get('GITHUB_RUN_ID'),
+              'github_run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'files':files,
+          }
+          (root/'RUN-RECEIPT.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          PY
+          find artifacts/contract-a-rc2-contract-e-gate -type f -print0 | sort -z | xargs -0 sha256sum > artifacts/contract-a-rc2-contract-e-gate/SHA256SUMS.txt
+
+      - name: Upload frozen pressure-test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-a-rc2-contract-e-pressure-${{ github.run_id }}
+          path: artifacts/contract-a-rc2-contract-e-gate/
+          if-no-files-found: error
+          retention-days: 90
