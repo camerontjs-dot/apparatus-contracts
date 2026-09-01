@@ -67,7 +67,6 @@ def qualify(output_dir: Path):
         if not row["exact_contract_match"]:
             failures.append(f"reference_mismatch:{case['id']}")
 
-    # Evaluator self-controls.
     negative_case = next(case for case in CASES if case["expected"]["allowed"] is False)
     positive_case = next(case for case in CASES if case["expected"]["allowed"] is True)
 
@@ -105,7 +104,6 @@ def qualify(output_dir: Path):
     if not bare_fp:
         failures.append("bare_resolution_control_not_discriminated")
 
-    # Coverage and pair integrity.
     kinds = Counter(case["request"].get("authority_kind") for case in CASES)
     positive_kinds = Counter(case["request"].get("authority_kind") for case in CASES if case["expected"]["allowed"] is True)
     negative_kinds = Counter(case["request"].get("authority_kind") for case in CASES if case["expected"]["allowed"] is False)
@@ -152,4 +150,4 @@ def qualify(output_dir: Path):
 
 
 if __name__ == "__main__":
-    qualify(Path("sealed/contract-e-authority-chain-fresh-rc1/qualification"))
+    qualify(Path("qualification"))
