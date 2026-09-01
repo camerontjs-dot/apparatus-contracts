@@ -41,9 +41,9 @@ The buckets classify **Contract A authority**, not whether a field exists somewh
 - `CORE_CANONICAL`: 6 families: 1, 2, 3, 4, 5, 7.
 - `OPTIONAL_CANONICAL`: none. Optionality that matters is represented by explicit state/cardinality inside core families rather than a new optional field family.
 - `PRODUCER_SPECIFIC_ATTACHMENT`: 2 families: 9, 20.
-- `LEGACY_ONLY`: 5 families: 8, 10, 11, 14, 18, 19. (Six numbered rows because 11 intentionally notes that scores have no demonstrated need.)
+- `LEGACY_ONLY`: 6 families: 8, 10, 11, 14, 18, 19. Retrieval score, within family 11, has no demonstrated A-level need despite query/rank remaining legacy-compatible state.
 - `FORBIDDEN_AUTHORITY`: 5 families: 12, 13, 15, 16, 17.
-- `REMOVE`: 1 family: 6, plus retrieval score as a subfield of family 11.
+- `REMOVE`: 1 whole family: 6, plus retrieval score as a removed subfield of family 11.
 
 ## Minimality conclusion
 
