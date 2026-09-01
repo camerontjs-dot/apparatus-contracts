@@ -20,6 +20,7 @@ The portfolio-level `decisions.md` (one level up) holds cross-asset decisions an
 | 2026-05-08 | v1.0.0 contract lock and design choices | Accepted |
 | 2026-05-08 | Naming: spec retains "Evidence Builder" as a contract role | Accepted |
 | 2026-05-15 | v1.1.0 vocabulary addition: `format_only` workflow condition | Accepted |
+| 2026-09-01 | Contract / apparatus separation invariant | Accepted |
 
 ---
 
@@ -87,3 +88,32 @@ A short naming note in `README.md` flags the two-name situation so a fresh reade
 - Skip the canonical update and let each consumer add `format_only` to its own Literal. Rejected because that would silently allow consumer drift: the verifier hashes vocabularies, so without a canonical addition the consumer literal would be locally permissive but globally inconsistent. The vocabulary distribution model requires the addition to happen at canonical first.
 
 **Verification:** Running `python -m validators verify-vocabulary` from the apparatus-contracts root reports zero drift across both extant consumers (CAL and EB) and marks the absent Harness consumer as `[absent]`. Running `python -m validators verify-spec-vocabulary` confirms the spec's controlled-vocabulary table and the canonical YAML agree.
+
+---
+
+## 2026-09-01: Contract / apparatus separation invariant
+
+**Status:** Accepted
+
+**Decision:** Adopt a repository-wide architectural invariant: every apparatus is developed, tested, and reasoned about against its governing contract rather than against the incidental output shape of the current neighboring apparatus. Producer implementation, contract authority, and consumer implementation remain separate authorities with separate change histories.
+
+The normative repository policy is [`APPARATUS-CONTRACT-SEPARATION.md`](APPARATUS-CONTRACT-SEPARATION.md). It applies explicitly to the upstream producer / Contract A / Evidence Bundler boundary, Evidence Bundler / Contract B / CAL boundary, CAL / Contract C / Decision Engine boundary, Decision Engine / Contract D / Authorization boundary, and future apparatuses.
+
+**Consequences:**
+
+- A current apparatus output is a concrete contract instance, not the definition of the contract.
+- A field or state not exercised by today's producer remains part of the contract when the canonical contract defines it.
+- Producer-private state cannot become downstream authority unless the governing contract carries it.
+- Apparatus evolution does not silently mutate a contract, and contract evolution requires a separate evidence and promotion decision.
+- Cross-repository tests distinguish producer conformance, contract sufficiency, and consumer conformance/recoverability even when one vertical slice exercises all three.
+- Failures are localized to the first violated authority boundary before changing downstream behavior.
+
+**Why:** Building a downstream apparatus around today's upstream output couples implementations that are supposed to be independently replaceable. It also risks shrinking a contract to the subset populated by one current producer or promoting producer-private behavior into cross-apparatus authority. The contract exists specifically to prevent that coupling.
+
+**Rejected alternatives:**
+
+- Treat the current producer output as the practical interface and update the contract later. Rejected because this reverses authority and makes downstream correctness depend on incidental implementation state.
+- Repeat the rule independently inside each apparatus repository without a canonical cross-boundary statement. Rejected because the rule itself concerns the relationship between repositories and would be vulnerable to drift or omission.
+- Add the rule separately to every versioned contract specification. Rejected as the primary mechanism because it is repository-wide governance, not a semantic field change to Contract A, B, C, D, or a research Contract E candidate. Individual specifications may restate the invariant where useful, but this decision applies without requiring contract-version churn.
+
+**Version consequence:** None. This decision changes repository governance and interpretation discipline, not any canonical contract schema, vocabulary, serialized semantics, or released object.
