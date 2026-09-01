@@ -18,6 +18,12 @@ concurrency:
 env:
   PREREGISTRATION_COMMIT: b13ba252bb2a48336402baebbdf854f7874f52b7
   PRESSURE_PREREGISTRATION_COMMIT: 44e8a714596423fb372257e150be02c1ea8e8533
+  PRESSURE_R3_PREREGISTRATION_COMMIT: 28e61f51a217f25b028018dc7432477f327864f9
+  SUBJECT_IDENTITY_BLOB: f9b7c7fc389c4e852c5406ecab3e09ac9f6f3171
+  A_REFERENCE_GENERATOR_BLOB: 1765b489590fca10462ad451847e0ddcb249f77f
+  RSH_SOURCE_LOADER_BLOB: 0f7dd438df770239137b7ab11f796390b45155fe
+  RSH_PRIMARY_CONTENT_BLOB: 616634d68b0b9026222eabe94696a56bf8d93140
+  RSH_SYNTHETIC_CONTENT_BLOB: 51e538a85c8501c055393396c2bece121ccb0795
   APPARATUS_BASE: 6a45ab2de09370f3048ffb083e25b487f81117e4
   A_RESEARCH_HEAD: 2e50567c4da2a4046a15bddfc3feee31296da3fb
   A_CANDIDATE_TREE: 54e5cfc659c574a1520ebc119d66e93d4f71ce34
@@ -120,12 +126,18 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse "$PREREGISTRATION_COMMIT")" = "$PREREGISTRATION_COMMIT"
           test "$(git rev-parse "$PRESSURE_PREREGISTRATION_COMMIT")" = "$PRESSURE_PREREGISTRATION_COMMIT"
+          test "$(git rev-parse "$PRESSURE_R3_PREREGISTRATION_COMMIT")" = "$PRESSURE_R3_PREREGISTRATION_COMMIT"
+          test "$(git hash-object research/contract-a-rc2-contract-e-pipeline-20260901/SUBJECT-IDENTITY-R3.json)" = "$SUBJECT_IDENTITY_BLOB"
           git merge-base --is-ancestor "$APPARATUS_BASE" HEAD
           test "$(git -C _external/a rev-parse HEAD)" = "$A_RESEARCH_HEAD"
           test "$(git -C _external/a rev-parse HEAD:research/contract-a-minimality-rc2-20260901/candidate)" = "$A_CANDIDATE_TREE"
           test "$(git -C _external/a rev-parse HEAD:research/contract-a-minimality-rc2-20260901/reference)" = "$A_REFERENCE_TREE"
           test "$(git -C _external/a rev-parse HEAD:research/contract-a-minimality-rc2-20260901/evaluator)" = "$A_EVALUATOR_TREE"
+          test "$(git -C _external/a hash-object research/contract-a-minimality-rc2-20260901/reference/run_conformance.py)" = "$A_REFERENCE_GENERATOR_BLOB"
           test "$(git -C _external/a/_deps/research-scaffold-harness rev-parse HEAD)" = "$RSH_SHA"
+          test "$(git -C _external/a/_deps/research-scaffold-harness hash-object src/research_scaffold_harness/runner/source_packet.py)" = "$RSH_SOURCE_LOADER_BLOB"
+          test "$(git -C _external/a/_deps/research-scaffold-harness hash-object pilots/pilot-001-rsh-001/sources/src-cgmp-quality-systems/content.md)" = "$RSH_PRIMARY_CONTENT_BLOB"
+          test "$(git -C _external/a/_deps/research-scaffold-harness hash-object pilots/pilot-001-rsh-001/sources/src-fictional-compliance-review-note/content.md)" = "$RSH_SYNTHETIC_CONTENT_BLOB"
           test "$(git -C _external/a/_deps/evidence-bundler rev-parse HEAD)" = "$EB_SHA"
           test "$(git -C _external/a/_deps/claim-audit-lab rev-parse HEAD)" = "$CAL_SHA"
           test "$(git -C _external/decision rev-parse HEAD)" = "$DECISION_SHA"
@@ -158,6 +170,49 @@ jobs:
           python -m pip install --no-deps -e _external/a/_deps/evidence-bundler
           python -m pip install --no-deps -e _external/a/_deps/claim-audit-lab
           python -m pip install --disable-pip-version-check -e './_external/apparatus-d[dev]'
+
+      - name: Verify exact R3 Contract A scientific subject
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/a:${{ github.workspace }}/_external/a/_deps/research-scaffold-harness:${{ github.workspace }}/_external/a/_deps/evidence-bundler:${{ github.workspace }}/_external/a/_deps/claim-audit-lab
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          root = pathlib.Path.cwd()
+          manifest = json.loads((root / 'research/contract-a-rc2-contract-e-pipeline-20260901/SUBJECT-IDENTITY-R3.json').read_text())
+          ref = root / '_external/a/research/contract-a-minimality-rc2-20260901/reference'
+          sys.path.insert(0, str(ref))
+          import run_conformance_v3 as v3
+
+          candidate = v3.rc2.make_candidate('declared')
+          expected = manifest['expected_subject']
+          assert candidate['schema'] == expected['schema']
+          assert candidate['handoff_id'] == expected['handoff_id']
+          assert candidate['handoff_sha256'] == expected['handoff_sha256']
+          assert candidate['producer']['producer_id'] == expected['producer_id']
+          assert candidate['producer']['producer_version'] == expected['producer_version']
+          assert candidate['work']['work_id'] == expected['work_id']
+          assert candidate['root_proposition']['proposition_id'] == expected['root_proposition']['proposition_id']
+          assert candidate['root_proposition']['text_sha256'] == expected['root_proposition']['text_sha256']
+          assert candidate['decomposition']['state'] == expected['decomposition']['state']
+          assert candidate['decomposition']['decomposition_id'] == expected['decomposition']['decomposition_id']
+          assert candidate['decomposition']['operator'] == expected['decomposition']['operator']
+          observed_children = [
+              {
+                  'proposition_id': row['proposition_id'],
+                  'text_sha256': row['text_sha256'],
+                  'sequence': row['sequence'],
+              }
+              for row in candidate['decomposition']['children']
+          ]
+          assert observed_children == expected['decomposition']['children']
+          assert [row['source_id'] for row in candidate['sources']] == expected['source_ids_in_generator_order']
+          print(json.dumps({'status': 'PASS', 'handoff_sha256': candidate['handoff_sha256'], 'subject_kind': manifest['subject_kind']}, sort_keys=True))
+          PY
 
       - name: Self-test frozen Contract A evaluator
         env:
@@ -245,6 +300,8 @@ jobs:
               'experiment_head':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
               'original_preregistration_commit':os.environ['PREREGISTRATION_COMMIT'],
               'pressure_preregistration_commit':os.environ['PRESSURE_PREREGISTRATION_COMMIT'],
+              'pressure_r3_preregistration_commit':os.environ['PRESSURE_R3_PREREGISTRATION_COMMIT'],
+              'subject_identity_blob':os.environ['SUBJECT_IDENTITY_BLOB'],
               'github_run_id':os.environ.get('GITHUB_RUN_ID'),
               'github_run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),
               'files':files,
