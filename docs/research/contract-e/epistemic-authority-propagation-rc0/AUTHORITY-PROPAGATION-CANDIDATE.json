@@ -1,0 +1,110 @@
+{
+  "schema": "contract-e-epistemic-authority-propagation-rc0-candidate-v1",
+  "classification": "research-only-meta-protocol",
+  "normative_contract_e_source_modified": false,
+  "principles": [
+    "no_authority_from_nowhere",
+    "authority_ceiling",
+    "non_transitive_by_default",
+    "proposal_preservation",
+    "comparison_narrowness",
+    "sticky_relevant_conflict_and_residue",
+    "embedding_scope_firewall",
+    "explicit_composition_authority",
+    "decision_not_execution",
+    "execution_not_verification",
+    "invalid_chain_fails_even_if_terminal_outcome_is_correct"
+  ],
+  "authority_kinds": [
+    "observation",
+    "measurement",
+    "semantic",
+    "comparison",
+    "composition",
+    "decision",
+    "action",
+    "verification"
+  ],
+  "statuses": [
+    "established",
+    "contested",
+    "unresolved",
+    "insufficient_authority",
+    "prohibited"
+  ],
+  "producer_allowed_kinds": {
+    "source_observer": ["observation"],
+    "language_instrument": ["measurement"],
+    "comparison_engine": ["comparison"],
+    "semantic_validator": ["semantic"],
+    "composition_governor": ["composition"],
+    "decision_engine": ["decision"],
+    "action_authorizer": ["action"],
+    "outcome_verifier": ["verification"],
+    "executor_reporter": ["measurement"]
+  },
+  "required_dependency_kinds": {
+    "observation": [],
+    "measurement": ["observation"],
+    "comparison": ["measurement"],
+    "semantic": ["measurement"],
+    "composition": ["semantic"],
+    "decision": ["semantic", "composition"],
+    "action": ["decision"],
+    "verification": ["observation"]
+  },
+  "explicit_basis_required_for": [
+    "measurement",
+    "semantic",
+    "composition",
+    "decision",
+    "action",
+    "verification"
+  ],
+  "authority_conferring_basis_fields": [
+    "subject",
+    "domain",
+    "operation",
+    "scope",
+    "target_class",
+    "current",
+    "valid"
+  ],
+  "comparison_relations": [
+    "EXACT_AGREEMENT",
+    "SEMANTIC_EQUIVALENCE",
+    "COMPATIBLE_PARTIAL_OVERLAP",
+    "COMPLEMENTARY_ORTHOGONAL",
+    "GRANULARITY_MISMATCH",
+    "SLOT_BOUNDARY_DISAGREEMENT",
+    "SCOPE_ATTACHMENT_DISAGREEMENT",
+    "ROLE_BINDING_DISAGREEMENT",
+    "OPERATOR_VALUE_DISAGREEMENT",
+    "POLARITY_DISAGREEMENT",
+    "JURISDICTION_DISAGREEMENT",
+    "PROVENANCE_OR_VISIBILITY_DISAGREEMENT",
+    "CONTRADICTION",
+    "INCOMMENSURABLE"
+  ],
+  "comparison_authority": {
+    "may_establish": ["measurement_relation", "coverage_asymmetry", "representation_instability", "convergence_observed"],
+    "may_not_establish": ["semantic_truth", "winner", "decision", "action"]
+  },
+  "embedding_operators": [
+    "quantifier",
+    "modality",
+    "probability",
+    "permission",
+    "conditional",
+    "attribution",
+    "temporal",
+    "quantitative",
+    "exception",
+    "negation"
+  ],
+  "residue_rule": "authority-relevant unresolved residue/conflict is sticky until discharged by an explicit resolver whose basis covers that residue; irrelevant residue remains preserved but does not block",
+  "composition_rule": "all authority-relevant component semantics must be established and an explicit composition basis must cover the exact component dimensions and operation",
+  "action_rule": "decision authority never substitutes for a separate current authority-conferring action basis",
+  "verification_rule": "executor report never substitutes for separately authorized outcome verification",
+  "preservation_rule": "raw source, native proposals, conflicts, comparison receipts, rejections, and residue are append-only evidence and are never deleted by an authority decision"
+}
