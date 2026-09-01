@@ -1,0 +1,21 @@
+{
+  "candidate_freeze": "7146b946989fab8c4eaef48ef9c6c7d39e21ada2",
+  "case_count": 82,
+  "classification": "normal_context_research_only",
+  "contract_e_1_0_0_authorized": false,
+  "deviations": [],
+  "evaluator_freeze": "9879d1d029631e390200d87dde6f840338438440",
+  "heldout_freeze": "a937f85aa5ebd6c9ae118b28828580684ff2986d",
+  "output_sha256": {
+    "REPORT.md": "bcaf6e0aaf2dbd996b3a4c048883aaa9c4b087b64d55b8155b79cc0cdeb2f26f",
+    "RESULTS.json": "2b65e9236a73d619f636d532eeccf8e6d8a2d868e5b5effd3005c491972fade4",
+    "ROWS.json": "57b51e7683ff7d8a44f2699a355c34c5f70a0e4a9d059dbe6f591a464dd18dc6",
+    "STDOUT.txt": "6be9692b574f3d4814ebd6c914c6e99e1c69fb89d00d01f85dcc613b87b5fd0c"
+  },
+  "predecessor_evidence": "2130e26052f68c28439dc8c2d1dcf59624efce51",
+  "preregistration": "7bcb6b2b74646488aa88fd407119d6f2d6f87435",
+  "production_authorization": false,
+  "run_head": "234ac8faaf3c0cf9f61aeeeca0b7bfc39c64d820",
+  "terminal_state": "AUTHORITY_CHAIN_PROTOCOL_SUPPORTED_WITH_BOUNDS",
+  "workflow_run_id": 33465304645
+}
