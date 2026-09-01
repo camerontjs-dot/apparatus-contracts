@@ -1,0 +1,236 @@
+name: Contract A 2.0.0 release lock
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'releases/contract-a/2.0.0.md'
+      - 'CHANGELOG.md'
+      - '.github/workflows/contract-a-2.0.0-release-lock.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'releases/contract-a/2.0.0.md'
+      - 'CHANGELOG.md'
+      - '.github/workflows/contract-a-2.0.0-release-lock.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  APPARATUS_PROMOTION_MAIN: b59c2fbe38bae78a3a35699362c0e67d17152e4b
+  A_RESEARCH_HEAD: 2e50567c4da2a4046a15bddfc3feee31296da3fb
+  INDEPENDENT_FREEZE: 464ccae7aa89371a5b7df00c73b3e7d4372a8f8c
+  INDEPENDENT_IMPL_BLOB: 84c50051242873c304be18c4d8a2f4173a811988
+  RSH_SHA: 548bfa81f65290eda15af658f647497679b840ef
+  EB_SHA: 6011789957f3294f97bff260069cfb5bb1c5772f
+  CAL_SHA: 53f0885b111676794d1bd20e10b91aa58b07e9d4
+  EXPECTED_REAL_PILOT_HANDOFF: sha256:de23b0eb66b3316e85bd9fbc73f4dfe2b6525a1e73783fca8d6e1fbd9bb0189d
+  CONTRACT_A_TAG: contract-a-v2.0.0
+
+jobs:
+  release-lock:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact release candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify release-only mutation surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor "$APPARATUS_PROMOTION_MAIN" HEAD
+          unexpected="$({ git diff --name-only "$APPARATUS_PROMOTION_MAIN"...HEAD || true; } | grep -Ev '^(releases/contract-a/2\.0\.0\.md|CHANGELOG\.md|\.github/workflows/contract-a-2\.0\.0-release-lock\.yml)$' || true)"
+          test -z "$unexpected" || { echo 'Unexpected release-tree mutation:' >&2; echo "$unexpected" >&2; exit 1; }
+      - name: Prove promoted Contract A surface is byte-unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code "$APPARATUS_PROMOTION_MAIN" -- \
+            contract-a-v2.0.0.md \
+            schema/contract-a \
+            fixtures/contract-a \
+            validators/contract_a.py \
+            validators/contract_a_rc2.py \
+            tests/test_contract_a_v2.py \
+            .github/workflows/contract-a-2.0.0-promotion.yml
+          test "$(git hash-object schema/contract-a/2.0.0/wire-spec.md)" = "2e7c37fca9aa6bdd1090fb527a663bdbe606ebcb"
+          test "$(git hash-object schema/contract-a/2.0.0/schema.json)" = "ff5cddfeacf4511136a3dd3b47db1a794b631cd9"
+          test "$(git hash-object validators/contract_a_rc2.py)" = "42e5f5b3bf38d677445e9d01ea130ba604e53409"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install exact production dependencies
+        run: python -m pip install --disable-pip-version-check -e '.[dev]'
+      - name: Re-run Contract A and full repository conformance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q tests/test_contract_a_v2.py
+          python -m pytest -q tests/
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from validators.contract_a import CONTRACT_A_VERSION, WIRE_SCHEMA_TOKEN
+          assert CONTRACT_A_VERSION == '2.0.0'
+          versions=json.loads(Path('schema/contract-a/versions.json').read_text())
+          assert versions['canonical_version']=='2.0.0'
+          assert versions['supported_versions']==['2.0.0']
+          assert versions['wire_schema_token']==WIRE_SCHEMA_TOKEN=='contract-a-wire-candidate-rc2'
+          assert Path('releases/contract-a/2.0.0.md').exists()
+          PY
+
+  frozen-independent-consumer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout immutable prereveal independent implementation
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.INDEPENDENT_FREEZE }}
+          path: _independent
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Verify independent freeze and rerun prereveal tests unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _independent hash-object research/contract-a-rc2-fresh-reproduction/independent/contract_a_rc2.py)" = "$INDEPENDENT_IMPL_BLOB"
+          python -m unittest discover -s _independent/research/contract-a-rc2-fresh-reproduction/independent/tests -v
+      - name: Compare independent and release validators on canonical fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import importlib.util, json, sys
+          from pathlib import Path
+          from validators.contract_a import ContractAValidationError, compute_handoff_sha256, validate_candidate
+          p=Path('_independent/research/contract-a-rc2-fresh-reproduction/independent/contract_a_rc2.py')
+          spec=importlib.util.spec_from_file_location('independent_a_release',p)
+          independent=importlib.util.module_from_spec(spec)
+          sys.modules[spec.name]=independent
+          spec.loader.exec_module(independent)
+          root=Path('fixtures/contract-a/2.0.0')
+          valid=['valid-all-of.json','valid-failed-decomposition.json','valid-undecomposed.json','valid-unknown-decomposition.json']
+          invalid=['invalid-forbidden-semantic-field.json','invalid-missing-proposition-id.json','invalid-source-content-hash.json']
+          for name in valid:
+              obj=json.loads((root/name).read_text())
+              validate_candidate(obj); independent.validate_candidate(obj)
+              assert compute_handoff_sha256(obj)==independent.compute_handoff_sha256(obj)==obj['handoff_sha256']
+          for name in invalid:
+              obj=json.loads((root/name).read_text())
+              ours=theirs=False
+              try: validate_candidate(obj)
+              except ContractAValidationError: ours=True
+              try: independent.validate_candidate(obj)
+              except independent.ContractAValidationError: theirs=True
+              assert ours and theirs, (name,ours,theirs)
+          print('RELEASE_INDEPENDENT_AGREEMENT', len(valid)+len(invalid))
+          PY
+
+  exact-real-pilot-subject:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout frozen Contract A research authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.A_RESEARCH_HEAD }}
+          path: _frozen_a
+      - name: Checkout exact frozen pipeline dependencies
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.RSH_SHA }}
+          path: _frozen_a/_deps/research-scaffold-harness
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: ${{ env.EB_SHA }}
+          path: _frozen_a/_deps/evidence-bundler
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CAL_SHA }}
+          path: _frozen_a/_deps/claim-audit-lab
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install bounded frozen-reference dependencies
+        shell: bash
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'pydantic>=2.6,<3' 'PyYAML>=6,<7' 'click>=8.1,<9' \
+            'pdfminer.six>=20231228' 'pypdf>=4,<7' 'rank-bm25>=0.2.2,<0.3' \
+            'typer>=0.12' 'pytest>=8,<10' 'rfc8785==0.1.4' \
+            'spacy>=3.7' 'quantulum3>=0.4'
+          python -m pip install --no-deps -e _frozen_a
+          python -m pip install --no-deps -e _frozen_a/_deps/research-scaffold-harness
+          python -m pip install --no-deps -e _frozen_a/_deps/evidence-bundler
+          python -m pip install --no-deps -e _frozen_a/_deps/claim-audit-lab
+      - name: Reconstruct exact real-pilot subject and consume with release validator
+        env:
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/_frozen_a:${{ github.workspace }}/_frozen_a/_deps/research-scaffold-harness:${{ github.workspace }}/_frozen_a/_deps/evidence-bundler:${{ github.workspace }}/_frozen_a/_deps/claim-audit-lab
+        shell: bash
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          from validators.contract_a import WIRE_SCHEMA_TOKEN, validate_candidate
+          ref=Path('_frozen_a/research/contract-a-minimality-rc2-20260901/reference').resolve()
+          sys.path.insert(0,str(ref))
+          import run_conformance_v3 as v3
+          candidate=v3.rc2.make_candidate('declared')
+          assert candidate['schema']==WIRE_SCHEMA_TOKEN
+          assert candidate['handoff_sha256']=='sha256:de23b0eb66b3316e85bd9fbc73f4dfe2b6525a1e73783fca8d6e1fbd9bb0189d'
+          validate_candidate(candidate)
+          for state in ('not_decomposed','failed','unknown'):
+              validate_candidate(v3.rc2.make_candidate(state))
+          print('RELEASE_REAL_PILOT_PASS', candidate['handoff_sha256'])
+          PY
+
+  seal:
+    needs: [release-lock, frozen-independent-consumer, exact-real-pilot-subject]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Write machine-readable Contract A release-lock receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/contract-a-2.0.0-release-lock
+          cat > build/contract-a-2.0.0-release-lock/release-lock-receipt.json <<JSON
+          {
+            "status": "PASS",
+            "contract_a_version": "2.0.0",
+            "release_commit": "${GITHUB_SHA}",
+            "namespaced_tag": "${CONTRACT_A_TAG}",
+            "apparatus_promotion_main": "${APPARATUS_PROMOTION_MAIN}",
+            "a_research_head": "${A_RESEARCH_HEAD}",
+            "independent_freeze": "${INDEPENDENT_FREEZE}",
+            "independent_impl_blob": "${INDEPENDENT_IMPL_BLOB}",
+            "real_pilot_handoff": "${EXPECTED_REAL_PILOT_HANDOFF}",
+            "wire_schema_token": "contract-a-wire-candidate-rc2",
+            "production_machine_surface_byte_unchanged": true,
+            "full_regression_python_311_312_313": true,
+            "frozen_independent_consumer_agreement": true,
+            "exact_real_pilot_consumption": true,
+            "contract_e_or_authorization_promoted": false
+          }
+          JSON
+          cat build/contract-a-2.0.0-release-lock/release-lock-receipt.json
+      - name: Upload release-lock receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-a-2.0.0-release-lock
+          path: build/contract-a-2.0.0-release-lock/release-lock-receipt.json
+          retention-days: 90
