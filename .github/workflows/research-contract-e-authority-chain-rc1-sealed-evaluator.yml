@@ -42,12 +42,20 @@ jobs:
             sealed/contract-e-authority-chain-fresh-rc1/evaluate_fresh.py \
             sealed/contract-e-authority-chain-fresh-rc1/qualify.py
 
-      - name: Qualify sealed evaluator before fresh implementation
+      - name: Run qualification and preserve failure diagnostics
         shell: bash
         run: |
-          set -euo pipefail
-          cd sealed/contract-e-authority-chain-fresh-rc1
-          python qualify.py
+          set -uo pipefail
+          root="sealed/contract-e-authority-chain-fresh-rc1"
+          mkdir -p "$root/qualification"
+          set +e
+          (cd "$root" && python qualify.py) >"$root/qualification/QUALIFIER_STDOUT.txt" 2>"$root/qualification/QUALIFIER_STDERR.txt"
+          rc=$?
+          set -e
+          printf '%s\n' "$rc" > "$root/qualification/QUALIFIER_EXIT_CODE.txt"
+          if [ ! -f "$root/qualification/QUALIFICATION.json" ]; then
+            printf '{"qualified":false,"case_count":0,"failures":["qualifier_failed_before_result"]}\n' > "$root/qualification/QUALIFICATION.json"
+          fi
 
       - name: Write sealed qualification receipt
         shell: bash
@@ -68,13 +76,13 @@ jobs:
               'aperture_bootstrap_blob': 'ed59344c6471404d49bba3f9c4a5e362f875976e',
               'workflow_head': os.environ['GITHUB_SHA'],
               'workflow_run_id': int(os.environ['GITHUB_RUN_ID']),
-              'qualified': q['qualified'],
-              'case_count': q['case_count'],
+              'qualified': bool(q.get('qualified')),
+              'case_count': int(q.get('case_count', 0)),
               'canonical_case_json_sha256': '5d34dc72a3175c6c4390d07219cb2f06a8e18c1b09bd16cff079ffd52a6ae241',
               'compressed_case_payload_sha256': 'aa3cd4e3162f0f457d684b9c1d57ec76aa27c32ee87df14c33cd052c2829f34e',
               'evaluator_file_sha256': {name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in names},
               'qualification_sha256': hashlib.sha256((root/'qualification/QUALIFICATION.json').read_bytes()).hexdigest(),
-              'deviations': [],
+              'deviations': ['initial qualification run 33466872751 stopped inside evaluator qualification before evidence upload; no fresh implementation existed and the frozen pre-freeze aperture was unchanged'],
           }
           (root/'qualification/SEALED_RUN_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+'\n')
           PY
@@ -94,3 +102,14 @@ jobs:
           git add sealed/contract-e-authority-chain-fresh-rc1/qualification/
           git commit -m "Research evidence: qualify Contract E authority-chain RC1 sealed evaluator"
           git push origin HEAD:sealed/contract-e-authority-chain-fresh-rc1-eval-20260901
+
+      - name: Gate evaluator qualification
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          q = json.loads(Path('sealed/contract-e-authority-chain-fresh-rc1/qualification/QUALIFICATION.json').read_text())
+          if not q.get('qualified'):
+              raise SystemExit('sealed evaluator is not qualified')
+          PY
