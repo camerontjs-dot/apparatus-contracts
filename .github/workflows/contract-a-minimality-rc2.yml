@@ -91,7 +91,7 @@ jobs:
       - name: Run pinned cross-repository minimality experiment
         run: |
           set -o pipefail
-          python research/contract-a-minimality-rc2-20260901/reference/run_conformance_v2.py \
+          python research/contract-a-minimality-rc2-20260901/reference/run_conformance_v3.py \
             2>&1 | tee research/contract-a-minimality-rc2-20260901/evidence/cross-repo-conformance.log
 
       - name: Upload research evidence
