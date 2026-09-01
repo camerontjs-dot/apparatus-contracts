@@ -1,0 +1,12 @@
+{
+  "canonical_version": "2.0.0",
+  "supported_versions": [
+    "2.0.0"
+  ],
+  "wire_schema_token": "contract-a-wire-candidate-rc2",
+  "legacy_authority": {
+    "version": "1.0.0",
+    "spec": "handoff-contract-v1.0.0.md",
+    "status": "immutable_historical_major_version"
+  }
+}

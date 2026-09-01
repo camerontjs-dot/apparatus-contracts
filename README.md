@@ -8,9 +8,15 @@ The maintained architecture is intentionally asymmetric. A contract exists only 
 
 ### Contract A — upstream work object → Evidence Bundler
 
-The legacy v1.0 handoff remains the maintained upstream contract authority while modernization research continues. Current research is testing the smallest upstream representation Evidence Bundler actually needs, including proposition identity and decomposition lineage, without treating upstream semantic assertions as downstream truth.
+Contract A 2.0.0 is the canonical production upstream declaration/source-representation contract after its promotion gate completes. It carries exact producer/work/root proposition identity, explicit decomposition state and declared `all_of` lineage where present, exact supplied UTF-8 source representations, and whole-object integrity without importing support, trust, retrieval, CAL, Decision, or Authorization semantics.
 
-Canonical legacy specification: [`handoff-contract-v1.0.0.md`](handoff-contract-v1.0.0.md)
+Specification: [`contract-a-v2.0.0.md`](contract-a-v2.0.0.md)
+
+The 2.0.0 public compatibility version deliberately retains the exact frozen RC2 integrity-bound wire token and machine semantics. The byte-identical wire authority lives under `schema/contract-a/2.0.0/`; `validators/contract_a.py` is the canonical production entry point.
+
+Legacy Contract A 1.0.0 remains immutable historical authority at [`handoff-contract-v1.0.0.md`](handoff-contract-v1.0.0.md). The change is major-class; legacy objects are not silently reinterpreted as 2.0.0.
+
+The production/version decision and bounded Contract E pre-promotion evidence are recorded in EDR-004 / issue #60 and terminal research PRs #57 and #61.
 
 ### Contract B — Evidence Bundler → Claim Audit Lab
 
@@ -42,7 +48,7 @@ A Decision is not automatic permission to execute an effect.
 
 Contract E is research-only, and the current question is deliberately broader than "what should the next serialized contract look like?" Research is testing standing authority state, typed jurisdiction, authority-basis binding, delegation/currentness, participant declarations, transient authorization receipts, and local enforcement as potentially cross-cutting machinery.
 
-No canonical Contract E schema or production authority control plane is established here.
+No canonical Contract E schema or production authority control plane is established here. Contract A 2.0.0 does not absorb the known unresolved Contract E qualification or surplus-record semantics.
 
 ## Boundary rules
 
@@ -75,6 +81,7 @@ Important top-level surfaces include:
 ```text
 APPARATUS-CONTRACT-SEPARATION.md             repository-wide boundary governance
 handoff-contract-v1.0.0.md                  legacy Contract A / original A+B authority
+contract-a-v2.0.0.md                         canonical Contract A 2.0.0 authority
 contract-b-factual-context-extension-v1.2.0.md
 contract-c-v1.0.0.md
 contract-d-v1.0.0.md
@@ -97,6 +104,8 @@ Research branches may contain newer-looking schemas or richer objects. They are 
 ## Verification
 
 The repository's verifier and acceptance workflows protect structural, vocabulary, identity, integrity, and cross-repository conformance properties appropriate to each maintained contract.
+
+Contract A 2.0.0 promotion additionally proves byte identity to the frozen RC2 wire authority, reruns the immutable prereveal independent implementation, compares independent and production behavior on all public fixtures, and consumes the exact real-pilot subject with the production validator.
 
 These checks are intentionally narrower than semantic truth. Structural validation does not establish source legitimacy, retrieval completeness, CAL semantic correctness, Decision policy correctness, or execution authorization.
 
@@ -122,7 +131,7 @@ A research result does not become production behavior merely because its branch 
 
 ## Known limits
 
-The legacy Contract A surface predates the current proposition/decomposition ownership research and is being revalidated rather than silently reinterpreted.
+Contract A 2.0.0 is a breaking successor to legacy Contract A 1.0.0. Current strict legacy consumers may require a separate compatibility carrier. Contract A does not establish decomposition semantic correctness or downstream authority.
 
 Contract B 1.2.0 is production-locked, but its contract-specific release identity is tracked separately from that behavioral lock.
 

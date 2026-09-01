@@ -1,0 +1,16 @@
+{
+  "schema": "contract-a-wire-candidate-rc2",
+  "handoff_id": "handoff-rsh-supplier-missing-id-001",
+  "producer": {
+    "producer_id": "research-scaffold-harness",
+    "producer_version": "548bfa81f65290eda15af658f647497679b840ef"
+  },
+  "work": {"work_id": "pilot-001-rsh-001:clm-supplier-qualification"},
+  "root_proposition": {
+    "text": "The manufacturer requires supplier qualification audits before approving alternative raw material sources.",
+    "text_sha256": "sha256:5fc1d3d66aaac30d1502966576d536370ba82f8433260693ea13152a9a228712"
+  },
+  "decomposition": {"state": "not_decomposed"},
+  "sources": [],
+  "handoff_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}
