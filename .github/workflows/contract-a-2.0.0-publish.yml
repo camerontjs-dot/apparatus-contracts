@@ -25,6 +25,9 @@ env:
   CONTRACT_A_TAG: contract-a-v2.0.0
   CONTRACT_A_VERSION: 2.0.0
   WIRE_SCHEMA_TOKEN: contract-a-wire-candidate-rc2
+  FROZEN_SPEC_BLOB: 2e7c37fca9aa6bdd1090fb527a663bdbe606ebcb
+  FROZEN_SCHEMA_BLOB: ff5cddfeacf4511136a3dd3b47db1a794b631cd9
+  FROZEN_VALIDATOR_BLOB: 42e5f5b3bf38d677445e9d01ea130ba604e53409
 
 jobs:
   verify-sealed-release:
@@ -52,7 +55,9 @@ jobs:
             .github/workflows/contract-a-2.0.0-promotion.yml \
             .github/workflows/contract-a-2.0.0-release-lock.yml \
             releases/contract-a/2.0.0.md
-          test "$(git hash-object "$RELEASE_COMMIT:schema/contract-a/2.0.0/wire-spec.md" 2>/dev/null || true)" != '' || true
+          test "$(git rev-parse "$RELEASE_COMMIT:schema/contract-a/2.0.0/wire-spec.md")" = "$FROZEN_SPEC_BLOB"
+          test "$(git rev-parse "$RELEASE_COMMIT:schema/contract-a/2.0.0/schema.json")" = "$FROZEN_SCHEMA_BLOB"
+          test "$(git rev-parse "$RELEASE_COMMIT:validators/contract_a_rc2.py")" = "$FROZEN_VALIDATOR_BLOB"
           test "$(git show "$RELEASE_COMMIT:schema/contract-a/versions.json" | python -c 'import json,sys; d=json.load(sys.stdin); print(d["canonical_version"])')" = "$CONTRACT_A_VERSION"
           test "$(git show "$RELEASE_COMMIT:schema/contract-a/versions.json" | python -c 'import json,sys; d=json.load(sys.stdin); print(d["wire_schema_token"])')" = "$WIRE_SCHEMA_TOKEN"
 
