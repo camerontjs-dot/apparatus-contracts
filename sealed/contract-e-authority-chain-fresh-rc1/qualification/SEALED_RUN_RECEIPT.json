@@ -1,0 +1,25 @@
+{
+  "aperture_bootstrap_blob": "ed59344c6471404d49bba3f9c4a5e362f875976e",
+  "aperture_contract_blob": "9a82515391beb8ca57fc5ab861c5c389b7750914",
+  "aperture_head_before_seal": "da3f7fd2664f9037452ca001b3c816a73ace79d7",
+  "canonical_case_json_sha256": "5d34dc72a3175c6c4390d07219cb2f06a8e18c1b09bd16cff079ffd52a6ae241",
+  "case_count": 0,
+  "classification": "sealed_before_fresh_implementation",
+  "compressed_case_payload_sha256": "aa3cd4e3162f0f457d684b9c1d57ec76aa27c32ee87df14c33cd052c2829f34e",
+  "deviations": [
+    "initial qualification run 33466872751 stopped inside evaluator qualification before evidence upload; no fresh implementation existed and the frozen pre-freeze aperture was unchanged"
+  ],
+  "evaluator_file_sha256": {
+    "EVALUATOR-CONTRACT.md": "317f89f2d59e2059d686737d2d4ddbc65119ea3b9732fa11ca3383ce4c317691",
+    "evaluate_fresh.py": "de092bc4d48264c437959dd7dfe9f2335935f70c2999dedbc863e303204426fe",
+    "qualify.py": "67b19982d8edb707b414822dd171e66bad6e1205b53375e8158c093202ede0f5",
+    "reference.py": "944a277e8482dbd9b45c12cc8b9f2d3e1f308e2afb2ef255cd1f3df175de72dd",
+    "sealed_cases.py": "ed698d190379c1e5234f2331c3cef291ee664a6beab8cfc0e51de1adcc066473"
+  },
+  "production_authorization": false,
+  "qualification_sha256": "38ffce5dbc54084b10f59aa74f0c9586fb58a1faa05e2b498711626e7da615dc",
+  "qualified": false,
+  "schema": "contract-e-authority-chain-fresh-rc1-sealed-receipt-v1",
+  "workflow_head": "8a599a75a066ad80fa754853a216c6a612e02b86",
+  "workflow_run_id": 33466959493
+}

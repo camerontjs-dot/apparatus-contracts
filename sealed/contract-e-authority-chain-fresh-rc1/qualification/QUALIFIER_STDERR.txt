@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/home/runner/work/apparatus-contracts/apparatus-contracts/sealed/contract-e-authority-chain-fresh-rc1/qualify.py", line 8, in <module>
+    from evaluate_fresh import _score_output
+  File "/home/runner/work/apparatus-contracts/apparatus-contracts/sealed/contract-e-authority-chain-fresh-rc1/evaluate_fresh.py", line 11, in <module>
+    from sealed_cases import CASES
+  File "/home/runner/work/apparatus-contracts/apparatus-contracts/sealed/contract-e-authority-chain-fresh-rc1/sealed_cases.py", line 29, in <module>
+    CASES = load_cases()
+            ^^^^^^^^^^^^
+  File "/home/runner/work/apparatus-contracts/apparatus-contracts/sealed/contract-e-authority-chain-fresh-rc1/sealed_cases.py", line 14, in load_cases
+    compressed = base64.b64decode(_PAYLOAD_B64)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/base64.py", line 88, in b64decode
+    return binascii.a2b_base64(s, strict_mode=validate)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+binascii.Error: Invalid base64-encoded string: number of data characters (6029) cannot be 1 more than a multiple of 4
