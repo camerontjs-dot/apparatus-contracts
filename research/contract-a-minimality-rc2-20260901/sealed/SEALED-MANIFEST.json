@@ -1,0 +1,11 @@
+{
+  "schema": "contract-a-rc2-post-freeze-reveal-sealed-manifest-v1",
+  "status": "SEALED_DO_NOT_REVEAL_PRE_FREEZE",
+  "freeze_receipt_commit": "6cf9019b9672075af674929455bef78c950dddc6",
+  "candidate_tree": "54e5cfc659c574a1520ebc119d66e93d4f71ce34",
+  "reference_tree": "18b9cec2bc3063ecad17d12d55e49ea4dcb61ff8",
+  "evaluator_tree": "5d7eb3e3a9a98ba1626118a5e06a018c02fa81ec",
+  "post_freeze_reveal_packet_blob": "c616c0ff9cf0a94da5f6ddb45cd595c05d610c78",
+  "prereveal_access": "forbidden",
+  "authorization_required": "POST-FREEZE REVEAL AUTHORIZED"
+}
