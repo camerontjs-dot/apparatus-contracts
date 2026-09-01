@@ -1,15 +1,1 @@
-Traceback (most recent call last):
-  File "/home/runner/work/apparatus-contracts/apparatus-contracts/sealed/contract-e-authority-chain-fresh-rc1/qualify.py", line 8, in <module>
-    from evaluate_fresh import _score_output
-  File "/home/runner/work/apparatus-contracts/apparatus-contracts/sealed/contract-e-authority-chain-fresh-rc1/evaluate_fresh.py", line 11, in <module>
-    from sealed_cases import CASES
-  File "/home/runner/work/apparatus-contracts/apparatus-contracts/sealed/contract-e-authority-chain-fresh-rc1/sealed_cases.py", line 29, in <module>
-    CASES = load_cases()
-            ^^^^^^^^^^^^
-  File "/home/runner/work/apparatus-contracts/apparatus-contracts/sealed/contract-e-authority-chain-fresh-rc1/sealed_cases.py", line 14, in load_cases
-    compressed = base64.b64decode(_PAYLOAD_B64)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/base64.py", line 88, in b64decode
-    return binascii.a2b_base64(s, strict_mode=validate)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-binascii.Error: Invalid base64-encoded string: number of data characters (6029) cannot be 1 more than a multiple of 4
+sealed evaluator qualification failed: reference_mismatch:OBS-POS-01; reference_mismatch:OBS-POS-02; reference_mismatch:OBS-POS-03; reference_mismatch:MEAS-POS-01; reference_mismatch:MEAS-POS-02; reference_mismatch:MEAS-POS-03; reference_mismatch:SEM-ATTRIBUTION-POS; reference_mismatch:SEM-CONDITIONAL-POS; reference_mismatch:SEM-EXCEPTION-POS; reference_mismatch:SEM-MODALITY-POS; reference_mismatch:SEM-NEGATION-POS; reference_mismatch:SEM-PERMISSION-POS; reference_mismatch:SEM-PROBABILITY-POS; reference_mismatch:SEM-QUANTIFIER-POS; reference_mismatch:SEM-QUANTITATIVE-POS; reference_mismatch:SEM-TEMPORAL-POS; reference_mismatch:CMP-POS-01; reference_mismatch:CMP-POS-02; reference_mismatch:CMP-POS-03; reference_mismatch:RES-POS-01; reference_mismatch:RES-POS-02; reference_mismatch:RES-POS-03; reference_mismatch:COMP-POS-01; reference_mismatch:COMP-POS-02; reference_mismatch:DEC-POS-01; reference_mismatch:DEC-POS-02; reference_mismatch:ACT-POS-01; reference_mismatch:ACT-POS-02; reference_mismatch:VER-POS-01; reference_mismatch:VER-POS-02
