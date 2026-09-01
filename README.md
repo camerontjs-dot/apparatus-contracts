@@ -8,13 +8,13 @@ The maintained architecture is intentionally asymmetric. A contract exists only 
 
 ### Contract A — upstream work object → Evidence Bundler
 
-The legacy v1.0 handoff remains the maintained upstream contract authority while modernization research continues. Current research is testing the smallest upstream representation Evidence Bundler actually needs, including proposition identity and decomposition lineage, without treating upstream semantic assertions as downstream truth.
+The legacy v1.0 handoff remains the maintained upstream contract authority while modernization research continues. Current research is testing the smallest upstream representation [Evidence Bundler](https://github.com/camerontjs-dot/evidence-bundler) actually needs, including proposition identity and decomposition lineage, without treating upstream semantic assertions as downstream truth.
 
 Canonical legacy specification: [`handoff-contract-v1.0.0.md`](handoff-contract-v1.0.0.md)
 
 ### Contract B — Evidence Bundler → Claim Audit Lab
 
-Contract B 1.2.0 is the canonical production handoff. Its additive factual-context/history extension carries provenance-bound evidence-world facts, explicit history and aperture observations, and preserved nomination/admission state without converting those fields into proposition-specific semantic judgments.
+Contract B 1.2.0 is the canonical production handoff from [Evidence Bundler](https://github.com/camerontjs-dot/evidence-bundler) to [Claim Audit Lab](https://github.com/camerontjs-dot/claim-audit-lab). Its additive factual-context/history extension carries provenance-bound evidence-world facts, explicit history and aperture observations, and preserved nomination/admission state without converting those fields into proposition-specific semantic judgments.
 
 Specification: [`contract-b-factual-context-extension-v1.2.0.md`](contract-b-factual-context-extension-v1.2.0.md)
 
@@ -22,7 +22,7 @@ The production/version decision and exact cross-repository evidence are recorded
 
 ### Contract C — Claim Audit Lab → downstream decision consumer
 
-Contract C 1.0.0 is the first canonical CAL result contract. It is decision-agnostic: it exports CAL-attributable epistemic state, exact Contract-B binding, producer/policy identity, retained contribution state, explicit unknown/failure state, and deterministic object identity without granting operational authorization.
+Contract C 1.0.0 is the first canonical CAL result contract. Producer: [Claim Audit Lab](https://github.com/camerontjs-dot/claim-audit-lab). Downstream decision consumer: [Decision Engine](https://github.com/camerontjs-dot/decision-engine). It is decision-agnostic: it exports CAL-attributable epistemic state, exact Contract-B binding, producer/policy identity, retained contribution state, explicit unknown/failure state, and deterministic object identity without granting operational authorization.
 
 Specification: [`contract-c-v1.0.0.md`](contract-c-v1.0.0.md)
 
@@ -34,7 +34,7 @@ Contract D 1.0.0 is the first canonical production Decision contract. It binds e
 
 Specification: [`contract-d-v1.0.0.md`](contract-d-v1.0.0.md)
 
-The immutable public release is tagged `contract-d-v1.0.0`. Its post-merge release lock reruns the exact Decision Engine producer, frozen independent consumer, frozen adversarial apparatus, and full conformance before publication.
+The immutable public release is tagged `contract-d-v1.0.0`. Its post-merge release lock reruns the exact [Decision Engine](https://github.com/camerontjs-dot/decision-engine) producer, frozen independent consumer, frozen adversarial apparatus, and full conformance before publication.
 
 A Decision is not automatic permission to execute an effect.
 
