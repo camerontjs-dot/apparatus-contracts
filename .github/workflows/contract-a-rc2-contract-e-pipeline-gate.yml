@@ -1,21 +1,18 @@
-name: Contract A RC2 to Contract E pre-promotion gate
+name: Contract A RC2 to Contract E pressure test
 
 on:
-  push:
-    branches:
-      - research/contract-a-rc2-contract-e-pipeline-gate-20260901
-  pull_request:
-    branches: [main]
-    paths:
-      - 'research/contract-a-rc2-contract-e-pipeline-20260901/**'
-      - '.github/workflows/contract-a-rc2-contract-e-pipeline-gate.yml'
   workflow_dispatch:
+    inputs:
+      execute_pressure_test:
+        description: Type RUN_CONTRACT_E_PRESSURE_TEST to execute the frozen pressure test
+        required: true
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: contract-a-rc2-contract-e-pressure-test
   cancel-in-progress: false
 
 env:
@@ -41,10 +38,16 @@ env:
   E_HELDOUT_BLOB: 33bdbd39c5e7e9564c358dbac80e148637216e43
 
 jobs:
-  gate:
-    name: Frozen A to E pipeline falsifier
+  pressure:
+    name: Frozen A to E parent/atom pressure test
     runs-on: ubuntu-24.04
     steps:
+      - name: Require explicit pressure-test authorization
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ inputs.execute_pressure_test }}" = "RUN_CONTRACT_E_PRESSURE_TEST"
+
       - name: Checkout experiment branch
         uses: actions/checkout@v4
         with:
@@ -124,20 +127,17 @@ jobs:
           test "$(git -C _external/a/_deps/evidence-bundler rev-parse HEAD)" = "$EB_SHA"
           test "$(git -C _external/a/_deps/claim-audit-lab rev-parse HEAD)" = "$CAL_SHA"
           test "$(git -C _external/decision rev-parse HEAD)" = "$DECISION_SHA"
-
           test "$(git -C _external/apparatus-c rev-parse HEAD)" = "$CONTRACT_C_RELEASE"
           test "$(git -C _external/apparatus-c rev-parse refs/tags/contract-c-v1.0.0)" = "$CONTRACT_C_TAG_OBJECT"
           test "$(git -C _external/apparatus-c hash-object validators/contract_c.py)" = "$CONTRACT_C_VALIDATOR_BLOB"
           test "$(git -C _external/apparatus-d rev-parse HEAD)" = "$CONTRACT_D_RELEASE"
           test "$(git -C _external/apparatus-d rev-parse refs/tags/contract-d-v1.0.0)" = "$CONTRACT_D_TAG_OBJECT"
-
           test "$(git -C _external/e rev-parse HEAD)" = "$E_HELDOUT_FREEZE"
-          EDIR=_external/e/docs/research/contract-e/epistemic-authority-propagation-rc0b
+          EDIR=docs/research/contract-e/epistemic-authority-propagation-rc0b
           test "$(git -C _external/e hash-object "$EDIR/AUTHORITY-CHAIN-CANDIDATE.json")" = "$E_CANDIDATE_BLOB"
           test "$(git -C _external/e hash-object "$EDIR/authority_chain.py")" = "$E_PROTOCOL_BLOB"
           test "$(git -C _external/e hash-object "$EDIR/evaluate.py")" = "$E_EVALUATOR_BLOB"
           test "$(git -C _external/e hash-object "$EDIR/heldout_cases.py")" = "$E_HELDOUT_BLOB"
-
           unexpected="$({ git diff --name-only "$APPARATUS_BASE"...HEAD || true; } | grep -Ev '^(research/contract-a-rc2-contract-e-pipeline-20260901/|\.github/workflows/contract-a-rc2-contract-e-pipeline-gate\.yml$)' || true)"
           test -z "$unexpected" || { echo "unexpected non-research mutation:" >&2; echo "$unexpected" >&2; exit 1; }
 
@@ -164,8 +164,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p artifacts/contract-a-rc2-contract-e-gate
-          python _external/a/research/contract-a-minimality-rc2-20260901/evaluator/test_candidate.py \
-            | tee artifacts/contract-a-rc2-contract-e-gate/A-EVALUATOR-SELFTEST.txt
+          python _external/a/research/contract-a-minimality-rc2-20260901/evaluator/test_candidate.py | tee artifacts/contract-a-rc2-contract-e-gate/A-EVALUATOR-SELFTEST.txt
 
       - name: Self-test frozen Contract E evaluator
         shell: bash
@@ -173,13 +172,11 @@ jobs:
           set -euo pipefail
           mkdir -p artifacts/contract-a-rc2-contract-e-gate/e-selftest
           EDIR=_external/e/docs/research/contract-e/epistemic-authority-propagation-rc0b
-          OUT_DIR="$PWD/artifacts/contract-a-rc2-contract-e-gate/e-selftest" python "$EDIR/evaluate.py" \
-            | tee artifacts/contract-a-rc2-contract-e-gate/E-EVALUATOR-SELFTEST.txt
+          OUT_DIR="$PWD/artifacts/contract-a-rc2-contract-e-gate/e-selftest" python "$EDIR/evaluate.py" | tee artifacts/contract-a-rc2-contract-e-gate/E-EVALUATOR-SELFTEST.txt
           python - <<'PY'
           import json
           from pathlib import Path
-          p=Path('artifacts/contract-a-rc2-contract-e-gate/e-selftest/RESULTS.json')
-          d=json.loads(p.read_text())
+          d=json.loads(Path('artifacts/contract-a-rc2-contract-e-gate/e-selftest/RESULTS.json').read_text())
           assert d['terminal_state']=='AUTHORITY_CHAIN_PROTOCOL_SUPPORTED_WITH_BOUNDS', d
           assert d['candidate']['cases']==82, d['candidate']['cases']
           assert d['candidate']['false_permits']==0
@@ -192,15 +189,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python research/contract-a-rc2-contract-e-pipeline-20260901/pipeline_gate.py \
-            | tee artifacts/contract-a-rc2-contract-e-gate/PIPELINE-STAGE.txt
+          python research/contract-a-rc2-contract-e-pipeline-20260901/pipeline_gate.py | tee artifacts/contract-a-rc2-contract-e-gate/PIPELINE-STAGE.txt
 
       - name: Run maintained Decision Engine into Contract D
         shell: bash
         run: |
           set -euo pipefail
-          node research/contract-a-rc2-contract-e-pipeline-20260901/decision_gate.mjs \
-            | tee artifacts/contract-a-rc2-contract-e-gate/DECISION-STAGE.txt
+          node research/contract-a-rc2-contract-e-pipeline-20260901/decision_gate.mjs | tee artifacts/contract-a-rc2-contract-e-gate/DECISION-STAGE.txt
 
       - name: Validate Contract D and run bounded Contract E authority controls
         env:
@@ -208,10 +203,31 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python research/contract-a-rc2-contract-e-pipeline-20260901/e_gate.py \
-            | tee artifacts/contract-a-rc2-contract-e-gate/E-GATE.txt
+          python research/contract-a-rc2-contract-e-pipeline-20260901/e_gate.py | tee artifacts/contract-a-rc2-contract-e-gate/E-GATE.txt
 
-      - name: Seal hosted run receipt
+      - name: Build parent-only, atoms-only, and parent-plus-atoms projections
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/a:${{ github.workspace }}/_external/a/_deps/research-scaffold-harness:${{ github.workspace }}/_external/a/_deps/evidence-bundler:${{ github.workspace }}/_external/a/_deps/claim-audit-lab
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/contract-a-rc2-contract-e-pipeline-20260901/pressure_projection.py | tee artifacts/contract-a-rc2-contract-e-gate/PRESSURE-PROJECTION-STAGE.txt
+
+      - name: Run Decision Engine across pressure projections
+        shell: bash
+        run: |
+          set -euo pipefail
+          node research/contract-a-rc2-contract-e-pipeline-20260901/pressure_decision.mjs | tee artifacts/contract-a-rc2-contract-e-gate/PRESSURE-DECISION-STAGE.txt
+
+      - name: Run Contract E parent/atom cross-use pressure matrix
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_external/apparatus-d
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/contract-a-rc2-contract-e-pipeline-20260901/pressure_e.py | tee artifacts/contract-a-rc2-contract-e-gate/PRESSURE-E-STAGE.txt
+
+      - name: Seal hosted pressure-test receipt
         shell: bash
         run: |
           set -euo pipefail
@@ -223,9 +239,9 @@ jobs:
               if p.is_file():
                   files[str(p.relative_to(root))]='sha256:'+hashlib.sha256(p.read_bytes()).hexdigest()
           receipt={
-              'schema':'contract-a-rc2-contract-e-hosted-run-receipt-v1',
+              'schema':'contract-a-rc2-contract-e-pressure-run-receipt-v1',
               'experiment_head':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
-              'preregistration_commit':os.environ['PREREGISTRATION_COMMIT'],
+              'original_preregistration_commit':os.environ['PREREGISTRATION_COMMIT'],
               'github_run_id':os.environ.get('GITHUB_RUN_ID'),
               'github_run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),
               'files':files,
@@ -234,11 +250,11 @@ jobs:
           PY
           find artifacts/contract-a-rc2-contract-e-gate -type f -print0 | sort -z | xargs -0 sha256sum > artifacts/contract-a-rc2-contract-e-gate/SHA256SUMS.txt
 
-      - name: Upload frozen gate evidence
+      - name: Upload frozen pressure-test evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: contract-a-rc2-contract-e-gate-${{ github.run_id }}
+          name: contract-a-rc2-contract-e-pressure-${{ github.run_id }}
           path: artifacts/contract-a-rc2-contract-e-gate/
           if-no-files-found: error
           retention-days: 90
