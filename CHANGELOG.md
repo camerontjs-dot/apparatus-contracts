@@ -2,6 +2,39 @@
 
 This repository contains independently versioned public artifacts. Changelog entries identify the artifact and its own compatibility version; repository-level tags must not be used to infer a contract version.
 
+## Contract A 2.0.0 — 2026-09-01
+
+### Added
+
+- First canonical standalone Contract A production release, version `2.0.0`.
+- Exact producer/work/root proposition identity and whole-object integrity binding.
+- Explicit decomposition states with exact declared `all_of` child identity/text/hash/order/lineage.
+- Exact supplied UTF-8 source representation identity, bytes, media type, and content hashes.
+- Fail-closed unknown-field and missing-state handling.
+- Canonical production validator entry point, schema routing, frozen fixtures, and release-lock evidence.
+
+### Compatibility
+
+- This is a major compatibility successor to legacy Contract A `1.0.0`; the legacy specification remains immutable historical authority.
+- The public release version is `2.0.0`, while the tested integrity-bound wire token remains exactly `contract-a-wire-candidate-rc2` so release does not rewrite already-tested handoff identities.
+- Legacy inputs without first-class decomposition lineage must preserve `unknown`, not invent `not_decomposed`.
+- Reverse projection into strict legacy A is not generally faithful and is not claimed as Contract A 2.0.0 authority.
+
+### Evidence and release identity
+
+- Decision authority: EDR-004 / issue #60.
+- RC2 terminal research: PR #57, `SUPPORTED FOR PROMOTION`.
+- Fresh independent recovery terminal: `camerontjs-dot/research-scaffold-harness@dada22df71e1f3d26d7646a1cd7429cdab519318`.
+- Bounded A→E pressure terminal: PR #61, `SUPPORTED FOR PROMOTION`.
+- Decisive pressure run: `33557518640`, artifact `9819938146`.
+- Production promotion PR: #65.
+- Production promotion merge: `b59c2fbe38bae78a3a35699362c0e67d17152e4b`.
+- Official immutable release tag: `contract-a-v2.0.0` on the exact release commit after the post-promotion release-lock workflow passes.
+
+### Known limits / nonclaims
+
+Contract A 2.0.0 does not establish source authenticity/trust, retrieval completeness, decomposition semantic correctness, proposition truth/support/refutation, CAL semantic accuracy, Decision policy correctness, Contract E qualification/surplus-record closure, operational Authorization, execution permission, or execution occurrence.
+
 ## Contract C 1.0.0 — 2026-08-29
 
 ### Added
