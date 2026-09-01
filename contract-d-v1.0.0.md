@@ -177,4 +177,4 @@ Contract D v1 does not establish or carry actor identity, requested operation as
 
 ## Promotion lineage
 
-This v1 surface is the production transcription authorized by EDR-003 after the terminal RC6 independent reproduction at `camerontjs-dot/research-scaffold-harness@1b51b421b96fb10f260f58a087c8376b35afdb5d`. Research RC identities remain evidence records and are not supported production versions.
+This proposed v1 surface is the production transcription authorized by EDR-003 after the terminal RC6 independent reproduction at `camerontjs-dot/research-scaffold-harness@1b51b421b96fb10f260f58a087c8376b35afdb5d`. Research RC identities remain evidence records and are not supported production versions.
