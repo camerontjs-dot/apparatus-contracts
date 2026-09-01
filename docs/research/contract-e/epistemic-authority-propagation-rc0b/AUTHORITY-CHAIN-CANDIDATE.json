@@ -1,0 +1,14 @@
+{
+  "schema": "contract-e-epistemic-authority-propagation-rc0b-candidate-v1",
+  "classification": "research-only-successor",
+  "predecessor": "2130e26052f68c28439dc8c2d1dcf59624efce51",
+  "repair_surface": ["recursive_authority_lineage", "authority_conferring_basis_discriminator", "authorized_resolution_receipts"],
+  "authority_kinds": ["observation", "measurement", "semantic", "comparison", "resolution", "composition", "decision", "action", "verification"],
+  "conferring_basis_types": ["grant", "policy", "delegation"],
+  "nonconferring_basis_examples": ["supporting_artifact", "citation", "warrant", "competence", "evidence_receipt", "comparison_receipt", "result_payload", "execution_report"],
+  "root_rule": "only a source observation whose source_hash matches the case source identity is a lineage root without an authority-conferring basis",
+  "recursive_rule": "every authority-conferring dependency receipt must be recomputed recursively from its producer ceiling, exact bounds, explicit authority-conferring basis, dependencies, and source identity; status=established is never sufficient",
+  "cycle_rule": "any dependency cycle invalidates the lineage",
+  "resolution_rule": "a blocking conflict/residue is discharged only by a recursively valid resolution receipt whose basis domain=resolution operation=resolve and whose resolves_ids explicitly contains that exact id",
+  "preservation_rule": "raw source, proposals, conflicts, residues, comparison receipts, and rejected/unresolved alternatives remain unchanged in the returned evidence snapshot"
+}
