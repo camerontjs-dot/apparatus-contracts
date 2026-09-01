@@ -1,0 +1,485 @@
+{
+  "candidate": {
+    "authority_sensitive_flip_rate": 1.0,
+    "cases": 89,
+    "expected_positive": 43,
+    "false_permit_ids": [
+      "RES-FORGE-01",
+      "RES-FORGE-02",
+      "RES-FORGE-03",
+      "CON-FORGE-01",
+      "CON-FORGE-02",
+      "LIN-NEG-01",
+      "LIN-NEG-02",
+      "LIN-NEG-03",
+      "LIN-NEG-04",
+      "BASIS-NEG-04"
+    ],
+    "false_permits": 10,
+    "false_permits_by_family": {
+      "cross_stage": 10
+    },
+    "false_reject_ids": [],
+    "false_rejects": 0,
+    "metamorphic_same_rate": 1.0,
+    "pair_rows": [
+      {
+        "expectation": "flip",
+        "outcomes": [
+          true,
+          false
+        ],
+        "pair_id": "META-FLIP-1",
+        "passed": true
+      },
+      {
+        "expectation": "flip",
+        "outcomes": [
+          true,
+          false
+        ],
+        "pair_id": "META-FLIP-2",
+        "passed": true
+      },
+      {
+        "expectation": "flip",
+        "outcomes": [
+          true,
+          false
+        ],
+        "pair_id": "META-FLIP-3",
+        "passed": true
+      },
+      {
+        "expectation": "same",
+        "outcomes": [
+          true,
+          true
+        ],
+        "pair_id": "META-SAME-1",
+        "passed": true
+      },
+      {
+        "expectation": "same",
+        "outcomes": [
+          true,
+          true
+        ],
+        "pair_id": "META-SAME-2",
+        "passed": true
+      },
+      {
+        "expectation": "same",
+        "outcomes": [
+          true,
+          true
+        ],
+        "pair_id": "META-SAME-3",
+        "passed": true
+      }
+    ],
+    "preservation": {
+      "comparisons": 1.0,
+      "conflicts": 1.0,
+      "proposals": 1.0,
+      "raw_source": 1.0,
+      "residues": 1.0
+    },
+    "true_permits": 43,
+    "valid_authority_grant_recall": 1.0
+  },
+  "candidate_commit": "361c1945af5aaa808958a2a28de3626d3a8c92de",
+  "controls": {
+    "AGREEMENT_CONTROL": {
+      "authority_sensitive_flip_rate": 0.0,
+      "cases": 89,
+      "expected_positive": 43,
+      "false_permit_ids": [
+        "AGR-NEG-01",
+        "AGR-NEG-02",
+        "AGR-NEG-03",
+        "AGR-NEG-04",
+        "LIN-NEG-01",
+        "LIN-NEG-02",
+        "LIN-NEG-03",
+        "LIN-NEG-04"
+      ],
+      "false_permits": 8,
+      "false_permits_by_family": {
+        "agreement": 4,
+        "cross_stage": 4
+      },
+      "false_reject_ids": [
+        "SEM-POS-01",
+        "SEM-POS-02",
+        "SEM-POS-03",
+        "SEM-POS-04",
+        "SEM-POS-05",
+        "SEM-POS-06",
+        "EMB-POS-01",
+        "EMB-POS-02",
+        "EMB-POS-03",
+        "EMB-POS-04",
+        "EMB-POS-05",
+        "EMB-POS-06",
+        "EMB-POS-07",
+        "EMB-POS-08",
+        "JUR-POS-01",
+        "JUR-POS-02",
+        "JUR-POS-03",
+        "JUR-POS-04",
+        "RES-POS-01",
+        "RES-POS-02",
+        "RES-POS-03",
+        "META-SAME-1-A",
+        "META-SAME-1-B",
+        "META-SAME-2-A",
+        "META-SAME-2-B",
+        "META-SAME-3-A",
+        "META-SAME-3-B",
+        "META-FLIP-1-A",
+        "META-FLIP-2-A",
+        "META-FLIP-3-A"
+      ],
+      "false_rejects": 30,
+      "metamorphic_same_rate": 1.0,
+      "pair_rows": [
+        {
+          "expectation": "flip",
+          "outcomes": [
+            false,
+            false
+          ],
+          "pair_id": "META-FLIP-1",
+          "passed": false
+        },
+        {
+          "expectation": "flip",
+          "outcomes": [
+            false,
+            false
+          ],
+          "pair_id": "META-FLIP-2",
+          "passed": false
+        },
+        {
+          "expectation": "flip",
+          "outcomes": [
+            false,
+            false
+          ],
+          "pair_id": "META-FLIP-3",
+          "passed": false
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            false,
+            false
+          ],
+          "pair_id": "META-SAME-1",
+          "passed": true
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            false,
+            false
+          ],
+          "pair_id": "META-SAME-2",
+          "passed": true
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            false,
+            false
+          ],
+          "pair_id": "META-SAME-3",
+          "passed": true
+        }
+      ],
+      "preservation": {
+        "comparisons": 1.0,
+        "conflicts": 1.0,
+        "proposals": 1.0,
+        "raw_source": 1.0,
+        "residues": 1.0
+      },
+      "true_permits": 13,
+      "valid_authority_grant_recall": 0.3023255813953488
+    },
+    "STAGE_LOCAL_CONTROL": {
+      "authority_sensitive_flip_rate": 0.0,
+      "cases": 89,
+      "expected_positive": 43,
+      "false_permit_ids": [
+        "EMB-NEG-01",
+        "EMB-NEG-02",
+        "EMB-NEG-03",
+        "EMB-NEG-04",
+        "EMB-NEG-05",
+        "EMB-NEG-06",
+        "EMB-NEG-07",
+        "EMB-NEG-08",
+        "AGR-NEG-01",
+        "AGR-NEG-02",
+        "AGR-NEG-03",
+        "AGR-NEG-04",
+        "RES-NEG-01",
+        "RES-NEG-02",
+        "RES-NEG-03",
+        "RES-FORGE-01",
+        "RES-FORGE-02",
+        "RES-FORGE-03",
+        "CON-FORGE-01",
+        "CON-FORGE-02",
+        "COMP-NEG-01",
+        "COMP-NEG-02",
+        "COMP-NEG-03",
+        "CEIL-NEG-01",
+        "CEIL-NEG-02",
+        "CEIL-NEG-03",
+        "CEIL-NEG-04",
+        "LIN-NEG-01",
+        "LIN-NEG-02",
+        "LIN-NEG-03",
+        "LIN-NEG-04",
+        "ACT-NEG-01",
+        "ACT-NEG-02",
+        "ACT-NEG-03",
+        "VER-NEG-01",
+        "VER-NEG-02",
+        "VER-NEG-03",
+        "BASIS-NEG-01",
+        "BASIS-NEG-02",
+        "BASIS-NEG-03",
+        "BASIS-NEG-04",
+        "META-FLIP-1-B",
+        "META-FLIP-2-B",
+        "META-FLIP-3-B"
+      ],
+      "false_permits": 44,
+      "false_permits_by_family": {
+        "agreement": 4,
+        "ceiling": 4,
+        "composition": 3,
+        "cross_stage": 15,
+        "decision_action": 3,
+        "execution_verification": 3,
+        "scope_embedding": 12
+      },
+      "false_reject_ids": [
+        "CMP-POS-01",
+        "CMP-POS-02",
+        "CMP-POS-03"
+      ],
+      "false_rejects": 3,
+      "metamorphic_same_rate": 1.0,
+      "pair_rows": [
+        {
+          "expectation": "flip",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-FLIP-1",
+          "passed": false
+        },
+        {
+          "expectation": "flip",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-FLIP-2",
+          "passed": false
+        },
+        {
+          "expectation": "flip",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-FLIP-3",
+          "passed": false
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-SAME-1",
+          "passed": true
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-SAME-2",
+          "passed": true
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-SAME-3",
+          "passed": true
+        }
+      ],
+      "preservation": {
+        "comparisons": 1.0,
+        "conflicts": 1.0,
+        "proposals": 1.0,
+        "raw_source": 1.0,
+        "residues": 1.0
+      },
+      "true_permits": 40,
+      "valid_authority_grant_recall": 0.9302325581395349
+    },
+    "TRANSITIVE_CONTROL": {
+      "authority_sensitive_flip_rate": 0.0,
+      "cases": 89,
+      "expected_positive": 43,
+      "false_permit_ids": [
+        "EMB-NEG-01",
+        "EMB-NEG-02",
+        "EMB-NEG-03",
+        "EMB-NEG-04",
+        "EMB-NEG-05",
+        "EMB-NEG-06",
+        "EMB-NEG-07",
+        "EMB-NEG-08",
+        "AGR-NEG-01",
+        "AGR-NEG-02",
+        "AGR-NEG-03",
+        "AGR-NEG-04",
+        "RES-NEG-01",
+        "RES-NEG-02",
+        "RES-NEG-03",
+        "RES-FORGE-01",
+        "RES-FORGE-02",
+        "RES-FORGE-03",
+        "CON-FORGE-01",
+        "CON-FORGE-02",
+        "COMP-NEG-01",
+        "COMP-NEG-02",
+        "COMP-NEG-03",
+        "LIN-NEG-01",
+        "LIN-NEG-02",
+        "LIN-NEG-03",
+        "LIN-NEG-04",
+        "ACT-NEG-01",
+        "ACT-NEG-02",
+        "ACT-NEG-03",
+        "VER-NEG-01",
+        "VER-NEG-02",
+        "VER-NEG-03",
+        "BASIS-NEG-01",
+        "BASIS-NEG-02",
+        "BASIS-NEG-03",
+        "BASIS-NEG-04",
+        "META-FLIP-1-B",
+        "META-FLIP-2-B",
+        "META-FLIP-3-B",
+        "CHAIN-NEG-01",
+        "CHAIN-NEG-02"
+      ],
+      "false_permits": 42,
+      "false_permits_by_family": {
+        "agreement": 4,
+        "composition": 3,
+        "cross_stage": 17,
+        "decision_action": 3,
+        "execution_verification": 3,
+        "scope_embedding": 12
+      },
+      "false_reject_ids": [],
+      "false_rejects": 0,
+      "metamorphic_same_rate": 1.0,
+      "pair_rows": [
+        {
+          "expectation": "flip",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-FLIP-1",
+          "passed": false
+        },
+        {
+          "expectation": "flip",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-FLIP-2",
+          "passed": false
+        },
+        {
+          "expectation": "flip",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-FLIP-3",
+          "passed": false
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-SAME-1",
+          "passed": true
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-SAME-2",
+          "passed": true
+        },
+        {
+          "expectation": "same",
+          "outcomes": [
+            true,
+            true
+          ],
+          "pair_id": "META-SAME-3",
+          "passed": true
+        }
+      ],
+      "preservation": {
+        "comparisons": 1.0,
+        "conflicts": 1.0,
+        "proposals": 1.0,
+        "raw_source": 1.0,
+        "residues": 1.0
+      },
+      "true_permits": 43,
+      "valid_authority_grant_recall": 1.0
+    }
+  },
+  "negative_control_coverage_ok": true,
+  "negative_control_unsafe_families": [
+    "agreement",
+    "ceiling",
+    "composition",
+    "cross_stage",
+    "decision_action",
+    "execution_verification",
+    "scope_embedding"
+  ],
+  "schema": "contract-e-epistemic-authority-propagation-rc0-results-v1",
+  "self_control_failures": [],
+  "terminal_state": "AUTHORITY_PROTOCOL_LAUNDERS"
+}

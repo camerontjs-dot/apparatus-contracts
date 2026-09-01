@@ -1,0 +1,21 @@
+{
+  "candidate_freeze_commit": "361c1945af5aaa808958a2a28de3626d3a8c92de",
+  "case_count": 89,
+  "classification": "normal_context_research_only",
+  "contract_e_1_0_0_authorized": false,
+  "contract_e_source_head": "b7fa5e3885bb75a21573f32268bf7c66d7428fdb",
+  "deviations": [],
+  "evaluator_freeze_commit": "606aca1665913b3dc0d0b31a97b9a25e551af36e",
+  "heldout_freeze_commit": "ef8eaec7af42ba5ad2648ae1caa1ffb8ae57774b",
+  "output_sha256": {
+    "REPORT.md": "df4c80b799c76d708091a9ed80a68a0880db88948faf66f1b272235832c842cc",
+    "RESULTS.json": "d13538cba6c68c0a8d079520742455adb2afc709ee32969673807124cbb0972a",
+    "ROWS.json": "41e2a63660f1b634b42530ef396d96a2a5ddc8890aed4ae83230deb20fc3ade7",
+    "STDOUT.txt": "14ae1abd6ba5873d87991787fc9d8ef8c1e4c89dff719e966e0dfe25509d7126"
+  },
+  "preregistration_commit": "21a93a5aae7ec2101bdea377b83f1a9d9f6c3fae",
+  "production_authorization": false,
+  "run_head": "03423820bf34625739ea434582e5ae0b24ed43c5",
+  "terminal_state": "AUTHORITY_PROTOCOL_LAUNDERS",
+  "workflow_run_id": 33464830024
+}
