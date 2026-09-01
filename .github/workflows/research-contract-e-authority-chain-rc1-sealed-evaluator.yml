@@ -1,0 +1,96 @@
+name: Research - Contract E Authority Chain RC1 Sealed Evaluator
+
+on:
+  push:
+    branches:
+      - sealed/contract-e-authority-chain-fresh-rc1-eval-20260901
+    paths-ignore:
+      - "sealed/contract-e-authority-chain-fresh-rc1/qualification/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen pre-freeze aperture
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:docs/research/contract-e/authority-chain-fresh-reproduction-rc1/AUTHORITY-CHAIN-CONTRACT-v1.json)" = "9a82515391beb8ca57fc5ab861c5c389b7750914"
+          test "$(git rev-parse HEAD:docs/research/contract-e/authority-chain-fresh-reproduction-rc1/PRE_FREEZE_BOOTSTRAP.md)" = "ed59344c6471404d49bba3f9c4a5e362f875976e"
+          test "$(sha256sum docs/research/contract-e/authority-chain-fresh-reproduction-rc1/AUTHORITY-CHAIN-CONTRACT-v1.json | cut -d' ' -f1)" = "f012826c1f2b54b534ddace6a38be270e5bd94bcf0fc539f024bcb12c62bf381"
+          test "$(sha256sum docs/research/contract-e/authority-chain-fresh-reproduction-rc1/PRE_FREEZE_BOOTSTRAP.md | cut -d' ' -f1)" = "7cf083daff12b05a08c1d04f4edc259b2e673ddf723e348b794ba996217a4372"
+
+      - name: Compile sealed evaluator
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            sealed/contract-e-authority-chain-fresh-rc1/reference.py \
+            sealed/contract-e-authority-chain-fresh-rc1/sealed_cases.py \
+            sealed/contract-e-authority-chain-fresh-rc1/evaluate_fresh.py \
+            sealed/contract-e-authority-chain-fresh-rc1/qualify.py
+
+      - name: Qualify sealed evaluator before fresh implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd sealed/contract-e-authority-chain-fresh-rc1
+          python qualify.py
+
+      - name: Write sealed qualification receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root = Path('sealed/contract-e-authority-chain-fresh-rc1')
+          q = json.loads((root/'qualification/QUALIFICATION.json').read_text())
+          names = ['reference.py','sealed_cases.py','evaluate_fresh.py','qualify.py','EVALUATOR-CONTRACT.md']
+          receipt = {
+              'schema': 'contract-e-authority-chain-fresh-rc1-sealed-receipt-v1',
+              'classification': 'sealed_before_fresh_implementation',
+              'production_authorization': False,
+              'aperture_head_before_seal': 'da3f7fd2664f9037452ca001b3c816a73ace79d7',
+              'aperture_contract_blob': '9a82515391beb8ca57fc5ab861c5c389b7750914',
+              'aperture_bootstrap_blob': 'ed59344c6471404d49bba3f9c4a5e362f875976e',
+              'workflow_head': os.environ['GITHUB_SHA'],
+              'workflow_run_id': int(os.environ['GITHUB_RUN_ID']),
+              'qualified': q['qualified'],
+              'case_count': q['case_count'],
+              'canonical_case_json_sha256': '5d34dc72a3175c6c4390d07219cb2f06a8e18c1b09bd16cff079ffd52a6ae241',
+              'compressed_case_payload_sha256': 'aa3cd4e3162f0f457d684b9c1d57ec76aa27c32ee87df14c33cd052c2829f34e',
+              'evaluator_file_sha256': {name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in names},
+              'qualification_sha256': hashlib.sha256((root/'qualification/QUALIFICATION.json').read_bytes()).hexdigest(),
+              'deviations': [],
+          }
+          (root/'qualification/SEALED_RUN_RECEIPT.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+'\n')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-authority-chain-fresh-rc1-sealed-${{ github.sha }}
+          path: sealed/contract-e-authority-chain-fresh-rc1/qualification/
+          if-no-files-found: error
+
+      - name: Commit immutable qualification evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sealed/contract-e-authority-chain-fresh-rc1/qualification/
+          git commit -m "Research evidence: qualify Contract E authority-chain RC1 sealed evaluator"
+          git push origin HEAD:sealed/contract-e-authority-chain-fresh-rc1-eval-20260901
