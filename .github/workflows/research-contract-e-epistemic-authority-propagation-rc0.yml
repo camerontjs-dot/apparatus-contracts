@@ -1,0 +1,119 @@
+name: Research - Contract E epistemic authority propagation RC0
+
+on:
+  push:
+    branches:
+      - research/contract-e-epistemic-authority-propagation-rc0-20260831
+    paths-ignore:
+      - docs/research/contract-e/epistemic-authority-propagation-rc0/results/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify immutable lineage and freezes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git cat-file -e b7fa5e3885bb75a21573f32268bf7c66d7428fdb^{commit}
+          git cat-file -e 21a93a5aae7ec2101bdea377b83f1a9d9f6c3fae^{commit}
+          git cat-file -e 361c1945af5aaa808958a2a28de3626d3a8c92de^{commit}
+          git cat-file -e 606aca1665913b3dc0d0b31a97b9a25e551af36e^{commit}
+          git cat-file -e ef8eaec7af42ba5ad2648ae1caa1ffb8ae57774b^{commit}
+
+          ROOT=docs/research/contract-e/epistemic-authority-propagation-rc0
+          git diff --exit-code 361c1945af5aaa808958a2a28de3626d3a8c92de HEAD -- \
+            "$ROOT/AUTHORITY-PROPAGATION-CANDIDATE.json" "$ROOT/authority_protocol.py"
+          git diff --exit-code 606aca1665913b3dc0d0b31a97b9a25e551af36e HEAD -- \
+            "$ROOT/EVALUATOR-CONTRACT.md" "$ROOT/evaluate.py"
+          git diff --exit-code ef8eaec7af42ba5ad2648ae1caa1ffb8ae57774b HEAD -- "$ROOT/heldout_cases.py"
+
+          for blob in \
+            9c1090335d87eb5e4885a755542923b453c45317 \
+            c3f293430ae6ddb87523d83ea6e5380b8b832136 \
+            8b1d292a240300388949d502e7b656e7a23a0b8e \
+            63c952c9c28f1be2173e69c79976c7dfe5880c10 \
+            f05feac88128fd693cca2fb25a0b2951654377eb \
+            61f46b09d391e7da4aed2491e428ec2ed226fe93; do
+            git ls-tree -r b7fa5e3885bb75a21573f32268bf7c66d7428fdb | grep -q "$blob"
+            git ls-tree -r HEAD | grep -q "$blob"
+          done
+
+          python -m py_compile "$ROOT/authority_protocol.py" "$ROOT/evaluate.py" "$ROOT/heldout_cases.py"
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+          p=Path('docs/research/contract-e/epistemic-authority-propagation-rc0/heldout_cases.py')
+          s=importlib.util.spec_from_file_location('cases',p); m=importlib.util.module_from_spec(s); s.loader.exec_module(m)
+          assert len(m.CASES) == 89, len(m.CASES)
+          print({'cases': len(m.CASES)})
+          PY
+
+      - name: Run frozen scientific evaluator
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=docs/research/contract-e/epistemic-authority-propagation-rc0
+          rm -rf "$ROOT/results"
+          mkdir -p "$ROOT/results"
+          OUT_DIR="$ROOT/results" python "$ROOT/evaluate.py" | tee "$ROOT/results/STDOUT.txt"
+
+      - name: Write immutable run receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=docs/research/contract-e/epistemic-authority-propagation-rc0
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root=Path('docs/research/contract-e/epistemic-authority-propagation-rc0/results')
+          results=json.loads((root/'RESULTS.json').read_text())
+          files=['RESULTS.json','ROWS.json','REPORT.md','STDOUT.txt']
+          receipt={
+            'classification':'normal_context_research_only',
+            'production_authorization':False,
+            'contract_e_1_0_0_authorized':False,
+            'contract_e_source_head':'b7fa5e3885bb75a21573f32268bf7c66d7428fdb',
+            'preregistration_commit':'21a93a5aae7ec2101bdea377b83f1a9d9f6c3fae',
+            'candidate_freeze_commit':'361c1945af5aaa808958a2a28de3626d3a8c92de',
+            'evaluator_freeze_commit':'606aca1665913b3dc0d0b31a97b9a25e551af36e',
+            'heldout_freeze_commit':'ef8eaec7af42ba5ad2648ae1caa1ffb8ae57774b',
+            'run_head':os.environ['GITHUB_SHA'],
+            'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+            'terminal_state':results['terminal_state'],
+            'case_count':results['candidate']['cases'],
+            'output_sha256':{f:hashlib.sha256((root/f).read_bytes()).hexdigest() for f in files},
+            'deviations':[],
+          }
+          (root/'RUN_RECEIPT.json').write_text(json.dumps(receipt,indent=2,sort_keys=True)+'\n')
+          PY
+          cd "$ROOT/results"
+          sha256sum RESULTS.json ROWS.json REPORT.md STDOUT.txt RUN_RECEIPT.json > SHA256SUMS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-epistemic-authority-propagation-rc0-${{ github.sha }}
+          path: docs/research/contract-e/epistemic-authority-propagation-rc0/results/
+          if-no-files-found: error
+
+      - name: Commit terminal evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/research/contract-e/epistemic-authority-propagation-rc0/results/
+          git commit -m 'Research evidence: Contract E epistemic authority propagation RC0'
+          git push origin HEAD:research/contract-e-epistemic-authority-propagation-rc0-20260831
