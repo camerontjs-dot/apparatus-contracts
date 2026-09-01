@@ -1,0 +1,28 @@
+{
+  "schema": "contract-a-wire-candidate-rc2",
+  "handoff_id": "handoff-rsh-supplier-001",
+  "producer": {
+    "producer_id": "research-scaffold-harness",
+    "producer_version": "548bfa81f65290eda15af658f647497679b840ef"
+  },
+  "work": {
+    "work_id": "pilot-001-rsh-001:clm-supplier-qualification"
+  },
+  "root_proposition": {
+    "proposition_id": "clm-supplier-qualification",
+    "text": "The manufacturer requires supplier qualification audits before approving alternative raw material sources, and documents all supplier changes through the site change control system with impact assessments reviewed by the quality unit.",
+    "text_sha256": "sha256:a3cc8b8ce899f14c8dec00e768aa867287c492aa82e59647c06df804868f06a8"
+  },
+  "decomposition": {
+    "state": "not_decomposed"
+  },
+  "sources": [
+    {
+      "source_id": "src-supplier-control",
+      "media_type": "text/plain; charset=utf-8",
+      "content": "Supplier qualification audits are required before alternative raw material sources are approved. Supplier changes are documented through change control with quality-unit impact assessment.",
+      "content_sha256": "sha256:be1302fe226ac45e0df710abf84f747dfb57042abd1d0bb06c4dbb3045a3c22c"
+    }
+  ],
+  "handoff_sha256": "sha256:b1fe0b846023655d6a2fe07bc09fe54a616865a2f49546d5db878f9e944ce2bc"
+}

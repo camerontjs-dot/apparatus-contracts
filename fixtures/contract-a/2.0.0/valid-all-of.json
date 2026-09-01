@@ -1,0 +1,44 @@
+{
+  "schema": "contract-a-wire-candidate-rc2",
+  "handoff_id": "handoff-rsh-supplier-allof-001",
+  "producer": {
+    "producer_id": "research-scaffold-harness",
+    "producer_version": "548bfa81f65290eda15af658f647497679b840ef"
+  },
+  "work": {
+    "work_id": "pilot-001-rsh-001:clm-supplier-qualification"
+  },
+  "root_proposition": {
+    "proposition_id": "clm-supplier-qualification",
+    "text": "The manufacturer requires supplier qualification audits before approving alternative raw material sources, and documents all supplier changes through the site change control system with impact assessments reviewed by the quality unit.",
+    "text_sha256": "sha256:a3cc8b8ce899f14c8dec00e768aa867287c492aa82e59647c06df804868f06a8"
+  },
+  "decomposition": {
+    "state": "declared",
+    "decomposition_id": "decomp-supplier-allof-001",
+    "operator": "all_of",
+    "children": [
+      {
+        "proposition_id": "clm-supplier-qualification-a",
+        "text": "The manufacturer requires supplier qualification audits before approving alternative raw material sources.",
+        "text_sha256": "sha256:5fc1d3d66aaac30d1502966576d536370ba82f8433260693ea13152a9a228712",
+        "sequence": 1
+      },
+      {
+        "proposition_id": "clm-supplier-qualification-b",
+        "text": "The manufacturer documents all supplier changes through the site change control system with impact assessments reviewed by the quality unit.",
+        "text_sha256": "sha256:de2a33eea8a1bd8c42864f2d77bf67faa391e088f0fb1ef6c633ea8d6b10bff9",
+        "sequence": 2
+      }
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "src-supplier-control",
+      "media_type": "text/plain; charset=utf-8",
+      "content": "Supplier qualification audits are required before alternative raw material sources are approved. Supplier changes are documented through change control with quality-unit impact assessment.",
+      "content_sha256": "sha256:be1302fe226ac45e0df710abf84f747dfb57042abd1d0bb06c4dbb3045a3c22c"
+    }
+  ],
+  "handoff_sha256": "sha256:f9d2f7be6eaaa21bcc032d3d91a9f9b42d645b15ed5130fc4b69807ba0ed6142"
+}
