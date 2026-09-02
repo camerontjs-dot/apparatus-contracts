@@ -111,3 +111,79 @@ jobs:
             production-acceptance/
           if-no-files-found: warn
           retention-days: 90
+
+  research-d-to-e-authorization-pressure:
+    name: Research D→E authorization pressure (Python ${{ matrix.python }})
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout experiment head
+        uses: actions/checkout@v4
+        with:
+          path: experiment
+
+      - name: Checkout exact Contract D 1.0.0 release
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+          path: contract-d
+
+      - name: Checkout exact frozen Contract E RC1 candidate
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 8876b7bcc2afa1a4902400b0cc507cf2ef02e6e7
+          path: contract-e
+
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install exact Contract D canonicalization dependency
+        run: python -m pip install --disable-pip-version-check 'rfc8785==0.1.4'
+
+      - name: Verify frozen authorities and blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C contract-d rev-parse HEAD)" = "298a1a0f7b7b6d7712e11200d04faec3e1ca169b"
+          test "$(git -C contract-e rev-parse HEAD)" = "8876b7bcc2afa1a4902400b0cc507cf2ef02e6e7"
+          test "$(git -C contract-d hash-object validators/contract_d_core.py)" = "564dcde5677df5ac8f86f21dc0ffd1692f44c9f0"
+          test "$(git -C contract-d hash-object validators/contract_d_consume.py)" = "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68"
+          test "$(git -C contract-d hash-object schema/contract-d/1.0.0/effect-registry.json)" = "a40f4f4447470654bdc16d852f5927189ae30cc5"
+          test "$(git -C contract-d hash-object fixtures/contract-d/1.0.0/valid.json)" = "66f59bc50e5062aa8550491defa2fee37e75fcc7"
+          test "$(git -C contract-e hash-object docs/research/contract-e/v1-closure-20260902/candidate/SPEC.md)" = "3041d31ed0905d50ff355e483fbb9422df994997"
+          test "$(git -C contract-e hash-object docs/research/contract-e/v1-closure-20260902/candidate/schema.json)" = "d934d055e39c81e6eb93830e7c6f6f43fc8a0870"
+          test "$(git -C contract-e hash-object docs/research/contract-e/v1-closure-20260902/candidate/reference.py)" = "378cdb7835df3959c82a0fe98068b1434b1b68ec"
+
+      - name: Compile frozen experiment harness
+        run: python -m py_compile experiment/docs/research/contract-e/d-to-e-authorization-consumer-pressure-20260902/attack_matrix.py
+
+      - name: Execute preregistered attack matrix
+        run: |
+          mkdir -p "experiment/build/d-to-e-authz-pressure/py${{ matrix.python }}"
+          python experiment/docs/research/contract-e/d-to-e-authorization-consumer-pressure-20260902/attack_matrix.py \
+            --contract-d-root contract-d \
+            --contract-e-root contract-e \
+            --output "experiment/build/d-to-e-authz-pressure/py${{ matrix.python }}/RESULTS.json"
+
+      - name: Verify frozen checkouts remain unmodified
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git -C contract-d status --porcelain)"
+          test -z "$(git -C contract-e status --porcelain)"
+
+      - name: Upload pressure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: d-to-e-authorization-consumer-pressure-py${{ matrix.python }}
+          path: experiment/build/d-to-e-authz-pressure/py${{ matrix.python }}/RESULTS.json
+          if-no-files-found: warn
+          retention-days: 90
