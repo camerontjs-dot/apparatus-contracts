@@ -1,0 +1,64 @@
+{
+  "schema": "contract-e-v1-fresh-rc2-evaluator-final-seal-v1",
+  "status": "SEALED",
+  "sealed_at": "2026-09-02T19:27:00Z",
+  "candidate": {
+    "frozen_head": "3a206729f53672fb28a711980925a24c77e6910a",
+    "spec_blob": "f05b679a30bafb8a08eef175ecefdb4a38245c9c",
+    "schema_blob": "42df79ff2c55fb5eaed9e880648abd87d6c20413",
+    "reference_blob": "98e3bf38dd1fb6028231a7f6b5c2459b387909c6",
+    "candidate_test_blob": "52c1ff54032b0ee02f00d9abb3e6ac5c3595340e",
+    "trusted_origin_profile_blob": "896b4a8494d9bd19d3e0f7d80ef34e6c214c54e6",
+    "profile_pressure_blob": "cea77f3c06b339192c946ad81d9c9ca1dbd89bd3",
+    "experiment_preregistration_blob": "a6fb67b598c50df37035b198f74105c6ae008db2",
+    "operator_decision_blob": "4f8dd5f9a8bbce0dca5056fff4658081a6c6c08a"
+  },
+  "evaluator": {
+    "qualification_head": "7468b46798058fde6ac2be1df9b41ac4ce814686",
+    "qualification_contract_blob": "6663984438ad7f9a2f6a734a8e6fe991c2fb6f96",
+    "evaluate_fresh_blob": "5e7b4d37961366b725f8f3d6cc5594e72d3cf045",
+    "hidden_cases_blob": "d39491240730640f64913cfe337904138d72f785",
+    "qualify_blob": "c74ab74ed5c493edb19a495df97bac6f3ec5aa3d"
+  },
+  "qualification": {
+    "workflow_run": 33673339224,
+    "job": 100391985749,
+    "artifact": 9863370018,
+    "artifact_digest": "sha256:16884a1974d3541c257a03d5dae64772c91272904aa433da0cd0593e0e369b24",
+    "qualification_results_sha256": "sha256:1bfd8fb2cee9def9e955c153076d9495d2331ebd4bccaa314bbc5bdaac1baa20",
+    "profile_results_sha256": "sha256:fe34cd65c944d25e2b0db68f98354d4f44e803abdbd50913c9a98bfc5f76ba61",
+    "hidden_case_count": 63,
+    "reference_normative_exact_matches": 63,
+    "false_permit_ids": [],
+    "false_reject_ids": [],
+    "exception_ids": [],
+    "preservation_failure_ids": [],
+    "diagnostic_shape_failure_ids": [],
+    "dual_identity_failure_ids": [],
+    "diagnostic_identity_checks": 63,
+    "weak_control_count": 8,
+    "weak_controls_caught": {
+      "claimed-only-identity-collapse": true,
+      "recomputed-only-identity-collapse": true,
+      "supporting-artifact-conferral": true,
+      "self-derived-decision-trust": true,
+      "self-derived-authority-state-trust": true,
+      "receipt-only-permission": true,
+      "historical-receipt-currentness": true,
+      "execution-intent-substitution": true
+    }
+  },
+  "independence": {
+    "fresh_independent_implementation_existed_at_candidate_freeze": false,
+    "fresh_independent_implementation_existed_at_evaluator_qualification": false,
+    "fresh_independent_implementation_existed_at_seal": false,
+    "evaluator_repair_between_qualification_and_seal": false
+  },
+  "immutability_rule": "Any change to the sealed evaluator, hidden cases, qualification contract, qualifier, or frozen candidate bytes after this receipt requires a new seal identity and cannot be counted as this evaluator.",
+  "nonclaims": [
+    "This seal does not establish fresh independent recoverability.",
+    "This seal does not promote Contract E or create a production version.",
+    "This seal does not authenticate a real-world root authority source.",
+    "This seal does not authorize execution or establish execution or verification occurrence."
+  ]
+}
