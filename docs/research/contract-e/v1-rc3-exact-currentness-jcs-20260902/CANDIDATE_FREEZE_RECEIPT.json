@@ -1,0 +1,75 @@
+{
+  "schema": "contract-e-v1-rc3-candidate-freeze-receipt-v1",
+  "candidate": "contract-e-authority-evaluation-candidate-rc3",
+  "production_authorization": false,
+  "branch": "research/contract-e-v1-rc3-exact-currentness-jcs-20260902",
+  "base_main": "c3563cff66d2c85dcbf575c693056e2d8e4563d4",
+  "preregistration_commit": "86afe0bdc3cbeba04809f13a8c05220a3262dfc4",
+  "accepted_candidate_head": "72f44d206f4f7e64d6993ac85e2fe2f086afb381",
+  "candidate_files": {
+    "SPEC.md": {
+      "git_blob": "8c142c6b86dd2512f1df0c19aa36dbef759d6c18",
+      "sha256": "de3a4aab39e02ff0c567dd10a84b462ca576edb9caed2da25f1e457c39f11482"
+    },
+    "schema.json": {
+      "git_blob": "87ec0e536de1d07b45f49c20b14bfa0c81f53a86",
+      "sha256": "64f38befd653eb8e93d68bbc0170989f6619737709680f14c73cebd781dfb990"
+    },
+    "reference.py": {
+      "git_blob": "ede55efbe3f8afc35a25716af4a896a669a904e7",
+      "sha256": "3da8f065cf2e749cd9e902169f3072f720db9529187835490e510a5359353155"
+    },
+    "test_candidate.py": {
+      "git_blob": "20db39ac2a0b46cd554bf3c6e266859d39e9ea25",
+      "sha256": "fe325cf948624f39b0abd6ce23d78111a5f4ab2a76642cc05f7ed29604d22bb2"
+    }
+  },
+  "reused_integration_blobs": {
+    "integration_profile.py": "6f19875d4f21765e02d51fef50ca53fae3daf177",
+    "test_integration_profile.py": "7c84806033a80b93c08d51492dce265a29dc2b40",
+    "run_integration_superset.py": "8cd53b679f39f6b08a5184eb3133f3c7d610eb2c"
+  },
+  "accepted_gate": {
+    "run": 33687913220,
+    "core_controls_per_runtime": 62,
+    "core_python_3_11": "PASS",
+    "core_python_3_12": "PASS",
+    "core_python_3_13": "PASS",
+    "integration_cases_per_runtime": 121,
+    "integration_python_3_11": "PASS",
+    "integration_python_3_12": "PASS",
+    "integration_python_3_13": "PASS",
+    "fractional_currentness_regressions": "6/6",
+    "dual_state_identity_regressions": "6/6",
+    "jcs_regressions": "9/9",
+    "exact_time_primitive_regressions": "9/9",
+    "integration_artifacts": [
+      {
+        "python": "3.11",
+        "artifact_id": 9868848436,
+        "digest": "sha256:be9a7720a77bf8fab9ae4d134f06bae723d6eed426f2d61566839de4aa7c37bf"
+      },
+      {
+        "python": "3.12",
+        "artifact_id": 9868850007,
+        "digest": "sha256:e032b770d5ea703322976e57c2206c4671d407227e13b73630cc4eea447fa95d"
+      },
+      {
+        "python": "3.13",
+        "artifact_id": 9868850024,
+        "digest": "sha256:e032b770d5ea703322976e57c2206c4671d407227e13b73630cc4eea447fa95d"
+      }
+    ]
+  },
+  "preserved_predecessor_failures": {
+    "rc1_terminal_state": "FALSIFIED",
+    "rc1_normative_exact": "48/50",
+    "rc2_fractional_discriminator_run": 33687111732,
+    "rc2_fractional_exact_matches": "0/3",
+    "rc2_fractional_false_permits": 2,
+    "rc2_fractional_false_rejects": 1
+  },
+  "candidate_frozen": true,
+  "post_freeze_candidate_repair_permitted": false,
+  "next_gate": "qualify_and_seal_new_evaluator_before_any_fresh_independent_rc3_implementation"
+}

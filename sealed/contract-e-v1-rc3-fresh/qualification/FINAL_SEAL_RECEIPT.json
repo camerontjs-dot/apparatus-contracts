@@ -1,0 +1,129 @@
+{
+  "schema": "contract-e-v1-rc3-fresh-evaluator-final-seal-v1",
+  "production_authorization": false,
+  "candidate": {
+    "identifier": "contract-e-authority-evaluation-candidate-rc3",
+    "accepted_frozen_head": "72f44d206f4f7e64d6993ac85e2fe2f086afb381",
+    "freeze_receipt_commit": "51431b7423040c924c34b78a6c97cc6c7605ba8a",
+    "reference_git_blob": "ede55efbe3f8afc35a25716af4a896a669a904e7",
+    "reference_sha256": "3da8f065cf2e749cd9e902169f3072f720db9529187835490e510a5359353155",
+    "frozen_core_controls_per_runtime": 62,
+    "frozen_integration_cases_per_runtime": 121,
+    "candidate_post_freeze_repair_permitted": false
+  },
+  "evaluator": {
+    "qualification_head": "2a4ca30961f71f5c274166b772bfd202e1dc10be",
+    "qualification_contract": {
+      "git_blob": "0d6370bf941ed4922dfc153a9b61f50cb80bb6fe",
+      "sha256": "618d9c331f3d0b04ea01555693e4109b48db886702b48db6a2cc879746aa7f71"
+    },
+    "evaluate_fresh_py": {
+      "git_blob": "27be84ed5d015f051bec1787901a4b615f620150",
+      "sha256": "1f1e01332452d08383f3b881fa9f82f5dc75e4227c20a2c18e5baf76262b391e"
+    },
+    "hidden_cases_py": {
+      "git_blob": "5167dcb71edf9aacf5d7087321f0b8e954d70fda",
+      "sha256": "5a49106243cfbaf757a4820456904826e81b91a12bf46ca3498197291974b9ec"
+    },
+    "hidden_reference_identity_extension_py": {
+      "git_blob": "a27c44a0c2897b6428a9b10f5a82d6c49dbf06b8",
+      "sha256": "62db53ac609bd3686782321272b36e0595d3b8e94e16d3a33dd2e0c54e817fde"
+    },
+    "qualify_py": {
+      "git_blob": "b267255fecd2381f04df564a09623d61a61dcecc",
+      "sha256": "5bdf45f347f72fb69e7b5f99123407d4eefa836a3bcdfab5e98d8d58ea83e943"
+    },
+    "qualification_receipt_sha256": "716956e21b1ca83ea2cf306198ad0acf07f932703681a02501300d6c67efa279",
+    "evaluator_post_seal_repair_permitted": false
+  },
+  "accepted_qualification": {
+    "run_id": 33688538939,
+    "job_id": 100441660043,
+    "artifact_id": 9869084680,
+    "artifact_digest": "sha256:3d46a575db9b48c1fe1dd936870a8ace18944e9a5348e74d9d301433bed01be1",
+    "qualification_state": "PASS",
+    "hidden_case_count": 59,
+    "reference_normative_exact_matches": 59,
+    "fractional_currentness_hidden_cases": 7,
+    "canonicalization_hidden_cases": 6,
+    "diagnostic_variant_state": "SUPPORTED",
+    "diagnostic_content_is_normative": false,
+    "weak_controls_required": 14,
+    "weak_controls_caught": 14,
+    "qualification_failures": []
+  },
+  "required_sensitivity_evidence": {
+    "microsecond_truncator": {
+      "scientific_state": "FALSIFIED",
+      "false_permit_ids": [
+        "FRACTION-PRE-VALID-FROM",
+        "FRACTION-POST-VALID-UNTIL",
+        "FRACTION-ULTRA-PRECISION-AFTER"
+      ],
+      "false_reject_ids": [
+        "FRACTION-PRE-REVOCATION"
+      ]
+    },
+    "ordinary_json_canonicalizer": {
+      "scientific_state": "FALSIFIED",
+      "canonicalization_failure_ids": [
+        "JCS-STATE-NUMBER-1",
+        "JCS-REQUEST-NEGATIVE-ZERO",
+        "JCS-REQUEST-SMALL-EXPONENT",
+        "JCS-REQUEST-LARGE-NUMBER",
+        "NEG-JCS-OUT-OF-DOMAIN"
+      ]
+    },
+    "reference_identity_blind": {
+      "scientific_state": "FALSIFIED",
+      "false_permit_ids": [
+        "NEG-SUPPORT-REF-IDENTITY"
+      ]
+    },
+    "claimed_only": "FALSIFIED",
+    "recomputed_only": "FALSIFIED",
+    "subject_blind": "FALSIFIED",
+    "currentness_blind": "FALSIFIED",
+    "blocker_blind": "FALSIFIED",
+    "resolution_blocker_bypass": "FALSIFIED",
+    "support_launderer": "FALSIFIED",
+    "state_identity_blind": "FALSIFIED",
+    "surplus_peer_permitter": "FALSIFIED",
+    "request_uniqueness_blind": "FALSIFIED",
+    "preservation_dropper": "FALSIFIED"
+  },
+  "preserved_pre_seal_qualification_failure": {
+    "run_id": 33688311037,
+    "job_id": 100440937913,
+    "candidate_byte_verification": "PASS",
+    "candidate_regression_suite": "PASS",
+    "qualification_state": "FAIL",
+    "escaped_weak_control": "reference_identity_blind",
+    "scientific_disposition": "preserved evaluator sensitivity failure; repaired only by adding one independent non-target supporting-reference identity discriminator before seal",
+    "apparatus_deviation": "qualification log directory was not pre-created, so tee and artifact upload also failed on the first run; this did not cause the semantic weak-control failure"
+  },
+  "independence": {
+    "fresh_independent_rc3_implementation_existed_at_qualification": false,
+    "fresh_independent_rc3_implementation_existed_at_seal": false,
+    "rsh_rc3_branch_search_immediately_before_seal": []
+  },
+  "normative_projection_fields": [
+    "schema",
+    "receipt_id",
+    "authority_conferring",
+    "authorized",
+    "request_id",
+    "request_sha256",
+    "claimed_authority_state_id",
+    "recomputed_authority_state_id",
+    "evaluation_time",
+    "subject_id",
+    "jurisdiction",
+    "authority_basis_id",
+    "preserved"
+  ],
+  "diagnostic_shape_requirement": "list[str]",
+  "diagnostic_content_normative": false,
+  "final_evaluator_state": "SEALED_FOR_FRESH_RC3_REPRODUCTION",
+  "production_promotion_authorized": false
+}
