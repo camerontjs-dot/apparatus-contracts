@@ -8,7 +8,7 @@ from pathlib import Path
 from hidden_cases import cases
 
 HERE = Path(__file__).resolve().parent
-REPO = HERE.parents[2]
+REPO = HERE.parents[1]
 REFERENCE_PATH = REPO / "docs/research/contract-e/v1-closure-20260902/candidate/reference.py"
 
 NORMATIVE_FIELDS = [
