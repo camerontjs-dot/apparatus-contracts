@@ -8,6 +8,8 @@ from copy import deepcopy
 from datetime import datetime, timezone
 from typing import Any
 
+import rfc8785
+
 STATE_SCHEMA = "contract-e-authority-state-candidate-rc2"
 REQUEST_SCHEMA = "contract-e-authorization-request-candidate-rc2"
 RECEIPT_SCHEMA = "contract-e-authorization-receipt-candidate-rc2"
@@ -65,16 +67,10 @@ def _assert_finite_json(value: Any, seen: set[int] | None = None) -> None:
 
 def canonical_bytes(value: Any) -> bytes:
     _assert_finite_json(value)
-    return (
-        json.dumps(
-            value,
-            sort_keys=True,
-            separators=(",", ":"),
-            ensure_ascii=False,
-            allow_nan=False,
-        )
-        + "\n"
-    ).encode("utf-8")
+    try:
+        return rfc8785.dumps(value) + b"\n"
+    except Exception as exc:
+        raise InvalidCanonicalJSON(str(exc)) from exc
 
 
 def sha256_identity(value: Any) -> str:
@@ -98,6 +94,10 @@ def strict_json_loads(text: str) -> Any:
         ),
     )
     _assert_finite_json(value)
+    try:
+        rfc8785.dumps(value)
+    except Exception as exc:
+        raise InvalidCanonicalJSON(str(exc)) from exc
     return value
 
 
@@ -177,6 +177,7 @@ def validate_authority_state(state: Any) -> tuple[bool, list[str]]:
     errors: list[str] = []
     try:
         _assert_finite_json(state)
+        canonical_bytes(state)
     except Exception:
         return False, ["malformed_state"]
     if not _exact_keys(state, STATE_KEYS) or state.get("schema") != STATE_SCHEMA:
@@ -277,6 +278,7 @@ def _validate_blockers(items: Any) -> bool:
 def validate_request(request: Any) -> tuple[bool, list[str]]:
     try:
         _assert_finite_json(request)
+        canonical_bytes(request)
     except Exception:
         return False, ["malformed_request"]
     if not _exact_keys(request, REQUEST_KEYS) or request.get("schema") != REQUEST_SCHEMA:
@@ -364,6 +366,14 @@ def _safe_request_field(request: Any, key: str, predicate) -> Any:
     return value if predicate(value) else None
 
 
+def _safe_time(value: Any) -> bool:
+    try:
+        _parse_time(value)
+        return True
+    except Exception:
+        return False
+
+
 def evaluate(authority_state: Any, request: Any) -> dict:
     diagnostics: list[str] = []
     claimed_state_id = _claimed_state_identity(authority_state)
@@ -441,11 +451,3 @@ def evaluate(authority_state: Any, request: Any) -> dict:
 
     receipt["diagnostics"] = sorted(set(diagnostics))
     return _finalize_receipt(receipt)
-
-
-def _safe_time(value: Any) -> bool:
-    try:
-        _parse_time(value)
-        return True
-    except Exception:
-        return False
