@@ -26,6 +26,8 @@ Specification: [`contract-b-factual-context-extension-v1.2.0.md`](contract-b-fac
 
 The production/version decision and exact cross-repository evidence are recorded in EDR-001, GitHub issue #14.
 
+The immutable public release is tagged `contract-b-v1.2.0`. Its release record binds the original production-lock commit, exact Evidence Bundler and Claim Audit Lab identities, the decisive acceptance/post-merge lock runs, and a machine-readable release-identity receipt.
+
 ### Contract C — Claim Audit Lab → downstream decision consumer
 
 Contract C 1.0.0 is the first canonical CAL result contract. It is decision-agnostic: it exports CAL-attributable epistemic state, exact Contract-B binding, producer/policy identity, retained contribution state, explicit unknown/failure state, and deterministic object identity without granting operational authorization.
@@ -133,7 +135,7 @@ A research result does not become production behavior merely because its branch 
 
 Contract A 2.0.0 is a breaking successor to legacy Contract A 1.0.0. Current strict legacy consumers may require a separate compatibility carrier. Contract A does not establish decomposition semantic correctness or downstream authority.
 
-Contract B 1.2.0 is production-locked, but its contract-specific release identity is tracked separately from that behavioral lock.
+Contract B 1.2.0 is canonical, production-locked, and released. Its release does not establish universal independent interoperability, source legitimacy, retrieval completeness, or correctness of CAL's semantic judgments.
 
 Contract C 1.0.0 is canonical and released, but that does not establish correctness of CAL's semantic judgments.
 
