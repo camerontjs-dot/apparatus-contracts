@@ -1,0 +1,42 @@
+name: Research - Contract E RC2 Successor
+
+on:
+  push:
+    branches:
+      - research/contract-e-v1-successor-rc2-dual-identity-20260902
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    name: RC2 candidate matrix (Python ${{ matrix.python }})
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Validate frozen schema JSON
+        run: python -m json.tool docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/schema.json >/dev/null
+      - name: Compile reference and tests
+        run: |
+          python -m py_compile \
+            docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/reference.py \
+            docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/test_candidate.py
+      - name: Execute preregistered RC2 core matrix
+        working-directory: docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate
+        run: python test_candidate.py
+      - name: Upload candidate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-rc2-candidate-py${{ matrix.python }}
+          path: docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/RESULTS.json
+          if-no-files-found: warn
+          retention-days: 90
