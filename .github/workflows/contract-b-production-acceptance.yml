@@ -161,8 +161,10 @@ jobs:
           test "$(git -C contract-e hash-object docs/research/contract-e/v1-closure-20260902/candidate/schema.json)" = "d934d055e39c81e6eb93830e7c6f6f43fc8a0870"
           test "$(git -C contract-e hash-object docs/research/contract-e/v1-closure-20260902/candidate/reference.py)" = "378cdb7835df3959c82a0fe98068b1434b1b68ec"
 
-      - name: Compile frozen experiment harness
-        run: python -m py_compile experiment/docs/research/contract-e/d-to-e-authorization-consumer-pressure-20260902/attack_matrix.py
+      - name: Compile experiment harnesses
+        run: |
+          python -m py_compile experiment/docs/research/contract-e/d-to-e-authorization-consumer-pressure-20260902/attack_matrix.py
+          python -m py_compile experiment/docs/research/contract-e/d-to-e-authorization-consumer-pressure-20260902/authenticity_extension.py
 
       - name: Execute preregistered attack matrix
         run: |
@@ -171,6 +173,13 @@ jobs:
             --contract-d-root contract-d \
             --contract-e-root contract-e \
             --output "experiment/build/d-to-e-authz-pressure/py${{ matrix.python }}/RESULTS.json"
+
+      - name: Execute frozen authenticity extension
+        run: |
+          python experiment/docs/research/contract-e/d-to-e-authorization-consumer-pressure-20260902/authenticity_extension.py \
+            --contract-d-root contract-d \
+            --contract-e-root contract-e \
+            --output "experiment/build/d-to-e-authz-pressure/py${{ matrix.python }}/AUTHENTICITY_RESULTS.json"
 
       - name: Verify frozen checkouts remain unmodified
         shell: bash
@@ -184,6 +193,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: d-to-e-authorization-consumer-pressure-py${{ matrix.python }}
-          path: experiment/build/d-to-e-authz-pressure/py${{ matrix.python }}/RESULTS.json
+          path: experiment/build/d-to-e-authz-pressure/py${{ matrix.python }}/
           if-no-files-found: warn
           retention-days: 90
