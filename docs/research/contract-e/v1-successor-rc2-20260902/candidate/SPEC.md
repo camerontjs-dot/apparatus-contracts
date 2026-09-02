@@ -71,9 +71,18 @@ No status string, confidence, agreement count, or cached `current=true` claim su
 
 ### 3.4 Canonical identity
 
-AuthorityState canonical identity is `sha256:` plus SHA-256 of deterministic canonical JSON of the supplied AuthorityState excluding `authority_state_id` itself.
+AuthorityState canonical identity is `sha256:` plus SHA-256 of the canonical bytes of the supplied AuthorityState excluding `authority_state_id` itself.
 
-Canonical JSON is finite JSON only, UTF-8, lexicographically sorted object keys, compact separators, Unicode preserved, and exactly one trailing newline. Non-finite numbers, host-only values, non-string keys, duplicate raw JSON member names, and cyclic decoded containers are rejected.
+RC2 canonical bytes are defined exactly as:
+
+1. the JSON value MUST be representable in the I-JSON domain accepted by RFC 8785 JSON Canonicalization Scheme (JCS); non-finite numbers, unsupported host-only values, non-string object keys, duplicate raw JSON member names, cyclic decoded containers, and values outside that canonicalization domain are rejected;
+2. serialize the value using **RFC 8785 JCS** exactly;
+3. encode the RFC 8785 result as UTF-8;
+4. append **exactly one ASCII LF byte (`0x0A`)**.
+
+No implementation-local JSON-number formatting, key-ordering rule, whitespace rule, Unicode escaping policy, or fallback serializer may substitute for RFC 8785.
+
+This clarification is evidence-driven. A pre-freeze discriminator showed that the earlier RC2 wording produced different canonical bytes for malformed numeric AuthorityState input under Python's ordinary sorted compact JSON serialization versus RFC 8785, even though valid-state bytes agreed. Because `recomputed_authority_state_id` is preserved on canonicalizable invalid state and participates in receipt semantic identity, an underspecified number grammar would recreate the exact class of independent-recoverability ambiguity RC2 is intended to eliminate.
 
 For a valid AuthorityState, the supplied `authority_state_id` MUST equal the recomputed canonical identity.
 
@@ -98,7 +107,7 @@ Authority-critical bindings are scalar exact-equality bindings. Missing, malform
 
 ### 4.1 Immutable references
 
-Each reference contains local `ref_id`, opaque `kind`, optional `version`, opaque immutable identifier, and deterministic `identity_sha256` over `{kind, version, immutable_id}`.
+Each reference contains local `ref_id`, opaque `kind`, optional `version`, opaque immutable identifier, and deterministic `identity_sha256` over `{kind, version, immutable_id}` using the same RC2 RFC 8785 + LF canonical-byte rule.
 
 `jurisdiction.target_ref` is an immutable `identity_sha256` and MUST resolve to a validated request reference.
 
@@ -143,7 +152,7 @@ The receipt contains:
 - `authorized` boolean;
 - request identity/state;
 - **`claimed_authority_state_id`** — the exact supplied AuthorityState `authority_state_id` when it is a syntactically valid `sha256:<64-lowercase-hex>` value, otherwise null;
-- **`recomputed_authority_state_id`** — the deterministic canonical identity recomputed from the supplied AuthorityState excluding `authority_state_id` whenever that supplied object is canonicalizable finite JSON, otherwise null;
+- **`recomputed_authority_state_id`** — the deterministic RFC 8785 + LF canonical identity recomputed from the supplied AuthorityState excluding `authority_state_id` whenever that supplied object is canonicalizable under the RC2 rule, otherwise null;
 - exact evaluation time, subject, and jurisdiction when recoverable;
 - terminal `authority_basis_id` only when authorized;
 - preserved request references, supporting artifacts, conflicts, and residues;
@@ -161,7 +170,7 @@ These are deliberately separate audit facts. Neither field is allowed to overwri
 
 ### 6.2 Receipt identity
 
-Receipt semantic identity is computed over the receipt excluding `receipt_id` and `diagnostics`. Both AuthorityState identity facts therefore participate in receipt semantic identity.
+Receipt semantic identity is computed over the receipt excluding `receipt_id` and `diagnostics`, using the same RC2 RFC 8785 + LF canonical-byte rule. Both AuthorityState identity facts therefore participate in receipt semantic identity.
 
 Diagnostics are non-authoritative, unordered observability information and do not change `receipt_id`.
 
@@ -187,6 +196,8 @@ RC2 does not define Qualification subject/scope binding, competence as an author
 ## 9. RC1 successor statement
 
 RC2 intentionally changes the receipt schema and semantic identity because RC1's single AuthorityState receipt identity was underdetermined on invalid input. RC2 does not relabel RC1 as passing and does not repair the frozen RC1 implementation.
+
+The RFC 8785 canonicalization clarification is a second pre-freeze evidence-driven correction inside the RC2 experiment. It was added only after the preregistered successor surface exposed that the broader recomputed-invalid-state identity domain made ordinary implementation-local JSON number rendering non-recoverable.
 
 ## 10. Version behavior and nonclaims
 
