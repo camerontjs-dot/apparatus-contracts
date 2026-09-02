@@ -40,3 +40,54 @@ jobs:
           path: docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/RESULTS.json
           if-no-files-found: warn
           retention-days: 90
+
+  trusted-origin-pressure:
+    name: RC2 D→E trusted-origin pressure (Python ${{ matrix.python }})
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout RC2 experiment branch
+        uses: actions/checkout@v4
+        with:
+          path: experiment
+      - name: Checkout exact Contract D 1.0.0 release
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+          path: contract-d
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install exact Contract D canonicalization dependency
+        run: python -m pip install --disable-pip-version-check 'rfc8785==0.1.4'
+      - name: Verify released Contract D authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C contract-d rev-parse HEAD)" = "298a1a0f7b7b6d7712e11200d04faec3e1ca169b"
+          test "$(git -C contract-d hash-object validators/contract_d_core.py)" = "564dcde5677df5ac8f86f21dc0ffd1692f44c9f0"
+          test "$(git -C contract-d hash-object validators/contract_d_consume.py)" = "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68"
+          test "$(git -C contract-d hash-object schema/contract-d/1.0.0/effect-registry.json)" = "a40f4f4447470654bdc16d852f5927189ae30cc5"
+      - name: Compile pressure harness
+        run: python -m py_compile experiment/docs/research/contract-e/v1-closure-20260902/successor-rc2/profile_pressure.py
+      - name: Execute preregistered D→E trusted-origin pressure
+        run: |
+          mkdir -p "experiment/build/contract-e-rc2-profile/py${{ matrix.python }}"
+          python experiment/docs/research/contract-e/v1-closure-20260902/successor-rc2/profile_pressure.py \
+            --contract-d-root contract-d \
+            --contract-e-reference experiment/docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/reference.py \
+            --output "experiment/build/contract-e-rc2-profile/py${{ matrix.python }}/PROFILE_RESULTS.json"
+      - name: Verify released D checkout unchanged
+        run: test -z "$(git -C contract-d status --porcelain)"
+      - name: Upload pressure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-rc2-profile-pressure-py${{ matrix.python }}
+          path: experiment/build/contract-e-rc2-profile/py${{ matrix.python }}/PROFILE_RESULTS.json
+          if-no-files-found: warn
+          retention-days: 90
