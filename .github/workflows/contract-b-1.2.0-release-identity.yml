@@ -1,0 +1,170 @@
+name: Contract B 1.2.0 release identity
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/contract-b-1.2.0-release-identity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  RELEASE_COMMIT: c314e53bd91c0736aa4370a364673b069aceb43e
+  CONTRACT_B_TAG: contract-b-v1.2.0
+  EVIDENCE_BUNDLER_MAIN: c8189c31adbab11729c31430c2070126224a2d42
+  CLAIM_AUDIT_LAB_MAIN: 33a928db97316a3652d57df9cafb8ca240305233
+  ACCEPTANCE_WORKFLOW_BLOB: 2b3f209c0b4b4753b41b0c5fa7a6bab7cbc2cb59
+  PREMERGE_ACCEPTANCE_RUN: '33115839918'
+  POSTMERGE_LOCK_RUN: '33116096988'
+  ACCEPTANCE_ARTIFACT: '9664451998'
+  ACCEPTANCE_ARTIFACT_DIGEST: sha256:888eeae4e02bac724a234bb18bc3b50c0419e502cb650b7bf6e22b8e10933054
+
+jobs:
+  publish-release-identity:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout control-plane commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact Contract B production-lock commit
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.RELEASE_COMMIT }}
+          path: _release
+          fetch-depth: 0
+
+      - name: Checkout exact production producer and consumer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: ${{ env.EVIDENCE_BUNDLER_MAIN }}
+          path: _deps/evidence-bundler
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CLAIM_AUDIT_LAB_MAIN }}
+          path: _deps/claim-audit-lab
+
+      - name: Verify immutable release identity and existing lock lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _release rev-parse HEAD)" = "$RELEASE_COMMIT"
+          test "$(git -C _deps/evidence-bundler rev-parse HEAD)" = "$EVIDENCE_BUNDLER_MAIN"
+          test "$(git -C _deps/claim-audit-lab rev-parse HEAD)" = "$CLAIM_AUDIT_LAB_MAIN"
+          test "$(cat _release/schema/.contract-version)" = "1.2.0"
+          test "$(cat _deps/evidence-bundler/schema/.contract-version)" = "1.2.0"
+          test "$(cat _deps/claim-audit-lab/schema/.contract-version)" = "1.2.0"
+          test "$(git -C _release hash-object .github/workflows/contract-b-production-acceptance.yml)" = "$ACCEPTANCE_WORKFLOW_BLOB"
+          test -f _release/contract-b-factual-context-extension-v1.2.0.md
+          git merge-base --is-ancestor "$RELEASE_COMMIT" HEAD
+
+      - name: Write release-identity receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/contract-b-1.2.0-release-identity
+          cat > build/contract-b-1.2.0-release-identity/release-lock-receipt.json <<JSON
+          {
+            "status": "PASS",
+            "contract_b_version": "1.2.0",
+            "release_commit": "${RELEASE_COMMIT}",
+            "control_plane_commit": "${GITHUB_SHA}",
+            "namespaced_tag": "${CONTRACT_B_TAG}",
+            "evidence_bundler_main": "${EVIDENCE_BUNDLER_MAIN}",
+            "claim_audit_lab_main": "${CLAIM_AUDIT_LAB_MAIN}",
+            "acceptance_workflow_blob": "${ACCEPTANCE_WORKFLOW_BLOB}",
+            "premerge_acceptance_run": "${PREMERGE_ACCEPTANCE_RUN}",
+            "postmerge_lock_run": "${POSTMERGE_LOCK_RUN}",
+            "acceptance_artifact": "${ACCEPTANCE_ARTIFACT}",
+            "acceptance_artifact_digest": "${ACCEPTANCE_ARTIFACT_DIGEST}",
+            "edr_issue": 14,
+            "semantic_change": false,
+            "release_identity_completion_only": true
+          }
+          JSON
+          cat build/contract-b-1.2.0-release-identity/release-lock-receipt.json
+
+      - name: Upload release-identity receipt as Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-b-1.2.0-release-identity
+          path: build/contract-b-1.2.0-release-identity/release-lock-receipt.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Create or verify immutable namespaced tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --tags origin "refs/tags/$CONTRACT_B_TAG" >/dev/null 2>&1; then
+            git fetch --force origin "refs/tags/$CONTRACT_B_TAG:refs/tags/$CONTRACT_B_TAG"
+            target="$(git rev-list -n 1 "$CONTRACT_B_TAG")"
+            test "$target" = "$RELEASE_COMMIT" || {
+              echo "Existing immutable tag points to $target, not $RELEASE_COMMIT" >&2
+              exit 1
+            }
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git tag -a "$CONTRACT_B_TAG" "$RELEASE_COMMIT" -m 'Contract B 1.2.0'
+            git push origin "refs/tags/$CONTRACT_B_TAG"
+          fi
+
+      - name: Create or verify GitHub Release and attach receipt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/contract-b-release-notes.md <<'NOTES'
+          # Contract B 1.2.0
+
+          Contract B 1.2.0 is the canonical production Evidence Bundler → Claim Audit Lab factual-context/history handoff established by EDR-001.
+
+          ## Release identity
+
+          - Contract version: `1.2.0`
+          - Namespaced immutable tag: `contract-b-v1.2.0`
+          - Canonical owner: `camerontjs-dot/apparatus-contracts`
+          - Exact production-lock commit: `c314e53bd91c0736aa4370a364673b069aceb43e`
+          - Exact Evidence Bundler producer: `c8189c31adbab11729c31430c2070126224a2d42`
+          - Exact Claim Audit Lab consumer: `33a928db97316a3652d57df9cafb8ca240305233`
+          - EDR-001: issue #14
+          - Decisive pre-merge acceptance run: `33115839918`
+          - Post-merge production lock run: `33116096988`
+          - Acceptance artifact: `9664451998`
+          - Acceptance artifact digest: `sha256:888eeae4e02bac724a234bb18bc3b50c0419e502cb650b7bf6e22b8e10933054`
+
+          ## What this release establishes
+
+          The released surface is the already-production-locked optional additive factual-context/history extension. It carries provenance-bound evidence-world facts, explicit history/search/aperture observations and limitations, typed anchors, and nomination/admission/review history while preserving the boundary that proposition-specific semantic judgment remains downstream CAL responsibility.
+
+          The production acceptance program established 17/17 cross-repository gates, exact Contract B 1.2.0 distribution pins across Apparatus, Evidence Bundler, and Claim Audit Lab, legacy 1.0.0/1.1.0 compatibility within the tested scope, explicit extension absence, and fail-closed handling for hostile semantic-looking upstream fields and integrity/history/tamper defects.
+
+          ## Release-control note
+
+          This GitHub Release closes the release-identity debt recorded in EDR-001. It does not alter Contract B semantics, move the production-lock commit, rerun or rewrite the historical scientific record, or promote any neighboring contract or apparatus.
+
+          ## Non-claims
+
+          This release does not establish universal independent interoperability, source legitimacy, corpus/retrieval completeness, correctness of CAL semantic judgments, Contract E authority semantics, Decision Engine policy correctness, or operational authorization.
+          NOTES
+
+          if gh release view "$CONTRACT_B_TAG" >/dev/null 2>&1; then
+            echo "GitHub Release already exists for $CONTRACT_B_TAG"
+          else
+            gh release create "$CONTRACT_B_TAG" \
+              --verify-tag \
+              --title 'Contract B 1.2.0' \
+              --notes-file /tmp/contract-b-release-notes.md
+          fi
+          gh release upload "$CONTRACT_B_TAG" \
+            build/contract-b-1.2.0-release-identity/release-lock-receipt.json \
+            --clobber
