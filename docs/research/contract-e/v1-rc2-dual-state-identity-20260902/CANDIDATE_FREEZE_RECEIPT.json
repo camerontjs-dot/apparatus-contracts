@@ -1,0 +1,89 @@
+{
+  "schema": "contract-e-v1-rc2-candidate-freeze-receipt-v1",
+  "marker": "CONTRACT_E_V1_RC2_CANDIDATE_FROZEN_BEFORE_FRESH_IMPLEMENTATION",
+  "candidate_freeze_head": "f616f6ed06bf922a53846d464dfc44838c55804d",
+  "candidate_intro_commit": "4e84440012417d8662adaffdc622578de0b961b6",
+  "candidate_files": {
+    "SPEC.md": {
+      "path": "docs/research/contract-e/v1-rc2-dual-state-identity-20260902/candidate/SPEC.md",
+      "git_blob": "ae8efaaa0328045da23932925f5c213a0c45ffb2",
+      "sha256": "da9e29206b86399ca40feea53af42e5a54293713cd778314f23122fdd703b762"
+    },
+    "schema.json": {
+      "path": "docs/research/contract-e/v1-rc2-dual-state-identity-20260902/candidate/schema.json",
+      "git_blob": "81eecca43a87b83a4e40dc70c9e4950617ff7fa2",
+      "sha256": "deea96f9ae4fd6886fecad021425ca23f3ece46128834087835ee31c8cc638e8"
+    },
+    "reference.py": {
+      "path": "docs/research/contract-e/v1-rc2-dual-state-identity-20260902/candidate/reference.py",
+      "git_blob": "f4d0d22b88512d3e7a4eadd12774c7aa966e67cf",
+      "sha256": "1a0c2ffe94cb889008b6fbb9b82716176dde122a2e827520224b07f4f75af338"
+    },
+    "test_candidate.py": {
+      "path": "docs/research/contract-e/v1-rc2-dual-state-identity-20260902/candidate/test_candidate.py",
+      "git_blob": "7e30e6eb9624291ac708ec651690daade550e685",
+      "sha256": "c0cffba6b7a148a585cca6e42c5af3be9a8b4add423e8d054ef910c64dbf77fb"
+    }
+  },
+  "accepted_gate": {
+    "run_id": 33673336584,
+    "head_sha": "f616f6ed06bf922a53846d464dfc44838c55804d",
+    "conclusion": "success",
+    "candidate_jobs": {
+      "python_3_11": 100391977956,
+      "python_3_12": 100391977869,
+      "python_3_13": 100391978219
+    },
+    "candidate_suite": {
+      "dual_state_identity_regressions": "4/4",
+      "exact_fractional_currentness_regressions": "5/5",
+      "seeded_weak_controls_caught": "6/6",
+      "released_a_d_reference_identities": "4/4"
+    },
+    "migrated_consumer_pressure_job": 100391977679,
+    "migrated_consumer_pressure": {
+      "source_head": "79c0918af76c42e66c30831cd30a8d98d146c30c",
+      "attack_matrix_blob": "10eb80cd1ca3b2279c17be934eff62b77c3f4513",
+      "contract_d_release": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+      "case_count": 101,
+      "pass_count": 101,
+      "fail_count": 0,
+      "weak_controls_caught": "5/5",
+      "artifact_id": 9863392207,
+      "artifact_digest": "sha256:32a63d62cf2e08008fc32096f4bb02069929fb84970020683f99f054e6c9eb2c"
+    }
+  },
+  "direct_rc1_consumer_compatibility": {
+    "run_id": 33673015461,
+    "job_id": 100390939280,
+    "result": "FAIL_CLOSED_SCHEMA_INCOMPATIBILITY",
+    "first_case": "H01-human-positive",
+    "expected": true,
+    "observed": false,
+    "cause": "RC1 consumer verifier requires the removed ambiguous receipt field authority_state_id; RC2 emits authority_state_claimed_id and authority_state_computed_id instead."
+  },
+  "preserved_apparatus_deviations": [
+    {
+      "run_id": 33672837070,
+      "kind": "pressure_wrapper_dependency_omission",
+      "detail": "Initial RC2 reuse wrapper omitted the exact rfc8785 dependency and failed before the scientific pressure matrix executed."
+    },
+    {
+      "run_id": 33673254062,
+      "kind": "consumer_migration_patch_transport_failure",
+      "detail": "The first preregistered migration attempt failed before matrix execution because YAML indentation altered the multi-line exact-match source block. The replacement was narrowed to one exact source line; candidate bytes were unchanged."
+    },
+    {
+      "kind": "inherited_harness_diagnostic_label",
+      "detail": "The frozen 101-case artifact retains the historical diagnostic label contract_e_candidate='research-only candidate RC1'. The workflow executed the byte-pinned RC2 reference from candidate_freeze_head; the stale label was deliberately not rewritten because only the preregistered receipt verifier migration was allowed."
+    }
+  ],
+  "semantic_changes_from_rc1": [
+    "AuthorizationReceipt exposes both authority_state_claimed_id and authority_state_computed_id as separately named normative fields.",
+    "Arbitrary fractional-second currentness/revocation comparison is exact rather than host-microsecond-truncated.",
+    "Previously implicit request-local uniqueness, supporting-reference resolution, canonicalization, malformed preservation, duplicate-raw-member, and fail-closed blocker behavior are made explicit."
+  ],
+  "fresh_implementation_existed_at_freeze": false,
+  "production_authorization": false,
+  "disposition": "FROZEN_RESEARCH_CANDIDATE_READY_FOR_EVALUATOR_QUALIFICATION"
+}
