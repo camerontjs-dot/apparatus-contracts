@@ -39,8 +39,8 @@ jobs:
           cd docs/research/contract-e/v1-rc2-dual-state-identity-20260902/candidate
           python test_candidate.py
 
-  pressure:
-    name: RC2 against frozen D-to-E pressure matrix
+  migrated-pressure:
+    name: RC2 migrated consumer against frozen D-to-E pressure matrix
     runs-on: ubuntu-latest
     steps:
       - name: Checkout RC2 branch
@@ -73,21 +73,56 @@ jobs:
           test "$(git -C contract-d hash-object validators/contract_d_consume.py)" = "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68"
           test "$(git -C contract-d hash-object schema/contract-d/1.0.0/effect-registry.json)" = "a40f4f4447470654bdc16d852f5927189ae30cc5"
           test "$(git -C contract-d hash-object fixtures/contract-d/1.0.0/valid.json)" = "66f59bc50e5062aa8550491defa2fee37e75fcc7"
-      - name: Run preregistered pressure matrix against RC2
+      - name: Apply exact preregistered RC2 consumer verifier migration
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp pressure-src/docs/research/contract-e/d-to-e-authorization-consumer-pressure-20260902/attack_matrix.py "$RUNNER_TEMP/attack_matrix_rc2.py"
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("${{ runner.temp }}/attack_matrix_rc2.py")
+          text = path.read_text(encoding="utf-8")
+          old = '''        for key in ("authority_state_id", "evaluation_time", "subject_id", "jurisdiction"):
+              if receipt.get(key) != req.get(key):
+                  return False
+          '''
+          new = '''        if receipt.get("authority_state_claimed_id") != req.get("authority_state_id"):
+              return False
+          if receipt.get("authority_state_computed_id") != req.get("authority_state_id"):
+              return False
+          for key in ("evaluation_time", "subject_id", "jurisdiction"):
+              if receipt.get(key) != req.get(key):
+                  return False
+          '''
+          if text.count(old) != 1:
+              raise SystemExit(f"expected exactly one RC1 verifier block, found {text.count(old)}")
+          path.write_text(text.replace(old, new), encoding="utf-8")
+          PY
+      - name: Run frozen 101-case pressure matrix with migrated verifier
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/rc2-e/docs/research/contract-e/v1-closure-20260902/candidate"
           cp rc2/docs/research/contract-e/v1-rc2-dual-state-identity-20260902/candidate/reference.py \
              "$RUNNER_TEMP/rc2-e/docs/research/contract-e/v1-closure-20260902/candidate/reference.py"
-          python pressure-src/docs/research/contract-e/d-to-e-authorization-consumer-pressure-20260902/attack_matrix.py \
+          python "$RUNNER_TEMP/attack_matrix_rc2.py" \
             --contract-d-root "$GITHUB_WORKSPACE/contract-d" \
             --contract-e-root "$RUNNER_TEMP/rc2-e" \
             --output "$RUNNER_TEMP/rc2-pressure-results.json"
-          cat "$RUNNER_TEMP/rc2-pressure-results.json"
-      - name: Upload pressure result
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("${{ runner.temp }}/rc2-pressure-results.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          assert data["case_count"] == 101, data
+          assert data["pass_count"] == 101, data
+          assert data["fail_count"] == 0, data
+          assert data["failed_case_ids"] == [], data
+          print("RC2_MIGRATED_CONSUMER_PRESSURE=101/101")
+          PY
+      - name: Upload migrated pressure result
         uses: actions/upload-artifact@v4
         with:
-          name: contract-e-rc2-d-to-e-pressure
+          name: contract-e-rc2-migrated-d-to-e-pressure
           path: ${{ runner.temp }}/rc2-pressure-results.json
           if-no-files-found: error
