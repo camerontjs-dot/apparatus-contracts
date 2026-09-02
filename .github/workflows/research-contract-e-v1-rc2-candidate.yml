@@ -82,20 +82,16 @@ jobs:
           from pathlib import Path
           path = Path("${{ runner.temp }}/attack_matrix_rc2.py")
           text = path.read_text(encoding="utf-8")
-          old = '''        for key in ("authority_state_id", "evaluation_time", "subject_id", "jurisdiction"):
-              if receipt.get(key) != req.get(key):
-                  return False
-          '''
-          new = '''        if receipt.get("authority_state_claimed_id") != req.get("authority_state_id"):
-              return False
-          if receipt.get("authority_state_computed_id") != req.get("authority_state_id"):
-              return False
-          for key in ("evaluation_time", "subject_id", "jurisdiction"):
-              if receipt.get(key) != req.get(key):
-                  return False
-          '''
+          old = '        for key in ("authority_state_id", "evaluation_time", "subject_id", "jurisdiction"):\n'
+          new = (
+              '        if receipt.get("authority_state_claimed_id") != req.get("authority_state_id"):\n'
+              '            return False\n'
+              '        if receipt.get("authority_state_computed_id") != req.get("authority_state_id"):\n'
+              '            return False\n'
+              '        for key in ("evaluation_time", "subject_id", "jurisdiction"):\n'
+          )
           if text.count(old) != 1:
-              raise SystemExit(f"expected exactly one RC1 verifier block, found {text.count(old)}")
+              raise SystemExit(f"expected exactly one RC1 verifier line, found {text.count(old)}")
           path.write_text(text.replace(old, new), encoding="utf-8")
           PY
       - name: Run frozen 101-case pressure matrix with migrated verifier
