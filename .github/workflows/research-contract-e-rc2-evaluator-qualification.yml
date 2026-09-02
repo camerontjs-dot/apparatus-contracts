@@ -1,0 +1,132 @@
+name: Research - Contract E RC2 Evaluator Qualification
+
+on:
+  push:
+    branches:
+      - research/contract-e-v1-successor-rc2-evaluator-20260902
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout evaluator branch
+        uses: actions/checkout@v4
+        with:
+          path: evaluator
+
+      - name: Checkout exact frozen RC2 candidate
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 44c919ea7f571b9a01ccf420ac710822c29476e4
+          path: candidate-freeze
+
+      - name: Checkout exact Contract D 1.0.0
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+          path: contract-d
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install exact canonicalization dependency
+        run: python -m pip install --disable-pip-version-check 'rfc8785==0.1.4'
+
+      - name: Verify frozen candidate and Contract D blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C candidate-freeze rev-parse HEAD)" = "44c919ea7f571b9a01ccf420ac710822c29476e4"
+          test "$(git -C candidate-freeze hash-object docs/research/contract-e/v1-successor-rc2-20260902/candidate/SPEC.md)" = "90bfa10fda928796f9b14c6a430ee12e412d9e3e"
+          test "$(git -C candidate-freeze hash-object docs/research/contract-e/v1-successor-rc2-20260902/candidate/schema.json)" = "ababc25a6dc9fc938251df57bea3ddcc3dd78850"
+          test "$(git -C candidate-freeze hash-object docs/research/contract-e/v1-successor-rc2-20260902/candidate/reference.py)" = "fda14bb18c66c51747b7b506abb8df8a55a8d166"
+          test "$(git -C candidate-freeze hash-object docs/research/contract-e/v1-successor-rc2-20260902/candidate/test_candidate.py)" = "7b51b8ad8e7523d29b45a153a6427934cb5661f5"
+          test "$(git -C candidate-freeze hash-object docs/research/contract-e/v1-successor-rc2-20260902/integration_profile.py)" = "6f19875d4f21765e02d51fef50ca53fae3daf177"
+          test "$(git -C candidate-freeze hash-object docs/research/contract-e/v1-successor-rc2-20260902/test_integration_profile.py)" = "7c84806033a80b93c08d51492dce265a29dc2b40"
+          test "$(git -C candidate-freeze hash-object docs/research/contract-e/v1-successor-rc2-20260902/run_integration_superset.py)" = "8cd53b679f39f6b08a5184eb3133f3c7d610eb2c"
+          test "$(git -C contract-d rev-parse HEAD)" = "298a1a0f7b7b6d7712e11200d04faec3e1ca169b"
+          test "$(git -C contract-d hash-object validators/contract_d_core.py)" = "564dcde5677df5ac8f86f21dc0ffd1692f44c9f0"
+          test "$(git -C contract-d hash-object validators/contract_d_consume.py)" = "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68"
+
+      - name: Compile evaluator apparatus
+        run: |
+          python -m py_compile \
+            evaluator/research/contract_e_rc2_evaluator/hidden_cases.py \
+            evaluator/research/contract_e_rc2_evaluator/evaluate_fresh.py \
+            evaluator/research/contract_e_rc2_evaluator/qualify_evaluator.py \
+            evaluator/research/contract_e_rc2_evaluator/qualify_integration_sensitivity.py
+
+      - name: Run frozen RC2 reference through fresh evaluator
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evaluator/build/contract-e-rc2-evaluator
+          python evaluator/research/contract_e_rc2_evaluator/evaluate_fresh.py \
+            --candidate candidate-freeze/docs/research/contract-e/v1-successor-rc2-20260902/candidate/reference.py \
+            --reference candidate-freeze/docs/research/contract-e/v1-successor-rc2-20260902/candidate/reference.py \
+            --hidden-cases evaluator/research/contract_e_rc2_evaluator/hidden_cases.py \
+            --output evaluator/build/contract-e-rc2-evaluator/REFERENCE-RESULTS.json
+
+      - name: Qualify core evaluator against seeded weak implementations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python evaluator/research/contract_e_rc2_evaluator/qualify_evaluator.py \
+            --reference candidate-freeze/docs/research/contract-e/v1-successor-rc2-20260902/candidate/reference.py \
+            --hidden-cases evaluator/research/contract_e_rc2_evaluator/hidden_cases.py \
+            --output evaluator/build/contract-e-rc2-evaluator/QUALIFICATION.json
+
+      - name: Re-run frozen 121-case integration pressure surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          python candidate-freeze/docs/research/contract-e/v1-successor-rc2-20260902/run_integration_superset.py \
+            --contract-d-root contract-d \
+            --output evaluator/build/contract-e-rc2-evaluator/FROZEN-INTEGRATION-RESULTS.json
+
+      - name: Qualify integration attack sensitivity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python evaluator/research/contract_e_rc2_evaluator/qualify_integration_sensitivity.py \
+            --profile candidate-freeze/docs/research/contract-e/v1-successor-rc2-20260902/integration_profile.py \
+            --reference candidate-freeze/docs/research/contract-e/v1-successor-rc2-20260902/candidate/reference.py \
+            --contract-d-root contract-d \
+            --output evaluator/build/contract-e-rc2-evaluator/INTEGRATION-SENSITIVITY.json
+
+      - name: Verify frozen checkouts remain untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C candidate-freeze diff --exit-code
+          git -C contract-d diff --exit-code
+
+      - name: Capture evaluator identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            printf 'EVALUATOR_HEAD=%s\n' "$(git -C evaluator rev-parse HEAD)"
+            printf 'CANDIDATE_FREEZE=%s\n' "$(git -C candidate-freeze rev-parse HEAD)"
+            sha256sum \
+              evaluator/research/contract_e_rc2_evaluator/hidden_cases.py \
+              evaluator/research/contract_e_rc2_evaluator/evaluate_fresh.py \
+              evaluator/research/contract_e_rc2_evaluator/qualify_evaluator.py \
+              evaluator/research/contract_e_rc2_evaluator/qualify_integration_sensitivity.py
+          } > evaluator/build/contract-e-rc2-evaluator/EVALUATOR-IDENTITIES.txt
+
+      - name: Upload qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-rc2-evaluator-qualification-${{ github.run_id }}
+          path: evaluator/build/contract-e-rc2-evaluator/
+          if-no-files-found: warn
+          retention-days: 90
