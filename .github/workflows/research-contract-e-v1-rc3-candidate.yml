@@ -1,0 +1,42 @@
+name: Research Contract E v1 RC3 candidate
+
+on:
+  push:
+    branches:
+      - research/contract-e-v1-rc3-exact-currentness-jcs-20260902
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    name: RC3 candidate (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install exact canonicalization dependency
+        run: python -m pip install --disable-pip-version-check 'rfc8785==0.1.4'
+      - name: Capture candidate identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="docs/research/contract-e/v1-rc3-exact-currentness-jcs-20260902/candidate"
+          git hash-object "$base/SPEC.md"
+          git hash-object "$base/schema.json"
+          git hash-object "$base/reference.py"
+          git hash-object "$base/test_candidate.py"
+          sha256sum "$base/SPEC.md" "$base/schema.json" "$base/reference.py" "$base/test_candidate.py"
+      - name: Run RC3 candidate suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd docs/research/contract-e/v1-rc3-exact-currentness-jcs-20260902/candidate
+          python test_candidate.py
