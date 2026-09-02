@@ -6,7 +6,7 @@ The maintained architecture is intentionally asymmetric. A contract exists only 
 
 ## Current contract surfaces
 
-### Contract A — upstream work object → Evidence Bundler
+### Contract A — upstream work object → [Evidence Bundler](https://github.com/camerontjs-dot/evidence-bundler)
 
 Contract A 2.0.0 is the canonical production upstream declaration/source-representation contract after its promotion gate completes. It carries exact producer/work/root proposition identity, explicit decomposition state and declared `all_of` lineage where present, exact supplied UTF-8 source representations, and whole-object integrity without importing support, trust, retrieval, CAL, Decision, or Authorization semantics.
 
@@ -18,19 +18,19 @@ Legacy Contract A 1.0.0 remains immutable historical authority at [`handoff-cont
 
 The production/version decision and bounded Contract E pre-promotion evidence are recorded in EDR-004 / issue #60 and terminal research PRs #57 and #61.
 
-### Contract B — Evidence Bundler → Claim Audit Lab
+### Contract B — [Evidence Bundler](https://github.com/camerontjs-dot/evidence-bundler) → [Claim Audit Lab](https://github.com/camerontjs-dot/claim-audit-lab)
 
-Contract B 1.2.0 is the canonical production handoff. Its additive factual-context/history extension carries provenance-bound evidence-world facts, explicit history and aperture observations, and preserved nomination/admission state without converting those fields into proposition-specific semantic judgments.
+Contract B 1.2.0 is the canonical production handoff from [Evidence Bundler](https://github.com/camerontjs-dot/evidence-bundler) to [Claim Audit Lab](https://github.com/camerontjs-dot/claim-audit-lab). Its additive factual-context/history extension carries provenance-bound evidence-world facts, explicit history and aperture observations, and preserved nomination/admission state without converting those fields into proposition-specific semantic judgments.
 
 Specification: [`contract-b-factual-context-extension-v1.2.0.md`](contract-b-factual-context-extension-v1.2.0.md)
 
 The production/version decision and exact cross-repository evidence are recorded in EDR-001, GitHub issue #14.
 
-The immutable public release is tagged `contract-b-v1.2.0`. Its release record binds the original production-lock commit, exact Evidence Bundler and Claim Audit Lab identities, the decisive acceptance/post-merge lock runs, and a machine-readable release-identity receipt.
+The immutable public release is tagged `contract-b-v1.2.0`. Its release record binds the original production-lock commit, exact [Evidence Bundler](https://github.com/camerontjs-dot/evidence-bundler) and [Claim Audit Lab](https://github.com/camerontjs-dot/claim-audit-lab) identities, the decisive acceptance/post-merge lock runs, and a machine-readable release-identity receipt.
 
 ### Contract C — Claim Audit Lab → downstream decision consumer
 
-Contract C 1.0.0 is the first canonical CAL result contract. It is decision-agnostic: it exports CAL-attributable epistemic state, exact Contract-B binding, producer/policy identity, retained contribution state, explicit unknown/failure state, and deterministic object identity without granting operational authorization.
+Contract C 1.0.0 is the first canonical CAL result contract. Producer: [Claim Audit Lab](https://github.com/camerontjs-dot/claim-audit-lab). Downstream decision consumer: [Decision Engine](https://github.com/camerontjs-dot/decision-engine). It is decision-agnostic: it exports CAL-attributable epistemic state, exact Contract-B binding, producer/policy identity, retained contribution state, explicit unknown/failure state, and deterministic object identity without granting operational authorization.
 
 Specification: [`contract-c-v1.0.0.md`](contract-c-v1.0.0.md)
 
@@ -42,7 +42,7 @@ Contract D 1.0.0 is the first canonical production Decision contract. It binds e
 
 Specification: [`contract-d-v1.0.0.md`](contract-d-v1.0.0.md)
 
-The immutable public release is tagged `contract-d-v1.0.0`. Its post-merge release lock reruns the exact Decision Engine producer, frozen independent consumer, frozen adversarial apparatus, and full conformance before publication.
+The immutable public release is tagged `contract-d-v1.0.0`. Its post-merge release lock reruns the exact [Decision Engine](https://github.com/camerontjs-dot/decision-engine) producer, frozen independent consumer, frozen adversarial apparatus, and full conformance before publication.
 
 A Decision is not automatic permission to execute an effect.
 
