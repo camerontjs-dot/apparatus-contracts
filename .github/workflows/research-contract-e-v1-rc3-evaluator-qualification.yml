@@ -35,12 +35,16 @@ jobs:
           set -euo pipefail
           cd docs/research/contract-e/v1-rc3-exact-currentness-jcs-20260902/candidate
           python test_candidate.py
+      - name: Prepare qualification evidence directory
+        shell: bash
+        run: mkdir -p sealed/contract-e-v1-rc3-fresh/qualification
       - name: Qualify evaluator and weak controls
         shell: bash
         run: |
           set -euo pipefail
           python sealed/contract-e-v1-rc3-fresh/qualify.py | tee sealed/contract-e-v1-rc3-fresh/qualification/qualification.log
       - name: Capture exact evaluator identities
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
@@ -50,13 +54,17 @@ jobs:
             printf 'QUALIFICATION_CONTRACT_BLOB=%s\n' "$(git hash-object "$root/QUALIFICATION-CONTRACT.md")"
             printf 'EVALUATOR_BLOB=%s\n' "$(git hash-object "$root/evaluate_fresh.py")"
             printf 'HIDDEN_CASES_BLOB=%s\n' "$(git hash-object "$root/hidden_cases.py")"
+            printf 'HIDDEN_EXTENSION_BLOB=%s\n' "$(git hash-object "$root/hidden_cases_reference_identity_extension.py")"
             printf 'QUALIFIER_BLOB=%s\n' "$(git hash-object "$root/qualify.py")"
             sha256sum \
               "$root/QUALIFICATION-CONTRACT.md" \
               "$root/evaluate_fresh.py" \
               "$root/hidden_cases.py" \
-              "$root/qualify.py" \
-              "$root/qualification/QUALIFICATION_RECEIPT.json"
+              "$root/hidden_cases_reference_identity_extension.py" \
+              "$root/qualify.py"
+            if test -f "$root/qualification/QUALIFICATION_RECEIPT.json"; then
+              sha256sum "$root/qualification/QUALIFICATION_RECEIPT.json"
+            fi
           } > "$root/qualification/EVALUATOR_IDENTITIES.txt"
           cat "$root/qualification/EVALUATOR_IDENTITIES.txt"
       - name: Upload qualification evidence
