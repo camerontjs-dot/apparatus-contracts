@@ -116,6 +116,14 @@ def _check_decision(
     return identity, outcome
 
 
+def _bind_decision_operation(expected: Any, jurisdiction: dict[str, str]) -> None:
+    requested_operation = getattr(expected, "requested_operation", None)
+    if not isinstance(requested_operation, str) or not requested_operation:
+        raise ProfileError("invalid_requested_operation_binding")
+    if jurisdiction.get("operation") != requested_operation:
+        raise ProfileError("decision_operation_authorization_mismatch")
+
+
 def build_authorization_request(
     *,
     authority_state: dict[str, Any],
@@ -180,6 +188,7 @@ def authorize_at_point_of_use(
     prior_receipts: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     decision_identity, d_outcome = _check_decision(decision, expected, trusted, contract_d_root)
+    _bind_decision_operation(expected, jurisdiction)
     _check_trusted_authority_state(authority_state, trusted)
     request = build_authorization_request(
         authority_state=authority_state,
@@ -202,9 +211,7 @@ def authorize_at_point_of_use(
     }
 
 
-def human_handoff(
-    **kwargs,
-) -> dict[str, Any]:
+def human_handoff(**kwargs) -> dict[str, Any]:
     result = authorize_at_point_of_use(**kwargs)
     if not result["permitted"]:
         return {"handoff_created": False, "authorization": result}
@@ -220,11 +227,7 @@ def human_handoff(
     }
 
 
-def machine_gate(
-    *,
-    execution_intent: dict[str, Any],
-    **kwargs,
-) -> dict[str, Any]:
+def machine_gate(*, execution_intent: dict[str, Any], **kwargs) -> dict[str, Any]:
     intent_id = execution_intent_identity(execution_intent)
     expected_target = immutable_ref("TARGET", "execution_intent", "1", intent_id)
     if kwargs.get("target_reference") != expected_target:
