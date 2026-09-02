@@ -57,5 +57,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: contract-e-v1-post-freeze-adversarial-${{ github.sha }}
-          path: docs/research/contract-e/v1-closure-20260902/POST_FREEZE_RESULTS.txt
+          path: POST_FREEZE_RESULTS.txt
           if-no-files-found: error
