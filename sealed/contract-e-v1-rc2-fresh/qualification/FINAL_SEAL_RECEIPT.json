@@ -1,0 +1,96 @@
+{
+  "schema": "contract-e-v1-rc2-fresh-evaluator-final-seal-v1",
+  "sealed_use": "fresh_context_independent_reproduction_comparison",
+  "candidate": {
+    "freeze_head": "f616f6ed06bf922a53846d464dfc44838c55804d",
+    "freeze_receipt_commit": "d48d24c791837bb64c9ef7ea5ae1771e13892a91",
+    "files": {
+      "SPEC.md": {
+        "git_blob": "ae8efaaa0328045da23932925f5c213a0c45ffb2",
+        "sha256": "da9e29206b86399ca40feea53af42e5a54293713cd778314f23122fdd703b762"
+      },
+      "schema.json": {
+        "git_blob": "81eecca43a87b83a4e40dc70c9e4950617ff7fa2",
+        "sha256": "deea96f9ae4fd6886fecad021425ca23f3ece46128834087835ee31c8cc638e8"
+      },
+      "reference.py": {
+        "git_blob": "f4d0d22b88512d3e7a4eadd12774c7aa966e67cf",
+        "sha256": "1a0c2ffe94cb889008b6fbb9b82716176dde122a2e827520224b07f4f75af338"
+      },
+      "test_candidate.py": {
+        "git_blob": "7e30e6eb9624291ac708ec651690daade550e685",
+        "sha256": "c0cffba6b7a148a585cca6e42c5af3be9a8b4add423e8d054ef910c64dbf77fb"
+      }
+    }
+  },
+  "evaluator": {
+    "qualification_head": "cc3d949f49609df02c2c0d9d60c26e29855829d4",
+    "files": {
+      "QUALIFICATION-CONTRACT.md": {
+        "git_blob": "de3f43324bd683eaa607b5d02c200791672eabfc",
+        "sha256": "1da9be9f6fa7d9589504c635e26ad0a2c3ee736918062be3d0e5b087425d83a6"
+      },
+      "evaluate_fresh.py": {
+        "git_blob": "9bf3e92088c0a5a412f77ca37da2af15662f01f0",
+        "sha256": "9499b607f8e5a8b7e79e478be25e5214ef45e54bd33ee743a1a9ea46318c004a"
+      },
+      "hidden_cases.py": {
+        "git_blob": "6891a7b593bb0126cd77cc56c6fe593b5d626259",
+        "sha256": "88ddc4c710a42cadb5bced15ed6134321da8f0ba9285d90dd5f6b9fc260564bb"
+      },
+      "qualify.py": {
+        "git_blob": "c06e5ee6af44c543e29cd2fb3bb20446ec651cfb",
+        "sha256": "d4ad7c90829f7398489d981c58b917e6da5af70e8171b714731dde3f57fd0048"
+      }
+    },
+    "normative_fields": [
+      "schema",
+      "receipt_id",
+      "authority_conferring",
+      "authorized",
+      "request_id",
+      "request_sha256",
+      "authority_state_claimed_id",
+      "authority_state_computed_id",
+      "evaluation_time",
+      "subject_id",
+      "jurisdiction",
+      "authority_basis_id",
+      "preserved"
+    ]
+  },
+  "accepted_qualification": {
+    "run_id": 33673926661,
+    "job_id": 100393947293,
+    "run_head": "cc3d949f49609df02c2c0d9d60c26e29855829d4",
+    "artifact_id": 9863588592,
+    "artifact_digest": "sha256:9ec87464ff2a56b144180a151cffb521c233f5167a77f0f0c36ac0b82a68302b",
+    "qualification_state": "PASS",
+    "hidden_case_count": 64,
+    "reference_normative_exact_matches": 64,
+    "diagnostic_variant_state": "SUPPORTED",
+    "weak_controls_required": 10,
+    "weak_controls_caught": 10,
+    "qualification_failures": []
+  },
+  "required_mutant_discrimination": {
+    "claimed_only": "FALSIFIED",
+    "computed_only": "FALSIFIED",
+    "microsecond_truncator": "FALSIFIED_WITH_FALSE_PERMIT",
+    "subject_blind": "FALSIFIED_WITH_FALSE_PERMIT",
+    "currentness_blind": "FALSIFIED_WITH_FALSE_PERMIT",
+    "blocker_blind": "FALSIFIED_WITH_FALSE_PERMIT",
+    "support_launderer": "FALSIFIED_WITH_FALSE_PERMIT",
+    "state_identity_blind": "FALSIFIED_WITH_FALSE_PERMIT",
+    "request_state_blind": "FALSIFIED_WITH_FALSE_PERMIT",
+    "preservation_dropper": "FALSIFIED_WITH_PRESERVATION_FAILURE"
+  },
+  "preseal_deviations": [
+    "A concurrent RSH branch research/contract-e-v1-fresh-independent-reproduction-rc2-20260902 appeared before this seal at commit 5804f39ed0043944a04b9a9bbcd36ba01ab232dd. It is exactly one aperture-only commit from RSH main and contains only SPEC.md, schema.json, and PRE_FREEZE_TASK.md; no fresh implementation, tests, or freeze receipt exist there. Its aperture materially disagrees with the frozen RC2 candidate and is quarantined/superseded. It is not authorized for fresh execution.",
+    "The frozen RC2 D-to-E pressure artifact retains an inherited diagnostic string naming candidate RC1 because the preregistered 101-case harness was intentionally not rewritten except for the exact consumer receipt-binding migration. The executed RC2 reference was byte-pinned separately."
+  ],
+  "fresh_implementation_existed_at_qualification": false,
+  "fresh_implementation_existed_at_seal": false,
+  "diagnostic_content_is_normative": false,
+  "production_authorization": false
+}
