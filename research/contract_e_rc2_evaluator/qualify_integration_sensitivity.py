@@ -11,6 +11,7 @@ from pathlib import Path
 def load(path: str, name: str):
     spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
     spec.loader.exec_module(module)
     return module
 
@@ -96,7 +97,6 @@ def main():
 
     controls = {}
 
-    # Weak: any structurally valid Decision is treated as trusted.
     forged = deepcopy(hold)
     forged["evaluation"] = {"state": "completed", "disposition": "clear"}
     forged_exp = expected(forged)
@@ -110,7 +110,6 @@ def main():
         correct_reject = False
     controls["decision_structural_validity_implies_trust"] = precondition and correct_reject
 
-    # Weak: a self-consistent AuthorityState hash is treated as root legitimacy.
     fabricated = deepcopy(state)
     fabricated["records"][0]["id"] = "fabricated-root"
     fabricated["authority_state_id"] = ref.authority_state_identity(fabricated)
@@ -132,7 +131,6 @@ def main():
         correct_reject = False
     controls["authority_state_self_hash_implies_root_trust"] = precondition and correct_reject
 
-    # Weak: receipt hash / authorized boolean is treated as current permission.
     receipt = deepcopy(baseline["authorization"]["receipt"])
     receipt["authorized"] = True
     receipt["authority_basis_id"] = "forged"
@@ -141,7 +139,6 @@ def main():
     controls["receipt_hash_implies_authorization_origin"] = bool(weak_receipt_accepts)
     controls["receipt_authorized_boolean_only"] = bool(receipt["authorized"])
 
-    # Weak: skip point-of-use evaluation after authority is revoked.
     revoked = make_state(revoked_at="2026-09-02T18:00:00Z")
     revoked_kwargs = deepcopy(kwargs)
     revoked_kwargs["authority_state"] = revoked
@@ -150,7 +147,6 @@ def main():
     current = profile.human_handoff(**revoked_kwargs)
     controls["skip_point_of_use_re_evaluation"] = baseline["authorization"]["receipt"]["authorized"] is True and current["handoff_created"] is False
 
-    # Weak: actor / operation / target blind consumption.
     wrong_subject = deepcopy(kwargs); wrong_subject["subject_id"] = "human:other"
     controls["subject_blind"] = profile.human_handoff(**wrong_subject)["handoff_created"] is False
 
@@ -169,7 +165,6 @@ def main():
     blocker = deepcopy(kwargs); blocker["conflicts"] = [{"id": "c", "relevant": True, "status": "unresolved"}]
     controls["blocker_blind"] = profile.human_handoff(**blocker)["handoff_created"] is False
 
-    # Weak: trust stale target ID instead of recomputing ExecutionIntent content.
     task = deepcopy(fixtures["task-dispatch-clear.json"])
     task_exp = expected(task)
     task_id = core.semantic_identity(task)
