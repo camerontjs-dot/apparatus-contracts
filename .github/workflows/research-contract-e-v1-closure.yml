@@ -1,0 +1,62 @@
+name: Research - Contract E v1 Closure Candidate
+
+on:
+  push:
+    branches:
+      - research/contract-e-v1-closure-20260902
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify exact canonical A-D release commits
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-list -n 1 contract-a-v2.0.0)" = "529c92b49a34d5c610618551a8737f019f9fa332"
+          test "$(git rev-list -n 1 contract-b-v1.2.0)" = "c314e53bd91c0736aa4370a364673b069aceb43e"
+          test "$(git rev-list -n 1 contract-c-v1.0.0)" = "5fe55f9ed5d0ee9f026ca1b077e9d70ce0487ea1"
+          test "$(git rev-list -n 1 contract-d-v1.0.0)" = "298a1a0f7b7b6d7712e11200d04faec3e1ca169b"
+
+      - name: Validate candidate machine schema JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m json.tool docs/research/contract-e/v1-closure-20260902/candidate/schema.json >/dev/null
+
+      - name: Run bounded candidate adversarial and pipeline-boundary suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd docs/research/contract-e/v1-closure-20260902/candidate
+          python test_candidate.py | tee RESULTS.txt
+
+      - name: Capture candidate identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd docs/research/contract-e/v1-closure-20260902/candidate
+          sha256sum SPEC.md schema.json reference.py test_candidate.py > SHA256SUMS
+          git rev-parse HEAD > GIT_HEAD
+          cat SHA256SUMS
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-v1-closure-candidate-${{ github.sha }}
+          path: |
+            docs/research/contract-e/v1-closure-20260902/candidate/RESULTS.txt
+            docs/research/contract-e/v1-closure-20260902/candidate/SHA256SUMS
+            docs/research/contract-e/v1-closure-20260902/candidate/GIT_HEAD
+          if-no-files-found: error

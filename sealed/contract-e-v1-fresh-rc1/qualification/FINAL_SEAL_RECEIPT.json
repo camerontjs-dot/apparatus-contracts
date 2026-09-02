@@ -1,0 +1,79 @@
+{
+  "accepted_qualification": {
+    "artifact_digest": "sha256:42c1d301cc0dea7fcd197ad7ce04c9354857bdccd62ec4b7b9f5b88a805c0ca1",
+    "artifact_id": 9849251850,
+    "diagnostic_variant_state": "SUPPORTED",
+    "hidden_case_count": 50,
+    "job_id": 100270779389,
+    "qualification_failures": [],
+    "reference_normative_exact_matches": 50,
+    "run_head": "ee8c341adf129ac51778a85597a07bfb05fe1587",
+    "run_id": 33637154396,
+    "weak_controls_caught": 7,
+    "weak_controls_required": 7
+  },
+  "candidate": {
+    "freeze_commit": "8876b7bcc2afa1a4902400b0cc507cf2ef02e6e7",
+    "files": {
+      "SPEC.md": {
+        "git_blob": "3041d31ed0905d50ff355e483fbb9422df994997",
+        "sha256": "499b30f4d9d9f29b4c60a7e0d84465e3a09b13972a230b728117024da9d12841"
+      },
+      "reference.py": {
+        "git_blob": "378cdb7835df3959c82a0fe98068b1434b1b68ec",
+        "sha256": "2b9ddbc5f6e51fffedcca1bcc33983113dbff995a476afe0608d7bf1dc58b643"
+      },
+      "schema.json": {
+        "git_blob": "d934d055e39c81e6eb93830e7c6f6f43fc8a0870",
+        "sha256": "eefe62ff98295f72457c4cc427c398f942afc81954c8d6afff2410652f56a07b"
+      },
+      "test_candidate.py": {
+        "git_blob": "39462a06c30aa312d3055d93d65a287688a89086",
+        "sha256": "4f6dcc40cb27151f1b374a8fc847842685fc64ef8ac5a78bc8b93360cf2080e0"
+      }
+    }
+  },
+  "diagnostic_content_is_normative": false,
+  "evaluator": {
+    "files": {
+      "QUALIFICATION-CONTRACT.md": {
+        "git_blob": "3c945580e53d28f8eff1afd1de0737542ba75514",
+        "sha256": "64fb5338329747b5e617027bf0b81654fbcbf43f592aa4b6f7e7acfd8f10edac"
+      },
+      "evaluate_fresh.py": {
+        "git_blob": "c07d3adbcc108dabe0daa6fc145a6d5dd51b3ec7",
+        "sha256": "4d91cddba1861d653c03c86b083aabb9c8274cb8bd83b854a49c796fb488ab36"
+      },
+      "hidden_cases.py": {
+        "git_blob": "f60f0315f42402a53378b5ce4ce55c1d5ab4e8f3",
+        "sha256": "6340670f01844893d89a8df6c5a6150e53c60a0ed63b9dc8e5e3c6e59f39fc31"
+      },
+      "qualify.py": {
+        "git_blob": "2fa9fc1011d4c8271a0cbe64b0dd03c72b674ab9",
+        "sha256": "46111e20783dd90922e631e18a7099ec462e54897d8c36a729a6483273626241"
+      }
+    },
+    "normative_fields": [
+      "schema",
+      "receipt_id",
+      "authority_conferring",
+      "authorized",
+      "request_id",
+      "request_sha256",
+      "authority_state_id",
+      "evaluation_time",
+      "subject_id",
+      "jurisdiction",
+      "authority_basis_id",
+      "preserved"
+    ]
+  },
+  "fresh_implementation_existed_at_seal": false,
+  "preseal_deviations": [
+    "The first pre-seal evaluate_fresh.py commit b177bc3a06b615fe8a3813c72de7514d186bf305 resolved the repository root one parent too high. Qualification review found this before any fresh implementation existed and before evaluator seal. The evaluator-only path defect was corrected at 306218c1e3816c0616bcfe1d0ca843d92cc12ea7 and the defective commit remains preserved in history."
+  ],
+  "production_authorization": false,
+  "schema": "contract-e-v1-fresh-evaluator-final-seal-v1",
+  "seal_base_head": "ee8c341adf129ac51778a85597a07bfb05fe1587",
+  "sealed_use": "fresh_context_independent_reproduction_comparison"
+}
