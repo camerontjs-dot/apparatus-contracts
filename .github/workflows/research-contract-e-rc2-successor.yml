@@ -91,3 +91,74 @@ jobs:
           path: experiment/build/contract-e-rc2-profile/py${{ matrix.python }}/PROFILE_RESULTS.json
           if-no-files-found: warn
           retention-days: 90
+
+  evaluator-qualification:
+    name: RC2 fresh evaluator qualification before independent implementation
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout RC2 branch with history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: apparatus
+      - name: Checkout exact Contract D 1.0.0 release
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+          path: contract-d
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact Contract D canonicalization dependency
+        run: python -m pip install --disable-pip-version-check 'rfc8785==0.1.4'
+      - name: Verify frozen RC2 candidate bytes remain exact
+        shell: bash
+        run: |
+          set -euo pipefail
+          freeze='3a206729f53672fb28a711980925a24c77e6910a'
+          root='docs/research/contract-e/v1-closure-20260902/successor-rc2'
+          test "$(git -C apparatus rev-parse "${freeze}:${root}/candidate/SPEC.md")" = 'f05b679a30bafb8a08eef175ecefdb4a38245c9c'
+          test "$(git -C apparatus rev-parse "${freeze}:${root}/candidate/schema.json")" = '42df79ff2c55fb5eaed9e880648abd87d6c20413'
+          test "$(git -C apparatus rev-parse "${freeze}:${root}/candidate/reference.py")" = '98e3bf38dd1fb6028231a7f6b5c2459b387909c6'
+          test "$(git -C apparatus rev-parse "${freeze}:${root}/candidate/test_candidate.py")" = '52c1ff54032b0ee02f00d9abb3e6ac5c3595340e'
+          test "$(git -C apparatus rev-parse "${freeze}:${root}/D-TO-E-TRUSTED-ORIGIN-PROFILE.md")" = '896b4a8494d9bd19d3e0f7d80ef34e6c214c54e6'
+          test "$(git -C apparatus rev-parse "${freeze}:${root}/EXPERIMENT-PREREGISTRATION.md")" = 'a6fb67b598c50df37035b198f74105c6ae008db2'
+          test "$(git -C apparatus rev-parse "${freeze}:${root}/profile_pressure.py")" = 'cea77f3c06b339192c946ad81d9c9ca1dbd89bd3'
+          test "$(git -C apparatus hash-object "${root}/candidate/SPEC.md")" = 'f05b679a30bafb8a08eef175ecefdb4a38245c9c'
+          test "$(git -C apparatus hash-object "${root}/candidate/schema.json")" = '42df79ff2c55fb5eaed9e880648abd87d6c20413'
+          test "$(git -C apparatus hash-object "${root}/candidate/reference.py")" = '98e3bf38dd1fb6028231a7f6b5c2459b387909c6'
+          test "$(git -C apparatus hash-object "${root}/candidate/test_candidate.py")" = '52c1ff54032b0ee02f00d9abb3e6ac5c3595340e'
+          test "$(git -C apparatus hash-object "${root}/D-TO-E-TRUSTED-ORIGIN-PROFILE.md")" = '896b4a8494d9bd19d3e0f7d80ef34e6c214c54e6'
+          test "$(git -C apparatus hash-object "${root}/EXPERIMENT-PREREGISTRATION.md")" = 'a6fb67b598c50df37035b198f74105c6ae008db2'
+          test "$(git -C apparatus hash-object "${root}/profile_pressure.py")" = 'cea77f3c06b339192c946ad81d9c9ca1dbd89bd3'
+      - name: Generate current trusted-origin qualification evidence
+        run: |
+          mkdir -p apparatus/build/contract-e-rc2-qualification
+          python apparatus/docs/research/contract-e/v1-closure-20260902/successor-rc2/profile_pressure.py \
+            --contract-d-root contract-d \
+            --contract-e-reference apparatus/docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/reference.py \
+            --output apparatus/build/contract-e-rc2-qualification/PROFILE_RESULTS.json
+      - name: Compile evaluator apparatus
+        run: |
+          python -m py_compile \
+            apparatus/sealed/contract-e-v1-fresh-rc2/hidden_cases.py \
+            apparatus/sealed/contract-e-v1-fresh-rc2/evaluate_fresh.py \
+            apparatus/sealed/contract-e-v1-fresh-rc2/qualify.py
+      - name: Qualify evaluator and seeded weak controls
+        run: |
+          python apparatus/sealed/contract-e-v1-fresh-rc2/qualify.py \
+            --profile-results apparatus/build/contract-e-rc2-qualification/PROFILE_RESULTS.json \
+            --output apparatus/build/contract-e-rc2-qualification/QUALIFICATION_RESULTS.json
+      - name: Verify no frozen authority checkout mutation
+        run: test -z "$(git -C contract-d status --porcelain)"
+      - name: Upload evaluator qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-rc2-evaluator-qualification-${{ github.sha }}
+          path: |
+            apparatus/build/contract-e-rc2-qualification/QUALIFICATION_RESULTS.json
+            apparatus/build/contract-e-rc2-qualification/PROFILE_RESULTS.json
+          if-no-files-found: warn
+          retention-days: 90
