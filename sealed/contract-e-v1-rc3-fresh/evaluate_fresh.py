@@ -7,6 +7,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from hidden_cases import cases
+from hidden_cases_reference_identity_extension import extra_cases
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -61,7 +62,7 @@ def compare(implementation_path: Path) -> dict:
     canonicalization_failures = []
     dual_identity_failures = []
 
-    hidden = cases(reference)
+    hidden = cases(reference) + extra_cases(reference)
     for item in hidden:
         expected = reference.evaluate(item["state"], item["request"])
         error = None
