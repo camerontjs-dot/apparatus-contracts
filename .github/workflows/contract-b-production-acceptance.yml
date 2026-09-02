@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - research/contract-e-v1-successor-rc2-dual-identity-20260902
   pull_request:
     branches:
       - main
@@ -109,5 +110,39 @@ jobs:
           path: |
             acceptance-heads.txt
             production-acceptance/
+          if-no-files-found: warn
+          retention-days: 90
+
+  research-contract-e-rc2-candidate:
+    name: Research Contract E RC2 candidate (Python ${{ matrix.python }})
+    if: github.ref == 'refs/heads/research/contract-e-v1-successor-rc2-dual-identity-20260902'
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout RC2 experiment branch
+        uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Validate RC2 schema
+        run: python -m json.tool docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/schema.json >/dev/null
+      - name: Compile RC2 reference and matrix
+        run: |
+          python -m py_compile \
+            docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/reference.py \
+            docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/test_candidate.py
+      - name: Execute preregistered RC2 core matrix
+        working-directory: docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate
+        run: python test_candidate.py
+      - name: Upload RC2 candidate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-rc2-candidate-py${{ matrix.python }}
+          path: docs/research/contract-e/v1-closure-20260902/successor-rc2/candidate/RESULTS.json
           if-no-files-found: warn
           retention-days: 90
