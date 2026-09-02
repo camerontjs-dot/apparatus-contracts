@@ -1,0 +1,61 @@
+name: Research - Contract E v1 Post-Freeze Adversarial
+
+on:
+  push:
+    branches:
+      - research/contract-e-v1-closure-20260902
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  post-freeze-adversarial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify frozen candidate files remain byte-identical
+        shell: bash
+        run: |
+          set -euo pipefail
+          freeze='8876b7bcc2afa1a4902400b0cc507cf2ef02e6e7'
+          root='docs/research/contract-e/v1-closure-20260902/candidate'
+          test "$(git rev-parse "${freeze}:${root}/SPEC.md")" = '3041d31ed0905d50ff355e483fbb9422df994997'
+          test "$(git rev-parse "${freeze}:${root}/schema.json")" = 'd934d055e39c81e6eb93830e7c6f6f43fc8a0870'
+          test "$(git rev-parse "${freeze}:${root}/reference.py")" = '378cdb7835df3959c82a0fe98068b1434b1b68ec'
+          test "$(git rev-parse "${freeze}:${root}/test_candidate.py")" = '39462a06c30aa312d3055d93d65a287688a89086'
+          test "$(git hash-object "${root}/SPEC.md")" = '3041d31ed0905d50ff355e483fbb9422df994997'
+          test "$(git hash-object "${root}/schema.json")" = 'd934d055e39c81e6eb93830e7c6f6f43fc8a0870'
+          test "$(git hash-object "${root}/reference.py")" = '378cdb7835df3959c82a0fe98068b1434b1b68ec'
+          test "$(git hash-object "${root}/test_candidate.py")" = '39462a06c30aa312d3055d93d65a287688a89086'
+          test "$(sha256sum "${root}/SPEC.md" | cut -d' ' -f1)" = '499b30f4d9d9f29b4c60a7e0d84465e3a09b13972a230b728117024da9d12841'
+          test "$(sha256sum "${root}/schema.json" | cut -d' ' -f1)" = 'eefe62ff98295f72457c4cc427c398f942afc81954c8d6afff2410652f56a07b'
+          test "$(sha256sum "${root}/reference.py" | cut -d' ' -f1)" = '2b9ddbc5f6e51fffedcca1bcc33983113dbff995a476afe0608d7bf1dc58b643'
+          test "$(sha256sum "${root}/test_candidate.py" | cut -d' ' -f1)" = '4f6dcc40cb27151f1b374a8fc847842685fc64ef8ac5a78bc8b93360cf2080e0'
+          git diff --exit-code "${freeze}" HEAD -- "${root}/SPEC.md" "${root}/schema.json" "${root}/reference.py" "${root}/test_candidate.py"
+
+      - name: Re-run frozen original suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd docs/research/contract-e/v1-closure-20260902/candidate
+          python test_candidate.py
+
+      - name: Run post-freeze adversarial extension
+        shell: bash
+        run: |
+          set -euo pipefail
+          python docs/research/contract-e/v1-closure-20260902/post_freeze_adversarial_extension.py | tee POST_FREEZE_RESULTS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-v1-post-freeze-adversarial-${{ github.sha }}
+          path: docs/research/contract-e/v1-closure-20260902/POST_FREEZE_RESULTS.txt
+          if-no-files-found: error
