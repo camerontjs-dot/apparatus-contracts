@@ -1,0 +1,94 @@
+{
+  "schema": "contract-e-v1-rc3-target-cardinality-successor-final-seal-v1",
+  "research_only": true,
+  "production_authorization": false,
+  "research_disposition": "SUPPORTED_BOUNDED_REFERENCE_EVALUATOR_SUCCESSOR",
+  "promotion_disposition": "NOT_READY",
+  "preregistration_commit": "6d33124a90b29668cc534765859a3cdd75e46ea6",
+  "predecessor_candidate_head": "72f44d206f4f7e64d6993ac85e2fe2f086afb381",
+  "predecessor_candidate_freeze_receipt": "51431b7423040c924c34b78a6c97cc6c7605ba8a",
+  "predecessor_evaluator_seal": "3943dd9e5e0711c894356fd4dfef25fd45507d91",
+  "successor_candidate_freeze_head": "30dd929b310727737488192af1579729b2d4dd3e",
+  "successor_candidate_freeze_receipt_commit": "e4b47d4b73998c30a09722e9e1ee93d8f00b66a9",
+  "successor_reference_blob": "00d4d8f078073388d751546c24678825b89a6402",
+  "successor_test_blob": "e0420e2d901ae07a347e44253d897692bc894c91",
+  "qualification_contract_blob": "21f5f5e78e82222e8d2d8dba0e645bf7f01c7a14",
+  "evaluator_blob": "5bba49c6a412c689232ea1315df0153455dd316f",
+  "target_cardinality_cases_blob": "94b6d2c91b0124e7d9469ae24731945a60721ac8",
+  "qualifier_blob": "b23103db7a4f34144ef0103668ebadd932156c0d",
+  "accepted_qualification": {
+    "run_id": 33834840544,
+    "job_id": 100905157421,
+    "head": "131cbcd4dcccdba024e273c27c8aa0bddf5fae89",
+    "artifact_id": 9922927161,
+    "artifact_digest": "sha256:fbe86bde6fbc56297389bc175aaeb78ecfda71fa4bb0bb4f80629cf4d9def400",
+    "artifact_qualification_receipt_sha256": "96ed6df22b0e5f72f0d61ed9e1eaf9d770d3b9dc987a6cadd5e40883e45b4d23",
+    "qualification_state": "PASS",
+    "hidden_cases": 62,
+    "reference_normative_exact_matches": 62,
+    "predecessor_hidden_cases": 59,
+    "predecessor_reference_normative_exact_matches": 59,
+    "predecessor_reference_normative_mismatches": 0,
+    "target_cardinality_hidden_cases": 3,
+    "predecessor_weak_controls_required": 14,
+    "predecessor_weak_controls_caught": 14,
+    "target_cardinality_weak_controls_required": 1,
+    "target_cardinality_weak_controls_caught": 1,
+    "weak_controls_required_total": 15,
+    "weak_controls_caught_total": 15,
+    "target_cardinality_blind_false_permit_ids": [
+      "NEG-TARGET-DUPLICATE-VALID-IDENTITY",
+      "NEG-TARGET-MULTIPLE-MATCHES"
+    ],
+    "diagnostic_variant_state": "SUPPORTED",
+    "qualification_failures": []
+  },
+  "preserved_apparatus_deviation": {
+    "run_id": 33834615021,
+    "job_id": 100904491435,
+    "head": "759dd61e36455d88bc8f966953c982ecbfb2f568",
+    "artifact_id": 9922852466,
+    "artifact_digest": "sha256:a94b5b644a7b9fbc86d7b160172c0eb614ef43022407c36119af126bae7a81f1",
+    "classification": "APPARATUS_FAILURE_BEFORE_SCIENTIFIC_COMPARISON",
+    "failure": "ModuleNotFoundError: No module named 'hidden_cases' while loading the exact predecessor hidden-case extension",
+    "candidate_controls_passed_before_failure": true,
+    "candidate_controls_total": 65,
+    "repair_commit": "1f509b36d3ca61dfd3dcf808d1da27ef34b05a8c",
+    "repair_scope": "successor evaluator import plumbing only; frozen candidate, hidden cases, weak controls, normative projection, SPEC and schema unchanged"
+  },
+  "production_profile_review": {
+    "commit": "131cbcd4dcccdba024e273c27c8aa0bddf5fae89",
+    "blob": "20ae7c3c2d01e2a4f6c9d781f3f95edce5415971",
+    "disposition": "NOT_READY",
+    "blocking_domains": [
+      "trusted authority origin and authenticated configuration",
+      "identified production consumer and integration boundary",
+      "production security and threat model",
+      "operational failure handling and recovery",
+      "downstream executor and verifier handoff",
+      "operational ownership and change authority"
+    ]
+  },
+  "fresh_independent_recoverability": {
+    "established": false,
+    "evidence": "Research Scaffold Harness PR #18 remains aperture-only; no durable fresh independent RC3/successor implementation is present in GitHub"
+  },
+  "what_is_supported": [
+    "the frozen RC3 specification requires exactly one validated target reference",
+    "the predecessor reference had a membership/at-least-one target-resolution defect",
+    "the frozen successor reference implements the exact-one target-resolution rule while preserving predecessor normative behavior on all 59 predecessor hidden cases",
+    "the successor evaluator discriminates the predecessor membership-only defect and all 14 predecessor weak controls",
+    "the bounded successor reference/evaluator repair is scientifically qualified"
+  ],
+  "what_is_not_established": [
+    "production trusted-origin authenticity or legitimacy",
+    "production deployment/integration readiness",
+    "production security posture",
+    "production operational failure/recovery behavior",
+    "production execution occurrence or verification",
+    "operational ownership",
+    "fresh independent recoverability of RC3 or this successor",
+    "production promotion, merge, tag, or release authority"
+  ],
+  "stop_condition": "Do not request promotion approval. Production-profile review is NOT_READY and fresh independent recoverability is not established. Further work requires new bounded evidence for those gaps; the sealed candidate/reference/evaluator bytes must remain unchanged."
+}
