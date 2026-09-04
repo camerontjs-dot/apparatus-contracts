@@ -1,0 +1,106 @@
+name: Research Contract E v1 RC3 target-cardinality successor qualification
+
+on:
+  push:
+    branches:
+      - research/contract-e-v1-rc3-target-reference-cardinality-successor-20260903
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    name: Candidate controls Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install exact canonicalization dependency
+        run: python -m pip install --disable-pip-version-check 'rfc8785==0.1.4'
+      - name: Verify predecessor authority and frozen successor candidate bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          predecessor="docs/research/contract-e/v1-rc3-exact-currentness-jcs-20260902/candidate"
+          successor="docs/research/contract-e/v1-rc3-target-reference-cardinality-successor-20260903/candidate"
+          test "$(git hash-object "$predecessor/SPEC.md")" = "8c142c6b86dd2512f1df0c19aa36dbef759d6c18"
+          test "$(git hash-object "$predecessor/schema.json")" = "87ec0e536de1d07b45f49c20b14bfa0c81f53a86"
+          test "$(git hash-object "$predecessor/reference.py")" = "ede55efbe3f8afc35a25716af4a896a669a904e7"
+          test "$(git hash-object "$successor/reference.py")" = "00d4d8f078073388d751546c24678825b89a6402"
+          test "$(git hash-object "$successor/test_successor.py")" = "e0420e2d901ae07a347e44253d897692bc894c91"
+      - name: Run predecessor controls plus successor target-cardinality controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd docs/research/contract-e/v1-rc3-target-reference-cardinality-successor-20260903/candidate
+          python test_successor.py
+
+  qualify:
+    name: Qualify successor evaluator and 15 weak controls
+    needs: candidate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install exact canonicalization dependency
+        run: python -m pip install --disable-pip-version-check 'rfc8785==0.1.4'
+      - name: Verify frozen successor candidate bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          successor="docs/research/contract-e/v1-rc3-target-reference-cardinality-successor-20260903/candidate"
+          test "$(git hash-object "$successor/reference.py")" = "00d4d8f078073388d751546c24678825b89a6402"
+          test "$(git hash-object "$successor/test_successor.py")" = "e0420e2d901ae07a347e44253d897692bc894c91"
+      - name: Re-run successor candidate controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd docs/research/contract-e/v1-rc3-target-reference-cardinality-successor-20260903/candidate
+          python test_successor.py
+      - name: Prepare qualification evidence directory
+        shell: bash
+        run: mkdir -p sealed/contract-e-v1-rc3-target-cardinality-successor/qualification
+      - name: Qualify evaluator, predecessor regression, and weak controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python sealed/contract-e-v1-rc3-target-cardinality-successor/qualify.py | tee sealed/contract-e-v1-rc3-target-cardinality-successor/qualification/qualification.log
+      - name: Capture exact successor evaluator identities
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="sealed/contract-e-v1-rc3-target-cardinality-successor"
+          {
+            printf 'HEAD=%s\n' "$(git rev-parse HEAD)"
+            printf 'QUALIFICATION_CONTRACT_BLOB=%s\n' "$(git hash-object "$root/QUALIFICATION-CONTRACT.md")"
+            printf 'EVALUATOR_BLOB=%s\n' "$(git hash-object "$root/evaluate_fresh.py")"
+            printf 'TARGET_CARDINALITY_CASES_BLOB=%s\n' "$(git hash-object "$root/target_cardinality_cases.py")"
+            printf 'QUALIFIER_BLOB=%s\n' "$(git hash-object "$root/qualify.py")"
+            sha256sum \
+              "$root/QUALIFICATION-CONTRACT.md" \
+              "$root/evaluate_fresh.py" \
+              "$root/target_cardinality_cases.py" \
+              "$root/qualify.py"
+            if test -f "$root/qualification/QUALIFICATION_RECEIPT.json"; then
+              sha256sum "$root/qualification/QUALIFICATION_RECEIPT.json"
+            fi
+          } > "$root/qualification/EVALUATOR_IDENTITIES.txt"
+          cat "$root/qualification/EVALUATOR_IDENTITIES.txt"
+      - name: Upload qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-e-v1-rc3-target-cardinality-successor-${{ github.sha }}
+          path: sealed/contract-e-v1-rc3-target-cardinality-successor/qualification/
+          if-no-files-found: error
+          retention-days: 90
