@@ -1,0 +1,23 @@
+{
+  "schema": "contract-e-v1-rc3-target-reference-cardinality-successor-freeze-v1",
+  "research_only": true,
+  "production_authorization": false,
+  "preregistration_commit": "6d33124a90b29668cc534765859a3cdd75e46ea6",
+  "candidate_freeze_head": "30dd929b310727737488192af1579729b2d4dd3e",
+  "predecessor_candidate_head": "72f44d206f4f7e64d6993ac85e2fe2f086afb381",
+  "predecessor_evaluator_seal": "3943dd9e5e0711c894356fd4dfef25fd45507d91",
+  "normative_spec_blob": "8c142c6b86dd2512f1df0c19aa36dbef759d6c18",
+  "normative_schema_blob": "87ec0e536de1d07b45f49c20b14bfa0c81f53a86",
+  "successor_reference_blob": "00d4d8f078073388d751546c24678825b89a6402",
+  "successor_test_blob": "e0420e2d901ae07a347e44253d897692bc894c91",
+  "predecessor_reference_blob": "ede55efbe3f8afc35a25716af4a896a669a904e7",
+  "predecessor_test_blob": "20db39ac2a0b46cd554bf3c6e266859d39e9ea25",
+  "intended_semantic_delta": "require jurisdiction.target_ref to resolve to exactly one validated request reference instead of accepting membership/at-least-one resolution",
+  "predecessor_asserted_controls_expected": 62,
+  "new_target_cardinality_controls_expected": 3,
+  "fresh_independent_recoverability_established": false,
+  "frozen_candidate_files_must_not_change_after_this_receipt": [
+    "docs/research/contract-e/v1-rc3-target-reference-cardinality-successor-20260903/candidate/reference.py",
+    "docs/research/contract-e/v1-rc3-target-reference-cardinality-successor-20260903/candidate/test_successor.py"
+  ]
+}
