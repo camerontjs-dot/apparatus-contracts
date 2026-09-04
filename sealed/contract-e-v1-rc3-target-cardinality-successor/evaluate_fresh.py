@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import sys
 from copy import deepcopy
 from pathlib import Path
 
@@ -56,11 +57,22 @@ def projection(value):
 
 
 def predecessor_hidden_cases(reference) -> list[dict]:
+    # The frozen predecessor extension imports sibling helpers with
+    # `from hidden_cases import ...`. Register the exact predecessor base
+    # module under that historical import name only while loading the extension.
     hidden = load_module(PREDECESSOR_HIDDEN_PATH, "contract_e_rc3_predecessor_hidden")
-    extension = load_module(
-        PREDECESSOR_HIDDEN_EXTENSION_PATH,
-        "contract_e_rc3_predecessor_hidden_extension",
-    )
+    previous_hidden = sys.modules.get("hidden_cases")
+    sys.modules["hidden_cases"] = hidden
+    try:
+        extension = load_module(
+            PREDECESSOR_HIDDEN_EXTENSION_PATH,
+            "contract_e_rc3_predecessor_hidden_extension",
+        )
+    finally:
+        if previous_hidden is None:
+            sys.modules.pop("hidden_cases", None)
+        else:
+            sys.modules["hidden_cases"] = previous_hidden
     return hidden.cases(reference) + extension.extra_cases(reference)
 
 
@@ -161,11 +173,12 @@ def compare(implementation_path: Path) -> dict:
         or preservation_failures
         or diagnostic_shape_failures
     )
+    target_cases = target_cardinality_cases(reference)
     return {
         "schema": "contract-e-v1-rc3-target-cardinality-fresh-comparison-v1",
         "case_count": count,
-        "predecessor_case_count": count - len(target_cardinality_cases(reference)),
-        "target_cardinality_case_count": len(target_cardinality_cases(reference)),
+        "predecessor_case_count": count - len(target_cases),
+        "target_cardinality_case_count": len(target_cases),
         "normative_exact_matches": exact,
         "normative_mismatch_ids": normative_mismatches,
         "false_permit_ids": false_permits,
