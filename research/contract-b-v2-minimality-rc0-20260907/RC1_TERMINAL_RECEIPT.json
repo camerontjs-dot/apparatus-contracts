@@ -1,0 +1,93 @@
+{
+  "schema": "contract-b-v2-minimality-rc1-terminal-receipt-v1",
+  "disposition": "SUPPORTED_FOR_INDEPENDENT_CONFORMANCE",
+  "thread_state": "TERMINAL_FOR_RC1_PRESSURE_TEST",
+  "production_authorization": false,
+  "authority": {
+    "apparatus_main_base": "c3563cff66d2c85dcbf575c693056e2d8e4563d4",
+    "contract_a": "contract-a-v2.0.0",
+    "contract_b_comparator": "contract-b-v1.2.0",
+    "predecessor_rc0_pr": 83,
+    "successor_rc1_pr": 84
+  },
+  "candidate": {
+    "prepared_rc1_head": "0a204806ab64b8c9d9012ca8171cd56a302969ac",
+    "decisive_execution_head": "f75df760b86129443b2b9e0c7ffa21b87c96298a",
+    "decisive_execution_tree": "621ef98d2ac5e260ad18923cf04c757401e54fb9",
+    "decisive_pr_merge_sha": "d765a53b1a28a7c532139c0bbd1e4280a61ad418",
+    "schema_token": "contract-b-v2-candidate-rc1"
+  },
+  "predecessor_negative_controls": {
+    "rc0_disposition": "RC0_FALSIFIED_REVISION_REQUIRED",
+    "counterexamples": [
+      "silent intended retrieval-lane omission could reseal as complete aperture",
+      "silent returned-candidate-tail truncation could reseal without an actual returned-count fact"
+    ],
+    "decisive_run_observation": "2 passed on each runtime before RC1 successor tests",
+    "meaning": "the predecessor weaknesses remained reproducible rather than disappearing from the evaluator"
+  },
+  "decisive_execution": {
+    "workflow": "Research Contract B v2 minimality RC1",
+    "run_id": 34146263504,
+    "conclusion": "success",
+    "python_versions": ["3.11", "3.12", "3.13"],
+    "rc1_pressure_tests": "31 passed on each runtime",
+    "apparatus_regression": "99 passed, 8 skipped on each runtime",
+    "no_cal_dependency": true,
+    "artifacts": [
+      {
+        "python": "3.11",
+        "artifact_id": 10027754340,
+        "sha256": "2f09ad7784fa94e3d0e632732b855c65e539a4f9958ca3435fc218146ed7492f"
+      },
+      {
+        "python": "3.12",
+        "artifact_id": 10027755180,
+        "sha256": "0c0519e64ae09b27b74d486d6bf37f23bec9829bc68f56dc85ff59165f3ea4e3"
+      },
+      {
+        "python": "3.13",
+        "artifact_id": 10027755257,
+        "sha256": "206ea0a8751bb98d9b62dba046b0c83bdbd60577ca833b9dc3686884633015a0"
+      }
+    ]
+  },
+  "regression_sentinels": {
+    "contract_b_1_2_production_acceptance_run": 34146263410,
+    "contract_b_1_2_production_acceptance_conclusion": "success",
+    "preserved_rc0_workflow_run": 34146263530,
+    "preserved_rc0_workflow_conclusion": "success"
+  },
+  "preserved_deviation": {
+    "first_rc1_execution_run": 34146137099,
+    "first_rc1_execution_head": "1f45509026ca64640abbb2907096ba247b5cb620",
+    "scientific_steps_before_failure": {
+      "rc0_negative_controls": "2 passed",
+      "rc1_pressure_tests": "31 passed",
+      "apparatus_regression": "99 passed, 8 skipped"
+    },
+    "failure": "broad Ruff hygiene gate found 13 mechanically fixable import-order, unused-import, annotation and stale-noqa findings",
+    "classification": "NON_SCIENTIFIC_HYGIENE_DEBT",
+    "successor_gate_change": "Ruff result preserved as advisory evidence; no RC1 semantic candidate, pressure test or expected scientific outcome was changed"
+  },
+  "supported_inference": "Within the frozen RC1 pressure-test apparatus, explicit target plans plus requested/observed scope, not_run state and returned_count are sufficient to close the two observed RC0 information-loss counterexamples while preserving A2 lineage, evidence provenance, candidate/selection/admission distinctions, and the non-semantic Contract B boundary.",
+  "not_established": [
+    "Contract B 2.0.0 production readiness",
+    "Evidence Bundler producer conformance to an externally frozen preparation profile",
+    "independent consumer recoverability",
+    "Claim Audit Lab consumer conformance",
+    "retrieval quality or completeness",
+    "source legitimacy or trust",
+    "universal minimality",
+    "promotion, release, tag or migration authority"
+  ],
+  "next_falsifier": "Freeze the exact RC1 candidate/spec and run independent producer/consumer conformance. A producer must demonstrate that its emitted target plan matches an externally frozen preparation profile, and an independent consumer must recover the same primary targets, candidate/selection/admission states and derived aperture without access to the RC1 implementation or expected outputs.",
+  "non_actions": {
+    "merged": false,
+    "released": false,
+    "tagged": false,
+    "promoted": false,
+    "production_defaults_changed": false,
+    "cal_semantic_engine_called": false
+  }
+}
