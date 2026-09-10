@@ -1,0 +1,94 @@
+name: Contract C Version Compatibility RC0
+
+on:
+  push:
+    branches:
+      - research/contract-c-version-compat-rc0-20260910
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compatibility-pressure:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify exact predecessor and research-only mutation surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor ad1ffbd7906a7cf34cce5afa906a5797cd4a14ff HEAD
+          test "$(git hash-object validators/contract_c.py)" = "9c75ccfbf2223578a8d1a7bf0c39673b394fbea4"
+          test "$(git hash-object schema/contract-c/1.0.0/schema.json)" = "b0369de9b5c156322d6787261bbc7658a3b33781"
+          git diff --quiet ad1ffbd7906a7cf34cce5afa906a5797cd4a14ff -- research/contract_c_non_deciding_shadow_rc0
+          changed="$(git diff --name-only ad1ffbd7906a7cf34cce5afa906a5797cd4a14ff...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -Ev '^(research/contract_c_version_compat_rc0/|\.github/workflows/contract-c-version-compat-rc0\.yml$)' | grep -q .; then
+            echo 'mutation escaped preregistered version-compatibility research surface' >&2
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install exact repository dependencies
+        run: python -m pip install -e '.[dev]'
+
+      - name: Compile compatibility apparatus
+        run: python -m compileall -q research/contract_c_version_compat_rc0
+
+      - name: Execute preregistered downgrade and authority-selection pressure test
+        run: |
+          python -m research.contract_c_version_compat_rc0.evaluate \
+            --repo-root . \
+            --out build/contract-c-version-compat-rc0
+
+      - name: Verify terminal compatibility result
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('build/contract-c-version-compat-rc0/EVALUATION.json').read_text())
+          assert data['research_disposition'] == 'SUPPORTED_PARALLEL_VERSIONING_AND_BREAKING_CHANGE_SIGNAL'
+          obs = data['observed_compatibility']
+          assert obs['released_1_0_accepts_released_1_0'] is True
+          assert obs['released_1_0_accepts_successor'] is False
+          assert obs['successor_accepts_successor'] is True
+          assert obs['existing_strict_1_0_consumer_breaks_on_successor'] is True
+          assert obs['safe_migration_pattern'] == 'parallel_exact_version_authority_no_downgrade'
+          assert data['semver_evidence']['project_governance_signal_if_later_promoted'] == 'MAJOR'
+          assert data['semver_evidence']['official_version_assigned'] is False
+          assert data['observed_compatibility']['validator_valid_semantic_laundering_downgrades']
+          assert data['interpretation']['translation_adapter_authorized'] is False
+          assert data['interpretation']['production_promotion_authorized'] is False
+          print(json.dumps({
+              'research_disposition': data['research_disposition'],
+              'validator_valid_semantic_laundering_downgrades': data['observed_compatibility']['validator_valid_semantic_laundering_downgrades'],
+              'semver_signal': data['semver_evidence']['project_governance_signal_if_later_promoted'],
+          }, sort_keys=True))
+          PY
+
+      - name: Re-run released Contract C regression
+        run: pytest -q tests/test_contract_c_v1.py tests/test_verify_contract_integrity.py
+
+      - name: Package compatibility evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp research/contract_c_version_compat_rc0/PREREGISTRATION.md build/contract-c-version-compat-rc0/
+          tar -czf contract-c-version-compat-rc0-${GITHUB_RUN_ID}.tar.gz -C build contract-c-version-compat-rc0
+
+      - name: Upload compatibility evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-version-compat-rc0-${{ github.run_id }}
+          path: contract-c-version-compat-rc0-${{ github.run_id }}.tar.gz
+          if-no-files-found: error
