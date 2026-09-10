@@ -49,6 +49,44 @@ jobs:
             --repo-root . \
             --out build/contract-c-non-deciding-shadow-rc0
 
+      - name: Qualify exact committed handoff bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from research.contract_c_non_deciding_shadow_rc0.shadow import validate_shadow_bytes
+          from validators import contract_c as released
+
+          root = Path('research/contract_c_non_deciding_shadow_rc0/handoff')
+          raw = (root / 'valid-shadow.json').read_bytes()
+          index = json.loads((root / 'contract-b-index.json').read_text())
+          delta = json.loads((root / 'schema-delta.json').read_text())
+
+          assert hashlib.sha256(raw).hexdigest() == '325962ebcdbf6af836bb6193a451524ccd40b4d10f2394ff9f703fbfce1ec1e3'
+          obj = released.parse_json_bytes(raw)
+          assert obj['result_set_id'] == 'result-set:4483272c4f6fbd9cb2362be7e3174bbd00aff3cf761d6c374897f3478818c9f0'
+          assert validate_shadow_bytes(raw, expected_sha256='325962ebcdbf6af836bb6193a451524ccd40b4d10f2394ff9f703fbfce1ec1e3', contract_b_index=index) == []
+          assert released.validate_contract_c_bytes(raw, contract_b_index=index)
+          assert delta['base_schema_blob'] == 'b0369de9b5c156322d6787261bbc7658a3b33781'
+          assert delta['changes'] == [
+              {'path': 'properties.contract_c_version.const', 'value': 'research-non-deciding-rc0'},
+              {'path': '$defs.contribution.properties.channel.enum', 'value': ['support', 'counterevidence', 'non_deciding']},
+          ]
+          p = obj['propositions'][0]
+          assert p['conclusion']['causal_form'] == 'independent_sufficient_alternatives'
+          assert [c['evidence_ref']['passage_id'] for c in p['contributions']] == ['u-a', 'u-b']
+          assert all(c['channel'] == 'non_deciding' for c in p['contributions'])
+          assert {b['id'] for b in p['conclusion']['basis_members']} == {c['contribution_id'] for c in p['contributions']}
+          print(json.dumps({
+              'handoff_sha256': 'sha256:' + hashlib.sha256(raw).hexdigest(),
+              'result_set_id': obj['result_set_id'],
+              'passages': ['u-a', 'u-b'],
+              'causal_form': p['conclusion']['causal_form'],
+          }, sort_keys=True))
+          PY
+
       - name: Re-run released Contract C regression
         run: pytest -q tests/test_contract_c_v1.py tests/test_verify_contract_integrity.py
 
@@ -76,11 +114,12 @@ jobs:
           }, sort_keys=True))
           PY
 
-      - name: Package shadow evidence
+      - name: Package shadow evidence and handoff
         shell: bash
         run: |
           set -euo pipefail
           cp research/contract_c_non_deciding_shadow_rc0/PREREGISTRATION.md build/contract-c-non-deciding-shadow-rc0/
+          cp -R research/contract_c_non_deciding_shadow_rc0/handoff build/contract-c-non-deciding-shadow-rc0/HANDOFF
           tar -czf contract-c-non-deciding-shadow-rc0-${GITHUB_RUN_ID}.tar.gz -C build contract-c-non-deciding-shadow-rc0
 
       - name: Upload shadow evidence
