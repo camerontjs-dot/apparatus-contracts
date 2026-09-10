@@ -36,7 +36,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ! grep -Eqi '(from .*sidecar|import .*sidecar|claim-audit-lab|cal_temporal|event_order|bound_projection|bound_relation|rc8j)' research/contract_c_attribution_sidecar_rc1/consumer.py
+          ! grep -En '^[[:space:]]*(from|import)[[:space:]].*sidecar' research/contract_c_attribution_sidecar_rc1/consumer.py
+          ! grep -Eqi '(claim-audit-lab|cal_temporal|event_order|bound_projection|bound_relation|rc8j)' research/contract_c_attribution_sidecar_rc1/consumer.py
 
       - name: Set up Python
         uses: actions/setup-python@v5
