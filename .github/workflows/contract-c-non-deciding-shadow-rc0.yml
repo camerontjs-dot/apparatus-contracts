@@ -1,0 +1,130 @@
+name: Contract C Non-Deciding Shadow RC0
+
+on:
+  push:
+    branches:
+      - research/contract-c-non-deciding-shadow-rc0-20260910
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shadow-contract-pressure:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify exact base and research-only mutation surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor c3563cff66d2c85dcbf575c693056e2d8e4563d4 HEAD
+          test "$(git hash-object validators/contract_c.py)" = "9c75ccfbf2223578a8d1a7bf0c39673b394fbea4"
+          test "$(git hash-object schema/contract-c/1.0.0/schema.json)" = "b0369de9b5c156322d6787261bbc7658a3b33781"
+          changed="$(git diff --name-only c3563cff66d2c85dcbf575c693056e2d8e4563d4...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -Ev '^(research/contract_c_non_deciding_shadow_rc0/|\.github/workflows/contract-c-non-deciding-shadow-rc0\.yml$)' | grep -q .; then
+            echo 'mutation escaped preregistered research-only surface' >&2
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install exact repository dependencies
+        run: python -m pip install -e '.[dev]'
+
+      - name: Compile shadow apparatus
+        run: python -m compileall -q research/contract_c_non_deciding_shadow_rc0
+
+      - name: Execute preregistered shadow pressure test
+        run: |
+          python -m research.contract_c_non_deciding_shadow_rc0.evaluate \
+            --repo-root . \
+            --out build/contract-c-non-deciding-shadow-rc0
+
+      - name: Qualify exact committed handoff bytes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from research.contract_c_non_deciding_shadow_rc0.shadow import validate_shadow_bytes
+          from validators import contract_c as released
+
+          root = Path('research/contract_c_non_deciding_shadow_rc0/handoff')
+          raw = (root / 'valid-shadow.json').read_bytes()
+          index = json.loads((root / 'contract-b-index.json').read_text())
+          delta = json.loads((root / 'schema-delta.json').read_text())
+
+          assert hashlib.sha256(raw).hexdigest() == '325962ebcdbf6af836bb6193a451524ccd40b4d10f2394ff9f703fbfce1ec1e3'
+          obj = released.parse_json_bytes(raw)
+          assert obj['result_set_id'] == 'result-set:4483272c4f6fbd9cb2362be7e3174bbd00aff3cf761d6c374897f3478818c9f0'
+          assert validate_shadow_bytes(raw, expected_sha256='325962ebcdbf6af836bb6193a451524ccd40b4d10f2394ff9f703fbfce1ec1e3', contract_b_index=index) == []
+          assert released.validate_contract_c_bytes(raw, contract_b_index=index)
+          assert delta['base_schema_blob'] == 'b0369de9b5c156322d6787261bbc7658a3b33781'
+          assert delta['changes'] == [
+              {'path': 'properties.contract_c_version.const', 'value': 'research-non-deciding-rc0'},
+              {'path': '$defs.contribution.properties.channel.enum', 'value': ['support', 'counterevidence', 'non_deciding']},
+          ]
+          p = obj['propositions'][0]
+          assert p['conclusion']['causal_form'] == 'independent_sufficient_alternatives'
+          assert [c['evidence_ref']['passage_id'] for c in p['contributions']] == ['u-a', 'u-b']
+          assert all(c['channel'] == 'non_deciding' for c in p['contributions'])
+          assert {b['id'] for b in p['conclusion']['basis_members']} == {c['contribution_id'] for c in p['contributions']}
+          print(json.dumps({
+              'handoff_sha256': 'sha256:' + hashlib.sha256(raw).hexdigest(),
+              'result_set_id': obj['result_set_id'],
+              'passages': ['u-a', 'u-b'],
+              'causal_form': p['conclusion']['causal_form'],
+          }, sort_keys=True))
+          PY
+
+      - name: Re-run released Contract C regression
+        run: pytest -q tests/test_contract_c_v1.py tests/test_verify_contract_integrity.py
+
+      - name: Verify terminal disposition
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('build/contract-c-non-deciding-shadow-rc0/EVALUATION.json')
+          data = json.loads(p.read_text())
+          assert data['research_disposition'] == 'SUPPORTED_BOUNDED_TWO_LEAF_SHADOW_DELTA'
+          assert data['semantic_schema_delta'] == [
+              '$defs.contribution.properties.channel.enum',
+              'properties.contract_c_version.const',
+          ]
+          assert data['checks']['released_1_0_rejects_shadow'] is True
+          assert data['checks']['two_neutral_basis_members_preserved'] is True
+          assert data['interpretation']['released_contract_c_1_0_mutated'] is False
+          assert data['interpretation']['production_promotion_authorized'] is False
+          print(json.dumps({
+              'research_disposition': data['research_disposition'],
+              'shadow_sha256': data['shadow_sha256'],
+              'shadow_result_set_id': data['shadow_result_set_id'],
+          }, sort_keys=True))
+          PY
+
+      - name: Package shadow evidence and handoff
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp research/contract_c_non_deciding_shadow_rc0/PREREGISTRATION.md build/contract-c-non-deciding-shadow-rc0/
+          cp -R research/contract_c_non_deciding_shadow_rc0/handoff build/contract-c-non-deciding-shadow-rc0/HANDOFF
+          tar -czf contract-c-non-deciding-shadow-rc0-${GITHUB_RUN_ID}.tar.gz -C build contract-c-non-deciding-shadow-rc0
+
+      - name: Upload shadow evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-non-deciding-shadow-rc0-${{ github.run_id }}
+          path: contract-c-non-deciding-shadow-rc0-${{ github.run_id }}.tar.gz
+          if-no-files-found: error
