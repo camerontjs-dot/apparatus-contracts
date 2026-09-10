@@ -1,0 +1,97 @@
+name: Contract C Attribution Sidecar RC1
+
+on:
+  push:
+    branches:
+      - research/contract-c-attribution-sidecar-rc1-20260910
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sidecar-pressure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify exact released base and research-only mutation surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor c3563cff66d2c85dcbf575c693056e2d8e4563d4 HEAD
+          test "$(git hash-object validators/contract_c.py)" = "9c75ccfbf2223578a8d1a7bf0c39673b394fbea4"
+          test "$(git hash-object schema/contract-c/1.0.0/schema.json)" = "b0369de9b5c156322d6787261bbc7658a3b33781"
+          changed="$(git diff --name-only c3563cff66d2c85dcbf575c693056e2d8e4563d4...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -Ev '^(research/contract_c_attribution_sidecar_rc1/|\.github/workflows/contract-c-attribution-sidecar-rc1\.yml$)' | grep -q .; then
+            echo 'mutation escaped preregistered sidecar research surface' >&2
+            exit 1
+          fi
+
+      - name: Verify independent consumer has no producer semantic import
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -Eqi '(from .*sidecar|import .*sidecar|claim-audit-lab|cal_temporal|event_order|bound_projection|bound_relation|rc8j)' research/contract_c_attribution_sidecar_rc1/consumer.py
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install exact repository dependencies
+        run: python -m pip install -e '.[dev]'
+
+      - name: Compile sidecar apparatus
+        run: python -m compileall -q research/contract_c_attribution_sidecar_rc1
+
+      - name: Execute richer sidecar pressure test
+        run: |
+          python -m research.contract_c_attribution_sidecar_rc1.evaluate \
+            --out build/contract-c-attribution-sidecar-rc1
+
+      - name: Verify terminal sidecar disposition
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('build/contract-c-attribution-sidecar-rc1/EVALUATION.json')
+          data=json.loads(p.read_text())
+          assert data['research_disposition']=='SUPPORTED_RICHER_SIDECAR_TECHNICALLY_SUFFICIENT'
+          assert all(data['checks'].values())
+          assert data['interpretation']['contract_c_wire_revision_technically_necessary_for_exact_counterexample'] is False
+          assert data['interpretation']['contract_c_alone_information_sufficient'] is False
+          assert data['interpretation']['sidecar_architecturally_preferred'] is None
+          assert data['interpretation']['canonical_contract_decision_authorized'] is False
+          print(json.dumps({
+              'research_disposition': data['research_disposition'],
+              'carrier_contract_c_sha256': data['carrier']['sha256'],
+              'sidecar_sha256': data['sidecar']['sha256'],
+              'receipt_id': data['sidecar']['receipt_id'],
+              'causal_passages': data['sidecar']['causal_passages'],
+              'causal_form': data['sidecar']['causal_form'],
+              'contract_c_alone_information_sufficient': data['interpretation']['contract_c_alone_information_sufficient'],
+          }, sort_keys=True))
+          PY
+
+      - name: Re-run released Contract C regression
+        run: pytest -q tests/test_contract_c_v1.py tests/test_verify_contract_integrity.py
+
+      - name: Package sidecar evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp research/contract_c_attribution_sidecar_rc1/PREREGISTRATION.md build/contract-c-attribution-sidecar-rc1/
+          tar -czf contract-c-attribution-sidecar-rc1-${GITHUB_RUN_ID}.tar.gz -C build contract-c-attribution-sidecar-rc1
+
+      - name: Upload sidecar evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-attribution-sidecar-rc1-${{ github.run_id }}
+          path: contract-c-attribution-sidecar-rc1-${{ github.run_id }}.tar.gz
+          if-no-files-found: error
