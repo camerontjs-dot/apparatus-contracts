@@ -1,0 +1,118 @@
+name: Contract C Successor Candidate RC0
+
+on:
+  push:
+    branches:
+      - research/contract-c-successor-minimal-in-band-candidate-20260912
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-self-consistency:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify exact production base and bounded candidate surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=c3563cff66d2c85dcbf575c693056e2d8e4563d4
+          git merge-base --is-ancestor "$BASE" HEAD
+          test "$(git hash-object contract-c-v1.0.0.md)" = "8c15f2e5f4047ccd17e204fb23aee1168781b9d5"
+          test "$(git hash-object schema/contract-c/1.0.0/schema.json)" = "b0369de9b5c156322d6787261bbc7658a3b33781"
+          test "$(git hash-object validators/contract_c.py)" = "9c75ccfbf2223578a8d1a7bf0c39673b394fbea4"
+          test "$(git hash-object schema/contract-c/versions.json)" = "6e805e274f8b1f491bf0c10735a46962ab91d2d4"
+          changed="$(git diff --name-only "$BASE"...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -Ev '^(research/contract_c_successor_candidate_rc0/|\.github/workflows/contract-c-successor-candidate-rc0\.yml$)' | grep -q .; then
+            echo 'candidate mutation escaped bounded research surface' >&2
+            exit 1
+          fi
+
+      - name: Verify frozen handoff was copied byte-for-byte
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object research/contract_c_successor_candidate_rc0/fixtures/valid-shadow.json)" = "14e88cbc691f7eba9366b4bf88611ef834637f27"
+          test "$(git hash-object research/contract_c_successor_candidate_rc0/fixtures/contract-b-index.json)" = "4de40713482a1fc5a075a230a61e19acc25afbd9"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install repository dependencies
+        run: python -m pip install -e '.[dev]'
+
+      - name: Compile candidate module
+        run: python -m compileall -q research/contract_c_successor_candidate_rc0
+
+      - name: Run candidate self-consistency and falsifier tests
+        run: pytest -q research/contract_c_successor_candidate_rc0/test_candidate.py
+
+      - name: Re-run released Contract C regression
+        run: pytest -q tests/test_contract_c_v1.py tests/test_verify_contract_integrity.py
+
+      - name: Materialize exact candidate schema and build receipt
+        shell: bash
+        run: |
+          mkdir -p build/contract-c-successor-candidate-rc0
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from research.contract_c_successor_candidate_rc0 import validator as candidate
+
+          root = Path('research/contract_c_successor_candidate_rc0')
+          raw = (root / 'fixtures/valid-shadow.json').read_bytes()
+          index = json.loads((root / 'fixtures/contract-b-index.json').read_text())
+          base = candidate.load_released_schema()
+          successor = candidate.build_candidate_schema(base)
+          delta = candidate.semantic_schema_delta(base, successor)
+          assert delta == candidate.expected_semantic_delta()
+          assert candidate.validate_candidate_bytes(
+              raw,
+              expected_sha256='325962ebcdbf6af836bb6193a451524ccd40b4d10f2394ff9f703fbfce1ec1e3',
+              contract_b_index=index,
+          ) == []
+
+          out = Path('build/contract-c-successor-candidate-rc0')
+          (out / 'generated-schema.json').write_text(
+              json.dumps(successor, sort_keys=True, indent=2) + '\n'
+          )
+          receipt = {
+              'schema': 'contract-c-successor-candidate-rc0-receipt-v1',
+              'base_commit': 'c3563cff66d2c85dcbf575c693056e2d8e4563d4',
+              'candidate_head': __import__('subprocess').check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+              'candidate_profile': candidate.CANDIDATE_VERSION,
+              'official_version_assigned': False,
+              'promotion_authorized': False,
+              'semantic_delta': delta,
+              'handoff_sha256': 'sha256:' + hashlib.sha256(raw).hexdigest(),
+              'result_set_id': json.loads(raw)['result_set_id'],
+              'released_contract_c_version': '1.0.0',
+              'released_registry_unchanged': True,
+              'sidecar_required': False,
+              'scalar_or_winner_surface_added': False,
+          }
+          (out / 'CANDIDATE_RECEIPT.json').write_text(
+              json.dumps(receipt, sort_keys=True, indent=2) + '\n'
+          )
+          print(json.dumps(receipt, sort_keys=True))
+          PY
+
+      - name: Package candidate evidence
+        shell: bash
+        run: |
+          tar -czf contract-c-successor-candidate-rc0-${GITHUB_RUN_ID}.tar.gz \
+            -C build contract-c-successor-candidate-rc0
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-successor-candidate-rc0-${{ github.run_id }}
+          path: contract-c-successor-candidate-rc0-${{ github.run_id }}.tar.gz
+          if-no-files-found: error
