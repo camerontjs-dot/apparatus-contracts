@@ -3,14 +3,16 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 from validators import contract_c as released
 
-from research.contract_c_successor_candidate_rc0 import validator as candidate
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import validator as candidate  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-HERE = Path(__file__).resolve().parent
 RAW = (HERE / "fixtures" / "valid-shadow.json").read_bytes()
 INDEX = json.loads((HERE / "fixtures" / "contract-b-index.json").read_text())
 EXPECTED_SHA = "325962ebcdbf6af836bb6193a451524ccd40b4d10f2394ff9f703fbfce1ec1e3"
