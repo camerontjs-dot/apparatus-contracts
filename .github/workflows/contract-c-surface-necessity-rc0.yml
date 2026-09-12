@@ -51,9 +51,43 @@ jobs:
       - name: Compile surface-necessity apparatus
         run: python -m compileall -q research/contract_c_surface_necessity_rc0
 
-      - name: Execute surface-necessity experiment
+      - name: Reproduce and preserve first evaluator deviation
+        shell: bash
         run: |
+          set +e
           python -m research.contract_c_surface_necessity_rc0.evaluate \
+            --out build/contract-c-surface-necessity-rc0
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('build/contract-c-surface-necessity-rc0/EVALUATION.json').read_text())
+          expected = {
+              'attacker_chosen_new_digest_is_not_authority',
+              'internal_receipt_cannot_authorize_coherent_tamper',
+          }
+          assert set(data['core_failures']) == expected
+          other = {k: v for k, v in data['checks'].items() if k not in expected}
+          assert all(other.values())
+          assert data['classification']['member_id'] == 'NOT_REQUIRED_FOR_TESTED_CAPABILITIES'
+          assert 'member_id' in data['preregistered_expectation_falsifications']
+          print(json.dumps({
+              'preserved_first_evaluator_disposition': data['research_disposition'],
+              'known_invalid_mutation_failures': sorted(expected),
+              'all_other_checks_pass': True,
+          }, sort_keys=True))
+          PY
+
+      - name: Execute corrected external-authority discriminator
+        run: |
+          python -m research.contract_c_surface_necessity_rc0.binding_discriminator \
+            --out build/contract-c-surface-necessity-rc0
+
+      - name: Synthesize terminal scientific receipt
+        run: |
+          python -m research.contract_c_surface_necessity_rc0.finalize \
             --out build/contract-c-surface-necessity-rc0
 
       - name: Verify terminal scientific receipt
@@ -62,15 +96,19 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          p = Path('build/contract-c-surface-necessity-rc0/EVALUATION.json')
+          p = Path('build/contract-c-surface-necessity-rc0/FINAL_EVALUATION.json')
           data = json.loads(p.read_text())
           assert data['research_disposition'] == 'SUPPORTED_MINIMAL_IN_BAND_INVARIANTS_WITH_SIDECAR_RESEARCH_VESSEL'
-          assert data['core_failures'] == []
-          assert data['interpretation']['research_vessel_supported'] is True
-          assert data['interpretation']['sidecar_is_useful_as_research_vessel'] is True
-          assert data['interpretation']['edr_002_currently_requires_neutral_provenance_in_contract_c'] is True
-          assert data['interpretation']['contract_c_successor_version_selected'] is False
-          assert data['interpretation']['promotion_authorized'] is False
+          assert data['all_other_first_evaluator_checks_pass'] is True
+          assert data['preserved_deviation']['classification'] == 'EVALUATOR_CONSTRUCTION_INVALID'
+          assert data['preserved_deviation']['unexpected_failed_checks'] == []
+          assert data['corrected_discriminator']['passed'] is True
+          d = data['corrected_discriminator']['checks']
+          assert d['same_exact_evidence_members'] is True
+          assert d['semantic_form_changed'] is True
+          assert d['internal_self_consistency_accepts_coherent_substitution'] is True
+          assert d['previously_authorized_digest_rejects_coherent_substitution'] is True
+          assert d['attacker_selected_new_digest_mechanically_accepts'] is True
           assert data['classification']['role'] == 'REQUIRED_SEMANTIC'
           assert data['classification']['causal_form'] == 'REQUIRED_SEMANTIC'
           assert data['classification']['members'] == 'REQUIRED_SEMANTIC'
@@ -80,10 +118,14 @@ jobs:
           assert data['classification']['member_id'] == 'NOT_REQUIRED_FOR_TESTED_CAPABILITIES'
           assert data['classification']['carrier_exact_identity'] == 'REQUIRED_INTEGRITY'
           assert data['classification']['external_sidecar_digest'] == 'REQUIRED_INTEGRITY'
-          assert 'member_id' in data['preregistered_expectation_falsifications']
-          assert data['checks']['authorized_external_digest_rejects_coherent_tamper'] is True
-          assert data['checks']['internal_receipt_cannot_authorize_coherent_tamper'] is True
-          assert data['checks']['vessel_preserves_same_invariant_shape'] is True
+          assert data['preregistered_expectation_falsifications'] == ['member_id']
+          i = data['interpretation']
+          assert i['research_vessel_supported'] is True
+          assert i['sidecar_is_useful_as_research_vessel'] is True
+          assert i['edr_002_currently_requires_neutral_provenance_in_contract_c'] is True
+          assert i['external_object_authority_requires_independent_expected_binding'] is True
+          assert i['contract_c_successor_version_selected'] is False
+          assert i['promotion_authorized'] is False
           print(json.dumps({
               'research_disposition': data['research_disposition'],
               'expectation_falsifications': data['preregistered_expectation_falsifications'],
