@@ -1,0 +1,188 @@
+name: Contract C Successor Promotion Qualification RC0
+
+on:
+  push:
+    branches:
+      - research/contract-c-successor-promotion-qualification-20260912
+    paths:
+      - research/contract_c_successor_promotion_qualification_rc0/PREREGISTRATION.md
+      - research/contract_c_successor_promotion_qualification_rc0/EVIDENCE_MANIFEST.json
+      - research/contract_c_successor_promotion_qualification_rc0/evaluate.py
+      - .github/workflows/contract-c-successor-promotion-qualification-rc0.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PARENT_CANDIDATE: 242351af7214c23dce76edd06299f55c038cd3f0
+  PRODUCTION_BASE: c3563cff66d2c85dcbf575c693056e2d8e4563d4
+  CONSUMER_FINAL: 07e60447fae17369be5676f013c187b9fd0bfd98
+
+jobs:
+  promotion-qualification:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout qualification branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify stacked qualification boundary and frozen parent candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor "$PARENT_CANDIDATE" HEAD
+          test "$(git merge-base "$PARENT_CANDIDATE" HEAD)" = "$PARENT_CANDIDATE"
+          changed="$(git diff --name-only "$PARENT_CANDIDATE"...HEAD)"
+          printf '%s\n' "$changed"
+          test -n "$changed"
+          if printf '%s\n' "$changed" | grep -Ev '^(research/contract_c_successor_promotion_qualification_rc0/|\.github/workflows/contract-c-successor-promotion-qualification-rc0\.yml$)' | grep -q .; then
+            echo 'qualification mutation escaped stacked research boundary' >&2
+            exit 1
+          fi
+          for path in \
+            research/contract_c_successor_candidate_rc0/CANDIDATE.md \
+            research/contract_c_successor_candidate_rc0/schema-delta.json \
+            research/contract_c_successor_candidate_rc0/validator.py \
+            research/contract_c_successor_candidate_rc0/test_candidate.py \
+            research/contract_c_successor_candidate_rc0/fixtures/valid-shadow.json \
+            research/contract_c_successor_candidate_rc0/fixtures/contract-b-index.json; do
+            test "$(git rev-parse "$PARENT_CANDIDATE:$path")" = "$(git rev-parse "HEAD:$path")"
+          done
+          test "$(git rev-parse "$PRODUCTION_BASE:contract-c-v1.0.0.md")" = "$(git rev-parse "HEAD:contract-c-v1.0.0.md")"
+          test "$(git rev-parse "$PRODUCTION_BASE:schema/contract-c/1.0.0/schema.json")" = "$(git rev-parse "HEAD:schema/contract-c/1.0.0/schema.json")"
+          test "$(git rev-parse "$PRODUCTION_BASE:validators/contract_c.py")" = "$(git rev-parse "HEAD:validators/contract_c.py")"
+          test "$(git rev-parse "$PRODUCTION_BASE:schema/contract-c/versions.json")" = "$(git rev-parse "HEAD:schema/contract-c/versions.json")"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install repository dependencies
+        run: python -m pip install -e '.[dev]'
+
+      - name: Re-run exact parent candidate controls
+        run: |
+          pytest -q research/contract_c_successor_candidate_rc0/test_candidate.py
+          pytest -q tests/test_contract_c_v1.py tests/test_verify_contract_integrity.py
+
+      - name: Execute preregistered promotion/version qualification
+        shell: bash
+        run: |
+          mkdir -p build/contract-c-successor-promotion-qualification-rc0
+          python research/contract_c_successor_promotion_qualification_rc0/evaluate.py \
+            build/contract-c-successor-promotion-qualification-rc0/QUALIFICATION_RESULT.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('build/contract-c-successor-promotion-qualification-rc0/QUALIFICATION_RESULT.json')
+          data=json.loads(p.read_text())
+          assert data['research_disposition'] in {
+              'SUPPORTED FOR PROMOTION', 'FALSIFIED', 'INCONCLUSIVE', 'SUPERSEDED'
+          }
+          assert data['version_class_if_promoted'] == 'MAJOR'
+          assert data['official_version_assigned'] is False
+          assert data['promotion_executed'] is False
+          assert data['checks']['exact_two_leaf_candidate_delta'] is True
+          assert data['checks']['exact_successor_handoff_validates_directly'] is True
+          assert data['checks']['non_deciding_preserved_without_relabelling'] is True
+          assert data['checks']['strict_released_1_0_rejects_exact_successor'] is True
+          assert data['checks']['downgrade_attempts_validate_only_with_semantic_loss'] is True
+          assert data['checks']['bounded_consumer_conformance_recorded'] is True
+          print(json.dumps({
+              'research_disposition': data['research_disposition'],
+              'version_class_if_promoted': data['version_class_if_promoted'],
+              'blockers': data['blockers'],
+          }, sort_keys=True))
+          PY
+
+      - name: Checkout exact fresh independent Consumer B
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.CONSUMER_FINAL }}
+          path: _consumer_b
+          fetch-depth: 0
+
+      - name: Verify and replay fresh Consumer B
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _consumer_b rev-parse HEAD)" = "$CONSUMER_FINAL"
+          test "$(git -C _consumer_b rev-parse "$CONSUMER_FINAL:candidate/consumer.py")" = "7c4e15855dfba57bdc2a23e98960e0d79d272aa6"
+          test "$(git -C _consumer_b rev-parse "$CONSUMER_FINAL:candidate/test_consumer.py")" = "9000b495fd5d15f16dc82e662abe6764dc2b02f1"
+          test "$(git -C _consumer_b rev-parse "$CONSUMER_FINAL:candidate/FREEZE_RECEIPT.json")" = "a2f75dff9ef4f1820a91331ee43e5ceb13d3a76e"
+          python _consumer_b/candidate/test_consumer.py
+          python - <<'PY'
+          import hashlib
+          import importlib.util
+          import json
+          import sys
+          from pathlib import Path
+
+          module_path=Path('_consumer_b/candidate/consumer.py')
+          spec=importlib.util.spec_from_file_location('fresh_consumer_b', module_path)
+          module=importlib.util.module_from_spec(spec)
+          sys.modules[spec.name]=module
+          spec.loader.exec_module(module)
+
+          root=Path('research/contract_c_successor_candidate_rc0/fixtures')
+          raw=(root/'valid-shadow.json').read_bytes()
+          index=json.loads((root/'contract-b-index.json').read_text())
+          obj=json.loads(raw)
+          profile={
+              'contract_c_version': 'research-non-deciding-rc0',
+              'whole_object_sha256': 'sha256:' + hashlib.sha256(raw).hexdigest(),
+              'result_set_id': obj['result_set_id'],
+          }
+          consumed=module.consume_contract_c(raw, index, profile)
+          proposition=consumed['propositions'][0]
+          assert [x['channel'] for x in proposition['causal_contributions']] == ['non_deciding','non_deciding']
+          assert proposition['causal_form'] == 'independent_sufficient_alternatives'
+          assert module.evaluate_supported_claim(consumed, 'temporal-p1')['disposition'] == 'hold'
+          print(json.dumps({
+              'fresh_consumer_exact_candidate_handoff': 'PASS',
+              'causal_form': proposition['causal_form'],
+              'policy': 'hold',
+          }, sort_keys=True))
+          PY
+
+      - name: Verify terminal classification matches required evidence gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('build/contract-c-successor-promotion-qualification-rc0/QUALIFICATION_RESULT.json').read_text())
+          # Current frozen evidence manifest records the live producer gate as not established.
+          # Missing required producer conformance must not be laundered into promotion support.
+          if data['checks']['producer_conformance_established']:
+              assert data['research_disposition'] == 'SUPPORTED FOR PROMOTION'
+          else:
+              assert data['research_disposition'] == 'INCONCLUSIVE'
+              assert data['blockers'] == [
+                  'maintained_or_promotion_ready_producer_conformance_for_exact_successor_not_established'
+              ]
+          PY
+
+      - name: Package qualification evidence
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p build/contract-c-successor-promotion-qualification-rc0
+          cp research/contract_c_successor_promotion_qualification_rc0/PREREGISTRATION.md \
+            build/contract-c-successor-promotion-qualification-rc0/
+          cp research/contract_c_successor_promotion_qualification_rc0/EVIDENCE_MANIFEST.json \
+            build/contract-c-successor-promotion-qualification-rc0/
+          git rev-parse HEAD > build/contract-c-successor-promotion-qualification-rc0/QUALIFICATION_SHA.txt
+          git -C _consumer_b rev-parse HEAD > build/contract-c-successor-promotion-qualification-rc0/CONSUMER_B_SHA.txt || true
+          tar -czf contract-c-successor-promotion-qualification-rc0-${GITHUB_RUN_ID}.tar.gz \
+            -C build contract-c-successor-promotion-qualification-rc0
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: contract-c-successor-promotion-qualification-rc0-${{ github.run_id }}
+          path: contract-c-successor-promotion-qualification-rc0-${{ github.run_id }}.tar.gz
+          if-no-files-found: error
