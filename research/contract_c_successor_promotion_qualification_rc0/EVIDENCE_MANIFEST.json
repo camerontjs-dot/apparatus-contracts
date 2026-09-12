@@ -1,0 +1,59 @@
+{
+  "schema": "contract-c-successor-promotion-qualification-evidence-v1",
+  "parent_candidate": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "pr": 91,
+    "head": "242351af7214c23dce76edd06299f55c038cd3f0",
+    "base_main": "c3563cff66d2c85dcbf575c693056e2d8e4563d4",
+    "profile": "research-non-deciding-rc0",
+    "construction_run": 34726240904,
+    "construction_job": 103640731461,
+    "construction_artifact": 10307728263,
+    "construction_artifact_digest": "sha256:9b1167c1eefb77fd6e9238fd9272fc8a23970f1560da66df105a6e5ca352afc9"
+  },
+  "released_contract_c": {
+    "version": "1.0.0",
+    "spec_blob": "8c15f2e5f4047ccd17e204fb23aee1168781b9d5",
+    "schema_blob": "b0369de9b5c156322d6787261bbc7658a3b33781",
+    "validator_blob": "9c75ccfbf2223578a8d1a7bf0c39673b394fbea4",
+    "versions_blob": "6e805e274f8b1f491bf0c10735a46962ab91d2d4"
+  },
+  "frozen_handoff": {
+    "object_blob": "14e88cbc691f7eba9366b4bf88611ef834637f27",
+    "contract_b_index_blob": "4de40713482a1fc5a075a230a61e19acc25afbd9",
+    "whole_object_sha256": "sha256:325962ebcdbf6af836bb6193a451524ccd40b4d10f2394ff9f703fbfce1ec1e3",
+    "result_set_id": "result-set:4483272c4f6fbd9cb2362be7e3174bbd00aff3cf761d6c374897f3478818c9f0"
+  },
+  "consumer_conformance": {
+    "status": "ESTABLISHED_BOUNDED",
+    "repository": "camerontjs-dot/research-scaffold-harness",
+    "final_commit": "07e60447fae17369be5676f013c187b9fd0bfd98",
+    "implementation_freeze": "c1c31885f5802d4ea710dea7bcec214e977b9f03",
+    "consumer_blob": "7c4e15855dfba57bdc2a23e98960e0d79d272aa6",
+    "tests_blob": "9000b495fd5d15f16dc82e662abe6764dc2b02f1",
+    "receipt_blob": "a2f75dff9ef4f1820a91331ee43e5ceb13d3a76e",
+    "comparison_run": 34717144897,
+    "comparison_job": 103616318296,
+    "comparison_artifact": 10305635450,
+    "comparison_artifact_digest": "sha256:e0b1e6427f935e801ae41566907580fb0ef58fc7b32642783b61030b70e8fd47",
+    "disposition": "SUPPORTED_CONTEXT_FREE_CONSUMER_B_REPRODUCTION"
+  },
+  "producer_conformance": {
+    "status": "NOT_ESTABLISHED_FOR_EXACT_SUCCESSOR",
+    "cal_repair_pr": 100,
+    "cal_repair_head": "aa5f0f1313e65e6d31493095214c76d743ca6d89",
+    "cal_repair_observation": "research-only unique multiplicity-preserving repair candidate; no canonical Contract C revision established",
+    "cal_rc1_pr": 104,
+    "cal_rc1_head": "a902621e8baea3063dddd7f92ba975aade305464",
+    "cal_rc1_observation": "bounded semantic engine qualification supported; canonical downstream Contract C authority and production support explicitly unresolved"
+  },
+  "architecture_evidence": {
+    "non_deciding_shadow_pr": 85,
+    "version_compatibility_pr": 86,
+    "surface_necessity_pr": 89,
+    "decision_current_main_conformance_pr": 72,
+    "fresh_consumer_pr": 29
+  },
+  "official_version_assigned": false,
+  "promotion_authorized": false
+}
