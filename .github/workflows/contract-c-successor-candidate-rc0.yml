@@ -64,8 +64,12 @@ jobs:
           python - <<'PY'
           import hashlib
           import json
+          import sys
           from pathlib import Path
-          from research.contract_c_successor_candidate_rc0 import validator as candidate
+
+          module_dir = Path('research/contract_c_successor_candidate_rc0').resolve()
+          sys.path.insert(0, str(module_dir))
+          import validator as candidate
 
           root = Path('research/contract_c_successor_candidate_rc0')
           raw = (root / 'fixtures/valid-shadow.json').read_bytes()
