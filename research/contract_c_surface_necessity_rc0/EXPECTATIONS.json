@@ -1,0 +1,45 @@
+{
+  "schema": "contract-c-surface-necessity-rc0-expectations-v1",
+  "frozen_before_evaluator": true,
+  "core_expectations": {
+    "policy_firewall": "PASS",
+    "in_band_and_vessel_invariants_agree": "PASS",
+    "role_needed_to_distinguish_causal_from_residual": true,
+    "causal_form_needed_to_distinguish_independent_from_joint": true,
+    "member_set_needed_for_exact_attribution": true,
+    "state_binding_conditionally_needed_for_multi_state_sidecar": true,
+    "source_and_passage_hash_recoverable_from_exact_contract_b_when_passage_id_present": true,
+    "source_and_passage_hash_needed_when_contract_b_not_available": true,
+    "proposition_text_hash_recoverable_from_exact_contract_b_when_proposition_id_present": true,
+    "external_sidecar_digest_needed_to_reject_coherently_reidentified_tamper": true,
+    "internal_receipt_id_alone_is_not_authorization": true,
+    "neutral_to_support_downgrade_safe": false,
+    "neutral_to_counterevidence_downgrade_safe": false,
+    "dropping_neutral_evidence_preserves_deep_attribution": false,
+    "missing_sidecar_preserves_destination_policy": true,
+    "missing_sidecar_preserves_deep_attribution": false,
+    "released_contract_c_1_0_unchanged": true,
+    "edr_002_currently_authorizes_required_neutral_provenance_outside_contract_c": false
+  },
+  "classification_expectations": {
+    "role": "REQUIRED_SEMANTIC",
+    "causal_form": "REQUIRED_SEMANTIC",
+    "members": "REQUIRED_SEMANTIC",
+    "state_id": "CONDITIONALLY_REQUIRED",
+    "source_id": "CONDITIONALLY_REQUIRED",
+    "passage_sha256": "CONDITIONALLY_REQUIRED",
+    "member_id": "REQUIRED_INTEGRITY",
+    "proposition_id": "REQUIRED_SEMANTIC",
+    "proposition_text_sha256": "CONDITIONALLY_REQUIRED",
+    "carrier_exact_identity": "REQUIRED_INTEGRITY",
+    "receipt_id": "NOT_SUFFICIENT_AS_AUTHORIZATION",
+    "external_sidecar_digest": "REQUIRED_INTEGRITY"
+  },
+  "nonclaims": [
+    "field names or exact JSON nesting are canonical",
+    "a sidecar is authorized as a production contract",
+    "Contract C 2.0.0 is selected or necessary",
+    "all future CAL semantic families have been covered",
+    "destination policy requires deep attribution"
+  ]
+}

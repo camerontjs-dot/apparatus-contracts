@@ -1,0 +1,152 @@
+name: Contract C Surface Necessity RC0
+
+on:
+  push:
+    branches:
+      - research/contract-c-surface-necessity-rc0-20260912
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  surface-necessity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify immutable released authority and bounded research surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor c3563cff66d2c85dcbf575c693056e2d8e4563d4 HEAD
+          test "$(git hash-object contract-c-v1.0.0.md)" = "8c15f2e5f4047ccd17e204fb23aee1168781b9d5"
+          test "$(git hash-object schema/contract-c/1.0.0/schema.json)" = "b0369de9b5c156322d6787261bbc7658a3b33781"
+          test "$(git hash-object validators/contract_c.py)" = "9c75ccfbf2223578a8d1a7bf0c39673b394fbea4"
+          changed="$(git diff --name-only f58f531abf6f2c8ab264db41346592b1498514d0...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -Ev '^(research/contract_c_surface_necessity_rc0/|\.github/workflows/contract-c-surface-necessity-rc0\.yml$)' | grep -q .; then
+            echo 'mutation escaped preregistered surface-necessity research boundary' >&2
+            exit 1
+          fi
+
+      - name: Verify independent consumer has no producer-vessel imports
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -En '^[[:space:]]*(from|import)[[:space:]].*(contract_c_surface_necessity_rc0\.vessel|contract_c_attribution_sidecar_rc1\.sidecar)' research/contract_c_surface_necessity_rc0/consumer.py
+          ! grep -Eqi '(claim-audit-lab|cal_v1_candidate|rc8j|bound_relation)' research/contract_c_surface_necessity_rc0/consumer.py
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install exact repository dependencies
+        run: python -m pip install -e '.[dev]'
+
+      - name: Compile surface-necessity apparatus
+        run: python -m compileall -q research/contract_c_surface_necessity_rc0
+
+      - name: Reproduce and preserve first evaluator deviation
+        shell: bash
+        run: |
+          set +e
+          python -m research.contract_c_surface_necessity_rc0.evaluate \
+            --out build/contract-c-surface-necessity-rc0
+          rc=$?
+          set -e
+          test "$rc" -eq 1
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('build/contract-c-surface-necessity-rc0/EVALUATION.json').read_text())
+          expected = {
+              'attacker_chosen_new_digest_is_not_authority',
+              'internal_receipt_cannot_authorize_coherent_tamper',
+          }
+          assert set(data['core_failures']) == expected
+          other = {k: v for k, v in data['checks'].items() if k not in expected}
+          assert all(other.values())
+          assert data['classification']['member_id'] == 'NOT_REQUIRED_FOR_TESTED_CAPABILITIES'
+          assert 'member_id' in data['preregistered_expectation_falsifications']
+          print(json.dumps({
+              'preserved_first_evaluator_disposition': data['research_disposition'],
+              'known_invalid_mutation_failures': sorted(expected),
+              'all_other_checks_pass': True,
+          }, sort_keys=True))
+          PY
+
+      - name: Execute corrected external-authority discriminator
+        run: |
+          python -m research.contract_c_surface_necessity_rc0.binding_discriminator \
+            --out build/contract-c-surface-necessity-rc0
+
+      - name: Synthesize terminal scientific receipt
+        run: |
+          python -m research.contract_c_surface_necessity_rc0.finalize \
+            --out build/contract-c-surface-necessity-rc0
+
+      - name: Verify terminal scientific receipt
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('build/contract-c-surface-necessity-rc0/FINAL_EVALUATION.json')
+          data = json.loads(p.read_text())
+          assert data['research_disposition'] == 'SUPPORTED_MINIMAL_IN_BAND_INVARIANTS_WITH_SIDECAR_RESEARCH_VESSEL'
+          assert data['all_other_first_evaluator_checks_pass'] is True
+          assert data['preserved_deviation']['classification'] == 'EVALUATOR_CONSTRUCTION_INVALID'
+          assert data['preserved_deviation']['unexpected_failed_checks'] == []
+          assert data['corrected_discriminator']['passed'] is True
+          d = data['corrected_discriminator']['checks']
+          assert d['same_exact_evidence_members'] is True
+          assert d['semantic_form_changed'] is True
+          assert d['internal_self_consistency_accepts_coherent_substitution'] is True
+          assert d['previously_authorized_digest_rejects_coherent_substitution'] is True
+          assert d['attacker_selected_new_digest_mechanically_accepts'] is True
+          assert data['classification']['role'] == 'REQUIRED_SEMANTIC'
+          assert data['classification']['causal_form'] == 'REQUIRED_SEMANTIC'
+          assert data['classification']['members'] == 'REQUIRED_SEMANTIC'
+          assert data['classification']['state_id'] == 'CONDITIONALLY_REQUIRED'
+          assert data['classification']['source_id'] == 'CONDITIONALLY_REQUIRED'
+          assert data['classification']['passage_sha256'] == 'CONDITIONALLY_REQUIRED'
+          assert data['classification']['member_id'] == 'NOT_REQUIRED_FOR_TESTED_CAPABILITIES'
+          assert data['classification']['carrier_exact_identity'] == 'REQUIRED_INTEGRITY'
+          assert data['classification']['external_sidecar_digest'] == 'REQUIRED_INTEGRITY'
+          assert data['preregistered_expectation_falsifications'] == ['member_id']
+          i = data['interpretation']
+          assert i['research_vessel_supported'] is True
+          assert i['sidecar_is_useful_as_research_vessel'] is True
+          assert i['edr_002_currently_requires_neutral_provenance_in_contract_c'] is True
+          assert i['external_object_authority_requires_independent_expected_binding'] is True
+          assert i['contract_c_successor_version_selected'] is False
+          assert i['promotion_authorized'] is False
+          print(json.dumps({
+              'research_disposition': data['research_disposition'],
+              'expectation_falsifications': data['preregistered_expectation_falsifications'],
+              'classification': data['classification'],
+          }, sort_keys=True))
+          PY
+
+      - name: Re-run released Contract C regression
+        run: pytest -q tests/test_contract_c_v1.py tests/test_verify_contract_integrity.py
+
+      - name: Package evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp research/contract_c_surface_necessity_rc0/PREREGISTRATION.md build/contract-c-surface-necessity-rc0/
+          cp research/contract_c_surface_necessity_rc0/EXPECTATIONS.json build/contract-c-surface-necessity-rc0/
+          tar -czf contract-c-surface-necessity-rc0-${GITHUB_RUN_ID}.tar.gz -C build contract-c-surface-necessity-rc0
+
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-surface-necessity-rc0-${{ github.run_id }}
+          path: contract-c-surface-necessity-rc0-${{ github.run_id }}.tar.gz
+          if-no-files-found: error
