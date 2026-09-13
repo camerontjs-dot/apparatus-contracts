@@ -1,0 +1,43 @@
+name: Contract C successor Candidate A RC0 adversarial qualification
+
+on:
+  pull_request:
+    paths:
+      - "research/contract_c_successor_candidate_a_rc0_20260913/**"
+      - ".github/workflows/contract-c-successor-candidate-a-rc0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout research head
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen Candidate A RC0 blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          root=research/contract_c_successor_candidate_a_rc0_20260913
+          test "$(git rev-parse HEAD:${root}/CANDIDATE_A_RC0.md)" = "4fae55b156b0caea5a4815c2c665a816f39667d9"
+          test "$(git rev-parse HEAD:${root}/candidate_a_rc0.schema.json)" = "ee89f25bfcef008c95cbb35adf696fb1b3e2dc20"
+          test "$(git rev-parse HEAD:${root}/candidate_a_rc0.py)" = "fb0a05ca929fbcf8284799306e9861d992839aaa"
+
+      - name: Execute preregistered adversarial cohort
+        run: |
+          python research/contract_c_successor_candidate_a_rc0_20260913/adversarial_qualify.py \
+            --out research/contract_c_successor_candidate_a_rc0_20260913/ADVERSARIAL_RESULT.json
+
+      - name: Upload qualification result
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-successor-candidate-a-rc0-result
+          path: research/contract_c_successor_candidate_a_rc0_20260913/ADVERSARIAL_RESULT.json
+          if-no-files-found: error
