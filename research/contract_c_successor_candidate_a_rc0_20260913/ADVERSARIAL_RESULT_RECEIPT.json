@@ -1,0 +1,46 @@
+{
+  "schema": "contract-c-successor-candidate-a-rc0-adversarial-receipt-v1",
+  "classification": "Draft Research / Research Infrastructure",
+  "anchors": {
+    "phase_2_freeze": "f5337dedaad045aa290e80f69dc83ac1a0f73436",
+    "candidate_freeze": "9f1808c47503c884887dbf862e9cd8162b21b583",
+    "preregistration": "2a3600719df8c0502bd265f63925dee9166c9ac1",
+    "evaluator_commit": "d06c1affdf5fb65cc1df235cb1a1ebb7af174adc",
+    "executed_workflow_head": "fdbb235714bac53239be19a3cea651020a2d437a"
+  },
+  "candidate_blobs_verified": {
+    "CANDIDATE_A_RC0.md": "4fae55b156b0caea5a4815c2c665a816f39667d9",
+    "candidate_a_rc0.schema.json": "ee89f25bfcef008c95cbb35adf696fb1b3e2dc20",
+    "candidate_a_rc0.py": "fb0a05ca929fbcf8284799306e9861d992839aaa"
+  },
+  "github_actions": {
+    "run_id": 34764954521,
+    "job_id": 103744166486,
+    "conclusion": "success",
+    "artifact_id": 10319849604,
+    "artifact_name": "contract-c-successor-candidate-a-rc0-result",
+    "artifact_zip_sha256": "871a0d2325a92a8415e46c61cf617ea649bee0b2ef6dadb3779eb0475c34c615",
+    "adversarial_result_json_sha256": "13d2938f5a0b1e16ae88a3df4ddc5bf4d7880f7bc20f47d2de9e4e624fc5ba27"
+  },
+  "counts": {
+    "positive_passed": 19,
+    "positive_total": 19,
+    "permutation_passed": 5,
+    "permutation_total": 5,
+    "attacks_detected": 36,
+    "attacks_total": 36,
+    "weak_controls_sensitive": 3,
+    "weak_controls_total": 3
+  },
+  "apparatus_failures": [],
+  "disposition": "QUALIFIED_FOR_CAL_PRODUCER_CONFORMANCE_RESEARCH",
+  "nonclaims": [
+    "not production promotion",
+    "not SemVer assignment",
+    "not CAL producer conformance",
+    "not independent consumer conformance",
+    "not compatibility/version decision",
+    "not Contract E / Authorization",
+    "not execution authority"
+  ]
+}

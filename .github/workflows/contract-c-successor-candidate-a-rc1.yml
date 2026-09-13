@@ -1,0 +1,47 @@
+name: Contract C successor Candidate A RC1 adversarial qualification
+
+on:
+  pull_request:
+    paths:
+      - "research/contract_c_successor_candidate_a_rc1_20260913/**"
+      - ".github/workflows/contract-c-successor-candidate-a-rc1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout research head
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify frozen programme oracle and RC1 blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          phase1=research/contract_c_successor_ground_up_20260913/SEMANTIC_SPECIMEN_CORPUS.md
+          phase2=research/contract_c_successor_ground_up_20260913/phase2_bakeoff.py
+          root=research/contract_c_successor_candidate_a_rc1_20260913
+          test "$(git rev-parse HEAD:${phase1})" = "0ff4f66bca00924755d42ed7f944c4dae8d10f66"
+          test "$(git rev-parse HEAD:${phase2})" = "9f00cd332ad366b878f60d13440af639360928de"
+          test "$(git rev-parse HEAD:${root}/CANDIDATE_A_RC1.md)" = "0ab62b7ceea1d56d6bc3b7cf8528769dd440ab7c"
+          test "$(git rev-parse HEAD:${root}/candidate_a_rc1.schema.json)" = "0de83032e6d989225cf014d9a70035f634a5e003"
+          test "$(git rev-parse HEAD:${root}/candidate_a_rc1.py)" = "03dbb5b774af523d8e6235bca86b18af5ddad5b0"
+
+      - name: Execute preregistered oracle-anchored cohort
+        run: |
+          python research/contract_c_successor_candidate_a_rc1_20260913/adversarial_qualify.py \
+            --out research/contract_c_successor_candidate_a_rc1_20260913/ADVERSARIAL_RESULT.json
+
+      - name: Upload qualification result
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-successor-candidate-a-rc1-result
+          path: research/contract_c_successor_candidate_a_rc1_20260913/ADVERSARIAL_RESULT.json
+          if-no-files-found: error

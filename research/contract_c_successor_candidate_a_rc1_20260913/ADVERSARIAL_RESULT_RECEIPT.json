@@ -1,0 +1,63 @@
+{
+  "schema": "contract-c-successor-candidate-a-rc1-adversarial-receipt-v1",
+  "classification": "Draft Research / Research Infrastructure",
+  "anchors": {
+    "phase_0_freeze": "e588e1295367a4b867d608342aaacaccb41850b8",
+    "phase_1_freeze": "175246ae16932f2f34a399560d7f76013213bf97",
+    "phase_1_5_freeze": "163d0d424777ef3c0a3b45dec2888c845634205d",
+    "phase_2_freeze": "f5337dedaad045aa290e80f69dc83ac1a0f73436",
+    "phase_1_corpus_blob": "0ff4f66bca00924755d42ed7f944c4dae8d10f66",
+    "phase_2_oracle_blob": "9f00cd332ad366b878f60d13440af639360928de",
+    "rc0_falsifier": "a0ddca1f1301a5d3dc11104b4fd1f6944f9967f6",
+    "candidate_freeze": "ba5f55b0fb6ca54e0461a688813b66fd81bf8c4c",
+    "preregistration": "55b0fc12c7b884556e2d0d4dc7811665301326df",
+    "evaluator_commit": "0bca118695eff88a7e5c3f86f3bcca2f85afd96b",
+    "executed_workflow_head": "4ab8db03968862a1eb9b79fcb4b1ca9de9b3ee0c"
+  },
+  "candidate_blobs_verified": {
+    "CANDIDATE_A_RC1.md": "0ab62b7ceea1d56d6bc3b7cf8528769dd440ab7c",
+    "candidate_a_rc1.schema.json": "0de83032e6d989225cf014d9a70035f634a5e003",
+    "candidate_a_rc1.py": "03dbb5b774af523d8e6235bca86b18af5ddad5b0"
+  },
+  "github_actions": {
+    "run_id": 34765492356,
+    "job_id": 103745597200,
+    "conclusion": "success",
+    "artifact_id": 10320486422,
+    "artifact_name": "contract-c-successor-candidate-a-rc1-result",
+    "artifact_zip_sha256": "de815a41966dd59671a5b56067db7dee07144c25050436560fe8b716327b8ec5",
+    "adversarial_result_json_sha256": "02ee02b98c451acd749e55c5fe73628b1f5f960223920e8f4c2318dea9d8bb28"
+  },
+  "oracle_source": {
+    "mode": "direct_import",
+    "path": "research/contract_c_successor_ground_up_20260913/phase2_bakeoff.py",
+    "mixed_reason_exact": "MIXED_RELATIONS"
+  },
+  "counts": {
+    "positive_passed": 19,
+    "positive_total": 19,
+    "permutation_passed": 5,
+    "permutation_total": 5,
+    "attacks_detected": 37,
+    "attacks_total": 37,
+    "weak_controls_sensitive": 4,
+    "weak_controls_total": 4
+  },
+  "decisive_rc0_regression": {
+    "attack": "A37",
+    "attacker_reason": "mixed_relations",
+    "frozen_oracle_reason": "MIXED_RELATIONS",
+    "caught_by": ["oracle", "structure_semantics"]
+  },
+  "apparatus_failures": [],
+  "disposition": "QUALIFIED_FOR_CAL_PRODUCER_CONFORMANCE_RESEARCH",
+  "nonclaims": [
+    "not production promotion",
+    "not SemVer assignment",
+    "not CAL producer conformance",
+    "not independent consumer conformance",
+    "not compatibility/version decision",
+    "not Contract E / Authorization",
+    "not execution authority"
+  ]
+}
