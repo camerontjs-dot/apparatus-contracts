@@ -1,0 +1,149 @@
+{
+  "candidate_A": {
+    "causal_leaf_reference_occurrences": 33,
+    "hypothesis": "canonical family of minimal sufficient exact participant-reference sets",
+    "measurement_authority_checks": {
+      "MA-01_measurement_not_public_authority": true,
+      "MA-02_caller_stipulation_not_public_authority": true,
+      "MA-03_warranted_result_representable": true
+    },
+    "mutation_checks": {
+      "01_world_substitution_observable": true,
+      "02_cross_world_composition_rejected": true,
+      "03_same_id_proposition_substitution_observable": true,
+      "04_direction_semantic_substitution_observable": true,
+      "05_evidence_substitution_rejected_or_observable": true,
+      "06_remove_causal_rejected": true,
+      "07_remove_residual_observable": true,
+      "08_causal_residual_move_rejected": true,
+      "09_neutral_laundering_observable": true,
+      "10_polarity_flip_observable": true,
+      "11_duplicate_semantic_member_rejected": true,
+      "12_unordered_permutation_same_canonical_bytes": true,
+      "13_reidentity_cannot_satisfy_old_external_authority": true,
+      "14_attacker_selected_digest_not_authority": true,
+      "15_destination_authorization_field_rejected": true
+    },
+    "recursive_causal_grammar": false,
+    "semantic_match_count": 19,
+    "semantic_matches": {
+      "EX-01-result-set-failed": true,
+      "EX-02-result-set-incomplete": true,
+      "EX-03-proposition-failed": true,
+      "EX-04-proposition-incomplete": true,
+      "EX-05-completed-not-checkable": true,
+      "SP-01-single-support": true,
+      "SP-02-single-refutation": true,
+      "SP-03-two-independent-supports": true,
+      "SP-04-two-independent-refutations": true,
+      "SP-05-joint-basis": true,
+      "SP-06-support-plus-neutral-residual": true,
+      "SP-07-causal-neutral-unresolved": true,
+      "SP-08-two-independent-unresolved": true,
+      "SP-09-minimal-mixed": true,
+      "SP-10-alt-joint-mixed": true,
+      "SP-11-symmetric-alt-joint-mixed": true,
+      "SP-12-alt-by-alt-mixed": true,
+      "SP-13-completed-no-deciding": true,
+      "SP-14-result-set-multi-proposition": true
+    },
+    "semantic_normalization_required_for_identity": false,
+    "total_canonical_bytes": 17274
+  },
+  "candidate_B": {
+    "causal_leaf_reference_occurrences": 27,
+    "factorization_alias_tests": {
+      "SP-10-alt-joint-mixed": {
+        "distributed_bytes": 1213,
+        "factorized_bytes": 1150,
+        "same_abstract_semantics": true,
+        "same_semantic_canonical_identity": true,
+        "same_syntax_canonical_bytes": false
+      },
+      "SP-11-symmetric-alt-joint-mixed": {
+        "distributed_bytes": 1212,
+        "factorized_bytes": 1149,
+        "same_abstract_semantics": true,
+        "same_semantic_canonical_identity": true,
+        "same_syntax_canonical_bytes": false
+      },
+      "SP-12-alt-by-alt-mixed": {
+        "distributed_bytes": 1533,
+        "factorized_bytes": 1307,
+        "same_abstract_semantics": true,
+        "same_semantic_canonical_identity": true,
+        "same_syntax_canonical_bytes": false
+      }
+    },
+    "hypothesis": "typed recursive causal expression with leaf/all_of/any_of",
+    "measurement_authority_checks": {
+      "MA-01_measurement_not_public_authority": true,
+      "MA-02_caller_stipulation_not_public_authority": true,
+      "MA-03_warranted_result_representable": true
+    },
+    "mutation_checks": {
+      "01_world_substitution_observable": true,
+      "02_cross_world_composition_rejected": true,
+      "03_same_id_proposition_substitution_observable": true,
+      "04_direction_semantic_substitution_observable": true,
+      "05_evidence_substitution_rejected_or_observable": true,
+      "06_remove_causal_rejected": true,
+      "07_remove_residual_observable": true,
+      "08_causal_residual_move_rejected": true,
+      "09_neutral_laundering_observable": true,
+      "10_polarity_flip_observable": true,
+      "11_duplicate_semantic_member_rejected": true,
+      "12_unordered_permutation_same_canonical_bytes": true,
+      "13_reidentity_cannot_satisfy_old_external_authority": true,
+      "14_attacker_selected_digest_not_authority": true,
+      "15_destination_authorization_field_rejected": true
+    },
+    "recursive_causal_grammar": true,
+    "semantic_match_count": 19,
+    "semantic_matches": {
+      "EX-01-result-set-failed": true,
+      "EX-02-result-set-incomplete": true,
+      "EX-03-proposition-failed": true,
+      "EX-04-proposition-incomplete": true,
+      "EX-05-completed-not-checkable": true,
+      "SP-01-single-support": true,
+      "SP-02-single-refutation": true,
+      "SP-03-two-independent-supports": true,
+      "SP-04-two-independent-refutations": true,
+      "SP-05-joint-basis": true,
+      "SP-06-support-plus-neutral-residual": true,
+      "SP-07-causal-neutral-unresolved": true,
+      "SP-08-two-independent-unresolved": true,
+      "SP-09-minimal-mixed": true,
+      "SP-10-alt-joint-mixed": true,
+      "SP-11-symmetric-alt-joint-mixed": true,
+      "SP-12-alt-by-alt-mixed": true,
+      "SP-13-completed-no-deciding": true,
+      "SP-14-result-set-multi-proposition": true
+    },
+    "semantic_normalization_required_for_identity": true,
+    "total_syntax_canonical_bytes": 17079
+  },
+  "classification": "Draft Research / Research Infrastructure",
+  "comparative_findings": {
+    "both_reconstruct_exact_same_frozen_oracles": true,
+    "byte_size_is_secondary_not_selection_authority": true,
+    "candidate_A_exposes_the_required_semantic_normal_form_directly": true,
+    "candidate_B_can_recover_one_semantic_identity_only_by_interpreting_and_normalizing_to_minimal_basis_semantics": true,
+    "candidate_B_factorization_reduces_repeated_leaf_occurrences": true,
+    "candidate_B_has_multiple_syntax_canonical_forms_for_same_semantics": true
+  },
+  "failures": [],
+  "frozen_inputs": {
+    "oracle_count": 19,
+    "phase_1_5_freeze": "163d0d424777ef3c0a3b45dec2888c845634205d",
+    "phase_1_5_result_commit": "a79962255b6b6568c84ba163c8bcc6f23275676a",
+    "phase_1_semantic_corpus": "175246ae16932f2f34a399560d7f76013213bf97"
+  },
+  "official_successor_version_assigned": false,
+  "production_authority_created": false,
+  "research_disposition": "PREFER_CANDIDATE_A_FOR_CURRENT_SUCCESSOR_SCOPE",
+  "schema": "contract-c-successor-phase-2-bakeoff-result-v1",
+  "selected_for_next_research_candidate": "Candidate A",
+  "sp12_current_cal_producer_claimed": false
+}
