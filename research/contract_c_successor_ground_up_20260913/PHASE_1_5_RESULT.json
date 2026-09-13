@@ -1,0 +1,218 @@
+{
+  "apparatus_failures": [],
+  "bounded_nonclaims": [
+    "SP-12 remains representation-stress-only.",
+    "CAL #106 exporter is not repaired.",
+    "No production authority or independent-reproduction claim is created."
+  ],
+  "cal_authority": {
+    "engine_blob": "636734fd1341d2ae721ae9697c7ac7652b89eecc",
+    "projection_blob": "9bc152275759304be03b84014c56bd434549a64a",
+    "rc1_commit": "a902621e8baea3063dddd7f92ba975aade305464",
+    "relation_blob": "e9e9401c92ee11d25a50dbc36e80aeb4c4cd220d"
+  },
+  "checks": {
+    "D1": true,
+    "D2": true,
+    "D3": true,
+    "D4": true,
+    "D5": true,
+    "M1": true,
+    "M2": true,
+    "M3": true,
+    "M4_nonclaim": true
+  },
+  "classification": "Draft Research / Research Infrastructure",
+  "discriminators": {
+    "D1": {
+      "current_consumer_requirement_exercised": false,
+      "dispositions": {
+        "aperture_completeness": "ABLATE_FOR_CURRENT_SUCCESSOR_SCOPE",
+        "eligibility": "ABLATE_FOR_CURRENT_SUCCESSOR_SCOPE",
+        "semantic_validity": "ABLATE_FOR_CURRENT_SUCCESSOR_SCOPE",
+        "temporal_applicability": "ABLATE_FOR_CURRENT_SUCCESSOR_SCOPE"
+      },
+      "slot_variation_observed": false,
+      "tested_distinctions_survive_without_slots": true
+    },
+    "D2": {
+      "basis_namespaces": [
+        "contribution"
+      ],
+      "current_consumer_requirement_exercised": false,
+      "current_rc1_non_evidence_causal_member_observed": false,
+      "disposition": "ABLATE_FOR_CURRENT_SUCCESSOR_SCOPE",
+      "reconsideration_trigger": "A future legitimate result requires a typed non-evidence cause not reconstructable from producer/policy identity, stable terminal reason, and evidence causal structure.",
+      "rule_roles": [
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    "D3": {
+      "disposition": "ABLATE_FULL_IN_BAND_POLICY_PAYLOAD_RETAIN_DIGEST_AND_IMMUTABLE_RESOLVER",
+      "exact_recovery": true,
+      "human_config_name_used": false,
+      "mutable_latest_used": false,
+      "network_lookup_required": false,
+      "policy_sha256": "44ecc33519fa8911079595d322f5f0decbf0389af42e153ac32214931798e42c",
+      "resolver_sha256": "sha256:80fe3785f030d9e1506d8c63b97ddb8d15d2439eb33692e2737b4037e9ab1df6",
+      "unknown_producer_rejected": true,
+      "wrong_digest_rejected": true
+    },
+    "D4": {
+      "checks": {
+        "baseline_resolves": true,
+        "different_world_replay_rejected": true,
+        "resealed_tamper_rejected_by_old_binding": true,
+        "same_id_mutation_rejected": true,
+        "stale_bundle_hash_rejected": true
+      },
+      "disposition": "ABLATE_REPEATED_PASSAGE_SHA256_RETAIN_EXACT_B_WORLD_BINDING",
+      "historical_exact_b_index_blob": "4de40713482a1fc5a075a230a61e19acc25afbd9"
+    },
+    "D5": {
+      "direct_identity_canonical_order": true,
+      "direct_identity_duplicate_detection": true,
+      "direct_identity_partition": true,
+      "disposition": "ABLATE_SEPARATE_CONTRIBUTION_ID_FOR_CURRENT_SUCCESSOR_SCOPE",
+      "duplicate_passage_id_rejected": true,
+      "one_trace_per_exact_passage": true,
+      "reconsideration_trigger": "Future qualified CAL emits multiple semantically distinct public contributions from the same exact passage to the same proposition.",
+      "two_semantically_distinct_contributions_from_same_exact_passage_supported": false
+    }
+  },
+  "failures": [],
+  "frozen_parents": {
+    "phase_0": "e588e1295367a4b867d608342aaacaccb41850b8",
+    "phase_1": "175246ae16932f2f34a399560d7f76013213bf97"
+  },
+  "metamorphic_specimens": {
+    "M1_SP04": {
+      "R1": {
+        "conclusion": "contradicted",
+        "failure": null,
+        "relations": [
+          "REFUTES"
+        ]
+      },
+      "R2": {
+        "conclusion": "contradicted",
+        "failure": null,
+        "relations": [
+          "REFUTES"
+        ]
+      },
+      "empty": {
+        "conclusion": "not_checkable",
+        "failure": "RELATION_UNRESOLVED",
+        "relations": []
+      },
+      "full": {
+        "conclusion": "contradicted",
+        "failure": null,
+        "relations": [
+          "REFUTES",
+          "REFUTES"
+        ]
+      },
+      "oracle": "MSC={{R1},{R2}}"
+    },
+    "M2_SP11": {
+      "R1_R2": {
+        "conclusion": "contradicted",
+        "failure": null,
+        "relations": [
+          "REFUTES",
+          "REFUTES"
+        ]
+      },
+      "S1": {
+        "conclusion": "supported",
+        "failure": null,
+        "relations": [
+          "SUPPORTS"
+        ]
+      },
+      "S1_R1": {
+        "conclusion": "not_checkable",
+        "failure": "MIXED_RELATIONS",
+        "relations": [
+          "SUPPORTS",
+          "REFUTES"
+        ]
+      },
+      "S1_R2": {
+        "conclusion": "not_checkable",
+        "failure": "MIXED_RELATIONS",
+        "relations": [
+          "SUPPORTS",
+          "REFUTES"
+        ]
+      },
+      "full": {
+        "conclusion": "not_checkable",
+        "failure": "MIXED_RELATIONS",
+        "relations": [
+          "SUPPORTS",
+          "REFUTES",
+          "REFUTES"
+        ]
+      },
+      "oracle": "MSC={{S1,R1},{S1,R2}}"
+    },
+    "M3_SP10": {
+      "R1": {
+        "conclusion": "contradicted",
+        "failure": null,
+        "relations": [
+          "REFUTES"
+        ]
+      },
+      "S1_R1": {
+        "conclusion": "not_checkable",
+        "failure": "MIXED_RELATIONS",
+        "relations": [
+          "SUPPORTS",
+          "REFUTES"
+        ]
+      },
+      "S1_S2": {
+        "conclusion": "supported",
+        "failure": null,
+        "relations": [
+          "SUPPORTS",
+          "SUPPORTS"
+        ]
+      },
+      "S2_R1": {
+        "conclusion": "not_checkable",
+        "failure": "MIXED_RELATIONS",
+        "relations": [
+          "SUPPORTS",
+          "REFUTES"
+        ]
+      },
+      "full": {
+        "conclusion": "not_checkable",
+        "failure": "MIXED_RELATIONS",
+        "relations": [
+          "SUPPORTS",
+          "SUPPORTS",
+          "REFUTES"
+        ]
+      },
+      "old_exporter_still_falsified": true,
+      "oracle": "MSC={{S1,R1},{S2,R1}}"
+    },
+    "M4_SP12": {
+      "producer_materialization_claimed": false,
+      "status": "REPRESENTATION_STRESS_ONLY"
+    }
+  },
+  "phase_2_blocked_by_normative_choice": false,
+  "research_disposition": "SUPPORTED_PHASE_1_5_FREEZE_READY",
+  "schema": "contract-c-successor-phase-1-5-result-v1",
+  "unresolved_questions": []
+}
