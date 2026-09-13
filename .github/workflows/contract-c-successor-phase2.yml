@@ -1,0 +1,34 @@
+name: Contract C successor Phase 2 bake-off
+
+on:
+  pull_request:
+    paths:
+      - "research/contract_c_successor_ground_up_20260913/**"
+      - ".github/workflows/contract-c-successor-phase2.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  bakeoff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Apparatus research head
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Execute schema-neutral Phase 2 bake-off
+        run: |
+          python research/contract_c_successor_ground_up_20260913/phase2_bakeoff.py \
+            --out research/contract_c_successor_ground_up_20260913/PHASE_2_RESULT.json
+
+      - name: Upload bake-off observation candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-successor-phase2-result
+          path: research/contract_c_successor_ground_up_20260913/PHASE_2_RESULT.json
+          if-no-files-found: error
