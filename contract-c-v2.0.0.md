@@ -10,13 +10,15 @@ Contract C is the immutable, decision-agnostic public representation of CAL-attr
 
 ## Public compatibility version and frozen wire profile
 
-Public compatibility version: `2.0.0`.
+Candidate public compatibility version: `2.0.0`.
 
 Integrity-bearing wire profile: `contract-c-successor-candidate-a-rc2-research`.
 
 The wire profile is intentionally retained from the exact frozen Candidate A RC2 subject. Renaming that field would change canonical bytes, result-set identities, whole-object hashes, and the subject qualified by the producer and independent-consumer evidence programme. Contract version discovery is therefore kept outside the integrity-bearing object, following the same promotion pattern used by Contract A 2.0.0.
 
-Version registry: `schema/contract-c/versions.json`.
+While this PR remains pre-merge and its cross-repository gates are open, the global discovery registry `schema/contract-c/versions.json` deliberately continues to identify released Contract C `1.0.0` as canonical. The C2 candidate identity lives at `schema/contract-c/2.0.0/promotion-version.json` with `canonical_registry_switch_authorized = false`.
+
+Only after the exact production candidate passes the required producer, independent-consumer, compatibility/adversarial, packaging and promotion gates may a final merge-authorized promotion commit atomically switch global discovery to `2.0.0`. Until then, claiming C2 as canonical would overstate the repository's actual authority state.
 
 Exact frozen wire specification: `schema/contract-c/2.0.0/wire-spec.md`.
 
@@ -45,7 +47,7 @@ The 2.0 surface preserves the exact tested Candidate A RC2 obligations:
 
 Contract C 2.0.0 is **MAJOR / breaking** relative to 1.0.0.
 
-Contract C 1.0.0 remains immutable historical authority. A 2.0 object must not be silently translated or downgraded to 1.0 by deleting or relabelling basis-group, participant-role, relation, unsupported-family, or execution-state semantics. Exact-version consumers must select authority independently rather than letting an object choose its own validator.
+Contract C 1.0.0 remains current canonical authority during this pre-merge qualification and remains immutable historical authority after any later C2 promotion. A 2.0 object must not be silently translated or downgraded to 1.0 by deleting or relabelling basis-group, participant-role, relation, unsupported-family, or execution-state semantics. Exact-version consumers must select authority independently rather than letting an object choose its own validator.
 
 No lossless C2 -> C1 downgrade is claimed or authorized.
 
@@ -68,6 +70,7 @@ Before merge/release, require at minimum:
 5. RC2-specific 1.0/2.0 compatibility matrix and no-downgrade controls;
 6. adversarial mutation and seeded weak-validator/consumer discrimination;
 7. clean repository tests and release-artifact reproducibility;
-8. a separate post-merge release lock before immutable `contract-c-v2.0.0` publication.
+8. an atomic canonical-discovery switch only after the preceding pre-merge gates are satisfied;
+9. a separate post-merge release lock before immutable `contract-c-v2.0.0` publication.
 
 Any new in-domain counterexample stops promotion and returns to the smallest discriminating successor experiment. Do not widen this production PR merely to turn a red gate green.
