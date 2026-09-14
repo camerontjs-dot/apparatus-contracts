@@ -1,0 +1,120 @@
+name: Contract C 2.0.0 promotion conformance
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'contract-c-v2.0.0.md'
+      - 'schema/contract-c/**'
+      - 'validators/contract_c_rc1_frozen.py'
+      - 'validators/contract_c_rc2.py'
+      - 'validators/contract_c_v2.py'
+      - 'tests/test_contract_c_v2.py'
+      - '.github/workflows/contract-c-2.0.0-promotion.yml'
+  push:
+    branches:
+      - promotion/contract-c-2.0.0-exact-rc2-authority-20260913
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Verify exact frozen RC2 authority blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object schema/contract-c/2.0.0/wire-spec.md)" = "960df40619f0fbeb630c4ea8b1042ed3a293a7a3"
+          test "$(git hash-object schema/contract-c/2.0.0/schema.json)" = "45ebaa1e5b7342422b4d6a19f897e72de4bb148f"
+          test "$(git hash-object schema/contract-c/2.0.0/reference/candidate_a_rc1.py)" = "03dbb5b774af523d8e6235bca86b18af5ddad5b0"
+          test "$(git hash-object schema/contract-c/2.0.0/reference/candidate_a_rc2.py)" = "ad5ed3ac71a8f8680188beb363c9d952c9922b15"
+          test "$(git hash-object validators/contract_c_rc1_frozen.py)" = "03dbb5b774af523d8e6235bca86b18af5ddad5b0"
+
+      - name: Verify pre-merge version authority state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object schema/contract-c/versions.json)" = "6e805e274f8b1f491bf0c10735a46962ab91d2d4"
+          uv run python - <<'PY'
+          import json
+          from pathlib import Path
+
+          candidate = json.loads(Path('schema/contract-c/2.0.0/promotion-version.json').read_text())
+          assert candidate == {
+              'candidate_compatibility_version': '2.0.0',
+              'wire_profile': 'contract-c-successor-candidate-a-rc2-research',
+              'promotion_status': 'pre_merge_candidate',
+              'promotion_authority': 'EDR-005 / issue #97',
+              'base_canonical_version': '1.0.0',
+              'candidate_rc2': '3e1c44d6e264e2baa37324b66f78165b15a927f1',
+              'canonical_registry_switch_authorized': False,
+          }
+          PY
+
+      - name: Install package and test dependencies
+        run: uv sync --all-extras
+
+      - name: Compile Contract C 2.0 production modules
+        run: |
+          uv run python -m py_compile \
+            validators/contract_c_rc1_frozen.py \
+            validators/contract_c_rc2.py \
+            validators/contract_c_v2.py
+
+      - name: Run Contract C 2.0 frozen-reference differential suite
+        run: uv run pytest -q tests/test_contract_c_v2.py
+
+      - name: Run full repository regression suite
+        run: uv run pytest -q tests/
+
+      - name: Static code hygiene for promotion surface
+        run: |
+          uv run ruff check \
+            validators/contract_c_rc2.py \
+            validators/contract_c_v2.py \
+            tests/test_contract_c_v2.py
+
+      - name: Record promotion authority identities
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "apparatus_head=$(git rev-parse HEAD)"
+            echo "job_status=${{ job.status }}"
+            echo "edr=97"
+            echo "candidate_public_version=2.0.0"
+            echo "current_canonical_version=1.0.0"
+            echo "canonical_registry_switch_authorized=false"
+            echo "wire_profile=contract-c-successor-candidate-a-rc2-research"
+            echo "candidate_rc2=3e1c44d6e264e2baa37324b66f78165b15a927f1"
+            echo "cal_producer_terminal=85ff90a40e967309de4293df930c95cdc2936f47"
+            echo "independent_consumer_subject=ba09743b28e57bc87dd1f315046ef79b93f24021"
+            echo "independent_consumer_terminal=1f3a3a186222be6c14c1442023c5970967fc5868"
+          } > contract-c-2.0.0-promotion-receipt.txt
+
+      - name: Upload promotion receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-2.0.0-promotion-${{ matrix.python-version }}
+          path: contract-c-2.0.0-promotion-receipt.txt
+          if-no-files-found: error
