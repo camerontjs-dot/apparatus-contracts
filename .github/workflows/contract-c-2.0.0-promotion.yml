@@ -48,6 +48,27 @@ jobs:
           test "$(git hash-object schema/contract-c/2.0.0/reference/candidate_a_rc2.py)" = "ad5ed3ac71a8f8680188beb363c9d952c9922b15"
           test "$(git hash-object validators/contract_c_rc1_frozen.py)" = "03dbb5b774af523d8e6235bca86b18af5ddad5b0"
 
+      - name: Verify pre-merge version authority state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object schema/contract-c/versions.json)" = "6e805e274f8b1f491bf0c10735a46962ab91d2d4"
+          uv run python - <<'PY'
+          import json
+          from pathlib import Path
+
+          candidate = json.loads(Path('schema/contract-c/2.0.0/promotion-version.json').read_text())
+          assert candidate == {
+              'candidate_compatibility_version': '2.0.0',
+              'wire_profile': 'contract-c-successor-candidate-a-rc2-research',
+              'promotion_status': 'pre_merge_candidate',
+              'promotion_authority': 'EDR-005 / issue #97',
+              'base_canonical_version': '1.0.0',
+              'candidate_rc2': '3e1c44d6e264e2baa37324b66f78165b15a927f1',
+              'canonical_registry_switch_authorized': False,
+          }
+          PY
+
       - name: Install package and test dependencies
         run: uv sync --all-extras
 
@@ -80,7 +101,9 @@ jobs:
             echo "apparatus_head=$(git rev-parse HEAD)"
             echo "job_status=${{ job.status }}"
             echo "edr=97"
-            echo "public_version=2.0.0"
+            echo "candidate_public_version=2.0.0"
+            echo "current_canonical_version=1.0.0"
+            echo "canonical_registry_switch_authorized=false"
             echo "wire_profile=contract-c-successor-candidate-a-rc2-research"
             echo "candidate_rc2=3e1c44d6e264e2baa37324b66f78165b15a927f1"
             echo "cal_producer_terminal=85ff90a40e967309de4293df930c95cdc2936f47"
