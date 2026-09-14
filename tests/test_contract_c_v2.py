@@ -124,6 +124,13 @@ def _unsupported(module: ModuleType) -> dict:
     return module.seal(value)
 
 
+def _assert_rejected_by_both(frozen: ModuleType, value: dict) -> None:
+    with pytest.raises(PROD.ContractCValidationError):
+        PROD.validate_object(value)
+    with pytest.raises(frozen.CandidateError):
+        frozen.validate_object(value)
+
+
 @pytest.mark.parametrize("builder", [_supported, _mixed_alternatives, _unsupported])
 def test_production_adapter_matches_frozen_rc2_bytes_and_identity(tmp_path: Path, builder) -> None:
     frozen = _load_frozen_rc2(tmp_path)
@@ -169,10 +176,7 @@ def test_exact_mixed_reason_case_is_fail_closed(tmp_path: Path) -> None:
     bad["propositions"][0]["terminal"]["reason"] = "mixed_relations"
     bad = PROD.seal(bad)
 
-    with pytest.raises(Exception):
-        PROD.validate_object(bad)
-    with pytest.raises(Exception):
-        frozen.validate_object(bad)
+    _assert_rejected_by_both(frozen, bad)
 
 
 def test_unsupported_family_cannot_acquire_causal_basis(tmp_path: Path) -> None:
@@ -186,10 +190,7 @@ def test_unsupported_family_cannot_acquire_causal_basis(tmp_path: Path) -> None:
     prop["basis_groups"] = [[_ref("U1")]]
     bad = PROD.seal(bad)
 
-    with pytest.raises(Exception):
-        PROD.validate_object(bad)
-    with pytest.raises(Exception):
-        frozen.validate_object(bad)
+    _assert_rejected_by_both(frozen, bad)
 
 
 def test_wrong_wire_profile_is_rejected(tmp_path: Path) -> None:
@@ -200,15 +201,12 @@ def test_wrong_wire_profile_is_rejected(tmp_path: Path) -> None:
     bad["profile"] = "2.0.0"
     bad = PROD.seal(bad)
 
-    with pytest.raises(Exception):
-        PROD.validate_object(bad)
-    with pytest.raises(Exception):
-        frozen.validate_object(bad)
+    _assert_rejected_by_both(frozen, bad)
 
 
 def test_external_authority_mismatch_is_rejected() -> None:
     value = _supported(PROD)
-    with pytest.raises(Exception):
+    with pytest.raises(PROD.ContractCValidationError):
         PROD.verify_external_authority(
             value, expected_whole_object_sha256="sha256:" + "0" * 64
         )
