@@ -34,12 +34,12 @@ PROFILE = WIRE_PROFILE
 ContractCValidationError = CandidateError
 
 __all__ = [
-    "CONTRACT_C_VERSION",
-    "WIRE_PROFILE",
-    "PROFILE",
     "CAL_RC1_IMPLEMENTATION",
     "CAL_RC1_POLICY_SHA256",
+    "CONTRACT_C_VERSION",
     "POLICY_RESOLVER_FIXTURE_COMMIT",
+    "PROFILE",
+    "WIRE_PROFILE",
     "ContractCValidationError",
     "canonical_bytes",
     "canonical_object",
