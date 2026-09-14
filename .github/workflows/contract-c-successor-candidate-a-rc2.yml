@@ -1,0 +1,127 @@
+name: Contract C Successor Candidate A RC2 Qualification
+
+on:
+  push:
+    branches:
+      - research/contract-c-successor-candidate-a-rc2-20260913
+    paths:
+      - research/contract_c_successor_candidate_a_rc2_20260913/**
+      - .github/workflows/contract-c-successor-candidate-a-rc2.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  RC1_FREEZE: ba5f55b0fb6ca54e0461a688813b66fd81bf8c4c
+  RC1_RECORD_HEAD: cb1e0d7d38f907bb66ab7136d05d325f8f977bc0
+  PHASE2_FREEZE: f5337dedaad045aa290e80f69dc83ac1a0f73436
+  CAL107_RECORD: d9b8d5d94b9fb37c0e8982572610c864b3633adb
+
+jobs:
+  qualify-rc2:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Apparatus RC2 research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify exact parent authorities and bounded successor mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse "$RC1_FREEZE:research/contract_c_successor_candidate_a_rc1_20260913/CANDIDATE_A_RC1.md")" = "0ab62b7ceea1d56d6bc3b7cf8528769dd440ab7c"
+          test "$(git rev-parse "$RC1_FREEZE:research/contract_c_successor_candidate_a_rc1_20260913/candidate_a_rc1.schema.json")" = "0de83032e6d989225cf014d9a70035f634a5e003"
+          test "$(git rev-parse "$RC1_FREEZE:research/contract_c_successor_candidate_a_rc1_20260913/candidate_a_rc1.py")" = "03dbb5b774af523d8e6235bca86b18af5ddad5b0"
+          test "$(git rev-parse "$PHASE2_FREEZE:research/contract_c_successor_ground_up_20260913/phase2_bakeoff.py")" = "9f00cd332ad366b878f60d13440af639360928de"
+          test "$(git rev-parse "$PHASE2_FREEZE:research/contract_c_successor_ground_up_20260913/SEMANTIC_SPECIMEN_CORPUS.md")" = "0ff4f66bca00924755d42ed7f944c4dae8d10f66"
+          test "$(git hash-object research/contract_c_successor_candidate_a_rc2_20260913/PREREGISTRATION.md)" = "52400fd420e06965c8757c76dbf6d4e427c0bf5d"
+          test "$(git hash-object research/contract_c_successor_candidate_a_rc2_20260913/CANDIDATE_A_RC2.md)" = "960df40619f0fbeb630c4ea8b1042ed3a293a7a3"
+          test "$(git hash-object research/contract_c_successor_candidate_a_rc2_20260913/candidate_a_rc2.schema.json)" = "45ebaa1e5b7342422b4d6a19f897e72de4bb148f"
+          test "$(git hash-object research/contract_c_successor_candidate_a_rc2_20260913/candidate_a_rc2.py)" = "ad5ed3ac71a8f8680188beb363c9d952c9922b15"
+          test "$(git hash-object research/contract_c_successor_candidate_a_rc2_20260913/qualify.py)" = "6e09966c3a152d3eb6a1e547758f1c79ce5006ee"
+          changed="$(git diff --name-only "$RC1_RECORD_HEAD"...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -Ev '^(research/contract_c_successor_candidate_a_rc2_20260913/|\.github/workflows/contract-c-successor-candidate-a-rc2\.yml$)' | grep -q .; then
+            echo 'RC2 mutation escaped bounded successor surface' >&2
+            exit 1
+          fi
+
+      - name: Checkout exact CAL #107 terminal evidence
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CAL107_RECORD }}
+          path: _cal107
+          fetch-depth: 0
+
+      - name: Verify exact CAL #107 falsifier record
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _cal107 rev-parse HEAD)" = "$CAL107_RECORD"
+          test "$(git -C _cal107 rev-parse "$CAL107_RECORD:research/contract_c_candidate_a_producer_conformance_rc0/TERMINAL_RECORD.md")" = "659e36cf52946831d325377b12bbe291ae848015"
+          grep -Fq 'UNSUPPORTED_SEMANTIC_FAMILY' _cal107/research/contract_c_candidate_a_producer_conformance_rc0/TERMINAL_RECORD.md
+          grep -Fq 'basis_group_architecture_falsified_by_unsupported_reason_gap = false' _cal107/research/contract_c_candidate_a_producer_conformance_rc0/TERMINAL_RECORD.md
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Apparatus test dependencies
+        run: python -m pip install -e '.[dev]'
+
+      - name: Compile frozen RC2 apparatus
+        run: |
+          python -m py_compile research/contract_c_successor_candidate_a_rc2_20260913/candidate_a_rc2.py
+          python -m py_compile research/contract_c_successor_candidate_a_rc2_20260913/qualify.py
+
+      - name: Execute preregistered RC2 qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/contract-c-successor-candidate-a-rc2
+          python research/contract_c_successor_candidate_a_rc2_20260913/qualify.py \
+            build/contract-c-successor-candidate-a-rc2/QUALIFICATION.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path('build/contract-c-successor-candidate-a-rc2/QUALIFICATION.json').read_text())
+          assert result['research_disposition'] in {
+              'QUALIFIED_FOR_CAL_PRODUCER_CONFORMANCE_RESEARCH',
+              'FALSIFIED_REQUIRES_SUCCESSOR_CANDIDATE',
+              'INCONCLUSIVE',
+              'SUPERSEDED',
+          }
+          assert result['checks']['rc1_discriminator_valid'] is True
+          assert result['checks']['weak_reason_alias_control_killed'] is True
+          assert result['interpretation']['causal_architecture_reopened'] is False
+          assert result['interpretation']['production_promotion_authorized'] is False
+          print(json.dumps({
+              'research_disposition': result['research_disposition'],
+              'failures': result['failures'],
+              'checks': result['checks'],
+          }, sort_keys=True))
+          PY
+
+      - name: Released Contract C 1.0 regression
+        run: pytest -q tests/test_contract_c_v1.py
+
+      - name: Package RC2 evidence
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p build/contract-c-successor-candidate-a-rc2
+          cp research/contract_c_successor_candidate_a_rc2_20260913/PREREGISTRATION.md build/contract-c-successor-candidate-a-rc2/
+          cp research/contract_c_successor_candidate_a_rc2_20260913/FREEZE_RECEIPT.md build/contract-c-successor-candidate-a-rc2/
+          git rev-parse HEAD > build/contract-c-successor-candidate-a-rc2/APPARATUS_SHA.txt
+          git -C _cal107 rev-parse HEAD > build/contract-c-successor-candidate-a-rc2/CAL107_SHA.txt
+          tar -czf contract-c-successor-candidate-a-rc2-${GITHUB_RUN_ID}.tar.gz -C build contract-c-successor-candidate-a-rc2
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: contract-c-successor-candidate-a-rc2-${{ github.run_id }}
+          path: contract-c-successor-candidate-a-rc2-${{ github.run_id }}.tar.gz
+          if-no-files-found: error
