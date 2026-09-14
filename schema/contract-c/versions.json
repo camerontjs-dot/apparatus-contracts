@@ -1,1 +1,12 @@
-{"canonical_version":"1.0.0","supported_versions":["1.0.0"]}
+{
+  "canonical_version": "2.0.0",
+  "supported_versions": [
+    "2.0.0"
+  ],
+  "wire_profile": "contract-c-successor-candidate-a-rc2-research",
+  "legacy_authority": {
+    "version": "1.0.0",
+    "spec": "contract-c-v1.0.0.md",
+    "status": "immutable_historical_major_version"
+  }
+}
