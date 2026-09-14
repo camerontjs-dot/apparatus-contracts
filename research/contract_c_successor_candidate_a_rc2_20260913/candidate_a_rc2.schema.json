@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:apparatus:research:contract-c-successor:candidate-a-rc2",
+  "title": "Contract C successor Candidate A RC2 research profile",
+  "$comment": "Draft Research only. RC2 is the exact RC1 basis-group architecture plus the CAL-owned UNSUPPORTED_SEMANTIC_FAMILY terminal reason. Cross-field causal, identity, exact-B reference, policy-resolution and external-authority rules are normative in candidate_a_rc2.py.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "result_set_id", "contract_b", "producer", "execution", "propositions"],
+  "properties": {
+    "profile": {"const": "contract-c-successor-candidate-a-rc2-research"},
+    "result_set_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "contract_b": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_version", "bundle_id", "bundle_hash"],
+      "properties": {
+        "contract_version": {"type": "string", "minLength": 1},
+        "bundle_id": {"type": "string", "minLength": 1},
+        "bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["semantic_implementation_sha", "policy_sha256", "policy_resolver_commit_sha"],
+      "properties": {
+        "semantic_implementation_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "policy_resolver_commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {"state": {"enum": ["completed", "failed", "incomplete"]}}
+    },
+    "propositions": {"type": "array", "items": {"$ref": "#/$defs/propositionResult"}}
+  },
+  "$defs": {
+    "evidenceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "passage_id"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "passage_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "participant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_ref", "relation", "role"],
+      "properties": {
+        "evidence_ref": {"$ref": "#/$defs/evidenceRef"},
+        "relation": {"enum": ["supports", "refutes", "non_polarized"]},
+        "role": {"enum": ["causal", "residual"]}
+      }
+    },
+    "propositionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposition", "execution", "terminal", "participants", "basis_groups"],
+      "properties": {
+        "proposition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["proposition_id", "content_sha256"],
+          "properties": {
+            "proposition_id": {"type": "string", "minLength": 1},
+            "content_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+          }
+        },
+        "execution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "completion"],
+          "properties": {
+            "state": {"enum": ["completed", "failed", "incomplete"]},
+            "completion": {"enum": ["assessed", "not_checkable", null]}
+          }
+        },
+        "terminal": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["verdict", "reason"],
+              "properties": {
+                "verdict": {"enum": ["supported", "contradicted", "not_checkable"]},
+                "reason": {"enum": ["categorical_support", "categorical_refutation", "MIXED_RELATIONS", "unresolved_categorical_relation", "joint_public_cause", "no_deciding_relation", "UNSUPPORTED_SEMANTIC_FAMILY"]}
+              }
+            }
+          ]
+        },
+        "participants": {"type": "array", "items": {"$ref": "#/$defs/participant"}},
+        "basis_groups": {
+          "type": "array",
+          "items": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidenceRef"}}
+        }
+      }
+    }
+  }
+}
