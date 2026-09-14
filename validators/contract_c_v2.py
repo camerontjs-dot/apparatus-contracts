@@ -27,12 +27,16 @@ from .contract_c_rc2 import (
 
 CONTRACT_C_VERSION = "2.0.0"
 WIRE_PROFILE = "contract-c-successor-candidate-a-rc2-research"
+# Compatibility alias for callers that operate on the integrity-bearing wire
+# profile directly. It is intentionally not the public SemVer version.
+PROFILE = WIRE_PROFILE
 
 ContractCValidationError = CandidateError
 
 __all__ = [
     "CONTRACT_C_VERSION",
     "WIRE_PROFILE",
+    "PROFILE",
     "CAL_RC1_IMPLEMENTATION",
     "CAL_RC1_POLICY_SHA256",
     "POLICY_RESOLVER_FIXTURE_COMMIT",
