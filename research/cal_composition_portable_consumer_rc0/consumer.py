@@ -48,7 +48,7 @@ def expected_material(request: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("module_id must be non-empty")
     for key in ("semantic_input", "modifier_state", "query"):
         if not isinstance(request.get(key), dict):
-            raise ValueError(f"{key} must be an object")
+            raise TypeError(f"{key} must be an object")
     return {
         "module_id": module_id,
         "relation": relation,
@@ -102,7 +102,7 @@ def verify_payload(payload: dict[str, Any]) -> None:
         raise ValueError("unexpected vector schema")
     canonicalization = payload.get("canonicalization")
     if not isinstance(canonicalization, dict):
-        raise ValueError("missing canonicalization profile")
+        raise TypeError("missing canonicalization profile")
     expected_profile = {
         "profile": PROFILE,
         "encoding": "UTF-8",
