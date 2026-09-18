@@ -1,0 +1,35 @@
+name: Research - independent CAL composition portable consumer RC0
+
+on:
+  push:
+    branches: [research/cal-composition-portable-consumer-rc0-20260918]
+  pull_request:
+    paths:
+      - "research/cal_composition_portable_consumer_rc0/**"
+      - "tests/research/test_cal_composition_portable_consumer_rc0.py"
+      - ".github/workflows/research-cal-composition-portable-consumer-rc0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test tooling
+        run: python -m pip install "pytest>=8,<10" "ruff>=0.15,<1"
+      - name: Independent portable-vector verification
+        run: python -m pytest -q tests/research/test_cal_composition_portable_consumer_rc0.py
+      - name: Import firewall
+        run: |
+          ! grep -R "claim_audit_lab\|composition_provenance_carrier_rc0"             research/cal_composition_portable_consumer_rc0/consumer.py             tests/research/test_cal_composition_portable_consumer_rc0.py
+      - name: Static checks
+        run: |
+          ruff check             research/cal_composition_portable_consumer_rc0/consumer.py             tests/research/test_cal_composition_portable_consumer_rc0.py
