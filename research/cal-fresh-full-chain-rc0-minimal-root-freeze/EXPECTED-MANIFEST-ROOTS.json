@@ -1,0 +1,28 @@
+{
+  "schema": "cal-fresh-full-chain-rc0-expected-roots-v1",
+  "freeze_id": "CAL-FRESH-FULL-CHAIN-RC0-EXPECTED-ROOTS-20260918",
+  "execution_package": {
+    "repository": "camerontjs-dot/research-scaffold-harness",
+    "pr": 38,
+    "head": "5a984ab1053a40d053681f00522fbe63e96a73a0"
+  },
+  "provenance_schema_authority": "1a5929295e735e351320cbd8c966dc43afed2859",
+  "expected_manifest_roots": [
+    {
+      "case_id": "not-needed-single",
+      "sha256": "9f713080ae9c42b4674ede0b58742504d856df963772b03af5cd426b365c580f"
+    },
+    {
+      "case_id": "health-canada-text-representation",
+      "sha256": "0fd17e3e15cca4c77923eff9450160e80f470dcebaad697f130bec82cfc00ec9"
+    },
+    {
+      "case_id": "valve-temporal-status",
+      "sha256": "0e81c6de1abf39a2c8272f43c11d7e2510b566f40ab9592b86806b1941ff6372"
+    },
+    {
+      "case_id": "declared-all-of",
+      "sha256": "7a3c9f78fdc6cb6dbee32a580769bf65f6bc1cdfa40bc4b2144026ca8d6222c8"
+    }
+  ]
+}
