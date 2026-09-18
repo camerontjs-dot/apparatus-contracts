@@ -1,0 +1,54 @@
+{
+  "schema": "cal-pipeline-provenance-rc1-independent-root-freeze-v1",
+  "freeze_id": "CAL-PROVENANCE-RC1-ROOT-FREEZE-20260917",
+  "status": "EXPECTED_MANIFEST_ROOTS_FROZEN_FOR_RECONSTRUCTION_TEST",
+  "classification": "research_authority_input_only",
+  "authority_scope": {
+    "establishes": [
+      "the exact expected RunManifest candidate digest that the next reconstruction consumer must require for each named RC1 case",
+      "a fixed external commitment that cannot move with the presented run package during the reconstruction test"
+    ],
+    "does_not_establish": [
+      "that the manifest bytes have already been independently recovered or recomputed",
+      "that the local execution report is truthful",
+      "that any artifact or attestation content is valid",
+      "semantic correctness of Gate, Evidence Bundler, CAL, Contract C2, Decision Engine, or Contract D",
+      "promotion, release, Authorization, or execution permission"
+    ]
+  },
+  "selection_basis": {
+    "source_type": "operator_transmitted_local_execution_report",
+    "execution_package_repository": "camerontjs-dot/research-scaffold-harness",
+    "execution_package_pr": 37,
+    "execution_package_head": "976522f87da104ff0ac0d14baa148d298c02c538",
+    "provenance_schema_authority": "1a5929295e735e351320cbd8c966dc43afed2859",
+    "rule": "Freeze the reported candidate commitments exactly before any context-free reconstruction attempt. Reconstruction must recover the presented manifest bytes and recompute/compare them to these fixed roots."
+  },
+  "expected_manifest_roots": [
+    {
+      "case_id": "first-genuine-b-side-replay",
+      "expected_manifest_sha256": "sha256:9c450afa89078c23c12bb92254cf562d65a3589bf90c46e8762a3e292f234d2b"
+    },
+    {
+      "case_id": "health-canada-ozempic-001",
+      "expected_manifest_sha256": "sha256:6e4290f6804a4a86d137411d337d00d6521fdf3f7d3fe534e6689fb032e0ae8d"
+    },
+    {
+      "case_id": "rimebridge-simple-support",
+      "expected_manifest_sha256": "sha256:c2532604f75c78d954965096953eb53901e3ce41ea606060e08c49b45f74f8cc"
+    },
+    {
+      "case_id": "amberbraid-temporal-supersession",
+      "expected_manifest_sha256": "sha256:8ba9d7544a225526235b45b5e6ff1e02e718ba6dde500d8a263c3103aba035d9"
+    },
+    {
+      "case_id": "wick-missing-decisive",
+      "expected_manifest_sha256": "sha256:28adf52413da1631ad3c8477c5f7d8a53b2f0c86592e9327cfd2d2e0694b513f"
+    }
+  ],
+  "next_gate": {
+    "consumer_requirement": "Use a fresh/context-free consumer that did not create the run package. Provide only the frozen provenance specification/schema authority, this expected-root record, the run manifest path/package, and ordinary artifact locators.",
+    "success_condition": "For each case, the recovered RunManifest bytes recompute to the fixed expected root; every reconstruction-required artifact is recovered and digest-verified; every present-stage attestation schema/digest validates; reconstruction status is reconstructable.",
+    "failure_rule": "Preserve any digest mismatch, missing bytes, missing locator, invalid attestation, unresolved authority, or other reconstruction gap. Do not move the expected root to fit the presented package."
+  }
+}
