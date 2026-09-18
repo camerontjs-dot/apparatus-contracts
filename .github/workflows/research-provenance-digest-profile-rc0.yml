@@ -1,0 +1,25 @@
+name: Research provenance digest profile RC0
+
+on:
+  push:
+    branches:
+      - research/provenance-digest-profile-rc0-20260918
+  pull_request:
+    paths:
+      - 'research/provenance-digest-profile-rc0/**'
+      - '.github/workflows/research-provenance-digest-profile-rc0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  portable-vectors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Run independent bounded vector consumer
+        run: |
+          python research/provenance-digest-profile-rc0/consumer.py
