@@ -1,0 +1,85 @@
+{
+  "schema": "cal-fresh-full-chain-rc0-independent-root-freeze-v1",
+  "freeze_id": "CAL-FRESH-FULL-CHAIN-RC0-ROOT-FREEZE-20260918",
+  "status": "EXPECTED_MANIFEST_ROOTS_FROZEN_FOR_RECONSTRUCTION_TEST",
+  "classification": "research_authority_input_only",
+  "authority_scope": {
+    "establishes": [
+      "the exact expected RunManifest candidate digest that the next reconstruction consumer must require for each named CAL Fresh Full-Chain RC0 case",
+      "a fixed external commitment that cannot move with the presented local run package during reconstruction"
+    ],
+    "does_not_establish": [
+      "that the manifest bytes have already been independently recovered or recomputed",
+      "that the operator-transmitted local execution report is truthful",
+      "that the reported retained artifacts or attestations are valid",
+      "that provenance non-interference has been independently reproduced",
+      "retrieval recall or evidence completeness",
+      "CAL semantic accuracy or Decision correctness",
+      "promotion, release, production readiness, Authorization, or execution permission"
+    ]
+  },
+  "selection_basis": {
+    "source_type": "operator_transmitted_local_paired_execution_report",
+    "execution_package_repository": "camerontjs-dot/research-scaffold-harness",
+    "execution_package_pr": 38,
+    "execution_package_head": "5a984ab1053a40d053681f00522fbe63e96a73a0",
+    "local_output_root": "20_live/cal-pipeline/cal-v1-studies/full-chain-rc0/",
+    "provenance_schema_authority": "1a5929295e735e351320cbd8c966dc43afed2859",
+    "provenance_terminal_research_head": "faf4714bb03854975abad063dac5bd106f9ba02f",
+    "reported_pair_result": "authoritative/native outputs byte-identical for every stage executed in both control and provenance-instrumented modes; only run-local CAL receipt paths differed",
+    "rule": "Freeze the reported candidate commitments exactly before any fresh/context-free reconstruction attempt. Reconstruction must recover the presented manifest bytes and recompute/compare them to these fixed roots."
+  },
+  "expected_manifest_roots": [
+    {
+      "case_id": "not-needed-single",
+      "expected_manifest_sha256": "sha256:9f713080ae9c42b4674ede0b58742504d856df963772b03af5cd426b365c580f",
+      "reported_terminal_state": "READY_FOR_INDEPENDENT_ROOT_FREEZE"
+    },
+    {
+      "case_id": "health-canada-text-representation",
+      "expected_manifest_sha256": "sha256:0fd17e3e15cca4c77923eff9450160e80f470dcebaad697f130bec82cfc00ec9",
+      "reported_terminal_state": "READY_FOR_INDEPENDENT_ROOT_FREEZE"
+    },
+    {
+      "case_id": "valve-temporal-status",
+      "expected_manifest_sha256": "sha256:0e81c6de1abf39a2c8272f43c11d7e2510b566f40ab9592b86806b1941ff6372",
+      "reported_terminal_state": "READY_FOR_INDEPENDENT_ROOT_FREEZE"
+    },
+    {
+      "case_id": "declared-all-of",
+      "expected_manifest_sha256": "sha256:7a3c9f78fdc6cb6dbee32a580769bf65f6bc1cdfa40bc4b2144026ca8d6222c8",
+      "reported_terminal_state": "DECOMPOSITION_BOUNDARY_PRESERVED"
+    }
+  ],
+  "reported_retention_aperture": [
+    {
+      "case_id": "not-needed-single",
+      "reported_artifact_count": 22,
+      "reported_all_retained_verified": true
+    },
+    {
+      "case_id": "health-canada-text-representation",
+      "reported_artifact_count": 22,
+      "reported_all_retained_verified": true
+    },
+    {
+      "case_id": "valve-temporal-status",
+      "reported_artifact_count": 22,
+      "reported_all_retained_verified": true
+    },
+    {
+      "case_id": "declared-all-of",
+      "reported_artifact_count": 13,
+      "reported_all_retained_verified": true
+    }
+  ],
+  "next_gate": {
+    "consumer_requirement": "Use a fresh/context-free consumer that did not create the paired run packages. Provide the frozen provenance specification/schema authority, this expected-root record, the four run package/manifest paths, and ordinary artifact locators. Do not provide expected semantic outputs beyond what is required to identify the frozen packages.",
+    "success_condition": "For each case, the recovered RunManifest bytes recompute to the fixed expected root; every reconstruction-required artifact is recovered and digest-verified; every present-stage attestation schema/digest validates; all artifact links and authority references resolve unambiguously; reconstruction status is reconstructable.",
+    "failure_rule": "Preserve any root mismatch, missing bytes, missing locator, invalid attestation, unresolved authority, ambiguous alias/link, schema failure, or other reconstruction gap. Do not move the expected root or repair the presented package after exposure."
+  },
+  "alias_boundary": {
+    "known_prior_observation": "The prior RC1 terminal reconstruction reported four metadata aliases and one authority alias. The local paired-execution report reproduced those rows from the private RC1 receipt without schema modification.",
+    "rule_for_this_gate": "Do not normalize candidate provenance schemas before this reconstruction. If any alias ambiguity prevents unique reconstruction, preserve it as a falsifier."
+  }
+}
