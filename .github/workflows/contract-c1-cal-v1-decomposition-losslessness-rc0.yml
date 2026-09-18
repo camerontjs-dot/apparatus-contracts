@@ -1,0 +1,40 @@
+name: Research - Contract C1 CAL V1 decomposition losslessness RC0
+
+on:
+  push:
+    branches: [research/contract-c1-cal-v1-decomposition-losslessness-rc0-20260918]
+  pull_request:
+    paths:
+      - "research/contract_c1_cal_v1_decomposition_losslessness_rc0/**"
+      - ".github/workflows/contract-c1-cal-v1-decomposition-losslessness-rc0.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --all-extras
+      - name: Verify canonical Contract C remains frozen
+        run: |
+          test "$(git hash-object contract-c-v1.0.0.md)" =             "8c15f2e5f4047ccd17e204fb23aee1168781b9d5"
+          test "$(git hash-object schema/contract-c/1.0.0/schema.json)" =             "b0369de9b5c156322d6787261bbc7658a3b33781"
+          test "$(git hash-object validators/contract_c.py)" =             "9c75ccfbf2223578a8d1a7bf0c39673b394fbea4"
+      - name: Frozen discriminator
+        run: |
+          uv run python -m pytest -q             research/contract_c1_cal_v1_decomposition_losslessness_rc0/test_discriminator.py
+      - name: Released Contract C regression
+        run: uv run python -m pytest -q tests/test_contract_c_v1.py
+      - name: Static checks
+        run: |
+          uv run python -m ruff check             research/contract_c1_cal_v1_decomposition_losslessness_rc0/test_discriminator.py
+          uv run python -m ruff format --check             research/contract_c1_cal_v1_decomposition_losslessness_rc0/test_discriminator.py
