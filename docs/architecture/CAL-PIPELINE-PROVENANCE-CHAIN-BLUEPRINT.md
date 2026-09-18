@@ -1,10 +1,12 @@
 # CAL Pipeline Provenance Chain Blueprint
 
-**Status:** proposed cross-pipeline architecture / governance record. This document is **not** a Contract A, B, C, or D promotion; it does not modify any released wire contract, semantic policy, Decision policy, Authorization surface, or execution permission.
+**Status:** reconstruction architecture supported under CAL Provenance RC1's tested five-run aperture. The provenance schemas remain research candidates. This document is **not** a Contract A, B, C, or D promotion; it does not modify any released wire contract, semantic policy, Decision policy, Authorization surface, or execution permission.
 
 **Canonical owner:** `camerontjs-dot/apparatus-contracts`
 
 **Date:** 2026-09-17
+
+**RC1 qualification update:** `SUPPORTED_PROVENANCE_RECONSTRUCTION_V1_RC1`. A fresh/context-free reconstruction consumer reported all five externally rooted RC1 run packages reconstructable: 49/49 required artifacts recovered, 60/60 commitments verified, 12/12 attestations valid, and 38/38 artifact links resolved, with zero reconstruction gaps. Terminal research receipt: `research/cal-pipeline-provenance-rc1-terminal/TERMINAL-RECONSTRUCTION-RECEIPT.md`. This qualifies reconstruction capability under the tested aperture; it does not release the candidate schemas or qualify retrieval, ClaimGate coverage, CAL semantics, Decision correctness, Authorization, or production readiness.
 
 ## 1. Problem statement
 
@@ -980,8 +982,14 @@ This architecture should be considered insufficient if any of the following are 
 
 ## 15. Current disposition
 
-`PROMISING_ARCHITECTURE_REQUIRES_SCHEMA_AND_RECONSTRUCTION_QUALIFICATION`
+`SUPPORTED_PROVENANCE_RECONSTRUCTION_V1_RC1`
 
-Observed evidence strongly motivates the provenance chain and existing contracts already expose most of the identities needed to support it. The missing piece is a continuous, producer-originated, independently verifiable chain between those contract boundaries plus durable retention of reconstruction-required bytes.
+RC0 established that the candidate architecture discriminates retained/reconstructable runs from commitment-only historical records and that a self-hashed manifest cannot serve as its own trust root.
 
-No contract promotion or maintained runtime mutation follows from this document alone.
+RC1 then exercised five heterogeneous run shapes with externally frozen expected manifest commitments and a fresh/context-free reconstruction consumer. The reported independent reconstruction recovered 49/49 required artifacts, verified 60/60 commitments, validated 12/12 attestations, resolved 38/38 artifact links, and found zero reconstruction gaps.
+
+Therefore, the architecture's reconstruction capability is supported under the tested RC1 aperture.
+
+This does **not** convert the candidate attestation or run-manifest schemas into released contracts. It does not qualify Evidence Bundler retrieval recall, ClaimGate coverage, CAL semantic correctness, Decision correctness, Authorization, production readiness, merge, release, or promotion.
+
+Next work should be bounded to schema-normalization review, standard apparatus instrumentation without semantic-output change, and additional fresh complete downstream runs rather than repeating the already-passed reconstruction question.
