@@ -55,7 +55,9 @@ LINEAGE_B = UpstreamLineage(
 )
 
 
-def _contribution(seed: str, source: str, passage: str, passage_hash: str) -> dict[str, object]:
+def _contribution(
+    seed: str, source: str, passage: str, passage_hash: str
+) -> dict[str, object]:
     return {
         "contribution_id": "contribution:" + seed * 64,
         "channel": "support",
@@ -290,7 +292,9 @@ def test_c1_and_contract_b_cannot_typed_recover_decomposition_lineage() -> None:
     assert _typed_decomposition_recovery(value) is None
 
 
-def test_distinct_upstream_decomposition_identity_remains_only_opaque_state_difference() -> None:
+def test_distinct_upstream_decomposition_identity_remains_only_opaque_state_difference() -> (
+    None
+):
     first = _strongest_c1(LINEAGE_A)
     second = _strongest_c1(LINEAGE_B)
 
@@ -310,18 +314,24 @@ def test_distinct_upstream_decomposition_identity_remains_only_opaque_state_diff
     assert _typed_decomposition_recovery(second) is None
 
 
-def test_payload_smuggling_is_transport_capacity_not_contract_defined_recovery() -> None:
+def test_payload_smuggling_is_transport_capacity_not_contract_defined_recovery() -> (
+    None
+):
     value = _strongest_c1(LINEAGE_A)
-    payload = json.dumps(
-        {
-            "decomposition_id": LINEAGE_A.decomposition_id,
-            "operator": LINEAGE_A.operator,
-            "children": LINEAGE_A.ordered_children,
-            "receipt": LINEAGE_A.decomposition_receipt_id,
-        },
-        sort_keys=True,
-        separators=(",", ":"),
-    ).encode("utf-8").hex()
+    payload = (
+        json.dumps(
+            {
+                "decomposition_id": LINEAGE_A.decomposition_id,
+                "operator": LINEAGE_A.operator,
+                "children": LINEAGE_A.ordered_children,
+                "receipt": LINEAGE_A.decomposition_receipt_id,
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        .encode("utf-8")
+        .hex()
+    )
 
     mutated = _mutate_state_basis(
         value,
