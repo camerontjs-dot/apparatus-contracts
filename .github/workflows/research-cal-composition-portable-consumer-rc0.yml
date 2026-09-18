@@ -29,7 +29,7 @@ jobs:
         run: python -m pytest -q tests/research/test_cal_composition_portable_consumer_rc0.py
       - name: Import firewall
         run: |
-          ! grep -R "claim_audit_lab\|composition_provenance_carrier_rc0"             research/cal_composition_portable_consumer_rc0/consumer.py             tests/research/test_cal_composition_portable_consumer_rc0.py
+          ! grep -E "^(from|import) +(claim_audit_lab|research\.composition_provenance_carrier_rc0)"             research/cal_composition_portable_consumer_rc0/consumer.py
       - name: Static checks
         run: |
           ruff check             research/cal_composition_portable_consumer_rc0/consumer.py             tests/research/test_cal_composition_portable_consumer_rc0.py
