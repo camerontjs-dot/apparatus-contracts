@@ -1,0 +1,124 @@
+name: Contract C CAL V1 parent-bound candidate freeze
+
+on:
+  push:
+    branches:
+      - promotion/contract-c-cal-v1-parent-bound-candidate-freeze-20260919
+  pull_request:
+    paths:
+      - "research/contract_c_cal_v1_parent_recomposition_candidate_freeze_20260919/**"
+      - ".github/workflows/contract-c-cal-v1-parent-bound-candidate-freeze.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout freeze subject
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify exact candidate lineage and blob
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 7aafa6e9235e76f0703a394ee42b799f09136846 HEAD
+          test "$(git rev-parse 7138f6c1599b9b8f8c655f85c9eba0c264fb3b26:research/contract_c_cal_v1_parent_recomposition_rc0_20260919/candidate_rc0.py)" = "df6b6ed410f52cafaeadfe1578d770f480a34b09"
+          test "$(git rev-parse HEAD:research/contract_c_cal_v1_parent_recomposition_rc0_20260919/candidate_rc0.py)" = "df6b6ed410f52cafaeadfe1578d770f480a34b09"
+
+      - name: Checkout exact Candidate A RC2 authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: b42c827acb0a9fe65353354d709add0e27bab307
+          path: _c2
+          fetch-depth: 1
+
+      - name: Checkout exact current-CAL resolver
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 1d33e0612befcf8016816197c90c062373796df9
+          path: _resolver_repo
+          fetch-depth: 1
+
+      - name: Checkout exact frozen CAL V1
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: e24e405f5336ee024674f39dba97255bb58a2dd9
+          path: _cal
+          fetch-depth: 1
+
+      - name: Checkout exact frozen Evidence Bundler
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: 4e1f6fe00e7c350b28f52bfea14f1f8988847884
+          path: _eb
+          fetch-depth: 1
+
+      - name: Checkout frozen independent consumer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: 12e7e640b229619501960b1b89cf4716d8d985b3
+          path: _consumer
+          fetch-depth: 1
+
+      - name: Verify exact external authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _c2 rev-parse HEAD)" = "b42c827acb0a9fe65353354d709add0e27bab307"
+          test "$(git -C _resolver_repo rev-parse HEAD)" = "1d33e0612befcf8016816197c90c062373796df9"
+          test "$(git -C _cal rev-parse HEAD)" = "e24e405f5336ee024674f39dba97255bb58a2dd9"
+          test "$(git -C _eb rev-parse HEAD)" = "4e1f6fe00e7c350b28f52bfea14f1f8988847884"
+          test "$(git -C _consumer rev-parse HEAD)" = "12e7e640b229619501960b1b89cf4716d8d985b3"
+          test "$(git -C _consumer rev-parse HEAD:candidate/consumer.py)" = "662e94c4445d2be9034e786711429394f217c0a6"
+          test "$(git -C _consumer rev-parse HEAD:candidate/test_consumer.py)" = "50f3104650a946b834c3ff6415bafb347863e836"
+          test "$(git -C _consumer rev-parse HEAD:candidate/FREEZE_RECEIPT.json)" = "cb99cd2ee29d38e19c845771654898561b91552f"
+          test "$(git -C _consumer rev-parse HEAD:research/contract_c_cal_v1_parent_consumer_aperture_rc1_20260919/PARENT_BINDING_SPEC.md)" = "7ea50014439edc8e15acd6e6d467735a83bfd59c"
+          test "$(git -C _consumer rev-parse HEAD:research/contract_c_cal_v1_parent_consumer_aperture_rc1_20260919/INNER_RC2_SPEC.md)" = "dc2c6421d2b92649a66e781f4e748b7c551a4952"
+          grep -q 'SEMANTIC_IMPLEMENTATION_SHA = "847cc970642bb648dc994b929c2053b5c9d4648c"' _cal/src/claim_audit_lab/production_v1/__init__.py
+          grep -q '"semantic_implementation_sha":"847cc970642bb648dc994b929c2053b5c9d4648c"' _resolver_repo/research/contract_c2_current_cal_resolver_successor_rc0/RESOLVER.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install bounded dependencies
+        run: >-
+          python -m pip install --disable-pip-version-check
+          pytest pydantic PyYAML click pypdf pdfminer.six rank-bm25
+
+      - name: Frozen CAL decomposition controls
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_cal/src
+        run: python -m pytest -q _cal/tests/production/test_decomposition_composer_rc0.py
+
+      - name: Released Contract C1 regression
+        run: python -m pytest -q tests/test_contract_c_v1.py
+
+      - name: Compile exact candidate
+        run: python -m py_compile research/contract_c_cal_v1_parent_recomposition_rc0_20260919/candidate_rc0.py research/contract_c_cal_v1_parent_recomposition_rc0_20260919/evaluate.py
+
+      - name: Reproduce producer qualification on frozen candidate
+        env:
+          CAL_ROOT: ${{ github.workspace }}/_cal
+          EB_ROOT: ${{ github.workspace }}/_eb
+          CAL_EB_INTEGRATION_REPO: ${{ github.workspace }}/_eb
+          C2_ROOT: ${{ github.workspace }}/_c2
+          RESOLVER_JSON: ${{ github.workspace }}/_resolver_repo/research/contract_c2_current_cal_resolver_successor_rc0/RESOLVER.json
+        run: |
+          python research/contract_c_cal_v1_parent_recomposition_rc0_20260919/evaluate.py /tmp/contract-c-freeze-result.json
+          python - <<'PY'
+          import json
+          data=json.load(open('/tmp/contract-c-freeze-result.json'))
+          assert data['disposition'] == 'SUPPORTED_FOR_INDEPENDENT_CONSUMER_APERTURE', data
+          PY
