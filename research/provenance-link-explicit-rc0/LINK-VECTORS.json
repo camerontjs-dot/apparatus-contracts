@@ -69,6 +69,12 @@
       "expected": {"resolve": "fail", "reason": "commitment-reproduction-mismatch"}
     },
     {
+      "name": "10-real-but-wrong-object-fails",
+      "description": "A real file at the pinned commit that is not the governing object MUST fail even though repo/commit/path are syntactically valid.",
+      "config": {"type": "git-backed", "repository": "camerontjs-dot/proposition-authoring", "commit_sha": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc", "object_path": "README.md", "kind": "gate-implementation", "logical_id": "run_gate_v1_rc3", "commitments": [{"scheme": "git-commit", "value": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc"}]},
+      "expected": {"resolve": "fail", "reason": "wrong-governing-object"}
+    },
+    {
       "name": "07-unresolved-blocks-reconstructable",
       "description": "Unresolved behaviorally relevant configuration cannot be reported reconstructable.",
       "artifacts_ok": true,

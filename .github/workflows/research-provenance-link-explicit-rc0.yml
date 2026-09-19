@@ -17,9 +17,42 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/proposition-authoring
+          ref: c0da10e2e3b9aada5f66af9859cf27964fd3c5fc
+          path: .authority/proposition-authoring
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: 4e1f6fe00e7c350b28f52bfea14f1f8988847884
+          path: .authority/evidence-bundler
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: 8204417f478cfbd891499145a7edec5ee33405ad
+          path: .authority/claim-audit-lab-producer
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: 847cc970642bb648dc994b929c2053b5c9d4648c
+          path: .authority/claim-audit-lab-semantic
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: b42c827acb0a9fe65353354d709add0e27bab307
+          path: .authority/apparatus-contracts-c2
+      - uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: b1bcc33e2b5ef0707b8cbf7dd8e821b2d34d1b55
+          path: .authority/decision-engine
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - name: Install validator dependencies
+        run: |
+          pip install jsonschema
       - name: Run explicit link validator
         run: |
           python research/provenance-link-explicit-rc0/validator.py

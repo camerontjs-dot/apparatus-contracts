@@ -60,7 +60,7 @@ Verified Git-backed recoveries for Fresh Full-Chain RC0 (exact authorities inspe
 - `cal-policy/cal-rules-v1.2.0 other policy_sha256:44ecc3…` → `camerontjs-dot/claim-audit-lab @ 8204417f478cfbd891499145a7edec5ee33405ad` path `research/contract_c2_current_cal_producer_conformance_rc0/materialize.py` constant `POLICY_SHA256`
 - `cal-semantic/cal-v1-integration-candidate-v1 git 847cc970…` → `camerontjs-dot/claim-audit-lab @ 847cc970642bb648dc994b929c2053b5c9d4648c` authority `claim-audit-lab semantic implementation`, object `src/claim_audit_lab/production_v1/semantic/engine.py` tree present at that commit
 - `c2-profile/contract-c-successor-candidate-a-rc2-research git b42c827…` → `camerontjs-dot/apparatus-contracts @ b42c827acb0a9fe65353354d709add0e27bab307` path `schema/contract-c/2.0.0/reference/candidate_a_rc2.py` present at that commit
-- `decision-policy/decision-engine.contract-c.supported-claim-verification@1.0.0 other policy:…` → `camerontjs-dot/decision-engine @ b1bcc33e2b5ef0707b8cbf7dd8e821b2d34d1b55` path `docs/DECISION_POLICY_SURFACE.md` Policy 1 `decision-engine.contract-c.supported-claim-verification` version `1.0.0`
+- `decision-policy/decision-engine.contract-c.supported-claim-verification@1.0.0 other policy:…` → `camerontjs-dot/decision-engine @ b1bcc33e2b5ef0707b8cbf7dd8e821b2d34d1b55` governing implementation `src/contractC2Decision.js` (`SUPPORTED_CLAIM_VERIFICATION_POLICY` id and version `1.0.0`); `docs/DECISION_POLICY_SURFACE.md` Policy 1 corroborates but does not substitute for governing code
 
 No new retained configuration artifacts were required: all current config identities are Git-backed recoverable with explicit paths. `unresolved` remains a valid typed outcome but is behaviorally blocking per Section 5.
 

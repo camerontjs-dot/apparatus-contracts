@@ -6,19 +6,19 @@
   "expected_manifest_roots": [
     {
       "case_id": "not-needed-single",
-      "sha256": "5738d1610ebec8125d1ee0ef478fcf2f00d9c97cbf1db91d0ccb7b6555490927"
+      "sha256": "4f8347dac9f28ae2d763804b77b2b551b3877f0097496f0db9d632736aa22c8b"
     },
     {
       "case_id": "health-canada-text-representation",
-      "sha256": "5f8aacd981d75f7495403aeb6c5fd287e152206308b8e02ecc4d4f0d2e08a9cb"
+      "sha256": "afb024e69556a02b72af85eea1280700fb1a2122700d01df5853a0d09fd2f97e"
     },
     {
       "case_id": "valve-temporal-status",
-      "sha256": "75e8a1281a8a8ef340efa8f10d6a30cb8762b1188bd7336036391914361ea94e"
+      "sha256": "fa7466a0041bec6d3d08d12f4d1759da7d40b0587cf4bec4fdc65fc132d8309d"
     },
     {
       "case_id": "declared-all-of",
-      "sha256": "ab99e2fd878fbeb01143a27d6106f7227ccbdb2a3443e7772b51b01f7a559044"
+      "sha256": "0a2939947e275b340feedb7a5b2531031b9a45884cb24f111891708b6cbc2b84"
     }
   ]
 }
