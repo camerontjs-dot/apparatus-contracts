@@ -1,0 +1,146 @@
+name: Contract C CAL V1 parent recomposition RC0
+
+on:
+  push:
+    branches:
+      - research/contract-c-cal-v1-parent-recomposition-rc0-20260919
+  pull_request:
+    paths:
+      - "research/contract_c_cal_v1_parent_recomposition_rc0_20260919/**"
+      - ".github/workflows/contract-c-cal-v1-parent-recomposition-rc0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rc0:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Apparatus research subject
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact Candidate A RC2 authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: b42c827acb0a9fe65353354d709add0e27bab307
+          path: _c2
+          fetch-depth: 1
+
+      - name: Checkout exact current-CAL resolver authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 1d33e0612befcf8016816197c90c062373796df9
+          path: _resolver_repo
+          fetch-depth: 1
+
+      - name: Checkout exact frozen CAL V1
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: e24e405f5336ee024674f39dba97255bb58a2dd9
+          path: _cal
+          fetch-depth: 1
+
+      - name: Checkout exact frozen Evidence Bundler
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: 4e1f6fe00e7c350b28f52bfea14f1f8988847884
+          path: _eb
+          fetch-depth: 1
+
+      - name: Verify exact external identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _c2 rev-parse HEAD)" = "b42c827acb0a9fe65353354d709add0e27bab307"
+          test "$(git -C _resolver_repo rev-parse HEAD)" = "1d33e0612befcf8016816197c90c062373796df9"
+          test "$(git -C _cal rev-parse HEAD)" = "e24e405f5336ee024674f39dba97255bb58a2dd9"
+          test "$(git -C _eb rev-parse HEAD)" = "4e1f6fe00e7c350b28f52bfea14f1f8988847884"
+          grep -q 'SEMANTIC_IMPLEMENTATION_SHA = "847cc970642bb648dc994b929c2053b5c9d4648c"' _cal/src/claim_audit_lab/production_v1/__init__.py
+          grep -q '"cal_semantic_code_head": "7cf0d2e50562ec4ce4082d1e1c058a11025b1a48"' _cal/research/cal_v1_prototype_freeze_20260918/FREEZE.json
+          grep -q 'c314e53bd91c0736aa4370a364673b069aceb43e' _eb/src/evidence_bundler/v1/contract_b.py
+          grep -q '"semantic_implementation_sha":"847cc970642bb648dc994b929c2053b5c9d4648c"' _resolver_repo/research/contract_c2_current_cal_resolver_successor_rc0/RESOLVER.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install bounded test dependencies
+        run: >-
+          python -m pip install --disable-pip-version-check
+          pytest pydantic PyYAML click pypdf pdfminer.six rank-bm25
+
+      - name: Frozen CAL decomposition controls
+        env:
+          PYTHONPATH: ${{ github.workspace }}/_cal/src
+        run: python -m pytest -q _cal/tests/production/test_decomposition_composer_rc0.py
+
+      - name: Released Contract C1 regression
+        run: python -m pytest -q tests/test_contract_c_v1.py
+
+      - name: Compile frozen RC0 apparatus
+        run: |
+          python -m py_compile \
+            research/contract_c_cal_v1_parent_recomposition_rc0_20260919/candidate_rc0.py \
+            research/contract_c_cal_v1_parent_recomposition_rc0_20260919/evaluate.py
+
+      - name: Execute preregistered discriminator
+        id: discriminator
+        continue-on-error: true
+        env:
+          CAL_ROOT: ${{ github.workspace }}/_cal
+          EB_ROOT: ${{ github.workspace }}/_eb
+          C2_ROOT: ${{ github.workspace }}/_c2
+          RESOLVER_JSON: ${{ github.workspace }}/_resolver_repo/research/contract_c2_current_cal_resolver_successor_rc0/RESOLVER.json
+        run: |
+          python research/contract_c_cal_v1_parent_recomposition_rc0_20260919/evaluate.py \
+            research/contract_c_cal_v1_parent_recomposition_rc0_20260919/RESULT.json
+
+      - name: Record execution receipt
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path("research/contract_c_cal_v1_parent_recomposition_rc0_20260919")
+          result = root / "RESULT.json"
+          receipt = {
+              "schema": "contract-c-cal-v1-parent-recomposition-rc0-execution-receipt-v1",
+              "github_sha": os.environ["GITHUB_SHA"],
+              "github_run_id": os.environ["GITHUB_RUN_ID"],
+              "result_present": result.exists(),
+              "result_sha256": (
+                  "sha256:" + hashlib.sha256(result.read_bytes()).hexdigest()
+                  if result.exists() else None
+              ),
+          }
+          (root / "EXECUTION_RECEIPT.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Upload preserved result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-c-cal-v1-parent-recomposition-rc0
+          path: |
+            research/contract_c_cal_v1_parent_recomposition_rc0_20260919/RESULT.json
+            research/contract_c_cal_v1_parent_recomposition_rc0_20260919/EXECUTION_RECEIPT.json
+          if-no-files-found: warn
+
+      - name: Enforce discriminator result
+        if: steps.discriminator.outcome != 'success'
+        run: exit 1
