@@ -56,6 +56,8 @@ No canonical Contract E schema or production authority control plane is establis
 
 **Repository-wide architectural invariant:** every apparatus is built, tested, and reasoned about from its governing contract, not from the incidental output shape of the current neighboring apparatus. Producer implementation, contract authority, and consumer implementation remain separate. The full rule and its apparatus-by-apparatus application are normative repository governance in [`APPARATUS-CONTRACT-SEPARATION.md`](APPARATUS-CONTRACT-SEPARATION.md).
 
+**Production-slice convention:** after bounded research convergence, apparatuses should expose the smallest production-shaped surface justified by the exact frozen evidence, while keeping contracts separate and unqualified capability out of the maintained path. See [`docs/MINIMAL-PRODUCTION-SLICE-CONVENTION.md`](docs/MINIMAL-PRODUCTION-SLICE-CONVENTION.md).
+
 A current output object is a concrete contract instance, not the definition of the contract. Unused contract states do not disappear because today's producer does not populate them, and producer-private behavior does not become downstream authority merely because today's consumer can observe it.
 
 The contracts preserve several pipeline invariants:
@@ -82,6 +84,7 @@ Important top-level surfaces include:
 
 ```text
 APPARATUS-CONTRACT-SEPARATION.md             repository-wide boundary governance
+docs/MINIMAL-PRODUCTION-SLICE-CONVENTION.md   apparatus promotion-slice governance
 handoff-contract-v1.0.0.md                  legacy Contract A / original A+B authority
 contract-a-v2.0.0.md                         canonical Contract A 2.0.0 authority
 contract-b-factual-context-extension-v1.2.0.md
