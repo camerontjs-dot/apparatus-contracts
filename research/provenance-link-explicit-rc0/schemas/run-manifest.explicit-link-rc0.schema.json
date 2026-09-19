@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/camerontjs-dot/apparatus-contracts/research/provenance-link-explicit-rc0/schemas/run-manifest.explicit-link-rc0.schema.json",
+  "title": "CAL Pipeline Run Manifest v1 Explicit Link RC0 (Research)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_schema",
+    "manifest_id",
+    "run_id",
+    "work_id",
+    "root_inputs",
+    "artifacts",
+    "stages",
+    "authorities",
+    "reconstruction",
+    "manifest_sha256",
+    "link_profile"
+  ],
+  "properties": {
+    "manifest_schema": {"const": "cal-pipeline-run-manifest-v1-explicit-link-rc0"},
+    "manifest_id": {"type": "string", "pattern": "^run-manifest:sha256:[0-9a-f]{64}$"},
+    "run_id": {"type": "string", "minLength": 1},
+    "work_id": {"type": "string", "minLength": 1},
+    "root_inputs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/artifactEntry"}
+    },
+    "stages": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/stageEntry"}
+    },
+    "authorities": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/authorityRef"}
+    },
+    "reconstruction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_artifact_ids", "status", "missing_or_unresolved", "notes"],
+      "properties": {
+        "required_artifact_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "status": {
+          "enum": [
+            "not_evaluated",
+            "reconstructable",
+            "partial",
+            "not_reconstructable"
+          ]
+        },
+        "missing_or_unresolved": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/reconstructionGap"}
+        },
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "manifest_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "link_profile": {"const": "cal-provenance-explicit-link-1"}
+  },
+  "$defs": {
+    "artifactEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "kind",
+        "logical_id",
+        "commitments",
+        "retention",
+        "required_for_reconstruction"
+      ],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "minLength": 1},
+        "logical_id": {"type": "string", "minLength": 1},
+        "commitments": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/commitment"}
+        },
+        "retention": {"$ref": "#/$defs/retention"},
+        "required_for_reconstruction": {"type": "boolean"}
+      }
+    },
+    "stageEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage_id", "stage_kind", "state", "attestation_artifact_id"],
+      "properties": {
+        "stage_id": {"type": "string", "minLength": 1},
+        "stage_kind": {
+          "enum": [
+            "claim_gate",
+            "evidence_gate",
+            "evidence_bundler",
+            "claim_audit_lab",
+            "decision_engine",
+            "other"
+          ]
+        },
+        "state": {"enum": ["completed", "abstained", "failed", "incomplete", "not_present"]},
+        "attestation_artifact_id": {"type": ["string", "null"]}
+      }
+    },
+    "authorityRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "immutable_id"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1},
+        "id": {"type": "string", "minLength": 1},
+        "immutable_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "commitment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "value"],
+      "properties": {
+        "scheme": {
+          "enum": [
+            "sha256-bytes",
+            "sha256-tree",
+            "contract-b-bundle-hash",
+            "contract-identity",
+            "git-commit",
+            "git-tree",
+            "semantic-id",
+            "other"
+          ]
+        },
+        "value": {"type": "string", "minLength": 1}
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "locators"],
+      "properties": {
+        "state": {
+          "enum": [
+            "retained_verified",
+            "retrievable_unverified",
+            "locator_absent",
+            "unknown"
+          ]
+        },
+        "locators": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/locator"}
+        }
+      }
+    },
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "value"],
+      "properties": {
+        "kind": {"enum": ["github_raw", "github_artifact", "git_object", "local_cas", "object_store", "filesystem", "other"]},
+        "value": {"type": "string", "minLength": 1}
+      }
+    },
+    "reconstructionGap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "reason"],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "reason": {
+          "enum": [
+            "identity_absent",
+            "locator_absent",
+            "bytes_unavailable",
+            "digest_mismatch",
+            "attestation_absent",
+            "authority_unresolved",
+            "schema_invalid",
+            "other"
+          ]
+        }
+      }
+    }
+  }
+}

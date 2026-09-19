@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/camerontjs-dot/apparatus-contracts/research/provenance-link-explicit-rc0/schemas/apparatus-attestation.explicit-link-rc0.schema.json",
+  "title": "CAL Pipeline Apparatus Attestation v1 Explicit Link RC0 (Research)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attestation_schema",
+    "attestation_id",
+    "stage",
+    "producer",
+    "run",
+    "inputs",
+    "authorities",
+    "configuration",
+    "operation",
+    "outputs",
+    "execution",
+    "attestation_sha256"
+  ],
+  "properties": {
+    "attestation_schema": {"const": "cal-pipeline-apparatus-attestation-v1-explicit-link-rc0"},
+    "attestation_id": {"type": "string", "pattern": "^attestation:sha256:[0-9a-f]{64}$"},
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {
+          "enum": [
+            "claim_gate",
+            "evidence_gate",
+            "evidence_bundler",
+            "claim_audit_lab",
+            "decision_engine",
+            "other"
+          ]
+        }
+      }
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system_id", "implementation"],
+      "properties": {
+        "system_id": {"type": "string", "minLength": 1},
+        "implementation": {"$ref": "#/$defs/implementationIdentity"}
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "work_id"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "work_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/inputRef"}
+    },
+    "authorities": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/authorityRef"}
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identities"],
+      "properties": {
+        "identities": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/artifactRef"}
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1}
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/artifactRef"}
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "reason_code"],
+      "properties": {
+        "state": {"enum": ["completed", "abstained", "failed", "incomplete"]},
+        "reason_code": {"type": ["string", "null"]}
+      }
+    },
+    "attestation_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "artifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "logical_id", "commitments"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1},
+        "logical_id": {"type": "string", "minLength": 1},
+        "commitments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/commitment"}
+        },
+        "artifact_id": {"type": "string", "minLength": 1},
+        "resolution": {"$ref": "#/$defs/configResolution"}
+      }
+    },
+    "inputRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "artifact"],
+      "properties": {
+        "role": {
+          "enum": [
+            "causal_input",
+            "authority_input",
+            "compatibility_input",
+            "observed_context",
+            "diagnostic_input"
+          ]
+        },
+        "artifact": {"$ref": "#/$defs/artifactRef"}
+      }
+    },
+    "authorityRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "immutable_id"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1},
+        "id": {"type": "string", "minLength": 1},
+        "immutable_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "implementationIdentity": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "repository", "commit_sha"],
+          "properties": {
+            "kind": {"const": "git"},
+            "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+            "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "content_sha256"],
+          "properties": {
+            "kind": {"const": "artifact"},
+            "content_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+          }
+        }
+      ]
+    },
+    "commitment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "value"],
+      "properties": {
+        "scheme": {
+          "enum": [
+            "sha256-bytes",
+            "sha256-tree",
+            "contract-b-bundle-hash",
+            "contract-identity",
+            "git-commit",
+            "git-tree",
+            "semantic-id",
+            "other"
+          ]
+        },
+        "value": {"type": "string", "minLength": 1}
+      }
+    },
+    "configResolution": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "artifact_id"],
+          "properties": {
+            "type": {"const": "retained"},
+            "artifact_id": {"type": "string", "minLength": 1}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "repository", "commit_sha", "object_path"],
+          "properties": {
+            "type": {"const": "git-backed"},
+            "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+            "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+            "object_path": {"type": "string", "minLength": 1}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": {"const": "unresolved"}
+          }
+        }
+      ]
+    }
+  }
+}

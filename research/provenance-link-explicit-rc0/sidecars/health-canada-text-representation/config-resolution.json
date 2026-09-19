@@ -1,0 +1,134 @@
+{
+  "case": "health-canada-text-representation",
+  "configurations": [
+    {
+      "kind": "c2-profile",
+      "logical_id": "contract-c-successor-candidate-a-rc2-research",
+      "commitments": [
+        {
+          "scheme": "git-commit",
+          "value": "b42c827acb0a9fe65353354d709add0e27bab307"
+        }
+      ],
+      "behaviorally_relevant": true,
+      "resolution": {
+        "type": "git-backed",
+        "repository": "camerontjs-dot/apparatus-contracts",
+        "commit_sha": "b42c827acb0a9fe65353354d709add0e27bab307",
+        "object_path": "schema/contract-c/2.0.0/reference/candidate_a_rc2.py",
+        "note": "authority apparatus-contracts C2 authority; reference file present at pinned commit"
+      }
+    },
+    {
+      "kind": "cal-policy",
+      "logical_id": "cal-rules-v1.2.0",
+      "commitments": [
+        {
+          "scheme": "other",
+          "value": "policy_sha256:44ecc33519fa8911079595d322f5f0decbf0389af42e153ac32214931798e42c"
+        }
+      ],
+      "behaviorally_relevant": true,
+      "resolution": {
+        "type": "git-backed",
+        "repository": "camerontjs-dot/claim-audit-lab",
+        "commit_sha": "8204417f478cfbd891499145a7edec5ee33405ad",
+        "object_path": "research/contract_c2_current_cal_producer_conformance_rc0/materialize.py",
+        "policy_constant": "POLICY_SHA256=44ecc33519fa8911079595d322f5f0decbf0389af42e153ac32214931798e42c",
+        "note": "producer commit contains POLICY_SHA256 matching attested other value"
+      }
+    },
+    {
+      "kind": "cal-semantic",
+      "logical_id": "cal-v1-integration-candidate-v1",
+      "commitments": [
+        {
+          "scheme": "git-commit",
+          "value": "847cc970642bb648dc994b929c2053b5c9d4648c"
+        }
+      ],
+      "behaviorally_relevant": true,
+      "resolution": {
+        "type": "git-backed",
+        "repository": "camerontjs-dot/claim-audit-lab",
+        "commit_sha": "847cc970642bb648dc994b929c2053b5c9d4648c",
+        "object_path": "src/claim_audit_lab/production_v1/semantic/engine.py",
+        "note": "authority claim-audit-lab semantic implementation; engine tree present at pinned commit"
+      }
+    },
+    {
+      "kind": "decision-policy",
+      "logical_id": "decision-engine.contract-c.supported-claim-verification@1.0.0",
+      "commitments": [
+        {
+          "scheme": "other",
+          "value": "policy:decision-engine.contract-c.supported-claim-verification@1.0.0"
+        }
+      ],
+      "behaviorally_relevant": true,
+      "resolution": {
+        "type": "git-backed",
+        "repository": "camerontjs-dot/decision-engine",
+        "commit_sha": "b1bcc33e2b5ef0707b8cbf7dd8e821b2d34d1b55",
+        "object_path": "src/contractC2Decision.js",
+        "policy_constant": "decision-engine.contract-c.supported-claim-verification version 1.0.0 Policy 1",
+        "note": "producer commit contains explicit policy surface matching attested label"
+      }
+    },
+    {
+      "kind": "eb-implementation",
+      "logical_id": "evidence-bundler-v1",
+      "commitments": [
+        {
+          "scheme": "git-commit",
+          "value": "4e1f6fe00e7c350b28f52bfea14f1f8988847884"
+        }
+      ],
+      "behaviorally_relevant": true,
+      "resolution": {
+        "type": "git-backed",
+        "repository": "camerontjs-dot/evidence-bundler",
+        "commit_sha": "4e1f6fe00e7c350b28f52bfea14f1f8988847884",
+        "object_path": "scripts/run_v1_integration_candidate.py",
+        "note": "authority evidence-bundler@4e1f... plus producer exact"
+      }
+    },
+    {
+      "kind": "eb-profile",
+      "logical_id": "eb-v1-integration-10x3-rc0",
+      "commitments": [
+        {
+          "scheme": "sha256-bytes",
+          "value": "sha256:5b10d0c29794e80d6876a99e26bcf6ec6a27a4c5165aee78054a6bc32759f4bc"
+        }
+      ],
+      "behaviorally_relevant": true,
+      "resolution": {
+        "type": "git-backed",
+        "repository": "camerontjs-dot/evidence-bundler",
+        "commit_sha": "4e1f6fe00e7c350b28f52bfea14f1f8988847884",
+        "object_path": "research/eb_v1_integration_candidate/INTEGRATION_PROFILE.json",
+        "config_sha256": "sha256:5b10d0c29794e80d6876a99e26bcf6ec6a27a4c5165aee78054a6bc32759f4bc",
+        "note": "embedded config_sha256 equals attested value"
+      }
+    },
+    {
+      "kind": "gate-implementation",
+      "logical_id": "run_gate_v1_rc3",
+      "commitments": [
+        {
+          "scheme": "git-commit",
+          "value": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc"
+        }
+      ],
+      "behaviorally_relevant": true,
+      "resolution": {
+        "type": "git-backed",
+        "repository": "camerontjs-dot/proposition-authoring",
+        "commit_sha": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc",
+        "object_path": "scripts/run_gate_v1_rc3.py",
+        "note": "authority proposition-authoring@c0da... plus producer exact; commit itself governs gate implementation"
+      }
+    }
+  ]
+}

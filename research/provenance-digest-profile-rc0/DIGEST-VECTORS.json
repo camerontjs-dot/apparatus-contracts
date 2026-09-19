@@ -1,0 +1,157 @@
+{
+  "profile": "cal-provenance-canonical-json-bounded-1",
+  "vectors": [
+    {
+      "kind": "attestation",
+      "name": "unicode-null-nested-attestation",
+      "unsealed": {
+        "attestation_schema": "cal-pipeline-apparatus-attestation-v1-candidate",
+        "stage": {
+          "id": "gate",
+          "kind": "claim_gate"
+        },
+        "producer": {
+          "system_id": "fixture-producer",
+          "implementation": {
+            "kind": "artifact",
+            "content_sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        },
+        "run": {
+          "run_id": "run-α",
+          "work_id": "work-1"
+        },
+        "inputs": [
+          {
+            "role": "causal_input",
+            "artifact": {
+              "kind": "input",
+              "logical_id": "claim",
+              "commitments": [
+                {
+                  "scheme": "sha256-bytes",
+                  "value": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+                }
+              ]
+            }
+          }
+        ],
+        "authorities": [],
+        "configuration": {
+          "identities": [
+            {
+              "kind": "config",
+              "logical_id": "cfg",
+              "commitments": [
+                {
+                  "scheme": "semantic-id",
+                  "value": "cfg:v1"
+                }
+              ]
+            }
+          ]
+        },
+        "operation": {
+          "name": "fixture",
+          "version": "1"
+        },
+        "outputs": [
+          {
+            "kind": "output",
+            "logical_id": "gate-output",
+            "commitments": [
+              {
+                "scheme": "sha256-bytes",
+                "value": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+              }
+            ]
+          }
+        ],
+        "execution": {
+          "state": "completed",
+          "reason_code": null
+        }
+      },
+      "expected_digest_sha256": "sha256:e1d99cc2f181610ab355fee57b65e64285f60942bfce96b47ef3b277f90a6e4d",
+      "expected_id": "attestation:sha256:e1d99cc2f181610ab355fee57b65e64285f60942bfce96b47ef3b277f90a6e4d"
+    },
+    {
+      "kind": "manifest",
+      "name": "unicode-retention-manifest",
+      "unsealed": {
+        "manifest_schema": "cal-pipeline-run-manifest-v1-candidate",
+        "run_id": "run-α",
+        "work_id": "work-1",
+        "root_inputs": [
+          "claim"
+        ],
+        "artifacts": [
+          {
+            "artifact_id": "claim",
+            "kind": "input",
+            "logical_id": "claim",
+            "commitments": [
+              {
+                "scheme": "sha256-bytes",
+                "value": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+              }
+            ],
+            "retention": {
+              "state": "retained_verified",
+              "locators": [
+                {
+                  "kind": "filesystem",
+                  "value": "inputs/claim.json"
+                }
+              ]
+            },
+            "required_for_reconstruction": true
+          },
+          {
+            "artifact_id": "gate-attestation",
+            "kind": "attestation",
+            "logical_id": "gate",
+            "commitments": [
+              {
+                "scheme": "sha256-bytes",
+                "value": "sha256:1d5ccdff6cff77b7d981ed504654ec85dde6a746c3e50434f6a1e553a135d343"
+              }
+            ],
+            "retention": {
+              "state": "retained_verified",
+              "locators": [
+                {
+                  "kind": "filesystem",
+                  "value": "gates/ATTESTATION.json"
+                }
+              ]
+            },
+            "required_for_reconstruction": true
+          }
+        ],
+        "stages": [
+          {
+            "stage_id": "gate",
+            "stage_kind": "claim_gate",
+            "state": "completed",
+            "attestation_artifact_id": "gate-attestation"
+          }
+        ],
+        "authorities": [],
+        "reconstruction": {
+          "required_artifact_ids": [
+            "claim",
+            "gate-attestation"
+          ],
+          "status": "not_evaluated",
+          "missing_or_unresolved": [],
+          "notes": [
+            "fixture ✓"
+          ]
+        }
+      },
+      "expected_digest_sha256": "sha256:ad2933137a17bb01402aac8cd979dd3561f5578bb0464b06c4e75acb76649ebf",
+      "expected_id": "run-manifest:sha256:ad2933137a17bb01402aac8cd979dd3561f5578bb0464b06c4e75acb76649ebf"
+    }
+  ]
+}
