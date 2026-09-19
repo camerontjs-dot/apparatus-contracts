@@ -480,6 +480,36 @@ def main() -> None:
             f"{case_id}:{name}" for name, ok in checks.items() if not ok
         )
 
+    # Preregistered cross-run replay: PIPE01 and PIPE03 share a supported C1
+    # proposition/conclusion but arise from distinct exact evidence worlds.
+    # A replayed child identity must remain structurally legible yet fail
+    # against PIPE01's independently fixed recomposition authority.
+    replay_base, replay_authority = built["PIPE01"]
+    _, replay_source_authority = built["PIPE03"]
+    replay = copy.deepcopy(replay_base)
+    source_child = replay_source_authority["ordered_children"][0]
+    target_child = replay["recomposition"]["ordered_children"][0]
+    target_child["native_result_sha256"] = source_child["native_result_sha256"]
+    target_child["cal_result_id"] = source_child["cal_result_id"]
+    replay.pop("result_set_id", None)
+    replay = candidate.seal(replay)
+    replay_structurally_valid = True
+    try:
+        candidate.validate_object(replay, rc2_validator=rc2)
+    except Exception:
+        replay_structurally_valid = False
+    replay_authority_rejected = _expect_reject(
+        lambda: candidate.verify_recomposition_authority(
+            replay,
+            exact_recomposition=replay_authority,
+            rc2_validator=rc2,
+        )
+    )
+    replay_ok = replay_structurally_valid and replay_authority_rejected
+    mutation_results["PIPE01"]["cross_run_child_replay"] = replay_ok
+    if not replay_ok:
+        failures.append("PIPE01:cross_run_child_replay")
+
     disposition = (
         "SUPPORTED_FOR_INDEPENDENT_CONSUMER_APERTURE"
         if not failures
