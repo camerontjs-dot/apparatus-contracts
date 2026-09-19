@@ -1,0 +1,350 @@
+name: CAL Pipeline frozen-slice pressure
+
+on:
+  push:
+    branches:
+      - research/cal-pipeline-frozen-slices-pressure-20260919
+    paths:
+      - 'research/cal-pipeline-frozen-slices-pressure-20260919/**'
+      - '.github/workflows/cal-pipeline-frozen-slices-pressure.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'research/cal-pipeline-frozen-slices-pressure-20260919/**'
+      - '.github/workflows/cal-pipeline-frozen-slices-pressure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  APPARATUS_BASE: c3563cff66d2c85dcbf575c693056e2d8e4563d4
+  GATE_SHA: 89ca88c7f0a661601f7eb798b6759667fa20ab3f
+  GATE_V1_SHA: c0da10e2e3b9aada5f66af9859cf27964fd3c5fc
+  EB_SHA: 08ca896debd6d16fa21be2f178ed7cbe62395d00
+  CAL_SHA: 61cab64149cb6119e4dbe1fe18496f3ccf89002f
+  DECISION_SHA: 7be709b2141c767c5da89b8b94cf90233c4238fe
+  CONTRACT_C_SHA: 5fe55f9ed5d0ee9f026ca1b077e9d70ce0487ea1
+  CONTRACT_D_SHA: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+  CONTRACT_C_RC1_EVIDENCE: 0e0d14471b0ed24382794244468539a723b8b888
+
+jobs:
+  front-half-pressure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout pressure evidence
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact Gate CLI slice
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/proposition-authoring
+          ref: ${{ env.GATE_SHA }}
+          path: _subjects/gate
+          fetch-depth: 1
+
+      - name: Checkout exact Gate V1 predecessor
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/proposition-authoring
+          ref: ${{ env.GATE_V1_SHA }}
+          path: _subjects/gate-v1
+          fetch-depth: 1
+
+      - name: Checkout exact EB 0.2 CLI slice
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: ${{ env.EB_SHA }}
+          path: _subjects/eb
+          fetch-depth: 1
+
+      - name: Checkout exact CAL V1 slice
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CAL_SHA }}
+          path: _subjects/cal
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify exact subjects and bounded apparatus evidence delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _subjects/gate rev-parse HEAD)" = "$GATE_SHA"
+          test "$(git -C _subjects/gate-v1 rev-parse HEAD)" = "$GATE_V1_SHA"
+          test "$(git -C _subjects/eb rev-parse HEAD)" = "$EB_SHA"
+          test "$(git -C _subjects/cal rev-parse HEAD)" = "$CAL_SHA"
+          git merge-base --is-ancestor "$APPARATUS_BASE" HEAD
+          changed="$(git diff --name-only "$APPARATUS_BASE" HEAD)"
+          unexpected="$(printf '%s\n' "$changed" | grep -Ev '^(research/cal-pipeline-frozen-slices-pressure-20260919/PREREGISTRATION\.md|\.github/workflows/cal-pipeline-frozen-slices-pressure\.yml)$' || true)"
+          test -z "$unexpected" || { printf 'unexpected apparatus delta:\n%s\n' "$unexpected" >&2; exit 1; }
+
+      - name: Prepare exact operator runtimes
+        shell: bash
+        run: |
+          set -euo pipefail
+          (cd _subjects/gate && python scripts/fetch_frozen_predecessors.py)
+          (cd _subjects/gate-v1 && python scripts/fetch_frozen_predecessors.py)
+          python -m pip install --upgrade pip
+          python -m pip install -e './_subjects/gate[dev]'
+          python -m pip install -e './_subjects/eb'
+          python -m pip install -e './_subjects/cal'
+
+      - name: Verify installed CLI identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v proposition-authoring-v1
+          command -v evidence-bundler-v1
+          command -v claim-audit-v1
+          evidence-bundler-v1 --version | tee /tmp/eb-version.txt
+          grep -q '0.2.0' /tmp/eb-version.txt
+          evidence-bundler-v1 inspect --json > /tmp/eb-inspect.json
+          claim-audit-v1 inspect --json > /tmp/cal-inspect.json
+          python - <<'PY'
+          import json
+          eb = json.load(open('/tmp/eb-inspect.json'))
+          cal = json.load(open('/tmp/cal-inspect.json'))
+          assert eb['package_version'] == '0.2.0'
+          assert eb['contract_a_authority']['version'] == '2.0.0'
+          assert eb['contract_b_authority']['version'] == '1.2.0'
+          assert cal['distribution_version'] == '0.6.0'
+          assert cal['contract_b']['version'] == '1.2.0'
+          PY
+
+      - name: Build valid Gate packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          source = json.loads(Path('_subjects/gate/research/gates_v1_rc3/health-canada-001.json').read_text())
+          for row in source['request']['sources']:
+              row['media_type'] = 'text/plain; charset=utf-8'
+          source['request']['handoff_id'] += '-frozen-pressure'
+          source['request']['work_id'] += '-frozen-pressure'
+          Path('/tmp/gate-valid.json').write_text(json.dumps(source, indent=2, sort_keys=True) + '\n')
+          PY
+
+      - name: Pressure valid Gate CLI and released Contract A boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          proposition-authoring-v1 /tmp/gate-valid.json --out-dir /tmp/gate-valid-a --implementation-identity frozen-slice-pressure
+          proposition-authoring-v1 /tmp/gate-valid.json --out-dir /tmp/gate-valid-b --implementation-identity frozen-slice-pressure
+          diff -ru /tmp/gate-valid-a /tmp/gate-valid-b
+          test -f /tmp/gate-valid-a/CONTRACT-A.json
+          PYTHONPATH="$GITHUB_WORKSPACE" python - <<'PY'
+          import json
+          from validators.contract_a import validate_candidate
+          validate_candidate(json.load(open('/tmp/gate-valid-a/CONTRACT-A.json')))
+          PY
+
+      - name: Pressure EB 0.2 installed CLI and Contract B / CAL intake
+        shell: bash
+        run: |
+          set -euo pipefail
+          evidence-bundler-v1 run /tmp/gate-valid-a/CONTRACT-A.json --out-dir /tmp/eb-a > /tmp/eb-a-summary.json
+          evidence-bundler-v1 run /tmp/gate-valid-a/CONTRACT-A.json --out-dir /tmp/eb-b > /tmp/eb-b-summary.json
+          PYTHONPATH="$GITHUB_WORKSPACE" python - <<'PY'
+          import json
+          from pathlib import Path
+          from validators.contract_b_factual_context import load_extension
+
+          a = json.load(open('/tmp/eb-a-summary.json'))
+          b = json.load(open('/tmp/eb-b-summary.json'))
+          assert a['native_package_sha256'] == b['native_package_sha256']
+          assert a['contract_b_bundle_hash'] == b['contract_b_bundle_hash']
+
+          bundle = Path('/tmp/eb-a/contract_b')
+          claim_ids = {p.stem for p in (bundle / 'claims').glob('*.yaml')}
+          source_ids = {p.name for p in (bundle / 'evidence').iterdir() if p.is_dir()}
+          passage_ids = {
+              p.stem
+              for source in (bundle / 'evidence').iterdir()
+              if source.is_dir()
+              for p in (source / 'passages').glob('*.yaml')
+          }
+          load_extension(
+              bundle / 'extensions' / 'contract-b-factual-context-v1.json',
+              claim_ids=claim_ids,
+              source_ids=source_ids,
+              passage_ids=passage_ids,
+          )
+          PY
+          python - <<'PY'
+          from pathlib import Path
+          from claim_audit_lab.contracts.factual_context import load_contract_b_intake
+          view = load_contract_b_intake(
+              Path('/tmp/eb-a/contract_b'),
+              deviations_dir=Path('/tmp/cal-intake-deviations'),
+          )
+          assert view.extension_state == 'present'
+          assert view.intake_ledger is not None
+          assert view.semantic_context is not None
+          PY
+
+      - name: Pressure Gate unsupported-representation fail-closed behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          proposition-authoring-v1             _subjects/gate/research/gates_v1_rc3/health-canada-001.json             --out-dir /tmp/gate-html             --implementation-identity frozen-slice-pressure
+          test ! -e /tmp/gate-html/CONTRACT-A.json
+          python - <<'PY'
+          import json
+          claim = json.load(open('/tmp/gate-html/CLAIM-GATE.json'))
+          evidence = json.load(open('/tmp/gate-html/EVIDENCE-GATE.json'))
+          receipt = json.load(open('/tmp/gate-html/STANDARDIZATION-RECEIPT.json'))
+          assert claim['authoring'] == {
+              'state': 'FAILED',
+              'reason': 'CONTRACT_A_SOURCE_REPRESENTATION_UNSUPPORTED',
+          }
+          assert receipt['downstream_authority']['evidence_bundler_may_consume_contract_a'] is False
+          assert any(row['media_type'] == 'text/html' for row in evidence['sources'])
+          PY
+
+      - name: Pressure hostile predecessor and occupied-output controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          (
+            cd _subjects/gate-v1
+            PYTHONPATH=src python scripts/run_gate_v1_rc3.py               research/gates_v1_rc3/health-canada-001.json               --out-dir /tmp/predecessor-html               --implementation-identity frozen-slice-pressure
+          )
+          test -f /tmp/predecessor-html/CONTRACT-A.json
+          set +e
+          evidence-bundler-v1 run /tmp/predecessor-html/CONTRACT-A.json --out-dir /tmp/eb-hostile             >/tmp/eb-hostile.stdout 2>/tmp/eb-hostile.stderr
+          rc=$?
+          set -e
+          test "$rc" -ne 0
+          test ! -e /tmp/eb-hostile/native_eb_v1_package.json
+          grep -q 'media_type' /tmp/eb-hostile.stderr
+
+          mkdir /tmp/eb-occupied
+          printf 'keep\n' > /tmp/eb-occupied/sentinel
+          set +e
+          evidence-bundler-v1 run /tmp/gate-valid-a/CONTRACT-A.json --out-dir /tmp/eb-occupied             >/tmp/eb-occupied.stdout 2>/tmp/eb-occupied.stderr
+          rc=$?
+          set -e
+          test "$rc" -ne 0
+          test "$(cat /tmp/eb-occupied/sentinel)" = 'keep'
+          grep -q 'refusing non-empty output directory' /tmp/eb-occupied.stderr
+
+      - name: Record front-half pressure result
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = {
+              'schema': 'cal-pipeline-frozen-slice-pressure-v1',
+              'cohort': 'front-half-operator-seam',
+              'gate': '89ca88c7f0a661601f7eb798b6759667fa20ab3f',
+              'eb': '08ca896debd6d16fa21be2f178ed7cbe62395d00',
+              'cal': '61cab64149cb6119e4dbe1fe18496f3ccf89002f',
+              'apparatus_base': 'c3563cff66d2c85dcbf575c693056e2d8e4563d4',
+              'contract_c_bridge_attempted': False,
+              'authorization_attempted': False,
+          }
+          Path('/tmp/front-half-pressure-result.json').write_text(json.dumps(result, indent=2, sort_keys=True) + '\n')
+          PY
+
+      - name: Upload front-half pressure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frozen-slice-front-half-pressure
+          path: |
+            /tmp/front-half-pressure-result.json
+            /tmp/eb-a-summary.json
+            /tmp/eb-b-summary.json
+            /tmp/eb-hostile.stdout
+            /tmp/eb-hostile.stderr
+            /tmp/eb-occupied.stdout
+            /tmp/eb-occupied.stderr
+            /tmp/eb-version.txt
+            /tmp/eb-inspect.json
+            /tmp/cal-inspect.json
+          if-no-files-found: warn
+
+  decision-pressure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact Decision V1
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: ${{ env.DECISION_SHA }}
+          fetch-depth: 1
+
+      - name: Checkout exact Contract C authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.CONTRACT_C_SHA }}
+          path: _contract_c
+          fetch-depth: 1
+
+      - name: Checkout exact Contract D authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.CONTRACT_D_SHA }}
+          path: _contract_d
+          fetch-depth: 1
+
+      - name: Checkout frozen real-CAL Contract C evidence
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: ${{ env.CONTRACT_C_RC1_EVIDENCE }}
+          path: _contract_c_rc1
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify exact Decision / contract authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$DECISION_SHA"
+          test "$(git -C _contract_c rev-parse HEAD)" = "$CONTRACT_C_SHA"
+          test "$(git -C _contract_d rev-parse HEAD)" = "$CONTRACT_D_SHA"
+          test "$(git -C _contract_c_rc1 rev-parse HEAD)" = "$CONTRACT_C_RC1_EVIDENCE"
+
+      - name: Install exact Contract D validator dependencies
+        run: python -m pip install --disable-pip-version-check -e './_contract_d[dev]'
+
+      - name: Re-run exact maintained Decision CLI hostile cohort
+        env:
+          APPARATUS_CONTRACT_C_DIR: ${{ github.workspace }}/_contract_c
+          APPARATUS_CONTRACT_D_DIR: ${{ github.workspace }}/_contract_d
+          CONTRACT_C_RC1_EVIDENCE_DIR: ${{ github.workspace }}/_contract_c_rc1/research/contract-c-gate-real-producer-rc1/frozen-evidence/real-cal-corpus
+          DECISION_EVALUATE_CLI_OUTPUT_DIR: ${{ github.workspace }}/build/frozen-slice-decision-pressure
+          PYTHON: python
+        run: node tests/decisionEvaluateCli.integration.mjs
+
+      - name: Upload Decision pressure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frozen-slice-decision-pressure
+          path: build/frozen-slice-decision-pressure/
+          if-no-files-found: error
