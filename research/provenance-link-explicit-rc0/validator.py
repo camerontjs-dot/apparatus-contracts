@@ -23,7 +23,7 @@ NEW_MANIFEST_SCHEMA = "cal-pipeline-run-manifest-v1-explicit-link-rc0"
 OLD_ATTESTATION_SCHEMA = "cal-pipeline-apparatus-attestation-v1-candidate"
 NEW_ATTESTATION_SCHEMA = "cal-pipeline-apparatus-attestation-v1-explicit-link-rc0"
 
-REPO_ROOT = ROOT.parent.parent.parent  # apparatus-contracts checkout root
+REPO_ROOT = ROOT.parent.parent  # apparatus-contracts checkout root
 
 
 def authority_root():
