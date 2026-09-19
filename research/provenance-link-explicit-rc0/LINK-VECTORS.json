@@ -51,10 +51,22 @@
     },
     {
       "name": "06-remove-recovery-path-fails",
-      "description": "Removing an immutable configuration recovery path fails reconstruction.",
-      "config_full": {"type": "git-backed", "repository": "camerontjs-dot/proposition-authoring", "commit_sha": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc", "object_path": "GATE-V1", "kind": "gate-implementation", "logical_id": "run_gate_v1_rc3", "commitments": [{"scheme": "git-commit", "value": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc"}]},
+      "description": "Removing an immutable configuration recovery path fails reconstruction (strict helper, real path).",
+      "config_full": {"type": "git-backed", "repository": "camerontjs-dot/proposition-authoring", "commit_sha": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc", "object_path": "scripts/run_gate_v1_rc3.py", "kind": "gate-implementation", "logical_id": "run_gate_v1_rc3", "commitments": [{"scheme": "git-commit", "value": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc"}]},
       "config_stripped": {"type": "git-backed", "kind": "gate-implementation", "logical_id": "run_gate_v1_rc3", "commitments": [{"scheme": "git-commit", "value": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc"}]},
       "expected": {"full": "pass", "stripped": "fail", "reason": "bare-commit-insufficient"}
+    },
+    {
+      "name": "08-nonexistent-object-path-fails",
+      "description": "Syntactically valid but nonexistent Git object_path MUST fail.",
+      "config": {"type": "git-backed", "repository": "camerontjs-dot/proposition-authoring", "commit_sha": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc", "object_path": "src/does-not-exist.py", "kind": "gate-implementation", "logical_id": "run_gate_v1_rc3", "commitments": [{"scheme": "git-commit", "value": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc"}]},
+      "expected": {"resolve": "fail", "reason": "unknown-object-path"}
+    },
+    {
+      "name": "09-mutated-non-git-commitment-fails",
+      "description": "Mutating a recoverable non-Git commitment while leaving repository/commit/path unchanged MUST fail via independent reproduction.",
+      "config": {"type": "git-backed", "repository": "camerontjs-dot/evidence-bundler", "commit_sha": "4e1f6fe00e7c350b28f52bfea14f1f8988847884", "object_path": "research/eb_v1_integration_candidate/INTEGRATION_PROFILE.json", "kind": "eb-profile", "logical_id": "eb-v1-integration-10x3-rc0", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"}]},
+      "expected": {"resolve": "fail", "reason": "commitment-reproduction-mismatch"}
     },
     {
       "name": "07-unresolved-blocks-reconstructable",

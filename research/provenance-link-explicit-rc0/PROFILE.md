@@ -6,6 +6,17 @@
 
 **Base:** candidate schemas at `1a5929295e735e351320cbd8c966dc43afed2859` plus digest profile `cal-provenance-canonical-json-bounded-1` for identity derivation. This profile adds link and configuration-resolution rules only.
 
+## 0. Successor schema identities (correction)
+
+The failing evaluator head `897db83d2e6c65fe7da6027726a90cedf72afef9` is preserved as `INCONCLUSIVE_LINK_RECONSTRUCTION_READINESS_EVALUATOR_INVALID`: explicit-link semantics stand, but sidecars falsely claimed closed candidate schemas while adding forbidden fields, and the config evaluator checked string shape rather than Git recovery.
+
+Research successor objects MUST declare research identities and MUST NOT claim conformance to the old closed schemas:
+
+- manifest `manifest_schema` MUST be `cal-pipeline-run-manifest-v1-explicit-link-rc0`;
+- attestation `attestation_schema` MUST be `cal-pipeline-apparatus-attestation-v1-explicit-link-rc0`.
+
+An object claiming `cal-pipeline-run-manifest-v1-candidate` MUST NOT contain top-level `link_profile`. An object claiming `cal-pipeline-apparatus-attestation-v1-candidate` MUST NOT contain `artifact_id` in artifact references or `resolution` in configuration identities. The corrected validator rejects such false conformance. Candidate schemas at `1a5929…` are unmodified and unreleased.
+
 ## 1. Explicit artifact references
 
 For research sidecars, every attestation artifact reference in `inputs[].artifact`, `outputs[]`, and retained-type `configuration.identities[]` MUST contain `artifact_id` naming a manifest `artifactEntry`.
@@ -36,12 +47,14 @@ Full-set equality is explicitly NOT required.
 Every behaviorally relevant configuration identity MUST resolve as one of:
 
 - `retained`: names a manifest `artifact_id` via Section 1–3 rules;
-- `git-backed`: provides `repository`, `commit_sha`, plus `object_path` and either `embedded_digest_field` or `file_sha256` sufficient to recover the exact governing bytes without private convention. A bare label or unexplained commit alone is INSUFFICIENT;
+- `git-backed`: provides `repository`, `commit_sha`, plus `object_path` sufficient to recover the exact governing bytes without private convention. A bare label or unexplained commit alone is INSUFFICIENT. Verification rule actually enforced by the validator:
+  - when the attested commitment itself is `git-commit`, require `repository` + exact matching `commit_sha` + a real `object_path` existing at that commit (the commit binds the repository tree; do not invent a second content digest for ceremony);
+  - when the attested commitment is not a Git commit, require a deterministic recovery/extraction rule from the pinned Git object and independently reproduce or verify the asserted commitment (recompute the digest from the pinned payload; mutated commitments MUST fail even when repository/commit/path are unchanged);
 - `unresolved`: no recoverable bytes demonstrated.
 
 Verified Git-backed recoveries for Fresh Full-Chain RC0 (exact authorities inspected before retained-artifact creation):
 
-- `gate-implementation/run_gate_v1_rc3 git c0da10e2…` → `camerontjs-dot/proposition-authoring @ c0da10e2e3b9aada5f66af9859cf27964fd3c5fc` (authority + producer exact)
+- `gate-implementation/run_gate_v1_rc3 git c0da10e2…` → `camerontjs-dot/proposition-authoring @ c0da10e2e3b9aada5f66af9859cf27964fd3c5fc`, entrypoint `scripts/run_gate_v1_rc3.py` importing `src/proposition_authoring/gate_v1_rc3.py` (both exist at the pinned commit; the former `GATE-V1-implementation` path did not exist and is withdrawn)
 - `eb-implementation/evidence-bundler-v1 git 4e1f6fe0…` → `camerontjs-dot/evidence-bundler @ 4e1f6fe00e7c350b28f52bfea14f1f8988847884` (authority + producer exact)
 - `eb-profile/eb-v1-integration-10x3-rc0 sha256 5b10d0c2…` → `camerontjs-dot/evidence-bundler @ 4e1f6fe0…` path `research/eb_v1_integration_candidate/INTEGRATION_PROFILE.json` field `config_sha256` equals attested value
 - `cal-policy/cal-rules-v1.2.0 other policy_sha256:44ecc3…` → `camerontjs-dot/claim-audit-lab @ 8204417f478cfbd891499145a7edec5ee33405ad` path `research/contract_c2_current_cal_producer_conformance_rc0/materialize.py` constant `POLICY_SHA256`
