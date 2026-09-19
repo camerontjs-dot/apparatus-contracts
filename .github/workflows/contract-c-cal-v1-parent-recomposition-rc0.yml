@@ -97,6 +97,7 @@ jobs:
         env:
           CAL_ROOT: ${{ github.workspace }}/_cal
           EB_ROOT: ${{ github.workspace }}/_eb
+          CAL_EB_INTEGRATION_REPO: ${{ github.workspace }}/_eb
           C2_ROOT: ${{ github.workspace }}/_c2
           RESOLVER_JSON: ${{ github.workspace }}/_resolver_repo/research/contract_c2_current_cal_resolver_successor_rc0/RESOLVER.json
         run: |
