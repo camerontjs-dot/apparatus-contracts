@@ -1,0 +1,24 @@
+{
+  "schema": "cal-provenance-link-explicit-expected-roots-v1",
+  "link_profile": "cal-provenance-explicit-link-1",
+  "stacked_on": "43f65ccfa70fb3d42aa4c6974e1ace472d7508a2",
+  "freeze_note": "Research-only successor sidecars; original packages/roots untouched; domain bytes unchanged (non-attestation commitments identical); retention locators sanitized to instrumented-relative for leak defense.",
+  "expected_manifest_roots": [
+    {
+      "case_id": "not-needed-single",
+      "sha256": "0dab517a7d38e1bf70123a0bb4e3f7a6436b1ca03ef7619b7c8864b77750057d"
+    },
+    {
+      "case_id": "health-canada-text-representation",
+      "sha256": "201ff19da5aa8d4ac229dee5cd8fef42302c1abfa3a2887bb49fdabf4a7c9097"
+    },
+    {
+      "case_id": "valve-temporal-status",
+      "sha256": "e2745787f1a151aa7be8ca634cb0a5c57e917edc709d5cd559b3909ee50b59cb"
+    },
+    {
+      "case_id": "declared-all-of",
+      "sha256": "1c6337d3e84fecb5d3c373bdd466beb3289f2faac7f6de9ef48856622fc8e357"
+    }
+  ]
+}

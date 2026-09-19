@@ -1,0 +1,67 @@
+{
+  "profile": "cal-provenance-explicit-link-1",
+  "vectors": [
+    {
+      "name": "01-explicit-ref-ignores-duplicate-content",
+      "description": "Duplicate content under another artifact_id does not confuse an explicit reference.",
+      "manifest_artifacts": [
+        {"artifact_id": "a1", "kind": "contract-a", "logical_id": "CONTRACT-A", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]},
+        {"artifact_id": "a2", "kind": "contract-a", "logical_id": "CONTRACT-A", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]}
+      ],
+      "reference": {"artifact_id": "a1", "kind": "contract-a", "logical_id": "CONTRACT-A", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]},
+      "expected": {"resolve": "pass", "resolved_artifact_id": "a1", "note": "explicit artifact_id wins; a2 ignored"}
+    },
+    {
+      "name": "02-duplicate-artifact-id-rejected",
+      "description": "Duplicate artifact_id is rejected.",
+      "manifest_artifacts": [
+        {"artifact_id": "dup", "kind": "contract-a", "logical_id": "CONTRACT-A", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}]},
+        {"artifact_id": "dup", "kind": "contract-a", "logical_id": "CONTRACT-A-OTHER", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}]}
+      ],
+      "reference": {"artifact_id": "dup", "kind": "contract-a", "logical_id": "CONTRACT-A", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}]},
+      "expected": {"resolve": "fail", "reason": "duplicate-artifact-id"}
+    },
+    {
+      "name": "03-logical-only-change-passes",
+      "description": "Changing only logical_id does not break a valid explicit link.",
+      "manifest_artifacts": [
+        {"artifact_id": "c1", "kind": "compatibility-carrier", "logical_id": "compatibility-carrier", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:7e5f88de38245c74bcda665027ba2bbbeddbe329fc6b632065dfd3cea7d8d2db"}]}
+      ],
+      "reference": {"artifact_id": "c1", "kind": "compatibility-carrier", "logical_id": "contract-b-compatibility-carrier", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:7e5f88de38245c74bcda665027ba2bbbeddbe329fc6b632065dfd3cea7d8d2db"}]},
+      "expected": {"resolve": "pass", "note": "kind/logical inspectable only; EB alias pressure case"}
+    },
+    {
+      "name": "04-retarget-missing-commitment-fails",
+      "description": "Retargeting artifact_id to an artifact missing the asserted commitment fails.",
+      "manifest_artifacts": [
+        {"artifact_id": "good", "kind": "contract-a", "logical_id": "CONTRACT-A", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}]},
+        {"artifact_id": "bad", "kind": "contract-a", "logical_id": "CONTRACT-A", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"}]}
+      ],
+      "reference": {"artifact_id": "bad", "kind": "contract-a", "logical_id": "CONTRACT-A", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}]},
+      "expected": {"resolve": "fail", "reason": "missing-commitment"}
+    },
+    {
+      "name": "05-extra-commitments-pass",
+      "description": "Additional valid commitments on the target do not break the link (subset rule).",
+      "manifest_artifacts": [
+        {"artifact_id": "snap", "kind": "contract-b-snapshot", "logical_id": "contract-b.snapshot.zip", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:892d4546ed08759712190fa971d58d94e0fe4705fb2065d3af0e09db1998e125"}, {"scheme": "contract-b-bundle-hash", "value": "sha256:0adcb350465cb193a6b06a9bb9bca526384d889e9486a873cac143fe1feac569"}]}
+      ],
+      "reference": {"artifact_id": "snap", "kind": "contract-b-bundle", "logical_id": "contract-b", "commitments": [{"scheme": "sha256-bytes", "value": "sha256:892d4546ed08759712190fa971d58d94e0fe4705fb2065d3af0e09db1998e125"}]},
+      "expected": {"resolve": "pass", "note": "subset holds despite kind/logical mismatch; bundle enrichment pressure case"}
+    },
+    {
+      "name": "06-remove-recovery-path-fails",
+      "description": "Removing an immutable configuration recovery path fails reconstruction.",
+      "config_full": {"type": "git-backed", "repository": "camerontjs-dot/proposition-authoring", "commit_sha": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc", "object_path": "GATE-V1", "kind": "gate-implementation", "logical_id": "run_gate_v1_rc3", "commitments": [{"scheme": "git-commit", "value": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc"}]},
+      "config_stripped": {"type": "git-backed", "kind": "gate-implementation", "logical_id": "run_gate_v1_rc3", "commitments": [{"scheme": "git-commit", "value": "c0da10e2e3b9aada5f66af9859cf27964fd3c5fc"}]},
+      "expected": {"full": "pass", "stripped": "fail", "reason": "bare-commit-insufficient"}
+    },
+    {
+      "name": "07-unresolved-blocks-reconstructable",
+      "description": "Unresolved behaviorally relevant configuration cannot be reported reconstructable.",
+      "artifacts_ok": true,
+      "config": {"type": "unresolved", "kind": "decision-policy", "logical_id": "decision-engine.contract-c.supported-claim-verification@1.0.0", "behaviorally_relevant": true},
+      "expected": {"reconstructable": false}
+    }
+  ]
+}
