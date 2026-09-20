@@ -10,6 +10,7 @@ on:
       - '.github/workflows/cal-pipeline-contract-authority-slice-v2-pressure.yml'
   pull_request:
     branches:
+      - main
       - integration/cal-pipeline-v1-contract-authority-freeze-20260919
     paths:
       - 'research/cal-pipeline-contract-authority-slice-v2-pressure-20260919/**'
