@@ -1,0 +1,291 @@
+name: CAL Pipeline production-shaped composition RC0
+
+on:
+  push:
+    branches:
+      - research/cal-pipeline-production-composition-rc0-20260920
+    paths:
+      - "research/cal_pipeline_production_composition_rc0_20260920/**"
+      - ".github/workflows/cal-pipeline-production-composition-rc0.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "research/cal_pipeline_production_composition_rc0_20260920/**"
+      - ".github/workflows/cal-pipeline-production-composition-rc0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  APPARATUS_BASE: c3563cff66d2c85dcbf575c693056e2d8e4563d4
+  A_RELEASE: 529c92b49a34d5c610618551a8737f019f9fa332
+  A_TAG_OBJECT: 7d45a2bdcb7cda7cd08f1bac721557c8b8fd885d
+  EB_SHA: 4e1f6fe00e7c350b28f52bfea14f1f8988847884
+  CAL_SHA: ddaf94551e38663920593cab89f9c60d43c1555f
+  CAL_TREE: 1677a1de987a594f4ee8d2670d56943c5f189fbd
+  C_FREEZE: c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec
+  C_RC2: b42c827acb0a9fe65353354d709add0e27bab307
+  C_RESOLVER: 1d33e0612befcf8016816197c90c062373796df9
+  C_CONSUMER: 12e7e640b229619501960b1b89cf4716d8d985b3
+  DE_SHA: 6cdb59c2ba41779ac954af56dd077574ba090013
+  DE_TREE: d4b75b63462451b5c258a13abf9ce2beb9e78098
+  D_RELEASE: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+  D_TAG_OBJECT: 6eadd688b482f3c9fce2ce5e7a2841089d852096
+
+jobs:
+  compose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout composition evidence
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout released Contract A 2.0.0 authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.A_RELEASE }}
+          path: _subjects/contract-a
+          fetch-depth: 0
+
+      - name: Checkout exact Evidence Bundler
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: ${{ env.EB_SHA }}
+          path: _subjects/eb
+          fetch-depth: 1
+
+      - name: Checkout exact qualified CAL candidate
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CAL_SHA }}
+          path: _subjects/cal
+          fetch-depth: 1
+
+      - name: Checkout frozen parent-bound Contract C
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_FREEZE }}
+          path: _subjects/contract-c
+          fetch-depth: 1
+
+      - name: Checkout exact Contract C RC2 authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_RC2 }}
+          path: _subjects/contract-c-rc2
+          fetch-depth: 1
+
+      - name: Checkout exact current-CAL Contract C resolver
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_RESOLVER }}
+          path: _subjects/contract-c-resolver
+          fetch-depth: 1
+
+      - name: Checkout frozen independent Contract C consumer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.C_CONSUMER }}
+          path: _subjects/contract-c-consumer
+          fetch-depth: 1
+
+      - name: Checkout exact qualified Decision candidate
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: ${{ env.DE_SHA }}
+          path: _subjects/decision
+          fetch-depth: 1
+
+      - name: Checkout released Contract D 1.0.0 authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.D_RELEASE }}
+          path: _subjects/contract-d
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify exact immutable subjects and bounded apparatus delta
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git merge-base --is-ancestor "$APPARATUS_BASE" HEAD
+          changed="$(git diff --name-only "$APPARATUS_BASE"...HEAD)"
+          unexpected="$(printf '%s\n' "$changed" | grep -Ev '^(research/cal_pipeline_production_composition_rc0_20260920/(PREREGISTRATION\.md|run_composition\.py)|\.github/workflows/cal-pipeline-production-composition-rc0\.yml)$' || true)"
+          test -z "$unexpected" || {
+            printf 'unexpected apparatus delta:\n%s\n' "$unexpected" >&2
+            exit 1
+          }
+
+          test "$(git -C _subjects/contract-a rev-parse HEAD)" = "$A_RELEASE"
+          test "$(git -C _subjects/contract-a rev-parse refs/tags/contract-a-v2.0.0)" = "$A_TAG_OBJECT"
+          test "$(git -C _subjects/contract-a rev-parse 'refs/tags/contract-a-v2.0.0^{}')" = "$A_RELEASE"
+          test "$(git -C _subjects/contract-a rev-parse HEAD:validators/contract_a_rc2.py)" = "42e5f5b3bf38d677445e9d01ea130ba604e53409"
+          test "$(git -C _subjects/contract-a rev-parse HEAD:validators/contract_a.py)" = "42a3b032446dc7b9eed8adfb7e66954af2088772"
+
+          test "$(git -C _subjects/eb rev-parse HEAD)" = "$EB_SHA"
+          test "$(git -C _subjects/eb rev-parse HEAD:research/eb_v1_integration_candidate/contract_b_compatibility_carrier.json)" = "ddb16cd58baed833adfc4e81d7aef3745a5900f3"
+
+          test "$(git -C _subjects/cal rev-parse HEAD)" = "$CAL_SHA"
+          test "$(git -C _subjects/cal rev-parse 'HEAD^{tree}')" = "$CAL_TREE"
+          test "$(git -C _subjects/cal rev-parse HEAD:src/claim_audit_lab/production_v1/semantic/decomposition.py)" = "268d0dc4dd22ddde3848141d62b7d719e48d374d"
+          test "$(git -C _subjects/cal rev-parse HEAD:src/claim_audit_lab/production_v1/parent_bound.py)" = "b6d281590d372729b968ae75fec470c7186d6bd6"
+          test "$(git -C _subjects/cal rev-parse HEAD:src/claim_audit_lab/production_v1/parent_cli.py)" = "774178a12acce0ad7a453eb0ba85ec5e5b14fa1c"
+
+          test "$(git -C _subjects/contract-c rev-parse HEAD)" = "$C_FREEZE"
+          test "$(git -C _subjects/contract-c rev-parse HEAD:research/contract_c_cal_v1_parent_recomposition_rc0_20260919/candidate_rc0.py)" = "df6b6ed410f52cafaeadfe1578d770f480a34b09"
+
+          test "$(git -C _subjects/contract-c-rc2 rev-parse HEAD)" = "$C_RC2"
+          test "$(git -C _subjects/contract-c-rc2 rev-parse HEAD:validators/contract_c_rc2.py)" = "1d2ecd228cde807138013c33c8675c3003421d3c"
+
+          test "$(git -C _subjects/contract-c-resolver rev-parse HEAD)" = "$C_RESOLVER"
+          test "$(git -C _subjects/contract-c-resolver rev-parse HEAD:research/contract_c2_current_cal_resolver_successor_rc0/RESOLVER.json)" = "1a408246fd3bef0758a958ae716b44ea74bc0689"
+
+          test "$(git -C _subjects/contract-c-consumer rev-parse HEAD)" = "$C_CONSUMER"
+          test "$(git -C _subjects/contract-c-consumer rev-parse HEAD:candidate/consumer.py)" = "662e94c4445d2be9034e786711429394f217c0a6"
+
+          test "$(git -C _subjects/decision rev-parse HEAD)" = "$DE_SHA"
+          test "$(git -C _subjects/decision rev-parse 'HEAD^{tree}')" = "$DE_TREE"
+          test "$(git -C _subjects/decision rev-parse HEAD:src/parentBoundContractCDecision.js)" = "83ab34bce30f874111500ed91f2c01421be9f9a0"
+          test "$(git -C _subjects/decision rev-parse HEAD:scripts/decision-engine-parent-bound-evaluate.mjs)" = "4e5a85aa1179e815b5e23e6524e2b2a314aab7d0"
+          test "$(git -C _subjects/decision rev-parse HEAD:src/contractCDecision.js)" = "2225f73eb6eefd83609f0ba19e4786d1267dd527"
+          test "$(git -C _subjects/decision rev-parse HEAD:src/decisionMaterializer.js)" = "1562fb29da6679a0cf894e478cbdd4ae16e21a18"
+
+          test "$(git -C _subjects/contract-d rev-parse HEAD)" = "$D_RELEASE"
+          test "$(git -C _subjects/contract-d rev-parse refs/tags/contract-d-v1.0.0)" = "$D_TAG_OBJECT"
+          test "$(git -C _subjects/contract-d rev-parse 'refs/tags/contract-d-v1.0.0^{}')" = "$D_RELEASE"
+          test "$(git -C _subjects/contract-d rev-parse HEAD:validators/contract_d_core.py)" = "564dcde5677df5ac8f86f21dc0ffd1692f44c9f0"
+          test "$(git -C _subjects/contract-d rev-parse HEAD:validators/contract_d_validate.py)" = "c03ef6c6f059cd03addf5e69b01025bb9a6af8d2"
+          test "$(git -C _subjects/contract-d rev-parse HEAD:validators/contract_d_consume.py)" = "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68"
+
+      - name: Prepare clean exact candidate runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m venv /tmp/cal-pipeline-composition-env
+          /tmp/cal-pipeline-composition-env/bin/python -m pip install --upgrade pip
+          /tmp/cal-pipeline-composition-env/bin/python -m pip install build
+          rm -rf /tmp/cal-pipeline-cal-dist
+          mkdir -p /tmp/cal-pipeline-cal-dist
+          /tmp/cal-pipeline-composition-env/bin/python -m build             --wheel             --outdir /tmp/cal-pipeline-cal-dist             _subjects/cal
+          /tmp/cal-pipeline-composition-env/bin/python -m pip install             /tmp/cal-pipeline-cal-dist/*.whl             -e _subjects/eb             rfc8785==0.1.4
+
+          /tmp/cal-pipeline-composition-env/bin/claim-audit-v1-parent inspect --json             > /tmp/cal-parent-inspect.json
+
+      - name: Compile frozen composition harness
+        run: |
+          /tmp/cal-pipeline-composition-env/bin/python -m py_compile             research/cal_pipeline_production_composition_rc0_20260920/run_composition.py
+
+      - name: Execute three-case production-shaped composition and replay falsifier
+        env:
+          CONTRACT_A_ROOT: ${{ github.workspace }}/_subjects/contract-a
+          EB_ROOT: ${{ github.workspace }}/_subjects/eb
+          CONTRACT_C_ROOT: ${{ github.workspace }}/_subjects/contract-c
+          CONTRACT_C_RC2_ROOT: ${{ github.workspace }}/_subjects/contract-c-rc2
+          CONTRACT_C_RESOLVER_ROOT: ${{ github.workspace }}/_subjects/contract-c-resolver
+          CONSUMER_ROOT: ${{ github.workspace }}/_subjects/contract-c-consumer
+          DECISION_ROOT: ${{ github.workspace }}/_subjects/decision
+          CONTRACT_D_ROOT: ${{ github.workspace }}/_subjects/contract-d
+          CAL_PARENT_CLI: /tmp/cal-pipeline-composition-env/bin/claim-audit-v1-parent
+          PYTHON: /tmp/cal-pipeline-composition-env/bin/python
+          NODE: node
+          COMPOSITION_ROOT: /tmp/cal-pipeline-production-composition
+        run: |
+          /tmp/cal-pipeline-composition-env/bin/python             research/cal_pipeline_production_composition_rc0_20260920/run_composition.py             /tmp/cal-pipeline-production-composition-result.json
+
+      - name: Verify terminal result and no Authorization
+        run: |
+          /tmp/cal-pipeline-composition-env/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(
+              Path("/tmp/cal-pipeline-production-composition-result.json").read_text()
+          )
+          assert result["disposition"] == "SUPPORTED_THREE_CASE_PRODUCTION_SHAPED_COMPOSITION"
+          assert result["cases"]["PIPE01"]["cal_parent_conclusion"] == "supported"
+          assert result["cases"]["PIPE01"]["decision_disposition"] == "clear"
+          assert result["cases"]["PIPE01"]["contract_d_consumer"] == "candidate_for_authorization"
+          assert result["cases"]["PIPE02"]["cal_parent_conclusion"] == "contradicted"
+          assert result["cases"]["PIPE02"]["decision_disposition"] == "hold"
+          assert result["cases"]["PIPE02"]["contract_d_consumer"] == "hold"
+          assert result["cases"]["PIPE03"]["cal_parent_conclusion"] == "not_checkable"
+          assert result["cases"]["PIPE03"]["decision_disposition"] == "hold"
+          assert result["cases"]["PIPE03"]["contract_d_consumer"] == "hold"
+          assert result["negative_controls"]["cross_run_native_child_replay"] == {
+              "rejected_before_contract_d_output": True,
+              "false_accepts": 0,
+              "stderr_sha256": result["negative_controls"]["cross_run_native_child_replay"]["stderr_sha256"],
+          }
+          assert result["deterministic_replay"]["passed"] is True
+          assert result["authorization_performed"] is False
+          assert result["execution_performed"] is False
+          PY
+
+      - name: Ordinary Apparatus regression
+        run: |
+          /tmp/cal-pipeline-composition-env/bin/python -m pip install -e '.[dev]'
+          /tmp/cal-pipeline-composition-env/bin/python -m pytest -q tests
+
+      - name: Record exact evidence receipt
+        run: |
+          /tmp/cal-pipeline-composition-env/bin/python - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+          from pathlib import Path
+
+          result_path = Path("/tmp/cal-pipeline-production-composition-result.json")
+          result = json.loads(result_path.read_text())
+          receipt = {
+              "schema": "cal-pipeline-production-composition-rc0-receipt-v1",
+              "evidence_commit": subprocess.check_output(
+                  ["git", "rev-parse", "HEAD"], text=True
+              ).strip(),
+              "evidence_tree": subprocess.check_output(
+                  ["git", "rev-parse", "HEAD^{tree}"], text=True
+              ).strip(),
+              "disposition": result["disposition"],
+              "result_sha256": "sha256:" + hashlib.sha256(
+                  result_path.read_bytes()
+              ).hexdigest(),
+              "subjects": result["exact_subjects"],
+              "authorization_performed": False,
+              "execution_performed": False,
+          }
+          Path("/tmp/cal-pipeline-production-composition-receipt.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(receipt, sort_keys=True))
+          PY
+
+      - name: Upload composition evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cal-pipeline-production-composition-${{ github.sha }}
+          if-no-files-found: warn
+          path: |
+            /tmp/cal-pipeline-production-composition-result.json
+            /tmp/cal-pipeline-production-composition-receipt.json
+            /tmp/cal-parent-inspect.json
+            /tmp/cal-pipeline-production-composition/
