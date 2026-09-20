@@ -1,0 +1,77 @@
+name: CAL Pipeline contract-authority slice v2 pressure
+
+on:
+  push:
+    branches:
+      - research/cal-pipeline-contract-authority-slice-v2-pressure-20260919
+    paths:
+      - 'research/cal-pipeline-contract-authority-slice-v2-pressure-20260919/**'
+      - '.github/workflows/cal-pipeline-contract-authority-slice-v2-pressure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SLICE_SHA: 79aa0527b52deaa748947514202c9a415b5f0e23
+  C2_SHA: b42c827acb0a9fe65353354d709add0e27bab307
+  PARENT_TERMINAL_SHA: 7aafa6e9235e76f0703a394ee42b799f09136846
+  RSH_APERTURE_SHA: 52869e08f98ebaaf4acd31dd5955874f7fdaec81
+
+jobs:
+  authority-slice-v2-pressure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout pressure branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact C2 promotion candidate
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C2_SHA }}
+          path: _pressure/c2
+          fetch-depth: 1
+
+      - name: Checkout exact parent-binding terminal record
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.PARENT_TERMINAL_SHA }}
+          path: _pressure/parent
+          fetch-depth: 1
+
+      - name: Checkout exact clean-room aperture
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.RSH_APERTURE_SHA }}
+          path: _pressure/rsh
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify pressure branch is a bounded successor of the frozen slice
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor "$SLICE_SHA" HEAD
+          changed="$(git diff --name-only "$SLICE_SHA" HEAD)"
+          unexpected="$(printf '%s\n' "$changed" | grep -Ev '^(research/cal-pipeline-contract-authority-slice-v2-pressure-20260919/|\.github/workflows/cal-pipeline-contract-authority-slice-v2-pressure\.yml$)' || true)"
+          test -z "$unexpected" || { printf 'unexpected subject mutation:\n%s\n' "$unexpected" >&2; exit 1; }
+
+      - name: Run authority and mutation pressure matrix
+        run: python research/cal-pipeline-contract-authority-slice-v2-pressure-20260919/pressure_slice_v2.py
+
+      - name: Upload pressure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: authority-slice-v2-pressure
+          path: build/authority-slice-v2-pressure/
+          if-no-files-found: error
