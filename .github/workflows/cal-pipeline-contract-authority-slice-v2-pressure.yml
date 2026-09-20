@@ -1,5 +1,6 @@
 name: CAL Pipeline contract-authority slice v2 pressure
 # Exact subject: PR #116 head 79aa0527b52deaa748947514202c9a415b5f0e23
+# Triggered after temporary main-base retarget for observable hosted execution
 
 on:
   push:
