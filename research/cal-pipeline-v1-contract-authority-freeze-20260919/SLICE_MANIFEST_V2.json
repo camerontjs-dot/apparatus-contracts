@@ -1,0 +1,252 @@
+{
+  "schema_version": "apparatus-contracts-local-pipeline-authority-slice/2",
+  "status": "QUALIFIED_FOR_LOCAL_PIPELINE_CONTRACT_AUTHORITY",
+  "component": "apparatus-contracts",
+  "candidate": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "base_branch": "main",
+    "commit": "c3563cff66d2c85dcbf575c693056e2d8e4563d4",
+    "role": "consolidated carrier of released Contract A/B/C/D authority; not a new contract version or release"
+  },
+  "governance": {
+    "authority_freeze_map_issue": 100,
+    "minimal_production_slice_pr": 111,
+    "minimal_production_slice_head": "7661748d5110b1cb00e5f4c0d8d007c9b7519a39",
+    "minimal_production_slice_status": "proposed-draft-governance",
+    "rule": "reuse already-qualified production surfaces; freeze only owned authority; do not import unqualified capability"
+  },
+  "contracts": {
+    "contract_a": {
+      "version": "2.0.0",
+      "tag": "contract-a-v2.0.0",
+      "release_commit": "529c92b49a34d5c610618551a8737f019f9fa332",
+      "promotion_commit": "b59c2fbe38bae78a3a35699362c0e67d17152e4b",
+      "spec": {
+        "path": "contract-a-v2.0.0.md",
+        "git_blob": "684f0a5129f18eb29368281f01be181c274e2acb"
+      },
+      "wire_spec": {
+        "path": "schema/contract-a/2.0.0/wire-spec.md",
+        "git_blob": "2e7c37fca9aa6bdd1090fb527a663bdbe606ebcb"
+      },
+      "schema": {
+        "path": "schema/contract-a/2.0.0/schema.json",
+        "git_blob": "ff5cddfeacf4511136a3dd3b47db1a794b631cd9"
+      },
+      "validators": [
+        {
+          "path": "validators/contract_a_rc2.py",
+          "git_blob": "42e5f5b3bf38d677445e9d01ea130ba604e53409"
+        },
+        {
+          "path": "validators/contract_a.py",
+          "git_blob": "42a3b032446dc7b9eed8adfb7e66954af2088772"
+        }
+      ],
+      "version_registry": {
+        "path": "schema/contract-a/versions.json",
+        "git_blob": "d4a4d5acf5934ead6c7849957df3216ddf2f2c1e"
+      }
+    },
+    "contract_b": {
+      "version": "1.2.0",
+      "tag": "contract-b-v1.2.0",
+      "release_commit": "c314e53bd91c0736aa4370a364673b069aceb43e",
+      "release_identity_control_plane_commit": "5056559dcff170bc7f7c71d4736eb32f8eeef019",
+      "spec": {
+        "path": "contract-b-factual-context-extension-v1.2.0.md",
+        "git_blob": "77645a6adac664892866f3fdf8abf66cd1d0dd10"
+      },
+      "validators": [
+        {
+          "path": "validators/contract_b_factual_context.py",
+          "git_blob": "f5ad1a0db70d2f36d06c04ab0c9c2050f41bd8e7"
+        },
+        {
+          "path": "validators/verify_contract_integrity.py",
+          "git_blob": "a2d5db218adb1c26d029ee9b8ef85329ea5c36a0"
+        }
+      ],
+      "version_marker": {
+        "path": "schema/.contract-version",
+        "git_blob": "26aaba0e86632e4d537006e45b0ec918d780b3b4"
+      },
+      "vocabulary": {
+        "path": "schema/vocabulary.yaml",
+        "git_blob": "85eb74e5e0c94830b723fbf50d86ccb50635c82d"
+      },
+      "qualification": {
+        "premerge_acceptance_run": 33115839918,
+        "postmerge_lock_run": 33116096988,
+        "acceptance_artifact": 9664451998,
+        "acceptance_artifact_digest": "sha256:888eeae4e02bac724a234bb18bc3b50c0419e502cb650b7bf6e22b8e10933054"
+      }
+    },
+    "contract_c": {
+      "version": "1.0.0",
+      "tag": "contract-c-v1.0.0",
+      "release_commit": "5fe55f9ed5d0ee9f026ca1b077e9d70ce0487ea1",
+      "promotion_commit": "b804958be9da841b7fb1541b0535767a933a2769",
+      "spec": {
+        "path": "contract-c-v1.0.0.md",
+        "git_blob": "8c15f2e5f4047ccd17e204fb23aee1168781b9d5"
+      },
+      "schema": {
+        "path": "schema/contract-c/1.0.0/schema.json",
+        "git_blob": "b0369de9b5c156322d6787261bbc7658a3b33781"
+      },
+      "version_registry": {
+        "path": "schema/contract-c/versions.json",
+        "git_blob": "6e805e274f8b1f491bf0c10735a46962ab91d2d4"
+      },
+      "validator": {
+        "path": "validators/contract_c.py",
+        "git_blob": "9c75ccfbf2223578a8d1a7bf0c39673b394fbea4"
+      },
+      "canonical_fixture_sha256": "sha256:7a66583e332be4901d13ba9f2d7e12419938c77a41b83223a4b0946ad529b7a1"
+    },
+    "contract_d": {
+      "version": "1.0.0",
+      "tag": "contract-d-v1.0.0",
+      "release_commit": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+      "promotion_commit": "68d0cd82def0faaadd3ad5410fb40ec68675b8bd",
+      "spec": {
+        "path": "contract-d-v1.0.0.md",
+        "git_blob": "f53276e06ad9c1e28312f8be809c8e73b10505f1"
+      },
+      "schema": {
+        "path": "schema/contract-d/1.0.0/schema.json",
+        "git_blob": "6da9ee61b9e5011ab1ea068dd419c80caf6a2fac"
+      },
+      "effect_registry": {
+        "path": "schema/contract-d/1.0.0/effect-registry.json",
+        "git_blob": "a40f4f4447470654bdc16d852f5927189ae30cc5"
+      },
+      "version_registry": {
+        "path": "schema/contract-d/versions.json",
+        "git_blob": "6e805e274f8b1f491bf0c10735a46962ab91d2d4"
+      },
+      "validators": [
+        {
+          "path": "validators/contract_d_core.py",
+          "git_blob": "564dcde5677df5ac8f86f21dc0ffd1692f44c9f0"
+        },
+        {
+          "path": "validators/contract_d_validate.py",
+          "git_blob": "c03ef6c6f059cd03addf5e69b01025bb9a6af8d2"
+        },
+        {
+          "path": "validators/contract_d_consume.py",
+          "git_blob": "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68"
+        }
+      ]
+    },
+    "contract_e": {
+      "included": false,
+      "status": "research-only",
+      "reason": "no canonical production Contract E / authority control plane is established"
+    }
+  },
+  "consolidated_snapshot_verification": {
+    "checked_normative_files": 22,
+    "all_checked_blobs_equal_exact_release_authority": true,
+    "interpretation": "current main can serve as one local authority checkout for released A2/B1.2/C1/D1 without substituting newer research semantics"
+  },
+  "pipeline_boundary": {
+    "supported_authority_chain": "Contract A 2.0.0 -> Contract B 1.2.0 -> Contract C 1.0.0 -> Contract D 1.0.0",
+    "contract_c_condition": "Contract C 1.0.0 may be used only when the exact CAL output is authoritatively representable under C1",
+    "hard_stop": "do not discard, downgrade, or hide richer CAL parent/decomposition state merely to reach C1/Decision",
+    "authorization": "out of scope; Contract D remains non-conferring without separately governed authority machinery",
+    "successor_update": "C2 + typed parent recomposition is a pinned research successor lane only; released C1 remains the authority lane until the clean-room consumer gate passes and downstream Decision compatibility is separately qualified"
+  },
+  "explicit_exclusions": [
+    "Contract E or successor Authorization semantics",
+    "open research-only Contract C/D/E candidates",
+    "producer-private apparatus logic",
+    "implicit contract widening from current producer outputs",
+    "automatic end-to-end qualification of the current CAL V1 candidate through Contract C 1.0.0",
+    "merge, tag, release, or version changes",
+    "treating the Contract C RC2 parent-binding research result as released/canonical authority before independent-consumer closure"
+  ],
+  "requalification_triggers": [
+    "any canonical A/B/C/D contract version changes",
+    "any pinned normative blob differs from its exact release authority",
+    "a new Contract C authority is required for richer CAL state",
+    "Contract E or another Authorization surface becomes canonical",
+    "a local pipeline run requires research-only contract capability",
+    "the frozen Contract C parent-binding independent consumer gate reaches a terminal result"
+  ],
+  "supersedes_for_local_handoff": {
+    "prior_manifest": "research/cal-pipeline-v1-contract-authority-freeze-20260919/SLICE_MANIFEST.json",
+    "prior_manifest_blob": "b66702df8a1f0f272ef113d14897aa01778af0a2",
+    "preservation_rule": "v1 remains immutable historical evidence; v2 adds an observed Contract C successor lane without changing released authority"
+  },
+  "authority_lane": {
+    "status": "unchanged",
+    "supported_authority_chain": "Contract A 2.0.0 -> Contract B 1.2.0 -> Contract C 1.0.0 -> Contract D 1.0.0",
+    "reason": "Contract C 2.0.0 successor work has not yet crossed the clean-room independent-consumer gate and is not canonical discovery/release authority"
+  },
+  "successor_lanes": {
+    "contract_c_v2_parent_recomposition": {
+      "admitted_to_authority_lane": false,
+      "current_disposition": "SUPPORTED_FOR_INDEPENDENT_CONSUMER_APERTURE",
+      "production_candidate": {
+        "apparatus_pr": 98,
+        "branch": "promotion/contract-c-2.0.0-exact-rc2-authority-20260913",
+        "exact_head": "b42c827acb0a9fe65353354d709add0e27bab307",
+        "state": "draft-open-not-merge-authorized",
+        "candidate_public_version": "2.0.0",
+        "frozen_wire_profile": "contract-c-successor-candidate-a-rc2-research",
+        "canonical_discovery_remains": "Contract C 1.0.0",
+        "exact_blobs": {
+          "contract-c-v2.0.0.md": "e22f20063b47c955be6bb7cfc2c12d8f8c7c2bbb",
+          "schema/contract-c/2.0.0/promotion-version.json": "b779014c8189b43df8ae08dfd6594882be554b6f",
+          "schema/contract-c/2.0.0/wire-spec.md": "960df40619f0fbeb630c4ea8b1042ed3a293a7a3",
+          "schema/contract-c/2.0.0/schema.json": "45ebaa1e5b7342422b4d6a19f897e72de4bb148f",
+          "schema/contract-c/2.0.0/reference/candidate_a_rc1.py": "03dbb5b774af523d8e6235bca86b18af5ddad5b0",
+          "schema/contract-c/2.0.0/reference/candidate_a_rc2.py": "ad5ed3ac71a8f8680188beb363c9d952c9922b15",
+          "validators/contract_c_rc1_frozen.py": "03dbb5b774af523d8e6235bca86b18af5ddad5b0",
+          "validators/contract_c_rc2.py": "1d2ecd228cde807138013c33c8675c3003421d3c",
+          "validators/contract_c_v2.py": "bb5a381f89828ddc92adfdedcc4e9d98069f436d"
+        },
+        "exact_head_workflow_evidence": {
+          "contract_c_v2_promotion_conformance_run": 34804396671,
+          "contract_c_v1_conformance_run": 34804396591,
+          "contract_b_1_2_acceptance_run": 34804396660,
+          "conclusions": "success"
+        }
+      },
+      "parent_recomposition_binding_rc0": {
+        "apparatus_pr": 118,
+        "source_experiment_head": "7138f6c1599b9b8f8c655f85c9eba0c264fb3b26",
+        "terminal_record_commit": "7aafa6e9235e76f0703a394ee42b799f09136846",
+        "disposition": "SUPPORTED_FOR_INDEPENDENT_CONSUMER_APERTURE",
+        "candidate_blob": "df6b6ed410f52cafaeadfe1578d770f480a34b09",
+        "evaluator_blob": "dd279c8bff695bfb09cac2f782f39be1300a0cdd",
+        "preregistration_blob": "40a9e9e0b40bfbc9bf9f9f7e6643e63c2a254bf5",
+        "workflow_blob": "07de7803e8b82f9a1bf0c0313c92d9d1b8a4b5ad",
+        "decisive_run": 35445002704,
+        "decisive_job": 105902301724,
+        "artifact": 10584872739,
+        "artifact_digest": "sha256:dfbf166cef3bb54ead82a32eea6cb38ce831b45f2c9433e996ead275b2ede938",
+        "observed_checks": {
+          "parent_binding_pressure_checks": "49/49 true",
+          "frozen_cal_decomposition_controls": "27 passed",
+          "released_contract_c1_regression": "16 passed"
+        }
+      },
+      "independent_consumer_gate": {
+        "repository": "camerontjs-dot/research-scaffold-harness",
+        "pr": 39,
+        "frozen_aperture_commit": "52869e08f98ebaaf4acd31dd5955874f7fdaec81",
+        "status": "APERTURE_FROZEN_CONSUMER_NOT_YET_EXECUTED",
+        "blocks_authority_admission": true
+      },
+      "local_route": {
+        "allowed_research_path": "Contract A 2.0.0 -> Contract B 1.2.0 -> exact C2 promotion candidate -> typed parent-recomposition binding",
+        "required_stop": "STOP before treating the parent-binding successor as shared Contract C authority or feeding it to Decision as qualified authority",
+        "falsifier": "any clean-room consumer failure, inability to reconstruct exact binding from the sparse aperture, or Decision-side loss/relabeling"
+      }
+    }
+  }
+}
