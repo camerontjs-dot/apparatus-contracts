@@ -7,6 +7,12 @@ on:
     paths:
       - 'research/cal-pipeline-contract-authority-slice-v2-pressure-20260919/**'
       - '.github/workflows/cal-pipeline-contract-authority-slice-v2-pressure.yml'
+  pull_request:
+    branches:
+      - integration/cal-pipeline-v1-contract-authority-freeze-20260919
+    paths:
+      - 'research/cal-pipeline-contract-authority-slice-v2-pressure-20260919/**'
+      - '.github/workflows/cal-pipeline-contract-authority-slice-v2-pressure.yml'
   workflow_dispatch:
 
 permissions:
