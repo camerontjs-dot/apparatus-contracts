@@ -288,4 +288,17 @@ jobs:
             /tmp/cal-pipeline-production-composition-result.json
             /tmp/cal-pipeline-production-composition-receipt.json
             /tmp/cal-parent-inspect.json
-            /tmp/cal-pipeline-production-composition/
+            /tmp/cal-pipeline-production-composition/PIPE01/case-result.json
+            /tmp/cal-pipeline-production-composition/PIPE01/cal/parent-result.json
+            /tmp/cal-pipeline-production-composition/PIPE01/cal/contract-c.json
+            /tmp/cal-pipeline-production-composition/PIPE01/contract-d.json
+            /tmp/cal-pipeline-production-composition/PIPE02/case-result.json
+            /tmp/cal-pipeline-production-composition/PIPE02/cal/parent-result.json
+            /tmp/cal-pipeline-production-composition/PIPE02/cal/contract-c.json
+            /tmp/cal-pipeline-production-composition/PIPE02/contract-d.json
+            /tmp/cal-pipeline-production-composition/PIPE03/case-result.json
+            /tmp/cal-pipeline-production-composition/PIPE03/cal/parent-result.json
+            /tmp/cal-pipeline-production-composition/PIPE03/cal/contract-c.json
+            /tmp/cal-pipeline-production-composition/PIPE03/contract-d.json
+            /tmp/cal-pipeline-production-composition/PIPE01-REPLAY/case-result.json
+            /tmp/cal-pipeline-production-composition/replay-attack-stderr.txt
