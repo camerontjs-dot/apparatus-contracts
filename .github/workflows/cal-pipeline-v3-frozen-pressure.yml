@@ -1,0 +1,291 @@
+name: CAL Pipeline v3 frozen pressure
+
+on:
+  push:
+    branches:
+      - research/cal-pipeline-v3-frozen-pressure-20260920
+    paths:
+      - "research/cal-pipeline-v3-frozen-pressure-20260920/**"
+      - ".github/workflows/cal-pipeline-v3-frozen-pressure.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "research/cal-pipeline-v3-frozen-pressure-20260920/**"
+      - ".github/workflows/cal-pipeline-v3-frozen-pressure.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  V3_SHA: ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463
+  V3_MANIFEST_BLOB: abb943c2096c0a30113773e17231a30730c05d3f
+  COMPOSITION_SHA: e68e5ab387e9779b0be62d92766b76e475964790
+  A_RELEASE: 529c92b49a34d5c610618551a8737f019f9fa332
+  EB_SHA: 4e1f6fe00e7c350b28f52bfea14f1f8988847884
+  CAL_SHA: ddaf94551e38663920593cab89f9c60d43c1555f
+  CAL_TREE: 1677a1de987a594f4ee8d2670d56943c5f189fbd
+  C_FREEZE: c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec
+  C_RC2: b42c827acb0a9fe65353354d709add0e27bab307
+  C_RESOLVER: 1d33e0612befcf8016816197c90c062373796df9
+  C_CONSUMER: 12e7e640b229619501960b1b89cf4716d8d985b3
+  DE_SHA: 6cdb59c2ba41779ac954af56dd077574ba090013
+  DE_TREE: d4b75b63462451b5c258a13abf9ce2beb9e78098
+  D_RELEASE: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+
+jobs:
+  pressure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout pressure apparatus
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact frozen v3 subject
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.V3_SHA }}
+          path: _subjects/v3
+          fetch-depth: 0
+
+      - name: Checkout exact frozen composition evidence
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.COMPOSITION_SHA }}
+          path: _subjects/composition
+          fetch-depth: 0
+
+      - name: Checkout released Contract A 2.0.0
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.A_RELEASE }}
+          path: _subjects/contract-a
+          fetch-depth: 0
+
+      - name: Checkout exact Evidence Bundler
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: ${{ env.EB_SHA }}
+          path: _subjects/eb
+          fetch-depth: 1
+
+      - name: Checkout exact CAL Slice 2
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CAL_SHA }}
+          path: _subjects/cal
+          fetch-depth: 1
+
+      - name: Checkout frozen parent-bound Contract C
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_FREEZE }}
+          path: _subjects/contract-c
+          fetch-depth: 1
+
+      - name: Checkout exact Contract C RC2
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_RC2 }}
+          path: _subjects/contract-c-rc2
+          fetch-depth: 1
+
+      - name: Checkout exact Contract C resolver
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_RESOLVER }}
+          path: _subjects/contract-c-resolver
+          fetch-depth: 1
+
+      - name: Checkout frozen independent consumer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.C_CONSUMER }}
+          path: _subjects/contract-c-consumer
+          fetch-depth: 1
+
+      - name: Checkout exact Decision candidate
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: ${{ env.DE_SHA }}
+          path: _subjects/decision
+          fetch-depth: 1
+
+      - name: Checkout released Contract D 1.0.0
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.D_RELEASE }}
+          path: _subjects/contract-d
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify bounded pressure delta and frozen identities
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git merge-base --is-ancestor "$V3_SHA" HEAD
+          changed="$(git diff --name-only "$V3_SHA"...HEAD)"
+          unexpected="$(printf '%s\n' "$changed" | grep -Ev '^(research/cal-pipeline-v3-frozen-pressure-20260920/|\.github/workflows/cal-pipeline-v3-frozen-pressure\.yml$)' || true)"
+          test -z "$unexpected" || {
+            printf 'unexpected frozen-subject mutation:\n%s\n' "$unexpected" >&2
+            exit 1
+          }
+
+          test "$(git -C _subjects/v3 rev-parse HEAD)" = "$V3_SHA"
+          test "$(git -C _subjects/v3 rev-parse HEAD:research/cal-pipeline-v1-contract-authority-freeze-20260919/SLICE_MANIFEST_V3.json)" = "$V3_MANIFEST_BLOB"
+
+          test "$(git -C _subjects/composition rev-parse HEAD)" = "$COMPOSITION_SHA"
+          test "$(git -C _subjects/eb rev-parse HEAD)" = "$EB_SHA"
+          test "$(git -C _subjects/cal rev-parse HEAD)" = "$CAL_SHA"
+          test "$(git -C _subjects/cal rev-parse 'HEAD^{tree}')" = "$CAL_TREE"
+          test "$(git -C _subjects/contract-c rev-parse HEAD)" = "$C_FREEZE"
+          test "$(git -C _subjects/contract-c-rc2 rev-parse HEAD)" = "$C_RC2"
+          test "$(git -C _subjects/contract-c-resolver rev-parse HEAD)" = "$C_RESOLVER"
+          test "$(git -C _subjects/contract-c-consumer rev-parse HEAD)" = "$C_CONSUMER"
+          test "$(git -C _subjects/decision rev-parse HEAD)" = "$DE_SHA"
+          test "$(git -C _subjects/decision rev-parse 'HEAD^{tree}')" = "$DE_TREE"
+          test "$(git -C _subjects/contract-d rev-parse HEAD)" = "$D_RELEASE"
+
+          test "$(git -C _subjects/cal rev-parse HEAD:src/claim_audit_lab/production_v1/semantic/decomposition.py)" = 268d0dc4dd22ddde3848141d62b7d719e48d374d
+          test "$(git -C _subjects/cal rev-parse HEAD:src/claim_audit_lab/production_v1/parent_bound.py)" = b6d281590d372729b968ae75fec470c7186d6bd6
+          test "$(git -C _subjects/cal rev-parse HEAD:src/claim_audit_lab/production_v1/parent_cli.py)" = 774178a12acce0ad7a453eb0ba85ec5e5b14fa1c
+
+          test "$(git -C _subjects/contract-c rev-parse HEAD:research/contract_c_cal_v1_parent_recomposition_rc0_20260919/candidate_rc0.py)" = df6b6ed410f52cafaeadfe1578d770f480a34b09
+          test "$(git -C _subjects/contract-c-rc2 rev-parse HEAD:validators/contract_c_rc2.py)" = 1d2ecd228cde807138013c33c8675c3003421d3c
+          test "$(git -C _subjects/contract-c-resolver rev-parse HEAD:research/contract_c2_current_cal_resolver_successor_rc0/RESOLVER.json)" = 1a408246fd3bef0758a958ae716b44ea74bc0689
+
+          test "$(git -C _subjects/contract-c-consumer rev-parse HEAD:candidate/consumer.py)" = 662e94c4445d2be9034e786711429394f217c0a6
+          test "$(git -C _subjects/contract-c-consumer rev-parse HEAD:candidate/test_consumer.py)" = 50f3104650a946b834c3ff6415bafb347863e836
+          test "$(git -C _subjects/contract-c-consumer rev-parse HEAD:candidate/FREEZE_RECEIPT.json)" = cb99cd2ee29d38e19c845771654898561b91552f
+
+          test "$(git -C _subjects/decision rev-parse HEAD:src/parentBoundContractCDecision.js)" = 83ab34bce30f874111500ed91f2c01421be9f9a0
+          test "$(git -C _subjects/decision rev-parse HEAD:scripts/decision-engine-parent-bound-evaluate.mjs)" = 4e5a85aa1179e815b5e23e6524e2b2a314aab7d0
+          test "$(git -C _subjects/decision rev-parse HEAD:src/contractCDecision.js)" = 2225f73eb6eefd83609f0ba19e4786d1267dd527
+          test "$(git -C _subjects/decision rev-parse HEAD:src/decisionMaterializer.js)" = 1562fb29da6679a0cf894e478cbdd4ae16e21a18
+          test "$(git -C _subjects/decision rev-parse HEAD:src/contractCIngress.js)" = f57a8067dadc04afb459f1d0342b2b786ec775e6
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          versions = json.loads(Path("_subjects/contract-c-rc2/schema/contract-c/versions.json").read_text())
+          promotion = json.loads(Path("_subjects/contract-c-rc2/schema/contract-c/2.0.0/promotion-version.json").read_text())
+          freeze = json.loads(Path("_subjects/contract-c/research/contract_c_cal_v1_parent_recomposition_candidate_freeze_20260919/FREEZE.json").read_text())
+          assert versions == {"canonical_version": "1.0.0", "supported_versions": ["1.0.0"]}
+          assert promotion["canonical_registry_switch_authorized"] is False
+          assert promotion["promotion_status"] == "pre_merge_candidate"
+          assert freeze["semver_assigned"] is False
+          assert freeze["production_release_authorized"] is False
+          assert freeze["independent_consumer"]["freeze_commit"] == "12e7e640b229619501960b1b89cf4716d8d985b3"
+          PY
+
+      - name: Run 35-case v3 authority-laundering matrix
+        run: python research/cal-pipeline-v3-frozen-pressure-20260920/verify_v3_manifest.py
+
+      - name: Prepare fresh exact candidate runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m venv /tmp/v3-pressure-env
+          /tmp/v3-pressure-env/bin/python -m pip install --upgrade pip
+          /tmp/v3-pressure-env/bin/python -m pip install build
+          rm -rf /tmp/v3-cal-dist
+          mkdir -p /tmp/v3-cal-dist
+          /tmp/v3-pressure-env/bin/python -m build --wheel --outdir /tmp/v3-cal-dist _subjects/cal
+          /tmp/v3-pressure-env/bin/python -m pip install /tmp/v3-cal-dist/*.whl -e _subjects/eb rfc8785==0.1.4
+
+      - name: Fresh three-case composition and replay pressure
+        env:
+          CONTRACT_A_ROOT: ${{ github.workspace }}/_subjects/contract-a
+          EB_ROOT: ${{ github.workspace }}/_subjects/eb
+          CONTRACT_C_ROOT: ${{ github.workspace }}/_subjects/contract-c
+          CONTRACT_C_RC2_ROOT: ${{ github.workspace }}/_subjects/contract-c-rc2
+          CONTRACT_C_RESOLVER_ROOT: ${{ github.workspace }}/_subjects/contract-c-resolver
+          CONSUMER_ROOT: ${{ github.workspace }}/_subjects/contract-c-consumer
+          DECISION_ROOT: ${{ github.workspace }}/_subjects/decision
+          CONTRACT_D_ROOT: ${{ github.workspace }}/_subjects/contract-d
+          CAL_PARENT_CLI: /tmp/v3-pressure-env/bin/claim-audit-v1-parent
+          PYTHON: /tmp/v3-pressure-env/bin/python
+          NODE: node
+          COMPOSITION_ROOT: /tmp/cal-pipeline-v3-pressure-composition
+        run: |
+          /tmp/v3-pressure-env/bin/python             _subjects/composition/research/cal_pipeline_production_composition_rc0_20260920/run_composition.py             /tmp/cal-pipeline-v3-pressure-result.json
+
+      - name: Verify fresh composition terminal invariants
+        run: |
+          /tmp/v3-pressure-env/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path("/tmp/cal-pipeline-v3-pressure-result.json").read_text())
+          assert result["disposition"] == "SUPPORTED_THREE_CASE_PRODUCTION_SHAPED_COMPOSITION"
+          assert result["cases"]["PIPE01"]["cal_parent_conclusion"] == "supported"
+          assert result["cases"]["PIPE01"]["decision_disposition"] == "clear"
+          assert result["cases"]["PIPE01"]["contract_d_consumer"] == "candidate_for_authorization"
+          assert result["cases"]["PIPE02"]["cal_parent_conclusion"] == "contradicted"
+          assert result["cases"]["PIPE02"]["decision_disposition"] == "hold"
+          assert result["cases"]["PIPE02"]["contract_d_consumer"] == "hold"
+          assert result["cases"]["PIPE03"]["cal_parent_conclusion"] == "not_checkable"
+          assert result["cases"]["PIPE03"]["decision_disposition"] == "hold"
+          assert result["cases"]["PIPE03"]["contract_d_consumer"] == "hold"
+          assert result["negative_controls"]["cross_run_native_child_replay"]["rejected_before_contract_d_output"] is True
+          assert result["negative_controls"]["cross_run_native_child_replay"]["false_accepts"] == 0
+          assert result["deterministic_replay"]["passed"] is True
+          assert result["authorization_performed"] is False
+          assert result["execution_performed"] is False
+          PY
+
+      - name: Record pressure receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/v3-pressure
+          cp /tmp/cal-pipeline-v3-pressure-result.json build/v3-pressure/composition-result.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          result = Path("build/v3-pressure/composition-result.json").read_bytes()
+          receipt = {
+              "schema": "cal-pipeline-v3-frozen-pressure/1",
+              "frozen_subject": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+              "manifest_blob": "abb943c2096c0a30113773e17231a30730c05d3f",
+              "composition_result_sha256": "sha256:" + hashlib.sha256(result).hexdigest(),
+              "authority_mutations": "35/35 rejected",
+              "weak_json_control": "35/35 accepted",
+              "authorization_performed": False,
+              "execution_performed": False,
+              "result": "PASS",
+          }
+          Path("build/v3-pressure/PRESSURE_RECEIPT.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + "\n"
+          )
+          print(json.dumps(receipt, sort_keys=True))
+          PY
+
+      - name: Upload v3 pressure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cal-pipeline-v3-frozen-pressure-${{ github.sha }}
+          path: build/v3-pressure/
+          if-no-files-found: error
