@@ -1,0 +1,150 @@
+{
+  "schema": "cal-pipeline-v3-ers-shadow-composition-boundary-receipt/1",
+  "date": "2026-09-21",
+  "disposition": "BLOCKED_FROZEN_DECISION_BOUNDARY_CANNOT_EXPRESS_ERS_OPERATION",
+  "question": "Can frozen CAL Pipeline v3 artifacts through Contract C, under an ERS-specific Decision context/policy, natively emit epistemic_audit.stage_pending_review@1 and reach ERS RC3 shadow_ready without execution?",
+  "answer": "no",
+  "positive_shadow_ready_reached": false,
+  "subjects": {
+    "apparatus_pr_124_head": "437483fe34da46e5563539e57d8e0cfa9baa629f",
+    "frozen_v3_subject": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "frozen_v3_tree": "14de536e432cb37ce1842d5061ed188b3c42a057",
+    "composition_runner": "e68e5ab387e9779b0be62d92766b76e475964790",
+    "composition_result_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+    "composition_artifact": 10594929710,
+    "composition_artifact_sha256": "sha256:bab1e7522a69e404208d9e65d9edae89d860827ef08fd3da1ad01813554b0841",
+    "contract_a": "529c92b49a34d5c610618551a8737f019f9fa332",
+    "evidence_bundler": "4e1f6fe00e7c350b28f52bfea14f1f8988847884",
+    "contract_b_lock": "c314e53bd91c0736aa4370a364673b069aceb43e",
+    "cal": "ddaf94551e38663920593cab89f9c60d43c1555f",
+    "cal_tree": "1677a1de987a594f4ee8d2670d56943c5f189fbd",
+    "parent_bound_contract_c": "c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec",
+    "contract_c_rc2": "b42c827acb0a9fe65353354d709add0e27bab307",
+    "contract_c_resolver": "1d33e0612befcf8016816197c90c062373796df9",
+    "independent_consumer": "12e7e640b229619501960b1b89cf4716d8d985b3",
+    "decision": "6cdb59c2ba41779ac954af56dd077574ba090013",
+    "decision_tree": "d4b75b63462451b5c258a13abf9ce2beb9e78098",
+    "contract_d_release": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "ers_slice": "319e325cdf678673fae645a70e3e34afb7dddef0",
+    "ers_slice_tree": "f99276c67f7eb470a50e0872f36e1acdd5731033",
+    "ers_pr_6_record_head": "4302b169637fb99333f5c37ed3850cd483a7384b",
+    "contract_e_rc2_profile_commit": "b153dcc4434cbe8a98616a9e410c6125378144c7"
+  },
+  "frozen_blobs_reconfirmed": {
+    "decision_parent_bound_ingress": "83ab34bce30f874111500ed91f2c01421be9f9a0",
+    "decision_parent_bound_cli": "4e5a85aa1179e815b5e23e6524e2b2a314aab7d0",
+    "decision_supported_claim_policy": "2225f73eb6eefd83609f0ba19e4786d1267dd527",
+    "decision_basis_citation_policy": "64b8a2629c1f18acd655c6ca8f7426876a2d5795",
+    "decision_materializer": "1562fb29da6679a0cf894e478cbdd4ae16e21a18",
+    "contract_d_effect_registry": "a40f4f4447470654bdc16d852f5927189ae30cc5",
+    "contract_d_core": "564dcde5677df5ac8f86f21dc0ffd1692f44c9f0",
+    "contract_d_validate": "c03ef6c6f059cd03addf5e69b01025bb9a6af8d2",
+    "contract_d_consume": "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68",
+    "cal_decomposition_composer": "268d0dc4dd22ddde3848141d62b7d719e48d374d",
+    "cal_parent_bound_runtime": "b6d281590d372729b968ae75fec470c7186d6bd6",
+    "cal_parent_cli": "774178a12acce0ad7a453eb0ba85ec5e5b14fa1c",
+    "ers_consumer": "ba3ae85223516d8141de560d647206431fb6686a",
+    "ers_focused_tests": "b1a67046c850ca1c3c0a7649ccccda324276a9f9",
+    "ers_pressure": "33746363913b9198bed294eba30088091722fcfa",
+    "semantic_bytes_changed": false
+  },
+  "reproduced_composition": {
+    "disposition": "SUPPORTED_THREE_CASE_PRODUCTION_SHAPED_COMPOSITION",
+    "result_bytes_equal_qualification_artifact": true,
+    "cases": {
+      "PIPE01": {
+        "contract_c_sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+        "contract_d_sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+        "effect": "knowledge.add_verified_tag@1",
+        "decision_disposition": "clear",
+        "contract_d_consumer": "candidate_for_authorization"
+      },
+      "PIPE02": {
+        "contract_c_sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+        "contract_d_sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+        "effect": "knowledge.add_verified_tag@1",
+        "decision_disposition": "hold",
+        "contract_d_consumer": "hold"
+      },
+      "PIPE03": {
+        "contract_c_sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+        "contract_d_sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+        "effect": "knowledge.add_verified_tag@1",
+        "decision_disposition": "hold",
+        "contract_d_consumer": "hold"
+      }
+    }
+  },
+  "decision_boundary": {
+    "parent_bound_cli_unknown_policy_flag": {
+      "emitted_decision": false,
+      "status": 1,
+      "code": "invalid_cli_arguments",
+      "message": "unknown argument: --policy",
+      "stdout_empty": true
+    },
+    "maintained_supported_claim_context": {
+      "ers_policy": {"emitted_decision": false, "code": "unsupported_policy"},
+      "requested_operation_field": {"emitted_decision": false, "code": "invalid_context"}
+    },
+    "maintained_basis_citation_context": {
+      "ers_policy": {"emitted_decision": false, "code": "unsupported_policy"},
+      "hardcoded_effect": "knowledge.cite_as_evidence@1"
+    },
+    "parent_bound_live_pipe01_context_injection": {
+      "contract_c_sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+      "target_only_effect": "knowledge.add_verified_tag@1",
+      "ers_policy_field_effect": "knowledge.add_verified_tag@1",
+      "requested_operation_field_effect": "knowledge.add_verified_tag@1",
+      "policy_id_emitted": "decision-engine.contract-c.supported-claim-verification",
+      "policy_version_emitted": "1.0.0",
+      "interpretation": "extra context fields are ignored; they do not select epistemic_audit.stage_pending_review@1"
+    }
+  },
+  "controls": {
+    "released_contract_d_registry_sha256": "4f6bcac7a9aa191cf03d500f1cfc46bbfad0d073c09a7564aa7b4b3eabaea61c",
+    "released_registry_bytes_unchanged": true,
+    "ers_effect_registered_on_disk": false,
+    "native_decisions_accepted_as_knowledge_add_verified_tag": ["PIPE01", "PIPE02", "PIPE03"],
+    "copied_decisions_with_only_effect_replaced": {
+      "note": "validator probes only; not sent to Contract E or ERS",
+      "code": "unknown_effect_type",
+      "cases": ["PIPE01", "PIPE02", "PIPE03"]
+    },
+    "research_local_extension": {
+      "in_memory_effect_present": true,
+      "disk_effect_present": false,
+      "registry_sha256_unchanged": true,
+      "native_pipe01_effect_after_extension": "knowledge.add_verified_tag",
+      "native_pipe01_effect_rewritten": false,
+      "used_as_adapter": false
+    },
+    "contract_e_existing_path": {
+      "pipe01_semantic_identity": "decision:sha256:3b14556d1c40a31ee9a8277724b78eb2a01b2f3c2da7d817f17356dd1ca81f41",
+      "pipe01_unadapted_against_ers_jurisdiction": "decision_operation_authorization_mismatch",
+      "pipe02_hold": "decision_not_candidate:hold",
+      "pipe03_hold": "decision_not_candidate:hold",
+      "pipe01_wrong_trusted_decision_identity": "untrusted_decision_identity",
+      "evaluate_calls": 0,
+      "execution_permitted": false,
+      "execution_occurred": false
+    },
+    "ers_rc3_slice": {
+      "entry_point": "harness.contract_e_shadow:stage_pending_review",
+      "unadapted_pipe01_decision": "execution_occurred_not_false",
+      "mismatched_decision_identity": "decision_identity_binding_mismatch",
+      "rc2_intent_shape": "wrong_execution_entry_point",
+      "shadow_ready": false,
+      "execution_occurred": false,
+      "sandbox_mutation": false
+    }
+  },
+  "unchanged_blockers": [
+    "FALSIFIED_EXECUTION_PAYLOAD_UNBOUND",
+    "trusted point-of-use authority-state provenance",
+    "evaluation-time provenance",
+    "real executor behavior",
+    "released Contract D effect registration",
+    "Contract E production authorization"
+  ]
+}
