@@ -14,7 +14,7 @@ This result extends the supported PR #127 composition without adding an executor
 - manifest blob: `7f55fca71236eed99b6c946cbfe8fefeedb9999a`
 - render-packet blob: `f3af62c893ca95f23cdc2050862c16898f417b41`
 - render-bound shadow blob: `990be0957b76c14e7f3de68b322c8b13fed38882`
-- tests blob: `aaff1193f2ce56b8a0d5b6785189feedb9999a`
+- tests blob: `aaff1193f2ce56b8a0d5b6785189feed5381755a`
 
 The first frozen attempt was preserved separately rather than repaired in place: commit `3de1835885a22147d8e930e03448df402661fc3`, tree `f176b9663b28913d81e04b24fac955ec42b3c63a`. Its cross-repository receipt exposed an unsupported numeric informational field in the inherited identity canonicalizer (`unsupported_identity_value`); no authorization, write, or executor occurred. The successor changes that field to a string and was frozen as the commit above.
 
