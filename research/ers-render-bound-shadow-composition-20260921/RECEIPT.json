@@ -1,0 +1,201 @@
+{
+  "schema": "ers-render-bound-shadow-composition-receipt/1",
+  "date": "2026-09-21",
+  "disposition": "SUPPORTED_FOR_CONTROLLED_LOCAL_RENDER_BOUND_ERS_SHADOW_COMPOSITION",
+  "subjects": {
+    "apparatus_pr127_base": "bb8ff5c5d9fd3e221b0dea76e4748fe85be30796",
+    "cal_pipeline_v3": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "decision_successor": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+    "contract_d": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "contract_e_profile": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+    "ers_rc3_preserved": "319e325cdf678673fae645a70e3e34afb7dddef0",
+    "ers_successor": "022fcb58e14864aa173f447fa0c18dd2362b41b0",
+    "ers_successor_tree": "c76334314f2d520190fc6c7c57cd4714501682ac",
+    "ers_successor_blobs": {
+      "pipeline_slices/contract-e-shadow-rc4-render-bound/README.md": "2dcb7d2945b7dc5ffaa20739f83cfc94a9ac45ec",
+      "pipeline_slices/contract-e-shadow-rc4-render-bound/SLICE_MANIFEST.json": "7f55fca71236eed99b6c946cbfe8fefeedb9999a",
+      "pipeline_slices/contract-e-shadow-rc4-render-bound/harness/render_packet.py": "f3af62c893ca95f23cdc2050862c16898f417b41",
+      "pipeline_slices/contract-e-shadow-rc4-render-bound/harness/render_bound_shadow.py": "990be0957b76c14e7f3de68b322c8b13fed38882",
+      "pipeline_slices/contract-e-shadow-rc4-render-bound/harness/test_render_bound_shadow.py": "aaff1193f2ce56b8a0d5b6785189feed5381755a"
+    }
+  },
+  "compatibility": {
+    "execution_intent_schema": "execution-intent-candidate-v1",
+    "variable_length_input_identities": 5,
+    "contract_e_result_identity": "sha256:a96804679c33e5c5e79d64564a69e7efcd95a902fb959baff2d3eaf1b90bfe9e",
+    "contract_e_source_changed": false
+  },
+  "claim": {
+    "claim_id": "ROOT",
+    "claim_content_sha256": "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0",
+    "claim_text_sha256_verified": "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0"
+  },
+  "render_packet": {
+    "schema": "ers-pending-review-render-packet-v1",
+    "identity": "sha256:fc3ae075b85ebeb4a8d329453505b9a9cd3bb0ee5658e04f5f77b853cc2b2512",
+    "canonical_bytes_sha256": "sha256:fc3ae075b85ebeb4a8d329453505b9a9cd3bb0ee5658e04f5f77b853cc2b2512",
+    "canonical_byte_length": 2211,
+    "target_relative_path": "20_live/epistemic-audit/pending-review/claim-review-PIPE01-alpha-had-a-higher-rate-than-beta-and-alice-reviewed-dossier.md",
+    "explicit_render_date": "2026-09-21",
+    "ordered_collections": [
+      "evidence",
+      "contradictions",
+      "revisions"
+    ],
+    "independent_replay": true,
+    "independent_row_reordering": true,
+    "mutation_results": {
+      "claim_text": true,
+      "claim_project_tag": true,
+      "claim_confidence": true,
+      "claim_credibility": true,
+      "claim_updated_at": true,
+      "run_id": true,
+      "render_date": true,
+      "evidence_source_name": true,
+      "evidence_source_uri": true,
+      "evidence_anchor": true,
+      "evidence_relation": true,
+      "evidence_weight": true,
+      "evidence_extractor": true,
+      "evidence_count": true,
+      "contradiction_resolution": true,
+      "revision_changed_at": true,
+      "revision_field": true,
+      "revision_old": true,
+      "revision_new": true,
+      "revision_actor": true,
+      "revision_reason": true
+    }
+  },
+  "payload": {
+    "identity": "sha256:f8d3a15fbf385a5846311b73a3e121bae92f7842d92dafb9ffc79612fd68f221",
+    "byte_length": 1325,
+    "terminal_newline": true,
+    "independent_renderer_match": true,
+    "deterministic_replay": true
+  },
+  "pipe01": {
+    "decision_semantic_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+    "execution_intent_identity": "sha256:1c66c881959644193760b8456dc587cfb0cc491a11a73276292ad90df9866147",
+    "contract_e_execution_intent_identity": "sha256:1c66c881959644193760b8456dc587cfb0cc491a11a73276292ad90df9866147",
+    "contract_e_result_identity": "sha256:39e913c46396c9c93a5d3a4e63e36c88c3b177f8397d04d16afc9930f8ebd1e8",
+    "contract_e_execution_permitted": true,
+    "contract_e_execution_occurred": false,
+    "ers_shadow_result_identity": "sha256:95853057fd06b2e57277b0fc14f23fea94ae51f2152472aa3a71f8a8759022f1",
+    "ers_shadow_ready": true,
+    "ers_execution_occurred": false,
+    "pre_state_identity": "sha256:8427056c02e99784c5f915d43b6b96ee4808a85e713056652a4c23fabcfe5903",
+    "executable_identity": "sha256:b19849757782c1e525e3a108e3e7fd7b51f7eba26a13ebe864b3672f1e830a87",
+    "input_identities": [
+      "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+      "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0",
+      "sha256:8427056c02e99784c5f915d43b6b96ee4808a85e713056652a4c23fabcfe5903",
+      "sha256:fc3ae075b85ebeb4a8d329453505b9a9cd3bb0ee5658e04f5f77b853cc2b2512",
+      "sha256:f8d3a15fbf385a5846311b73a3e121bae92f7842d92dafb9ffc79612fd68f221"
+    ],
+    "sandbox_before": [],
+    "sandbox_after": []
+  },
+  "cases": {
+    "PIPE01": {
+      "parent_conclusion": "supported",
+      "ers_disposition": "clear",
+      "ers_decision_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+      "supported_canonical_sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+      "supported_matches_frozen_v3": true,
+      "released_contract_d_rejection": "exact Contract D validation failed: Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\n    validate_decision(value)\n    ~~~~~~~~~~~~~~~~~^^^^^^^\n  File \"/private/tmp/apparatus-contract-d-authority/validators/contract_d_core.py\", line 199, in validate_decision\n    validate_effect(decision[\"effect\"])\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/apparatus-contract-d-authority/validators/contract_d_core.py\", line 138, in validate_effect\n    raise ContractDError(\"unknown_effect_type\", \"$.effect.type\", etype)\nvalidators.contract_d_core.ContractDError: unknown_effect_type at $.effect.type: epistemic_audit.stage_pending_review"
+    },
+    "PIPE02": {
+      "parent_conclusion": "contradicted",
+      "ers_disposition": "hold",
+      "ers_decision_identity": "decision:sha256:e5e9197601b4f6fedd625c9f577cbdb0465b1d177b8df46faa4d5822f12aa1d4",
+      "supported_canonical_sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+      "supported_matches_frozen_v3": true,
+      "released_contract_d_rejection": "exact Contract D validation failed: Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\n    validate_decision(value)\n    ~~~~~~~~~~~~~~~~~^^^^^^^\n  File \"/private/tmp/apparatus-contract-d-authority/validators/contract_d_core.py\", line 199, in validate_decision\n    validate_effect(decision[\"effect\"])\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/apparatus-contract-d-authority/validators/contract_d_core.py\", line 138, in validate_effect\n    raise ContractDError(\"unknown_effect_type\", \"$.effect.type\", etype)\nvalidators.contract_d_core.ContractDError: unknown_effect_type at $.effect.type: epistemic_audit.stage_pending_review"
+    },
+    "PIPE03": {
+      "parent_conclusion": "not_checkable",
+      "ers_disposition": "hold",
+      "ers_decision_identity": "decision:sha256:7ab331f7bf2f9a65b1b2677db63f80f224e01387ac6ae9614d7a359794eac160",
+      "supported_canonical_sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+      "supported_matches_frozen_v3": true,
+      "released_contract_d_rejection": "exact Contract D validation failed: Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\n    validate_decision(value)\n    ~~~~~~~~~~~~~~~~~^^^^^^^\n  File \"/private/tmp/apparatus-contract-d-authority/validators/contract_d_core.py\", line 199, in validate_decision\n    validate_effect(decision[\"effect\"])\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/apparatus-contract-d-authority/validators/contract_d_core.py\", line 138, in validate_effect\n    raise ContractDError(\"unknown_effect_type\", \"$.effect.type\", etype)\nvalidators.contract_d_core.ContractDError: unknown_effect_type at $.effect.type: epistemic_audit.stage_pending_review"
+    }
+  },
+  "hold_cases": {
+    "PIPE02": {
+      "error": "decision_not_candidate:hold",
+      "contract_e_evaluate_calls": 0
+    },
+    "PIPE03": {
+      "error": "decision_not_candidate:hold",
+      "contract_e_evaluate_calls": 0
+    }
+  },
+  "negative_controls": {
+    "missing_payload": {
+      "rejected": true,
+      "error": "missing_candidate_payload"
+    },
+    "one_byte_payload_mutation": {
+      "rejected": true,
+      "error": "rendered_payload_identity_mismatch"
+    },
+    "different_valid_packet_payload": {
+      "rejected": true,
+      "error": "rendered_payload_identity_mismatch"
+    },
+    "mutated_render_packet_identity": {
+      "rejected": true,
+      "error": "render_packet_identity_mismatch"
+    },
+    "mutated_payload_identity": {
+      "rejected": true,
+      "error": "rendered_payload_identity_mismatch"
+    },
+    "wrong_decision_identity": {
+      "rejected": true,
+      "error": "decision_identity_binding_mismatch"
+    },
+    "wrong_executable_identity": {
+      "rejected": true,
+      "error": "unexpected_executable_identity"
+    },
+    "wrong_pre_state": {
+      "rejected": true,
+      "error": "point_of_use_pre_state_mismatch"
+    },
+    "altered_target": {
+      "rejected": true,
+      "error": "side_effect_target_mismatch"
+    },
+    "stale_authority_state": {
+      "rejected": true,
+      "error": "stale_authority_state"
+    }
+  },
+  "upstream_bytes_changed": {
+    "decision_successor": false,
+    "cal_pipeline_v3": false,
+    "released_contract_d": false,
+    "contract_e_profile": false,
+    "frozen_ers_rc3_slice": false
+  },
+  "execution": {
+    "executor_included": false,
+    "executor_invoked": false,
+    "pending_review_write": false,
+    "real_mainframe_mutation": false,
+    "contract_d_effect_registered": false,
+    "release_or_promotion": false
+  },
+  "open_blockers": [
+    "trusted point-of-use authority-state provenance",
+    "trusted evaluation-time provenance",
+    "released Contract D ERS effect registration",
+    "Contract E production authorization",
+    "real executor behavior",
+    "filesystem write atomicity and recovery semantics"
+  ]
+}
