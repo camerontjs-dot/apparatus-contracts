@@ -1,0 +1,122 @@
+{
+  "schema": "cal-pipeline-v3-ers-shadow-policy-composition-receipt/1",
+  "date": "2026-09-21",
+  "disposition": "SUPPORTED_FOR_CONTROLLED_LOCAL_ERS_SHADOW_COMPOSITION",
+  "phase_a_disposition": "SUPPORTED_NATIVE_ERS_OPERATION_DECISION_CANDIDATE",
+  "policy_owns_effect": true,
+  "caller_operation_selects_effect": false,
+  "shadow_ready": true,
+  "execution_occurred": false,
+  "sandbox_mutation": false,
+  "released_contract_d_rejection": "unknown_effect_type",
+  "released_contract_d_rejection_intact": true,
+  "frozen_semantic_bytes_changed": false,
+  "subjects": {
+    "blocker_pr": 126,
+    "blocker_head": "7f532094e186e87a6ebfac9e4e2d04a38efc47bd",
+    "frozen_v3_subject": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "reproduced_composition_digest": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+    "frozen_decision": "6cdb59c2ba41779ac954af56dd077574ba090013",
+    "frozen_decision_tree": "d4b75b63462451b5c258a13abf9ce2beb9e78098",
+    "successor_decision": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+    "successor_tree": "08a34359d4a177bc17c8de1521d60255bf6ebf82",
+    "dispatch_blob": "9948b0dba9f77d2ad7c71d74b27d2684985ecc70",
+    "successor_cli_blob": "c628eaaf4f55b890f7fe0a6750f7265bf407d92e",
+    "successor_test_blob": "090756ffd7315585d7df2b1eba430a4a36446332",
+    "preregistration_blob": "f48308abf64f7accac9f6082d236be0da51b535e",
+    "contract_d": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "effect_registry_blob": "a40f4f4447470654bdc16d852f5927189ae30cc5",
+    "effect_registry_sha256": "sha256:4f6bcac7a9aa191cf03d500f1cfc46bbfad0d073c09a7564aa7b4b3eabaea61c",
+    "contract_e_profile_commit": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+    "contract_e_profile_blob": "4d68eb6da30118ef67485af70871edacf9edcf23",
+    "ers_slice": "319e325cdf678673fae645a70e3e34afb7dddef0",
+    "ers_tree": "f99276c67f7eb470a50e0872f36e1acdd5731033",
+    "ers_consumer_blob": "ba3ae85223516d8141de560d647206431fb6686a",
+    "ers_executable_sha256": "sha256:16e3e1dff86aff4d6f8508360a4681cca839ba15b8613c94e05ecf909c67a106"
+  },
+  "unchanged_blobs": {
+    "src/parentBoundContractCDecision.js": "83ab34bce30f874111500ed91f2c01421be9f9a0",
+    "src/decisionMaterializer.js": "1562fb29da6679a0cf894e478cbdd4ae16e21a18",
+    "src/contractCDecision.js": "2225f73eb6eefd83609f0ba19e4786d1267dd527",
+    "scripts/decision-engine-parent-bound-evaluate.mjs": "4e5a85aa1179e815b5e23e6524e2b2a314aab7d0",
+    "src/contractDCanonicalOutput.js": "0ea61767b9ae61b3b80c0c2f26de4292f213b7fb"
+  },
+  "policies": {
+    "supported_claim": {
+      "id": "decision-engine.contract-c.supported-claim-verification",
+      "version": "1.0.0",
+      "effect": "knowledge.add_verified_tag@1",
+      "params": {"scope": "claim"}
+    },
+    "ers_staging": {
+      "id": "decision-engine.contract-c.epistemic-audit-stage-pending-review",
+      "version": "1.0.0",
+      "effect": "epistemic_audit.stage_pending_review@1",
+      "params": {}
+    }
+  },
+  "cases": {
+    "PIPE01": {
+      "parent": "supported",
+      "contract_c_sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+      "supported_disposition": "clear",
+      "supported_contract_d_sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+      "ers_disposition": "clear",
+      "ers_semantic_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+      "ers_canonical_sha256": "sha256:7ddea63c77b2cf1223489129b64aef6ecc71ed31238b805689abb2f68f7a03eb"
+    },
+    "PIPE02": {
+      "parent": "contradicted",
+      "contract_c_sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+      "supported_disposition": "hold",
+      "supported_contract_d_sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+      "ers_disposition": "hold",
+      "ers_semantic_identity": "decision:sha256:e5e9197601b4f6fedd625c9f577cbdb0465b1d177b8df46faa4d5822f12aa1d4",
+      "ers_canonical_sha256": "sha256:6a2371e7d866c1e59f50ebd3403cad2564679460b96aa89c93228a4666e31f22",
+      "stopped_before_contract_e_evaluate": true
+    },
+    "PIPE03": {
+      "parent": "not_checkable",
+      "contract_c_sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+      "supported_disposition": "hold",
+      "supported_contract_d_sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+      "ers_disposition": "hold",
+      "ers_semantic_identity": "decision:sha256:7ab331f7bf2f9a65b1b2677db63f80f224e01387ac6ae9614d7a359794eac160",
+      "ers_canonical_sha256": "sha256:46160bc34af39f63ab1dd00a44f3065423c83d52ee6592f2f289c6b1510c55f4",
+      "stopped_before_contract_e_evaluate": true
+    }
+  },
+  "execution_intent_identity": "sha256:f30952c81a147c6077936203db508aea52caee6e3dfbd740fd2110ceef934bc5",
+  "contract_e_result_identity": "sha256:a9ca429190620e48a3d0a2a4ffdf436f199e11af29b03b298030d8d334674cc8",
+  "shadow_result_sha256": "sha256:bdb54311312d5661bafb55c449d016eda07746eb33db2c4123d2ea6518f856f2",
+  "pre_state_sha256": "sha256:8db38b60321ce2dadb1edb9be8a58a8b150bde3a3bbf91aa7bd4e69379738093",
+  "relative_path": "20_live/epistemic-audit/pending-review/claim-review-PIPE01-root.md",
+  "negative_controls": {
+    "unknown_policy": "unsupported_policy",
+    "unsupported_policy_version": "unsupported_policy",
+    "extra_context_field": "invalid_context",
+    "caller_requested_operation": "invalid_context",
+    "caller_effect": "invalid_context",
+    "mutated_target_hash": "target_binding_mismatch",
+    "raw_byte_mutation": "contract_c_whole_object_mismatch",
+    "cross_run_native_child_replay": "contract_c_validation_failed",
+    "consumer_checkout_substitution": "consumer_authority_mismatch",
+    "cli_requested_operation": "invalid_cli_arguments",
+    "cli_effect": "invalid_cli_arguments",
+    "wrong_decision_identity": "decision_identity_binding_mismatch",
+    "wrong_executable": "unexpected_executable_identity",
+    "wrong_pre_state": "point_of_use_pre_state_mismatch",
+    "stale_authority_state": "stale_authority_state",
+    "altered_entry_point": "wrong_execution_entry_point",
+    "untrusted_decision_identity": "untrusted_decision_identity",
+    "tag_decision_against_ers_jurisdiction": "decision_operation_authorization_mismatch"
+  },
+  "unchanged_blockers": [
+    "FALSIFIED_EXECUTION_PAYLOAD_UNBOUND",
+    "trusted_point_of_use_authority_state_provenance",
+    "trusted_evaluation_time_provenance",
+    "released_contract_d_ers_effect_registration",
+    "contract_e_production_authorization",
+    "real_executor_behavior"
+  ]
+}
