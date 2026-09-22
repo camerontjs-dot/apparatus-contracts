@@ -1,0 +1,211 @@
+name: CAL Pipeline v3 complete fixture recovery
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "research/cal-pipeline-v3-fixture-recovery-20260922/**"
+      - ".github/workflows/cal-pipeline-v3-fixture-recovery.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  COMPOSITION_SHA: e68e5ab387e9779b0be62d92766b76e475964790
+  A_RELEASE: 529c92b49a34d5c610618551a8737f019f9fa332
+  EB_SHA: 4e1f6fe00e7c350b28f52bfea14f1f8988847884
+  CAL_SHA: ddaf94551e38663920593cab89f9c60d43c1555f
+  C_FREEZE: c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec
+  C_RC2: b42c827acb0a9fe65353354d709add0e27bab307
+  C_RESOLVER: 1d33e0612befcf8016816197c90c062373796df9
+  C_CONSUMER: 12e7e640b229619501960b1b89cf4716d8d985b3
+  DE_SHA: 6cdb59c2ba41779ac954af56dd077574ba090013
+  D_RELEASE: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+
+jobs:
+  recover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout recovery apparatus
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact historical generator
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.COMPOSITION_SHA }}
+          path: _subjects/composition
+          fetch-depth: 1
+
+      - name: Checkout released Contract A 2.0.0
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.A_RELEASE }}
+          path: _subjects/contract-a
+          fetch-depth: 1
+
+      - name: Checkout exact Evidence Bundler
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: ${{ env.EB_SHA }}
+          path: _subjects/eb
+          fetch-depth: 1
+
+      - name: Checkout exact CAL candidate
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: ${{ env.CAL_SHA }}
+          path: _subjects/cal
+          fetch-depth: 1
+
+      - name: Checkout frozen parent-bound Contract C
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_FREEZE }}
+          path: _subjects/contract-c
+          fetch-depth: 1
+
+      - name: Checkout exact Contract C RC2 authority
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_RC2 }}
+          path: _subjects/contract-c-rc2
+          fetch-depth: 1
+
+      - name: Checkout exact Contract C resolver
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.C_RESOLVER }}
+          path: _subjects/contract-c-resolver
+          fetch-depth: 1
+
+      - name: Checkout frozen independent Contract C consumer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: ${{ env.C_CONSUMER }}
+          path: _subjects/contract-c-consumer
+          fetch-depth: 1
+
+      - name: Checkout exact historical Decision candidate
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: ${{ env.DE_SHA }}
+          path: _subjects/decision
+          fetch-depth: 1
+
+      - name: Checkout released Contract D 1.0.0
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: ${{ env.D_RELEASE }}
+          path: _subjects/contract-d
+          fetch-depth: 1
+
+      - name: Download surviving PR123 artifact
+        uses: actions/download-artifact@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          run-id: 35479370533
+          name: cal-pipeline-production-composition-c2b0039ea19e0cefd099e363f5aa61a13d907635
+          github-token: ${{ github.token }}
+          path: _historical/pr123
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify exact subject identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C _subjects/composition rev-parse HEAD)" = "$COMPOSITION_SHA"
+          test "$(git -C _subjects/contract-a rev-parse HEAD)" = "$A_RELEASE"
+          test "$(git -C _subjects/eb rev-parse HEAD)" = "$EB_SHA"
+          test "$(git -C _subjects/cal rev-parse HEAD)" = "$CAL_SHA"
+          test "$(git -C _subjects/contract-c rev-parse HEAD)" = "$C_FREEZE"
+          test "$(git -C _subjects/contract-c-rc2 rev-parse HEAD)" = "$C_RC2"
+          test "$(git -C _subjects/contract-c-resolver rev-parse HEAD)" = "$C_RESOLVER"
+          test "$(git -C _subjects/contract-c-consumer rev-parse HEAD)" = "$C_CONSUMER"
+          test "$(git -C _subjects/decision rev-parse HEAD)" = "$DE_SHA"
+          test "$(git -C _subjects/contract-d rev-parse HEAD)" = "$D_RELEASE"
+
+      - name: Prepare exact historical runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m venv /tmp/cal-fixture-recovery-env
+          /tmp/cal-fixture-recovery-env/bin/python -m pip install --upgrade pip
+          /tmp/cal-fixture-recovery-env/bin/python -m pip install build
+          rm -rf /tmp/cal-fixture-recovery-dist
+          mkdir -p /tmp/cal-fixture-recovery-dist
+          /tmp/cal-fixture-recovery-env/bin/python -m build --wheel --outdir /tmp/cal-fixture-recovery-dist _subjects/cal
+          /tmp/cal-fixture-recovery-env/bin/python -m pip install /tmp/cal-fixture-recovery-dist/*.whl -e _subjects/eb rfc8785==0.1.4
+          /tmp/cal-fixture-recovery-env/bin/python -m py_compile             research/cal-pipeline-v3-fixture-recovery-20260922/verify_fixture_recovery.py
+
+      - name: Reproduce complete fixture world A
+        env: &composition_env
+          CONTRACT_A_ROOT: ${{ github.workspace }}/_subjects/contract-a
+          EB_ROOT: ${{ github.workspace }}/_subjects/eb
+          CONTRACT_C_ROOT: ${{ github.workspace }}/_subjects/contract-c
+          CONTRACT_C_RC2_ROOT: ${{ github.workspace }}/_subjects/contract-c-rc2
+          CONTRACT_C_RESOLVER_ROOT: ${{ github.workspace }}/_subjects/contract-c-resolver
+          CONSUMER_ROOT: ${{ github.workspace }}/_subjects/contract-c-consumer
+          DECISION_ROOT: ${{ github.workspace }}/_subjects/decision
+          CONTRACT_D_ROOT: ${{ github.workspace }}/_subjects/contract-d
+          CAL_PARENT_CLI: /tmp/cal-fixture-recovery-env/bin/claim-audit-v1-parent
+          PYTHON: /tmp/cal-fixture-recovery-env/bin/python
+          NODE: node
+          COMPOSITION_ROOT: /tmp/cal-fixture-recovery-a
+        run: |
+          /tmp/cal-fixture-recovery-env/bin/python             _subjects/composition/research/cal_pipeline_production_composition_rc0_20260920/run_composition.py             /tmp/cal-fixture-recovery-result-a.json
+
+      - name: Reproduce complete fixture world B
+        env:
+          CONTRACT_A_ROOT: ${{ github.workspace }}/_subjects/contract-a
+          EB_ROOT: ${{ github.workspace }}/_subjects/eb
+          CONTRACT_C_ROOT: ${{ github.workspace }}/_subjects/contract-c
+          CONTRACT_C_RC2_ROOT: ${{ github.workspace }}/_subjects/contract-c-rc2
+          CONTRACT_C_RESOLVER_ROOT: ${{ github.workspace }}/_subjects/contract-c-resolver
+          CONSUMER_ROOT: ${{ github.workspace }}/_subjects/contract-c-consumer
+          DECISION_ROOT: ${{ github.workspace }}/_subjects/decision
+          CONTRACT_D_ROOT: ${{ github.workspace }}/_subjects/contract-d
+          CAL_PARENT_CLI: /tmp/cal-fixture-recovery-env/bin/claim-audit-v1-parent
+          PYTHON: /tmp/cal-fixture-recovery-env/bin/python
+          NODE: node
+          COMPOSITION_ROOT: /tmp/cal-fixture-recovery-b
+        run: |
+          /tmp/cal-fixture-recovery-env/bin/python             _subjects/composition/research/cal_pipeline_production_composition_rc0_20260920/run_composition.py             /tmp/cal-fixture-recovery-result-b.json
+
+      - name: Verify and package complete fixture bundle
+        run: |
+          set -euo pipefail
+          rm -rf build/cal-pipeline-v3-fixture-recovery
+          /tmp/cal-fixture-recovery-env/bin/python             research/cal-pipeline-v3-fixture-recovery-20260922/verify_fixture_recovery.py             --run-a /tmp/cal-fixture-recovery-a             --run-b /tmp/cal-fixture-recovery-b             --result-a /tmp/cal-fixture-recovery-result-a.json             --result-b /tmp/cal-fixture-recovery-result-b.json             --historical-artifact _historical/pr123             --out build/cal-pipeline-v3-fixture-recovery/frozen-fixtures             > build/cal-pipeline-v3-fixture-recovery-verification.json
+
+      - name: Upload complete recovery evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cal-pipeline-v3-complete-fixture-recovery-${{ github.sha }}
+          if-no-files-found: error
+          path: |
+            build/cal-pipeline-v3-fixture-recovery/
+            build/cal-pipeline-v3-fixture-recovery-verification.json
+            /tmp/cal-fixture-recovery-result-a.json
+            /tmp/cal-fixture-recovery-result-b.json
