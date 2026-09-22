@@ -1,0 +1,55 @@
+{
+  "schema": "ers-evaluation-provenance-freeze-receipt-contract/1",
+  "successor_experiment_id": "ERS-EVAL-TIME-PROV-20260921-03",
+  "scientific_preregistration": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "pull_request": 130,
+    "commit": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "unchanged_matrix_required": true
+  },
+  "predecessor": {
+    "ers_source": "65bde55f770c3c3d6e9b7b2b37f74c054e809e11",
+    "ers_freeze": "66a82e8ac28c380ddc7eb4388bdc3daf289c1db9",
+    "apparatus_source": "e28c0950227f6fcf031aa413d07f94f85454ae90",
+    "apparatus_freeze": "21c960e4eba8306c855bec76afce829a801eb050",
+    "inconclusive_result": "5c437c0a11e1250e319871448cda4dd8023b8cb3"
+  },
+  "canonical_paths": {
+    "ers": {
+      "source_commit": "implementation.source_commit",
+      "source_tree": "implementation.source_tree",
+      "preregistration_head": "apparatus.preregistration_head",
+      "apparatus_candidate_source_commit": "apparatus.candidate_source_commit",
+      "transcript_schema_blob": "apparatus.transcript_schema_blob",
+      "issuer_key_identity": "issuer.public_key_identity",
+      "public_api": "public_api",
+      "decisive_observed_before_freeze": "decisive_rc6_matrix_observed_before_freeze"
+    },
+    "apparatus": {
+      "apparatus_source_commit": "apparatus_candidate_source_commit",
+      "apparatus_source_tree": "apparatus_candidate_source_tree",
+      "ers_source_commit": "ers_candidate.source_commit",
+      "ers_source_tree": "ers_candidate.source_tree",
+      "ers_freeze_receipt_commit": "ers_candidate.freeze_receipt_commit",
+      "ers_freeze_receipt_blob": "ers_candidate.freeze_receipt_blob",
+      "preregistration_head": "preregistration.frozen_head",
+      "transcript_schema_blob": "preregistration.transcript_schema_blob",
+      "issuer_key_identity": "issuer.public_key_identity",
+      "public_api": "public_supervisor_api",
+      "decisive_observed_before_freeze": "decisive_rc6_matrix_observed_before_freeze"
+    }
+  },
+  "frozen_transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d",
+  "preflight_must_not": [
+    "start Contract E supervisor",
+    "invoke Contract E evaluator",
+    "run PIPE01/PIPE02/PIPE03",
+    "run any decisive mutation"
+  ],
+  "allowed_changes": [
+    "receipt-path consumer repair",
+    "non-evaluating consistency preflight",
+    "successor-specific receipt/result identifiers"
+  ],
+  "scientific_surfaces_must_remain_unchanged": true
+}
