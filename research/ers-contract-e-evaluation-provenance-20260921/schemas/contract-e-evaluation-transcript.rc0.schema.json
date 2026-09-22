@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/camerontjs-dot/apparatus-contracts/research/ers-contract-e-evaluation-provenance-20260921/schemas/contract-e-evaluation-transcript.rc0.schema.json",
+  "title": "Contract E Evaluation Transcript RC0 (Research)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "body", "signature"],
+  "properties": {
+    "schema": {
+      "const": "contract-e-evaluation-transcript-rc0"
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "issuer_id",
+        "issuer_key_id",
+        "contract_e_repository",
+        "contract_e_commit_sha",
+        "execution_intent_identity",
+        "authority_state_identity",
+        "evaluation_time",
+        "contract_e_request_sha256",
+        "contract_e_result_sha256",
+        "contract_e_result_identity",
+        "challenge",
+        "observed_at",
+        "freshness_max_seconds"
+      ],
+      "properties": {
+        "issuer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuer_key_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "contract_e_repository": {
+          "const": "camerontjs-dot/apparatus-contracts"
+        },
+        "contract_e_commit_sha": {
+          "const": "b153dcc4434cbe8a98616a9e410c6125378144c7"
+        },
+        "execution_intent_identity": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "authority_state_identity": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "evaluation_time": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "contract_e_request_sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "contract_e_result_sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "contract_e_result_identity": {
+          "type": ["string", "null"]
+        },
+        "challenge": {
+          "type": "string",
+          "minLength": 40
+        },
+        "observed_at": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+        },
+        "freshness_max_seconds": {
+          "const": "30"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "key_id", "value"],
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "key_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
