@@ -1,0 +1,136 @@
+{
+  "schema": "ers-contract-e-evaluation-provenance-apparatus-freeze/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260921-03",
+  "frozen_at_utc": "2026-09-22T12:16:13Z",
+  "decisive_rc6_matrix_observed_before_freeze": false,
+  "apparatus_candidate_branch": "research/ers-contract-e-evaluation-provenance-successor-execution-20260921",
+  "apparatus_candidate_source_commit": "c14d2cf2a4845270127286e5a140403ef46844f3",
+  "apparatus_candidate_source_tree": "27499cf9a5949de55305d93a02e683dbd9a82db5",
+  "apparatus_candidate_source_path": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py",
+  "apparatus_candidate_source_blob": "b36a4e1b45fb78af180a8cdab346979e1062846f",
+  "preflight_source_commit": "c14d2cf2a4845270127286e5a140403ef46844f3",
+  "preflight_source_tree": "27499cf9a5949de55305d93a02e683dbd9a82db5",
+  "preflight_source_path": "research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py",
+  "preflight_source_blob": "3ecb92da8ba9cff46298ca40d7eadcebcccc283a",
+  "preflight_test_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-receipt-contract-rc0/test_receipt_preflight.py",
+  "preflight_test_blob": "151d53c0a5cae910abb5de5d5d86d7846cdf679b",
+  "ers_candidate": {
+    "repository": "camerontjs-dot/epistemic-research-system",
+    "branch": "research/contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260921",
+    "base_commit": "66a82e8ac28c380ddc7eb4388bdc3daf289c1db9",
+    "source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+    "freeze_receipt_commit": "a041eeaf6d5b9959df7ef8016d3b51772a9dc1aa",
+    "freeze_receipt_tree": "ff80bd481a22aaa4c17cf1bedbcf6c4afc57488b",
+    "freeze_receipt_blob": "cbc4978f3d6890b20acb1ee02299fe8c17d84d2d",
+    "freeze_receipt_path": "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260921/FREEZE_RECEIPT.json"
+  },
+  "preregistration": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "pull_request": 130,
+    "frozen_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "preregistration_blob": "7c8904bf1237b8cf381e7d69f7b217286363b9ac",
+    "transcript_schema_path": "research/ers-contract-e-evaluation-provenance-20260921/schemas/contract-e-evaluation-transcript.rc0.schema.json",
+    "transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
+  },
+  "receipt_contract_preregistration": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "pull_request": 131,
+    "frozen_head": "077ccf6d386526bda258b3e90bd43e153c4c04c5",
+    "freeze_receipt_contract_blob": "92b029e6fb5e1a7c11a661911647e618594cd797"
+  },
+  "predecessor": {
+    "ers_source": "65bde55f770c3c3d6e9b7b2b37f74c054e809e11",
+    "ers_freeze": "66a82e8ac28c380ddc7eb4388bdc3daf289c1db9",
+    "apparatus_source": "e28c0950227f6fcf031aa413d07f94f85454ae90",
+    "apparatus_freeze": "21c960e4eba8306c855bec76afce829a801eb050",
+    "inconclusive_result": "5c437c0a11e1250e319871448cda4dd8023b8cb3"
+  },
+  "frozen_dependencies": {
+    "contract_e": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+    "contract_d": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "decision": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+    "cal_pipeline_v3": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "contract_c_consumer": "12e7e640b229619501960b1b89cf4716d8d985b3",
+    "render_bound_ers_rc4": "022fcb58e14864aa173f447fa0c18dd2362b41b0",
+    "ers_rc5_base": "099f84700f28e118734f1ca74feb977da1c4cf17",
+    "provenance_profile": "3934423b1a97ad1b099057c40fe8014e5dd08c97",
+    "provenance_root_freeze": "8f762f0d02d2f5a32d85c6b1c721782198422239"
+  },
+  "issuer": {
+    "algorithm": "Ed25519",
+    "public_key_identity": "sha256:e7f4581c2d58eecd0279f895cf3dd49df3098d092fa1e083731d802fcd1db259",
+    "private_key_scope": "qualification-only, local, outside both candidate repositories",
+    "private_key_file_mode": "0600",
+    "predecessor_private_key_available": false,
+    "successor_key_generated_before_freeze": true,
+    "rotation_after_freeze": false
+  },
+  "public_supervisor_api": {
+    "signature": "evaluate_and_attest(socket_path, *, decision, execution_intent, authority_state, challenge) -> dict[str, bytes]",
+    "wire_keys": [
+      "schema",
+      "decision",
+      "execution_intent",
+      "authority_state",
+      "challenge"
+    ],
+    "caller_time_parameter": false,
+    "caller_contract_e_result_parameter": false,
+    "caller_precomputed_transcript_signing_parameter": false,
+    "normal_api_shape_tests": "4 passed"
+  },
+  "material_environment": {
+    "os": "macOS 27.0 (26A428) arm64",
+    "python": "3.11.15",
+    "pytest": "9.1.1",
+    "jsonschema": "4.26.0",
+    "cryptography": "50.0.1",
+    "cryptography_openssl": "OpenSSL 3.5.6",
+    "rfc8785": "0.1.4",
+    "git": "2.50.1 (Apple Git-155)",
+    "node": "v26.7.0",
+    "openssl_cli": "OpenSSL 3.6.3",
+    "uv": "0.11.11 (ed7b06001)",
+    "qualification_environment": "ephemeral uvx environment with pinned dependencies"
+  },
+  "sandbox_before_decisive_run": {
+    "path": "/private/tmp/ers-rc6-sandbox-successor.TJWuEU",
+    "device": 16777233,
+    "inode": 36485857,
+    "mode_decimal": 16832,
+    "mode_octal": "0o40700",
+    "mtime_ns_decimal": "1790079149884052593",
+    "entries": [],
+    "snapshot_sha256": "sha256:5bbe9d86cf065ea4392fe8b9a1e0a9dbb8ad2604968f7c7bf2542f15621d4ec6"
+  },
+  "pre_freeze_checks": {
+    "preserved_rc6_base_api_tests": "4 passed at exact predecessor freeze 66a82e8ac28c380ddc7eb4388bdc3daf289c1db9",
+    "successor_rc6_api_tests": "4 passed",
+    "apparatus_receipt_preflight_unit_tests": "7 passed",
+    "runner_cli_help_with_pinned_runtime": "PASS",
+    "python_syntax_and_diff_check": "PASS",
+    "decisive_matrix_observed": false,
+    "contract_e_evaluations": 0
+  },
+  "pre_freeze_deviations": [
+    {
+      "event": "the qualification-only private key associated with the predecessor verifier pin was unavailable",
+      "handling": "The single successor qualification key was generated before freeze, its public identity is pinned here, and it will not be rotated after freeze.",
+      "scope": "Only the verifier public-key bytes and public-key identity pin changed; transcript schema, verification algorithm, supervisor, Contract E invocation, ERS consumer, and decisive matrix remain unchanged."
+    },
+    {
+      "event": "a direct system-Python runner-help invocation lacked the pinned jsonschema dependency",
+      "handling": "Preserved as a development setup failure; runner help was rerun with the pinned uvx dependency set and passed. No evaluator or decisive control was invoked."
+    }
+  ],
+  "boundary": {
+    "contract_e_evaluation_performed": false,
+    "decisive_matrix_performed": false,
+    "sandbox_file_created": false,
+    "executor_or_pending_review_write": false,
+    "real_mainframe_mutation": false,
+    "effect_registration_or_production_promotion": false,
+    "contract_d_or_contract_e_source_changed": false
+  }
+}
