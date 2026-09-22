@@ -1,0 +1,5 @@
+# Preserved reproduction attempt 001
+
+The preregistered composition runner at apparatus commit `f5c356e` completed against frozen ERS RC5 `099f84700f28e118734f1ca74feb977da1c4cf17`. It reproduced the authentic PIPE01 write-free success and the caller-selected evaluation-time provenance falsifier: after Contract E returned, changing only the result request's evaluation time by one second caused the pinned observer to issue a valid receipt and RC5 to return `shadow_ready=true`, `execution_occurred=false`.
+
+The raw machine receipt was retained locally with SHA-256 `fe842aa9ad8202ab7926814918d2bcceb58402a8decb9f058621c4f38af445a4`. Its released-Contract-D diagnostic preserved a Python traceback containing an absolute local checkout path, so that raw receipt is not included in the public evidence. The reproduction script's evidence serializer is being advanced in a new apparatus commit to record the tested rejection code (`unknown_effect_type`) without the machine-local traceback. The ERS candidate and the observed scientific result are unchanged.

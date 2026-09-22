@@ -201,7 +201,11 @@ def main() -> None:
             "supported_contract_d_identity": sha256_identity(stored_d),
             "supported_matches_frozen_v3": True,
             "ers_decision_identity": core.semantic_identity(node_case["ers"]),
-            "released_contract_d_rejection": node_case["released_ers_contract_d"]["message"],
+            "released_contract_d_rejection_code": (
+                "unknown_effect_type"
+                if "unknown_effect_type" in node_case["released_ers_contract_d"]["message"]
+                else "unexpected_rejection_code"
+            ),
         }
 
     pipe01 = decision_result["cases"]["PIPE01"]
