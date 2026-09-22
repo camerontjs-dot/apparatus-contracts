@@ -1,0 +1,56 @@
+{
+  "schema": "cal-pipeline-experiment-preregistration/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260921-02",
+  "predecessor_disposition": "FALSIFIED_POINT_OF_USE_CONTEXT_EVALUATION_TIME_PROVENANCE",
+  "subjects": {
+    "apparatus_predecessor": "fe9ea89bd9d7d6ecd8aa20f92dd84ab892a6931b",
+    "contract_e": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+    "ers_rc5": "099f84700f28e118734f1ca74feb977da1c4cf17",
+    "ers_render_bound_rc4": "022fcb58e14864aa173f447fa0c18dd2362b41b0",
+    "decision": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+    "cal_pipeline_v3": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "contract_d": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "provenance_profile": "3934423b1a97ad1b099057c40fe8014e5dd08c97",
+    "provenance_root_freeze": "8f762f0d02d2f5a32d85c6b1c721782198422239"
+  },
+  "primary_property": "evaluation time is independently sourced by the Contract E supervisor and bound to the exact Contract E request/result before ERS shadow_ready",
+  "required_public_supervisor_inputs": [
+    "execution intent / exact intent identity",
+    "authority-state source or exact authority-state identity as permitted by the frozen local fixture protocol",
+    "fresh ERS challenge"
+  ],
+  "forbidden_public_supervisor_inputs": [
+    "evaluation_time",
+    "contract_e_result",
+    "precomputed transcript body to sign"
+  ],
+  "decisive_mutations": [
+    "post_evaluation_result_time_plus_one_second_without_contract_e_rerun",
+    "cross_pair_two_authentic_evaluation_results_and_transcripts",
+    "one_byte_contract_e_result_mutation",
+    "wrong_execution_intent_transcript",
+    "wrong_authority_state_transcript",
+    "wrong_issuer_key",
+    "stale_transcript",
+    "replayed_challenge"
+  ],
+  "success_requires": [
+    "authentic PIPE01 shadow_ready true and execution_occurred false",
+    "all decisive mutations reject before shadow_ready",
+    "public supervisor API does not accept caller-supplied evaluation time or result",
+    "sandbox unchanged",
+    "frozen evaluator unchanged after decisive exposure"
+  ],
+  "provenance_sidecar_use": {
+    "profile": "cal-provenance-explicit-link-1",
+    "role": "research evidence capture only; not primary oracle",
+    "required_objects": [
+      "Contract E apparatus attestation",
+      "ERS apparatus attestation",
+      "run manifest"
+    ]
+  },
+  "production_mutation_permitted": false,
+  "real_executor_permitted": false,
+  "mainframe_write_permitted": false
+}
