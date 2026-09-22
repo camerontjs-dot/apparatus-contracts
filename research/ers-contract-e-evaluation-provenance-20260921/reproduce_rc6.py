@@ -111,7 +111,9 @@ def sandbox_snapshot(root: Path) -> dict[str, Any]:
         "device": stat_value.st_dev,
         "inode": stat_value.st_ino,
         "mode": stat_value.st_mode,
-        "mtime_ns": stat_value.st_mtime_ns,
+        # RFC 8785 intentionally rejects integers outside the IEEE-754 safe
+        # range; preserve exact nanoseconds as a decimal string in receipts.
+        "mtime_ns": str(stat_value.st_mtime_ns),
         "entries": entries,
     }
 
