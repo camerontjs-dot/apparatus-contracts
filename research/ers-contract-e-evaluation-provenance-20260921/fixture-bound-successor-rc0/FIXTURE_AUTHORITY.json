@@ -1,0 +1,102 @@
+{
+  "schema": "ers-evaluation-provenance-fixture-authority/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "classification": "fixture_bound_scientific_successor_preregistration",
+  "scientific_hypothesis_change": false,
+  "decisive_matrix_change": false,
+  "predecessor": {
+    "scientific_preregistration_pr": 130,
+    "scientific_preregistration_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "executable_freeze_pr": 134,
+    "executable_pr_head": "f68f0b5f06c9ecd8f8824c3b30340416d14d2d57",
+    "runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "receipt_preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076"
+  },
+  "fixture_recovery": {
+    "pull_request": 138,
+    "candidate_head": "510e9a586a015ad5b825318d0908601baf98d55a",
+    "candidate_tree": "5373e38b744ec100cc61d6188ed83ca4522070aa",
+    "disposition": "QUALIFIED_FIXTURE_RECOVERY_RC2",
+    "hosted_run_id": 35779664920,
+    "hosted_artifact_id": 10717946190,
+    "hosted_artifact_name": "cal-pipeline-v3-complete-fixture-recovery-f6a34e24552ed2e0b5d7978113d324d7bab07587",
+    "hosted_artifact_digest": "sha256:a0aae7095994051cdc8fb229701541a55ae7798d00ffa5104a6019c4afc95790",
+    "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+    "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+    "composition_result_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+    "local_hosted_byte_identity": true
+  },
+  "fixture_files": {
+    "PIPE01": {
+      "cal/contract-c.json": {
+        "sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+        "provenance": "byte_matched_to_surviving_historical_artifact"
+      },
+      "consumer-inputs.json": {
+        "sha256": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+        "provenance": "deterministically_reconstructed_without_preserved_historical_reference"
+      },
+      "decision-target.json": {
+        "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+        "provenance": "deterministically_reconstructed_without_preserved_historical_reference"
+      },
+      "contract-d.json": {
+        "sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+        "provenance": "byte_matched_to_surviving_historical_artifact"
+      }
+    },
+    "PIPE02": {
+      "cal/contract-c.json": {
+        "sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+        "provenance": "byte_matched_to_surviving_historical_artifact"
+      },
+      "consumer-inputs.json": {
+        "sha256": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+        "provenance": "deterministically_reconstructed_without_preserved_historical_reference"
+      },
+      "decision-target.json": {
+        "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+        "provenance": "deterministically_reconstructed_without_preserved_historical_reference"
+      },
+      "contract-d.json": {
+        "sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+        "provenance": "byte_matched_to_surviving_historical_artifact"
+      }
+    },
+    "PIPE03": {
+      "cal/contract-c.json": {
+        "sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+        "provenance": "byte_matched_to_surviving_historical_artifact"
+      },
+      "consumer-inputs.json": {
+        "sha256": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+        "provenance": "deterministically_reconstructed_without_preserved_historical_reference"
+      },
+      "decision-target.json": {
+        "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+        "provenance": "deterministically_reconstructed_without_preserved_historical_reference"
+      },
+      "contract-d.json": {
+        "sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+        "provenance": "byte_matched_to_surviving_historical_artifact"
+      }
+    }
+  },
+  "reconstructed_claim_content_id": "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0",
+  "required_pre_execution_gate": [
+    "fixture root contains exactly the required four files per PIPE case",
+    "all twelve file bytes match the pinned sha256 identities above",
+    "fixture manifest bytes match the pinned manifest digest",
+    "fixture verification receipt bytes match the pinned verification digest",
+    "provenance classifications match this frozen authority record",
+    "frozen scientific runner blob remains 35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "no Contract E evaluation or supervisor launch occurs before this gate passes"
+  ],
+  "falsifier": "any pinned fixture byte, provenance classification, manifest, verification receipt, or frozen runner identity differs",
+  "boundary": {
+    "historical_authority_claim_for_reconstructed_inputs": false,
+    "scientific_matrix_authorized_by_this_record": false,
+    "executor_authorized": false,
+    "mainframe_write_authorized": false
+  }
+}
