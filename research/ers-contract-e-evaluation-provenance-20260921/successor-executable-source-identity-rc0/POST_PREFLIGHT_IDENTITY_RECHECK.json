@@ -1,0 +1,44 @@
+{
+  "schema": "apparatus-post-preflight-source-identity-recheck/1",
+  "successor_id": "ERS-EVAL-TIME-PROV-20260922-04",
+  "repository": "camerontjs-dot/apparatus-contracts",
+  "fresh_detached_checkout_path": "/private/tmp/cal-rc6-exec-identity-c2.00rhcr/qualification",
+  "frozen_source_commit": "143f54da8136148c2e4781eec543ebfc230a0bba",
+  "frozen_source_tree": "d5d9c7f15e69437383c05113a8c7bb1b6919005c",
+  "receipt_evidence_commit": "af14c509413fda568b9c0307bc4c22ba82944409",
+  "observed_head": "af14c509413fda568b9c0307bc4c22ba82944409",
+  "observed_head_tree": "7bf361210d04cd4096121d88e557dbe4643b5f62",
+  "observed_head_parent": "143f54da8136148c2e4781eec543ebfc230a0bba",
+  "worktree_status_porcelain": "",
+  "worktree_clean": true,
+  "preflight": {
+    "path": "research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py",
+    "frozen_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+    "observed_worktree_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+    "observed_commit_path_blob": "e7e94523bff84792d355ef2a6da805a91919e076"
+  },
+  "runner": {
+    "path": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py",
+    "frozen_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "observed_worktree_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "observed_commit_path_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72"
+  },
+  "preflight_output": {
+    "status": "PASS",
+    "git_blob": "dfd80c338d2f00f9abd72a7e0dd6ecd88c1a559b",
+    "sha256_bytes": "sha256:8eb2e5a34c42a84030f3027b0a6833cf97553513b5966af4b902a165278ac54c",
+    "comparison_count": 54,
+    "contract_e_evaluation_calls": 0,
+    "supervisor_process_launches": 0,
+    "candidate_runtime_imports": [],
+    "network_attempts": 0
+  },
+  "prior_incomplete_recheck_attempt": {
+    "status": "INCOMPLETE_OPERATOR_PATH_ERROR",
+    "candidate_source_file_opened": false,
+    "checkout_changed": false,
+    "runner_launched": false
+  },
+  "timestamp_utc": "2026-09-22T14:19:50Z",
+  "recheck_passed": true
+}

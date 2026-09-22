@@ -18,17 +18,17 @@ from pathlib import Path
 from typing import Any
 
 
-EXPERIMENT_ID = "ERS-EVAL-TIME-PROV-20260921-03"
+EXPERIMENT_ID = "ERS-EVAL-TIME-PROV-20260922-04"
 PR130_HEAD = "dcdd10355e2f885273d843eef6e345bafca95faa"
 PR131_HEAD = "077ccf6d386526bda258b3e90bd43e153c4c04c5"
 TRANSCRIPT_SCHEMA_BLOB = "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
 ERS_REPOSITORY = "camerontjs-dot/epistemic-research-system"
 APPARATUS_REPOSITORY = "camerontjs-dot/apparatus-contracts"
 ERS_RECEIPT_RELATIVE_PATH = Path(
-    "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260921/FREEZE_RECEIPT.json"
+    "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json"
 )
 APP_RECEIPT_RELATIVE_PATH = Path(
-    "research/ers-contract-e-evaluation-provenance-20260921/successor-receipt-contract-rc0/FREEZE_RECEIPT.json"
+    "research/ers-contract-e-evaluation-provenance-20260921/successor-executable-source-identity-rc0/FREEZE_RECEIPT.json"
 )
 TRANSCRIPT_SCHEMA_PATH = (
     "research/ers-contract-e-evaluation-provenance-20260921/"
@@ -318,6 +318,8 @@ def build_preflight(
     guard: RuntimeGuard,
 ) -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
+    if apparatus_freeze_receipt.resolve() != (apparatus_root / APP_RECEIPT_RELATIVE_PATH).resolve():
+        raise PreflightError("apparatus_freeze_receipt_path_not_canonical")
     ers_receipt_git_blob = git_text(
         ers_root,
         "rev-parse",
