@@ -862,6 +862,7 @@ def run_matrix(args: argparse.Namespace, output_root: Path) -> dict[str, Any]:
         "disposition": disposition,
         "subjects": {
             "apparatus_preregistration": APPARATUS_PREREG,
+            "receipt_contract_preregistration": RECEIPT_CONTRACT_PREREG,
             "apparatus_candidate_source_commit": args.apparatus_source_commit,
             "ers_rc5_base": ERS_RC5,
             "ers_candidate_source_commit": args.ers_source_commit,
@@ -871,14 +872,14 @@ def run_matrix(args: argparse.Namespace, output_root: Path) -> dict[str, Any]:
             "cal_pipeline_v3": CAL_V3,
             "contract_c_consumer": CONTRACT_C_CONSUMER,
             "provenance_profile": PROVENANCE_PROFILE,
-        "transcript_schema_git_blob": TRANSCRIPT_SCHEMA_BLOB,
-        "receipt_preflight": {
-            "path": preflight_path.relative_to(ROOT).as_posix(),
-            "git_blob": git(ROOT, "hash-object", str(preflight_path)),
-            "sha256_bytes": sha256_identity(preflight_raw),
-            "compared_value_count": len(preflight_checks),
-            "contract_e_evaluation_calls": instrumentation["contract_e_evaluation_calls"],
-        },
+            "transcript_schema_git_blob": TRANSCRIPT_SCHEMA_BLOB,
+            "receipt_preflight": {
+                "path": preflight_path.relative_to(ROOT).as_posix(),
+                "git_blob": git(ROOT, "hash-object", str(preflight_path)),
+                "sha256_bytes": sha256_identity(preflight_raw),
+                "compared_value_count": len(preflight_checks),
+                "contract_e_evaluation_calls": instrumentation["contract_e_evaluation_calls"],
+            },
         },
         "pipe01": {
             "decision_identity": decision_identity,

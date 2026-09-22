@@ -28,7 +28,7 @@ ERS_RECEIPT_RELATIVE_PATH = Path(
     "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260921/FREEZE_RECEIPT.json"
 )
 APP_RECEIPT_RELATIVE_PATH = Path(
-    "research/ers-contract-e-evaluation-provenance-20260921/successor-receipt-contract-rc0/FREEZE_RECEIPT.json"
+    "research/ers-contract-e-evaluation-provenance-20260921/successor-executable-source-identity-rc0/FREEZE_RECEIPT.json"
 )
 TRANSCRIPT_SCHEMA_PATH = (
     "research/ers-contract-e-evaluation-provenance-20260921/"
@@ -318,6 +318,8 @@ def build_preflight(
     guard: RuntimeGuard,
 ) -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
+    if apparatus_freeze_receipt.resolve() != (apparatus_root / APP_RECEIPT_RELATIVE_PATH).resolve():
+        raise PreflightError("apparatus_freeze_receipt_path_not_canonical")
     ers_receipt_git_blob = git_text(
         ers_root,
         "rev-parse",
