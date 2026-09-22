@@ -199,6 +199,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf build/cal-pipeline-v3-fixture-recovery
+          mkdir -p build
           /tmp/cal-fixture-recovery-env/bin/python             research/cal-pipeline-v3-fixture-recovery-20260922/verify_fixture_recovery.py             --run-a /tmp/cal-fixture-recovery-a             --run-b /tmp/cal-fixture-recovery-b             --result-a /tmp/cal-fixture-recovery-result-a.json             --result-b /tmp/cal-fixture-recovery-result-b.json             --historical-artifact _historical/pr123             --out build/cal-pipeline-v3-fixture-recovery/frozen-fixtures             > build/cal-pipeline-v3-fixture-recovery-verification.json
 
       - name: Upload complete recovery evidence
