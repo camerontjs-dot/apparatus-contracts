@@ -1,0 +1,184 @@
+{
+  "schema": "ers-contract-e-evaluation-provenance-qualification-disposition/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-04",
+  "terminal_disposition": "BLOCKED",
+  "stage": "before_scientific_runner_launch",
+  "scientific_conclusion": "NONE",
+  "reason": "The exact PR130-bound PIPE fixture root could not be located or established. The available nearby fixture corpus has a different Contract C identity and incompatible layout; it was not substituted.",
+  "authorities": {
+    "scientific_preregistration": {
+      "repository": "camerontjs-dot/apparatus-contracts",
+      "pull_request": 130,
+      "commit": "dcdd10355e2f885273d843eef6e345bafca95faa"
+    },
+    "receipt_contract": {
+      "repository": "camerontjs-dot/apparatus-contracts",
+      "pull_request": 131,
+      "commit": "077ccf6d386526bda258b3e90bd43e153c4c04c5"
+    },
+    "executable_source_identity": {
+      "repository": "camerontjs-dot/apparatus-contracts",
+      "pull_request": 133,
+      "commit": "83e727bd68959f75fca05415aa13fc045f91bfef"
+    },
+    "preserved_predecessor": {
+      "apparatus_pull_request": 132,
+      "disposition": "INCONCLUSIVE",
+      "commit": "f1cd38145ca0a525b35452298360f5dba6b69eb3"
+    },
+    "ers_predecessor_pr10": {
+      "repository": "camerontjs-dot/epistemic-research-system",
+      "pull_request": 10,
+      "commit": "66a82e8ac28c380ddc7eb4388bdc3daf289c1db9"
+    },
+    "ers_predecessor_pr11": {
+      "repository": "camerontjs-dot/epistemic-research-system",
+      "pull_request": 11,
+      "commit": "a041eeaf6d5b9959df7ef8016d3b51772a9dc1aa"
+    }
+  },
+  "apparatus_candidate": {
+    "branch": "research/ers-contract-e-evaluation-provenance-exec-identity-execution-20260922",
+    "source_commit": "143f54da8136148c2e4781eec543ebfc230a0bba",
+    "source_tree": "d5d9c7f15e69437383c05113a8c7bb1b6919005c",
+    "receipt_evidence_commit": "af14c509413fda568b9c0307bc4c22ba82944409",
+    "receipt_evidence_tree": "7bf361210d04cd4096121d88e557dbe4643b5f62",
+    "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py",
+    "runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "preflight_path": "research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py",
+    "preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+    "transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
+  },
+  "ers_candidate": {
+    "branch": "research/contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922",
+    "source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+    "freeze_receipt_commit": "64ed29cc444931f4807f627ad75523e14cf00c03",
+    "freeze_receipt_tree": "08c6ae9833ada46b09928b6e6fed3e00f516951b",
+    "freeze_receipt_blob": "e66996d515817ff66682fc7f1d552c75d57ed2c0"
+  },
+  "source_identity_gate": {
+    "status": "PASS",
+    "receipt_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-executable-source-identity-rc0/EXECUTABLE_SOURCE_IDENTITY.json",
+    "receipt_sha256": "sha256:65f4e9fa5d1658429585e1dd4bd7cba530967d8f1c7f48c513b8b674aa00ebc8",
+    "candidate_python_executed_before_identity_gate": false,
+    "observed_head_equals_frozen_source_commit": true,
+    "observed_tree_equals_frozen_source_tree": true,
+    "worktree_clean": true,
+    "runner_worktree_commit_path_frozen_blob_equal": true,
+    "preflight_worktree_commit_path_frozen_blob_equal": true
+  },
+  "receipt_preflight": {
+    "status": "PASS",
+    "candidate_script_executions": 1,
+    "output_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-executable-source-identity-rc0/PREFLIGHT_PASS.json",
+    "output_git_blob": "dfd80c338d2f00f9abd72a7e0dd6ecd88c1a559b",
+    "output_sha256": "sha256:8eb2e5a34c42a84030f3027b0a6833cf97553513b5966af4b902a165278ac54c",
+    "comparison_count": 54,
+    "contract_e_evaluation_calls": 0,
+    "supervisor_process_launches": 0,
+    "candidate_runtime_imports": [],
+    "network_attempts": 0,
+    "failed_launcher_attempts": 1,
+    "failed_launcher_attempt_opened_candidate_file": false,
+    "failed_launcher_attempt_reason": "An operator path typo caused the shell Python launcher to report that receipt_preflight.py could not be opened. The frozen file was not opened or executed."
+  },
+  "post_preflight_identity_recheck": {
+    "status": "PASS",
+    "receipt_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-executable-source-identity-rc0/POST_PREFLIGHT_IDENTITY_RECHECK.json",
+    "timestamp_utc": "2026-09-22T14:19:50Z",
+    "observed_head": "af14c509413fda568b9c0307bc4c22ba82944409",
+    "observed_tree": "7bf361210d04cd4096121d88e557dbe4643b5f62",
+    "worktree_clean": true,
+    "runner_worktree_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "runner_commit_path_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "preflight_worktree_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+    "preflight_commit_path_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+    "failed_prior_recheck_attempt": "An operator path typo left the blob comparisons incomplete; the runner was not launched, and the corrected complete recheck passed."
+  },
+  "development_tests": {
+    "count": 4,
+    "result": "PASS",
+    "test_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-executable-source-identity-rc0/test_pr132_delta_static.py",
+    "test_blob": "683e16dfe2e4cef374de883bcad7a8debcdb2552",
+    "method": "AST parsing only; candidate runner and preflight were not imported or executed by these tests"
+  },
+  "matrix_inputs": {
+    "required_layout_per_case": [
+      "<fixtures>/<PIPE>/cal/contract-c.json",
+      "<fixtures>/<PIPE>/consumer-inputs.json",
+      "<fixtures>/<PIPE>/decision-target.json",
+      "<fixtures>/<PIPE>/contract-d.json"
+    ],
+    "required_cases": ["PIPE01", "PIPE02", "PIPE03"],
+    "frozen_expected_identities_from_PR127_receipt": {
+      "PIPE01": {
+        "contract_c_sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+        "supported_contract_d_sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24"
+      },
+      "PIPE02": {
+        "contract_c_sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+        "supported_contract_d_sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230"
+      },
+      "PIPE03": {
+        "contract_c_sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+        "supported_contract_d_sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55"
+      }
+    },
+    "searched_authoritative_surfaces": [
+      "Live apparatus-contracts PR130 changed files and its exact frozen tree",
+      "The frozen PR127 parent-bound receipt carried forward in apparatus source",
+      "Local MainFrame decision-engine fixture runs",
+      "Existing /private/tmp qualification checkouts"
+    ],
+    "unavailable_authority": "No fixture root with the required layout and frozen case identities was present in the inspected authority surfaces.",
+    "nearby_nonmatching_fixture": {
+      "path": "30_projects/decision-engine/install-runs/2026-09-20-de-parent-grok-001/fixtures/parent-bound-cases/PIPE01",
+      "files": ["consumer-inputs.json", "contract-c.json", "validated.json"],
+      "contract_c_sha256": "sha256:a0e2f77b48a9a9fe8347df345e5f112cfe76bde19cc82986c2efaccf90730524",
+      "why_not_used": "Different Contract C identity; lacks the required cal/contract-c.json, decision-target.json, and contract-d.json layout."
+    },
+    "substitution_performed": false
+  },
+  "scientific_run": {
+    "runner_launched": false,
+    "matrix_started": false,
+    "supervisor_launches": 0,
+    "contract_e_matrix_evaluations": 0,
+    "pipe01_authentic_path": "NOT_RUN",
+    "pipe01_execution_intent_identity": "NOT_OBSERVED",
+    "contract_e_request_identity": "NOT_OBSERVED",
+    "contract_e_result_identity": "NOT_OBSERVED",
+    "contract_e_transcript_identity": "NOT_OBSERVED",
+    "ers_shadow_identity": "NOT_OBSERVED",
+    "provenance_sidecars": "NOT_GENERATED",
+    "sandbox": {
+      "root_created": false,
+      "before": "NOT_OBSERVED",
+      "after": "NOT_OBSERVED"
+    },
+    "decisive_controls": {
+      "post_evaluation_plus_one_second_without_rerun": "NOT_RUN",
+      "result_A_transcript_B": "NOT_RUN",
+      "result_B_transcript_A": "NOT_RUN",
+      "one_byte_contract_e_result_mutation": "NOT_RUN",
+      "wrong_execution_intent": "NOT_RUN",
+      "wrong_authority_state": "NOT_RUN",
+      "wrong_issuer": "NOT_RUN",
+      "stale_transcript": "NOT_RUN",
+      "replayed_challenge": "NOT_RUN",
+      "caller_evaluation_time_or_result_injection": "NOT_RUN",
+      "PIPE02_expected_HOLD": "NOT_RUN",
+      "PIPE03_expected_HOLD": "NOT_RUN"
+    }
+  },
+  "bounded_nonclaims": [
+    "No scientific conclusion about Contract E evaluation-time provenance was reached.",
+    "No authentic PIPE01 path, Contract E request/result/transcript, ERS shadow result, or mutation outcome was observed in this successor.",
+    "The receipt preflight PASS establishes receipt consistency only; it is not Contract E evaluation or PR130 matrix evidence.",
+    "The frozen source identity and preflight gates passed, but the scientific runner did not launch.",
+    "No executor, pending-review write, effect registration, release, merge, production promotion, or real MainFrame mutation occurred."
+  ],
+  "smallest_next_falsifier": "Recover the exact PR130-bound PIPE fixture root and verify its required paths plus PIPE01-03 Contract C / supported Contract D identities against the frozen PR127 receipt. Then run the complete unchanged matrix from the existing frozen apparatus and ERS candidates; the first decisive falsifier is the +1-second post-evaluation result-time mutation without rerunning Contract E.",
+  "timestamp_utc": "2026-09-22T14:27:00Z"
+}
