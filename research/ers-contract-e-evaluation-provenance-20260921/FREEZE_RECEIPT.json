@@ -1,0 +1,118 @@
+{
+  "schema": "ers-contract-e-evaluation-provenance-apparatus-freeze/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260921-02",
+  "frozen_at_utc": "2026-09-22T02:33:14Z",
+  "decisive_rc6_matrix_observed_before_freeze": false,
+  "apparatus_candidate_source_commit": "e28c0950227f6fcf031aa413d07f94f85454ae90",
+  "apparatus_candidate_source_tree": "255ca6ba9d6d007c9392a92c5bccc850d22eb55b",
+  "apparatus_candidate_source_blob": "f27a7288900ff8a8e273f1578df9d0f849e0e9ab",
+  "apparatus_candidate_source_path": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py",
+  "repository": "camerontjs-dot/apparatus-contracts",
+  "branch": "research/ers-contract-e-evaluation-provenance-execution-20260921",
+  "preregistration": {
+    "pull_request": 130,
+    "frozen_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "preregistration_blob": "7c8904bf1237b8cf381e7d69f7b217286363b9ac",
+    "experiment_blob": "7b0515c186b70b081aad4774821045b2b8202774",
+    "transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
+  },
+  "ers_candidate": {
+    "repository": "camerontjs-dot/epistemic-research-system",
+    "branch": "research/contract-e-evaluation-transcript-rc6-20260921",
+    "source_commit": "65bde55f770c3c3d6e9b7b2b37f74c054e809e11",
+    "source_tree": "1f33789ef4efd592d6cab9c6586c522846ac0d52",
+    "freeze_receipt_commit": "66a82e8ac28c380ddc7eb4388bdc3daf289c1db9",
+    "freeze_receipt_tree": "0c0a066882da4f366a9beac7df51b1bca18f22a7",
+    "freeze_receipt_blob": "f7cdd796acda9ff45c1f59e526ca3597b0d855df",
+    "transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
+  },
+  "frozen_dependencies": {
+    "contract_e": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+    "contract_d": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "decision": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+    "cal_pipeline_v3": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "contract_c_consumer": "12e7e640b229619501960b1b89cf4716d8d985b3",
+    "render_bound_ers_rc4": "022fcb58e14864aa173f447fa0c18dd2362b41b0",
+    "ers_rc5_base": "099f84700f28e118734f1ca74feb977da1c4cf17",
+    "provenance_profile": "3934423b1a97ad1b099057c40fe8014e5dd08c97"
+  },
+  "issuer": {
+    "algorithm": "Ed25519",
+    "public_key_identity": "sha256:9b97a2a3f588c60b899f93c5dbbd010c41e8bd93f5790d6ba11fb8c381d4da17",
+    "private_key_scope": "qualification-only, local and outside candidate repositories",
+    "private_key_file_mode": "0600",
+    "rotation_after_freeze": false
+  },
+  "public_supervisor_api": {
+    "signature": "evaluate_and_attest(socket_path, *, decision, execution_intent, authority_state, challenge) -> dict[str, bytes]",
+    "wire_keys": ["schema", "decision", "execution_intent", "authority_state", "challenge"],
+    "caller_time_parameter": false,
+    "caller_contract_e_result_parameter": false,
+    "caller_precomputed_transcript_signing_parameter": false,
+    "normal_api_shape_tests": "4 passed"
+  },
+  "material_environment": {
+    "os": "macOS 26.5.2 arm64",
+    "python": "3.11.15",
+    "pytest": "9.1.1",
+    "jsonschema": "4.26.0",
+    "cryptography": "50.0.1",
+    "cryptography_openssl": "OpenSSL 4.0.2",
+    "rfc8785": "0.1.4",
+    "git": "2.50.1 (Apple Git-155)",
+    "node": "v26.7.0",
+    "openssl_cli": "OpenSSL 3.6.3",
+    "uv": "0.11.11 (ed7b06001)",
+    "qualification_venv": "/private/tmp/ers-rc6-qualification.hKVgXS/venv"
+  },
+  "sandbox_before_decisive_run": {
+    "path": "/private/tmp/ers-rc6-sandbox.5kzYoe",
+    "device": 16777233,
+    "inode": 36340413,
+    "mode_decimal": 16832,
+    "mode_octal": "0o40700",
+    "mtime_ns_decimal": "1790043579576573106",
+    "entries": [],
+    "snapshot_sha256": "sha256:02f0329451a49534087e4a61dc7a0b1969bcbe4cddc3be3905c62787253efe8c"
+  },
+  "pre_freeze_verification": {
+    "contract_e_variable_input_identities": "lengths 3, 5 and 7 accepted by frozen execution-intent-candidate-v1 profile",
+    "rc5_baseline": "29 passed, 22 subtests passed with matching pinned issuer key",
+    "rc6_api": "4 passed",
+    "matrix_rejection_helper": "3 scenarios passed; no Contract E evaluation",
+    "synthetic_profile_sidecars": "PASS; exact profile 3934423b1a97ad1b099057c40fe8014e5dd08c97; 27 references; synthetic only",
+    "sandbox_snapshot_rfc8785": "PASS",
+    "transcript_schema_blob": "PASS exact PR #130 blob",
+    "syntax_help_and_diff_checks": "PASS"
+  },
+  "preserved_pre_freeze_deviations": [
+    {
+      "event": "synthetic sidecar smoke first emitted run-manifest IDs without the sha256 segment",
+      "attempt_output_path": "/var/folders/7g/zcws5p_15fq6s6lbrr646b000000gn/T/ers-rc6-sidecar-dryrun-1eosxqjb",
+      "invalid_manifest_id": "run-manifest:2f5c0155d9921f531fde77dc89606d40d15c039310b829bc8c54a88ce7b807df",
+      "resolution": "fixed before freeze; exact-profile synthetic validation then passed"
+    },
+    {
+      "event": "cross-pair control could reject on challenge mismatch before result binding",
+      "resolution": "frozen harness now uses the paired transcript challenge/request and requires the exact result-digest mismatch"
+    },
+    {
+      "event": "sandbox mtime_ns exceeded the RFC 8785 safe integer domain",
+      "resolution": "frozen harness records exact nanoseconds as a decimal string; canonical serialization passed"
+    },
+    {
+      "event": "initial runner copy landed untracked in the point-of-use-context worktree",
+      "attempt_worktree_head": "fe9ea89bd9d7d6ecd8aa20f92dd84ab892a6931b",
+      "attempt_file_sha256": "093dac6e2d70457b941d2c9f597bc8219f6023663f771df1b507c0ee3ba9dfc0",
+      "resolution": "left uncommitted and preserved; prepared execution branch is the frozen source"
+    }
+  ],
+  "boundary": {
+    "decisive_rc6_contract_e_evaluation_performed": false,
+    "mutation_matrix_performed": false,
+    "sandbox_file_created": false,
+    "executor_or_pending_review_write": false,
+    "real_mainframe_mutation": false,
+    "effect_registration_or_production_promotion": false
+  }
+}
