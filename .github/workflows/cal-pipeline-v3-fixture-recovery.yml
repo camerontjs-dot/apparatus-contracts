@@ -22,6 +22,7 @@ env:
   C_CONSUMER: 12e7e640b229619501960b1b89cf4716d8d985b3
   DE_SHA: 6cdb59c2ba41779ac954af56dd077574ba090013
   D_RELEASE: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+  D_TAG_OBJECT: 6eadd688b482f3c9fce2ce5e7a2841089d852096
 
 jobs:
   recover:
@@ -111,7 +112,7 @@ jobs:
           repository: camerontjs-dot/apparatus-contracts
           ref: ${{ env.D_RELEASE }}
           path: _subjects/contract-d
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Download surviving PR123 artifact
         uses: actions/download-artifact@v4
@@ -144,6 +145,8 @@ jobs:
           test "$(git -C _subjects/contract-c-consumer rev-parse HEAD)" = "$C_CONSUMER"
           test "$(git -C _subjects/decision rev-parse HEAD)" = "$DE_SHA"
           test "$(git -C _subjects/contract-d rev-parse HEAD)" = "$D_RELEASE"
+          test "$(git -C _subjects/contract-d rev-parse refs/tags/contract-d-v1.0.0)" = "$D_TAG_OBJECT"
+          test "$(git -C _subjects/contract-d rev-parse 'refs/tags/contract-d-v1.0.0^{}')" = "$D_RELEASE"
 
       - name: Prepare exact historical runtime
         shell: bash
