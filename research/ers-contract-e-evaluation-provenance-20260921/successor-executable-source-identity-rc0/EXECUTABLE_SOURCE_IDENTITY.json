@@ -1,0 +1,27 @@
+{
+  "schema": "apparatus-executable-source-identity/1",
+  "successor_id": "ERS-EVAL-TIME-PROV-20260922-04",
+  "repository": "camerontjs-dot/apparatus-contracts",
+  "fresh_detached_checkout_path": "/private/tmp/cal-rc6-exec-identity-c2.00rhcr/qualification",
+  "frozen_source_commit": "143f54da8136148c2e4781eec543ebfc230a0bba",
+  "observed_head": "143f54da8136148c2e4781eec543ebfc230a0bba",
+  "frozen_source_tree": "d5d9c7f15e69437383c05113a8c7bb1b6919005c",
+  "observed_head_tree": "d5d9c7f15e69437383c05113a8c7bb1b6919005c",
+  "worktree_status_porcelain": "",
+  "worktree_clean": true,
+  "preflight": {
+    "path": "research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py",
+    "frozen_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+    "observed_worktree_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+    "observed_commit_path_blob": "e7e94523bff84792d355ef2a6da805a91919e076"
+  },
+  "runner": {
+    "path": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py",
+    "frozen_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "observed_worktree_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "observed_commit_path_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72"
+  },
+  "timestamp_utc": "2026-09-22T14:07:06Z",
+  "candidate_python_executed_before_identity_gate": false,
+  "identity_gate_passed": true
+}
