@@ -159,7 +159,7 @@ jobs:
           /tmp/cal-fixture-recovery-env/bin/python -m py_compile             research/cal-pipeline-v3-fixture-recovery-20260922/verify_fixture_recovery.py
 
       - name: Reproduce complete fixture world A
-        env: &composition_env
+        env:
           CONTRACT_A_ROOT: ${{ github.workspace }}/_subjects/contract-a
           EB_ROOT: ${{ github.workspace }}/_subjects/eb
           CONTRACT_C_ROOT: ${{ github.workspace }}/_subjects/contract-c
