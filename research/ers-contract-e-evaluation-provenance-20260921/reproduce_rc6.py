@@ -27,7 +27,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-EXPERIMENT_ID = "ERS-EVAL-TIME-PROV-20260921-03"
+EXPERIMENT_ID = "ERS-EVAL-TIME-PROV-20260922-04"
 APPARATUS_PREREG = "dcdd10355e2f885273d843eef6e345bafca95faa"
 RECEIPT_CONTRACT_PREREG = "077ccf6d386526bda258b3e90bd43e153c4c04c5"
 CONTRACT_E = "b153dcc4434cbe8a98616a9e410c6125378144c7"
@@ -40,6 +40,9 @@ ERS_RC4 = "022fcb58e14864aa173f447fa0c18dd2362b41b0"
 ERS_RC3 = "319e325cdf678673fae645a70e3e34afb7dddef0"
 PROVENANCE_PROFILE = "3934423b1a97ad1b099057c40fe8014e5dd08c97"
 TRANSCRIPT_SCHEMA_BLOB = "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
+ERS_RECEIPT_RELATIVE_PATH = Path(
+    "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json"
+)
 CLAIM_CONTENT_ID = "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0"
 PIPE01_DECISION_ID = "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15"
 ISSUER_KEY_ID = "sha256:e7f4581c2d58eecd0279f895cf3dd49df3098d092fa1e083731d802fcd1db259"
@@ -291,7 +294,7 @@ def run_matrix(args: argparse.Namespace, output_root: Path) -> dict[str, Any]:
     check(schema_path.is_file(), "frozen_transcript_schema_missing")
     check(git(ROOT, "hash-object", str(schema_path)) == TRANSCRIPT_SCHEMA_BLOB, "transcript_schema_blob_mismatch")
 
-    freeze_receipt_path = ers_root / "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260921/FREEZE_RECEIPT.json"
+    freeze_receipt_path = ers_root / ERS_RECEIPT_RELATIVE_PATH
     freeze_receipt = json.loads(freeze_receipt_path.read_text(encoding="utf-8"))
     check("implementation_source_commit" not in freeze_receipt, "noncanonical_ers_source_commit_alias")
     check(freeze_receipt["implementation"]["source_commit"] == args.ers_source_commit, "ers_source_commit_freeze_mismatch")
@@ -312,7 +315,7 @@ def run_matrix(args: argparse.Namespace, output_root: Path) -> dict[str, Any]:
     ers_freeze_commit = app_freeze["ers_candidate"]["freeze_receipt_commit"]
     ers_freeze_blob = app_freeze["ers_candidate"]["freeze_receipt_blob"]
     check(git(ers_root, "rev-parse", "HEAD") == ers_freeze_commit, "ers_freeze_receipt_commit_mismatch")
-    check(git(ers_root, "rev-parse", f"{ers_freeze_commit}:research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260921/FREEZE_RECEIPT.json") == ers_freeze_blob, "ers_freeze_receipt_blob_mismatch")
+    check(git(ers_root, "rev-parse", f"{ers_freeze_commit}:{ERS_RECEIPT_RELATIVE_PATH.as_posix()}") == ers_freeze_blob, "ers_freeze_receipt_blob_mismatch")
 
     preflight_path = args.preflight_pass_receipt.resolve()
     preflight_raw = preflight_path.read_bytes()

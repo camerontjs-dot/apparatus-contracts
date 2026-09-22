@@ -24,6 +24,35 @@ def _function(path: Path, name: str) -> ast.FunctionDef:
 
 
 class Pr132DeltaStaticTests(unittest.TestCase):
+    def test_candidate_scripts_pin_successor_id_and_ers_receipt_path(self) -> None:
+        preflight = ast.parse(
+            PREFLIGHT.read_text(encoding="utf-8"), filename=str(PREFLIGHT)
+        )
+        runner = ast.parse(RUNNER.read_text(encoding="utf-8"), filename=str(RUNNER))
+
+        def assigned_value(module: ast.Module, name: str) -> ast.expr:
+            assignment = next(
+                node
+                for node in module.body
+                if isinstance(node, ast.Assign)
+                and any(
+                    isinstance(target, ast.Name) and target.id == name
+                    for target in node.targets
+                )
+            )
+            return assignment.value
+
+        expected_id = "ERS-EVAL-TIME-PROV-20260922-04"
+        self.assertEqual(ast.literal_eval(assigned_value(preflight, "EXPERIMENT_ID")), expected_id)
+        self.assertEqual(ast.literal_eval(assigned_value(runner, "EXPERIMENT_ID")), expected_id)
+
+        expected_path = (
+            "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-"
+            "successor-20260922/FREEZE_RECEIPT.json"
+        )
+        self.assertIn(expected_path, ast.unparse(assigned_value(preflight, "ERS_RECEIPT_RELATIVE_PATH")))
+        self.assertIn(expected_path, ast.unparse(assigned_value(runner, "ERS_RECEIPT_RELATIVE_PATH")))
+
     def test_preflight_receipt_path_is_scoped_to_this_successor(self) -> None:
         module = ast.parse(
             PREFLIGHT.read_text(encoding="utf-8"), filename=str(PREFLIGHT)
