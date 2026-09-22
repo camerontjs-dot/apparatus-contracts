@@ -1,0 +1,89 @@
+{
+  "schema": "ers-evaluation-provenance-prematrix-review/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260921-03",
+  "disposition": "INCONCLUSIVE",
+  "classification": "frozen apparatus/preflight source identity was not established",
+  "scientific_matrix_started": false,
+  "contract_e_evaluation_started": false,
+  "decisive_result_observed": false,
+  "candidate_freezes": {
+    "ers": {
+      "base_commit": "66a82e8ac28c380ddc7eb4388bdc3daf289c1db9",
+      "source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+      "source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+      "freeze_commit": "a041eeaf6d5b9959df7ef8016d3b51772a9dc1aa",
+      "freeze_tree": "ff80bd481a22aaa4c17cf1bedbcf6c4afc57488b",
+      "freeze_receipt_blob": "cbc4978f3d6890b20acb1ee02299fe8c17d84d2d"
+    },
+    "apparatus": {
+      "base_commit": "077ccf6d386526bda258b3e90bd43e153c4c04c5",
+      "source_commit": "c14d2cf2a4845270127286e5a140403ef46844f3",
+      "source_tree": "27499cf9a5949de55305d93a02e683dbd9a82db5",
+      "source_blobs": {
+        "reproduce_rc6.py": "b36a4e1b45fb78af180a8cdab346979e1062846f",
+        "receipt_preflight.py": "3ecb92da8ba9cff46298ca40d7eadcebcccc283a"
+      },
+      "freeze_commit": "26ffa1b66d752165cb5a2ae8cbe51e96c6a19c4e",
+      "freeze_tree": "705395400c142dea6e89978368c85af7e7b5a93d",
+      "freeze_receipt_blob": "1329bf07c4900e4cc8b5a9e084b00325f992f806",
+      "preflight_pass_blob": "2686125e84a96ff532e780a15c0e2f8d2f902af4",
+      "preflight_pass_sha256": "sha256:69364a26394b603805659dd0e979468f9179ef3faf2bcb3d8d746cd1b730f68d"
+    }
+  },
+  "preflight_observation": {
+    "recorded_status": "PASS",
+    "comparison_count": 54,
+    "all_recorded_comparisons_passed": true,
+    "instrumentation": {
+      "contract_e_evaluation_calls": 0,
+      "supervisor_process_launches": 0,
+      "candidate_runtime_imports": [],
+      "network_attempts": 0,
+      "git_processes": 23,
+      "non_git_processes": []
+    },
+    "frozen_preflight_source_blob": "3ecb92da8ba9cff46298ca40d7eadcebcccc283a",
+    "executed_worktree_preflight_blob": "6a97d24dec6ea60c52581ccbe2b8ab10977e1e0d",
+    "identity_mismatch": true
+  },
+  "runner_source_observation": {
+    "frozen_runner_blob": "b36a4e1b45fb78af180a8cdab346979e1062846f",
+    "worktree_runner_blob_observed_after_freeze": "0af2885ce346578dbaa9d11feaa9ab45703f2ea7",
+    "identity_mismatch": true
+  },
+  "preserved_worktree_delta": [
+    {
+      "file": "research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py",
+      "observed_change": "added a canonical apparatus freeze receipt path guard after the source commit"
+    },
+    {
+      "file": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py",
+      "observed_change": "added the PR #131 identity to result metadata and corrected indentation after the source commit"
+    }
+  ],
+  "qualification_checks": {
+    "preserved_rc6_base_api_tests_at_66a82e8": "4 passed",
+    "ers_successor_api_tests_at_65f47d0": "4 passed",
+    "apparatus_preflight_unit_tests_on_worktree_blob_6a97d24": "7 passed; not attributed to frozen preflight blob 3ecb92d",
+    "runner_help": "passed with pinned uvx dependencies on worktree runner blob 0af2885; direct system-Python attempt failed because jsonschema was absent",
+    "no_contract_e_supervisor_or_evaluation": true
+  },
+  "reasoning": {
+    "observation": "The preflight PASS records the frozen Git source blob but the process executed a different worktree preflight blob. The apparatus runner worktree also differed from its recorded source blob.",
+    "inference": "The candidate integrity boundary is not demonstrated. The preflight PASS cannot qualify the frozen source, and no scientific conclusion is available.",
+    "smallest_next_falsifier": "In a new successor, require a clean worktree and verify the executing preflight module and runner bytes equal their frozen source blobs before the non-evaluating receipt comparison; freeze that exact candidate, then run the unchanged PR #130 matrix."
+  },
+  "sandbox": {
+    "before_snapshot_sha256": "sha256:5bbe9d86cf065ea4392fe8b9a1e0a9dbb8ad2604968f7c7bf2542f15621d4ec6",
+    "after_snapshot_sha256": "sha256:5bbe9d86cf065ea4392fe8b9a1e0a9dbb8ad2604968f7c7bf2542f15621d4ec6",
+    "entries_after": [],
+    "unchanged": true
+  },
+  "non_claims": [
+    "No Contract E result, request, or transcript was produced.",
+    "No PIPE01, PIPE02, PIPE03, or decisive mutation control was run.",
+    "No provenance sidecars were generated.",
+    "No executor, pending-review write, MainFrame mutation, effect registration, release, merge, or production promotion occurred.",
+    "This INCONCLUSIVE result is not evidence for or against the evaluation-time provenance hypothesis."
+  ]
+}
