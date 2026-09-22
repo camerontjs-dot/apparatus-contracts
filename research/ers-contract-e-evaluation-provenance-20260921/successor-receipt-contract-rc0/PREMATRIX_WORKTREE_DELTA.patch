@@ -1,0 +1,48 @@
+diff --git a/research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py b/research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py
+index 3ecb92d..6a97d24 100644
+--- a/research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py
++++ b/research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py
+@@ -318,6 +318,8 @@ def build_preflight(
+     guard: RuntimeGuard,
+ ) -> dict[str, Any]:
+     checks: list[dict[str, Any]] = []
++    if apparatus_freeze_receipt.resolve() != (apparatus_root / APP_RECEIPT_RELATIVE_PATH).resolve():
++        raise PreflightError("apparatus_freeze_receipt_path_not_canonical")
+     ers_receipt_git_blob = git_text(
+         ers_root,
+         "rev-parse",
+diff --git a/research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py b/research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py
+index b36a4e1..0af2885 100644
+--- a/research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py
++++ b/research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py
+@@ -862,6 +862,7 @@ def run_matrix(args: argparse.Namespace, output_root: Path) -> dict[str, Any]:
+         "disposition": disposition,
+         "subjects": {
+             "apparatus_preregistration": APPARATUS_PREREG,
++            "receipt_contract_preregistration": RECEIPT_CONTRACT_PREREG,
+             "apparatus_candidate_source_commit": args.apparatus_source_commit,
+             "ers_rc5_base": ERS_RC5,
+             "ers_candidate_source_commit": args.ers_source_commit,
+@@ -871,14 +872,14 @@ def run_matrix(args: argparse.Namespace, output_root: Path) -> dict[str, Any]:
+             "cal_pipeline_v3": CAL_V3,
+             "contract_c_consumer": CONTRACT_C_CONSUMER,
+             "provenance_profile": PROVENANCE_PROFILE,
+-        "transcript_schema_git_blob": TRANSCRIPT_SCHEMA_BLOB,
+-        "receipt_preflight": {
+-            "path": preflight_path.relative_to(ROOT).as_posix(),
+-            "git_blob": git(ROOT, "hash-object", str(preflight_path)),
+-            "sha256_bytes": sha256_identity(preflight_raw),
+-            "compared_value_count": len(preflight_checks),
+-            "contract_e_evaluation_calls": instrumentation["contract_e_evaluation_calls"],
+-        },
++            "transcript_schema_git_blob": TRANSCRIPT_SCHEMA_BLOB,
++            "receipt_preflight": {
++                "path": preflight_path.relative_to(ROOT).as_posix(),
++                "git_blob": git(ROOT, "hash-object", str(preflight_path)),
++                "sha256_bytes": sha256_identity(preflight_raw),
++                "compared_value_count": len(preflight_checks),
++                "contract_e_evaluation_calls": instrumentation["contract_e_evaluation_calls"],
++            },
+         },
+         "pipe01": {
+             "decision_identity": decision_identity,
