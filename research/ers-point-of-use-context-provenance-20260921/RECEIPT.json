@@ -1,0 +1,165 @@
+{
+  "schema": "ers-point-of-use-context-provenance-composition-receipt/1",
+  "experiment_id": "ERS-POU-CTX-20260921-01",
+  "disposition": "FALSIFIED_POINT_OF_USE_CONTEXT_EVALUATION_TIME_PROVENANCE",
+  "subjects": {
+    "apparatus_pr127_base": "bb8ff5c5d9fd3e221b0dea76e4748fe85be30796",
+    "apparatus_pr128_base": "5fefe7ac3725ccf3a68ff1fa5991ebc14add6856",
+    "decision_successor": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+    "cal_pipeline_v3": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "contract_d": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "contract_e_profile": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+    "contract_c_consumer": "12e7e640b229619501960b1b89cf4716d8d985b3",
+    "ers_rc3_preserved": "319e325cdf678673fae645a70e3e34afb7dddef0",
+    "ers_render_bound_successor": "022fcb58e14864aa173f447fa0c18dd2362b41b0",
+    "ers_preregistration": "907a10dae0d3d1fc78acbfda3c26a164f3a4693b",
+    "ers_rc5_frozen_successor": "099f84700f28e118734f1ca74feb977da1c4cf17",
+    "ers_rc5_tree": "db84bae8bf070d03ce9b613ab9c35e6302f8dc0c"
+  },
+  "contract_e_compatibility": {
+    "schema": "execution-intent-candidate-v1",
+    "input_identity_count": 5,
+    "variable_length_intent_accepted": true,
+    "intent_identity": "sha256:ea2eecfa42cde738ab1e742174830a76184d282a5c6d48c37af31dd2d2cc851d",
+    "contract_e_source_changed": false
+  },
+  "pipe01": {
+    "decision_semantic_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+    "claim_content_sha256": "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0",
+    "render_packet_schema": "ers-pending-review-render-packet-v1",
+    "render_packet_identity": "sha256:fc3ae075b85ebeb4a8d329453505b9a9cd3bb0ee5658e04f5f77b853cc2b2512",
+    "payload_identity": "sha256:f8d3a15fbf385a5846311b73a3e121bae92f7842d92dafb9ffc79612fd68f221",
+    "pre_state_identity": "sha256:afb81fe5d0279a2640bbcaf856462754ad619cc56993912681272a6be3b03d63",
+    "executable_identity": "sha256:f8e5f4840a1fd85f3d17fe357028f2fdd3231ab69e300cd369b0643a53982d44",
+    "execution_intent_identity": "sha256:45e86d877a5882e3171108981ec52d4bc95ac2883cca4128e5f0ba300026152b",
+    "execution_intent_input_identities": [
+      "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+      "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0",
+      "sha256:afb81fe5d0279a2640bbcaf856462754ad619cc56993912681272a6be3b03d63",
+      "sha256:fc3ae075b85ebeb4a8d329453505b9a9cd3bb0ee5658e04f5f77b853cc2b2512",
+      "sha256:f8d3a15fbf385a5846311b73a3e121bae92f7842d92dafb9ffc79612fd68f221"
+    ],
+    "contract_e_result_identity": "sha256:d0abb0c004b87874dffb64e46db332001c489e0dd4dde9975d9c0f6331d76ac3",
+    "ers_shadow_result_identity": "sha256:419a1648a14aa55e2bdf3bc6df19dead41abb26141afd51a048b0cd05f389812",
+    "shadow_ready": true,
+    "execution_occurred": false,
+    "sandbox_before": [],
+    "sandbox_after": []
+  },
+  "context_receipt": {
+    "schema": "ers-point-of-use-context-receipt-v1",
+    "identity": "sha256:c906c2ea98d4e8cb9082a8c4b161ca05df661682c139f9e7e282c59126668b4e",
+    "issuer_id": "ers-qualification-local-supervisor-v1",
+    "issuer_key_id": "sha256:9b97a2a3f588c60b899f93c5dbbd010c41e8bd93f5790d6ba11fb8c381d4da17",
+    "signature_independently_verified": true,
+    "body_identity_independently_recomputed": true,
+    "evaluation_time_source_id": "contract-e-authorization-request.evaluation_time",
+    "authority_state_source_id": "qualification-authority-state-fixture-v1",
+    "observer_clock_source_id": "qualification-supervisor-process.os-clock-utc-v1",
+    "authority_state_identity": "sha256:ecb0ebe9018bdb7c784417d519a36fa5c1f18369fe87d7497520e6e0a201a6a6",
+    "evaluation_time": "2026-09-22T00:43:25.234368Z",
+    "observed_at": "2026-09-22T00:43:25.281795Z",
+    "freshness_age_seconds": 0.047427,
+    "signed_receipt": {
+      "body": {
+        "authority_state_identity": "sha256:ecb0ebe9018bdb7c784417d519a36fa5c1f18369fe87d7497520e6e0a201a6a6",
+        "challenge": "WFu9FQEZQ584LvXhZRtkKJ1DFVpRuhKH6ZRiW8bx__Y",
+        "evaluation_time": "2026-09-22T00:43:25.234368Z",
+        "execution_intent_identity": "sha256:45e86d877a5882e3171108981ec52d4bc95ac2883cca4128e5f0ba300026152b",
+        "freshness_max_seconds": "30",
+        "issued_at": "2026-09-22T00:43:25.281795Z",
+        "issuer_id": "ers-qualification-local-supervisor-v1",
+        "issuer_key_id": "sha256:9b97a2a3f588c60b899f93c5dbbd010c41e8bd93f5790d6ba11fb8c381d4da17",
+        "observations": {
+          "authority_state_identity": "sha256:ecb0ebe9018bdb7c784417d519a36fa5c1f18369fe87d7497520e6e0a201a6a6",
+          "authority_state_source_id": "qualification-authority-state-fixture-v1",
+          "evaluation_time": "2026-09-22T00:43:25.234368Z",
+          "evaluation_time_source_id": "contract-e-authorization-request.evaluation_time",
+          "observed_at": "2026-09-22T00:43:25.281795Z",
+          "observer_clock_source_id": "qualification-supervisor-process.os-clock-utc-v1"
+        },
+        "schema": "ers-point-of-use-context-receipt-v1"
+      },
+      "signature": {
+        "algorithm": "Ed25519",
+        "key_id": "sha256:9b97a2a3f588c60b899f93c5dbbd010c41e8bd93f5790d6ba11fb8c381d4da17",
+        "value": "O+xJNJafpubzOg+nFnqlrLGCdzYq14fMYZG3RM9SPdbKtB7W/KSCDnRteQCOMNtbCduH4Y3YNX3PUVSRQ7cCDQ=="
+      }
+    }
+  },
+  "caller_selected_time_falsifier": {
+    "request_mutated_after_contract_e": true,
+    "contract_e_original_result_identity": "sha256:d0abb0c004b87874dffb64e46db332001c489e0dd4dde9975d9c0f6331d76ac3",
+    "mutated_result_identity": "sha256:054b9e6abd5a861819d497a389a9aee49c203e60b1d763e143fe8b97747eccb8",
+    "mutated_result_identity_differs": true,
+    "original_contract_e_evaluation_time": "2026-09-22T00:43:25.234368Z",
+    "mutated_evaluation_time": "2026-09-22T00:43:24.234368Z",
+    "observer_receipt_signature_valid": true,
+    "observer_receipt_identity": "sha256:92bdd7ee640f69f1e1acdcfc56d15b68da3c3173b70eb9c31ccc7968f77770d3",
+    "observer_receipt_key_id": "sha256:9b97a2a3f588c60b899f93c5dbbd010c41e8bd93f5790d6ba11fb8c381d4da17",
+    "accepted": true,
+    "shadow_ready": true,
+    "execution_occurred": false
+  },
+  "held_cases": {
+    "PIPE02": {
+      "decision": "decision_not_candidate:hold",
+      "contract_e_evaluate_calls": 0
+    },
+    "PIPE03": {
+      "decision": "decision_not_candidate:hold",
+      "contract_e_evaluate_calls": 0
+    }
+  },
+  "supported_claim_and_contract_d": {
+    "cases": {
+      "PIPE01": {
+        "contract_c_identity": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+        "supported_contract_d_identity": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+        "supported_matches_frozen_v3": true,
+        "ers_decision_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+        "released_contract_d_rejection_code": "unknown_effect_type"
+      },
+      "PIPE02": {
+        "contract_c_identity": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+        "supported_contract_d_identity": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+        "supported_matches_frozen_v3": true,
+        "ers_decision_identity": "decision:sha256:e5e9197601b4f6fedd625c9f577cbdb0465b1d177b8df46faa4d5822f12aa1d4",
+        "released_contract_d_rejection_code": "unknown_effect_type"
+      },
+      "PIPE03": {
+        "contract_c_identity": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+        "supported_contract_d_identity": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+        "supported_matches_frozen_v3": true,
+        "ers_decision_identity": "decision:sha256:7ab331f7bf2f9a65b1b2677db63f80f224e01387ac6ae9614d7a359794eac160",
+        "released_contract_d_rejection_code": "unknown_effect_type"
+      }
+    },
+    "supported_policy_byte_behavior_compatible": true,
+    "released_contract_d_still_rejects_ers_as_unknown_effect_type": true
+  },
+  "upstream_bytes_changed": {
+    "decision": false,
+    "cal_pipeline_v3": false,
+    "released_contract_d": false,
+    "contract_e_profile": false,
+    "frozen_ers_rc3": false,
+    "render_bound_ers_rc4": false
+  },
+  "execution_and_mutation": {
+    "executor_included": false,
+    "executor_invoked": false,
+    "pending_review_write": false,
+    "real_mainframe_mutation": false,
+    "contract_d_effect_registration": false,
+    "release_or_promotion": false
+  },
+  "open_blockers": [
+    "trusted point-of-use authority-state provenance",
+    "trusted evaluation-time provenance",
+    "released Contract D ERS effect registration",
+    "Contract E production authorization",
+    "real executor behavior",
+    "filesystem write atomicity and recovery semantics"
+  ]
+}
