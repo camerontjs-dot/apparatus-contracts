@@ -1,0 +1,44 @@
+{
+  "schema": "ers-evaluation-provenance-executable-source-gate/1",
+  "successor_experiment_id": "ERS-EVAL-TIME-PROV-20260922-04",
+  "scientific_authority": {
+    "pull_request": 130,
+    "commit": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "matrix_must_remain_unchanged": true
+  },
+  "receipt_contract_authority": {
+    "pull_request": 131,
+    "commit": "077ccf6d386526bda258b3e90bd43e153c4c04c5"
+  },
+  "preserved_inconclusive": {
+    "apparatus_pull_request": 132,
+    "apparatus_result_commit": "f1cd38145ca0a525b35452298360f5dba6b69eb3",
+    "ers_pull_request": 11
+  },
+  "source_identity_gate": {
+    "fresh_detached_worktree_required": true,
+    "clean_status_required": true,
+    "external_git_checks_required_before_candidate_python": true,
+    "required_preflight_blob_checks": [
+      "git hash-object worktree path == frozen preflight blob",
+      "git rev-parse HEAD:path == frozen preflight blob"
+    ],
+    "required_runner_blob_checks": [
+      "git hash-object worktree path == frozen runner blob",
+      "git rev-parse HEAD:path == frozen runner blob"
+    ],
+    "candidate_python_executed_before_gate_must_be": false
+  },
+  "required_order": [
+    "commit candidate source",
+    "freeze exact commit/tree/executable blobs",
+    "create fresh detached checkout",
+    "record external executable-source identity",
+    "run non-evaluating receipt preflight from exact checkout",
+    "recheck clean/blob identities",
+    "run unchanged PR130 matrix"
+  ],
+  "contract_e_calls_before_scientific_matrix": 0,
+  "supervisor_launches_during_receipt_preflight": 0,
+  "production_mutation_permitted": false
+}
