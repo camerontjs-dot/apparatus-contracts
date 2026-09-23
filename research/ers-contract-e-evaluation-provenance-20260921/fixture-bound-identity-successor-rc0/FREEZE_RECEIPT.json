@@ -1,0 +1,150 @@
+{
+  "schema": "ers-contract-e-evaluation-provenance-apparatus-freeze/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "frozen_at_utc": "2026-09-23T03:11:07Z",
+  "decisive_rc6_matrix_observed_before_freeze": false,
+  "apparatus_candidate_branch": "research/ers-contract-e-evaluation-provenance-identity-successor-20260923",
+  "apparatus_candidate_source_commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+  "apparatus_candidate_source_tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+  "apparatus_candidate_source_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+  "apparatus_candidate_source_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+  "preflight_source_commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+  "preflight_source_tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+  "preflight_source_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/receipt_preflight_fixture_bound.py",
+  "preflight_source_blob": "ddf19ab89ebbb021891262b34664162020b8ac41",
+  "ers_candidate": {
+    "repository": "camerontjs-dot/epistemic-research-system",
+    "branch": "research/contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923",
+    "base_commit": "64ed29cc444931f4807f627ad75523e14cf00c03",
+    "source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+    "freeze_receipt_commit": "cd9e0cc725863261513cc5fd5dd3587fc6e721cf",
+    "freeze_receipt_tree": "419a66fa2408bd06c51266e1a6820d74e249a4ce",
+    "freeze_receipt_blob": "31d9978f21902d458d758386343e87f0be429252",
+    "freeze_receipt_path": "research/ers-contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923/FREEZE_RECEIPT.json"
+  },
+  "preregistration": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "pull_request": 130,
+    "frozen_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "preregistration_blob": "7c8904bf1237b8cf381e7d69f7b217286363b9ac",
+    "experiment_blob": "7b0515c186b70b081aad4774821045b2b8202774",
+    "question": "bind independently sourced evaluation time to the exact Contract E invocation and exact Contract E result",
+    "decisive_controls": [
+      "authentic PIPE01 path reaches shadow_ready=true with execution_occurred=false",
+      "post-evaluation +1 second result-time mutation without rerunning Contract E is rejected before shadow_ready",
+      "cross-pair result A with transcript B is rejected",
+      "cross-pair result B with transcript A is rejected",
+      "one-byte Contract E result mutation is rejected",
+      "wrong execution-intent transcript is rejected",
+      "wrong authority-state transcript is rejected",
+      "correctly-shaped wrong issuer is rejected",
+      "stale transcript is rejected",
+      "replayed challenge is rejected",
+      "caller evaluation-time or result injection attempt is rejected",
+      "PIPE02 expected HOLD remains HOLD",
+      "PIPE03 expected HOLD remains HOLD",
+      "sandbox remains unchanged"
+    ],
+    "transcript_schema_path": "research/ers-contract-e-evaluation-provenance-20260921/schemas/contract-e-evaluation-transcript.rc0.schema.json",
+    "transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
+  },
+  "fixture_bound_preregistration": {
+    "pull_request": 139,
+    "commit": "aca99bfc1bc6f06269894087942fb590f4388697",
+    "fixture_authority_blob": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+    "fixture_authority_prereg_blob": "6cb114e9ba79f1fd436de033387a95669ea59f40"
+  },
+  "fixture_binding_gate": {
+    "pull_request": 140,
+    "receipt_head": "dee0aaa2483349ec8106d376d214d99c6790336f",
+    "implementation_source_commit": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+    "gate_blob": "868eb4e0ea3b1c4cb327ffcb0f7490924558caf1",
+    "fixture_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad"
+  },
+  "execution_carrier": {
+    "pull_request": 141,
+    "head": "39b1987d2265ae9e6b9f9879cecc08096834721f"
+  },
+  "identity_reconciliation_preregistration": {
+    "pull_request": 142,
+    "base": "39b1987d2265ae9e6b9f9879cecc08096834721f",
+    "head": "f14fbcce20eb5c2756cb2b4bfcbdc27d0ebd6393",
+    "preregistration_blob": "19ff92df38fd41b7c3f4b6a706c5587ff7505b6e",
+    "authority_blob": "d1b8990be06da30b518f4f8946a4f8673a21c16f",
+    "predecessor_runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "predecessor_preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076"
+  },
+  "fixture_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+  "frozen_dependencies": {
+    "contract_e": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+    "contract_d": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "decision": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+    "cal_pipeline_v3": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "contract_c_consumer": "12e7e640b229619501960b1b89cf4716d8d985b3",
+    "render_bound_ers_rc4": "022fcb58e14864aa173f447fa0c18dd2362b41b0",
+    "ers_rc5_base": "099f84700f28e118734f1ca74feb977da1c4cf17",
+    "ers_rc6_predecessor_freeze": "66a82e8ac28c380ddc7eb4388bdc3daf289c1db9",
+    "provenance_profile": "3934423b1a97ad1b099057c40fe8014e5dd08c97",
+    "provenance_root_freeze": "8f762f0d02d2f5a32d85c6b1c721782198422239"
+  },
+  "issuer": {
+    "algorithm": "Ed25519",
+    "public_key_identity": "sha256:e7f4581c2d58eecd0279f895cf3dd49df3098d092fa1e083731d802fcd1db259",
+    "private_key_scope": "qualification-only, local, outside both candidate repositories",
+    "private_key_file_mode": "0600",
+    "predecessor_private_key_available": false,
+    "successor_key_generated_before_freeze": true,
+    "rotation_after_freeze": false
+  },
+  "public_supervisor_api": {
+    "signature": "evaluate_and_attest(socket_path, *, decision, execution_intent, authority_state, challenge) -> dict[str, bytes]",
+    "wire_keys": [
+      "schema",
+      "decision",
+      "execution_intent",
+      "authority_state",
+      "challenge"
+    ],
+    "caller_time_parameter": false,
+    "caller_contract_e_result_parameter": false,
+    "caller_precomputed_transcript_signing_parameter": false,
+    "normal_api_shape_tests": "4 passed"
+  },
+  "source_delta_rationale": [
+    {
+      "change": "new runner copy differs from frozen predecessor only by single experiment literal to 05 (line 30 EXPERIMENT_ID)",
+      "reason": "full identity successor required because frozen runner fails closed on experiment_id and propagates that identity into result/sidecar/manifest envelopes; wrapper with two identities is rejected"
+    },
+    {
+      "change": "new receipt-preflight copy differs from frozen predecessor only by single experiment literal to 05 (line 21 EXPERIMENT_ID)",
+      "reason": "preflight cross-checks ERS and apparatus receipt experiment identities against its own EXPERIMENT_ID; wrapper would require special interpretation of one run under two identities"
+    },
+    {
+      "change": "original frozen files remain unchanged; new files live alongside under fixture-bound-identity-successor-rc0/",
+      "reason": "preserve predecessor evidence and keep successor delta minimal and auditable"
+    }
+  ],
+  "material_environment": {
+    "os": "macOS 27.0 arm64",
+    "python": "3.11.15",
+    "git": "2.50.1 (Apple Git-155)",
+    "qualification_environment": "non-evaluating, no candidate import, no network"
+  },
+  "pre_freeze_checks": {
+    "successor_static_source_tests": "AST/text propagation checks only; candidate scripts were not imported or executed",
+    "source_identity_gate": "PASS at external Git blob boundary before candidate Python (single-literal delta verified)",
+    "receipt_preflight_invocations_before_receipt_creation": 0,
+    "contract_e_evaluations": 0,
+    "decisive_matrix_observed": false
+  },
+  "boundary": {
+    "contract_e_evaluation_performed": false,
+    "decisive_matrix_performed": false,
+    "sandbox_file_created": false,
+    "executor_or_pending_review_write": false,
+    "real_mainframe_mutation": false,
+    "effect_registration_or_production_promotion": false,
+    "contract_d_or_contract_e_source_changed": false
+  }
+}
