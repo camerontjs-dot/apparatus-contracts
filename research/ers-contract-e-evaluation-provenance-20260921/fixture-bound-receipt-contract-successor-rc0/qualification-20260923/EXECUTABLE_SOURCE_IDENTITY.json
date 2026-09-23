@@ -1,0 +1,75 @@
+{
+  "schema": "ers-evaluation-provenance-executable-source-identity/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "phase": "before_non_evaluating_preflight",
+  "status": "PASS",
+  "checkouts": {
+    "apparatus": {
+      "state": "detached_clean",
+      "freeze_commit": "af3385cab18789450d1e02c00a0e07a84ffcfcc9",
+      "freeze_tree": "b5c28580b14d9fb96a99a3ce3af1068e34858da4",
+      "receipt": {
+        "path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json",
+        "commit_blob": "bc7d3938be9146dd6455ab5f9fda896f22a70274",
+        "worktree_blob": "bc7d3938be9146dd6455ab5f9fda896f22a70274"
+      },
+      "preflight": {
+        "source_commit": "9f75ee325f31971ca8f0d4e1ddf9a7c04c98e940",
+        "source_tree": "53e4d53f5f62112d28d080da0a732475c3c51df5",
+        "path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/receipt_preflight_05_contract_compat.py",
+        "commit_blob": "3314048d5904fa59fdb00e67a1ee108c167097aa",
+        "worktree_blob": "3314048d5904fa59fdb00e67a1ee108c167097aa"
+      },
+      "candidate_source": {
+        "commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+        "tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+        "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+        "runner_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67"
+      },
+      "pr130_commit": "dcdd10355e2f885273d843eef6e345bafca95faa",
+      "pr131_commit": "077ccf6d386526bda258b3e90bd43e153c4c04c5",
+      "pr131_contract": {
+        "path": "research/ers-contract-e-evaluation-provenance-20260921/successor-receipt-contract-rc0/FREEZE_RECEIPT_CONTRACT.json",
+        "blob_at_pr131": "92b029e6fb5e1a7c11a661911647e618594cd797"
+      },
+      "successor_preregistration": {
+        "commit": "48f88111a39402f5ae6f0565e39b2482e6e58fe0",
+        "tree": "ff1220fe1988bb1803ce6aad21c5c76f69d53b4d",
+        "preregistration_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/PREREGISTRATION.md",
+        "preregistration_blob": "2b9a4f07d5527e30beb60f3d0c98507e060a804f",
+        "authority_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/RECEIPT_CONTRACT_RECONCILIATION_AUTHORITY.json",
+        "authority_blob": "9e55f84820a98532cb854cee804c8428aee6e80c"
+      }
+    },
+    "ers": {
+      "state": "detached_clean",
+      "freeze_commit": "aa214666c9a68871c0d878a70b7f3833d49dbe9b",
+      "freeze_tree": "1ad0bb7df9a6d836a5fdca7157173c60429619a3",
+      "receipt": {
+        "path": "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json",
+        "commit_blob": "50c9493d3f0584de74399118da01b7b603c813e0",
+        "worktree_blob": "50c9493d3f0584de74399118da01b7b603c813e0"
+      },
+      "source": {
+        "commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+        "tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+        "runtime_blobs": {
+          "README.md": "79186111ed844377a1f2d20d94c608260f5fbd96",
+          "SLICE_MANIFEST.json": "ced260d5c6d55ab66d03af4ccf9cdd8525fbbadb",
+          "harness/context_bound_shadow.py": "ac6942d0d242c2135499dd61c72b9c0d9f2ca24a",
+          "harness/evaluation_transcript.py": "0669a0129f5a2767407e63270496e5becfe844bb",
+          "harness/qualification_supervisor.py": "cf64a065793903d2bc1da5f7c5e6be0d639021aa",
+          "harness/supervisor_client.py": "9447b7cf01a05b38862036644b490557a84f8c9c",
+          "harness/test_evaluation_transcript_api.py": "8b58833d86a707feba7794d017afb75367134528",
+          "schemas/contract-e-evaluation-transcript.rc0.schema.json": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
+        }
+      }
+    }
+  },
+  "instrumentation_expected_for_non_evaluating_preflight": {
+    "contract_e_evaluation_calls": 0,
+    "supervisor_process_launches": 0,
+    "candidate_runtime_imports": [],
+    "network_attempts": 0
+  }
+}

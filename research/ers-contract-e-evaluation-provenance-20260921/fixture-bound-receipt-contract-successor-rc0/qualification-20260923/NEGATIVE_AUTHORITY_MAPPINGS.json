@@ -1,0 +1,140 @@
+{
+  "instrumentation": {
+    "candidate_runtime_imports": [],
+    "contract_e_evaluation_calls": 0,
+    "git_processes": 0,
+    "network_attempts": 0,
+    "non_git_processes": [],
+    "supervisor_process_launches": 0
+  },
+  "old_ers_cross_pair": {
+    "commit": "cd9e0cc725863261513cc5fd5dd3587fc6e721cf",
+    "receipt_blob": "31d9978f21902d458d758386343e87f0be429252"
+  },
+  "positive_input_receipts": {
+    "apparatus_commit": "af3385cab18789450d1e02c00a0e07a84ffcfcc9",
+    "ers_commit": "aa214666c9a68871c0d878a70b7f3833d49dbe9b"
+  },
+  "preflight_source_commit": "9f75ee325f31971ca8f0d4e1ddf9a7c04c98e940",
+  "results": [
+    {
+      "actual_failed_checks": [
+        "ers_pr131_head",
+        "matching_pr131_head",
+        "ers_pr131_contract_blob",
+        "matching_pr131_contract_blob",
+        "ers_pr131_contract_path"
+      ],
+      "case": "missing_ers_pr131_binding",
+      "check_count": 23,
+      "expected_failed_checks": [
+        "ers_pr131_contract_blob",
+        "ers_pr131_head"
+      ],
+      "missing_expected_checks": [],
+      "status": "PASS"
+    },
+    {
+      "actual_failed_checks": [
+        "apparatus_pr131_head",
+        "matching_pr131_head",
+        "apparatus_pr131_contract_blob",
+        "matching_pr131_contract_blob",
+        "apparatus_pr131_contract_path"
+      ],
+      "case": "missing_apparatus_pr131_binding",
+      "check_count": 23,
+      "expected_failed_checks": [
+        "apparatus_pr131_contract_blob",
+        "apparatus_pr131_head"
+      ],
+      "missing_expected_checks": [],
+      "status": "PASS"
+    },
+    {
+      "actual_failed_checks": [
+        "ers_pr131_head",
+        "matching_pr131_head"
+      ],
+      "case": "wrong_pr131_commit",
+      "check_count": 23,
+      "expected_failed_checks": [
+        "ers_pr131_head",
+        "matching_pr131_head"
+      ],
+      "missing_expected_checks": [],
+      "status": "PASS"
+    },
+    {
+      "actual_failed_checks": [
+        "ers_pr131_contract_blob",
+        "matching_pr131_contract_blob"
+      ],
+      "case": "correct_pr131_commit_wrong_contract_blob",
+      "check_count": 23,
+      "expected_failed_checks": [
+        "ers_pr131_contract_blob",
+        "matching_pr131_contract_blob"
+      ],
+      "missing_expected_checks": [],
+      "status": "PASS"
+    },
+    {
+      "actual_failed_checks": [
+        "ers_pr130_head",
+        "matching_pr130_head"
+      ],
+      "case": "wrong_pr130_commit",
+      "check_count": 23,
+      "expected_failed_checks": [
+        "ers_pr130_head",
+        "matching_pr130_head"
+      ],
+      "missing_expected_checks": [],
+      "status": "PASS"
+    },
+    {
+      "actual_failed_checks": [
+        "ers_pr130_head",
+        "matching_pr130_head",
+        "ers_obsolete_pr130_alias_absent"
+      ],
+      "case": "obsolete_ers_pr130_path_without_canonical_path",
+      "check_count": 23,
+      "expected_failed_checks": [
+        "ers_obsolete_pr130_alias_absent",
+        "ers_pr130_head",
+        "matching_pr130_head"
+      ],
+      "missing_expected_checks": [],
+      "status": "PASS"
+    },
+    {
+      "actual_failed_checks": [
+        "ers_pr131_head",
+        "matching_pr131_head",
+        "ers_pr131_contract_blob",
+        "matching_pr131_contract_blob",
+        "ers_pr131_contract_path",
+        "ers_successor_preregistration_head",
+        "matching_successor_preregistration_head",
+        "ers_successor_preregistration_blob",
+        "ers_successor_preregistration_authority_blob",
+        "ers_successor_preregistration_path",
+        "ers_successor_preregistration_authority_path"
+      ],
+      "case": "predecessor_old_ers_receipt_cross_paired_with_new_apparatus_receipt",
+      "check_count": 23,
+      "expected_failed_checks": [
+        "ers_pr131_contract_blob",
+        "ers_pr131_head",
+        "ers_successor_preregistration_blob",
+        "ers_successor_preregistration_head"
+      ],
+      "missing_expected_checks": [],
+      "status": "PASS"
+    }
+  ],
+  "schema": "ers-evaluation-provenance-authority-negative-qualification/1",
+  "status": "PASS"
+}
