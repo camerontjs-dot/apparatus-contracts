@@ -1,0 +1,68 @@
+{
+  "schema": "ers-evaluation-provenance-receipt-path-successor-freeze/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "status": "Draft",
+  "frozen_at_utc": "2026-09-23T09:30:00Z",
+  "decisive_rc6_matrix_observed_before_freeze": false,
+  "base": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "branch": "research/ers-contract-e-evaluation-provenance-05-receipt-path-prereg-20260923",
+    "base_commit": "9ac48b98f564962a9cb0e79c3202cfb0d41bf53a",
+    "base_parent": "e9e364acfaa763abe5971ac95debc850ffcbfc69"
+  },
+  "preregistration": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "prereg_commit": "a5fc406eb9072c0ca3af56cb1884514bd926abe3",
+    "authority_blob": "2101bf06021131652bd37955cacc6bbad8288345",
+    "preregistration_blob": "c266602b11c7eec886db36d3da2d04a0f1834bfb",
+    "authority_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-path-successor-rc0/RECEIPT_PATH_RECONCILIATION_AUTHORITY.json",
+    "preregistration_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-path-successor-rc0/PREREGISTRATION.md"
+  },
+  "compat_preflight": {
+    "path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-path-successor-rc0/receipt_preflight_fixture_bound_compat.py",
+    "source_commit": "91057d97ffb0586449e4f8ba07408abb0f41ea9d",
+    "source_tree": "e718159e975ef0fdf7e7f63fa931d0f339b142ca",
+    "git_blob": "30c2f4767215e504031f1953cb490bb51c481815",
+    "sha256_bytes": "sha256:806b5003ae265b41e4a12ad28c35113d0bfa967579a0f6f6457f5bb31f136092",
+    "predecessor_blob": "ddf19ab89ebbb021891262b34664162020b8ac41",
+    "predecessor_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/receipt_preflight_fixture_bound.py",
+    "delta": "only ERS_RECEIPT_RELATIVE_PATH and APP_RECEIPT_RELATIVE_PATH changed to required exact paths; all other bytes identical"
+  },
+  "required_compat_paths": {
+    "ers_receipt_relative_path": "research/ers-contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923/FREEZE_RECEIPT.json",
+    "apparatus_receipt_relative_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/FREEZE_RECEIPT.json"
+  },
+  "bound_authorities": {
+    "apparatus_freeze_commit": "e9e364acfaa763abe5971ac95debc850ffcbfc69",
+    "apparatus_freeze_tree": "370d2f3dd191cbbf7139d07c037744cec8baef77",
+    "apparatus_freeze_blob": "6d5ffde330cda4614baa61844f1f6a83489603df",
+    "apparatus_freeze_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/FREEZE_RECEIPT.json",
+    "apparatus_source_commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+    "apparatus_source_tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+    "runner_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+    "ers_receipt_commit": "cd9e0cc725863261513cc5fd5dd3587fc6e721cf",
+    "ers_receipt_tree": "419a66fa2408bd06c51266e1a6820d74e249a4ce",
+    "ers_receipt_blob": "31d9978f21902d458d758386343e87f0be429252",
+    "ers_receipt_path": "research/ers-contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923/FREEZE_RECEIPT.json",
+    "ers_source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "ers_source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+    "pr130_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d",
+    "fixture_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad"
+  },
+  "explicit_scope": {
+    "ers_source_changed": false,
+    "runner_changed": false,
+    "scientific_implementation_changed": false,
+    "fixture_changed": false,
+    "prs_142_143_144_mutated": false,
+    "matrix_run": false,
+    "scientific_claim": false
+  },
+  "boundary": {
+    "contract_e_evaluation_performed": false,
+    "decisive_matrix_performed": false,
+    "sandbox_created": false,
+    "note": "This freeze binds the compat preflight copy for audit. It does not authorize matrix execution. The compat tool consumes the exact e9e364 and cd9e0cc receipts; this new freeze receipt is not consumed by that preflight run."
+  }
+}
