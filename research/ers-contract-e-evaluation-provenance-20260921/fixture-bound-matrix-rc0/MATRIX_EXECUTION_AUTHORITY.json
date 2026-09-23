@@ -1,0 +1,90 @@
+{
+  "schema": "ers-evaluation-provenance-fixture-bound-matrix-execution/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "classification": "decisive_scientific_execution_preregistration",
+  "base_gate_qualification": {
+    "pull_request": 140,
+    "receipt_head": "dee0aaa2483349ec8106d376d214d99c6790336f",
+    "implementation_source_commit": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+    "implementation_source_tree": "9f237e71ded2411797560a0b0b97bfb1c848cad7",
+    "disposition": "QUALIFIED_FIXTURE_BOUND_SCIENTIFIC_SUBJECT",
+    "gate_blob": "868eb4e0ea3b1c4cb327ffcb0f7490924558caf1",
+    "gate_test_blob": "b77a8624dd265f1b98dd6969becb54a3c14bd568",
+    "gate_pass_receipt_blob": "db2cfb22b90c8f225b4db4d4e19738783edd216e",
+    "gate_identity_blob": "b21bb61e9a92224a25f1b0193ddef7abc0ffea89",
+    "qualification_disposition_blob": "f798c7ca32b193ea549a9edc68cdf659956a0b60",
+    "fixture_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad"
+  },
+  "scientific_preregistration": {
+    "pull_request": 130,
+    "commit": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "question": "bind independently sourced evaluation time to the exact Contract E invocation and exact Contract E result"
+  },
+  "fixture_bound_preregistration": {
+    "pull_request": 139,
+    "commit": "aca99bfc1bc6f06269894087942fb590f4388697",
+    "fixture_authority_blob": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+    "fixture_authority_sha256": "sha256:b92459539153d08c5b9176efd492d0e6849d1068f261552628b4a9b192172ea6"
+  },
+  "executable_freeze": {
+    "pull_request": 134,
+    "head": "f68f0b5f06c9ecd8f8824c3b30340416d14d2d57",
+    "apparatus_source_commit": "143f54da8136148c2e4781eec543ebfc230a0bba",
+    "apparatus_source_tree": "d5d9c7f15e69437383c05113a8c7bb1b6919005c",
+    "runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "receipt_preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076"
+  },
+  "fixture_recovery": {
+    "pull_request": 138,
+    "head": "510e9a586a015ad5b825318d0908601baf98d55a",
+    "tree": "5373e38b744ec100cc61d6188ed83ca4522070aa",
+    "hosted_run_id": 35779664920,
+    "hosted_artifact_id": 10717946190,
+    "hosted_artifact_digest": "sha256:a0aae7095994051cdc8fb229701541a55ae7798d00ffa5104a6019c4afc95790",
+    "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+    "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+    "composition_result_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+  },
+  "pre_execution_required": [
+    "fresh detached checkout of this exact execution-preregistration head",
+    "worktree clean",
+    "PR140 fixture-binding gate source and frozen identities unchanged",
+    "fixture-binding gate passes on the exact supplied fixture subject",
+    "fixture subject identity equals sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+    "scientific runner blob equals 35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "receipt preflight blob equals e7e94523bff84792d355ef2a6da805a91919e076",
+    "all frozen dependency and receipt checks in the scientific runner remain fail-closed",
+    "sandbox exists and is empty before launch"
+  ],
+  "decisive_controls": [
+    "authentic PIPE01 path reaches shadow_ready=true with execution_occurred=false",
+    "post-evaluation +1 second result-time mutation without rerunning Contract E is rejected before shadow_ready",
+    "cross-pair result A with transcript B is rejected",
+    "cross-pair result B with transcript A is rejected",
+    "one-byte Contract E result mutation is rejected",
+    "wrong execution-intent transcript is rejected",
+    "wrong authority-state transcript is rejected",
+    "correctly-shaped wrong issuer is rejected",
+    "stale transcript is rejected",
+    "replayed challenge is rejected",
+    "caller evaluation-time or result injection attempt is rejected",
+    "PIPE02 expected HOLD remains HOLD",
+    "PIPE03 expected HOLD remains HOLD",
+    "sandbox remains unchanged"
+  ],
+  "first_decisive_falsifier": "post-evaluation +1 second result-time mutation without rerunning Contract E reaches shadow_ready=true or otherwise fails to reject at the preregistered boundary",
+  "execution_policy": {
+    "scientific_matrix_authorized_by_this_record": false,
+    "operator_must_explicitly_initiate": true,
+    "maximum_decisive_runs_per_frozen_execution_subject": 1,
+    "repair_after_exposure_in_same_subject": false,
+    "rerun_after_scientific_result": false,
+    "preserve_partial_matrix_progress": true,
+    "preserve_failure_or_counterexample": true
+  },
+  "nonclaims": [
+    "This preregistration is not a scientific result.",
+    "It does not make reconstructed fixture files historical.",
+    "It does not authorize an executor, pending-review write, production promotion, effect registration, or MainFrame mutation."
+  ]
+}
