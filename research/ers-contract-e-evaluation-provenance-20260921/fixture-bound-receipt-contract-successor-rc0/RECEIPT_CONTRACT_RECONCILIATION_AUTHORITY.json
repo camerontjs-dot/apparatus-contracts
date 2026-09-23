@@ -1,0 +1,103 @@
+{
+  "schema": "ers-evaluation-provenance-receipt-contract-reconciliation/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "classification": "pre_scientific_receipt_contract_reconciliation_preregistration",
+  "status": "Draft",
+  "base": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "branch": "research/ers-contract-e-evaluation-provenance-05-receipt-contract-prereg-20260923",
+    "base_commit": "ae72c6293cb7e7833a55b181e3abc31f116a75ee",
+    "base_meaning": "exact published PR #145 head (path-only BLOCKED successor, Draft)",
+    "parent_lineage": [
+      "9ac48b98f564962a9cb0e79c3202cfb0d41bf53a",
+      "e9e364acfaa763abe5971ac95debc850ffcbfc69"
+    ]
+  },
+  "precedent_pr131": {
+    "role": "precedent and pinned evidence, not the new experiment authority",
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "pull_request": 131,
+    "state": "CLOSED",
+    "commit": "077ccf6d386526bda258b3e90bd43e153c4c04c5",
+    "contract_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-receipt-contract-rc0/FREEZE_RECEIPT_CONTRACT.json",
+    "contract_blob": "92b029e6fb5e1a7c11a661911647e618594cd797",
+    "original_rule": "Do not add alias fields solely to make old code pass. The runner/preflight should consume the canonical nested paths."
+  },
+  "receipt_contract_mappings": [
+    {
+      "meaning": "PR #130 scientific authority",
+      "ers_receipt_dotted_path": "apparatus.scientific_preregistration.commit",
+      "apparatus_receipt_dotted_path": "preregistration.frozen_head",
+      "pinned_value": "dcdd10355e2f885273d843eef6e345bafca95faa"
+    },
+    {
+      "meaning": "PR #131 receipt-contract lineage",
+      "ers_receipt_dotted_path": "apparatus.receipt_contract_preregistration.commit",
+      "apparatus_receipt_dotted_path": "receipt_contract_preregistration.frozen_head",
+      "pinned_value": "077ccf6d386526bda258b3e90bd43e153c4c04c5"
+    },
+    {
+      "meaning": "PR #131 contract blob",
+      "ers_receipt_dotted_path": "apparatus.receipt_contract_preregistration.freeze_receipt_contract_blob",
+      "apparatus_receipt_dotted_path": "receipt_contract_preregistration.freeze_receipt_contract_blob",
+      "pinned_value": "92b029e6fb5e1a7c11a661911647e618594cd797"
+    }
+  ],
+  "no_alias_rule": {
+    "obsolete_ers_path": "apparatus.preregistration_head",
+    "permitted": false,
+    "rule": "No alias for the obsolete ERS PR #130 path is permitted. The preflight moves to apparatus.scientific_preregistration.commit; we do not add apparatus.preregistration_head back just to placate old code. Consistent with PR #131 original rule against adding aliases solely to satisfy predecessors."
+  },
+  "bound_05_authorities": {
+    "apparatus_freeze_commit": "e9e364acfaa763abe5971ac95debc850ffcbfc69",
+    "apparatus_source_commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+    "apparatus_source_tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+    "runner_blob_unchanged": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+    "predecessor_preflight_blob": "ddf19ab89ebbb021891262b34664162020b8ac41",
+    "compat_preflight_blob_path_fixed": "30c2f4767215e504031f1953cb490bb51c481815",
+    "ers_receipt_commit": "cd9e0cc725863261513cc5fd5dd3587fc6e721cf",
+    "ers_source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "ers_source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+    "pr130_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d",
+    "fixture_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad"
+  },
+  "future_implementation_permitted_after_freeze": {
+    "note": "Mechanical path only; not executed in this preregistration task. No receipt edits yet.",
+    "ers_successor": "from exact #13 head cd9e0cc, new receipt only; implementation remains 65f47d/tree 405bb6 with all runtime blobs unchanged; new receipt adds explicit PR #131 contract binding and otherwise preserves 05 authority",
+    "apparatus_successor": "keep runner blob d0f3b699 byte-identical; new preflight copy whose only semantic changes beyond already-authorized path fix are (a) read ERS PR #130 from apparatus.scientific_preregistration.commit and (b) require PR #131 fields via newly preregistered paths; then freeze new apparatus receipt binding exact new ERS receipt and exact preflight blob"
+  },
+  "required_qualification_gate": {
+    "note": "Not run in this task. Gate for the later implementation step.",
+    "layer": "non-evaluating preflight only; do not run PR #130 matrix",
+    "positive": "exact pairing must pass",
+    "negatives_at_least": [
+      "missing ERS PR #131 binding",
+      "missing apparatus PR #131 binding",
+      "wrong PR #131 commit",
+      "correct PR #131 commit but wrong contract blob",
+      "wrong PR #130 commit",
+      "obsolete ERS PR #130-only path",
+      "predecessor/old receipt cross-pair",
+      "altered receipt bytes",
+      "wrong ERS or apparatus source identity"
+    ],
+    "instrumentation_must_be": {
+      "contract_e_evaluations": 0,
+      "supervisor_launches": 0,
+      "candidate_runtime_imports": [],
+      "network_attempts": 0
+    }
+  },
+  "explicit_non_authorization": {
+    "no_receipt_edits_in_this_task": true,
+    "no_ers_source_change": true,
+    "no_runner_change": true,
+    "no_scientific_implementation_change": true,
+    "no_fixture_change": true,
+    "no_matrix_run": true,
+    "no_scientific_claim": true
+  },
+  "stop_rule": "Stop when remaining uncertainty requires a new experiment rather than stretching the present boundary. If any later gate fails, record BLOCKED and stop; do not patch in place or retry toward a pass.",
+  "next_boundary_after_qualification": "RECEIPT_CONTRACT_RECONCILED; matrix still requires separate authorization"
+}
