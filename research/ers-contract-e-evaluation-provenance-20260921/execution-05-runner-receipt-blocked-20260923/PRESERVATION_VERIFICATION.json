@@ -1,0 +1,78 @@
+{
+  "archives_checked": [
+    {
+      "bytes": 1034240,
+      "path": "artifacts/apparatus-05-lineage-pr146.tar",
+      "sha256": "sha256:4d32a0e04b9cc38cb5ab779aad7edd0173509dc5b81c8361146c3d8d9eda979f",
+      "status": "PASS"
+    },
+    {
+      "bytes": 112640,
+      "path": "artifacts/ers-rc6-05-lineage-pr14.tar",
+      "sha256": "sha256:5bc5192bdfff685467af28fea4c9ca03644eaede82852caa37f75edb6ad82aed",
+      "status": "PASS"
+    },
+    {
+      "bytes": 41820,
+      "path": "artifacts/fixture-recovery-artifact.zip",
+      "sha256": "sha256:a0aae7095994051cdc8fb229701541a55ae7798d00ffa5104a6019c4afc95790",
+      "status": "PASS"
+    }
+  ],
+  "bundles": [
+    {
+      "bundle": "bundles/apparatus-contracts.bundle",
+      "bundle_sha256": "sha256:3b65e7f7e3170286f9ab6a93839142037989ec786f42d07d9aa20e9c0b0fac0b",
+      "bundle_verify": "PASS",
+      "clean_worktree": true,
+      "manifest_pins_checked": 22,
+      "repository": "apparatus-contracts",
+      "restored_commit": "af3385cab18789450d1e02c00a0e07a84ffcfcc9",
+      "restored_tree": "b5c28580b14d9fb96a99a3ce3af1068e34858da4"
+    },
+    {
+      "bundle": "bundles/epistemic-research-system.bundle",
+      "bundle_sha256": "sha256:3e94c1463be1e9d928e305a0d24460da54c01c30b169e5364a584f78b0f1b7fc",
+      "bundle_verify": "PASS",
+      "clean_worktree": true,
+      "manifest_pins_checked": 6,
+      "repository": "epistemic-research-system",
+      "restored_commit": "aa214666c9a68871c0d878a70b7f3833d49dbe9b",
+      "restored_tree": "1ad0bb7df9a6d836a5fdca7157173c60429619a3"
+    },
+    {
+      "bundle": "bundles/decision-engine.bundle",
+      "bundle_sha256": "sha256:81d2e05f7d7cafaab27ce62662e04952c3d3587ddd56574b9c3ee8d512381fd3",
+      "bundle_verify": "PASS",
+      "clean_worktree": true,
+      "manifest_pins_checked": 1,
+      "repository": "decision-engine",
+      "restored_commit": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+      "restored_tree": "08a34359d4a177bc17c8de1521d60255bf6ebf82"
+    },
+    {
+      "bundle": "bundles/research-scaffold-harness.bundle",
+      "bundle_sha256": "sha256:9a18e1e4f6a26c5526557f8d2044de3ce6a8a3862168affb88528f9c6a0449f7",
+      "bundle_verify": "PASS",
+      "clean_worktree": true,
+      "manifest_pins_checked": 1,
+      "repository": "research-scaffold-harness",
+      "restored_commit": "12e7e640b229619501960b1b89cf4716d8d985b3",
+      "restored_tree": "0a3b5c4d6f0967f718db56137fbe175b9e430d14"
+    }
+  ],
+  "errors": [],
+  "fixture_files_checked": 12,
+  "frozen_and_lineage_file_blob_identities_checked": 108,
+  "manifest_pins_checked": 30,
+  "private_key_marker_scan": {
+    "archive_members_scanned": 101,
+    "filesystem_files_scanned": 26,
+    "git_blobs_scanned": 1844,
+    "marker_scanned": "PEM private-key delimiters",
+    "markers_found": 0,
+    "status": "PASS"
+  },
+  "schema": "cal-pipeline-frozen-snapshot-preservation-verification/1",
+  "status": "PASS"
+}

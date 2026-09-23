@@ -1,0 +1,179 @@
+{
+  "blocking_findings": [
+    {
+      "blob_at_ers_pr14": "e66996d515817ff66682fc7f1d552c75d57ed2c0",
+      "code": "RUNNER_READS_PREDECESSOR_ERS_RECEIPT",
+      "experiment_id_at_path": "ERS-EVAL-TIME-PROV-20260922-04",
+      "hard_coded_path": "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json",
+      "required_05_blob": "50c9493d3f0584de74399118da01b7b603c813e0",
+      "required_05_path": "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json",
+      "runner_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+      "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py"
+    },
+    {
+      "canonical_field": "apparatus.scientific_preregistration.commit",
+      "canonical_value": "dcdd10355e2f885273d843eef6e345bafca95faa",
+      "code": "RUNNER_READS_OBSOLETE_PR130_FIELD",
+      "present_in_ers_05_receipt": false,
+      "runner_field": "apparatus.preregistration_head"
+    },
+    {
+      "code": "FROZEN_RUNNER_IMPORT_DEPENDENCIES_UNAVAILABLE",
+      "complete_exact_package_lock": "UNKNOWN",
+      "frozen_python": "3.11.15",
+      "installed_in_frozen_python": [],
+      "required_top_level_imports": [
+        "jsonschema",
+        "rfc8785",
+        "cryptography"
+      ]
+    }
+  ],
+  "claims_established": [
+    "The frozen receipt/source preflight passes its 86 recorded comparisons.",
+    "The exact frozen runner and exact ERS 05 receipt disagree on receipt path and PR #130 field.",
+    "The locally preserved source bundles and fixture artifacts restore and match their recorded identities."
+  ],
+  "claims_not_established": [
+    "No PR #130 matrix case ran.",
+    "No Contract E behavior or evaluation-time provenance hypothesis was supported or falsified.",
+    "No sandbox behavior, production authorization, release readiness, or broader correctness was established."
+  ],
+  "decision": "The receipt/source preflight passed. Static runner review and the missing exact-runtime imports block execution before scientific discrimination.",
+  "disposition": "BLOCKED_BEFORE_SCIENTIFIC_MATRIX",
+  "environment": {
+    "frozen_receipt_git": "2.50.1 (Apple Git-155)",
+    "git_for_preflight": "2.54.0 (Apple Git-157)",
+    "os": "macOS 27.0 arm64",
+    "python_for_preflight": "3.11.15",
+    "version_difference_recorded": true
+  },
+  "execution": {
+    "candidate_runtime_imports": [],
+    "contract_e_evaluation_calls": 0,
+    "matrix_cases_run": 0,
+    "network_attempts": 0,
+    "runner_invoked": false,
+    "sandbox_created": false,
+    "scientific_disposition": "NONE",
+    "supervisor_process_launches": 0
+  },
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "frozen_sources": {
+    "apparatus": {
+      "commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+      "tree": "082d0bce4c1be496b2590e835817e68592e2e2bc"
+    },
+    "apparatus_freeze_receipt": {
+      "blob": "bc7d3938be9146dd6455ab5f9fda896f22a70274",
+      "commit": "af3385cab18789450d1e02c00a0e07a84ffcfcc9",
+      "tree": "b5c28580b14d9fb96a99a3ce3af1068e34858da4"
+    },
+    "dependencies": [
+      {
+        "associated_pr": "https://github.com/camerontjs-dot/decision-engine/pull/87",
+        "commit": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+        "repository": "camerontjs-dot/decision-engine",
+        "tree": "08a34359d4a177bc17c8de1521d60255bf6ebf82"
+      },
+      {
+        "associated_history_pr": "https://github.com/camerontjs-dot/research-scaffold-harness/pull/42",
+        "commit": "12e7e640b229619501960b1b89cf4716d8d985b3",
+        "repository": "camerontjs-dot/research-scaffold-harness",
+        "tree": "0a3b5c4d6f0967f718db56137fbe175b9e430d14"
+      }
+    ],
+    "ers": {
+      "implementation_source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+      "implementation_source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+      "receipt_blob": "50c9493d3f0584de74399118da01b7b603c813e0",
+      "receipt_commit": "aa214666c9a68871c0d878a70b7f3833d49dbe9b",
+      "receipt_path": "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json",
+      "tree": "1ad0bb7df9a6d836a5fdca7157173c60429619a3"
+    },
+    "fixture_subject": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+    "preflight": {
+      "blob": "3314048d5904fa59fdb00e67a1ee108c167097aa",
+      "commit": "9f75ee325f31971ca8f0d4e1ddf9a7c04c98e940",
+      "path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/receipt_preflight_05_contract_compat.py",
+      "tree": "53e4d53f5f62112d28d080da0a732475c3c51df5"
+    },
+    "receipt_contract_preregistration": {
+      "commit": "48f88111a39402f5ae6f0565e39b2482e6e58fe0",
+      "tree": "ff1220fe1988bb1803ce6aad21c5c76f69d53b4d"
+    },
+    "runner": {
+      "blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+      "path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py"
+    }
+  },
+  "live_authority": {
+    "apparatus_pr130": {
+      "head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+      "state": "OPEN_DRAFT",
+      "tree": "fcc3131541d176e7f9c8dbf89b8171eabb638cec",
+      "url": "https://github.com/camerontjs-dot/apparatus-contracts/pull/130"
+    },
+    "apparatus_pr131": {
+      "contract_blob": "92b029e6fb5e1a7c11a661911647e618594cd797",
+      "head": "077ccf6d386526bda258b3e90bd43e153c4c04c5",
+      "state": "CLOSED_DRAFT",
+      "url": "https://github.com/camerontjs-dot/apparatus-contracts/pull/131"
+    },
+    "apparatus_pr146": {
+      "head": "cd465d798220daa3f45261d3e6f385cf67224a46",
+      "state": "OPEN_DRAFT",
+      "tree": "83eef64dffc9d7e962852fd1f4e1e9c76d0e1ba2",
+      "url": "https://github.com/camerontjs-dot/apparatus-contracts/pull/146"
+    },
+    "ers_pr13": {
+      "head": "cd9e0cc725863261513cc5fd5dd3587fc6e721cf",
+      "state": "OPEN_DRAFT",
+      "url": "https://github.com/camerontjs-dot/epistemic-research-system/pull/13"
+    },
+    "ers_pr14": {
+      "head": "aa214666c9a68871c0d878a70b7f3833d49dbe9b",
+      "state": "OPEN_DRAFT",
+      "tree": "1ad0bb7df9a6d836a5fdca7157173c60429619a3",
+      "url": "https://github.com/camerontjs-dot/epistemic-research-system/pull/14"
+    }
+  },
+  "next_step": "Preregister and freeze a runner successor that reads the exact ERS 05 receipt path and canonical PR #130 field, and pin the full runtime dependency environment; then run a fresh non-evaluating gate before any new matrix execution.",
+  "preserved_history": [
+    "https://github.com/camerontjs-dot/apparatus-contracts/pull/143",
+    "https://github.com/camerontjs-dot/apparatus-contracts/pull/144",
+    "https://github.com/camerontjs-dot/apparatus-contracts/pull/145",
+    "https://github.com/camerontjs-dot/apparatus-contracts/pull/146",
+    "https://github.com/camerontjs-dot/epistemic-research-system/pull/13",
+    "https://github.com/camerontjs-dot/epistemic-research-system/pull/14"
+  ],
+  "qualification": {
+    "receipt_source_preflight": {
+      "checks_failed": 0,
+      "checks_passed": 86,
+      "instrumentation": {
+        "candidate_runtime_imports": [],
+        "contract_e_evaluation_calls": 0,
+        "network_attempts": 0,
+        "supervisor_process_launches": 0
+      },
+      "output": "RECEIPT_SOURCE_PREFLIGHT.json",
+      "source_blob": "3314048d5904fa59fdb00e67a1ee108c167097aa",
+      "status": "PASS"
+    },
+    "runner_receipt_review": {
+      "output": "STATIC_RUNNER_RECEIPT_REVIEW.json",
+      "runner_invoked": false,
+      "status": "BLOCKED_STATIC_INCOMPATIBILITY"
+    },
+    "snapshot_preservation": {
+      "all_four_bundles_restore": true,
+      "fixture_files_checked": 12,
+      "frozen_and_lineage_file_blobs_checked": 108,
+      "output": "PRESERVATION_VERIFICATION.json",
+      "private_key_marker_scan": "PASS",
+      "status": "PASS"
+    }
+  },
+  "schema": "cal-pipeline-frozen-05-matrix-readiness-disposition/1"
+}

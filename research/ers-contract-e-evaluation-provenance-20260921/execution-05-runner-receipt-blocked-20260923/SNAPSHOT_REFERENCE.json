@@ -1,0 +1,92 @@
+{
+  "absolute_local_path_published": false,
+  "archives": [
+    {
+      "bytes": 1034240,
+      "path": "artifacts/apparatus-05-lineage-pr146.tar",
+      "sha256": "sha256:4d32a0e04b9cc38cb5ab779aad7edd0173509dc5b81c8361146c3d8d9eda979f"
+    },
+    {
+      "bytes": 112640,
+      "path": "artifacts/ers-rc6-05-lineage-pr14.tar",
+      "sha256": "sha256:5bc5192bdfff685467af28fea4c9ca03644eaede82852caa37f75edb6ad82aed"
+    },
+    {
+      "bytes": 41820,
+      "path": "artifacts/fixture-recovery-artifact.zip",
+      "sha256": "sha256:a0aae7095994051cdc8fb229701541a55ae7798d00ffa5104a6019c4afc95790"
+    }
+  ],
+  "bundle_restore_and_archive_verification": {
+    "bundles": 4,
+    "fixture_files_checked": 12,
+    "frozen_and_lineage_file_blob_identities_checked": 108,
+    "private_key_marker_scan": "PASS",
+    "status": "PASS"
+  },
+  "bundles": [
+    {
+      "bundle": "bundles/apparatus-contracts.bundle",
+      "bundle_scope": null,
+      "bundle_sha256": "sha256:3b65e7f7e3170286f9ab6a93839142037989ec786f42d07d9aa20e9c0b0fac0b",
+      "repository": "apparatus-contracts",
+      "restore_commit": "af3385cab18789450d1e02c00a0e07a84ffcfcc9",
+      "restore_status": "PASS",
+      "restore_tree": "b5c28580b14d9fb96a99a3ce3af1068e34858da4"
+    },
+    {
+      "bundle": "bundles/epistemic-research-system.bundle",
+      "bundle_scope": null,
+      "bundle_sha256": "sha256:3e94c1463be1e9d928e305a0d24460da54c01c30b169e5364a584f78b0f1b7fc",
+      "repository": "epistemic-research-system",
+      "restore_commit": "aa214666c9a68871c0d878a70b7f3833d49dbe9b",
+      "restore_status": "PASS",
+      "restore_tree": "1ad0bb7df9a6d836a5fdca7157173c60429619a3"
+    },
+    {
+      "bundle": "bundles/decision-engine.bundle",
+      "bundle_scope": {
+        "advertised_ref": "refs/heads/pinned",
+        "commit": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+        "tree": "08a34359d4a177bc17c8de1521d60255bf6ebf82",
+        "unrelated_refs_omitted": true
+      },
+      "bundle_sha256": "sha256:81d2e05f7d7cafaab27ce62662e04952c3d3587ddd56574b9c3ee8d512381fd3",
+      "repository": "decision-engine",
+      "restore_commit": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+      "restore_status": "PASS",
+      "restore_tree": "08a34359d4a177bc17c8de1521d60255bf6ebf82"
+    },
+    {
+      "bundle": "bundles/research-scaffold-harness.bundle",
+      "bundle_scope": null,
+      "bundle_sha256": "sha256:9a18e1e4f6a26c5526557f8d2044de3ce6a8a3862168affb88528f9c6a0449f7",
+      "repository": "research-scaffold-harness",
+      "restore_commit": "12e7e640b229619501960b1b89cf4716d8d985b3",
+      "restore_status": "PASS",
+      "restore_tree": "0a3b5c4d6f0967f718db56137fbe175b9e430d14"
+    }
+  ],
+  "exact_preflight_output_sha256": "sha256:1b5b4e335aa2c99f02d89ac2eb02c0001253d835b5dd5a5abdff77e7b081839b",
+  "fixture": {
+    "hosted_artifact_sha256": "sha256:a0aae7095994051cdc8fb229701541a55ae7798d00ffa5104a6019c4afc95790",
+    "subject": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad"
+  },
+  "label": "CAL-Pipeline-Frozen-ERS-EVAL-TIME-PROV-05-20260923",
+  "local_snapshot_is_offline_preservation_only": true,
+  "manifest_sha256": "sha256:844563c4e0e868b46337db415190a859dd381f4c50a37fc836b57daf189ecbd5",
+  "private_key_bytes_in_snapshot": false,
+  "public_evidence_redactions": [
+    {
+      "fields": [
+        "compared_values[68].actual",
+        "compared_values[68].expected"
+      ],
+      "file": "RECEIPT_SOURCE_PREFLIGHT_REDACTED.json",
+      "redaction": "absolute local checkout prefix replaced with <LOCAL_CHECKOUT_ROOT>; equality and all pass results preserved"
+    }
+  ],
+  "redacted_public_preflight_sha256": "sha256:bf6fae1d0c449960266153d9204382e4cf6c5a09dc013b9d8a932456b7df0c66",
+  "schema": "cal-pipeline-05-local-snapshot-reference/1",
+  "sha256sums_file_sha256": "sha256:0bb4cab7841d5136fe451c636148c722c86187a5c6fc981d0d75c0af1d9c7136"
+}
