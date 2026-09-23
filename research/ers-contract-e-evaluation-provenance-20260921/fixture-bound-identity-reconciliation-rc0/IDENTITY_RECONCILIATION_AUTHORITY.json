@@ -1,0 +1,86 @@
+{
+  "schema": "ers-evaluation-provenance-experiment-identity-reconciliation/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "classification": "pre_scientific_identity_reconciliation_preregistration",
+  "predecessor": {
+    "execution_carrier_pr": 141,
+    "execution_carrier_head": "39b1987d2265ae9e6b9f9879cecc08096834721f",
+    "fixture_binding_gate_pr": 140,
+    "fixture_binding_gate_head": "dee0aaa2483349ec8106d376d214d99c6790336f",
+    "fixture_bound_prereg_pr": 139,
+    "fixture_bound_prereg_head": "aca99bfc1bc6f06269894087942fb590f4388697",
+    "scientific_prereg_pr": 130,
+    "scientific_prereg_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "executable_freeze_pr": 134,
+    "executable_freeze_head": "f68f0b5f06c9ecd8f8824c3b30340416d14d2d57"
+  },
+  "chosen_architecture": "full_identity_successor",
+  "rejected_architecture": "immutable_inner_runner_envelope",
+  "reason": "Existing runner and receipt-preflight fail closed on experiment_id and also emit/hash that identity into result/sidecar/manifest envelopes. A wrapper would create two experiment identities for one run.",
+  "frozen_old_subjects": {
+    "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py",
+    "runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+    "receipt_preflight_path": "research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py",
+    "receipt_preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+    "apparatus_freeze_receipt_blob": "7bb1c7ba25315809d5383965f35dd26084eae29e",
+    "ers_receipt_only_pr": 12,
+    "ers_receipt_commit": "64ed29cc444931f4807f627ad75523e14cf00c03",
+    "ers_receipt_blob": "e66996d515817ff66682fc7f1d552c75d57ed2c0",
+    "ers_source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "ers_source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191"
+  },
+  "authorized_apparatus_implementation": {
+    "new_runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+    "new_preflight_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/receipt_preflight_fixture_bound.py",
+    "allowed_semantic_delta": "none",
+    "allowed_text_delta": [
+      "copy frozen runner bytes and replace only the single literal ERS-EVAL-TIME-PROV-20260922-04 with ERS-EVAL-TIME-PROV-20260922-05",
+      "copy frozen receipt-preflight bytes and replace only the single literal ERS-EVAL-TIME-PROV-20260922-04 with ERS-EVAL-TIME-PROV-20260922-05"
+    ],
+    "originals_must_remain_unchanged": true,
+    "residual_old_experiment_literal_allowed": false,
+    "any_other_diff_is_falsifier": true
+  },
+  "required_ers_successor": {
+    "type": "receipt_only",
+    "source_code_change_allowed": false,
+    "frozen_source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "frozen_source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+    "required_experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+    "must_bind_new_apparatus_source_commit": true,
+    "must_bind_new_runner_blob": true,
+    "must_bind_new_preflight_blob": true
+  },
+  "required_apparatus_freeze": {
+    "must_bind_experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+    "must_bind_new_runner_blob": true,
+    "must_bind_new_preflight_blob": true,
+    "must_bind_new_ers_receipt_commit_and_blob": true,
+    "must_preserve_scientific_question_and_controls": true
+  },
+  "required_identity_qualification": [
+    "AST/text propagation check: one experiment literal per new source and zero residual 04 literal",
+    "wrong-ID runner rejection",
+    "wrong-ID preflight rejection",
+    "cross-pair old 04 receipt with new 05 authority rejection",
+    "altered fixture-subject rejection",
+    "altered runner-blob rejection",
+    "new source blobs differ from old blobs only by the experiment literal",
+    "zero Contract E evaluations",
+    "zero supervisor launches",
+    "zero candidate runtime imports",
+    "zero network activity"
+  ],
+  "scientific_invariants": {
+    "fixture_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+    "contract_e_change_allowed": false,
+    "contract_d_change_allowed": false,
+    "ers_behavior_change_allowed": false,
+    "transcript_schema_change_allowed": false,
+    "issuer_change_allowed": false,
+    "decisive_control_change_allowed": false,
+    "matrix_execution_allowed": false
+  },
+  "stop_rule": "Freeze and report the first mismatch or unexpected diff. Do not repair and continue inside the same frozen identity subject.",
+  "next_boundary_if_qualified": "READY_FOR_FIXTURE_BOUND_EVALUATION_TIME_PROVENANCE_MATRIX"
+}
