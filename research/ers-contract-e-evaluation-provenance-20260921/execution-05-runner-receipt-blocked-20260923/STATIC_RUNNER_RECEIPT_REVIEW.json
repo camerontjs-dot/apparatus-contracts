@@ -1,0 +1,38 @@
+{
+  "status": "BLOCKED_STATIC_INCOMPATIBILITY",
+  "classification": "pre-scientific runner-to-receipt binding mismatch; runner was not invoked",
+  "runner": {
+    "commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+    "tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+    "path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+    "blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67"
+  },
+  "apparatus_receipt": {
+    "commit": "af3385cab18789450d1e02c00a0e07a84ffcfcc9",
+    "tree": "b5c28580b14d9fb96a99a3ce3af1068e34858da4",
+    "blob": "bc7d3938be9146dd6455ab5f9fda896f22a70274"
+  },
+  "required_ers_receipt": {
+    "commit": "aa214666c9a68871c0d878a70b7f3833d49dbe9b",
+    "tree": "1ad0bb7df9a6d836a5fdca7157173c60429619a3",
+    "path": "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json",
+    "blob": "50c9493d3f0584de74399118da01b7b603c813e0"
+  },
+  "runner_hard_coded_ers_receipt_path": {
+    "path": "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json",
+    "blob_at_required_ers_commit": "e66996d515817ff66682fc7f1d552c75d57ed2c0",
+    "experiment_id": "ERS-EVAL-TIME-PROV-20260922-04"
+  },
+  "static_source_locations": {
+    "receipt_path_constant_line": 43,
+    "obsolete_pr130_field_line": 303,
+    "receipt_blob_comparison_line": 318
+  },
+  "obsolete_field": {
+    "runner_reads": "apparatus.preregistration_head",
+    "current_receipt_has_field": false,
+    "current_receipt_canonical_value": "dcdd10355e2f885273d843eef6e345bafca95faa"
+  },
+  "predicted_boundary": "runner receipt checks cannot reconcile the current 05 receipt; no Contract E evaluation, supervisor launch, sandbox setup, or matrix case was attempted",
+  "preflight_scope_note": "receipt/source preflight PASS validates receipt bindings and source identities but does not check this runner-internal ERS path/field use"
+}

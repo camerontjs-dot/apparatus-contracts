@@ -1,0 +1,32 @@
+{
+  "captured_host": {
+    "architecture": "arm64",
+    "build": "26A428",
+    "default_python": "3.14.4",
+    "gh": "2.92.0 (2026-04-28)",
+    "git": "2.54.0 (Apple Git-157)",
+    "os": "macOS 27.0",
+    "python_for_preflight": "3.11.15"
+  },
+  "complete_exact_package_lock": "UNKNOWN; no complete package lock or inventory is pinned by the receipt contract",
+  "frozen_receipt_environment": {
+    "git": "2.50.1 (Apple Git-155)",
+    "os": "macOS 27.0 arm64",
+    "python": "3.11.15"
+  },
+  "matrix_runner_invoked": false,
+  "packages_installed_for_this_task": false,
+  "runner_imports": {
+    "python_3_11_15": {
+      "cryptography": "NOT_INSTALLED",
+      "jsonschema": "NOT_INSTALLED",
+      "rfc8785": "NOT_INSTALLED"
+    },
+    "python_3_14_4": {
+      "cryptography": "NOT_INSTALLED",
+      "jsonschema": "INSTALLED",
+      "rfc8785": "INSTALLED"
+    }
+  },
+  "schema": "cal-pipeline-05-runner-environment/1"
+}
