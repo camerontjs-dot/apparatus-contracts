@@ -1,0 +1,2940 @@
+{
+  "schema": "ers-evaluation-time-provenance-execution-failure/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "classification": "pre_execution_failure",
+  "disposition": "BLOCKED",
+  "scientific_conclusion": "NONE",
+  "blocked_at": "05_receipt_source_preflight",
+  "observed_at_utc": "2026-09-23 04:15:26 UTC",
+  "execution_authorization": "explicitly initiated by operator in this task",
+  "execution_branch": "research/ers-contract-e-evaluation-provenance-05-execution-20260923",
+  "pre_run_commit": "e9e364acfaa763abe5971ac95debc850ffcbfc69",
+  "pre_run_tree": "370d2f3dd191cbbf7139d07c037744cec8baef77",
+  "one_run_rule": "No Contract E matrix run started; no retry or repair was performed.",
+  "authority_inputs": {
+    "scientific_authority": {
+      "repository": "camerontjs-dot/apparatus-contracts",
+      "pr": 130,
+      "commit": "dcdd10355e2f885273d843eef6e345bafca95faa"
+    },
+    "apparatus_freeze": {
+      "repository": "camerontjs-dot/apparatus-contracts",
+      "pr": 143,
+      "head": "e9e364acfaa763abe5971ac95debc850ffcbfc69",
+      "tree": "370d2f3dd191cbbf7139d07c037744cec8baef77",
+      "freeze_receipt_blob": "6d5ffde330cda4614baa61844f1f6a83489603df",
+      "implementation_commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+      "implementation_tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+      "runner_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+      "receipt_preflight_blob": "ddf19ab89ebbb021891262b34664162020b8ac41"
+    },
+    "ers": {
+      "repository": "camerontjs-dot/epistemic-research-system",
+      "pr": 13,
+      "receipt_commit": "cd9e0cc725863261513cc5fd5dd3587fc6e721cf",
+      "receipt_tree": "419a66fa2408bd06c51266e1a6820d74e249a4ce",
+      "receipt_blob": "31d9978f21902d458d758386343e87f0be429252",
+      "source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+      "source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+      "source_changed": false
+    },
+    "fixture_authority": {
+      "pr": 139,
+      "commit": "aca99bfc1bc6f06269894087942fb590f4388697",
+      "authority_blob": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+      "authority_sha256": "sha256:b92459539153d08c5b9176efd492d0e6849d1068f261552628b4a9b192172ea6"
+    },
+    "fixture_gate_authority": {
+      "pr": 140,
+      "receipt_head": "dee0aaa2483349ec8106d376d214d99c6790336f",
+      "implementation_commit": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+      "implementation_tree": "9f237e71ded2411797560a0b0b97bfb1c848cad7",
+      "gate_blob": "868eb4e0ea3b1c4cb327ffcb0f7490924558caf1",
+      "fixture_authority_blob": "7d69167bc17d380f9ccf5c6be0473fbdf4338215"
+    },
+    "fixture_artifact": {
+      "pr": 138,
+      "run_id": 35779664920,
+      "head": "510e9a586a015ad5b825318d0908601baf98d55a",
+      "tree": "5373e38b744ec100cc61d6188ed83ca4522070aa",
+      "artifact_id": 10717946190,
+      "size_bytes": 41820,
+      "digest": "sha256:a0aae7095994051cdc8fb229701541a55ae7798d00ffa5104a6019c4afc95790",
+      "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+      "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+      "composition_result_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+    }
+  },
+  "checkout_verification": {
+    "apparatus_freeze": {
+      "head": "e9e364acfaa763abe5971ac95debc850ffcbfc69",
+      "tree": "370d2f3dd191cbbf7139d07c037744cec8baef77",
+      "status": "clean_detached"
+    },
+    "apparatus_source": {
+      "head": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+      "tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+      "runner_git_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+      "runner_worktree_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+      "preflight_git_blob": "ddf19ab89ebbb021891262b34664162020b8ac41",
+      "preflight_worktree_blob": "ddf19ab89ebbb021891262b34664162020b8ac41",
+      "status": "clean_detached"
+    },
+    "ers": {
+      "head": "cd9e0cc725863261513cc5fd5dd3587fc6e721cf",
+      "tree": "419a66fa2408bd06c51266e1a6820d74e249a4ce",
+      "receipt_blob": "31d9978f21902d458d758386343e87f0be429252",
+      "source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+      "status": "clean_detached"
+    },
+    "fixture_gate": {
+      "head": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+      "tree": "9f237e71ded2411797560a0b0b97bfb1c848cad7",
+      "gate_blob": "868eb4e0ea3b1c4cb327ffcb0f7490924558caf1",
+      "status": "clean_detached"
+    }
+  },
+  "fixture_binding_gate": {
+    "status": "PASS",
+    "subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+    "expected_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+    "raw_receipt_sha256": "sha256:54793563a2dbad506a7484bae20b0c315da95b8ebfe308ba48a382511ede9585",
+    "raw_receipt_redacted_for_public_paths": true,
+    "receipt_path": "FIXTURE_BINDING_PREFLIGHT.json",
+    "command_sha256": "sha256:d9cd0b596776acfa39f51e464254773dd52e05a4d637148968d8dba2b0c72698",
+    "receipt": {
+      "apparatus_source": {
+        "commit": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+        "head": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+        "receipt_preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+        "receipt_preflight_path": "research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py",
+        "runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+        "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py"
+      },
+      "compared_values": [
+        {
+          "actual": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+          "check": "apparatus_head_equals_source_commit",
+          "expected": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "preregistration_is_ancestor",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "fixture_authority_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "scientific_runner_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "receipt_preflight_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "check": "fixture_authority_preregistration_blob",
+          "expected": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "passed": true
+        },
+        {
+          "actual": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "check": "fixture_authority_source_blob",
+          "expected": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "passed": true
+        },
+        {
+          "actual": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "check": "fixture_authority_worktree_blob",
+          "expected": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "fixture_authority_byte_sha256_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "check": "scientific_runner_source_blob",
+          "expected": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "passed": true
+        },
+        {
+          "actual": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "check": "scientific_runner_worktree_blob",
+          "expected": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "passed": true
+        },
+        {
+          "actual": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "check": "receipt_preflight_source_blob",
+          "expected": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "passed": true
+        },
+        {
+          "actual": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "check": "receipt_preflight_worktree_blob",
+          "expected": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "passed": true
+        },
+        {
+          "actual": "ERS-EVAL-TIME-PROV-20260922-05",
+          "check": "authority_experiment_id",
+          "expected": "ERS-EVAL-TIME-PROV-20260922-05",
+          "passed": true
+        },
+        {
+          "actual": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "check": "authority_runner_blob_pin",
+          "expected": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "passed": true
+        },
+        {
+          "actual": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "check": "authority_receipt_preflight_blob_pin",
+          "expected": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "passed": true
+        },
+        {
+          "actual": [
+            "FIXTURE_MANIFEST.json",
+            "PIPE01",
+            "PIPE02",
+            "PIPE03"
+          ],
+          "check": "fixture_root_entries",
+          "expected": [
+            "FIXTURE_MANIFEST.json",
+            "PIPE01",
+            "PIPE02",
+            "PIPE03"
+          ],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "fixture_root_has_no_unexpected_entries",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "PIPE01_directory_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "check": "PIPE01_exact_runner_read_files",
+          "expected": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE01_missing_required_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE01_unexpected_runner_read_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE01/cal/contract-c.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "PIPE01/cal/contract-c.json/sha256",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "PIPE01/cal/contract-c.json/independent_sha256",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "PIPE01/cal/contract-c.json/hashlib_matches_independent",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE01/consumer-inputs.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "PIPE01/consumer-inputs.json/sha256",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "PIPE01/consumer-inputs.json/independent_sha256",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "PIPE01/consumer-inputs.json/hashlib_matches_independent",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE01/decision-target.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE01/decision-target.json/sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE01/decision-target.json/independent_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE01/decision-target.json/hashlib_matches_independent",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE01/contract-d.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "PIPE01/contract-d.json/sha256",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "PIPE01/contract-d.json/independent_sha256",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "PIPE01/contract-d.json/hashlib_matches_independent",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "PIPE02_directory_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "check": "PIPE02_exact_runner_read_files",
+          "expected": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE02_missing_required_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE02_unexpected_runner_read_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE02/cal/contract-c.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "PIPE02/cal/contract-c.json/sha256",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "PIPE02/cal/contract-c.json/independent_sha256",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "PIPE02/cal/contract-c.json/hashlib_matches_independent",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE02/consumer-inputs.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "PIPE02/consumer-inputs.json/sha256",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "PIPE02/consumer-inputs.json/independent_sha256",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "PIPE02/consumer-inputs.json/hashlib_matches_independent",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE02/decision-target.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE02/decision-target.json/sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE02/decision-target.json/independent_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE02/decision-target.json/hashlib_matches_independent",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE02/contract-d.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "PIPE02/contract-d.json/sha256",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "PIPE02/contract-d.json/independent_sha256",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "PIPE02/contract-d.json/hashlib_matches_independent",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "PIPE03_directory_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "check": "PIPE03_exact_runner_read_files",
+          "expected": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE03_missing_required_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE03_unexpected_runner_read_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE03/cal/contract-c.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "PIPE03/cal/contract-c.json/sha256",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "PIPE03/cal/contract-c.json/independent_sha256",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "PIPE03/cal/contract-c.json/hashlib_matches_independent",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE03/consumer-inputs.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "PIPE03/consumer-inputs.json/sha256",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "PIPE03/consumer-inputs.json/independent_sha256",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "PIPE03/consumer-inputs.json/hashlib_matches_independent",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE03/decision-target.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE03/decision-target.json/sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE03/decision-target.json/independent_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE03/decision-target.json/hashlib_matches_independent",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE03/contract-d.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "PIPE03/contract-d.json/sha256",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "PIPE03/contract-d.json/independent_sha256",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "PIPE03/contract-d.json/hashlib_matches_independent",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+          "check": "recovery_manifest_sha256",
+          "expected": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+          "passed": true
+        },
+        {
+          "actual": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+          "check": "recovery_manifest_independent_sha256",
+          "expected": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+          "passed": true
+        },
+        {
+          "actual": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+          "check": "verification_receipt_sha256",
+          "expected": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+          "passed": true
+        },
+        {
+          "actual": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+          "check": "verification_receipt_independent_sha256",
+          "expected": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "manifest/PIPE01/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE01/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE01/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "manifest/PIPE01/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE01/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE01/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "manifest/PIPE01/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE01/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE01/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "manifest/PIPE01/contract-d.json/recorded_sha256",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE01/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE01/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "manifest/PIPE02/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE02/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE02/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "manifest/PIPE02/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE02/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE02/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "manifest/PIPE02/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE02/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE02/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "manifest/PIPE02/contract-d.json/recorded_sha256",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE02/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE02/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "manifest/PIPE03/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE03/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE03/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "manifest/PIPE03/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE03/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE03/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "manifest/PIPE03/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE03/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE03/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "manifest/PIPE03/contract-d.json/recorded_sha256",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE03/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE03/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "manifest_recorded_composition_result_sha256",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "verification/PIPE01/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE01/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE01/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "verification/PIPE01/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE01/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE01/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "verification/PIPE01/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE01/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE01/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "verification/PIPE01/contract-d.json/recorded_sha256",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE01/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE01/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "verification/PIPE02/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE02/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE02/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "verification/PIPE02/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE02/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE02/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "verification/PIPE02/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE02/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE02/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "verification/PIPE02/contract-d.json/recorded_sha256",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE02/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE02/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "verification/PIPE03/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE03/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE03/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "verification/PIPE03/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE03/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE03/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "verification/PIPE03/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE03/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE03/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "verification/PIPE03/contract-d.json/recorded_sha256",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE03/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE03/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "verification_recorded_composition_result_sha256",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "composition_result_sha256:cal-fixture-recovery-result-a.json",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "composition_result_independent_sha256:cal-fixture-recovery-result-a.json",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "composition_result_sha256:cal-fixture-recovery-result-b.json",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "composition_result_independent_sha256:cal-fixture-recovery-result-b.json",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": {
+            "FIXTURE_MANIFEST.json": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+            "PIPE01/cal/contract-c.json": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+            "PIPE01/consumer-inputs.json": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+            "PIPE01/contract-d.json": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+            "PIPE01/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+            "PIPE02/cal/contract-c.json": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+            "PIPE02/consumer-inputs.json": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+            "PIPE02/contract-d.json": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+            "PIPE02/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+            "PIPE03/cal/contract-c.json": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+            "PIPE03/consumer-inputs.json": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+            "PIPE03/contract-d.json": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+            "PIPE03/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          },
+          "check": "fixture_bytes_unmodified",
+          "expected": {
+            "FIXTURE_MANIFEST.json": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+            "PIPE01/cal/contract-c.json": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+            "PIPE01/consumer-inputs.json": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+            "PIPE01/contract-d.json": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+            "PIPE01/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+            "PIPE02/cal/contract-c.json": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+            "PIPE02/consumer-inputs.json": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+            "PIPE02/contract-d.json": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+            "PIPE02/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+            "PIPE03/cal/contract-c.json": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+            "PIPE03/consumer-inputs.json": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+            "PIPE03/contract-d.json": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+            "PIPE03/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          },
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "loaded_forbidden_modules",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "contract_e_evaluation_calls",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "supervisor_process_launches",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "scientific_runner_imports",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "ers_candidate_runtime_imports",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "network_attempts",
+          "expected": 0,
+          "passed": true
+        }
+      ],
+      "disposition": "QUALIFIED_FIXTURE_BOUND_SCIENTIFIC_SUBJECT",
+      "executor_authorized": false,
+      "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+      "fixture_root": {
+        "entries": [
+          "FIXTURE_MANIFEST.json",
+          "PIPE01",
+          "PIPE02",
+          "PIPE03"
+        ],
+        "path": "$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery/frozen-fixtures",
+        "path_identity_preregistered": false
+      },
+      "historical_authority_claim_for_reconstructed_inputs": false,
+      "independent_digest": {
+        "composition_results": [
+          {
+            "independent_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+            "path": "$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-a.json",
+            "sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+          },
+          {
+            "independent_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+            "path": "$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-b.json",
+            "sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+          }
+        ],
+        "fixture_files": {
+          "PIPE01": {
+            "cal/contract-c.json": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+            "consumer-inputs.json": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+            "contract-d.json": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+            "decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          },
+          "PIPE02": {
+            "cal/contract-c.json": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+            "consumer-inputs.json": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+            "contract-d.json": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+            "decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          },
+          "PIPE03": {
+            "cal/contract-c.json": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+            "consumer-inputs.json": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+            "contract-d.json": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+            "decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          }
+        },
+        "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+        "tool": [
+          "/usr/bin/shasum",
+          "-a",
+          "256"
+        ],
+        "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85"
+      },
+      "instrumentation": {
+        "candidate_runtime_imports": [],
+        "contract_e_evaluation_calls": 0,
+        "ers_candidate_runtime_imports": 0,
+        "git_processes": 9,
+        "independent_digest_processes": 16,
+        "loaded_forbidden_modules": [],
+        "network_attempts": 0,
+        "non_allowed_processes": [],
+        "scientific_runner_imports": 0,
+        "supervisor_process_launches": 0
+      },
+      "mainframe_write_authorized": false,
+      "nonclaims": [
+        "This gate passing means only QUALIFIED_FIXTURE_BOUND_SCIENTIFIC_SUBJECT.",
+        "It does not mean the evaluation-time provenance hypothesis passed.",
+        "It does not turn reconstructed consumer-inputs.json or decision-target.json into historical bytes.",
+        "It does not authorize an executor, ERS write, production promotion, or MainFrame mutation.",
+        "It does not authorize the PR #130 decisive matrix."
+      ],
+      "observed_fixture_files": {
+        "PIPE01": {
+          "cal/contract-c.json": {
+            "bytes": "3191",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0"
+          },
+          "consumer-inputs.json": {
+            "bytes": "26593",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896"
+          },
+          "contract-d.json": {
+            "bytes": "763",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24"
+          },
+          "decision-target.json": {
+            "bytes": "120",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          }
+        },
+        "PIPE02": {
+          "cal/contract-c.json": {
+            "bytes": "3200",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d"
+          },
+          "consumer-inputs.json": {
+            "bytes": "26593",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9"
+          },
+          "contract-d.json": {
+            "bytes": "786",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230"
+          },
+          "decision-target.json": {
+            "bytes": "120",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          }
+        },
+        "PIPE03": {
+          "cal/contract-c.json": {
+            "bytes": "2984",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526"
+          },
+          "consumer-inputs.json": {
+            "bytes": "19313",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b"
+          },
+          "contract-d.json": {
+            "bytes": "787",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e"
+          },
+          "decision-target.json": {
+            "bytes": "120",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          }
+        }
+      },
+      "preregistration": {
+        "commit": "aca99bfc1bc6f06269894087942fb590f4388697",
+        "fixture_authority_blob": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+        "fixture_authority_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-successor-rc0/FIXTURE_AUTHORITY.json",
+        "fixture_authority_sha256": "sha256:b92459539153d08c5b9176efd492d0e6849d1068f261552628b4a9b192172ea6",
+        "pull_request": 139,
+        "repository": "camerontjs-dot/apparatus-contracts"
+      },
+      "recovery_identities": {
+        "composition_result_files": [
+          {
+            "independent_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+            "path": "$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-a.json",
+            "sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+          },
+          {
+            "independent_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+            "path": "$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-b.json",
+            "sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+          }
+        ],
+        "composition_result_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+        "manifest_path": "$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery/frozen-fixtures/FIXTURE_MANIFEST.json",
+        "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+        "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+        "verification_receipt_path": "$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery-verification.json"
+      },
+      "schema": "ers-evaluation-provenance-fixture-binding-preflight/1",
+      "scientific_hypothesis_result": "NOT_RUN",
+      "scientific_matrix_authorized": false,
+      "status": "PASS",
+      "subject": {
+        "composition_result_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+        "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+        "fixture_authority_blob": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+        "fixture_files": {
+          "PIPE01": {
+            "cal/contract-c.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0"
+            },
+            "consumer-inputs.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896"
+            },
+            "contract-d.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24"
+            },
+            "decision-target.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+            }
+          },
+          "PIPE02": {
+            "cal/contract-c.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d"
+            },
+            "consumer-inputs.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9"
+            },
+            "contract-d.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230"
+            },
+            "decision-target.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+            }
+          },
+          "PIPE03": {
+            "cal/contract-c.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526"
+            },
+            "consumer-inputs.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b"
+            },
+            "contract-d.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e"
+            },
+            "decision-target.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+            }
+          }
+        },
+        "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+        "preregistration_commit": "aca99bfc1bc6f06269894087942fb590f4388697",
+        "receipt_preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+        "runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+        "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85"
+      },
+      "subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad"
+    },
+    "stdout": {
+      "apparatus_source": {
+        "commit": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+        "head": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+        "receipt_preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+        "receipt_preflight_path": "research/ers-contract-e-evaluation-provenance-20260921/receipt_preflight.py",
+        "runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+        "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/reproduce_rc6.py"
+      },
+      "compared_values": [
+        {
+          "actual": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+          "check": "apparatus_head_equals_source_commit",
+          "expected": "1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f",
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "preregistration_is_ancestor",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "fixture_authority_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "scientific_runner_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "receipt_preflight_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "check": "fixture_authority_preregistration_blob",
+          "expected": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "passed": true
+        },
+        {
+          "actual": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "check": "fixture_authority_source_blob",
+          "expected": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "passed": true
+        },
+        {
+          "actual": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "check": "fixture_authority_worktree_blob",
+          "expected": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "fixture_authority_byte_sha256_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "check": "scientific_runner_source_blob",
+          "expected": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "passed": true
+        },
+        {
+          "actual": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "check": "scientific_runner_worktree_blob",
+          "expected": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "passed": true
+        },
+        {
+          "actual": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "check": "receipt_preflight_source_blob",
+          "expected": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "passed": true
+        },
+        {
+          "actual": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "check": "receipt_preflight_worktree_blob",
+          "expected": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "passed": true
+        },
+        {
+          "actual": "ERS-EVAL-TIME-PROV-20260922-05",
+          "check": "authority_experiment_id",
+          "expected": "ERS-EVAL-TIME-PROV-20260922-05",
+          "passed": true
+        },
+        {
+          "actual": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "check": "authority_runner_blob_pin",
+          "expected": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+          "passed": true
+        },
+        {
+          "actual": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "check": "authority_receipt_preflight_blob_pin",
+          "expected": "e7e94523bff84792d355ef2a6da805a91919e076",
+          "passed": true
+        },
+        {
+          "actual": [
+            "FIXTURE_MANIFEST.json",
+            "PIPE01",
+            "PIPE02",
+            "PIPE03"
+          ],
+          "check": "fixture_root_entries",
+          "expected": [
+            "FIXTURE_MANIFEST.json",
+            "PIPE01",
+            "PIPE02",
+            "PIPE03"
+          ],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "fixture_root_has_no_unexpected_entries",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "PIPE01_directory_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "check": "PIPE01_exact_runner_read_files",
+          "expected": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE01_missing_required_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE01_unexpected_runner_read_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE01/cal/contract-c.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "PIPE01/cal/contract-c.json/sha256",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "PIPE01/cal/contract-c.json/independent_sha256",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "PIPE01/cal/contract-c.json/hashlib_matches_independent",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE01/consumer-inputs.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "PIPE01/consumer-inputs.json/sha256",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "PIPE01/consumer-inputs.json/independent_sha256",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "PIPE01/consumer-inputs.json/hashlib_matches_independent",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE01/decision-target.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE01/decision-target.json/sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE01/decision-target.json/independent_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE01/decision-target.json/hashlib_matches_independent",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE01/contract-d.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "PIPE01/contract-d.json/sha256",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "PIPE01/contract-d.json/independent_sha256",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "PIPE01/contract-d.json/hashlib_matches_independent",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "PIPE02_directory_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "check": "PIPE02_exact_runner_read_files",
+          "expected": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE02_missing_required_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE02_unexpected_runner_read_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE02/cal/contract-c.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "PIPE02/cal/contract-c.json/sha256",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "PIPE02/cal/contract-c.json/independent_sha256",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "PIPE02/cal/contract-c.json/hashlib_matches_independent",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE02/consumer-inputs.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "PIPE02/consumer-inputs.json/sha256",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "PIPE02/consumer-inputs.json/independent_sha256",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "PIPE02/consumer-inputs.json/hashlib_matches_independent",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE02/decision-target.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE02/decision-target.json/sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE02/decision-target.json/independent_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE02/decision-target.json/hashlib_matches_independent",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE02/contract-d.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "PIPE02/contract-d.json/sha256",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "PIPE02/contract-d.json/independent_sha256",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "PIPE02/contract-d.json/hashlib_matches_independent",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": true,
+          "check": "PIPE03_directory_present",
+          "expected": true,
+          "passed": true
+        },
+        {
+          "actual": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "check": "PIPE03_exact_runner_read_files",
+          "expected": [
+            "cal/contract-c.json",
+            "consumer-inputs.json",
+            "contract-d.json",
+            "decision-target.json"
+          ],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE03_missing_required_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "PIPE03_unexpected_runner_read_files",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE03/cal/contract-c.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "PIPE03/cal/contract-c.json/sha256",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "PIPE03/cal/contract-c.json/independent_sha256",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "PIPE03/cal/contract-c.json/hashlib_matches_independent",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE03/consumer-inputs.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "PIPE03/consumer-inputs.json/sha256",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "PIPE03/consumer-inputs.json/independent_sha256",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "PIPE03/consumer-inputs.json/hashlib_matches_independent",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "PIPE03/decision-target.json/frozen_provenance",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE03/decision-target.json/sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE03/decision-target.json/independent_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "PIPE03/decision-target.json/hashlib_matches_independent",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "PIPE03/contract-d.json/frozen_provenance",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "PIPE03/contract-d.json/sha256",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "PIPE03/contract-d.json/independent_sha256",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "PIPE03/contract-d.json/hashlib_matches_independent",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+          "check": "recovery_manifest_sha256",
+          "expected": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+          "passed": true
+        },
+        {
+          "actual": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+          "check": "recovery_manifest_independent_sha256",
+          "expected": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+          "passed": true
+        },
+        {
+          "actual": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+          "check": "verification_receipt_sha256",
+          "expected": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+          "passed": true
+        },
+        {
+          "actual": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+          "check": "verification_receipt_independent_sha256",
+          "expected": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "manifest/PIPE01/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE01/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE01/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "manifest/PIPE01/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE01/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE01/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "manifest/PIPE01/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE01/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE01/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "manifest/PIPE01/contract-d.json/recorded_sha256",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE01/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE01/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "manifest/PIPE02/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE02/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE02/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "manifest/PIPE02/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE02/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE02/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "manifest/PIPE02/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE02/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE02/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "manifest/PIPE02/contract-d.json/recorded_sha256",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE02/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE02/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "manifest/PIPE03/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE03/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE03/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "manifest/PIPE03/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE03/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE03/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "manifest/PIPE03/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE03/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "manifest/PIPE03/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "manifest/PIPE03/contract-d.json/recorded_sha256",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE03/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "manifest/PIPE03/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "manifest_recorded_composition_result_sha256",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "check": "verification/PIPE01/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE01/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE01/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "check": "verification/PIPE01/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE01/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE01/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "verification/PIPE01/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE01/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE01/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "check": "verification/PIPE01/contract-d.json/recorded_sha256",
+          "expected": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE01/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE01/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "check": "verification/PIPE02/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE02/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE02/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "check": "verification/PIPE02/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE02/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE02/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "verification/PIPE02/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE02/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE02/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "check": "verification/PIPE02/contract-d.json/recorded_sha256",
+          "expected": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE02/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE02/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "check": "verification/PIPE03/cal/contract-c.json/recorded_sha256",
+          "expected": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE03/cal/contract-c.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE03/cal/contract-c.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "check": "verification/PIPE03/consumer-inputs.json/recorded_sha256",
+          "expected": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE03/consumer-inputs.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE03/consumer-inputs.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "check": "verification/PIPE03/decision-target.json/recorded_sha256",
+          "expected": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE03/decision-target.json/provenance_classification",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "deterministically_reconstructed_without_preserved_historical_reference",
+          "check": "verification/PIPE03/decision-target.json/provenance_matches_frozen_authority",
+          "expected": "deterministically_reconstructed_without_preserved_historical_reference",
+          "passed": true
+        },
+        {
+          "actual": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "check": "verification/PIPE03/contract-d.json/recorded_sha256",
+          "expected": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE03/contract-d.json/provenance_classification",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "byte_matched_to_surviving_historical_artifact",
+          "check": "verification/PIPE03/contract-d.json/provenance_matches_frozen_authority",
+          "expected": "byte_matched_to_surviving_historical_artifact",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "verification_recorded_composition_result_sha256",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "composition_result_sha256:cal-fixture-recovery-result-a.json",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "composition_result_independent_sha256:cal-fixture-recovery-result-a.json",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "composition_result_sha256:cal-fixture-recovery-result-b.json",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "check": "composition_result_independent_sha256:cal-fixture-recovery-result-b.json",
+          "expected": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+          "passed": true
+        },
+        {
+          "actual": {
+            "FIXTURE_MANIFEST.json": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+            "PIPE01/cal/contract-c.json": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+            "PIPE01/consumer-inputs.json": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+            "PIPE01/contract-d.json": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+            "PIPE01/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+            "PIPE02/cal/contract-c.json": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+            "PIPE02/consumer-inputs.json": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+            "PIPE02/contract-d.json": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+            "PIPE02/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+            "PIPE03/cal/contract-c.json": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+            "PIPE03/consumer-inputs.json": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+            "PIPE03/contract-d.json": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+            "PIPE03/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          },
+          "check": "fixture_bytes_unmodified",
+          "expected": {
+            "FIXTURE_MANIFEST.json": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+            "PIPE01/cal/contract-c.json": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+            "PIPE01/consumer-inputs.json": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+            "PIPE01/contract-d.json": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+            "PIPE01/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+            "PIPE02/cal/contract-c.json": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+            "PIPE02/consumer-inputs.json": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+            "PIPE02/contract-d.json": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+            "PIPE02/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142",
+            "PIPE03/cal/contract-c.json": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+            "PIPE03/consumer-inputs.json": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+            "PIPE03/contract-d.json": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+            "PIPE03/decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          },
+          "passed": true
+        },
+        {
+          "actual": [],
+          "check": "loaded_forbidden_modules",
+          "expected": [],
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "contract_e_evaluation_calls",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "supervisor_process_launches",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "scientific_runner_imports",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "ers_candidate_runtime_imports",
+          "expected": 0,
+          "passed": true
+        },
+        {
+          "actual": 0,
+          "check": "network_attempts",
+          "expected": 0,
+          "passed": true
+        }
+      ],
+      "disposition": "QUALIFIED_FIXTURE_BOUND_SCIENTIFIC_SUBJECT",
+      "executor_authorized": false,
+      "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+      "fixture_root": {
+        "entries": [
+          "FIXTURE_MANIFEST.json",
+          "PIPE01",
+          "PIPE02",
+          "PIPE03"
+        ],
+        "path": "$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery/frozen-fixtures",
+        "path_identity_preregistered": false
+      },
+      "historical_authority_claim_for_reconstructed_inputs": false,
+      "independent_digest": {
+        "composition_results": [
+          {
+            "independent_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+            "path": "$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-a.json",
+            "sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+          },
+          {
+            "independent_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+            "path": "$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-b.json",
+            "sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+          }
+        ],
+        "fixture_files": {
+          "PIPE01": {
+            "cal/contract-c.json": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+            "consumer-inputs.json": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896",
+            "contract-d.json": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+            "decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          },
+          "PIPE02": {
+            "cal/contract-c.json": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+            "consumer-inputs.json": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9",
+            "contract-d.json": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+            "decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          },
+          "PIPE03": {
+            "cal/contract-c.json": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+            "consumer-inputs.json": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b",
+            "contract-d.json": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+            "decision-target.json": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          }
+        },
+        "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+        "tool": [
+          "/usr/bin/shasum",
+          "-a",
+          "256"
+        ],
+        "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85"
+      },
+      "instrumentation": {
+        "candidate_runtime_imports": [],
+        "contract_e_evaluation_calls": 0,
+        "ers_candidate_runtime_imports": 0,
+        "git_processes": 9,
+        "independent_digest_processes": 16,
+        "loaded_forbidden_modules": [],
+        "network_attempts": 0,
+        "non_allowed_processes": [],
+        "scientific_runner_imports": 0,
+        "supervisor_process_launches": 0
+      },
+      "mainframe_write_authorized": false,
+      "nonclaims": [
+        "This gate passing means only QUALIFIED_FIXTURE_BOUND_SCIENTIFIC_SUBJECT.",
+        "It does not mean the evaluation-time provenance hypothesis passed.",
+        "It does not turn reconstructed consumer-inputs.json or decision-target.json into historical bytes.",
+        "It does not authorize an executor, ERS write, production promotion, or MainFrame mutation.",
+        "It does not authorize the PR #130 decisive matrix."
+      ],
+      "observed_fixture_files": {
+        "PIPE01": {
+          "cal/contract-c.json": {
+            "bytes": "3191",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0"
+          },
+          "consumer-inputs.json": {
+            "bytes": "26593",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896"
+          },
+          "contract-d.json": {
+            "bytes": "763",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24"
+          },
+          "decision-target.json": {
+            "bytes": "120",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          }
+        },
+        "PIPE02": {
+          "cal/contract-c.json": {
+            "bytes": "3200",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d"
+          },
+          "consumer-inputs.json": {
+            "bytes": "26593",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9"
+          },
+          "contract-d.json": {
+            "bytes": "786",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230"
+          },
+          "decision-target.json": {
+            "bytes": "120",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          }
+        },
+        "PIPE03": {
+          "cal/contract-c.json": {
+            "bytes": "2984",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526"
+          },
+          "consumer-inputs.json": {
+            "bytes": "19313",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b"
+          },
+          "contract-d.json": {
+            "bytes": "787",
+            "provenance": "byte_matched_to_surviving_historical_artifact",
+            "sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e"
+          },
+          "decision-target.json": {
+            "bytes": "120",
+            "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+            "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+          }
+        }
+      },
+      "preregistration": {
+        "commit": "aca99bfc1bc6f06269894087942fb590f4388697",
+        "fixture_authority_blob": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+        "fixture_authority_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-successor-rc0/FIXTURE_AUTHORITY.json",
+        "fixture_authority_sha256": "sha256:b92459539153d08c5b9176efd492d0e6849d1068f261552628b4a9b192172ea6",
+        "pull_request": 139,
+        "repository": "camerontjs-dot/apparatus-contracts"
+      },
+      "recovery_identities": {
+        "composition_result_files": [
+          {
+            "independent_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+            "path": "$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-a.json",
+            "sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+          },
+          {
+            "independent_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+            "path": "$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-b.json",
+            "sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753"
+          }
+        ],
+        "composition_result_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+        "manifest_path": "$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery/frozen-fixtures/FIXTURE_MANIFEST.json",
+        "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+        "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85",
+        "verification_receipt_path": "$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery-verification.json"
+      },
+      "schema": "ers-evaluation-provenance-fixture-binding-preflight/1",
+      "scientific_hypothesis_result": "NOT_RUN",
+      "scientific_matrix_authorized": false,
+      "status": "PASS",
+      "subject": {
+        "composition_result_sha256": "sha256:2ef133c504cd33bf5b9912acb06e154b43d7060b967dd4230081d4a8ad4f9753",
+        "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+        "fixture_authority_blob": "7d69167bc17d380f9ccf5c6be0473fbdf4338215",
+        "fixture_files": {
+          "PIPE01": {
+            "cal/contract-c.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0"
+            },
+            "consumer-inputs.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896"
+            },
+            "contract-d.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24"
+            },
+            "decision-target.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+            }
+          },
+          "PIPE02": {
+            "cal/contract-c.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d"
+            },
+            "consumer-inputs.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:806c31b1ddcaeb355ad9b1a13931995fc1bdfb8c4ce18c658d9bbbdc243e96e9"
+            },
+            "contract-d.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230"
+            },
+            "decision-target.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+            }
+          },
+          "PIPE03": {
+            "cal/contract-c.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526"
+            },
+            "consumer-inputs.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:b61a132432089a2508cab81088d00bb79dfe5aa69c7c9a390a2cff3d4417623b"
+            },
+            "contract-d.json": {
+              "provenance": "byte_matched_to_surviving_historical_artifact",
+              "sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e"
+            },
+            "decision-target.json": {
+              "provenance": "deterministically_reconstructed_without_preserved_historical_reference",
+              "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+            }
+          }
+        },
+        "manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2",
+        "preregistration_commit": "aca99bfc1bc6f06269894087942fb590f4388697",
+        "receipt_preflight_blob": "e7e94523bff84792d355ef2a6da805a91919e076",
+        "runner_blob": "35bf0e98d7575b9db7ffe2f6906aff757e865e72",
+        "verification_json_sha256": "sha256:999a1c2aa8c10dd768d02a2233d557a102d2e578b6ff5602b55da1c912f26c85"
+      },
+      "subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad"
+    }
+  },
+  "receipt_source_preflight": {
+    "status": "FAIL",
+    "exit_code": 1,
+    "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+    "error_type": "PreflightError",
+    "error": "apparatus_freeze_receipt_path_not_canonical",
+    "instrumentation": {
+      "candidate_runtime_imports": [],
+      "contract_e_evaluation_calls": 0,
+      "git_processes": 0,
+      "network_attempts": 0,
+      "non_git_processes": [],
+      "supervisor_process_launches": 0
+    },
+    "raw_receipt_sha256": "sha256:8b53a5de2d98380712e8183a51f4088328bff35f3d868a615d805fac07555af6",
+    "receipt_path": "RECEIPT_SOURCE_PREFLIGHT.json",
+    "frozen_source_boundary": {
+      "preflight_blob": "ddf19ab89ebbb021891262b34664162020b8ac41",
+      "error_guard": "apparatus_freeze_receipt.resolve() != (apparatus_root / APP_RECEIPT_RELATIVE_PATH).resolve()",
+      "error_source_lines": "321-322",
+      "frozen_app_receipt_relative_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-executable-source-identity-rc0/FREEZE_RECEIPT.json",
+      "required_pr143_freeze_receipt_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/FREEZE_RECEIPT.json",
+      "frozen_ers_receipt_relative_path": "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json",
+      "required_pr13_receipt_path": "research/ers-contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923/FREEZE_RECEIPT.json",
+      "ers_path_mismatch": "static frozen-source mismatch; runtime did not reach ERS receipt comparison."
+    }
+  },
+  "matrix": {
+    "status": "NOT_RUN",
+    "runner_invoked": false,
+    "contract_e_evaluations": 0,
+    "supervisor_launches": 0,
+    "evaluation_time": null,
+    "evaluation_timestamps": [],
+    "controls": [
+      {
+        "id": "PIPE01_authentic",
+        "description": "authentic PIPE01 reaches shadow_ready=true with execution_occurred=false",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "post_eval_plus_1_second",
+        "description": "mutate only result evaluation time by exactly +1 second; reject before shadow_ready; no E rerun",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "cross_pair_result_A_transcript_B",
+        "description": "cross-pair result A with transcript B",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "cross_pair_result_B_transcript_A",
+        "description": "cross-pair result B with transcript A",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "one_byte_result_mutation",
+        "description": "mutate one byte in Contract E result",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "wrong_execution_intent_transcript",
+        "description": "use wrong execution-intent transcript",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "wrong_authority_state_transcript",
+        "description": "use wrong authority-state transcript",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "wrong_issuer",
+        "description": "use correctly shaped wrong issuer",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "stale_transcript",
+        "description": "use stale transcript",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "replayed_challenge",
+        "description": "replay challenge",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "caller_time_or_result_injection",
+        "description": "attempt caller-supplied evaluation time or Contract E result injection",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "PIPE02_expected_HOLD",
+        "description": "PIPE02 remains HOLD",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "PIPE03_expected_HOLD",
+        "description": "PIPE03 remains HOLD",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      },
+      {
+        "id": "sandbox_unchanged",
+        "description": "sandbox before/after equality",
+        "status": "NOT_RUN_PREEXECUTION_BLOCK",
+        "observed_rejection": null,
+        "shadow_ready": null
+      }
+    ],
+    "sandbox": {
+      "status": "NOT_CREATED — receipt/source preflight failed first",
+      "before": null,
+      "after": null,
+      "unchanged": null
+    }
+  },
+  "generated_artifacts": {
+    "RUNNING_JSON": null,
+    "MATRIX_PROGRESS_JSON": "research/ers-contract-e-evaluation-provenance-20260921/execution-05-preflight-blocked-20260923/MATRIX_PROGRESS.json (operator evidence ledger; frozen runner did not start)",
+    "RESULT_JSON": null,
+    "FAILURE_JSON": "research/ers-contract-e-evaluation-provenance-20260921/execution-05-preflight-blocked-20260923/FAILURE.json",
+    "contract_e_request_bytes": null,
+    "contract_e_result_bytes": null,
+    "signed_transcript_bytes": null,
+    "per_run_sidecars": null,
+    "per_run_manifests": null,
+    "challenges": [],
+    "evaluation_time_values": [],
+    "issuer_public_key_identity": "sha256:e7f4581c2d58eecd0279f895cf3dd49df3098d092fa1e083731d802fcd1db259",
+    "execution_intent_identity": "NOT_GENERATED — Contract E was not invoked",
+    "authority_state_identity": "NOT_GENERATED — Contract E was not invoked",
+    "fixture_recovery_manifest_sha256": "sha256:43dd34ef801b8b4f8aafcf13f482a1107033c04d40760e44e13307f2d6c779c2"
+  },
+  "deviations": [
+    {
+      "stage": "preflight",
+      "detail": "Frozen 05 receipt/source preflight returned apparatus_freeze_receipt_path_not_canonical; all matrix execution stopped."
+    },
+    {
+      "stage": "post_preflight_gates",
+      "detail": "Post-preflight Git-blob recheck, independent critical-input rehash, qualification-sandbox creation, and sandbox snapshot were not run after the preflight failure, per the stop rule."
+    },
+    {
+      "stage": "operator_identity_check",
+      "detail": "One initial read-only git rev-parse command contained a malformed SHA; the command failed before any Python gate, was corrected, and no source or scientific input was changed."
+    }
+  ],
+  "nonclaims": [
+    "No scientific hypothesis result was obtained.",
+    "No mutation rejection boundary was observed.",
+    "PIPE02 and PIPE03 were not run; no HOLD outcome is claimed.",
+    "No sandbox equality result exists.",
+    "This blocked preflight does not authorize or imply executor, pending-review write, Contract D effect registration, production promotion/release, or MainFrame mutation."
+  ],
+  "source_urls": {
+    "apparatus_143": "https://github.com/camerontjs-dot/apparatus-contracts/pull/143",
+    "apparatus_130": "https://github.com/camerontjs-dot/apparatus-contracts/pull/130",
+    "issue_137": "https://github.com/camerontjs-dot/apparatus-contracts/issues/137",
+    "ers_13": "https://github.com/camerontjs-dot/epistemic-research-system/pull/13",
+    "fixture_138": "https://github.com/camerontjs-dot/apparatus-contracts/pull/138",
+    "fixture_prereg_139": "https://github.com/camerontjs-dot/apparatus-contracts/pull/139",
+    "fixture_gate_140": "https://github.com/camerontjs-dot/apparatus-contracts/pull/140"
+  }
+}

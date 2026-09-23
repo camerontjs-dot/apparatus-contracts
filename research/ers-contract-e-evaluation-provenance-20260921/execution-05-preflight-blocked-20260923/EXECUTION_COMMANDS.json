@@ -1,0 +1,23 @@
+{
+  "schema": "ers-evaluation-time-provenance-execution-commands/1",
+  "status": "PREEXECUTION_ONLY_MATRIX_COMMAND_NOT_RUN",
+  "exact_local_command_log_sha256": "sha256:d9cd0b596776acfa39f51e464254773dd52e05a4d637148968d8dba2b0c72698",
+  "exact_local_command_log_retained_outside_repository": true,
+  "commands": [
+    {
+      "id": "fixture_binding_gate",
+      "executed": true,
+      "command": "python3.11 '$SCRATCH_ROOT/fixture-gate-checkout/research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-successor-rc0/fixture_binding_preflight.py' --apparatus-root '$SCRATCH_ROOT/fixture-gate-checkout' --apparatus-source-commit 1c88f95bea10f6fecb99a5bfd1ea51bc6710ba2f --fixture-root '$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery/frozen-fixtures' --recovery-manifest '$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery/frozen-fixtures/FIXTURE_MANIFEST.json' --verification-receipt '$SCRATCH_ROOT/fixture-artifact/home/runner/work/apparatus-contracts/apparatus-contracts/build/cal-pipeline-v3-fixture-recovery/../cal-pipeline-v3-fixture-recovery-verification.json' --composition-result '$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-a.json' --composition-result '$SCRATCH_ROOT/fixture-artifact/tmp/cal-fixture-recovery-result-b.json' --output '$SCRATCH_ROOT/preflight/FIXTURE_BINDING_PREFLIGHT.json' > '$SCRATCH_ROOT/preflight/FIXTURE_BINDING_STDOUT.json'"
+    },
+    {
+      "id": "receipt_source_preflight",
+      "executed": true,
+      "command": "python3.11 '$SCRATCH_ROOT/apparatus-source-checkout/research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/receipt_preflight_fixture_bound.py' --apparatus-root '$SCRATCH_ROOT/apparatus-source-checkout' --apparatus-source-commit b868e66523ed622dbc6615d22d5f73f81cbda94f --ers-root '$SCRATCH_ROOT/ers-checkout' --ers-source-commit 65f47d029fb734be1d5d506a135cbeba813f6be8 --ers-freeze-commit cd9e0cc725863261513cc5fd5dd3587fc6e721cf --apparatus-freeze-receipt '$SCRATCH_ROOT/apparatus-checkout/research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/FREEZE_RECEIPT.json' --output '$SCRATCH_ROOT/preflight/RECEIPT_SOURCE_PREFLIGHT.json' > '$SCRATCH_ROOT/preflight/RECEIPT_SOURCE_PREFLIGHT_STDOUT.json' 2>&1"
+    },
+    {
+      "id": "frozen_matrix_runner",
+      "executed": false,
+      "reason": "preflight failure; execution stopped"
+    }
+  ]
+}
