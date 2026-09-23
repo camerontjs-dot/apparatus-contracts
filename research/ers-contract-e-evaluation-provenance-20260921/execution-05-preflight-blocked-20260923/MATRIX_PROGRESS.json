@@ -1,0 +1,12 @@
+{
+  "schema": "ers-evaluation-time-provenance-matrix-progress/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "origin": "execution-evidence ledger; frozen runner was not invoked",
+  "state": "not_started",
+  "blocked_at": "05_receipt_source_preflight",
+  "contract_e_evaluations": 0,
+  "completed_rows": [],
+  "next_row": null,
+  "error": "apparatus_freeze_receipt_path_not_canonical",
+  "disposition": "BLOCKED"
+}

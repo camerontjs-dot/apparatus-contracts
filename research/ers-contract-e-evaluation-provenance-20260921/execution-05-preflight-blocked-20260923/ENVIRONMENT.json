@@ -1,0 +1,15 @@
+{
+  "schema": "ers-evaluation-time-provenance-execution-environment/1",
+  "captured_at_utc": "2026-09-23 04:15:26 UTC",
+  "timezone": "America/Toronto",
+  "platform": "macOS 27.0 arm64 (Darwin 27.0)",
+  "python_used_for_non_evaluating_gates": "Python 3.11.15",
+  "default_python_available": "Python 3.14.4",
+  "git": "git version 2.50.1 (Apple Git-155)",
+  "openssl": "OpenSSL 3.6.3 9 Jun 2026",
+  "matrix_runtime": "NOT_ESTABLISHED — runner was not launched",
+  "artifact_acquisition": "GitHub workflow artifact 10717946190; verified archive SHA-256",
+  "gate_and_preflight_python": "Python 3.11.15",
+  "contract_e_runtime": "not reached",
+  "local_hostname": "omitted"
+}

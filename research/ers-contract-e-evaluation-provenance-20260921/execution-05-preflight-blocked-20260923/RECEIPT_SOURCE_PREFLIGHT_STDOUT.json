@@ -1,0 +1,15 @@
+{
+  "error": "apparatus_freeze_receipt_path_not_canonical",
+  "error_type": "PreflightError",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "instrumentation": {
+    "candidate_runtime_imports": [],
+    "contract_e_evaluation_calls": 0,
+    "git_processes": 0,
+    "network_attempts": 0,
+    "non_git_processes": [],
+    "supervisor_process_launches": 0
+  },
+  "schema": "ers-evaluation-provenance-receipt-consistency-preflight/1",
+  "status": "FAIL"
+}
