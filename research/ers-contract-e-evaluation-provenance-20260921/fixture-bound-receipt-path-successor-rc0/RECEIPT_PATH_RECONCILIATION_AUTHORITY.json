@@ -1,0 +1,125 @@
+{
+  "schema": "ers-evaluation-provenance-receipt-path-reconciliation/1",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "classification": "pre_scientific_receipt_path_reconciliation_preregistration",
+  "status": "Draft",
+  "base": {
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "branch": "research/ers-contract-e-evaluation-provenance-05-receipt-path-prereg-20260923",
+    "base_commit": "9ac48b98f564962a9cb0e79c3202cfb0d41bf53a",
+    "base_commit_meaning": "exact PR #144 head, recorded BLOCKED 05 matrix preflight attempt",
+    "base_parent": "e9e364acfaa763abe5971ac95debc850ffcbfc69",
+    "base_parent_meaning": "exact PR #143 head, frozen 05 fixture-bound identity successor"
+  },
+  "pr_stack": {
+    "pr_130_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "pr_130_meaning": "scientific hypothesis and decisive controls, unchanged",
+    "pr_142_head": "f14fbcce20eb5c2756cb2b4bfcbdc27d0ebd6393",
+    "pr_142_base": "39b1987d2265ae9e6b9f9879cecc08096834721f",
+    "pr_142_scope": "04->05 identity change only (new runner copy single literal, new preflight copy single literal, receipt-only ERS successor, apparatus freeze binding). Receipt-path changes are outside PR #142 and are not authorized by it.",
+    "pr_143_head": "e9e364acfaa763abe5971ac95debc850ffcbfc69",
+    "pr_143_tree": "370d2f3dd191cbbf7139d07c037744cec8baef77",
+    "pr_143_freeze_blob": "6d5ffde330cda4614baa61844f1f6a83489603df",
+    "pr_144_head": "9ac48b98f564962a9cb0e79c3202cfb0d41bf53a",
+    "pr_144_disposition": "BLOCKED",
+    "pr_144_failure": "apparatus_freeze_receipt_path_not_canonical"
+  },
+  "exact_authorities": {
+    "apparatus_freeze_commit": "e9e364acfaa763abe5971ac95debc850ffcbfc69",
+    "apparatus_freeze_tree": "370d2f3dd191cbbf7139d07c037744cec8baef77",
+    "apparatus_freeze_blob": "6d5ffde330cda4614baa61844f1f6a83489603df",
+    "apparatus_freeze_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/FREEZE_RECEIPT.json",
+    "apparatus_source_commit": "b868e66523ed622dbc6615d22d5f73f81cbda94f",
+    "apparatus_source_tree": "082d0bce4c1be496b2590e835817e68592e2e2bc",
+    "predecessor_preflight_blob": "ddf19ab89ebbb021891262b34664162020b8ac41",
+    "predecessor_preflight_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/receipt_preflight_fixture_bound.py",
+    "predecessor_runner_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+    "predecessor_runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+    "ers_receipt_commit": "cd9e0cc725863261513cc5fd5dd3587fc6e721cf",
+    "ers_receipt_tree": "419a66fa2408bd06c51266e1a6820d74e249a4ce",
+    "ers_receipt_blob": "31d9978f21902d458d758386343e87f0be429252",
+    "ers_receipt_path": "research/ers-contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923/FREEZE_RECEIPT.json",
+    "ers_source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "ers_source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191",
+    "pr130_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "transcript_schema_blob": "b85b38ce95263e348d2ebd1293f76ffc87adcf6d",
+    "fixture_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad"
+  },
+  "predecessor_canonical_paths_frozen_in_old_preflight": {
+    "old_ers_receipt_relative_path": "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json",
+    "old_app_receipt_relative_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-executable-source-identity-rc0/FREEZE_RECEIPT.json",
+    "meaning": "predecessor paths hard-coded at blob ddf19ab89ebbb021891262b34664162020b8ac41 lines 27-32; they reject the exact authorities above before ERS comparison"
+  },
+  "required_compat_paths": {
+    "new_ers_receipt_relative_path": "research/ers-contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923/FREEZE_RECEIPT.json",
+    "new_app_receipt_relative_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/FREEZE_RECEIPT.json",
+    "meaning": "values recorded as required_pr13_receipt_path and required_pr143_freeze_receipt_path in PR #144 FAILURE.json; new compat preflight must equal exactly these"
+  },
+  "authorized_apparatus_implementation": {
+    "new_directory": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-path-successor-rc0/",
+    "new_preflight_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-path-successor-rc0/receipt_preflight_fixture_bound_compat.py",
+    "allowed_semantic_delta": "none except canonical path compatibility",
+    "allowed_text_delta": [
+      "copy exact frozen predecessor bytes at blob ddf19ab89ebbb021891262b34664162020b8ac41",
+      "replace only ERS_RECEIPT_RELATIVE_PATH old value with new_ers_receipt_relative_path above",
+      "replace only APP_RECEIPT_RELATIVE_PATH old value with new_app_receipt_relative_path above",
+      "no other byte change, including EXPERIMENT_ID, PR130_HEAD, PR131_HEAD, schema blob, issuer, API shapes, guard logic"
+    ],
+    "originals_must_remain_unchanged": true,
+    "new_freeze_receipt_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-path-successor-rc0/FREEZE_RECEIPT.json",
+    "new_freeze_receipt_must_bind": [
+      "experiment_id ERS-EVAL-TIME-PROV-20260922-05",
+      "new compat preflight blob and path",
+      "predecessor preflight blob ddf19ab89ebbb021891262b34664162020b8ac41",
+      "apparatus source commit b868e66523ed622dbc6615d22d5f73f81cbda94f and tree 082d0bce4c1be496b2590e835817e68592e2e2bc",
+      "ERS receipt cd9e0cc725863261513cc5fd5dd3587fc6e721cf/tree/blob/path and ERS source 65f47d029fb734be1d5d506a135cbeba813f6be8/tree",
+      "PR130 head dcdd10355e2f885273d843eef6e345bafca95faa",
+      "fixture subject sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+      "this preregistration commit and authority blob"
+    ],
+    "any_other_diff_is_falsifier": true
+  },
+  "explicit_non_authorization": {
+    "pr_142_does_not_authorize_receipt_path_changes": true,
+    "no_ers_source_change": true,
+    "no_runner_change": true,
+    "no_scientific_implementation_change": true,
+    "no_fixture_change": true,
+    "no_pr_142_143_144_mutation": true,
+    "no_matrix_run": true,
+    "no_scientific_claim": true
+  },
+  "required_qualification": {
+    "layer": "non-evaluating receipt/source preflight only",
+    "checkouts": "fresh detached checkouts, not implementation worktree",
+    "positive": "exact path/receipt pairing (new compat preflight accepts e9e364 freeze receipt at required APP path and cd9e0cc ERS receipt at required ERS path, with source commits b868e66523ed622dbc6615d22d5f73f81cbda94f and 65f47d029fb734be1d5d506a135cbeba813f6be8, PR130 head dcdd10355e2f885273d843eef6e345bafca95faa)",
+    "negatives": [
+      "predecessor APP path against new receipts must fail with apparatus_freeze_receipt_path_not_canonical",
+      "predecessor ERS path mismatch must fail before ERS comparison",
+      "swapped receipts (apparatus receipt where ERS expected and vice versa) must fail",
+      "mismatched apparatus source commit must fail",
+      "mismatched ERS source commit must fail",
+      "mismatched commit/tree/blob identities (freeze commit, freeze tree, freeze blob, source tree, preflight blob) must fail"
+    ],
+    "controls": [
+      "zero runner imports",
+      "zero supervisor launches",
+      "zero Contract E evaluations",
+      "zero network access",
+      "zero sandbox creation",
+      "zero matrix controls run"
+    ]
+  },
+  "scientific_invariants": {
+    "fixture_subject_identity": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+    "pr130_question_and_controls_change_allowed": false,
+    "contract_e_change_allowed": false,
+    "contract_d_change_allowed": false,
+    "ers_behavior_change_allowed": false,
+    "transcript_schema_change_allowed": false,
+    "issuer_change_allowed": false,
+    "matrix_execution_allowed": false
+  },
+  "stop_rule": "If any gate fails, record BLOCKED and stop; do not patch in place or retry toward a pass.",
+  "next_boundary_if_qualified": "RECEIPT_PATH_COMPAT_PREFLIGHT_QUALIFIED; matrix still requires separate authorization"
+}

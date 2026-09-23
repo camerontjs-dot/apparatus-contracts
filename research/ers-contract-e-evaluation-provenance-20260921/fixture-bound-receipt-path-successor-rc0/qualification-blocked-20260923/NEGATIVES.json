@@ -1,0 +1,86 @@
+{
+  "N1_predecessor_app_path": {
+    "error": "apparatus_freeze_receipt_path_not_canonical",
+    "instrumentation": {
+      "candidate_runtime_imports": [],
+      "contract_e_evaluation_calls": 0,
+      "git_processes": 0,
+      "network_attempts": 0,
+      "non_git_processes": [],
+      "supervisor_process_launches": 0
+    },
+    "status": "FAIL"
+  },
+  "N2_predecessor_ers_freeze": {
+    "error": "git_object_check_failed:fatal: path 'research/ers-contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923/FREEZE_RECEIPT.json' exists on disk, but not in '64ed29cc444931f4807f627ad75523e14cf00c03'",
+    "instrumentation": {
+      "candidate_runtime_imports": [],
+      "contract_e_evaluation_calls": 0,
+      "git_processes": 1,
+      "network_attempts": 0,
+      "non_git_processes": [],
+      "supervisor_process_launches": 0
+    },
+    "status": "FAIL"
+  },
+  "N3_swapped_ers_freeze": {
+    "error": "git_object_check_failed:fatal: path 'research/ers-contract-e-evaluation-transcript-rc6-fixture-bound-identity-successor-20260923/FREEZE_RECEIPT.json' exists on disk, but not in 'e9e364acfaa763abe5971ac95debc850ffcbfc69'",
+    "instrumentation": {
+      "candidate_runtime_imports": [],
+      "contract_e_evaluation_calls": 0,
+      "git_processes": 1,
+      "network_attempts": 0,
+      "non_git_processes": [],
+      "supervisor_process_launches": 0
+    },
+    "status": "FAIL"
+  },
+  "N4_wrong_app_source": {
+    "error": "git_object_check_failed:fatal: path 'research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py' exists on disk, but not in 'f14fbcce20eb5c2756cb2b4bfcbdc27d0ebd6393'",
+    "instrumentation": {
+      "candidate_runtime_imports": [],
+      "contract_e_evaluation_calls": 0,
+      "git_processes": 19,
+      "network_attempts": 0,
+      "non_git_processes": [],
+      "supervisor_process_launches": 0
+    },
+    "status": "FAIL"
+  },
+  "N5_wrong_ers_source": {
+    "error": "{\"checks\": [{\"actual\": \"ers-contract-e-evaluation-transcript-freeze/1\", \"check\": \"ers_receipt_schema\", \"expected\": \"ers-contract-e-evaluation-transcript-freeze/1\", \"passed\": true}, {\"actual\": \"ers-contract-e-evaluation-provenance-apparatus-freeze/1\", \"check\": \"apparatus_receipt_schema\", \"expected\": ",
+    "instrumentation": {
+      "candidate_runtime_imports": [],
+      "contract_e_evaluation_calls": 0,
+      "git_processes": 23,
+      "network_attempts": 0,
+      "non_git_processes": [],
+      "supervisor_process_launches": 0
+    },
+    "status": "FAIL"
+  },
+  "N6_altered_blob": {
+    "error": "apparatus_freeze_receipt_path_not_canonical",
+    "instrumentation": {
+      "candidate_runtime_imports": [],
+      "contract_e_evaluation_calls": 0,
+      "git_processes": 0,
+      "network_attempts": 0,
+      "non_git_processes": [],
+      "supervisor_process_launches": 0
+    },
+    "status": "FAIL"
+  },
+  "N6b_altered_blob": {
+    "error": "{\"checks\": [{\"actual\": \"ers-contract-e-evaluation-transcript-freeze/1\", \"check\": \"ers_receipt_schema\", \"expected\": \"ers-contract-e-evaluation-transcript-freeze/1\", \"passed\": true}, {\"actual\": \"ers-contract-e-evaluation-provenance-apparatus-freeze/1\", \"check\": \"apparatus_receipt_schema\", \"expected\": ",
+    "instrumentation": {
+      "candidate_runtime_imports": [],
+      "contract_e_evaluation_calls": 0,
+      "git_processes": 23,
+      "network_attempts": 0,
+      "non_git_processes": [],
+      "supervisor_process_launches": 0
+    },
+    "status": "FAIL"
+  }
+}

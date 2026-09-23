@@ -1,0 +1,25 @@
+{
+  "controls": {
+    "contract_e_evaluations": 0,
+    "matrix_controls": 0,
+    "network_access": 0,
+    "runner_imports": 0,
+    "sandbox_creation": 0,
+    "supervisor_launches": 0
+  },
+  "disposition": "BLOCKED",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "matrix": "NOT_RUN",
+  "positive": {
+    "error_type": "PreflightError",
+    "failures": [
+      "ers_pr130_head",
+      "matching_pr130_head",
+      "ers_pr131_head",
+      "apparatus_pr131_head"
+    ],
+    "status": "FAIL"
+  },
+  "schema": "ers-evaluation-provenance-receipt-path-qualification-blocked/1",
+  "scientific_claim": "none"
+}
