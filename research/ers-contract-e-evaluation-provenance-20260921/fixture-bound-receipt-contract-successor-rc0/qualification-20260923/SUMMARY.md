@@ -43,6 +43,12 @@ The first altered-byte CLI attempt used the clean-checkout preflight executable 
 - Unchanged: PR #130 controls, Contract E/D, Decision Engine, CAL, Contract C consumer, ERS runtime and transcript schema, issuer semantics, scientific runner, fixture bytes/subject, and expected scientific outcomes.
 - No mutation to PRs #143, #144, #145, #13, #130, or #131.
 
+## Publication state
+
+- ERS receipt successor: [Draft PR #14](https://github.com/camerontjs-dot/epistemic-research-system/pull/14), based on PR #13 head `cd9e0cc725863261513cc5fd5dd3587fc6e721cf`, head `aa214666c9a68871c0d878a70b7f3833d49dbe9b`.
+- Apparatus preflight/receipt successor: [Draft PR #146](https://github.com/camerontjs-dot/apparatus-contracts/pull/146), based on PR #145 head `ae72c6293cb7e7833a55b181e3abc31f116a75ee`.
+- Final live check: PR #130 remained OPEN Draft at `dcdd10355e2f885273d843eef6e345bafca95faa`; PR #131 remained CLOSED at `077ccf6d386526bda258b3e90bd43e153c4c04c5`; PRs #143, #144, and #145 remained at `e9e364acfaa763abe5971ac95debc850ffcbfc69`, `9ac48b98f564962a9cb0e79c3202cfb0d41bf53a`, and `ae72c6293cb7e7833a55b181e3abc31f116a75ee`; ERS PR #13 remained at `cd9e0cc725863261513cc5fd5dd3587fc6e721cf`. PR #145 remains Draft with its earlier BLOCKED result intact.
+
 ## Next authorized step
 
-Reconcile/publish these two successors as Draft research lineage and attach the qualification evidence. Stop before the PR #130 scientific matrix; that matrix requires separate authorization.
+Keep both successors Draft pending review. No matrix work is authorized by this qualification; the next experiment action requires separate explicit authorization for the PR #130 scientific matrix.
