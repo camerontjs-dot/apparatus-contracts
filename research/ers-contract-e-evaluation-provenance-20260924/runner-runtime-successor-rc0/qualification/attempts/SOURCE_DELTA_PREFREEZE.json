@@ -1,0 +1,31 @@
+{
+  "proof": {
+    "added_source_lines": [
+      "    \"research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json\"",
+      "    check(freeze_receipt[\"apparatus\"][\"scientific_preregistration\"][\"commit\"] == APPARATUS_PREREG, \"ers_receipt_preregistration_mismatch\")"
+    ],
+    "pr130_lookup_new": [
+      "apparatus",
+      "scientific_preregistration",
+      "commit"
+    ],
+    "pr130_lookup_old": [
+      "apparatus",
+      "preregistration_head"
+    ],
+    "predecessor_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+    "receipt_path_new": "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json",
+    "receipt_path_old": "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json",
+    "removed_source_lines": [
+      "    \"research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json\"",
+      "    check(freeze_receipt[\"apparatus\"][\"preregistration_head\"] == APPARATUS_PREREG, \"ers_receipt_preregistration_mismatch\")"
+    ],
+    "schema": "ers-05-runner-source-delta-proof/1",
+    "status": "PASS",
+    "successor_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+    "whole_ast_equal_after_authorized_normalization": true
+  },
+  "qualification_status": "NOT_FROZEN_REHEARSAL",
+  "schema": "ers-05-runner-delta-prefreeze-rehearsal/1",
+  "status": "PASS"
+}

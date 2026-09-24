@@ -1,0 +1,303 @@
+{
+  "authorities": {
+    "preserved_pr147": {
+      "base": "cd465d798220daa3f45261d3e6f385cf67224a46",
+      "base_branch": "research/ers-contract-e-evaluation-provenance-05-receipt-contract-prereg-20260923",
+      "disposition": "BLOCKED_BEFORE_SCIENTIFIC_MATRIX",
+      "draft": true,
+      "head": "c054d2fb0822e61833cb9e8a5acb7072dbce6531",
+      "head_branch": "research/ers-contract-e-evaluation-provenance-05-scientific-execution-blocked-20260923",
+      "number": 147,
+      "repository": "camerontjs-dot/apparatus-contracts",
+      "state": "OPEN"
+    },
+    "qualified_pr146": {
+      "draft": true,
+      "head": "cd465d798220daa3f45261d3e6f385cf67224a46",
+      "head_branch": "research/ers-contract-e-evaluation-provenance-05-receipt-contract-prereg-20260923",
+      "number": 146,
+      "receipt_blob": "bc7d3938be9146dd6455ab5f9fda896f22a70274",
+      "receipt_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json",
+      "repository": "camerontjs-dot/apparatus-contracts",
+      "state": "OPEN"
+    }
+  },
+  "counters_at_freeze": {
+    "candidate_runtime_imports": 0,
+    "contract_e_evaluations": 0,
+    "pipe_matrix_cases": 0,
+    "sandbox_creations": 0,
+    "scientific_matrix_run": false,
+    "scientific_mutations": 0,
+    "supervisor_launches": 0
+  },
+  "disposition_at_freeze": "FROZEN_BEFORE_NONSCIENTIFIC_QUALIFICATION",
+  "ers_implementation": {
+    "source_commit": "65f47d029fb734be1d5d506a135cbeba813f6be8",
+    "source_tree": "405bb622e0d7d0f69f3da7506a15fa0b2390e191"
+  },
+  "ers_receipt": {
+    "blob": "50c9493d3f0584de74399118da01b7b603c813e0",
+    "branch": "research/ers-contract-e-evaluation-provenance-05-receipt-contract-successor-20260923",
+    "commit": "aa214666c9a68871c0d878a70b7f3833d49dbe9b",
+    "draft": true,
+    "path": "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json",
+    "pull_request": 14,
+    "repository": "camerontjs-dot/epistemic-research-system",
+    "state": "OPEN",
+    "tree": "1ad0bb7df9a6d836a5fdca7157173c60429619a3"
+  },
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "final_qualification_expected_network_calls": 0,
+  "final_qualification_observed": false,
+  "fixture_subject": "sha256:bebbb1b7973a962d59c92061e8e70283a2fb4b2b8c388705b8d80ce13000c7ad",
+  "frozen_at_utc": "2026-09-24T13:46:19Z",
+  "frozen_dependencies": {
+    "cal_pipeline_v3": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+    "contract_c_consumer": "12e7e640b229619501960b1b89cf4716d8d985b3",
+    "contract_d": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+    "contract_e": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+    "decision": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+    "ers_rc5_base": "099f84700f28e118734f1ca74feb977da1c4cf17",
+    "ers_rc6_predecessor_freeze": "66a82e8ac28c380ddc7eb4388bdc3daf289c1db9",
+    "provenance_profile": "3934423b1a97ad1b099057c40fe8014e5dd08c97",
+    "provenance_root_freeze": "8f762f0d02d2f5a32d85c6b1c721782198422239",
+    "render_bound_ers_rc4": "022fcb58e14864aa173f447fa0c18dd2362b41b0"
+  },
+  "github_state_verified_at_utc": "2026-09-24T13:46:19Z",
+  "issuer": {
+    "algorithm": "Ed25519",
+    "private_key_copied_into_successor_artifacts": false,
+    "public_key_identity": "sha256:e7f4581c2d58eecd0279f895cf3dd49df3098d092fa1e083731d802fcd1db259",
+    "secure_private_key_location": "local macOS Keychain; requires local user session"
+  },
+  "qualification_tools": {
+    "dependency_smoke": {
+      "blob": "9adc02f254d8784193e3fceca0973be1fdc98eaa",
+      "path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/qualification/dependency_smoke.py"
+    },
+    "non_scientific_gate": {
+      "blob": "5ad9211d5a48eabae770e0f8647ceaa97f90b2ac",
+      "path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/qualification/non_scientific_gate.py"
+    },
+    "source_delta_proof": {
+      "blob": "c4ab0efb3185b68113a721c850910a1f48a0dd27",
+      "path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/qualification/source_delta_proof.py"
+    },
+    "startup_guard": {
+      "blob": "2d83a971affb62129b535a0537702e10e815d0cb",
+      "path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/qualification/sitecustomize.py"
+    }
+  },
+  "qualified_preflight": {
+    "qualification_state": "qualified_predecessor; this successor run is pending",
+    "source_blob": "3314048d5904fa59fdb00e67a1ee108c167097aa",
+    "source_commit": "9f75ee325f31971ca8f0d4e1ddf9a7c04c98e940",
+    "source_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/receipt_preflight_05_contract_compat.py",
+    "source_tree": "53e4d53f5f62112d28d080da0a732475c3c51df5"
+  },
+  "receipt_contract_preregistration": {
+    "commit": "077ccf6d386526bda258b3e90bd43e153c4c04c5",
+    "contract_blob": "92b029e6fb5e1a7c11a661911647e618594cd797",
+    "contract_path": "research/ers-contract-e-evaluation-provenance-20260921/successor-receipt-contract-rc0/FREEZE_RECEIPT_CONTRACT.json",
+    "draft": true,
+    "pull_request": 131,
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "state": "CLOSED"
+  },
+  "runner": {
+    "authorized_changes": [
+      {
+        "from": "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json",
+        "to": "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json"
+      },
+      {
+        "from": "apparatus.preregistration_head",
+        "to": "apparatus.scientific_preregistration.commit"
+      }
+    ],
+    "branch": "research/ers-contract-e-evaluation-provenance-05-runner-runtime-successor-20260924",
+    "path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+    "predecessor_blob": "d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+    "predecessor_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+    "source_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+    "source_commit": "dacf5fa48c2a348e603502ca20b70bf89ae358f4",
+    "source_delta_proof_blob": "c4ab0efb3185b68113a721c850910a1f48a0dd27",
+    "source_delta_proof_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/qualification/source_delta_proof.py",
+    "source_tree": "a48ee3c0d91afaa4372d9dd06c97370d14c6723e",
+    "whole_ast_equal_after_authorized_normalization": true
+  },
+  "runtime": {
+    "artifact_checksums_blob": "eae436bd6d24e42be909a96ee22a110e2bcc4cc4",
+    "artifact_checksums_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/ARTIFACTS.SHA256SUMS",
+    "base_python": {
+      "executable": "/Users/admin/.local/bin/python3.11",
+      "implementation": "CPython",
+      "reported_sys_executable": "/Users/admin/.local/bin/python3.11",
+      "resolved_executable": "/Users/admin/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/bin/python3.11",
+      "sha256": "06f1bfa6c5e9d42bc4c8371dd9217a2a185dcdc15ae888193d01f75dc04a3eb1",
+      "version": "3.11.15"
+    },
+    "dependency_graph": [
+      {
+        "direct": false,
+        "name": "attrs",
+        "version": "26.1.0",
+        "wheel": "attrs-26.1.0-py3-none-any.whl",
+        "wheel_bytes": 67548,
+        "wheel_sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+      },
+      {
+        "direct": false,
+        "name": "cffi",
+        "version": "2.1.1",
+        "wheel": "cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl",
+        "wheel_bytes": 184168,
+        "wheel_sha256": "398aff33cee2767e3e781d2554c54bd0dff386bb437581e0d8011fde1a942ec1"
+      },
+      {
+        "direct": true,
+        "name": "cryptography",
+        "version": "50.0.1",
+        "wheel": "cryptography-50.0.1-cp311-abi3-macosx_11_0_arm64.whl",
+        "wheel_bytes": 4010153,
+        "wheel_sha256": "b8f852c65863251b9e3a1b8c150ce21e59b522dbb6a7d4bc80e680d38388e986"
+      },
+      {
+        "direct": true,
+        "name": "jsonschema",
+        "version": "4.26.0",
+        "wheel": "jsonschema-4.26.0-py3-none-any.whl",
+        "wheel_bytes": 90630,
+        "wheel_sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+      },
+      {
+        "direct": false,
+        "name": "jsonschema-specifications",
+        "version": "2025.9.1",
+        "wheel": "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+        "wheel_bytes": 18437,
+        "wheel_sha256": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+      },
+      {
+        "direct": false,
+        "name": "pycparser",
+        "version": "3.0",
+        "wheel": "pycparser-3.0-py3-none-any.whl",
+        "wheel_bytes": 48172,
+        "wheel_sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"
+      },
+      {
+        "direct": false,
+        "name": "referencing",
+        "version": "0.37.0",
+        "wheel": "referencing-0.37.0-py3-none-any.whl",
+        "wheel_bytes": 26766,
+        "wheel_sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+      },
+      {
+        "direct": true,
+        "name": "rfc8785",
+        "version": "0.1.4",
+        "wheel": "rfc8785-0.1.4-py3-none-any.whl",
+        "wheel_bytes": 9240,
+        "wheel_sha256": "520d690b448ecf0703691c76e1a34a24ddcd4fc5bc41d589cb7c58ec651bcd48"
+      },
+      {
+        "direct": false,
+        "name": "rpds-py",
+        "version": "2026.6.3",
+        "wheel": "rpds_py-2026.6.3-cp311-cp311-macosx_11_0_arm64.whl",
+        "wheel_bytes": 345513,
+        "wheel_sha256": "db08f45aecde626498fb3df07bcf6d2ec040af42e859a4f5040d79c200342911"
+      },
+      {
+        "direct": false,
+        "name": "typing-extensions",
+        "version": "4.16.0",
+        "wheel": "typing_extensions-4.16.0-py3-none-any.whl",
+        "wheel_bytes": 45571,
+        "wheel_sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+      }
+    ],
+    "direct_pins": {
+      "cryptography": "50.0.1",
+      "jsonschema": "4.26.0",
+      "rfc8785": "0.1.4"
+    },
+    "download_installer": {
+      "invocation": "python3.11 -m pip download --isolated --disable-pip-version-check --no-input --no-deps --require-hashes --only-binary=:all: --no-cache-dir --index-url https://pypi.org/simple --dest /private/tmp/cal-ers05-runner-runtime-successor-20260924/runtime-build/wheelhouse-rebuild -r research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/requirements.lock",
+      "name": "pip",
+      "version": "pip 26.1 from /Users/admin/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/site-packages/pip (python 3.11)"
+    },
+    "environment_disclaimer": "This is a newly frozen successor runtime chosen from available evidence. It is not claimed to reconstruct an unknown historical matrix environment.",
+    "final_install_result": "pending frozen qualification",
+    "manifest_blob": "496a2161ea4c9725751bd7ff3fd5d72d557ee9c2",
+    "manifest_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/MANIFEST.json",
+    "manifest_sha256": "f4a53166f4df2ac35c505c5b29e2a4a9a1e9ea494caf6c1bdeb1ce8d13adf475",
+    "network_provenance": {
+      "final_qualification_expected_network_calls": 0,
+      "package_index": "https://pypi.org/simple",
+      "purpose": "uv resolution and hash-verified PyPI wheel downloads",
+      "used_before_freeze": true
+    },
+    "requirements_in_blob": "5a7b85d2a136982e01b760a7e4dcff59306bb6d6",
+    "requirements_in_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/requirements.in",
+    "requirements_in_sha256": "23ab220762eb55cdc79e1d8a03ab8e98f1a39e4fa79e927a13195284026157d5",
+    "requirements_lock_blob": "352172b091cd70b2d9ccb89b188a548cefe9f9a9",
+    "requirements_lock_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/requirements.lock",
+    "requirements_lock_sha256": "4d0bd11eadca52c292cb883afc062fd95de6b03e8304dedf4820a027898a419f",
+    "resolution_command": "uv pip compile requirements.in --python /Users/admin/.local/bin/python3.11 --python-version 3.11.15 --python-platform aarch64-apple-darwin --generate-hashes --only-binary :all: --no-annotate --no-header --no-cache --no-progress --default-index https://pypi.org/simple --config-file /dev/null --output-file /private/tmp/cal-ers05-runner-runtime-successor-20260924/runtime-build/reconstructed.lock",
+    "resolver": {
+      "executable": "/Users/admin/.local/bin/uv",
+      "name": "uv",
+      "python_downloads_disabled": true,
+      "sha256": "b2859884b9693e7ffe7ba8c3ad912b78fa2b77b3519bb58a82b6f8fedb983f23",
+      "version": "uv 0.11.11 (ed7b06001 2026-05-06 aarch64-apple-darwin)"
+    },
+    "restore_install_command": [
+      "uv venv --python <python-3.11.15-executable> --no-project --no-python-downloads --no-cache --no-progress --config-file /dev/null <new-venv>",
+      "uv pip sync --python <new-venv>/bin/python --offline --no-index --find-links <this-directory>/wheelhouse --require-hashes --strict --no-cache --no-progress --config-file /dev/null requirements.lock",
+      "uv pip check --python <new-venv>/bin/python --offline --no-cache --config-file /dev/null"
+    ],
+    "restore_instructions_blob": "a30790ba72c218a45cbb1e206d96cb10cf5af9ea",
+    "restore_instructions_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/RESTORE.md",
+    "target": {
+      "architecture": "arm64",
+      "os": "macOS 27.0",
+      "platform_tag": "aarch64-apple-darwin"
+    },
+    "wheelhouse_blob": "30b5eaad87b93f23d6db8e1e192dcaba47a2ccf0",
+    "wheelhouse_builder_blob": "b7ee9eb9ae65cca81ad39e01bdf3a763b3c8b5ba",
+    "wheelhouse_builder_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/build_wheelhouse_archive.py",
+    "wheelhouse_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/wheelhouse.zip",
+    "wheelhouse_sha256": "68474c180d4e5d2b35df36354d68cc477a69061960cd26385661cad9a63a0214",
+    "wheelhouse_sha256sums_blob": "852bc415d026f8fb7bd8c21d0bb8da705da5f090",
+    "wheelhouse_sha256sums_path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/WHEELHOUSE.SHA256SUMS",
+    "wheelhouse_sha256sums_sha256": "cdc5f72cd91c66a9be03f0f473b30ac3799a61ea4fb44a3b7c70d6597fa09e4b"
+  },
+  "schema": "ers-eval-time-prov-05-runner-runtime-successor-freeze/1",
+  "scientific_preregistration": {
+    "commit": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "draft": true,
+    "pull_request": 130,
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "state": "OPEN"
+  },
+  "successor_of": {
+    "branch": "research/ers-contract-e-evaluation-provenance-05-scientific-execution-blocked-20260923",
+    "commit": "c054d2fb0822e61833cb9e8a5acb7072dbce6531",
+    "disposition": "BLOCKED_BEFORE_SCIENTIFIC_MATRIX",
+    "pull_request": 147,
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "tree": "b11c679e67834db40534eb3dc0d313fffd6cbfac"
+  },
+  "successor_preregistration": {
+    "blob": "4308549db59e7c358d26abdada166891df8f248d",
+    "branch": "research/ers-contract-e-evaluation-provenance-05-runner-runtime-successor-20260924",
+    "commit": "e0be5131d2b906f01d3d2461941af048e0f16920",
+    "path": "research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/PREREGISTRATION.md",
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "tree": "2ce8a4093ed098c23f2b124226ccdfa9ff2d6a09"
+  }
+}

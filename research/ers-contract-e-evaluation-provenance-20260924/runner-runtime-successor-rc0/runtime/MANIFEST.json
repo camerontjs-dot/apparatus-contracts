@@ -1,0 +1,226 @@
+{
+  "archive_format": {
+    "entry_order": "filename ascending",
+    "file_mode": "100644",
+    "format": "ZIP_STORED",
+    "timestamp_utc": "1980-01-01T00:00:00Z",
+    "wheel_count": 10,
+    "wheels": [
+      {
+        "bytes": 67548,
+        "filename": "attrs-26.1.0-py3-none-any.whl",
+        "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+      },
+      {
+        "bytes": 184168,
+        "filename": "cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl",
+        "sha256": "398aff33cee2767e3e781d2554c54bd0dff386bb437581e0d8011fde1a942ec1"
+      },
+      {
+        "bytes": 4010153,
+        "filename": "cryptography-50.0.1-cp311-abi3-macosx_11_0_arm64.whl",
+        "sha256": "b8f852c65863251b9e3a1b8c150ce21e59b522dbb6a7d4bc80e680d38388e986"
+      },
+      {
+        "bytes": 90630,
+        "filename": "jsonschema-4.26.0-py3-none-any.whl",
+        "sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+      },
+      {
+        "bytes": 18437,
+        "filename": "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+        "sha256": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+      },
+      {
+        "bytes": 48172,
+        "filename": "pycparser-3.0-py3-none-any.whl",
+        "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"
+      },
+      {
+        "bytes": 26766,
+        "filename": "referencing-0.37.0-py3-none-any.whl",
+        "sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+      },
+      {
+        "bytes": 9240,
+        "filename": "rfc8785-0.1.4-py3-none-any.whl",
+        "sha256": "520d690b448ecf0703691c76e1a34a24ddcd4fc5bc41d589cb7c58ec651bcd48"
+      },
+      {
+        "bytes": 345513,
+        "filename": "rpds_py-2026.6.3-cp311-cp311-macosx_11_0_arm64.whl",
+        "sha256": "db08f45aecde626498fb3df07bcf6d2ec040af42e859a4f5040d79c200342911"
+      },
+      {
+        "bytes": 45571,
+        "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+        "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+      }
+    ]
+  },
+  "base_python": {
+    "executable": "/Users/admin/.local/bin/python3.11",
+    "implementation": "CPython",
+    "reported_sys_executable": "/Users/admin/.local/bin/python3.11",
+    "resolved_executable": "/Users/admin/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/bin/python3.11",
+    "sha256": "06f1bfa6c5e9d42bc4c8371dd9217a2a185dcdc15ae888193d01f75dc04a3eb1",
+    "version": "3.11.15"
+  },
+  "dependency_count": 10,
+  "dependency_graph": [
+    {
+      "direct": false,
+      "name": "attrs",
+      "version": "26.1.0",
+      "wheel": "attrs-26.1.0-py3-none-any.whl",
+      "wheel_bytes": 67548,
+      "wheel_sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+    },
+    {
+      "direct": false,
+      "name": "cffi",
+      "version": "2.1.1",
+      "wheel": "cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl",
+      "wheel_bytes": 184168,
+      "wheel_sha256": "398aff33cee2767e3e781d2554c54bd0dff386bb437581e0d8011fde1a942ec1"
+    },
+    {
+      "direct": true,
+      "name": "cryptography",
+      "version": "50.0.1",
+      "wheel": "cryptography-50.0.1-cp311-abi3-macosx_11_0_arm64.whl",
+      "wheel_bytes": 4010153,
+      "wheel_sha256": "b8f852c65863251b9e3a1b8c150ce21e59b522dbb6a7d4bc80e680d38388e986"
+    },
+    {
+      "direct": true,
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "wheel": "jsonschema-4.26.0-py3-none-any.whl",
+      "wheel_bytes": 90630,
+      "wheel_sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+    },
+    {
+      "direct": false,
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "wheel": "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+      "wheel_bytes": 18437,
+      "wheel_sha256": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+    },
+    {
+      "direct": false,
+      "name": "pycparser",
+      "version": "3.0",
+      "wheel": "pycparser-3.0-py3-none-any.whl",
+      "wheel_bytes": 48172,
+      "wheel_sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"
+    },
+    {
+      "direct": false,
+      "name": "referencing",
+      "version": "0.37.0",
+      "wheel": "referencing-0.37.0-py3-none-any.whl",
+      "wheel_bytes": 26766,
+      "wheel_sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+    },
+    {
+      "direct": true,
+      "name": "rfc8785",
+      "version": "0.1.4",
+      "wheel": "rfc8785-0.1.4-py3-none-any.whl",
+      "wheel_bytes": 9240,
+      "wheel_sha256": "520d690b448ecf0703691c76e1a34a24ddcd4fc5bc41d589cb7c58ec651bcd48"
+    },
+    {
+      "direct": false,
+      "name": "rpds-py",
+      "version": "2026.6.3",
+      "wheel": "rpds_py-2026.6.3-cp311-cp311-macosx_11_0_arm64.whl",
+      "wheel_bytes": 345513,
+      "wheel_sha256": "db08f45aecde626498fb3df07bcf6d2ec040af42e859a4f5040d79c200342911"
+    },
+    {
+      "direct": false,
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "wheel": "typing_extensions-4.16.0-py3-none-any.whl",
+      "wheel_bytes": 45571,
+      "wheel_sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+    }
+  ],
+  "direct_pin_authority": {
+    "cryptography": {
+      "source": "prior frozen ERS qualification evidence; requested direct pin",
+      "version": "50.0.1"
+    },
+    "jsonschema": {
+      "source": "prior frozen ERS qualification evidence; requested direct pin",
+      "version": "4.26.0"
+    },
+    "rfc8785": {
+      "git_blob": "94396e082c521996c9ed6e39546b3dbb0be60772",
+      "source": "apparatus pyproject.toml",
+      "version": "0.1.4"
+    }
+  },
+  "direct_pins": {
+    "cryptography": "50.0.1",
+    "jsonschema": "4.26.0",
+    "rfc8785": "0.1.4"
+  },
+  "disclaimer": "This is a newly frozen successor runtime chosen from available evidence. It is not claimed to reconstruct an unknown historical matrix environment.",
+  "download_installer": {
+    "invocation": "python3.11 -m pip download --isolated --disable-pip-version-check --no-input --no-deps --require-hashes --only-binary=:all: --no-cache-dir --index-url https://pypi.org/simple --dest /private/tmp/cal-ers05-runner-runtime-successor-20260924/runtime-build/wheelhouse-rebuild -r research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/requirements.lock",
+    "name": "pip",
+    "version": "pip 26.1 from /Users/admin/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/site-packages/pip (python 3.11)"
+  },
+  "files": {
+    "requirements.in": {
+      "bytes": 55,
+      "path": "requirements.in",
+      "sha256": "23ab220762eb55cdc79e1d8a03ab8e98f1a39e4fa79e927a13195284026157d5"
+    },
+    "requirements.lock": {
+      "bytes": 23656,
+      "path": "requirements.lock",
+      "sha256": "4d0bd11eadca52c292cb883afc062fd95de6b03e8304dedf4820a027898a419f"
+    },
+    "wheelhouse.zip": {
+      "bytes": 4847772,
+      "path": "wheelhouse.zip",
+      "sha256": "68474c180d4e5d2b35df36354d68cc477a69061960cd26385661cad9a63a0214"
+    },
+    "wheelhouse_builder": {
+      "bytes": 1062,
+      "path": "build_wheelhouse_archive.py",
+      "sha256": "c90b4eae6d7212004eebdaf2c6d25f6de97d02ae296b525603d1f7530e3425f2"
+    },
+    "wheelhouse_sha256sums": {
+      "bytes": 1176,
+      "path": "WHEELHOUSE.SHA256SUMS",
+      "sha256": "cdc5f72cd91c66a9be03f0f473b30ac3799a61ea4fb44a3b7c70d6597fa09e4b"
+    }
+  },
+  "network_provenance": {
+    "final_qualification_expected_network_calls": 0,
+    "package_index": "https://pypi.org/simple",
+    "purpose": "uv resolution and hash-verified PyPI wheel downloads",
+    "used_before_freeze": true
+  },
+  "resolution_command": "uv pip compile requirements.in --python /Users/admin/.local/bin/python3.11 --python-version 3.11.15 --python-platform aarch64-apple-darwin --generate-hashes --only-binary :all: --no-annotate --no-header --no-cache --no-progress --default-index https://pypi.org/simple --config-file /dev/null --output-file /private/tmp/cal-ers05-runner-runtime-successor-20260924/runtime-build/reconstructed.lock",
+  "resolver": {
+    "executable": "/Users/admin/.local/bin/uv",
+    "name": "uv",
+    "python_downloads_disabled": true,
+    "sha256": "b2859884b9693e7ffe7ba8c3ad912b78fa2b77b3519bb58a82b6f8fedb983f23",
+    "version": "uv 0.11.11 (ed7b06001 2026-05-06 aarch64-apple-darwin)"
+  },
+  "schema": "ers-evaluation-provenance-runtime-manifest/1",
+  "status": "runtime-artifacts-frozen-inputs; final-install-results-in-qualification-receipt",
+  "target": {
+    "architecture": "arm64",
+    "os": "macOS 27.0",
+    "platform_tag": "aarch64-apple-darwin"
+  }
+}
