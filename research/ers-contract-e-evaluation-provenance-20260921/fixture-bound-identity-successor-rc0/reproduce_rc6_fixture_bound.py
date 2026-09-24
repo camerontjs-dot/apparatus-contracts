@@ -26,7 +26,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parents[2]
 EXPERIMENT_ID = "ERS-EVAL-TIME-PROV-20260922-05"
 APPARATUS_PREREG = "dcdd10355e2f885273d843eef6e345bafca95faa"
 RECEIPT_CONTRACT_PREREG = "077ccf6d386526bda258b3e90bd43e153c4c04c5"
