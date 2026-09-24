@@ -41,7 +41,7 @@ ERS_RC3 = "319e325cdf678673fae645a70e3e34afb7dddef0"
 PROVENANCE_PROFILE = "3934423b1a97ad1b099057c40fe8014e5dd08c97"
 TRANSCRIPT_SCHEMA_BLOB = "b85b38ce95263e348d2ebd1293f76ffc87adcf6d"
 ERS_RECEIPT_RELATIVE_PATH = Path(
-    "research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json"
+    "research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json"
 )
 CLAIM_CONTENT_ID = "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0"
 PIPE01_DECISION_ID = "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15"
@@ -300,7 +300,7 @@ def run_matrix(args: argparse.Namespace, output_root: Path) -> dict[str, Any]:
     check(freeze_receipt["implementation"]["source_commit"] == args.ers_source_commit, "ers_source_commit_freeze_mismatch")
     ers_source_tree = git(ers_root, "rev-parse", f"{args.ers_source_commit}^{{tree}}")
     check(freeze_receipt["implementation"]["source_tree"] == ers_source_tree, "ers_source_tree_freeze_mismatch")
-    check(freeze_receipt["apparatus"]["preregistration_head"] == APPARATUS_PREREG, "ers_receipt_preregistration_mismatch")
+    check(freeze_receipt["apparatus"]["scientific_preregistration"]["commit"] == APPARATUS_PREREG, "ers_receipt_preregistration_mismatch")
     check(freeze_receipt["apparatus"]["transcript_schema_blob"] == TRANSCRIPT_SCHEMA_BLOB, "ers_receipt_transcript_schema_mismatch")
     check(git(ers_root, "merge-base", "--is-ancestor", args.ers_source_commit, "HEAD") == "", "ers_source_not_ancestor")
     app_freeze = json.loads(args.apparatus_freeze_receipt.read_text(encoding="utf-8"))

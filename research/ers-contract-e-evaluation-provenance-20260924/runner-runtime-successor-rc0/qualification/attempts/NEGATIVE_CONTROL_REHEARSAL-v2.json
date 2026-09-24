@@ -1,0 +1,75 @@
+{
+  "controls": [
+    {
+      "control": "predecessor_ers_receipt_path",
+      "error": "ers_receipt_path_mismatch:research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json",
+      "rejection_boundary": "ers_receipt_path_mismatch",
+      "status": "PASS"
+    },
+    {
+      "control": "obsolete_only_pr130_alias",
+      "error": "ers_pr130_canonical_missing",
+      "rejection_boundary": "ers_pr130_canonical_missing",
+      "status": "PASS"
+    },
+    {
+      "control": "wrong_pr130_value",
+      "error": "wrong_pr130_commit:0000000000000000000000000000000000000000",
+      "rejection_boundary": "wrong_pr130_commit",
+      "status": "PASS"
+    },
+    {
+      "control": "wrong_ers_receipt_blob",
+      "error": "ers_receipt_blob_mismatch:expected=50c9493d3f0584de74399118da01b7b603c813e0;actual=0000000000000000000000000000000000000000",
+      "rejection_boundary": "ers_receipt_blob_mismatch",
+      "status": "PASS"
+    },
+    {
+      "control": "wrong_runner_blob",
+      "error": "runner_blob_mismatch:expected=79a347c9698610a1c743074e426a79590cb32ba4;actual=d0f3b69949bdeedea87fe0ac82b6d3407eac1a67",
+      "rejection_boundary": "runner_blob_mismatch",
+      "status": "PASS"
+    },
+    {
+      "control": "runner_modified_beyond_preregistered_delta",
+      "error": "runner_delta_proof_failed:{\"error\": \"source_delta_not_exact:{\\\"removed\\\": [\\\"    \\\\\\\"research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json\\\\\\\"\\\\n\\\", \\\"    check(freeze_receipt[\\\\\\\"apparatus\\\\\\\"][\\\\\\\"preregistration_head\\\\\\\"] == APPARATUS_PREREG, \\\\\\\"ers_receipt_preregistration_mismatch\\\\\\\")\\\\n\\\"], \\\"added\\\": [\\\"    \\\\\\\"research/ers-contract-e-evaluation-transcript-rc6-receipt-contract-successor-20260923/FREEZE_RECEIPT.json\\\\\\\"\\\\n\\\", \\\"    check(freeze_receipt[\\\\\\\"apparatus\\\\\\\"][\\\\\\\"scientific_preregistration\\\\\\\"][\\\\\\\"commit\\\\\\\"] == APPARATUS_PREREG, \\\\\\\"ers_receipt_preregistration_mismatch\\\\\\\")\\\\n\\\", \\\"\\\\n\\\", \\\"# unauthorized change\\\\n\\\"]}\", \"error_code\": \"source_delta_not_exact\", \"schema\": \"ers-05-runner-source-delta-proof/1\", \"status\": \"FAIL\"}",
+      "rejection_boundary": "runner_delta_proof_failed",
+      "status": "PASS"
+    },
+    {
+      "control": "wrong_runtime_lock_hash",
+      "error": "runtime_lock_hash_mismatch:expected=4d0bd11eadca52c292cb883afc062fd95de6b03e8304dedf4820a027898a419f;actual=922cc3910a40158a52460feb3d37be6d3309675cb62d2de6b4517b6c60e94c4a",
+      "rejection_boundary": "runtime_lock_hash_mismatch",
+      "status": "PASS"
+    },
+    {
+      "control": "wrong_direct_dependency_version",
+      "error": "direct_package_version_mismatch:jsonschema:4.26.1",
+      "rejection_boundary": "direct_package_version_mismatch:jsonschema",
+      "status": "PASS"
+    },
+    {
+      "control": "missing_required_package",
+      "error": "missing_required_package:cryptography",
+      "rejection_boundary": "missing_required_package:cryptography",
+      "status": "PASS"
+    },
+    {
+      "control": "altered_package_artifact_hash",
+      "error": "artifact_hash_mismatch:attrs-26.1.0-py3-none-any.whl:expected=c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309;actual=d629568619907a9d3d990599a0ca84690d216ff306646bdf0519964a8ee2fff9",
+      "rejection_boundary": "artifact_hash_mismatch:attrs-26.1.0-py3-none-any.whl",
+      "status": "PASS"
+    },
+    {
+      "control": "old_runner_paired_with_new_05_receipt",
+      "error": "runner_receipt_path_pair_mismatch:research/ers-contract-e-evaluation-transcript-rc6-exec-identity-successor-20260922/FREEZE_RECEIPT.json",
+      "rejection_boundary": "runner_receipt_path_pair_mismatch",
+      "status": "PASS"
+    }
+  ],
+  "gate_source_blob": "109b5585ff8444198e5eefbde6b7f96e99d94bd6",
+  "qualification_status": "NOT_FROZEN_REHEARSAL",
+  "schema": "ers-05-negative-control-rehearsal/1",
+  "source_delta_checker_blob": "c4ab0efb3185b68113a721c850910a1f48a0dd27",
+  "status": "PASS"
+}
