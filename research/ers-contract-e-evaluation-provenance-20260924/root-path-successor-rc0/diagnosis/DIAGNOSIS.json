@@ -1,0 +1,181 @@
+{
+  "assignment": "ROOT = HERE.parents[1]",
+  "candidates": [
+    {
+      "basename": "fixture-bound-identity-successor-rc0",
+      "contains_git_metadata": false,
+      "is_repository_root": false,
+      "name": "HERE",
+      "path_equals_show_toplevel": false,
+      "show_toplevel": "/private/tmp/ers05-root-path-successor-20260924"
+    },
+    {
+      "basename": "ers-contract-e-evaluation-provenance-20260921",
+      "contains_git_metadata": false,
+      "is_repository_root": false,
+      "name": "parents[0]",
+      "path_equals_show_toplevel": false,
+      "show_toplevel": "/private/tmp/ers05-root-path-successor-20260924"
+    },
+    {
+      "basename": "research",
+      "contains_git_metadata": false,
+      "is_repository_root": false,
+      "name": "parents[1]",
+      "path_equals_show_toplevel": false,
+      "show_toplevel": "/private/tmp/ers05-root-path-successor-20260924"
+    },
+    {
+      "basename": "ers05-root-path-successor-20260924",
+      "contains_git_metadata": true,
+      "is_repository_root": true,
+      "name": "parents[2]",
+      "path_equals_show_toplevel": true,
+      "show_toplevel": "/private/tmp/ers05-root-path-successor-20260924"
+    },
+    {
+      "basename": "tmp",
+      "contains_git_metadata": false,
+      "is_repository_root": false,
+      "name": "parents[3]",
+      "path_equals_show_toplevel": false,
+      "show_toplevel": null
+    }
+  ],
+  "frozen_commit": "b673b2b06804e94042ad35d4621f4a4ca5ee4851",
+  "later_join_affected": true,
+  "minimal_correction": "ROOT = HERE.parents[2]",
+  "observed_failure": {
+    "disposition": "INCONCLUSIVE",
+    "error": "Command '['git', '-C', '/private/tmp/ers-eval-matrix-20260924/checkouts/apparatus-root/research', 'rev-parse', 'HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json']' returned non-zero exit status 128.",
+    "matrix_progress": {},
+    "path": "/private/tmp/ers-eval-matrix-20260924/outputs/matrix-run/FAILURE.json",
+    "sha256": "d169327a4958e203e087489a71a000460de5b36ad33583559d86619f2057f3d0"
+  },
+  "root_name_uses": [
+    {
+      "context": "Store",
+      "kind": "assignment",
+      "line": 29,
+      "text": "ROOT = HERE.parents[1]"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 288,
+      "text": "check(git(ROOT, \"merge-base\", \"--is-ancestor\", APPARATUS_PREREG, \"HEAD\") == \"\", \"preregistration_not_ancestor\")"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 289,
+      "text": "check(git(ROOT, \"merge-base\", \"--is-ancestor\", RECEIPT_CONTRACT_PREREG, \"HEAD\") == \"\", \"receipt_contract_preregistration_not_ancestor\")"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 290,
+      "text": "check(git(ROOT, \"cat-file\", \"-t\", CAL_V3) == \"commit\", \"cal_v3_object_missing\")"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 295,
+      "text": "check(git(ROOT, \"hash-object\", str(schema_path)) == TRANSCRIPT_SCHEMA_BLOB, \"transcript_schema_blob_mismatch\")"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 330,
+      "text": "check(app_preflight_input.get(\"git_blob\") == git(ROOT, \"hash-object\", str(args.apparatus_freeze_receipt)), \"preflight_apparatus_receipt_blob_mismatch\")"
+    },
+    {
+      "context": "Load",
+      "kind": "repository_relative_conversion",
+      "line": 340,
+      "text": "app_receipt_relative = args.apparatus_freeze_receipt.resolve().relative_to(ROOT).as_posix()"
+    },
+    {
+      "context": "Load",
+      "kind": "repository_relative_conversion",
+      "line": 341,
+      "text": "preflight_relative = preflight_path.relative_to(ROOT).as_posix()"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 342,
+      "text": "check(git(ROOT, \"rev-parse\", f\"HEAD:{app_receipt_relative}\") == git(ROOT, \"hash-object\", str(args.apparatus_freeze_receipt)), \"apparatus_freeze_receipt_not_in_frozen_head\")"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 342,
+      "text": "check(git(ROOT, \"rev-parse\", f\"HEAD:{app_receipt_relative}\") == git(ROOT, \"hash-object\", str(args.apparatus_freeze_receipt)), \"apparatus_freeze_receipt_not_in_frozen_head\")"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 343,
+      "text": "check(git(ROOT, \"rev-parse\", f\"HEAD:{preflight_relative}\") == git(ROOT, \"hash-object\", str(preflight_path)), \"preflight_pass_not_in_frozen_head\")"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 343,
+      "text": "check(git(ROOT, \"rev-parse\", f\"HEAD:{preflight_relative}\") == git(ROOT, \"hash-object\", str(preflight_path)), \"preflight_pass_not_in_frozen_head\")"
+    },
+    {
+      "context": "Load",
+      "kind": "repository_relative_join",
+      "line": 363,
+      "text": "ROOT / \"research/ers-render-bound-shadow-composition-20260921/reproduce.py\","
+    },
+    {
+      "context": "Load",
+      "kind": "repository_relative_conversion",
+      "line": 880,
+      "text": "\"path\": preflight_path.relative_to(ROOT).as_posix(),"
+    },
+    {
+      "context": "Load",
+      "kind": "git_cwd",
+      "line": 881,
+      "text": "\"git_blob\": git(ROOT, \"hash-object\", str(preflight_path)),"
+    },
+    {
+      "context": "Load",
+      "kind": "other_root_value",
+      "line": 1071,
+      "text": "(\"apparatus-preregistration\", \"camerontjs-dot/apparatus-contracts\", APPARATUS_PREREG, ROOT),"
+    }
+  ],
+  "runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+  "runner_relative": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+  "schema": "ers-05-root-path-diagnosis/1",
+  "scientific_boundary_reached_in_observed_failure": false,
+  "transforms": {
+    "parents[1]": {
+      "basename": "research",
+      "head_spec": "HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json",
+      "path_equals_show_toplevel": false,
+      "preflight_relative": "ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/qualification-20260923/POSITIVE.json",
+      "receipt_relative": "ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json",
+      "render_join_exists": false,
+      "rev_parse_exit": 128,
+      "rev_parse_stderr": "fatal: path 'research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json' exists, but not 'ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json'\nhint: Did you mean 'HEAD:research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json' aka 'HEAD:./ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json'?",
+      "rev_parse_stdout": "HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json"
+    },
+    "parents[2]": {
+      "basename": "ers05-root-path-successor-20260924",
+      "head_spec": "HEAD:research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json",
+      "path_equals_show_toplevel": true,
+      "preflight_relative": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/qualification-20260923/POSITIVE.json",
+      "receipt_relative": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json",
+      "render_join_exists": true,
+      "rev_parse_exit": 0,
+      "rev_parse_stderr": "",
+      "rev_parse_stdout": "bc7d3938be9146dd6455ab5f9fda896f22a70274"
+    }
+  }
+}
