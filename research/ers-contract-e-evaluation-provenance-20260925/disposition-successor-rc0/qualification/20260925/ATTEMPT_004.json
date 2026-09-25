@@ -1,0 +1,63 @@
+{
+  "schema": "ers05-bootstrap-invocation-attempt/1",
+  "attempt": 4,
+  "source_commit": "26eb757b0e9f853156f9f01424fae3377b9badf2",
+  "observed_disposition": "INCONCLUSIVE before discrimination set",
+  "profile": {
+    "path": "research/ers-contract-e-evaluation-provenance-20260925/disposition-successor-rc0/qualification/write-deny-profile.sb",
+    "sha256": "ac0025ad01d00d87661e34bb83362c4094479c2ff619c3fdbfb5cfd9287c12ce",
+    "git_blob": "8c64f9e6d50e1ec196b726b6270cc28755808797"
+  },
+  "failure_boundary": "first case bootstrap setup: provenance validator path passed to runner",
+  "first_case": "frozen_pr148",
+  "expected_first_case": "repository_root_path_defect",
+  "actual_first_case": {
+    "outcome": "INCONCLUSIVE",
+    "error_type": "CalledProcessError",
+    "error": "git -C <FROZEN_CHECKOUTS> rev-parse HEAD returned nonzero because ERS05_PROVENANCE_PROFILE pointed to provenance-root/validator.py instead of provenance-root/research/provenance-link-explicit-rc0/validator.py"
+  },
+  "gate_error_after_first_case": {
+    "error_type": "RecursionError",
+    "error": "the disposition classifier replaced bootstrap.classify, then delegated to bootstrap.classify recursively"
+  },
+  "completed_before_error": [
+    "pre-execution protected-tree snapshot only",
+    "open(..., wb) denied against protected canary with PermissionError",
+    "Path.write_bytes denied against protected canary with PermissionError",
+    "source delta proof PASS for source commit 26eb757b0e9f853156f9f01424fae3377b9badf2",
+    "pinned CPython, uv, Node, lock, wheelhouse, and all ten wheel identities",
+    "fresh offline install from exact wheelhouse",
+    "uv pip check",
+    "RFC 8785, JSON Schema, and Ed25519 positive/negative smoke checks",
+    "first case entered, but intended root-path boundary was not reached"
+  ],
+  "cases_not_run": [
+    "frozen_pr149",
+    "new_successor",
+    "wrong_root_control",
+    "wrong_disposition_control",
+    "wrong_receipt_path_control"
+  ],
+  "runner_imported": false,
+  "post_snapshot": "not reached; no before/after comparison for this attempt",
+  "scientific_counters": {
+    "contract_e_evaluations": 0,
+    "supervisor_launches": 0,
+    "scientific_pipe_executions": 0,
+    "scientific_mutations": 0,
+    "scientific_sandbox_mutations": 0,
+    "provenance_scientific_captures": 0,
+    "unauthorized_network_attempts": 0,
+    "protected_filesystem_mutations": 0
+  },
+  "freeze_created": false,
+  "pr130_matrix_started": false,
+  "resolution": "correct the ERS05_PROVENANCE_PROFILE path to the committed validator location and delegate to a captured original classifier; rerun all cases under the unchanged OS deny-write profile",
+  "preserved_output_receipts": [
+    "ATTEMPT_004_PR148_RUNNING.json",
+    "ATTEMPT_004_PR148_FAILURE.json",
+    "ATTEMPT_004_SOURCE_DELTA.json",
+    "ATTEMPT_004_RUNTIME_REUSE.json"
+  ],
+  "output_archive_alias": "$QUALIFICATION_TEMP/ATTEMPT_004_output_archive"
+}

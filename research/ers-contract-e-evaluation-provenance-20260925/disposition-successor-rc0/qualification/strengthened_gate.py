@@ -14,6 +14,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import bootstrap_pre_matrix as bootstrap
+ORIGINAL_CLASSIFY = bootstrap.classify
 
 PROFILE_SHA256 = "ac0025ad01d00d87661e34bb83362c4094479c2ff619c3fdbfb5cfd9287c12ce"
 RUNNER_PATH = bootstrap.SUCCESSOR_RUNNER
@@ -194,7 +195,7 @@ def containment_probe(canary: Path) -> dict:
 def classify(error: str, boundary: bool, counters: dict) -> str:
     if "pipe01_native_ers_decision_changed" in error:
         return "pipe01_disposition_expectation_defect"
-    return bootstrap.classify(error, boundary, counters)
+    return ORIGINAL_CLASSIFY(error, boundary, counters)
 
 
 def clean_case(case: dict, alias_roots: list[tuple[str, Path]]) -> dict:
@@ -310,7 +311,9 @@ def main() -> int:
         "ERS05_CONTRACT_E_ROOT": str(args.frozen_checkouts / "contract-e-root"),
         "ERS05_CONTRACT_D_ROOT": str(args.frozen_checkouts / "contract-d-root"),
         "ERS05_CONSUMER_ROOT": str(args.frozen_checkouts / "consumer-root"),
-        "ERS05_PROVENANCE_PROFILE": str(args.frozen_checkouts / "provenance-root" / "validator.py"),
+        "ERS05_PROVENANCE_PROFILE": str(
+            args.frozen_checkouts / "provenance-root" / bootstrap.PROFILE
+        ),
         "ERS05_FIXTURES": str(args.fixtures_root),
         "MAINFRAME_ROOT": str(args.mainframe_root),
         "ERS05_PROTECTED_PATHS": os.pathsep.join(str(path.resolve()) for _, path, _ in root_specs),
