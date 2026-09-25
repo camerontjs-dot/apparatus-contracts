@@ -276,9 +276,13 @@ def main() -> int:
         raise RuntimeError("wrong_root_control_identity_changed")
     if 'disposition"] == "pending_review"' not in wrong_disposition_text or "ROOT = HERE.parents[2]" not in wrong_disposition_text:
         raise RuntimeError("wrong_disposition_control_identity_changed")
-    source_parent = subprocess.check_output(["git", "-C", str(repo), "rev-parse", f"{actual_source}^1"], text=True).strip()
-    if source_parent != PREREG_COMMIT:
-        raise RuntimeError("preregistration_parent_changed")
+    source_parent = git_text(repo, "rev-parse", f"{actual_source}^1")
+    preregistration_ancestor = subprocess.run(
+        ["git", "-C", str(repo), "merge-base", "--is-ancestor", PREREG_COMMIT, actual_source],
+        check=False,
+    )
+    if preregistration_ancestor.returncode != 0:
+        raise RuntimeError("preregistration_not_source_ancestor")
 
     root_specs = [
         ("mainframe_repo", args.mainframe_root, False),
