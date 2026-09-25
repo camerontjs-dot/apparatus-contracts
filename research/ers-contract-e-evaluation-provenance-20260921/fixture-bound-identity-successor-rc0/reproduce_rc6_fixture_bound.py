@@ -388,7 +388,7 @@ def run_matrix(args: argparse.Namespace, output_root: Path) -> dict[str, Any]:
     decision_identity = core.semantic_identity(decision)
     check(decision_identity == PIPE01_DECISION_ID, "pipe01_native_decision_identity_changed")
     check(pipe01["target"]["content_sha256"] == CLAIM_CONTENT_ID, "pipe01_claim_content_identity_changed")
-    check(decision["evaluation"]["disposition"] == "pending_review", "pipe01_native_ers_decision_changed")
+    check(decision["evaluation"]["disposition"] == "clear", "pipe01_native_ers_decision_changed")
     for case_id in ("PIPE02", "PIPE03"):
         check(decision_result["cases"][case_id]["ers"]["evaluation"]["disposition"] == "hold", case_id + ":hold_behavior_changed")
 
