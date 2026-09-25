@@ -1,0 +1,171 @@
+{
+  "answer": {
+    "basis": "Exact decision reconstruction, frozen render-bound receipt, parent-bound effect receipt, and frozen hold-case counts agree.",
+    "pending_review_is_evaluation_disposition": false,
+    "runner_conflated_effect_with_evaluation_disposition": true
+  },
+  "composition_receipt": {
+    "decision_semantic_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+    "ers_evaluation_disposition": "clear",
+    "ers_execution_occurred": false,
+    "ers_shadow_ready": true,
+    "parent_conclusion": "supported"
+  },
+  "effect_and_holds": {
+    "effect_type": "epistemic_audit.stage_pending_review@1",
+    "pipe01_decision_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+    "pipe02_hold": {
+      "contract_e_evaluate_calls": 0,
+      "error": "decision_not_candidate:hold"
+    },
+    "pipe03_hold": {
+      "contract_e_evaluate_calls": 0,
+      "error": "decision_not_candidate:hold"
+    }
+  },
+  "frozen_pipe01_inputs": [
+    {
+      "bytes": 3191,
+      "git_blob": "fb1a7779369215a273ff54ba25911d45c3e42f39",
+      "path": "PIPE01/cal/contract-c.json",
+      "root_alias": "preserved_first_matrix_attempt:fixtures",
+      "sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0"
+    },
+    {
+      "bytes": 26593,
+      "git_blob": "670657307c262ccad2fe307d5b75aa3af2e13029",
+      "path": "PIPE01/consumer-inputs.json",
+      "root_alias": "preserved_first_matrix_attempt:fixtures",
+      "sha256": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896"
+    },
+    {
+      "bytes": 120,
+      "git_blob": "dfd6793a182a342dd3f80580bf53f64017de2c80",
+      "path": "PIPE01/decision-target.json",
+      "root_alias": "preserved_first_matrix_attempt:fixtures",
+      "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+    },
+    {
+      "bytes": 763,
+      "git_blob": "8359d717d70e81e1f4c1a650da59a3ab631d58d5",
+      "path": "PIPE01/contract-d.json",
+      "root_alias": "preserved_first_matrix_attempt:fixtures",
+      "sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24"
+    }
+  ],
+  "reconstructed_decision": {
+    "canonical_bytes_base64": "eyJjb250cmFjdF9kX3ZlcnNpb24iOiIxLjAuMCIsImVmZmVjdCI6eyJwYXJhbXMiOnt9LCJ0eXBlIjoiZXBpc3RlbWljX2F1ZGl0LnN0YWdlX3BlbmRpbmdfcmV2aWV3IiwidmVyc2lvbiI6IjEifSwiZXZhbHVhdGlvbiI6eyJkaXNwb3NpdGlvbiI6ImNsZWFyIiwic3RhdGUiOiJjb21wbGV0ZWQifSwiaW5wdXRfYXV0aG9yaXR5Ijp7ImlkIjoic2hhMjU2OjI1NGZmZGJiM2NlYWViN2M3NDcxN2JmYzQxY2ZmZTJkYWM5MTc4Mjk2YzI4NmIzOWFhMmY0ODY0OWYyMmZjN2MiLCJpbW11dGFibGVfaWQiOiJzaGEyNTY6YmEwMmVjNTcwYjAwNDg4MzJhMmZjOWY2Yjk1OGY0MjZiMTFlNWRjMGZlNzNjZjFlMTJhZTUxNWQzOGVhMjNhMCIsImtpbmQiOiJjb250cmFjdC1jIn0sIm1ldGFkYXRhIjp7ImRpYWdub3N0aWNzIjp7ImRlY29tcG9zaXRpb25faWQiOiJELVBJUEUtUFJPRC1SQzAiLCJvcGVyYXRvciI6ImFsbF9vZiIsInBhcmVudF9jb25jbHVzaW9uIjoic3VwcG9ydGVkIn0sInJlYXNvbl9jb2RlcyI6WyJjb250cmFjdF9jX3N1cHBvcnRlZCJdfSwicG9saWN5Ijp7ImlkIjoiZGVjaXNpb24tZW5naW5lLmNvbnRyYWN0LWMuZXBpc3RlbWljLWF1ZGl0LXN0YWdlLXBlbmRpbmctcmV2aWV3IiwidmVyc2lvbiI6IjEuMC4wIn0sInRhcmdldCI6eyJjb250ZW50X3NoYTI1NiI6InNoYTI1NjpmZTlhMzkzYjBjMzFmN2UyZjIwMGNiZWZjMDhkOTI5M2UzNjRmOGEwODEwODY1YTczMDAzZWMzNTAyYzM4N2QwIiwiaWQiOiJST09UIiwia2luZCI6ImNsYWltIn19Cg==",
+    "canonical_bytes_git_blob": "fab835c5cbeba74624c7877f10231bf74d515536",
+    "canonical_bytes_length": 766,
+    "canonical_bytes_path": "decision-reconciliation/PIPE01_DECISION.canonical.json",
+    "canonical_bytes_sha256": "sha256:7ddea63c77b2cf1223489129b64aef6ecc71ed31238b805689abb2f68f7a03eb",
+    "effect_type": "epistemic_audit.stage_pending_review",
+    "evaluation_disposition": "clear",
+    "object": {
+      "contract_d_version": "1.0.0",
+      "effect": {
+        "params": {},
+        "type": "epistemic_audit.stage_pending_review",
+        "version": "1"
+      },
+      "evaluation": {
+        "disposition": "clear",
+        "state": "completed"
+      },
+      "input_authority": {
+        "id": "sha256:254ffdbb3ceaeb7c74717bfc41cffe2dac9178296c286b39aa2f48649f22fc7c",
+        "immutable_id": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+        "kind": "contract-c"
+      },
+      "metadata": {
+        "diagnostics": {
+          "decomposition_id": "D-PIPE-PROD-RC0",
+          "operator": "all_of",
+          "parent_conclusion": "supported"
+        },
+        "reason_codes": [
+          "contract_c_supported"
+        ]
+      },
+      "policy": {
+        "id": "decision-engine.contract-c.epistemic-audit-stage-pending-review",
+        "version": "1.0.0"
+      },
+      "target": {
+        "content_sha256": "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0",
+        "id": "ROOT",
+        "kind": "claim"
+      }
+    },
+    "semantic_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15"
+  },
+  "schema": "ers05-pipe01-decision-reconciliation/1",
+  "source_authority": {
+    "apparatus_commit": "4bd5b030726ed064d410cb8c99e79c23a0426c8a",
+    "apparatus_repository": "camerontjs-dot/apparatus-contracts",
+    "apparatus_tree": "6aff39c21f777912472ae62324b94619ef4956de",
+    "cal_v3": {
+      "commit": "ffc43d4e89f5b1f7748e9cde0fa1efc7db47b463",
+      "manifest_blob": "abb943c2096c0a30113773e17231a30730c05d3f",
+      "manifest_path": "research/cal-pipeline-v1-contract-authority-freeze-20260919/SLICE_MANIFEST_V3.json",
+      "repository": "camerontjs-dot/apparatus-contracts",
+      "tree": "14de536e432cb37ce1842d5061ed188b3c42a057"
+    },
+    "consumer_root": {
+      "commit": "12e7e640b229619501960b1b89cf4716d8d985b3",
+      "repository": "camerontjs-dot/research-scaffold-harness"
+    },
+    "contract_d_root": {
+      "commit": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+      "repository": "camerontjs-dot/apparatus-contracts"
+    },
+    "contract_e_profile": {
+      "commit": "b153dcc4434cbe8a98616a9e410c6125378144c7",
+      "git_blob": "4d68eb6da30118ef67485af70871edacf9edcf23",
+      "path": "docs/research/contract-e/ers-point-of-use-crossrepo-rc2-20260919/contract_e_profile.py",
+      "repository": "camerontjs-dot/apparatus-contracts"
+    },
+    "decision_reconstruction_source": {
+      "git_blob": "691b5d4488b2fcc48316ea98b297f86306197aaa",
+      "path": "research/ers-render-bound-shadow-composition-20260921/reproduce.py"
+    },
+    "frozen_decision_engine": {
+      "commit": "816374379ba7eb23f5bfdadaf203b7e287c052db",
+      "files": {
+        "src/contractCDecision.js": "2225f73eb6eefd83609f0ba19e4786d1267dd527",
+        "src/parentBoundContractCDecision.js": "83ab34bce30f874111500ed91f2c01421be9f9a0",
+        "src/parentBoundPolicyDispatch.js": "9948b0dba9f77d2ad7c71d74b27d2684985ecc70"
+      },
+      "repository": "camerontjs-dot/decision-engine",
+      "tree": "08a34359d4a177bc17c8de1521d60255bf6ebf82"
+    },
+    "parent_bound_effect_receipt": {
+      "effect_json_pointer": "/policies/ers_staging/effect",
+      "git_blob": "2cbf363559cf31c42d998f4179a754a7a75b6297",
+      "path": "research/parent-bound-ers-shadow-composition-20260921/RECEIPT.json",
+      "pipe01_identity_pointer": "/cases/PIPE01/ers_semantic_identity",
+      "sha256": "sha256:817c38de4c8fbef94e1ca75f1bc3a7deb045b56a29d9010f775bc2cd08af9477"
+    },
+    "pr130": {
+      "commit": "dcdd10355e2f885273d843eef6e345bafca95faa",
+      "experiment_blob": "7b0515c186b70b081aad4774821045b2b8202774",
+      "experiment_path": "research/ers-contract-e-evaluation-provenance-20260921/EXPERIMENT.json",
+      "preregistration_blob": "7c8904bf1237b8cf381e7d69f7b217286363b9ac",
+      "preregistration_path": "research/ers-contract-e-evaluation-provenance-20260921/PREREGISTRATION.md",
+      "tree": "fcc3131541d176e7f9c8dbf89b8171eabb638cec"
+    },
+    "render_bound_receipt": {
+      "git_blob": "96834e1501236a4e0d7ae2734e24897c2da8eaff",
+      "json_pointers": {
+        "decision_identity": "/cases/PIPE01/ers_decision_identity",
+        "evaluation_disposition": "/cases/PIPE01/ers_disposition",
+        "execution_occurred": "/pipe01/ers_execution_occurred",
+        "parent_conclusion": "/cases/PIPE01/parent_conclusion",
+        "shadow_ready": "/pipe01/ers_shadow_ready"
+      },
+      "path": "research/ers-render-bound-shadow-composition-20260921/RECEIPT.json",
+      "sha256": "sha256:2bdffee9b6b15b0a87ecef950681b15c5e5babc74a918b53e9e609dcb953a671"
+    }
+  },
+  "status": "RECONCILED"
+}
