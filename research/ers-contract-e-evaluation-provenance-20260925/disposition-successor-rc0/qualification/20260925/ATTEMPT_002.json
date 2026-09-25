@@ -1,0 +1,34 @@
+{
+  "schema": "ers05-bootstrap-invocation-attempt/1",
+  "attempt": 2,
+  "source_commit": "2e58212479eca67815a12a132390b7a84a28b4af",
+  "observed_disposition": "INCONCLUSIVE before runner cases",
+  "profile": {
+    "path": "qualification/write-deny-profile.sb",
+    "sha256": "ac0025ad01d00d87661e34bb83362c4094479c2ff619c3fdbfb5cfd9287c12ce",
+    "git_blob": "8c64f9e6d50e1ec196b726b6270cc28755808797"
+  },
+  "failure_boundary": "source lineage validation after HEAD identity lookup",
+  "error_type": "RuntimeError",
+  "error_summary": "preregistration_parent_changed",
+  "source_parent_commit": "59ce54822dac3e6edf44e58442d9f8d21a1a440c",
+  "preregistration_commit": "e54330db4de2090e8a238823459546d3153a42e3",
+  "runner_cases_entered": 0,
+  "runner_imported": false,
+  "negative_controls": "not reached",
+  "protected_snapshots": "not reached",
+  "scientific_counters": {
+    "contract_e_evaluations": 0,
+    "supervisor_launches": 0,
+    "scientific_pipe_executions": 0,
+    "scientific_mutations": 0,
+    "scientific_sandbox_mutations": 0,
+    "provenance_scientific_captures": 0,
+    "unauthorized_network_attempts": 0,
+    "protected_filesystem_mutations": 0
+  },
+  "post_attempt_canary_empty": true,
+  "freeze_created": false,
+  "pr130_matrix_started": false,
+  "resolution": "the gate now verifies preregistration ancestry and records the actual immediate source parent"
+}

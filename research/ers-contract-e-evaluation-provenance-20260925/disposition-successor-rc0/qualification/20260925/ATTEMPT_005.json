@@ -1,0 +1,2355 @@
+{
+  "attempt": 5,
+  "live_authority_recheck": {
+    "ers_pr14_head": "aa214666c9a68871c0d878a70b7f3833d49dbe9b",
+    "material_authority_moved": false,
+    "pr130_head": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "pr131_head": "077ccf6d386526bda258b3e90bd43e153c4c04c5",
+    "pr146_head": "cd465d798220daa3f45261d3e6f385cf67224a46",
+    "pr147_head": "c054d2fb0822e61833cb9e8a5acb7072dbce6531",
+    "pr148_head": "b673b2b06804e94042ad35d4621f4a4ca5ee4851",
+    "pr149_head": "4bd5b030726ed064d410cb8c99e79c23a0426c8a"
+  },
+  "predecessor": {
+    "commit": "4bd5b030726ed064d410cb8c99e79c23a0426c8a",
+    "disposition": "INCONCLUSIVE before scientific boundary"
+  },
+  "qualification": {
+    "bootstrap_boundary_gate_blob": "2a4e02419d56c0393cd33ea6e893cfe9c824bb60",
+    "bootstrap_gate_blob": "77695405b451030b437cfa50f96a253b334c4c56",
+    "canary": {
+      "after": {
+        "algorithm": "sorted-lstat-tree-sha256",
+        "entries": 1,
+        "file_bytes": 0,
+        "sha256": "59b51bf068d1bbe42f9830a21f6971c0e92b5344411c41792fc2522245ddc661"
+      },
+      "attempts": [
+        {
+          "api": "open(..., wb)",
+          "errno": 1,
+          "error_type": "PermissionError",
+          "result": "DENIED"
+        },
+        {
+          "api": "Path.write_bytes",
+          "errno": 1,
+          "error_type": "PermissionError",
+          "result": "DENIED"
+        }
+      ],
+      "before": {
+        "algorithm": "sorted-lstat-tree-sha256",
+        "entries": 1,
+        "file_bytes": 0,
+        "sha256": "59b51bf068d1bbe42f9830a21f6971c0e92b5344411c41792fc2522245ddc661"
+      },
+      "canary_alias": "protected_controls:write_canary",
+      "passed": true,
+      "unchanged": true
+    },
+    "cases": [
+      {
+        "boundary_reached": false,
+        "case": "frozen_pr148",
+        "error": "Command '['git', '-C', '$PR148_ROOT/research', 'rev-parse', 'HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json']' returned non-zero exit status 128.",
+        "error_type": "CalledProcessError",
+        "expected": "repository_root_path_defect",
+        "matched": true,
+        "observed": "repository_root_path_defect"
+      },
+      {
+        "boundary_reached": false,
+        "case": "frozen_pr149",
+        "error": "pipe01_native_ers_decision_changed",
+        "error_type": "QualificationError",
+        "expected": "pipe01_disposition_expectation_defect",
+        "matched": true,
+        "observed": "pipe01_disposition_expectation_defect"
+      },
+      {
+        "boundary_reached": false,
+        "case": "new_successor",
+        "error": "ERS effect unexpectedly present in released Contract D registry",
+        "error_type": "RuntimeError",
+        "expected": "bootstrap_pass",
+        "matched": false,
+        "observed": "incidental_failure"
+      },
+      {
+        "boundary_reached": false,
+        "case": "wrong_root_control",
+        "error": "Command '['git', '-C', '$CONTROL_ROOT/wrong-root/research', 'rev-parse', 'HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json']' returned non-zero exit status 128.",
+        "error_type": "CalledProcessError",
+        "expected": "repository_root_path_defect",
+        "matched": true,
+        "observed": "repository_root_path_defect"
+      },
+      {
+        "boundary_reached": false,
+        "case": "wrong_disposition_control",
+        "error": "ERS effect unexpectedly present in released Contract D registry",
+        "error_type": "RuntimeError",
+        "expected": "pipe01_disposition_expectation_defect",
+        "matched": false,
+        "observed": "incidental_failure"
+      },
+      {
+        "boundary_reached": false,
+        "case": "wrong_receipt_path_control",
+        "error": "'$QUALIFICATION_OUTPUT/wrong-receipt-path/FREEZE_RECEIPT.json' is not in the subpath of '$SUCCESSOR_ROOT' OR one path is relative and the other is absolute.",
+        "error_type": "ValueError",
+        "expected": "receipt_path_outside_repository",
+        "matched": true,
+        "observed": "receipt_path_outside_repository"
+      }
+    ],
+    "contract_e_evaluations": 0,
+    "disposition": "INCONCLUSIVE before freeze",
+    "effective_profile_binding_sha256": "9bc7cdc44ad3eb58fef4bae4e497fca5db7f7b07074e64bd8d29aa54ed81f276",
+    "freeze_created": false,
+    "missing_required_setup_checks": [
+      "PIPE01:released_d_rejection_changed",
+      "PIPE01:supported_contract_d_bytes_changed",
+      "PIPE01:supported_decision_behavior_changed",
+      "PIPE02:hold_behavior_changed",
+      "PIPE02:released_d_rejection_changed",
+      "PIPE02:supported_contract_d_bytes_changed",
+      "PIPE02:supported_decision_behavior_changed",
+      "PIPE03:hold_behavior_changed",
+      "PIPE03:released_d_rejection_changed",
+      "PIPE03:supported_contract_d_bytes_changed",
+      "PIPE03:supported_decision_behavior_changed",
+      "authority_state_fixture_identity_mismatch",
+      "five_inherited_input_identities_changed",
+      "frozen_contract_e_intent_identity_disagrees",
+      "independent_execution_intent_identity_mismatch",
+      "independent_payload_identity_mismatch",
+      "independent_render_disagreement",
+      "independent_render_packet_identity_mismatch",
+      "payload_terminal_newline_changed",
+      "pinned_public_key_identity_mismatch",
+      "pipe01_claim_content_identity_changed",
+      "pipe01_fixture_missing",
+      "pipe01_native_decision_identity_changed",
+      "pipe01_native_ers_decision_changed",
+      "sandbox_not_empty_before_decisive_run"
+    ],
+    "pr130_matrix_started": false,
+    "profile_sha256": "ac0025ad01d00d87661e34bb83362c4094479c2ff619c3fdbfb5cfd9287c12ce",
+    "protected_filesystem_mutations_counter": 0,
+    "protected_tree_comparison": {
+      "cause_of_mainframe_metadata_delta": "UNKNOWN",
+      "changed_roots": [
+        "mainframe_repo"
+      ],
+      "mainframe_git_state_after": {
+        "head": "8a57e889e53ead7fd2c10426b6cfc6d5d38061f2",
+        "index_sha256": "380ead220ad34571a14100b683a862cc00284c84bc5723c57d0f220ad80e182d",
+        "status_entries": 3,
+        "status_sha256": "6a032d628d31c4a03f0775d5110c79c49f8d744ecdfd27c57caa1809b28ad9a1"
+      },
+      "mainframe_git_state_before": {
+        "head": "8a57e889e53ead7fd2c10426b6cfc6d5d38061f2",
+        "index_sha256": "380ead220ad34571a14100b683a862cc00284c84bc5723c57d0f220ad80e182d",
+        "status_entries": 3,
+        "status_sha256": "6a032d628d31c4a03f0775d5110c79c49f8d744ecdfd27c57caa1809b28ad9a1"
+      },
+      "mainframe_metadata_after": {
+        "algorithm": "sorted-lstat-metadata-tree-sha256",
+        "entries": 834183,
+        "file_bytes": 38114360961,
+        "sha256": "6b26ba7bec26af3ea2f56e4832e92bdf3b7b179791e67705299683e62e8b3f68"
+      },
+      "mainframe_metadata_before": {
+        "algorithm": "sorted-lstat-metadata-tree-sha256",
+        "entries": 834180,
+        "file_bytes": 38113364524,
+        "sha256": "a98c20b5df47b35d3a93604a1413f88ed4098c6ccf974723f22ec4601cdc39a3"
+      },
+      "unchanged": false
+    },
+    "provenance_scientific_captures": 0,
+    "raw_report_external_archive": "$QUALIFICATION_TEMP/ATTEMPT_005_output_archive/QUALIFICATION.json",
+    "raw_report_sha256": "1a59fcd84789e8d51e9f45af779eb73d33f38846bb82eddf6d39eddc36dbfa87",
+    "runtime_status": "PASS",
+    "scientific_counters": {
+      "contract_e_evaluations": 0,
+      "per_case_zero_counter_check": true,
+      "protected_filesystem_mutations": 0,
+      "provenance_scientific_captures": 0,
+      "scientific_mutations": 0,
+      "scientific_pipe_executions": 0,
+      "scientific_sandbox_mutations": 0,
+      "supervisor_launches": 0,
+      "unauthorized_network_attempts": 0
+    },
+    "scientific_mutations": 0,
+    "scientific_pipe_executions": 0,
+    "scientific_sandbox_mutations": 0,
+    "source_delta_status": "PASS",
+    "successor_failure": "ERS effect unexpectedly present in released Contract D registry",
+    "supervisor_launches": 0,
+    "unauthorized_network_attempts": 0,
+    "write_profile_git_blob": "8c64f9e6d50e1ec196b726b6270cc28755808797",
+    "wrong_disposition_control_failure": "same incidental Contract D registry assertion; intended PIPE01 disposition boundary not reached"
+  },
+  "qualification_report": {
+    "bootstrap_boundary_gate_blob": "2a4e02419d56c0393cd33ea6e893cfe9c824bb60",
+    "bootstrap_gate_blob": "77695405b451030b437cfa50f96a253b334c4c56",
+    "cases": [
+      {
+        "boundary_reached": false,
+        "check_count": 48,
+        "checks": [
+          {
+            "label": "wrong_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "ers_rc5_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "ers_rc4_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "receipt_contract_preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "cal_v3_object_missing",
+            "passed": true
+          },
+          {
+            "label": "wrong_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_ers_candidate",
+            "passed": true
+          },
+          {
+            "label": "frozen_transcript_schema_missing",
+            "passed": true
+          },
+          {
+            "label": "transcript_schema_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "ers_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_tree_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "apparatus_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_tree_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_issuer_key_mismatch",
+            "passed": true
+          },
+          {
+            "label": "frozen_issuer_key_id_changed",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_receipt_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_consistency_preflight_not_pass",
+            "passed": true
+          },
+          {
+            "label": "preflight_experiment_id_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_sha256_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_compared_values_missing",
+            "passed": true
+          },
+          {
+            "label": "preflight_contains_failed_comparison",
+            "passed": true
+          },
+          {
+            "label": "contract_e_called_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "supervisor_started_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "candidate_runtime_imported_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "network_used_during_preflight",
+            "passed": true
+          }
+        ],
+        "cli_flags": [
+          "--ers-root",
+          "--ers-source-commit",
+          "--apparatus-source-commit",
+          "--apparatus-freeze-receipt",
+          "--preflight-pass-receipt",
+          "--decision-root",
+          "--contract-e-root",
+          "--contract-d-root",
+          "--consumer-root",
+          "--fixtures",
+          "--sandbox-root",
+          "--transcript-schema",
+          "--provenance-profile",
+          "--issuer-private-key",
+          "--output"
+        ],
+        "counters": {
+          "contract_e_evaluations": 0,
+          "mainframe_write_attempts": 0,
+          "network_attempts": 0,
+          "non_git_processes": [],
+          "protected_filesystem_mutations": 0,
+          "protected_write_attempts": 0,
+          "provenance_scientific_captures": 0,
+          "scientific_mutations": 0,
+          "scientific_pipe_cases": 0,
+          "scientific_sandbox_creations": 0,
+          "scientific_sandbox_mutations": 0,
+          "supervisor_launches": 0
+        },
+        "error": "Command '['git', '-C', '$PR148_ROOT/research', 'rev-parse', 'HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json']' returned non-zero exit status 128.",
+        "error_type": "CalledProcessError",
+        "expected": "repository_root_path_defect",
+        "failed_checks": [],
+        "issuer_public_identity_checked_before_runner": true,
+        "matched": true,
+        "name": "frozen_pr148",
+        "observed": "repository_root_path_defect",
+        "private_key_material_retained": false,
+        "runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+        "runner_output_files": [
+          "FAILURE.json",
+          "RUNNING.json"
+        ],
+        "sandbox_entries_after": [],
+        "stages": [
+          "root_pins",
+          "all_frozen_roots",
+          "git_ancestry",
+          "pr130_authority",
+          "pr131_authority",
+          "cal_v3_object",
+          "provenance_profile",
+          "transcript_schema",
+          "ers_freeze_receipt",
+          "apparatus_freeze_receipt",
+          "preflight_receipt",
+          "repository_relative_conversion",
+          "head_path_resolution"
+        ]
+      },
+      {
+        "boundary_reached": false,
+        "check_count": 63,
+        "checks": [
+          {
+            "label": "wrong_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "ers_rc5_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "ers_rc4_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "receipt_contract_preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "cal_v3_object_missing",
+            "passed": true
+          },
+          {
+            "label": "wrong_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_ers_candidate",
+            "passed": true
+          },
+          {
+            "label": "frozen_transcript_schema_missing",
+            "passed": true
+          },
+          {
+            "label": "transcript_schema_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "ers_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_tree_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "apparatus_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_tree_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_issuer_key_mismatch",
+            "passed": true
+          },
+          {
+            "label": "frozen_issuer_key_id_changed",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_receipt_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_consistency_preflight_not_pass",
+            "passed": true
+          },
+          {
+            "label": "preflight_experiment_id_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_sha256_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_compared_values_missing",
+            "passed": true
+          },
+          {
+            "label": "preflight_contains_failed_comparison",
+            "passed": true
+          },
+          {
+            "label": "contract_e_called_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "supervisor_started_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "candidate_runtime_imported_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "network_used_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "apparatus_freeze_receipt_not_in_frozen_head",
+            "passed": true
+          },
+          {
+            "label": "preflight_pass_not_in_frozen_head",
+            "passed": true
+          },
+          {
+            "label": "contract_e_variable_length_intent_probe_failed",
+            "passed": true
+          },
+          {
+            "label": "PIPE01:supported_decision_behavior_changed",
+            "passed": true
+          },
+          {
+            "label": "PIPE01:supported_contract_d_bytes_changed",
+            "passed": true
+          },
+          {
+            "label": "PIPE01:released_d_rejection_changed",
+            "passed": true
+          },
+          {
+            "label": "PIPE02:supported_decision_behavior_changed",
+            "passed": true
+          },
+          {
+            "label": "PIPE02:supported_contract_d_bytes_changed",
+            "passed": true
+          },
+          {
+            "label": "PIPE02:released_d_rejection_changed",
+            "passed": true
+          },
+          {
+            "label": "PIPE03:supported_decision_behavior_changed",
+            "passed": true
+          },
+          {
+            "label": "PIPE03:supported_contract_d_bytes_changed",
+            "passed": true
+          },
+          {
+            "label": "PIPE03:released_d_rejection_changed",
+            "passed": true
+          },
+          {
+            "label": "pipe01_native_decision_identity_changed",
+            "passed": true
+          },
+          {
+            "label": "pipe01_claim_content_identity_changed",
+            "passed": true
+          },
+          {
+            "label": "pipe01_native_ers_decision_changed",
+            "passed": false
+          }
+        ],
+        "cli_flags": [
+          "--ers-root",
+          "--ers-source-commit",
+          "--apparatus-source-commit",
+          "--apparatus-freeze-receipt",
+          "--preflight-pass-receipt",
+          "--decision-root",
+          "--contract-e-root",
+          "--contract-d-root",
+          "--consumer-root",
+          "--fixtures",
+          "--sandbox-root",
+          "--transcript-schema",
+          "--provenance-profile",
+          "--issuer-private-key",
+          "--output"
+        ],
+        "counters": {
+          "contract_e_evaluations": 0,
+          "mainframe_write_attempts": 0,
+          "network_attempts": 0,
+          "non_git_processes": [
+            "node --input-type=module"
+          ],
+          "protected_filesystem_mutations": 0,
+          "protected_write_attempts": 0,
+          "provenance_scientific_captures": 0,
+          "scientific_mutations": 0,
+          "scientific_pipe_cases": 0,
+          "scientific_sandbox_creations": 0,
+          "scientific_sandbox_mutations": 0,
+          "supervisor_launches": 0
+        },
+        "error": "pipe01_native_ers_decision_changed",
+        "error_type": "QualificationError",
+        "expected": "pipe01_disposition_expectation_defect",
+        "failed_checks": [
+          {
+            "label": "pipe01_native_ers_decision_changed",
+            "passed": false
+          }
+        ],
+        "issuer_public_identity_checked_before_runner": true,
+        "matched": true,
+        "name": "frozen_pr149",
+        "observed": "pipe01_disposition_expectation_defect",
+        "private_key_material_retained": false,
+        "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+        "runner_output_files": [
+          "FAILURE.json",
+          "RUNNING.json"
+        ],
+        "sandbox_entries_after": [],
+        "stages": [
+          "root_pins",
+          "all_frozen_roots",
+          "git_ancestry",
+          "pr130_authority",
+          "pr131_authority",
+          "cal_v3_object",
+          "provenance_profile",
+          "transcript_schema",
+          "ers_freeze_receipt",
+          "apparatus_freeze_receipt",
+          "preflight_receipt",
+          "repository_relative_conversion",
+          "head_path_resolution",
+          "preflight_head_path_resolution",
+          "contract_e_profile_module",
+          "contract_d_setup",
+          "render_bound_module",
+          "frozen_fixture_identities",
+          "pipe01_decision_identity"
+        ]
+      },
+      {
+        "boundary_reached": false,
+        "check_count": 51,
+        "checks": [
+          {
+            "label": "wrong_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "ers_rc5_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "ers_rc4_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "receipt_contract_preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "cal_v3_object_missing",
+            "passed": true
+          },
+          {
+            "label": "wrong_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_ers_candidate",
+            "passed": true
+          },
+          {
+            "label": "frozen_transcript_schema_missing",
+            "passed": true
+          },
+          {
+            "label": "transcript_schema_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "ers_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_tree_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "apparatus_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_tree_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_issuer_key_mismatch",
+            "passed": true
+          },
+          {
+            "label": "frozen_issuer_key_id_changed",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_receipt_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_consistency_preflight_not_pass",
+            "passed": true
+          },
+          {
+            "label": "preflight_experiment_id_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_sha256_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_compared_values_missing",
+            "passed": true
+          },
+          {
+            "label": "preflight_contains_failed_comparison",
+            "passed": true
+          },
+          {
+            "label": "contract_e_called_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "supervisor_started_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "candidate_runtime_imported_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "network_used_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "apparatus_freeze_receipt_not_in_frozen_head",
+            "passed": true
+          },
+          {
+            "label": "preflight_pass_not_in_frozen_head",
+            "passed": true
+          },
+          {
+            "label": "contract_e_variable_length_intent_probe_failed",
+            "passed": true
+          }
+        ],
+        "cli_flags": [
+          "--ers-root",
+          "--ers-source-commit",
+          "--apparatus-source-commit",
+          "--apparatus-freeze-receipt",
+          "--preflight-pass-receipt",
+          "--decision-root",
+          "--contract-e-root",
+          "--contract-d-root",
+          "--consumer-root",
+          "--fixtures",
+          "--sandbox-root",
+          "--transcript-schema",
+          "--provenance-profile",
+          "--issuer-private-key",
+          "--output"
+        ],
+        "counters": {
+          "contract_e_evaluations": 0,
+          "mainframe_write_attempts": 0,
+          "network_attempts": 0,
+          "non_git_processes": [
+            "node --input-type=module"
+          ],
+          "protected_filesystem_mutations": 0,
+          "protected_write_attempts": 0,
+          "provenance_scientific_captures": 0,
+          "scientific_mutations": 0,
+          "scientific_pipe_cases": 0,
+          "scientific_sandbox_creations": 0,
+          "scientific_sandbox_mutations": 0,
+          "supervisor_launches": 0
+        },
+        "error": "ERS effect unexpectedly present in released Contract D registry",
+        "error_type": "RuntimeError",
+        "expected": "bootstrap_pass",
+        "failed_checks": [],
+        "issuer_public_identity_checked_before_runner": true,
+        "matched": false,
+        "name": "new_successor",
+        "observed": "incidental_failure",
+        "private_key_material_retained": false,
+        "runner_blob": "45eab4fc9aba4b851020b649546b09272c249c36",
+        "runner_output_files": [
+          "FAILURE.json",
+          "RUNNING.json"
+        ],
+        "sandbox_entries_after": [],
+        "stages": [
+          "root_pins",
+          "all_frozen_roots",
+          "git_ancestry",
+          "pr130_authority",
+          "pr131_authority",
+          "cal_v3_object",
+          "provenance_profile",
+          "transcript_schema",
+          "ers_freeze_receipt",
+          "apparatus_freeze_receipt",
+          "preflight_receipt",
+          "repository_relative_conversion",
+          "head_path_resolution",
+          "preflight_head_path_resolution",
+          "contract_e_profile_module",
+          "contract_d_setup",
+          "render_bound_module"
+        ]
+      },
+      {
+        "boundary_reached": false,
+        "check_count": 48,
+        "checks": [
+          {
+            "label": "wrong_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "ers_rc5_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "ers_rc4_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "receipt_contract_preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "cal_v3_object_missing",
+            "passed": true
+          },
+          {
+            "label": "wrong_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_ers_candidate",
+            "passed": true
+          },
+          {
+            "label": "frozen_transcript_schema_missing",
+            "passed": true
+          },
+          {
+            "label": "transcript_schema_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "ers_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_tree_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "apparatus_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_tree_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_issuer_key_mismatch",
+            "passed": true
+          },
+          {
+            "label": "frozen_issuer_key_id_changed",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_receipt_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_consistency_preflight_not_pass",
+            "passed": true
+          },
+          {
+            "label": "preflight_experiment_id_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_sha256_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_compared_values_missing",
+            "passed": true
+          },
+          {
+            "label": "preflight_contains_failed_comparison",
+            "passed": true
+          },
+          {
+            "label": "contract_e_called_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "supervisor_started_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "candidate_runtime_imported_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "network_used_during_preflight",
+            "passed": true
+          }
+        ],
+        "cli_flags": [
+          "--ers-root",
+          "--ers-source-commit",
+          "--apparatus-source-commit",
+          "--apparatus-freeze-receipt",
+          "--preflight-pass-receipt",
+          "--decision-root",
+          "--contract-e-root",
+          "--contract-d-root",
+          "--consumer-root",
+          "--fixtures",
+          "--sandbox-root",
+          "--transcript-schema",
+          "--provenance-profile",
+          "--issuer-private-key",
+          "--output"
+        ],
+        "counters": {
+          "contract_e_evaluations": 0,
+          "mainframe_write_attempts": 0,
+          "network_attempts": 0,
+          "non_git_processes": [],
+          "protected_filesystem_mutations": 0,
+          "protected_write_attempts": 0,
+          "provenance_scientific_captures": 0,
+          "scientific_mutations": 0,
+          "scientific_pipe_cases": 0,
+          "scientific_sandbox_creations": 0,
+          "scientific_sandbox_mutations": 0,
+          "supervisor_launches": 0
+        },
+        "error": "Command '['git', '-C', '$CONTROL_ROOT/wrong-root/research', 'rev-parse', 'HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json']' returned non-zero exit status 128.",
+        "error_type": "CalledProcessError",
+        "expected": "repository_root_path_defect",
+        "failed_checks": [],
+        "issuer_public_identity_checked_before_runner": true,
+        "matched": true,
+        "name": "wrong_root_control",
+        "observed": "repository_root_path_defect",
+        "private_key_material_retained": false,
+        "runner_blob": "3fcf873dce401f72c47fb4dc73448cf250887600",
+        "runner_output_files": [
+          "FAILURE.json",
+          "RUNNING.json"
+        ],
+        "sandbox_entries_after": [],
+        "stages": [
+          "root_pins",
+          "all_frozen_roots",
+          "git_ancestry",
+          "pr130_authority",
+          "pr131_authority",
+          "cal_v3_object",
+          "provenance_profile",
+          "transcript_schema",
+          "ers_freeze_receipt",
+          "apparatus_freeze_receipt",
+          "preflight_receipt",
+          "repository_relative_conversion",
+          "head_path_resolution"
+        ]
+      },
+      {
+        "boundary_reached": false,
+        "check_count": 51,
+        "checks": [
+          {
+            "label": "wrong_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "ers_rc5_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "ers_rc4_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "receipt_contract_preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "cal_v3_object_missing",
+            "passed": true
+          },
+          {
+            "label": "wrong_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_ers_candidate",
+            "passed": true
+          },
+          {
+            "label": "frozen_transcript_schema_missing",
+            "passed": true
+          },
+          {
+            "label": "transcript_schema_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "ers_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_tree_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "apparatus_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_tree_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_issuer_key_mismatch",
+            "passed": true
+          },
+          {
+            "label": "frozen_issuer_key_id_changed",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_receipt_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_consistency_preflight_not_pass",
+            "passed": true
+          },
+          {
+            "label": "preflight_experiment_id_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_sha256_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_compared_values_missing",
+            "passed": true
+          },
+          {
+            "label": "preflight_contains_failed_comparison",
+            "passed": true
+          },
+          {
+            "label": "contract_e_called_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "supervisor_started_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "candidate_runtime_imported_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "network_used_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "apparatus_freeze_receipt_not_in_frozen_head",
+            "passed": true
+          },
+          {
+            "label": "preflight_pass_not_in_frozen_head",
+            "passed": true
+          },
+          {
+            "label": "contract_e_variable_length_intent_probe_failed",
+            "passed": true
+          }
+        ],
+        "cli_flags": [
+          "--ers-root",
+          "--ers-source-commit",
+          "--apparatus-source-commit",
+          "--apparatus-freeze-receipt",
+          "--preflight-pass-receipt",
+          "--decision-root",
+          "--contract-e-root",
+          "--contract-d-root",
+          "--consumer-root",
+          "--fixtures",
+          "--sandbox-root",
+          "--transcript-schema",
+          "--provenance-profile",
+          "--issuer-private-key",
+          "--output"
+        ],
+        "counters": {
+          "contract_e_evaluations": 0,
+          "mainframe_write_attempts": 0,
+          "network_attempts": 0,
+          "non_git_processes": [
+            "node --input-type=module"
+          ],
+          "protected_filesystem_mutations": 0,
+          "protected_write_attempts": 0,
+          "provenance_scientific_captures": 0,
+          "scientific_mutations": 0,
+          "scientific_pipe_cases": 0,
+          "scientific_sandbox_creations": 0,
+          "scientific_sandbox_mutations": 0,
+          "supervisor_launches": 0
+        },
+        "error": "ERS effect unexpectedly present in released Contract D registry",
+        "error_type": "RuntimeError",
+        "expected": "pipe01_disposition_expectation_defect",
+        "failed_checks": [],
+        "issuer_public_identity_checked_before_runner": true,
+        "matched": false,
+        "name": "wrong_disposition_control",
+        "observed": "incidental_failure",
+        "private_key_material_retained": false,
+        "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+        "runner_output_files": [
+          "FAILURE.json",
+          "RUNNING.json"
+        ],
+        "sandbox_entries_after": [],
+        "stages": [
+          "root_pins",
+          "all_frozen_roots",
+          "git_ancestry",
+          "pr130_authority",
+          "pr131_authority",
+          "cal_v3_object",
+          "provenance_profile",
+          "transcript_schema",
+          "ers_freeze_receipt",
+          "apparatus_freeze_receipt",
+          "preflight_receipt",
+          "repository_relative_conversion",
+          "head_path_resolution",
+          "preflight_head_path_resolution",
+          "contract_e_profile_module",
+          "contract_d_setup",
+          "render_bound_module"
+        ]
+      },
+      {
+        "boundary_reached": false,
+        "check_count": 48,
+        "checks": [
+          {
+            "label": "wrong_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_decision",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_e",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_d",
+            "passed": true
+          },
+          {
+            "label": "wrong_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_contract_c_consumer",
+            "passed": true
+          },
+          {
+            "label": "ers_rc5_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "ers_rc4_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "receipt_contract_preregistration_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "cal_v3_object_missing",
+            "passed": true
+          },
+          {
+            "label": "wrong_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_provenance_profile",
+            "passed": true
+          },
+          {
+            "label": "dirty_frozen_ers_candidate",
+            "passed": true
+          },
+          {
+            "label": "frozen_transcript_schema_missing",
+            "passed": true
+          },
+          {
+            "label": "transcript_schema_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "ers_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_tree_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_receipt_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_source_not_ancestor",
+            "passed": true
+          },
+          {
+            "label": "apparatus_source_commit_freeze_mismatch",
+            "passed": true
+          },
+          {
+            "label": "noncanonical_ers_source_commit_alias",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_ers_source_tree_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_preregistration_mismatch",
+            "passed": true
+          },
+          {
+            "label": "apparatus_transcript_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_issuer_key_mismatch",
+            "passed": true
+          },
+          {
+            "label": "frozen_issuer_key_id_changed",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "ers_freeze_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_receipt_schema_mismatch",
+            "passed": true
+          },
+          {
+            "label": "receipt_consistency_preflight_not_pass",
+            "passed": true
+          },
+          {
+            "label": "preflight_experiment_id_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_ers_freeze_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_source_commit_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_blob_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_apparatus_receipt_sha256_mismatch",
+            "passed": true
+          },
+          {
+            "label": "preflight_compared_values_missing",
+            "passed": true
+          },
+          {
+            "label": "preflight_contains_failed_comparison",
+            "passed": true
+          },
+          {
+            "label": "contract_e_called_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "supervisor_started_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "candidate_runtime_imported_during_preflight",
+            "passed": true
+          },
+          {
+            "label": "network_used_during_preflight",
+            "passed": true
+          }
+        ],
+        "cli_flags": [
+          "--ers-root",
+          "--ers-source-commit",
+          "--apparatus-source-commit",
+          "--apparatus-freeze-receipt",
+          "--preflight-pass-receipt",
+          "--decision-root",
+          "--contract-e-root",
+          "--contract-d-root",
+          "--consumer-root",
+          "--fixtures",
+          "--sandbox-root",
+          "--transcript-schema",
+          "--provenance-profile",
+          "--issuer-private-key",
+          "--output"
+        ],
+        "counters": {
+          "contract_e_evaluations": 0,
+          "mainframe_write_attempts": 0,
+          "network_attempts": 0,
+          "non_git_processes": [],
+          "protected_filesystem_mutations": 0,
+          "protected_write_attempts": 0,
+          "provenance_scientific_captures": 0,
+          "scientific_mutations": 0,
+          "scientific_pipe_cases": 0,
+          "scientific_sandbox_creations": 0,
+          "scientific_sandbox_mutations": 0,
+          "supervisor_launches": 0
+        },
+        "error": "'$QUALIFICATION_OUTPUT/wrong-receipt-path/FREEZE_RECEIPT.json' is not in the subpath of '$SUCCESSOR_ROOT' OR one path is relative and the other is absolute.",
+        "error_type": "ValueError",
+        "expected": "receipt_path_outside_repository",
+        "failed_checks": [],
+        "issuer_public_identity_checked_before_runner": true,
+        "matched": true,
+        "name": "wrong_receipt_path_control",
+        "observed": "receipt_path_outside_repository",
+        "private_key_material_retained": false,
+        "runner_blob": "45eab4fc9aba4b851020b649546b09272c249c36",
+        "runner_output_files": [
+          "FAILURE.json",
+          "RUNNING.json"
+        ],
+        "sandbox_entries_after": [],
+        "stages": [
+          "root_pins",
+          "all_frozen_roots",
+          "git_ancestry",
+          "pr130_authority",
+          "pr131_authority",
+          "cal_v3_object",
+          "provenance_profile",
+          "transcript_schema",
+          "ers_freeze_receipt",
+          "apparatus_freeze_receipt",
+          "preflight_receipt",
+          "repository_relative_conversion"
+        ]
+      }
+    ],
+    "containment": {
+      "allowed_write_aliases": [
+        "$QUALIFICATION_OUTPUT",
+        "$QUALIFICATION_TEMP"
+      ],
+      "effective_profile_binding_sha256": "9bc7cdc44ad3eb58fef4bae4e497fca5db7f7b07074e64bd8d29aa54ed81f276",
+      "mechanism": "macOS sandbox-exec deny-default profile",
+      "negative_control": {
+        "after": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 1,
+          "file_bytes": 0,
+          "sha256": "59b51bf068d1bbe42f9830a21f6971c0e92b5344411c41792fc2522245ddc661"
+        },
+        "attempts": [
+          {
+            "api": "open(..., wb)",
+            "errno": 1,
+            "error_type": "PermissionError",
+            "result": "DENIED"
+          },
+          {
+            "api": "Path.write_bytes",
+            "errno": 1,
+            "error_type": "PermissionError",
+            "result": "DENIED"
+          }
+        ],
+        "before": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 1,
+          "file_bytes": 0,
+          "sha256": "59b51bf068d1bbe42f9830a21f6971c0e92b5344411c41792fc2522245ddc661"
+        },
+        "canary_alias": "protected_controls:write_canary",
+        "passed": true,
+        "unchanged": true
+      },
+      "network_rule": "deny network*",
+      "profile_path": "qualification/write-deny-profile.sb",
+      "profile_sha256": "ac0025ad01d00d87661e34bb83362c4094479c2ff619c3fdbfb5cfd9287c12ce",
+      "protected_aliases": [
+        "mainframe_repo",
+        "apparatus_workbench",
+        "pr148_checkout",
+        "pr149_checkout",
+        "successor_checkout",
+        "controlled_worktrees",
+        "frozen_checkouts",
+        "frozen_fixtures",
+        "scientific_sandbox",
+        "frozen_runtime",
+        "protected_canary"
+      ]
+    },
+    "decision_disposition": "clear",
+    "decision_identity": "decision:sha256:3427c5cb6692bf7358c13e47628ef7a91a0c53e78affc58f2ae60173daffcc15",
+    "missing_required_setup_checks": [
+      "PIPE01:released_d_rejection_changed",
+      "PIPE01:supported_contract_d_bytes_changed",
+      "PIPE01:supported_decision_behavior_changed",
+      "PIPE02:hold_behavior_changed",
+      "PIPE02:released_d_rejection_changed",
+      "PIPE02:supported_contract_d_bytes_changed",
+      "PIPE02:supported_decision_behavior_changed",
+      "PIPE03:hold_behavior_changed",
+      "PIPE03:released_d_rejection_changed",
+      "PIPE03:supported_contract_d_bytes_changed",
+      "PIPE03:supported_decision_behavior_changed",
+      "authority_state_fixture_identity_mismatch",
+      "five_inherited_input_identities_changed",
+      "frozen_contract_e_intent_identity_disagrees",
+      "independent_execution_intent_identity_mismatch",
+      "independent_payload_identity_mismatch",
+      "independent_render_disagreement",
+      "independent_render_packet_identity_mismatch",
+      "payload_terminal_newline_changed",
+      "pinned_public_key_identity_mismatch",
+      "pipe01_claim_content_identity_changed",
+      "pipe01_fixture_missing",
+      "pipe01_native_decision_identity_changed",
+      "pipe01_native_ers_decision_changed",
+      "sandbox_not_empty_before_decisive_run"
+    ],
+    "passed": false,
+    "predecessor_pr148_commit": "b673b2b06804e94042ad35d4621f4a4ca5ee4851",
+    "predecessor_pr149_commit": "4bd5b030726ed064d410cb8c99e79c23a0426c8a",
+    "preregistration_ancestor_commit": "e54330db4de2090e8a238823459546d3153a42e3",
+    "protected_filesystem": {
+      "after": {
+        "apparatus_workbench": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 3223,
+          "file_bytes": 66868682,
+          "sha256": "deb5a887bd2c0d44fafbe24d7d86ff0981df00168971fe34c6f0023520c8c14d"
+        },
+        "controlled_worktrees": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 614,
+          "file_bytes": 23423872,
+          "sha256": "eed688d520f6ea9456459f7cf6f092375719a3ffc715de5d2fe571ebc263b7c3"
+        },
+        "frozen_checkouts": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 2194,
+          "file_bytes": 42651795,
+          "sha256": "f23976fc47f234ab70b04f68fe4e534a33e4b1e9d19317b55cc0e88a4b01c64c"
+        },
+        "frozen_fixtures": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 19,
+          "file_bytes": 84570,
+          "sha256": "8f630894d4aee33a3a9fcfa1748f76bd13c7ab87808a044fd140a7a774c677d0"
+        },
+        "frozen_runtime": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 535,
+          "file_bytes": 25912327,
+          "sha256": "e95cdf6945290dcc4012c62f1273182eed606f89d49e7dd73783cb1ac039ae2e"
+        },
+        "mainframe_git_state": {
+          "head": "8a57e889e53ead7fd2c10426b6cfc6d5d38061f2",
+          "index_sha256": "380ead220ad34571a14100b683a862cc00284c84bc5723c57d0f220ad80e182d",
+          "status_entries": 3,
+          "status_sha256": "6a032d628d31c4a03f0775d5110c79c49f8d744ecdfd27c57caa1809b28ad9a1"
+        },
+        "mainframe_repo": {
+          "algorithm": "sorted-lstat-metadata-tree-sha256",
+          "entries": 834183,
+          "file_bytes": 38114360961,
+          "sha256": "6b26ba7bec26af3ea2f56e4832e92bdf3b7b179791e67705299683e62e8b3f68"
+        },
+        "pr148_checkout": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 404,
+          "file_bytes": 23618222,
+          "sha256": "b5dd857956dd79c0956f4e73d96f91e0e51088f4eed8c6cb7e3d3324911387c2"
+        },
+        "pr149_checkout": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 286,
+          "file_bytes": 11735699,
+          "sha256": "e1b505c5e08575164ee95b37454381b7060811eb5744724c01053c1bef91955a"
+        },
+        "protected_canary": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 1,
+          "file_bytes": 0,
+          "sha256": "59b51bf068d1bbe42f9830a21f6971c0e92b5344411c41792fc2522245ddc661"
+        },
+        "scientific_sandbox": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 1,
+          "file_bytes": 0,
+          "sha256": "e2445a9d0b3b4bed3d724dc0e6135974fcd4cafd3fb929fba1a2b35f757c9899"
+        },
+        "successor_checkout": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 308,
+          "file_bytes": 11749851,
+          "sha256": "d3ffb239ccd99ee6d9a630d22d87d59eafaf879915112336e647c8a6ef6e131e"
+        }
+      },
+      "before": {
+        "apparatus_workbench": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 3223,
+          "file_bytes": 66868682,
+          "sha256": "deb5a887bd2c0d44fafbe24d7d86ff0981df00168971fe34c6f0023520c8c14d"
+        },
+        "controlled_worktrees": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 614,
+          "file_bytes": 23423872,
+          "sha256": "eed688d520f6ea9456459f7cf6f092375719a3ffc715de5d2fe571ebc263b7c3"
+        },
+        "frozen_checkouts": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 2194,
+          "file_bytes": 42651795,
+          "sha256": "f23976fc47f234ab70b04f68fe4e534a33e4b1e9d19317b55cc0e88a4b01c64c"
+        },
+        "frozen_fixtures": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 19,
+          "file_bytes": 84570,
+          "sha256": "8f630894d4aee33a3a9fcfa1748f76bd13c7ab87808a044fd140a7a774c677d0"
+        },
+        "frozen_runtime": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 535,
+          "file_bytes": 25912327,
+          "sha256": "e95cdf6945290dcc4012c62f1273182eed606f89d49e7dd73783cb1ac039ae2e"
+        },
+        "mainframe_git_state": {
+          "head": "8a57e889e53ead7fd2c10426b6cfc6d5d38061f2",
+          "index_sha256": "380ead220ad34571a14100b683a862cc00284c84bc5723c57d0f220ad80e182d",
+          "status_entries": 3,
+          "status_sha256": "6a032d628d31c4a03f0775d5110c79c49f8d744ecdfd27c57caa1809b28ad9a1"
+        },
+        "mainframe_repo": {
+          "algorithm": "sorted-lstat-metadata-tree-sha256",
+          "entries": 834180,
+          "file_bytes": 38113364524,
+          "sha256": "a98c20b5df47b35d3a93604a1413f88ed4098c6ccf974723f22ec4601cdc39a3"
+        },
+        "pr148_checkout": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 404,
+          "file_bytes": 23618222,
+          "sha256": "b5dd857956dd79c0956f4e73d96f91e0e51088f4eed8c6cb7e3d3324911387c2"
+        },
+        "pr149_checkout": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 286,
+          "file_bytes": 11735699,
+          "sha256": "e1b505c5e08575164ee95b37454381b7060811eb5744724c01053c1bef91955a"
+        },
+        "protected_canary": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 1,
+          "file_bytes": 0,
+          "sha256": "59b51bf068d1bbe42f9830a21f6971c0e92b5344411c41792fc2522245ddc661"
+        },
+        "scientific_sandbox": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 1,
+          "file_bytes": 0,
+          "sha256": "e2445a9d0b3b4bed3d724dc0e6135974fcd4cafd3fb929fba1a2b35f757c9899"
+        },
+        "successor_checkout": {
+          "algorithm": "sorted-lstat-tree-sha256",
+          "entries": 308,
+          "file_bytes": 11749851,
+          "sha256": "d3ffb239ccd99ee6d9a630d22d87d59eafaf879915112336e647c8a6ef6e131e"
+        }
+      },
+      "snapshot_scope": [
+        "mainframe_repo",
+        "apparatus_workbench",
+        "pr148_checkout",
+        "pr149_checkout",
+        "successor_checkout",
+        "controlled_worktrees",
+        "frozen_checkouts",
+        "frozen_fixtures",
+        "scientific_sandbox",
+        "frozen_runtime",
+        "protected_canary",
+        "mainframe_git_state"
+      ],
+      "unchanged": false
+    },
+    "runtime": {
+      "dependency_smoke": {
+        "ed25519_negative": "PASS",
+        "ed25519_positive": "PASS",
+        "jsonschema_negative": "PASS",
+        "jsonschema_positive": "PASS",
+        "rfc8785_negative": "FloatDomainError",
+        "rfc8785_positive": "PASS",
+        "versions": {
+          "cryptography": "50.0.1",
+          "jsonschema": "4.26.0",
+          "rfc8785": "0.1.4"
+        }
+      },
+      "offline_install": {
+        "network_mode": "offline; no-index; no-cache; exact wheelhouse only",
+        "pip_check": "Using Python 3.11.15 environment at: $QUALIFICATION_OUTPUT/runtime-offline-install\nChecked 12 packages in 1ms\nAll installed packages are compatible",
+        "status": "PASS",
+        "uv_output_tail": [
+          " + cryptography==50.0.1",
+          " + jsonschema==4.26.0",
+          " + jsonschema-specifications==2025.9.1",
+          " + pycparser==3.0",
+          " + referencing==0.37.0",
+          " + rfc8785==0.1.4",
+          " + rpds-py==2026.6.3",
+          " + typing-extensions==4.16.0"
+        ]
+      },
+      "runtime_artifacts": {
+        "interpreter": {
+          "path_alias": "$FROZEN_RUNTIME/venv/bin/python",
+          "resolved_binary_sha256": "06f1bfa6c5e9d42bc4c8371dd9217a2a185dcdc15ae888193d01f75dc04a3eb1",
+          "version": "3.11.15"
+        },
+        "lock_sha256": "4d0bd11eadca52c292cb883afc062fd95de6b03e8304dedf4820a027898a419f",
+        "wheel_count": 10,
+        "wheelhouse_zip_sha256": "68474c180d4e5d2b35df36354d68cc477a69061960cd26385661cad9a63a0214",
+        "wheels": [
+          {
+            "bytes": 67548,
+            "filename": "attrs-26.1.0-py3-none-any.whl",
+            "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+          },
+          {
+            "bytes": 184168,
+            "filename": "cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl",
+            "sha256": "398aff33cee2767e3e781d2554c54bd0dff386bb437581e0d8011fde1a942ec1"
+          },
+          {
+            "bytes": 4010153,
+            "filename": "cryptography-50.0.1-cp311-abi3-macosx_11_0_arm64.whl",
+            "sha256": "b8f852c65863251b9e3a1b8c150ce21e59b522dbb6a7d4bc80e680d38388e986"
+          },
+          {
+            "bytes": 90630,
+            "filename": "jsonschema-4.26.0-py3-none-any.whl",
+            "sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+          },
+          {
+            "bytes": 18437,
+            "filename": "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+            "sha256": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+          },
+          {
+            "bytes": 48172,
+            "filename": "pycparser-3.0-py3-none-any.whl",
+            "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"
+          },
+          {
+            "bytes": 26766,
+            "filename": "referencing-0.37.0-py3-none-any.whl",
+            "sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+          },
+          {
+            "bytes": 9240,
+            "filename": "rfc8785-0.1.4-py3-none-any.whl",
+            "sha256": "520d690b448ecf0703691c76e1a34a24ddcd4fc5bc41d589cb7c58ec651bcd48"
+          },
+          {
+            "bytes": 345513,
+            "filename": "rpds_py-2026.6.3-cp311-cp311-macosx_11_0_arm64.whl",
+            "sha256": "db08f45aecde626498fb3df07bcf6d2ec040af42e859a4f5040d79c200342911"
+          },
+          {
+            "bytes": 45571,
+            "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+            "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+          }
+        ]
+      },
+      "schema": "ers05-runtime-reverification/1",
+      "source_runtime_manifest_sha256": "f4a53166f4df2ac35c505c5b29e2a4a9a1e9ea494caf6c1bdeb1ce8d13adf475",
+      "status": "PASS",
+      "toolchain": {
+        "machine": "arm64",
+        "node": {
+          "binary_sha256": "1ef99ea25fe70c9b67e7efe768ef8ee22148d3cabc703db6131b57aeb617d040",
+          "version": "v26.7.0"
+        },
+        "platform": "macOS-27.0-arm64-arm-64bit",
+        "uv": {
+          "binary_sha256": "b2859884b9693e7ffe7ba8c3ad912b78fa2b77b3519bb58a82b6f8fedb983f23",
+          "version": "uv 0.11.11 (ed7b06001 2026-05-06 aarch64-apple-darwin)"
+        }
+      }
+    },
+    "schema": "ers05-strengthened-pre-matrix-qualification/1",
+    "scientific_authority_pr130_commit": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "scientific_counters": {
+      "contract_e_evaluations": 0,
+      "per_case_zero_counter_check": true,
+      "protected_filesystem_mutations": 0,
+      "provenance_scientific_captures": 0,
+      "scientific_mutations": 0,
+      "scientific_pipe_executions": 0,
+      "scientific_sandbox_mutations": 0,
+      "supervisor_launches": 0,
+      "unauthorized_network_attempts": 0
+    },
+    "source_commit": "1ed7d2573290bfea1a883acc014baf6e70cab19c",
+    "source_delta": {
+      "ast_equal_after_normalizing_authorized_disposition_constant": true,
+      "changed_line": {
+        "line": 391,
+        "predecessor": "decision[\"evaluation\"][\"disposition\"] == \"pending_review\"",
+        "successor": "decision[\"evaluation\"][\"disposition\"] == \"clear\""
+      },
+      "changed_paths_outside_successor_dir": [
+        "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py"
+      ],
+      "cumulative_runner_lineage": [
+        {
+          "commit": "b673b2b06804e94042ad35d4621f4a4ca5ee4851",
+          "pull_request": 148,
+          "receipt_path_and_apparatus_commit_corrections_retained": true,
+          "runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4"
+        },
+        {
+          "commit": "4bd5b030726ed064d410cb8c99e79c23a0426c8a",
+          "pull_request": 149,
+          "root_correction_retained": true,
+          "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+          "source_delta_blob": "3a11e56f95ccdd8418664e52e46867ab1c080d16",
+          "source_delta_path": "research/ers-contract-e-evaluation-provenance-20260924/root-path-successor-rc0/qualification/20260924/SOURCE_DELTA.json"
+        },
+        {
+          "successor_preregistration_commit": "e54330db4de2090e8a238823459546d3153a42e3"
+        }
+      ],
+      "pipe01_fixture_identities": [
+        {
+          "bytes": 3191,
+          "git_blob": "fb1a7779369215a273ff54ba25911d45c3e42f39",
+          "path": "PIPE01/cal/contract-c.json",
+          "root_alias": "preserved_first_matrix_attempt:fixtures",
+          "sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0"
+        },
+        {
+          "bytes": 26593,
+          "git_blob": "670657307c262ccad2fe307d5b75aa3af2e13029",
+          "path": "PIPE01/consumer-inputs.json",
+          "root_alias": "preserved_first_matrix_attempt:fixtures",
+          "sha256": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896"
+        },
+        {
+          "bytes": 120,
+          "git_blob": "dfd6793a182a342dd3f80580bf53f64017de2c80",
+          "path": "PIPE01/decision-target.json",
+          "root_alias": "preserved_first_matrix_attempt:fixtures",
+          "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+        },
+        {
+          "bytes": 763,
+          "git_blob": "8359d717d70e81e1f4c1a650da59a3ab631d58d5",
+          "path": "PIPE01/contract-d.json",
+          "root_alias": "preserved_first_matrix_attempt:fixtures",
+          "sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24"
+        }
+      ],
+      "pr130": {
+        "blobs": {
+          "research/ers-contract-e-evaluation-provenance-20260921/EXPERIMENT.json": "7b0515c186b70b081aad4774821045b2b8202774",
+          "research/ers-contract-e-evaluation-provenance-20260921/PREREGISTRATION.md": "7c8904bf1237b8cf381e7d69f7b217286363b9ac"
+        },
+        "commit": "dcdd10355e2f885273d843eef6e345bafca95faa"
+      },
+      "predecessor": {
+        "commit": "4bd5b030726ed064d410cb8c99e79c23a0426c8a",
+        "pull_request": 149,
+        "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+        "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+        "tree": "6aff39c21f777912472ae62324b94619ef4956de"
+      },
+      "preregistration": {
+        "commit": "e54330db4de2090e8a238823459546d3153a42e3",
+        "source_commit_parent": "26eb757b0e9f853156f9f01424fae3377b9badf2"
+      },
+      "retained_pr148_corrections": {
+        "pr148_apparatus_scientific_preregistration_commit": true,
+        "pr148_ers_receipt_path": true,
+        "pr149_repository_root_correction": true
+      },
+      "schema": "ers05-runner-source-delta/1",
+      "source": {
+        "commit": "1ed7d2573290bfea1a883acc014baf6e70cab19c",
+        "runner_blob": "45eab4fc9aba4b851020b649546b09272c249c36",
+        "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+        "tree": "b2a2845887d85500dd4ed7f15ad463ad5ed5088d"
+      },
+      "status": "PASS",
+      "unchanged_surfaces": {
+        "ers_and_contract_e_semantics": true,
+        "expected_scientific_outcomes": true,
+        "fixtures": true,
+        "matrix_cases": true,
+        "scientific_mutations": true,
+        "supervisor_api": true,
+        "transcript_schema_and_signing": true
+      }
+    },
+    "source_parent_commit": "26eb757b0e9f853156f9f01424fae3377b9badf2",
+    "status": "INCONCLUSIVE",
+    "write_profile_git_blob": "8c64f9e6d50e1ec196b726b6270cc28755808797"
+  },
+  "report_aliasing": "absolute workspace paths replaced by stable root aliases in the embedded report",
+  "schema": "ers05-disposition-successor-qualification-attempt/1",
+  "scientific_authority": {
+    "decisive_result_observed_before_freeze": false,
+    "pr130_commit": "dcdd10355e2f885273d843eef6e345bafca95faa",
+    "unchanged": true
+  },
+  "source_identity": {
+    "commit": "1ed7d2573290bfea1a883acc014baf6e70cab19c",
+    "runner_blob": "45eab4fc9aba4b851020b649546b09272c249c36",
+    "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+    "tree": "b2a2845887d85500dd4ed7f15ad463ad5ed5088d"
+  }
+}

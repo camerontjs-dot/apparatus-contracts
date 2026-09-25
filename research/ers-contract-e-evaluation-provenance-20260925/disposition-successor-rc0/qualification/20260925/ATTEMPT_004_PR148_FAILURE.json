@@ -1,0 +1,10 @@
+{
+  "decisive_result_observed_before_freeze": false,
+  "disposition": "INCONCLUSIVE",
+  "error": "Command '['git', '-C', '/private/tmp/ers-eval-matrix-20260924/checkouts', 'rev-parse', 'HEAD']' returned non-zero exit status 128.",
+  "error_type": "CalledProcessError",
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "matrix_progress": {},
+  "output_path": "$QUALIFICATION_OUTPUT/frozen_pr148/runner-output",
+  "schema": "ers-contract-e-evaluation-provenance-failure/1"
+}

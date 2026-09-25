@@ -1,0 +1,7 @@
+{
+  "decisive_result_observed_before_freeze": false,
+  "experiment_id": "ERS-EVAL-TIME-PROV-20260922-05",
+  "output_path": "$QUALIFICATION_OUTPUT/frozen_pr148/runner-output",
+  "schema": "ers-contract-e-evaluation-provenance-run-state/1",
+  "state": "active"
+}

@@ -1,0 +1,100 @@
+{
+  "ast_equal_after_normalizing_authorized_disposition_constant": true,
+  "changed_line": {
+    "line": 391,
+    "predecessor": "decision[\"evaluation\"][\"disposition\"] == \"pending_review\"",
+    "successor": "decision[\"evaluation\"][\"disposition\"] == \"clear\""
+  },
+  "changed_paths_outside_successor_dir": [
+    "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py"
+  ],
+  "cumulative_runner_lineage": [
+    {
+      "commit": "b673b2b06804e94042ad35d4621f4a4ca5ee4851",
+      "pull_request": 148,
+      "receipt_path_and_apparatus_commit_corrections_retained": true,
+      "runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4"
+    },
+    {
+      "commit": "4bd5b030726ed064d410cb8c99e79c23a0426c8a",
+      "pull_request": 149,
+      "root_correction_retained": true,
+      "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+      "source_delta_blob": "3a11e56f95ccdd8418664e52e46867ab1c080d16",
+      "source_delta_path": "research/ers-contract-e-evaluation-provenance-20260924/root-path-successor-rc0/qualification/20260924/SOURCE_DELTA.json"
+    },
+    {
+      "successor_preregistration_commit": "e54330db4de2090e8a238823459546d3153a42e3"
+    }
+  ],
+  "pipe01_fixture_identities": [
+    {
+      "bytes": 3191,
+      "git_blob": "fb1a7779369215a273ff54ba25911d45c3e42f39",
+      "path": "PIPE01/cal/contract-c.json",
+      "root_alias": "preserved_first_matrix_attempt:fixtures",
+      "sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0"
+    },
+    {
+      "bytes": 26593,
+      "git_blob": "670657307c262ccad2fe307d5b75aa3af2e13029",
+      "path": "PIPE01/consumer-inputs.json",
+      "root_alias": "preserved_first_matrix_attempt:fixtures",
+      "sha256": "sha256:ef66645be0d9c0e5b637111c16b2e8e98ca27c51bbb2bf1b11657a028bff9896"
+    },
+    {
+      "bytes": 120,
+      "git_blob": "dfd6793a182a342dd3f80580bf53f64017de2c80",
+      "path": "PIPE01/decision-target.json",
+      "root_alias": "preserved_first_matrix_attempt:fixtures",
+      "sha256": "sha256:9afebdb690169513ea17a26b583cf2b36379282d2d8035409abe4c74c451d142"
+    },
+    {
+      "bytes": 763,
+      "git_blob": "8359d717d70e81e1f4c1a650da59a3ab631d58d5",
+      "path": "PIPE01/contract-d.json",
+      "root_alias": "preserved_first_matrix_attempt:fixtures",
+      "sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24"
+    }
+  ],
+  "pr130": {
+    "blobs": {
+      "research/ers-contract-e-evaluation-provenance-20260921/EXPERIMENT.json": "7b0515c186b70b081aad4774821045b2b8202774",
+      "research/ers-contract-e-evaluation-provenance-20260921/PREREGISTRATION.md": "7c8904bf1237b8cf381e7d69f7b217286363b9ac"
+    },
+    "commit": "dcdd10355e2f885273d843eef6e345bafca95faa"
+  },
+  "predecessor": {
+    "commit": "4bd5b030726ed064d410cb8c99e79c23a0426c8a",
+    "pull_request": 149,
+    "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+    "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+    "tree": "6aff39c21f777912472ae62324b94619ef4956de"
+  },
+  "preregistration": {
+    "commit": "e54330db4de2090e8a238823459546d3153a42e3",
+    "source_commit_parent": "2e58212479eca67815a12a132390b7a84a28b4af"
+  },
+  "retained_pr148_corrections": {
+    "pr148_apparatus_scientific_preregistration_commit": true,
+    "pr148_ers_receipt_path": true,
+    "pr149_repository_root_correction": true
+  },
+  "schema": "ers05-runner-source-delta/1",
+  "source": {
+    "commit": "5baf648551ad3cdee1c0390cbd7a114c09c1519c",
+    "runner_blob": "45eab4fc9aba4b851020b649546b09272c249c36",
+    "runner_path": "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+    "tree": "0f59a52bb955e44a814881a85c7739099d81b9fc"
+  },
+  "status": "PASS",
+  "unchanged_surfaces": {
+    "ers_and_contract_e_semantics": true,
+    "expected_scientific_outcomes": true,
+    "fixtures": true,
+    "matrix_cases": true,
+    "scientific_mutations": true,
+    "supervisor_api": true,
+    "transcript_schema_and_signing": true
+  }
+}

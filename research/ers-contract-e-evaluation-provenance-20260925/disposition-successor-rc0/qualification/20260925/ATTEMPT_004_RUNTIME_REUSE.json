@@ -1,0 +1,107 @@
+{
+  "dependency_smoke": {
+    "ed25519_negative": "PASS",
+    "ed25519_positive": "PASS",
+    "jsonschema_negative": "PASS",
+    "jsonschema_positive": "PASS",
+    "rfc8785_negative": "FloatDomainError",
+    "rfc8785_positive": "PASS",
+    "versions": {
+      "cryptography": "50.0.1",
+      "jsonschema": "4.26.0",
+      "rfc8785": "0.1.4"
+    }
+  },
+  "offline_install": {
+    "network_mode": "offline; no-index; no-cache; exact wheelhouse only",
+    "pip_check": "Using Python 3.11.15 environment at: $QUALIFICATION_OUTPUT/runtime-offline-install\nChecked 12 packages in 0.85ms\nAll installed packages are compatible",
+    "status": "PASS",
+    "uv_output_tail": [
+      " + cryptography==50.0.1",
+      " + jsonschema==4.26.0",
+      " + jsonschema-specifications==2025.9.1",
+      " + pycparser==3.0",
+      " + referencing==0.37.0",
+      " + rfc8785==0.1.4",
+      " + rpds-py==2026.6.3",
+      " + typing-extensions==4.16.0"
+    ]
+  },
+  "runtime_artifacts": {
+    "interpreter": {
+      "path_alias": "$FROZEN_RUNTIME/venv/bin/python",
+      "resolved_binary_sha256": "06f1bfa6c5e9d42bc4c8371dd9217a2a185dcdc15ae888193d01f75dc04a3eb1",
+      "version": "3.11.15"
+    },
+    "lock_sha256": "4d0bd11eadca52c292cb883afc062fd95de6b03e8304dedf4820a027898a419f",
+    "wheel_count": 10,
+    "wheelhouse_zip_sha256": "68474c180d4e5d2b35df36354d68cc477a69061960cd26385661cad9a63a0214",
+    "wheels": [
+      {
+        "bytes": 67548,
+        "filename": "attrs-26.1.0-py3-none-any.whl",
+        "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309"
+      },
+      {
+        "bytes": 184168,
+        "filename": "cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl",
+        "sha256": "398aff33cee2767e3e781d2554c54bd0dff386bb437581e0d8011fde1a942ec1"
+      },
+      {
+        "bytes": 4010153,
+        "filename": "cryptography-50.0.1-cp311-abi3-macosx_11_0_arm64.whl",
+        "sha256": "b8f852c65863251b9e3a1b8c150ce21e59b522dbb6a7d4bc80e680d38388e986"
+      },
+      {
+        "bytes": 90630,
+        "filename": "jsonschema-4.26.0-py3-none-any.whl",
+        "sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+      },
+      {
+        "bytes": 18437,
+        "filename": "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+        "sha256": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+      },
+      {
+        "bytes": 48172,
+        "filename": "pycparser-3.0-py3-none-any.whl",
+        "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992"
+      },
+      {
+        "bytes": 26766,
+        "filename": "referencing-0.37.0-py3-none-any.whl",
+        "sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+      },
+      {
+        "bytes": 9240,
+        "filename": "rfc8785-0.1.4-py3-none-any.whl",
+        "sha256": "520d690b448ecf0703691c76e1a34a24ddcd4fc5bc41d589cb7c58ec651bcd48"
+      },
+      {
+        "bytes": 345513,
+        "filename": "rpds_py-2026.6.3-cp311-cp311-macosx_11_0_arm64.whl",
+        "sha256": "db08f45aecde626498fb3df07bcf6d2ec040af42e859a4f5040d79c200342911"
+      },
+      {
+        "bytes": 45571,
+        "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+        "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+      }
+    ]
+  },
+  "schema": "ers05-runtime-reverification/1",
+  "source_runtime_manifest_sha256": "f4a53166f4df2ac35c505c5b29e2a4a9a1e9ea494caf6c1bdeb1ce8d13adf475",
+  "status": "PASS",
+  "toolchain": {
+    "machine": "arm64",
+    "node": {
+      "binary_sha256": "1ef99ea25fe70c9b67e7efe768ef8ee22148d3cabc703db6131b57aeb617d040",
+      "version": "v26.7.0"
+    },
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "uv": {
+      "binary_sha256": "b2859884b9693e7ffe7ba8c3ad912b78fa2b77b3519bb58a82b6f8fedb983f23",
+      "version": "uv 0.11.11 (ed7b06001 2026-05-06 aarch64-apple-darwin)"
+    }
+  }
+}
