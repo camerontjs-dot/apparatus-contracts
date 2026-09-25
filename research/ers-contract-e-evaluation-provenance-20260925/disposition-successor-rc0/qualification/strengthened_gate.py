@@ -15,7 +15,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import bootstrap_pre_matrix as bootstrap
 
-PROFILE_SHA256 = "abea9469da6439a458015b80b8431eb654b817dfaa3b0a815c104de0c5834806"
+PROFILE_SHA256 = "ac0025ad01d00d87661e34bb83362c4094479c2ff619c3fdbfb5cfd9287c12ce"
 RUNNER_PATH = bootstrap.SUCCESSOR_RUNNER
 PR148_COMMIT = "b673b2b06804e94042ad35d4621f4a4ca5ee4851"
 PR149_COMMIT = "4bd5b030726ed064d410cb8c99e79c23a0426c8a"

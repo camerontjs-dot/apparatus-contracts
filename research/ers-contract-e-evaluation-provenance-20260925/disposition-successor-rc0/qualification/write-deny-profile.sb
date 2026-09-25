@@ -3,6 +3,7 @@
 (allow process-exec)
 (allow process-fork)
 (allow file-read*)
+(allow file-write* (literal "/dev/null"))
 (deny file-write* (subpath (param "ERS05_MAINFRAME_ROOT")))
 (deny file-write* (subpath (param "ERS05_APPARATUS_ROOT")))
 (deny file-write* (subpath (param "ERS05_APPARATUS_WORKBENCH")))

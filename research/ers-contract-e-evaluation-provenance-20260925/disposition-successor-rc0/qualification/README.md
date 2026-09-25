@@ -11,11 +11,12 @@ scientific authority remains PR #130 at `dcdd10355e2f885273d843eef6e345bafca95fa
 ## Procedure
 
 `run_strengthened_gate.sh` launches the complete gate under the checked-in
-macOS deny-default profile. The profile allows file writes only below the two
-caller-designated qualification output and temporary directories. It explicitly
-denies MainFrame, apparatus and predecessor checkouts, control worktrees,
-frozen checkouts, fixtures, runtime, sandbox, and the protected canary. Network
-access is denied.
+macOS deny-default profile. The profile allows persistent file writes only below the two
+caller-designated qualification output and temporary directories. It allows
+`/dev/null` as a non-persistent OS sink required by Git's read/write null-stream
+probe. It explicitly denies MainFrame, apparatus and predecessor checkouts,
+control worktrees, frozen checkouts, fixtures, runtime, sandbox, and the
+protected canary. Network access is denied.
 
 Before any bootstrap case, the gate attempts writes to an empty protected canary
 through ordinary `open(..., "wb")` and `Path.write_bytes`. Both must raise
