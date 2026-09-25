@@ -1,0 +1,23 @@
+{
+  "ast_equivalent_after_normalizing_root_index": true,
+  "changed_lines": [
+    {
+      "line": 29,
+      "predecessor": "ROOT = HERE.parents[1]",
+      "successor": "ROOT = HERE.parents[2]"
+    }
+  ],
+  "function_and_class_bodies_identical": true,
+  "predecessor_commit": "b673b2b06804e94042ad35d4621f4a4ca5ee4851",
+  "predecessor_runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+  "protected_functions_present": [
+    "matrix_rejection",
+    "start_supervisor",
+    "run_matrix",
+    "build_and_validate_sidecars",
+    "main"
+  ],
+  "schema": "ers-05-root-path-source-delta/1",
+  "scientific_matrix_mutation_supervisor_transcript_contract_bodies_unchanged": true,
+  "successor_runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990"
+}

@@ -1,0 +1,129 @@
+{
+  "cases": [
+    {
+      "counters": {
+        "contract_e_evaluations": 0,
+        "mainframe_write_attempts": 0,
+        "network_attempts": 0,
+        "non_git_processes": [],
+        "scientific_mutations": 0,
+        "scientific_pipe_cases": 0,
+        "scientific_sandbox_creations": 0,
+        "supervisor_launches": 0
+      },
+      "error": "Command '['git', '-C', '/private/tmp/ers-eval-matrix-20260924/checkouts/apparatus-root/research', 'rev-parse', 'HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json']' returned non-zero exit status 128.",
+      "error_type": "CalledProcessError",
+      "expected": "repository_root_path_defect",
+      "matched": true,
+      "name": "predecessor",
+      "outcome": "repository_root_path_defect",
+      "process_exit": 0,
+      "runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+      "stages": [
+        "root_pins",
+        "ancestry_and_cal_v3",
+        "transcript_schema",
+        "ers_freeze_receipt",
+        "apparatus_freeze_receipt",
+        "preflight_receipt",
+        "repository_relative_conversion",
+        "head_path_resolution"
+      ]
+    },
+    {
+      "counters": {
+        "contract_e_evaluations": 0,
+        "mainframe_write_attempts": 0,
+        "network_attempts": 0,
+        "non_git_processes": [
+          "node --input-type=module"
+        ],
+        "scientific_mutations": 0,
+        "scientific_pipe_cases": 0,
+        "scientific_sandbox_creations": 0,
+        "supervisor_launches": 0
+      },
+      "error": "pipe01_native_ers_decision_changed",
+      "error_type": "QualificationError",
+      "expected": "bootstrap_pass",
+      "matched": false,
+      "name": "successor",
+      "outcome": "incidental_failure",
+      "process_exit": 1,
+      "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+      "stages": [
+        "root_pins",
+        "ancestry_and_cal_v3",
+        "transcript_schema",
+        "ers_freeze_receipt",
+        "apparatus_freeze_receipt",
+        "preflight_receipt",
+        "repository_relative_conversion",
+        "head_path_resolution",
+        "contract_e_profile_module",
+        "render_bound_module"
+      ]
+    },
+    {
+      "counters": {
+        "contract_e_evaluations": 0,
+        "mainframe_write_attempts": 0,
+        "network_attempts": 0,
+        "non_git_processes": [],
+        "scientific_mutations": 0,
+        "scientific_pipe_cases": 0,
+        "scientific_sandbox_creations": 0,
+        "supervisor_launches": 0
+      },
+      "error": "Command '['git', '-C', '/private/tmp/ers05-wrong-root-sp5bi8p3/research', 'rev-parse', 'HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json']' returned non-zero exit status 128.",
+      "error_type": "CalledProcessError",
+      "expected": "repository_root_path_defect",
+      "matched": true,
+      "name": "wrong_root",
+      "outcome": "repository_root_path_defect",
+      "process_exit": 0,
+      "runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+      "stages": [
+        "root_pins",
+        "ancestry_and_cal_v3",
+        "transcript_schema",
+        "ers_freeze_receipt",
+        "apparatus_freeze_receipt",
+        "preflight_receipt",
+        "repository_relative_conversion",
+        "head_path_resolution"
+      ]
+    },
+    {
+      "counters": {
+        "contract_e_evaluations": 0,
+        "mainframe_write_attempts": 0,
+        "network_attempts": 0,
+        "non_git_processes": [],
+        "scientific_mutations": 0,
+        "scientific_pipe_cases": 0,
+        "scientific_sandbox_creations": 0,
+        "supervisor_launches": 0
+      },
+      "error": "'/private/tmp/ers05-bootstrap-discrimination-20260924/outside-receipt/FREEZE_RECEIPT.json' is not in the subpath of '/private/tmp/ers05-root-path-successor-20260924' OR one path is relative and the other is absolute.",
+      "error_type": "ValueError",
+      "expected": "receipt_path_outside_repository",
+      "matched": true,
+      "name": "wrong_receipt_path",
+      "outcome": "receipt_path_outside_repository",
+      "process_exit": 0,
+      "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+      "stages": [
+        "root_pins",
+        "ancestry_and_cal_v3",
+        "transcript_schema",
+        "ers_freeze_receipt",
+        "apparatus_freeze_receipt",
+        "preflight_receipt",
+        "repository_relative_conversion"
+      ]
+    }
+  ],
+  "passed": false,
+  "schema": "ers-05-bootstrap-discrimination/1"
+}
