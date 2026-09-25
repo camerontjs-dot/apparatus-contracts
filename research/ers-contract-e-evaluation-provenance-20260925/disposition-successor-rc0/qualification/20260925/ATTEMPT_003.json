@@ -1,0 +1,39 @@
+{
+  "schema": "ers05-bootstrap-invocation-attempt/1",
+  "attempt": 3,
+  "source_commit": "5baf648551ad3cdee1c0390cbd7a114c09c1519c",
+  "observed_disposition": "INCONCLUSIVE before runner cases",
+  "profile": {
+    "path": "qualification/write-deny-profile.sb",
+    "sha256": "ac0025ad01d00d87661e34bb83362c4094479c2ff619c3fdbfb5cfd9287c12ce",
+    "git_blob": "8c64f9e6d50e1ec196b726b6270cc28755808797"
+  },
+  "failure_boundary": "runtime dependency smoke receipt serialization",
+  "error_type": "NameError",
+  "error_summary": "json was not imported in the inline smoke process when it serialized the smoke receipt",
+  "completed_before_error": [
+    "pre-execution protected-tree snapshot",
+    "open wb and Path.write_bytes denied against the protected canary",
+    "source delta proof",
+    "CPython, uv, Node, lock, wheelhouse, and all 10 wheel identities",
+    "offline installation from the pinned wheelhouse",
+    "uv pip check",
+    "RFC 8785, JSON Schema, and Ed25519 smoke assertions before final serialization"
+  ],
+  "runner_cases_entered": 0,
+  "runner_imported": false,
+  "post_snapshot": "not reached; protected tree comparison unavailable for this attempt",
+  "scientific_counters": {
+    "contract_e_evaluations": 0,
+    "supervisor_launches": 0,
+    "scientific_pipe_executions": 0,
+    "scientific_mutations": 0,
+    "scientific_sandbox_mutations": 0,
+    "provenance_scientific_captures": 0,
+    "unauthorized_network_attempts": 0,
+    "protected_filesystem_mutations": 0
+  },
+  "freeze_created": false,
+  "pr130_matrix_started": false,
+  "resolution": "add the missing stdlib json import; preserve the installed environment and rerun the complete gate for a before/after snapshot pair"
+}

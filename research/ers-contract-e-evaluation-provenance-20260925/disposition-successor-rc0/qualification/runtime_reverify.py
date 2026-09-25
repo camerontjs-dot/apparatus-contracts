@@ -116,6 +116,7 @@ def main() -> int:
 
     smoke = r'''
 import importlib.metadata as md
+import json
 import jsonschema
 import rfc8785
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
