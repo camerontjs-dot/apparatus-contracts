@@ -1,0 +1,38 @@
+{
+  "apparatus_head": "b673b2b06804e94042ad35d4621f4a4ca5ee4851",
+  "boundary_reached": false,
+  "counters": {
+    "contract_e_evaluations": 0,
+    "mainframe_write_attempts": 0,
+    "network_attempts": 0,
+    "non_git_processes": [],
+    "scientific_mutations": 0,
+    "scientific_pipe_cases": 0,
+    "scientific_sandbox_creations": 0,
+    "supervisor_launches": 0
+  },
+  "error": "Command '['git', '-C', '/private/tmp/ers-eval-matrix-20260924/checkouts/apparatus-root/research', 'rev-parse', 'HEAD:ers-contract-e-evaluation-provenance-20260921/fixture-bound-receipt-contract-successor-rc0/FREEZE_RECEIPT.json']' returned non-zero exit status 128.",
+  "error_type": "CalledProcessError",
+  "exit_code": 3,
+  "issuer_public_identity_checked_before_runner": true,
+  "outcome": "repository_root_path_defect",
+  "private_key_material_retained": false,
+  "runner": "/private/tmp/ers-eval-matrix-20260924/checkouts/apparatus-root/research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+  "runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+  "runner_output_files": [
+    "FAILURE.json",
+    "RUNNING.json"
+  ],
+  "sandbox_entries_after": [],
+  "schema": "ers-05-bootstrap-pre-matrix/1",
+  "stages": [
+    "root_pins",
+    "ancestry_and_cal_v3",
+    "transcript_schema",
+    "ers_freeze_receipt",
+    "apparatus_freeze_receipt",
+    "preflight_receipt",
+    "repository_relative_conversion",
+    "head_path_resolution"
+  ]
+}

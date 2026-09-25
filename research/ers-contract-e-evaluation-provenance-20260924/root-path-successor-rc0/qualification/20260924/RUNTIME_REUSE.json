@@ -1,0 +1,60 @@
+{
+  "pr148_qualification": {
+    "apparatus_commit": "b673b2b06804e94042ad35d4621f4a4ca5ee4851",
+    "dependency_smoke_receipt_sha256": "77816ab313297358aa9cdbba64fae5220e0ad70e4dff528ee2ae94cd68c71e41",
+    "negative_controls": "11/11 PASS",
+    "preflight_checks": "86/86",
+    "preflight_receipt_sha256": "7c78e1719ec3d7a3550827c4c6481654d2adc6c65b61f74b7c3f0da095e8ef71",
+    "preflight_status": "PASS",
+    "qualification_receipt_sha256": "3c2ef62e6dc395f8b6f9c7625e658e9ab28048689cb1813045da3df35c889adc",
+    "qualification_status": "PASS",
+    "runner_blob": "79a347c9698610a1c743074e426a79590cb32ba4",
+    "runtime_manifest_sha256": "f4a53166f4df2ac35c505c5b29e2a4a9a1e9ea494caf6c1bdeb1ce8d13adf475"
+  },
+  "runtime": {
+    "dependency_smoke": {
+      "ed25519_sign_verify": "PASS",
+      "ed25519_wrong_message_rejection": "PASS",
+      "installed_package_versions": "PASS",
+      "jsonschema_negative_validation": "PASS",
+      "jsonschema_positive_validation": "PASS",
+      "network_calls": 0,
+      "rfc8785_canonicalization": "PASS",
+      "status": "PASS"
+    },
+    "direct_pins": {
+      "cryptography": "50.0.1",
+      "jsonschema": "4.26.0",
+      "rfc8785": "0.1.4"
+    },
+    "lock_sha256": "4d0bd11eadca52c292cb883afc062fd95de6b03e8304dedf4820a027898a419f",
+    "node": {
+      "binary_sha256": "1ef99ea25fe70c9b67e7efe768ef8ee22148d3cabc703db6131b57aeb617d040",
+      "version": "v26.7.0"
+    },
+    "platform": "macOS arm64",
+    "python": {
+      "binary_sha256": "06f1bfa6c5e9d42bc4c8371dd9217a2a185dcdc15ae888193d01f75dc04a3eb1",
+      "implementation": "CPython",
+      "version": "3.11.15"
+    },
+    "resolver": {
+      "binary_sha256": "b2859884b9693e7ffe7ba8c3ad912b78fa2b77b3519bb58a82b6f8fedb983f23",
+      "name": "uv",
+      "version": "0.11.11"
+    },
+    "uv_pip_check": "PASS; 10 packages compatible",
+    "wheel_files_verified": "10/10 PASS",
+    "wheel_manifest_sha256": "cdc5f72cd91c66a9be03f0f473b30ac3799a61ea4fb44a3b7c70d6597fa09e4b",
+    "wheelhouse_zip_sha256": "68474c180d4e5d2b35df36354d68cc477a69061960cd26385661cad9a63a0214"
+  },
+  "schema": "ers-05-runtime-reuse-evidence/1",
+  "scope": "runtime identity and non-scientific runtime checks reused from the frozen PR #148 qualification; runtime artifacts were rehashed and compatibility checked for this successor",
+  "successor_bootstrap_invocation": {
+    "bootstrap_disposition": "INCONCLUSIVE",
+    "full_candidate_runtime_qualification": "not completed because strengthened bootstrap failed before its stop boundary",
+    "observed_node_version": "v26.7.0",
+    "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+    "used_same_python_environment": true
+  }
+}

@@ -1,0 +1,23 @@
+# Profile
+# structural_type: config
+# lifecycle_scope: workbench
+# owner_surface: apparatus-contracts research receipts
+# authority: deterministic source
+# privacy: public-safe
+# volatility: stable
+# source_of_truth: true
+# update_rule: replace-with-review
+# verification: bin/repo-leak-scan <apparatus-contracts worktree>
+# Purpose: preserve exact synthetic CI fixture paths in prior blocked evidence.
+# Scope and authority: entries apply only to the named preserved evidence files and the listed path fragments.
+# Privacy and provenance: these are captured fixture paths, not workstation paths or credentials.
+research/ers-contract-e-evaluation-provenance-20260921/execution-05-preflight-blocked-20260923/EXECUTION_COMMANDS.json | /home/runner/work | Synthetic CI fixture path retained in a blocked-attempt command receipt.
+research/ers-contract-e-evaluation-provenance-20260921/execution-05-preflight-blocked-20260923/FAILURE.json | /home/runner/work | Synthetic CI fixture path retained in a blocked-attempt failure receipt.
+research/ers-contract-e-evaluation-provenance-20260921/execution-05-preflight-blocked-20260923/FIXTURE_BINDING_PREFLIGHT.json | /home/runner/work | Synthetic CI fixture path retained in a blocked-attempt preflight receipt.
+research/ers-contract-e-evaluation-provenance-20260921/execution-05-preflight-blocked-20260923/FIXTURE_BINDING_STDOUT.json | /home/runner/work | Synthetic CI fixture path retained in a blocked-attempt preflight output.
+research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-successor-rc0/FIXTURE_BINDING_PREFLIGHT_PASS.json | /home/runner/work | Synthetic CI fixture path retained in a fixture qualification receipt.
+research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-successor-rc0/QUALIFICATION_DISPOSITION.json | /home/runner/work | Synthetic CI fixture path retained in a fixture qualification disposition.
+research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/FREEZE_RECEIPT.json | /Users/admin/ | Frozen PR #148 runtime identity receipt retained unchanged as the successor base.
+research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/MANIFEST.json | /Users/admin/ | Frozen PR #148 runtime manifest retained unchanged as the successor base.
+research/ers-contract-e-evaluation-provenance-20260924/runner-runtime-successor-rc0/runtime/attempts/BUILD_ATTEMPTS.md | /Users/admin/ | Frozen PR #148 build-attempt provenance retained unchanged as the successor base.
+sealed/contract-e-authority-chain-fresh-rc1/qualification/QUALIFIER_STDERR.txt | /home/ | Historical qualification stderr retained unchanged.

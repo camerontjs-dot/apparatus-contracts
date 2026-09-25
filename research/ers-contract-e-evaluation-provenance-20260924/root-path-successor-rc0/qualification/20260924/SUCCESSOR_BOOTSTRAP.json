@@ -1,0 +1,42 @@
+{
+  "apparatus_head": "f491d3b0d37571a26fa862d9b61054a3f498ca0e",
+  "boundary_reached": false,
+  "counters": {
+    "contract_e_evaluations": 0,
+    "mainframe_write_attempts": 0,
+    "network_attempts": 0,
+    "non_git_processes": [
+      "node --input-type=module"
+    ],
+    "scientific_mutations": 0,
+    "scientific_pipe_cases": 0,
+    "scientific_sandbox_creations": 0,
+    "supervisor_launches": 0
+  },
+  "error": "pipe01_native_ers_decision_changed",
+  "error_type": "QualificationError",
+  "exit_code": 3,
+  "issuer_public_identity_checked_before_runner": true,
+  "outcome": "incidental_failure",
+  "private_key_material_retained": false,
+  "runner": "/private/tmp/ers05-root-path-successor-20260924/research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py",
+  "runner_blob": "6c20a20831a34cf83eb38f0b86ae6965a15a7990",
+  "runner_output_files": [
+    "FAILURE.json",
+    "RUNNING.json"
+  ],
+  "sandbox_entries_after": [],
+  "schema": "ers-05-bootstrap-pre-matrix/1",
+  "stages": [
+    "root_pins",
+    "ancestry_and_cal_v3",
+    "transcript_schema",
+    "ers_freeze_receipt",
+    "apparatus_freeze_receipt",
+    "preflight_receipt",
+    "repository_relative_conversion",
+    "head_path_resolution",
+    "contract_e_profile_module",
+    "render_bound_module"
+  ]
+}
