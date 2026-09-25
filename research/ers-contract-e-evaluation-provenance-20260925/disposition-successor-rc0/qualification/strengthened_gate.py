@@ -314,6 +314,7 @@ def main() -> int:
         "GIT_OPTIONAL_LOCKS": "0",
         "PYTHONDONTWRITEBYTECODE": "1",
     })
+    os.environ.update(env)
 
     run_child(HERE / "source_delta_proof.py", [
         "--repo", str(repo), "--source-commit", actual_source,
@@ -429,7 +430,8 @@ def main() -> int:
         "schema": "ers05-strengthened-pre-matrix-qualification/1",
         "status": "PASS" if passed else "INCONCLUSIVE",
         "source_commit": actual_source,
-        "source_parent_preregistration_commit": source_parent,
+        "source_parent_commit": source_parent,
+        "preregistration_ancestor_commit": PREREG_COMMIT,
         "bootstrap_gate_blob": git_text(repo, "rev-parse", f"{actual_source}:research/ers-contract-e-evaluation-provenance-20260925/disposition-successor-rc0/qualification/strengthened_gate.py"),
         "bootstrap_boundary_gate_blob": git_text(repo, "rev-parse", f"{actual_source}:research/ers-contract-e-evaluation-provenance-20260925/disposition-successor-rc0/qualification/bootstrap_pre_matrix.py"),
         "write_profile_git_blob": git_text(repo, "rev-parse", f"{actual_source}:research/ers-contract-e-evaluation-provenance-20260925/disposition-successor-rc0/qualification/write-deny-profile.sb"),

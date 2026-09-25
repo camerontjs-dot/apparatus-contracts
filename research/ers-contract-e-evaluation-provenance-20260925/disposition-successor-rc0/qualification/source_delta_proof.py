@@ -89,8 +89,12 @@ def main() -> int:
     if base_tree != BASE_TREE:
         raise ProofError("pr149_tree_identity_changed")
     parent = git(repo, "rev-parse", f"{args.source_commit}^1").decode().strip()
-    if parent != PREREG_COMMIT:
-        raise ProofError("source_commit_not_child_of_preregistration")
+    ancestry = subprocess.run(
+        ["git", "-C", str(repo), "merge-base", "--is-ancestor", PREREG_COMMIT, args.source_commit],
+        check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    )
+    if ancestry.returncode != 0:
+        raise ProofError("preregistration_not_source_ancestor")
 
     predecessor = git(repo, "cat-file", "blob", f"{BASE_COMMIT}:{RUNNER}")
     successor = git(repo, "cat-file", "blob", f"{args.source_commit}:{RUNNER}")
@@ -158,7 +162,7 @@ def main() -> int:
             "runner_path": RUNNER,
             "runner_blob": base_runner_blob,
         },
-        "preregistration": {"commit": PREREG_COMMIT},
+        "preregistration": {"commit": PREREG_COMMIT, "source_commit_parent": parent},
         "source": {
             "commit": args.source_commit,
             "tree": git(repo, "rev-parse", f"{args.source_commit}^{{tree}}").decode().strip(),
