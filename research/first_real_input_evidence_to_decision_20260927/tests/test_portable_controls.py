@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MUTATE = ROOT / "scripts" / "mutate_contract_a_source.py"
 VERIFY = ROOT / "scripts" / "verify_target_review.py"
+CHECK_GATE = ROOT / "scripts" / "check_gate_output.py"
 
 
 def tagged(data: bytes) -> str:
@@ -110,6 +111,77 @@ class PortableControlTests(unittest.TestCase):
             )
             self.assertNotEqual(cp.returncode, 0)
             self.assertIn("distinct", cp.stderr + cp.stdout)
+
+    def test_non_all_of_is_preserved_as_stop_not_reroll(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            text = "Alpha had a higher rate than Beta."
+            text_sha = "sha256:" + hashlib.sha256(text.encode()).hexdigest()
+            source = "evidence"
+            source_sha = tagged(source.encode())
+            contract_a = root / "a.json"
+            contract_a.write_text(
+                json.dumps(
+                    {
+                        "handoff_sha256": "sha256:" + "c" * 64,
+                        "root_proposition": {
+                            "proposition_id": "claim-1",
+                            "text": text,
+                            "text_sha256": text_sha,
+                        },
+                        "decomposition": {"state": "not_needed"},
+                        "sources": [
+                            {
+                                "source_id": "source-ref:1",
+                                "content": source,
+                                "content_sha256": source_sha,
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            receipt = root / "adapter.json"
+            receipt.write_text(
+                json.dumps(
+                    {
+                        "claim_id": "claim-1",
+                        "claim_text_sha256": text_sha,
+                        "source_bindings": [
+                            {
+                                "source_ref_id": "source-ref:1",
+                                "ers_content_identity": source_sha,
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            target_review = root / "target-review.json"
+            stop = root / "STOPPED.json"
+            cp = subprocess.run(
+                [
+                    sys.executable,
+                    str(CHECK_GATE),
+                    "--contract-a",
+                    str(contract_a),
+                    "--adapter-receipt",
+                    str(receipt),
+                    "--out-target-review",
+                    str(target_review),
+                    "--stop-receipt",
+                    str(stop),
+                ],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(cp.returncode, 3)
+            self.assertFalse(target_review.exists())
+            stopped = json.loads(stop.read_text(encoding="utf-8"))
+            self.assertEqual(stopped["terminal_state"], "STOPPED")
+            self.assertEqual(stopped["stop_code"], "CONTRACT_A_NOT_DECLARED_ALL_OF")
+            self.assertFalse(stopped["reroll_authorized"])
 
 
 if __name__ == "__main__":

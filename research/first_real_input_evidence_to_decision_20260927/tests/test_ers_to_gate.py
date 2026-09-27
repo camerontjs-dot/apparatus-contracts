@@ -28,8 +28,12 @@ class AdapterTests(unittest.TestCase):
         self.source.write_text("Exact raw source bytes.\n", encoding="utf-8")
         identity = tagged(self.source.read_bytes())
         self.inventory = {
-            "schema": "ers.mainframe_backlog_intake.rc0",
-            "inventory_id": "backlog-inventory:sha256:" + "1" * 64,
+            "schema": "ers.mainframe_single_item_intake.rc1",
+            "mode": "exact_single_item",
+            "inventory_id": "single-item-inventory:sha256:" + "1" * 64,
+            "allowlist_identity": "sha256:" + "4" * 64,
+            "knowledge_path": "10_knowledge/demo/item.md",
+            "document_identity": "sha256:" + "2" * 64,
             "mainframe_read_only": True,
             "source_semantics": "UNASSESSED",
             "documents": [
@@ -56,7 +60,9 @@ class AdapterTests(unittest.TestCase):
                 }
             ],
         }
-        (self.root / "inventory.json").write_text(json.dumps(self.inventory), encoding="utf-8")
+        (self.root / "inventory.json").write_text(
+            json.dumps(self.inventory), encoding="utf-8"
+        )
         self.selection = self.root / "selection.json"
         self.selection.write_text(
             json.dumps(
@@ -73,14 +79,43 @@ class AdapterTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.tmp.cleanup()
 
+    def _write_inventory(self) -> None:
+        (self.root / "inventory.json").write_text(
+            json.dumps(self.inventory), encoding="utf-8"
+        )
+
     def test_copies_identity_text_and_bytes_without_semantic_metadata(self) -> None:
         packet, receipt = mod.build(self.root, self.selection)
-        self.assertEqual(packet["request"]["root_text"], "Alpha had a higher rate than Beta.")
-        self.assertEqual(packet["request"]["sources"][0]["content"], "Exact raw source bytes.\n")
+        self.assertEqual(
+            packet["request"]["root_text"], "Alpha had a higher rate than Beta."
+        )
+        self.assertEqual(
+            packet["request"]["sources"][0]["content"], "Exact raw source bytes.\n"
+        )
         self.assertEqual(packet["source_metadata"], [])
         self.assertEqual(packet["evidence_task"], {})
+        self.assertEqual(
+            packet["request"]["producer_version"],
+            "3cf04f2defa07513ec2be4418d41698ca7aeebab",
+        )
         self.assertEqual(receipt["source_semantics"], "UNASSESSED")
+        self.assertEqual(
+            receipt["ers_inventory_schema"], "ers.mainframe_single_item_intake.rc1"
+        )
         self.assertFalse(receipt["semantic_inference_performed"])
+
+    def test_legacy_rc0_inventory_is_rejected(self) -> None:
+        self.inventory["schema"] = "ers.mainframe_backlog_intake.rc0"
+        self.inventory.pop("mode", None)
+        self._write_inventory()
+        with self.assertRaises(mod.AdapterError):
+            mod.build(self.root, self.selection)
+
+    def test_multiple_document_inventory_is_rejected(self) -> None:
+        self.inventory["documents"].append(dict(self.inventory["documents"][0]))
+        self._write_inventory()
+        with self.assertRaises(mod.AdapterError):
+            mod.build(self.root, self.selection)
 
     def test_source_byte_substitution_is_rejected(self) -> None:
         self.source.write_text("Changed bytes.\n", encoding="utf-8")
@@ -89,7 +124,7 @@ class AdapterTests(unittest.TestCase):
 
     def test_semantic_status_drift_is_rejected(self) -> None:
         self.inventory["documents"][0]["source_refs"][0]["semantic_status"] = "SUPPORTED"
-        (self.root / "inventory.json").write_text(json.dumps(self.inventory), encoding="utf-8")
+        self._write_inventory()
         with self.assertRaises(mod.AdapterError):
             mod.build(self.root, self.selection)
 
@@ -99,7 +134,7 @@ class AdapterTests(unittest.TestCase):
         row = self.inventory["documents"][0]["source_refs"][0]
         row["packet_path"] = "sources/raw.pdf"
         row["content_identity"] = tagged(binary.read_bytes())
-        (self.root / "inventory.json").write_text(json.dumps(self.inventory), encoding="utf-8")
+        self._write_inventory()
         with self.assertRaises(mod.AdapterError):
             mod.build(self.root, self.selection)
 

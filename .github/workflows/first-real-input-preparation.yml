@@ -2,13 +2,13 @@ name: First real-input preparation portable checks
 
 on:
   pull_request:
-    branches: [main]
     paths:
       - "research/first_real_input_evidence_to_decision_20260927/**"
       - ".github/workflows/first-real-input-preparation.yml"
   push:
     branches:
       - "research-infra/first-real-input-evidence-to-decision-prep-20260927"
+      - "research-infra/first-real-input-single-item-prep-20260927"
     paths:
       - "research/first_real_input_evidence_to_decision_20260927/**"
       - ".github/workflows/first-real-input-preparation.yml"
@@ -17,21 +17,54 @@ on:
 permissions:
   contents: read
 
+env:
+  ERS_SINGLE_SHA: 3cf04f2defa07513ec2be4418d41698ca7aeebab
+  ERS_FIXTURE: research/first_real_input_evidence_to_decision_20260927/ers_single_source_fixture
+  ERS_LEGACY_SHA256: aaca130854e7e088e83a320d36eec0ff45f41097205c967d076a11243f22f547
+
 jobs:
   portable:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Verify ERS source mirror is exact Git-blob identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/adapters/base.py")" = "7913ae423e60c1ecb4082d483344d9c9cfc6d77f"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/backlog_common.py")" = "9832a369847a9f8dcef10637180bcae86d3fba06"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/backlog_intake.py")" = "976f7d506dcbd9363896894fd056e7b47a0f755c"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/backlog_sources.py")" = "798311c5fc011fb0ed77e1317ec4b70e194903ed"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/claim_filters.py")" = "b9722c99dba204d5283ba951d2432f82da15cc77"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/backlog_single_item_intake.py")" = "bfc0ea5c7ec9ed8ecb2cf7621ec9d8eca83e02e9"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/test_backlog_intake.py")" = "2f463132cdb5a4684bfad967d996cd02b2cfbef3"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/test_backlog_single_item_intake.py")" = "75888c065fecd8b2dc5bbcb362063fc4d043a5a8"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/prompts/knowledge_backlog_intake.md")" = "793a9d128f591ffeb8bf56b793d599ca63222c28"
+          test "$(sha256sum "$ERS_FIXTURE/harness/backlog_intake.py" | awk '{print $1}')" = "$ERS_LEGACY_SHA256"
+
+      - name: Execute exact mirrored ERS RC1 portable controls
+        working-directory: research/first_real_input_evidence_to_decision_20260927/ers_single_source_fixture
+        run: |
+          python -m py_compile harness/backlog_single_item_intake.py harness/test_backlog_single_item_intake.py
+          python -m unittest harness.test_backlog_single_item_intake -v
+          python -m unittest harness.test_backlog_intake -v
+
       - name: Compile preparation scripts
         run: |
           python -m py_compile research/first_real_input_evidence_to_decision_20260927/scripts/*.py
-      - name: Run portable fixture and failure-control tests
+
+      - name: Run preparation fixture and failure-control tests
         run: |
           python -m unittest discover             -s research/first_real_input_evidence_to_decision_20260927/tests             -p 'test_*.py' -v
-      - name: Validate static manifests and subject distinction
+
+      - name: Validate static manifests and subject distinctions
         run: |
           python - <<'PY'
           import json
@@ -39,13 +72,22 @@ jobs:
 
           root = Path("research/first_real_input_evidence_to_decision_20260927")
           subjects = json.loads((root / "SUBJECTS.json").read_text())
+          assert subjects["schema"] == "cal-pipeline-first-real-input-subjects-v2"
+          assert subjects["subjects"]["ers_intake"]["commit"] == "3cf04f2defa07513ec2be4418d41698ca7aeebab"
+          assert subjects["subjects"]["ers_intake"]["predecessor_commit"] == "5c22d846174154f00649efc6b312f5409c6d1a3d"
           assert subjects["subjects"]["evidence_bundler"]["commit"] == "08ca896debd6d16fa21be2f178ed7cbe62395d00"
           assert subjects["historical_reference"]["evidence_bundler_commit"] == "4e1f6fe00e7c350b28f52bfea14f1f8988847884"
           assert subjects["subjects"]["evidence_bundler"]["commit"] != subjects["historical_reference"]["evidence_bundler_commit"]
-          for name in ("SELECTION.template.json", "TARGET_REVIEW.template.json", "RUN_MANIFEST.template.json"):
+          for name in (
+              "ERS_ALLOWLIST.template.json",
+              "SELECTION.template.json",
+              "TARGET_REVIEW.template.json",
+              "RUN_MANIFEST.template.json",
+          ):
               json.loads((root / name).read_text())
           PY
-      - name: Show local-only runner interfaces without executing subjects
+
+      - name: Show local-only runner interfaces without executing private subjects
         run: |
           python research/first_real_input_evidence_to_decision_20260927/scripts/verify_subjects.py --help >/dev/null
           python research/first_real_input_evidence_to_decision_20260927/scripts/run_current_subject.py --help >/dev/null

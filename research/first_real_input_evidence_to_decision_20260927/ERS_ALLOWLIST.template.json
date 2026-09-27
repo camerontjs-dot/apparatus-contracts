@@ -1,0 +1,9 @@
+{
+  "schema": "ers.mainframe_single_item_allowlist.rc1",
+  "items": [
+    {
+      "knowledge_path": "UNFILLED_PRIVATE_10_KNOWLEDGE_PATH.md",
+      "document_identity": "UNFILLED_SHA256"
+    }
+  ]
+}

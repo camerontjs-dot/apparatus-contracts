@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Bind Gate Contract A to the selected ERS claim and emit an unfilled target-review packet."""
+"""Bind Gate Contract A to the selected ERS claim.
+
+For the first-input successor, a non-declared-all_of Gate result is a preserved stop.
+It is never an instruction to reroll another claim.
+"""
 
 from __future__ import annotations
 
@@ -17,11 +21,24 @@ def sha_file(path: Path) -> str:
     return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def write_stop(path: Path, *, code: str, detail: str, contract_a: Path) -> None:
+    value = {
+        "schema": "cal-pipeline-first-real-input-stop-v1",
+        "terminal_state": "STOPPED",
+        "stop_code": code,
+        "detail": detail,
+        "contract_a_file_sha256": sha_file(contract_a),
+        "reroll_authorized": False,
+    }
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--contract-a", required=True, type=Path)
     ap.add_argument("--adapter-receipt", required=True, type=Path)
     ap.add_argument("--out-target-review", required=True, type=Path)
+    ap.add_argument("--stop-receipt", required=True, type=Path)
     args = ap.parse_args()
 
     a = json.loads(args.contract_a.read_text(encoding="utf-8"))
@@ -33,28 +50,47 @@ def main() -> int:
         raise SystemExit("Contract A root text hash does not match ERS-selected claim")
 
     expected_sources = {
-        row["source_ref_id"]: row["ers_content_identity"] for row in receipt["source_bindings"]
+        row["source_ref_id"]: row["ers_content_identity"]
+        for row in receipt["source_bindings"]
     }
-    observed_sources = {row["source_id"]: row["content_sha256"] for row in a.get("sources", [])}
+    observed_sources = {
+        row["source_id"]: row["content_sha256"] for row in a.get("sources", [])
+    }
     if observed_sources != expected_sources:
         raise SystemExit("Contract A source identities differ from ERS raw-source bindings")
 
     decomp = a.get("decomposition", {})
     if decomp.get("state") != "declared" or decomp.get("operator") != "all_of":
-        raise SystemExit(
-            "CAL #183 requires a prevalidated declared all_of Contract A decomposition; "
-            "select a different real claim rather than rewriting Gate output"
+        write_stop(
+            args.stop_receipt,
+            code="CONTRACT_A_NOT_DECLARED_ALL_OF",
+            detail=(
+                "First admitted case is outside CAL #183 parent-bound shape. "
+                "Preserve this result and stop; selecting another claim to obtain all_of "
+                "would be result-chasing."
+            ),
+            contract_a=args.contract_a,
         )
+        print("STOPPED_CONTRACT_A_NOT_DECLARED_ALL_OF")
+        return 3
+
     children = decomp.get("children")
     if not isinstance(children, list) or not children:
-        raise SystemExit("declared all_of decomposition has no children")
+        write_stop(
+            args.stop_receipt,
+            code="CONTRACT_A_DECLARED_ALL_OF_WITHOUT_CHILDREN",
+            detail="Declared all_of contains no children; preserve and stop.",
+            contract_a=args.contract_a,
+        )
+        print("STOPPED_CONTRACT_A_DECLARED_ALL_OF_WITHOUT_CHILDREN")
+        return 3
 
     targets = []
     for index, child in enumerate(children, start=1):
         text = child.get("text")
         if child.get("sequence") != index:
             raise SystemExit("Contract A child sequence is not contiguous")
-        if child.get("text_sha256") != tagged_text(text):
+        if not isinstance(text, str) or child.get("text_sha256") != tagged_text(text):
             raise SystemExit("Contract A child text hash mismatch")
         targets.append(
             {
@@ -78,7 +114,11 @@ def main() -> int:
         "review_scope": "exact Contract A child text versus typed CAL target fields",
         "targets": targets,
     }
-    args.out_target_review.write_text(json.dumps(out, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    args.out_target_review.write_text(
+        json.dumps(out, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    if args.stop_receipt.exists():
+        raise SystemExit("unexpected pre-existing stop receipt")
     print("TARGET_REVIEW_REQUIRED")
     return 0
 

@@ -1,19 +1,29 @@
 # First real-input evidence-to-decision preparation
 
-This directory is a portable integration-preparation packet for Apparatus #137. It intentionally stops before private input selection and before independent trusted-target approval.
+This directory now has a separately identified strict single-item successor over PR #151.
+
+The predecessor preparation remains preserved at PR #151 / `06fcfbedb49f598195f7be9bb5c7aa7d94c75312`. It pinned frozen ERS #4 and its project-tag scanning CLI. The current successor does **not** reuse that intake identity.
+
+Current first-input intake authority:
+- ERS Draft PR #15
+- commit `3cf04f2defa07513ec2be4418d41698ca7aeebab`
+- surface `harness/backlog_single_item_intake.py`
+- exact one-item allowlist, no knowledge-tree scan
+- frozen legacy `harness/backlog_intake.py` remains blob `976f7d506dcbd9363896894fd056e7b47a0f755c`
 
 Contents:
 
-- `SUBJECTS.json`: exact current source subjects and executable blob pins.
-- `LOCAL_HANDOFF.md`: complete local execution handoff.
-- `SELECTION.template.json`: unfilled private MainFrame claim selection.
+- `SUBJECTS.json`: exact current source subjects and explicit predecessor identities.
+- `LOCAL_HANDOFF.md`: single executable continuation; runtime health is checked before private input.
+- `ERS_ALLOWLIST.template.json`: unfilled exactly-one-document admission.
+- `SELECTION.template.json`: claim selection within that already admitted document.
 - `TARGET_REVIEW.template.json`: unfilled independent target-review gate.
-- `RUN_MANIFEST.template.json`: run-record skeleton; preparation alone must not complete it.
-- `scripts/ers_to_gate.py`: deterministic identity/text/byte adapter, no evidence semantics.
+- `RUN_MANIFEST.template.json`: records strict subject identity and forbids first-case reroll.
+- `scripts/ers_to_gate.py`: accepts only strict ERS RC1 inventory and copies identity/text/bytes.
+- `scripts/check_gate_output.py`: preserves non-`all_of` as a stopped first-case outcome.
 - `scripts/verify_subjects.py`: offline exact checkout/blob verifier.
-- `scripts/check_gate_output.py`: binds Gate Contract A back to ERS and requires the CAL #183 decomposition shape.
-- `scripts/verify_target_review.py`: verifies target bytes/bindings and documented independent review.
+- `scripts/verify_target_review.py`: exact target-byte/text binding plus documented independent review.
 - `scripts/run_current_subject.py`: admitted A->D execution, replay and source-substitution control.
-- `tests/`: public synthetic/portable tests only.
+- `tests/`: public portable tests only.
 
-The first real-input run is **not** part of this branch.
+No private MainFrame item, model service change, target approval, evidence admission, real A->D run, Contract E operation, or ERS write is part of this branch.
