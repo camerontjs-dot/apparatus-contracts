@@ -21,5 +21,9 @@
     "Do not mark this manifest complete from preparation alone.",
     "A valid HOLD/not_checkable outcome is not a failed run.",
     "No Contract E or ERS write belongs in this milestone."
-  ]
+  ],
+  "ers_single_item_allowlist": null,
+  "ers_single_item_subject": "3cf04f2defa07513ec2be4418d41698ca7aeebab",
+  "legacy_ers_rc0_used": false,
+  "first_case_reroll_authorized": false
 }
