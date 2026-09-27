@@ -1,0 +1,10 @@
+{
+  "schema": "cal-pipeline-trusted-target-review-v1",
+  "contract_a_handoff_sha256": "UNFILLED_AFTER_GATE",
+  "contract_a_file_sha256": "UNFILLED_AFTER_GATE",
+  "author_context": "UNFILLED",
+  "reviewer_context": "UNFILLED_INDEPENDENT_REVIEW",
+  "independent_review": false,
+  "review_scope": "exact Contract A child text versus typed CAL target fields",
+  "targets": []
+}
