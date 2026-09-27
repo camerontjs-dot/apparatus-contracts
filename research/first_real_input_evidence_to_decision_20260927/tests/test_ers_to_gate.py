@@ -28,7 +28,8 @@ class AdapterTests(unittest.TestCase):
         self.source.write_text("Exact raw source bytes.\n", encoding="utf-8")
         identity = tagged(self.source.read_bytes())
         self.inventory = {
-            "schema": "ers.mainframe_single_item_intake.rc1",\n            "mode": "exact_single_item",
+            "schema": "ers.mainframe_single_item_intake.rc1",
+            "mode": "exact_single_item",
             "inventory_id": "single-item-inventory:sha256:" + "1" * 64,\n            "allowlist_identity": "sha256:" + "4" * 64,\n            "knowledge_path": "10_knowledge/demo/item.md",\n            "document_identity": "sha256:" + "2" * 64,
             "mainframe_read_only": True,
             "source_semantics": "UNASSESSED",
