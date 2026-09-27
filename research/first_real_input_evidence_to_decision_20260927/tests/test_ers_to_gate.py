@@ -28,8 +28,8 @@ class AdapterTests(unittest.TestCase):
         self.source.write_text("Exact raw source bytes.\n", encoding="utf-8")
         identity = tagged(self.source.read_bytes())
         self.inventory = {
-            "schema": "ers.mainframe_backlog_intake.rc0",
-            "inventory_id": "backlog-inventory:sha256:" + "1" * 64,
+            "schema": "ers.mainframe_single_item_intake.rc1",\n            "mode": "exact_single_item",
+            "inventory_id": "single-item-inventory:sha256:" + "1" * 64,\n            "allowlist_identity": "sha256:" + "4" * 64,\n            "knowledge_path": "10_knowledge/demo/item.md",\n            "document_identity": "sha256:" + "2" * 64,
             "mainframe_read_only": True,
             "source_semantics": "UNASSESSED",
             "documents": [
@@ -81,6 +81,18 @@ class AdapterTests(unittest.TestCase):
         self.assertEqual(packet["evidence_task"], {})
         self.assertEqual(receipt["source_semantics"], "UNASSESSED")
         self.assertFalse(receipt["semantic_inference_performed"])
+        self.assertEqual(
+            packet["request"]["producer_version"],
+            "3cf04f2defa07513ec2be4418d41698ca7aeebab",
+        )
+        self.assertEqual(receipt["ers_inventory_schema"], "ers.mainframe_single_item_intake.rc1")
+
+    def test_legacy_rc0_inventory_is_rejected(self) -> None:
+        self.inventory["schema"] = "ers.mainframe_backlog_intake.rc0"
+        self.inventory.pop("mode", None)
+        (self.root / "inventory.json").write_text(json.dumps(self.inventory), encoding="utf-8")
+        with self.assertRaises(mod.AdapterError):
+            mod.build(self.root, self.selection)
 
     def test_source_byte_substitution_is_rejected(self) -> None:
         self.source.write_text("Changed bytes.\n", encoding="utf-8")
