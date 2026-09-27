@@ -1,0 +1,25 @@
+{
+  "schema": "cal-pipeline-first-real-input-run-manifest-v1",
+  "preparation_only": true,
+  "real_input_execution_completed": false,
+  "private_input_admitted": false,
+  "trusted_targets_reviewed": false,
+  "subjects_file": "SUBJECTS.json",
+  "selection": null,
+  "ers_intake": null,
+  "ers_to_gate_receipt": null,
+  "gate": null,
+  "evidence_bundler": null,
+  "cal": null,
+  "contract_c": null,
+  "decision_contract_d": null,
+  "replay": null,
+  "substitution_control": null,
+  "authorization_performed": false,
+  "execution_performed": false,
+  "notes": [
+    "Do not mark this manifest complete from preparation alone.",
+    "A valid HOLD/not_checkable outcome is not a failed run.",
+    "No Contract E or ERS write belongs in this milestone."
+  ]
+}
