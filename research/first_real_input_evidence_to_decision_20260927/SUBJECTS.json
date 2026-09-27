@@ -23,6 +23,11 @@
         "harness/backlog_intake.py": "976f7d506dcbd9363896894fd056e7b47a0f755c",
         "harness/backlog_sources.py": "798311c5fc011fb0ed77e1317ec4b70e194903ed",
         "harness/prompts/knowledge_backlog_intake.md": "793a9d128f591ffeb8bf56b793d599ca63222c28"
+      },
+      "qualification_mirror": {
+        "path": "research/first_real_input_evidence_to_decision_20260927/ers_single_source_fixture",
+        "purpose": "CI mirror only because Apparatus Actions token cannot checkout ERS repository; every mirrored file is required to have the exact source Git blob identity.",
+        "source_commit": "3cf04f2defa07513ec2be4418d41698ca7aeebab"
       }
     },
     "gate": {
