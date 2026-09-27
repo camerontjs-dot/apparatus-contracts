@@ -19,7 +19,7 @@ permissions:
 
 env:
   ERS_SINGLE_SHA: 3cf04f2defa07513ec2be4418d41698ca7aeebab
-  ERS_LEGACY_BLOB: 976f7d506dcbd9363896894fd056e7b47a0f755c
+  ERS_FIXTURE: research/first_real_input_evidence_to_decision_20260927/ers_single_source_fixture
   ERS_LEGACY_SHA256: aaca130854e7e088e83a320d36eec0ff45f41097205c967d076a11243f22f547
 
 jobs:
@@ -27,31 +27,30 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-
-      - name: Checkout exact ERS single-item successor
-        uses: actions/checkout@v4
         with:
-          repository: camerontjs-dot/epistemic-research-system
-          ref: ${{ env.ERS_SINGLE_SHA }}
-          path: _subjects/ers-single
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Verify exact ERS successor and frozen predecessor source
+      - name: Verify ERS source mirror is exact Git-blob identity
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git -C _subjects/ers-single rev-parse HEAD)" = "$ERS_SINGLE_SHA"
-          test "$(git -C _subjects/ers-single rev-parse HEAD:harness/backlog_single_item_intake.py)" = "bfc0ea5c7ec9ed8ecb2cf7621ec9d8eca83e02e9"
-          test "$(git -C _subjects/ers-single rev-parse HEAD:harness/test_backlog_single_item_intake.py)" = "75888c065fecd8b2dc5bbcb362063fc4d043a5a8"
-          test "$(git -C _subjects/ers-single rev-parse HEAD:harness/backlog_intake.py)" = "$ERS_LEGACY_BLOB"
-          test "$(sha256sum _subjects/ers-single/harness/backlog_intake.py | awk '{print $1}')" = "$ERS_LEGACY_SHA256"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/adapters/base.py")" = "7913ae423e60c1ecb4082d483344d9c9cfc6d77f"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/backlog_common.py")" = "9832a369847a9f8dcef10637180bcae86d3fba06"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/backlog_intake.py")" = "976f7d506dcbd9363896894fd056e7b47a0f755c"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/backlog_sources.py")" = "798311c5fc011fb0ed77e1317ec4b70e194903ed"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/claim_filters.py")" = "b9722c99dba204d5283ba951d2432f82da15cc77"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/backlog_single_item_intake.py")" = "bfc0ea5c7ec9ed8ecb2cf7621ec9d8eca83e02e9"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/test_backlog_intake.py")" = "2f463132cdb5a4684bfad967d996cd02b2cfbef3"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/test_backlog_single_item_intake.py")" = "75888c065fecd8b2dc5bbcb362063fc4d043a5a8"
+          test "$(git rev-parse "HEAD:$ERS_FIXTURE/harness/prompts/knowledge_backlog_intake.md")" = "793a9d128f591ffeb8bf56b793d599ca63222c28"
+          test "$(sha256sum "$ERS_FIXTURE/harness/backlog_intake.py" | awk '{print $1}')" = "$ERS_LEGACY_SHA256"
 
-      - name: Execute exact ERS portable controls
-        working-directory: _subjects/ers-single
+      - name: Execute exact mirrored ERS RC1 portable controls
+        working-directory: research/first_real_input_evidence_to_decision_20260927/ers_single_source_fixture
         run: |
           python -m py_compile harness/backlog_single_item_intake.py harness/test_backlog_single_item_intake.py
           python -m unittest harness.test_backlog_single_item_intake -v
