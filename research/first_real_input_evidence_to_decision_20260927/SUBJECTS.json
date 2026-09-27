@@ -1,5 +1,5 @@
 {
-  "schema": "cal-pipeline-first-real-input-subjects-v1",
+  "schema": "cal-pipeline-first-real-input-subjects-v2",
   "prepared_on": "2026-09-27",
   "apparatus_base": "c3563cff66d2c85dcbf575c693056e2d8e4563d4",
   "historical_reference": {
@@ -11,10 +11,15 @@
   "subjects": {
     "ers_intake": {
       "repository": "camerontjs-dot/epistemic-research-system",
-      "commit": "5c22d846174154f00649efc6b312f5409c6d1a3d",
-      "pr": 4,
+      "commit": "3cf04f2defa07513ec2be4418d41698ca7aeebab",
+      "pr": 15,
+      "mode": "exact_single_item_rc1",
+      "predecessor_commit": "5c22d846174154f00649efc6b312f5409c6d1a3d",
+      "predecessor_legacy_blob": "976f7d506dcbd9363896894fd056e7b47a0f755c",
       "checkout_required": true,
       "files": {
+        "harness/backlog_single_item_intake.py": "bfc0ea5c7ec9ed8ecb2cf7621ec9d8eca83e02e9",
+        "harness/test_backlog_single_item_intake.py": "75888c065fecd8b2dc5bbcb362063fc4d043a5a8",
         "harness/backlog_intake.py": "976f7d506dcbd9363896894fd056e7b47a0f755c",
         "harness/backlog_sources.py": "798311c5fc011fb0ed77e1317ec4b70e194903ed",
         "harness/prompts/knowledge_backlog_intake.md": "793a9d128f591ffeb8bf56b793d599ca63222c28"
@@ -126,5 +131,10 @@
         "validators/contract_d_consume.py": "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68"
       }
     }
+  },
+  "predecessor_preparation": {
+    "pr": 151,
+    "commit": "06fcfbedb49f598195f7be9bb5c7aa7d94c75312",
+    "note": "Preserved predecessor used frozen ERS #4 legacy project-tag scanning surface and is not the strict single-item run authority."
   }
 }
