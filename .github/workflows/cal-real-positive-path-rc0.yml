@@ -38,6 +38,20 @@ jobs:
           ref: 89ca88c7f0a661601f7eb798b6759667fa20ab3f
           path: authority/gate
 
+      - name: Checkout Gate frozen predecessor source
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: b25fa4743e16f40186d29bec3757c378733b7791
+          path: authority/gate-predecessor-eb
+
+      - name: Checkout Gate frozen evaluator source
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: 26539c53781148543e980fe1f07b25f1ad9c2005
+          path: authority/gate-predecessor-eval
+
       - name: Checkout released Contract A 2.0
         uses: actions/checkout@v4
         with:
@@ -116,6 +130,29 @@ jobs:
           test "$(git -C authority/consumer rev-parse HEAD)" = "12e7e640b229619501960b1b89cf4716d8d985b3"
           test "$(git -C authority/decision rev-parse HEAD)" = "6cdb59c2ba41779ac954af56dd077574ba090013"
           test "$(git -C authority/contract-d rev-parse HEAD)" = "298a1a0f7b7b6d7712e11200d04faec3e1ca169b"
+
+      - name: Materialize exact Gate frozen predecessors
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEST="authority/gate/vendor/frozen"
+          mkdir -p "$DEST"
+          test "$(git -C authority/gate-predecessor-eb rev-parse HEAD:research/proposition_compiler_multiproposer_rc0/proposers.py)" = "b2684f1752a1eb841dd6ee85b1e81ae523b03810"
+          test "$(git -C authority/gate-predecessor-eb rev-parse HEAD:research/proposition_compiler_multiproposer_rc0/resolver.py)" = "ca2fbf63855f21551c2e1ebb46019768753746e4"
+          test "$(git -C authority/gate-predecessor-eb rev-parse HEAD:research/proposition_compiler_multiproposer_rc0/fresh_roots.jsonl)" = "e51ec542898a0f40489e0140bbd0455e1429e0bb"
+          test "$(git -C authority/gate-predecessor-eb rev-parse HEAD:research/proposition_compiler_multiproposer_rc0/GOLD/fresh_gold.jsonl)" = "da169fcc9b0efc096cbb3c68a744da9d7beaa03d"
+          test "$(git -C authority/gate-predecessor-eval rev-parse HEAD:research/proposition_compiler_evaluator_rc1/evaluator.py)" = "e675b55559af17d50b65cd6af01ac23b0881bb43"
+          test "$(git -C authority/contract-a rev-parse HEAD:validators/contract_a_rc2.py)" = "42e5f5b3bf38d677445e9d01ea130ba604e53409"
+          test "$(git -C authority/contract-a rev-parse HEAD:schema/contract-a/2.0.0/schema.json)" = "ff5cddfeacf4511136a3dd3b47db1a794b631cd9"
+          test "$(git -C authority/contract-a rev-parse HEAD:schema/contract-a/2.0.0/wire-spec.md)" = "2e7c37fca9aa6bdd1090fb527a663bdbe606ebcb"
+          cp authority/gate-predecessor-eb/research/proposition_compiler_multiproposer_rc0/proposers.py "$DEST/proposers.py"
+          cp authority/gate-predecessor-eb/research/proposition_compiler_multiproposer_rc0/resolver.py "$DEST/resolver_predecessor.py"
+          cp authority/gate-predecessor-eb/research/proposition_compiler_multiproposer_rc0/fresh_roots.jsonl "$DEST/predecessor_fresh_roots.jsonl"
+          cp authority/gate-predecessor-eb/research/proposition_compiler_multiproposer_rc0/GOLD/fresh_gold.jsonl "$DEST/predecessor_fresh_gold.jsonl"
+          cp authority/gate-predecessor-eval/research/proposition_compiler_evaluator_rc1/evaluator.py "$DEST/evaluator.py"
+          cp authority/contract-a/validators/contract_a_rc2.py "$DEST/contract_a_rc2.py"
+          cp authority/contract-a/schema/contract-a/2.0.0/schema.json "$DEST/contract_a_schema.json"
+          cp authority/contract-a/schema/contract-a/2.0.0/wire-spec.md "$DEST/contract_a_wire_spec.md"
 
       - name: Install exact runnable subjects
         run: |
