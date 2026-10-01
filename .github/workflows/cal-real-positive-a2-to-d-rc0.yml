@@ -1,0 +1,245 @@
+name: CAL real positive A2-to-D RC0
+
+on:
+  pull_request:
+    paths:
+      - "research/cal_real_positive_a2_to_d_rc0_20261001/**"
+      - ".github/workflows/cal-real-positive-a2-to-d-rc0.yml"
+  push:
+    branches:
+      - "research/cal-real-positive-a2-to-d-rc0-20261001"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  positive-a2-to-d:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout experiment
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Checkout released Contract A 2.0
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 529c92b49a34d5c610618551a8737f019f9fa332
+          path: authority/contract-a
+
+      - name: Checkout current Evidence Bundler subject
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: 08ca896debd6d16fa21be2f178ed7cbe62395d00
+          path: authority/eb
+
+      - name: Checkout exact CAL target/parent subject
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: 76b7c4dee6369cc6494486eb115a096e9da370b0
+          path: authority/cal
+
+      - name: Checkout parent-bound Contract C
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec
+          path: authority/contract-c-parent
+
+      - name: Checkout inner Contract C RC2
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: b42c827acb0a9fe65353354d709add0e27bab307
+          path: authority/contract-c-rc2
+
+      - name: Checkout Contract C resolver
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 1d33e0612befcf8016816197c90c062373796df9
+          path: authority/contract-c-resolver
+
+      - name: Checkout frozen independent C consumer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: 12e7e640b229619501960b1b89cf4716d8d985b3
+          path: authority/consumer
+
+      - name: Checkout Decision parent-bound ingress
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: 6cdb59c2ba41779ac954af56dd077574ba090013
+          path: authority/decision
+
+      - name: Checkout released Contract D 1.0
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+          path: authority/contract-d
+
+      - name: Verify exact authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C authority/contract-a rev-parse HEAD)" = "529c92b49a34d5c610618551a8737f019f9fa332"
+          test "$(git -C authority/eb rev-parse HEAD)" = "08ca896debd6d16fa21be2f178ed7cbe62395d00"
+          test "$(git -C authority/cal rev-parse HEAD)" = "76b7c4dee6369cc6494486eb115a096e9da370b0"
+          test "$(git -C authority/cal rev-parse HEAD:src/claim_audit_lab/production_v1/targeting.py)" = "ea588ab8b91008bdf4020475478a24b01d679b27"
+          test "$(git -C authority/contract-c-parent rev-parse HEAD)" = "c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec"
+          test "$(git -C authority/contract-c-rc2 rev-parse HEAD)" = "b42c827acb0a9fe65353354d709add0e27bab307"
+          test "$(git -C authority/contract-c-resolver rev-parse HEAD)" = "1d33e0612befcf8016816197c90c062373796df9"
+          test "$(git -C authority/consumer rev-parse HEAD)" = "12e7e640b229619501960b1b89cf4716d8d985b3"
+          test "$(git -C authority/decision rev-parse HEAD)" = "6cdb59c2ba41779ac954af56dd077574ba090013"
+          test "$(git -C authority/contract-d rev-parse HEAD)" = "298a1a0f7b7b6d7712e11200d04faec3e1ca169b"
+
+      - name: Install exact runnable subjects
+        run: |
+          set -euo pipefail
+          python -m venv .venv-positive
+          .venv-positive/bin/python -m pip install --upgrade pip
+          .venv-positive/bin/python -m pip install \
+            -e authority/eb \
+            -e authority/cal
+          .venv-positive/bin/python -m pip check
+
+      - name: Validate frozen A2 and freeze targets before EB
+        run: |
+          set -euo pipefail
+          mkdir -p build/pre-eb-targets
+          PYTHONPATH=authority/contract-a .venv-positive/bin/python - <<'PY'
+          import json
+          from validators.contract_a import validate_candidate
+          path="research/cal_real_positive_a2_to_d_rc0_20261001/CONTRACT-A.json"
+          value=json.load(open(path, encoding="utf-8"))
+          validate_candidate(value)
+          d=value["decomposition"]
+          assert d["state"]=="declared"
+          assert d["operator"]=="all_of"
+          assert len(d["children"])==2
+          print(value["handoff_sha256"])
+          PY
+          PYTHONPATH=authority/cal/src .venv-positive/bin/python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          from claim_audit_lab.production_v1.targeting import author_target, canonical_target_bytes
+
+          def tagged(raw): return "sha256:"+hashlib.sha256(raw).hexdigest()
+          a_path=Path("research/cal_real_positive_a2_to_d_rc0_20261001/CONTRACT-A.json")
+          a=json.loads(a_path.read_text())
+          rows=[]
+          out=Path("build/pre-eb-targets")
+          for child in a["decomposition"]["children"]:
+              target=author_target(child["proposition_id"], child["text"])
+              assert target["proposition"]["semantic_family"]=="strict_comparison", target
+              raw=canonical_target_bytes(target)
+              p=out/f'{child["proposition_id"]}.json'
+              p.write_bytes(raw)
+              rows.append({
+                  "proposition_id":child["proposition_id"],
+                  "claim_text_sha256":child["text_sha256"],
+                  "target_path":f"pre-eb-targets/{p.name}",
+                  "target_sha256":tagged(raw),
+                  "semantic_family":target["proposition"]["semantic_family"],
+              })
+          freeze={
+              "schema":"cal-pipeline-pre-eb-target-freeze-v1",
+              "generated_before_eb":True,
+              "contract_a_handoff_sha256":a["handoff_sha256"],
+              "contract_a_file_sha256":tagged(a_path.read_bytes()),
+              "target_authority":{
+                  "cal_head":"76b7c4dee6369cc6494486eb115a096e9da370b0",
+                  "targeting_blob":"ea588ab8b91008bdf4020475478a24b01d679b27",
+              },
+              "targets":rows,
+          }
+          Path("build/TARGET-FREEZE.json").write_text(json.dumps(freeze,sort_keys=True,indent=2)+"\n")
+          print(json.dumps(freeze,sort_keys=True))
+          PY
+
+      - name: Execute unchanged default-admission A2-to-D path twice
+        run: |
+          set -euo pipefail
+          .venv-positive/bin/python research/cal_real_positive_a2_to_d_rc0_20261001/run_positive_subject.py \
+            --contract-a research/cal_real_positive_a2_to_d_rc0_20261001/CONTRACT-A.json \
+            --target-freeze build/TARGET-FREEZE.json \
+            --out-root build/a-to-d \
+            --contract-a-root authority/contract-a \
+            --eb-root authority/eb \
+            --cal-cli .venv-positive/bin/claim-audit-v1-parent \
+            --contract-c-root authority/contract-c-parent \
+            --rc2-root authority/contract-c-rc2 \
+            --resolver-root authority/contract-c-resolver \
+            --consumer-root authority/consumer \
+            --decision-root authority/decision \
+            --contract-d-root authority/contract-d \
+            --python .venv-positive/bin/python \
+            --node "$(command -v node)"
+
+      - name: Classify preregistered case
+        run: |
+          set -euo pipefail
+          .venv-positive/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt=json.loads(Path("build/a-to-d/RUN-RECEIPT.json").read_text())
+          r1=receipt["run1"]; r2=receipt["run2"]
+          positive=(
+              r1["eb_accepted_relationships"]>0 and
+              r1["cal_parent_conclusion"]=="supported" and
+              r1["decision_disposition"]=="clear" and
+              r1["contract_d_consumer_outcome"]=="candidate_for_authorization" and
+              r2["cal_parent_conclusion"]=="supported" and
+              r2["decision_disposition"]=="clear" and
+              r2["contract_d_consumer_outcome"]=="candidate_for_authorization" and
+              receipt["replay"]["byte_identity_equivalent"] is True and
+              receipt["substitution_control"]["rejected_before_artifact_emission"] is True
+          )
+          result={
+              "schema":"cal-real-positive-a2-to-d-rc0-result-v1",
+              "disposition":(
+                  "SUPPORTED_FOR_BOUNDED_REAL_A2_TO_D_POSITIVE_PATH"
+                  if positive else
+                  "FALSIFIED_REAL_A2_TO_D_POSITIVE_CASE"
+              ),
+              "run1":r1,
+              "run2":r2,
+              "replay":receipt["replay"],
+              "substitution_control":receipt["substitution_control"],
+              "no_admission_override":True,
+              "gate_invoked":False,
+              "authorization_performed":False,
+              "contract_e_invoked":False,
+              "execution_performed":False,
+          }
+          Path("build/RESULT.json").write_text(json.dumps(result,sort_keys=True,indent=2)+"\n")
+          print(result["disposition"])
+          PY
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cal-real-positive-a2-to-d-rc0
+          path: |
+            build/TARGET-FREEZE.json
+            build/pre-eb-targets/
+            build/a-to-d/RUN-RECEIPT.json
+            build/RESULT.json
+          if-no-files-found: warn
