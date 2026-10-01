@@ -169,14 +169,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          PACKET="research/cal_real_positive_path_rc0_20261001/SOURCE_PACKET.json"
+          PACKET="$GITHUB_WORKSPACE/research/cal_real_positive_path_rc0_20261001/SOURCE_PACKET.json"
           mkdir -p build
-          .venv-positive/bin/python authority/gate/scripts/run_gate_production_slice_v1.py \
-            "$PACKET" --out-dir build/gate-1 \
-            --implementation-identity "cal-real-positive-path-rc0@89ca88c7f0a661601f7eb798b6759667fa20ab3f"
-          .venv-positive/bin/python authority/gate/scripts/run_gate_production_slice_v1.py \
-            "$PACKET" --out-dir build/gate-2 \
-            --implementation-identity "cal-real-positive-path-rc0@89ca88c7f0a661601f7eb798b6759667fa20ab3f"
+          (
+            cd authority/gate
+            "$GITHUB_WORKSPACE/.venv-positive/bin/python" scripts/run_gate_production_slice_v1.py \
+              "$PACKET" --out-dir "$GITHUB_WORKSPACE/build/gate-1" \
+              --implementation-identity "cal-real-positive-path-rc0@89ca88c7f0a661601f7eb798b6759667fa20ab3f"
+            "$GITHUB_WORKSPACE/.venv-positive/bin/python" scripts/run_gate_production_slice_v1.py \
+              "$PACKET" --out-dir "$GITHUB_WORKSPACE/build/gate-2" \
+              --implementation-identity "cal-real-positive-path-rc0@89ca88c7f0a661601f7eb798b6759667fa20ab3f"
+          )
           cmp build/gate-1/CONTRACT-A.json build/gate-2/CONTRACT-A.json
           PYTHONPATH=authority/contract-a .venv-positive/bin/python - <<'PY'
           import json
