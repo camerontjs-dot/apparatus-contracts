@@ -1,0 +1,20 @@
+{
+  "schema": "cal-real-positive-a2-source-provenance-v1",
+  "source_id": "bls-ted-union-membership-2025-normalized",
+  "source_url": "https://www.bls.gov/opub/ted/2026/black-workers-had-a-higher-union-membership-rate-than-white-asian-and-hispanic-workers-in-2025.htm",
+  "publisher": "U.S. Bureau of Labor Statistics",
+  "publication_date": "2026-03-17",
+  "representation": "Same normalized factual representation frozen in predecessor Apparatus PR #155.",
+  "source_facts_used": {
+    "black_men_percent": 12.4,
+    "white_men_percent": 10.3,
+    "black_women_percent": 10.5,
+    "white_women_percent": 9.3
+  },
+  "predecessor": {
+    "pr": 155,
+    "disposition": "BLOCKED_BEFORE_EB",
+    "gate_reason": "NO_UNIQUE_WARRANTED_DECLARATION:unsupported:NO_BOUNDED_FRAME_PARSE"
+  },
+  "selection_rule": "No new source is selected. This successor holds the exact predecessor evidence representation fixed and replaces only the unavailable Gate-produced A2 precondition with an explicit valid predeclared A2 so the downstream A2-to-D question can be tested separately."
+}
