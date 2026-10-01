@@ -1,16 +1,20 @@
 {
-  "handoff_id": "cal-real-positive-path-bls-union-2025-rc0",
-  "producer_id": "cal-pipeline-real-positive-path",
-  "producer_version": "rc0",
-  "work_id": "cal-real-positive-path-bls-union-2025-rc0",
-  "root_id": "ROOT-BLS-UNION-2025",
-  "root_text": "Black Men had a higher rate than White Men, and Black Women had a higher rate than White Women.",
-  "sources": [
-    {
-      "source_id": "bls-ted-union-membership-2025-normalized",
-      "media_type": "text/plain; charset=utf-8",
-      "content": "2025 union membership rates: Black men 12.4 percent; White men 10.3 percent; Black women 10.5 percent; White women 9.3 percent."
-    }
-  ],
-  "context_source_id": "bls-ted-union-membership-2025-normalized"
+  "request": {
+    "handoff_id": "cal-real-positive-path-bls-union-2025-rc0",
+    "producer_id": "cal-pipeline-real-positive-path",
+    "producer_version": "rc0",
+    "work_id": "cal-real-positive-path-bls-union-2025-rc0",
+    "root_id": "ROOT-BLS-UNION-2025",
+    "root_text": "Black Men had a higher rate than White Men, and Black Women had a higher rate than White Women.",
+    "sources": [
+      {
+        "source_id": "bls-ted-union-membership-2025-normalized",
+        "media_type": "text/plain; charset=utf-8",
+        "content": "2025 union membership rates: Black men 12.4 percent; White men 10.3 percent; Black women 10.5 percent; White women 9.3 percent."
+      }
+    ],
+    "context_source_id": "bls-ted-union-membership-2025-normalized"
+  },
+  "evidence_task": {},
+  "source_metadata": []
 }
