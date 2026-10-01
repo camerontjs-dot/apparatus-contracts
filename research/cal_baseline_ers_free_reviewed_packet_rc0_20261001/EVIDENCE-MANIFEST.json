@@ -1,0 +1,63 @@
+{
+  "files": [
+    {
+      "git_blob": "59d6f8ab1bacba464124ec2437c69d7fc61d4d37",
+      "length_bytes": 4900,
+      "path": "COMMANDS.PUBLIC.json",
+      "sha256": "sha256:1ab82302baf1337b7274f797a91ce6ca25af401ec9001607da46849027c54188"
+    },
+    {
+      "git_blob": "a732e402ac90b7507f8584d9214a9b9a04dfb8fd",
+      "length_bytes": 4252,
+      "path": "FAILURES-DEVIATIONS.PUBLIC.json",
+      "sha256": "sha256:c70b52a445329f85f9848894abcbf3addd3f9e1978faab11be371925b41f71d2"
+    },
+    {
+      "git_blob": "22279862d01801dfe2f1e06bf0ad986ed7db8d81",
+      "length_bytes": 1077,
+      "path": "GATE-REPLAY-RECEIPT.json",
+      "sha256": "sha256:c942754dc345fc7115c1c8c47131dffb0fc361943cbddc91aeeaa3f7985c2387"
+    },
+    {
+      "git_blob": "2cb35611c748da433b4f74efc79e99ecc68d0190",
+      "length_bytes": 4150,
+      "path": "PACKET-REVIEW.PUBLIC.json",
+      "sha256": "sha256:d7132baf103c7e4e9d89fb1f4b368b0dcb3adafe90ca407410df17a3874eff3d"
+    },
+    {
+      "git_blob": "989152c13c86361fde1c1c6bfb76700a247460c8",
+      "length_bytes": 10329,
+      "path": "PREREGISTRATION.md",
+      "sha256": "sha256:4654da884ac19a7c083e0a1b698d9e4d01f9b56957452770fb20dfffedb8d5e6"
+    },
+    {
+      "git_blob": "670daee7c28da124685488b453cdcdb3fc8269e4",
+      "length_bytes": 37911,
+      "path": "PRESSURE-RECEIPT.PUBLIC.json",
+      "sha256": "sha256:12f69cd55954ae7d763b4f53c5c3f87c61f5da6238fe9da22e4df9b182af1243"
+    },
+    {
+      "git_blob": "51e5945317d0dbf0cb3624acb09c7c2e2b3c88d6",
+      "length_bytes": 9082,
+      "path": "RESULTS.md",
+      "sha256": "sha256:e933bf3b9de1e68423d3244f940fcde6a7d3340efb29245957008009f3aca563"
+    },
+    {
+      "git_blob": "0997ba44d481fd65b983c6d14750144ce4e86979",
+      "length_bytes": 2723,
+      "path": "RUN-RECEIPT.json",
+      "sha256": "sha256:edc455503e1208100e356e80349f75593de3f4534508690f468d7a2ea46d7a74"
+    },
+    {
+      "git_blob": "e98d44fb32d17ea6011bde6e0680c54500742e97",
+      "length_bytes": 4795,
+      "path": "SUBJECTS.ERS-FREE.json",
+      "sha256": "sha256:98617660f5a6d7d22618fd459fa01f09b62f4deff0911ab878631eb0f9623330"
+    }
+  ],
+  "private_terminal_receipt_sha256": "sha256:087e7a6576a5f6e4c78fb5774df6bcd66d7d6ca8716885d8476500ccf70064c2",
+  "raw_packet_source_target_or_full_context_bytes_published": false,
+  "schema": "cal-baseline-public-evidence-manifest-v1",
+  "scientific_authority_commit": "1cc9efc52fa591846af473ee165a643f9ac41c22",
+  "terminal_disposition": "SUPPORTED_FOR_BOUNDED_ERS_FREE_REAL_PACKET_BASELINE"
+}

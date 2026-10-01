@@ -1,0 +1,23 @@
+{
+  "contract_a_byte_identity_both_runs_and_reviewed_packet": true,
+  "disposition": "PASS",
+  "frozen_reviewed_contract_a_sha256": "sha256:8a4a42b57020d710b0e68a57fac5d31d8a977e75bde2c7d535a656bacefabb41",
+  "handoff_identity_both_runs_and_reviewed_packet": true,
+  "runs": [
+    {
+      "a2_validation": "PASS",
+      "command_receipt_sha256": "sha256:30d36a6949aee22236d664a4dd007c1c9d41879131b3eaa10420d60d4ce8087f",
+      "contract_a_file_sha256": "sha256:8a4a42b57020d710b0e68a57fac5d31d8a977e75bde2c7d535a656bacefabb41",
+      "handoff_sha256": "sha256:b59ba3b35d2b1d8b0378ac277703cd4a8867ec1e88b8ea34be577df0c3eeb843",
+      "run": 1
+    },
+    {
+      "a2_validation": "PASS",
+      "command_receipt_sha256": "sha256:0d3e9de82cf7082aca9cd75c2144868326db56976f9b9f8a36551c8353bb5449",
+      "contract_a_file_sha256": "sha256:8a4a42b57020d710b0e68a57fac5d31d8a977e75bde2c7d535a656bacefabb41",
+      "handoff_sha256": "sha256:b59ba3b35d2b1d8b0378ac277703cd4a8867ec1e88b8ea34be577df0c3eeb843",
+      "run": 2
+    }
+  ],
+  "schema": "cal-baseline-gate-replay-receipt-v1"
+}

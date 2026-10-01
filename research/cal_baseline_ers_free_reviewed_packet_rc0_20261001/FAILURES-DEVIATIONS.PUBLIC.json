@@ -1,0 +1,68 @@
+{
+  "all_original_failure_artifacts_retained_locally": true,
+  "eb_admission_revised_after_result": false,
+  "failed_baseline_commands": 0,
+  "failures": [
+    {
+      "cal_or_decision_exposed_before_repair": false,
+      "deviation_receipt_sha256": "sha256:5a7637b065098b15725537b28018a6e74b3fe697f1c95b3a8a84e97cc79d9be1",
+      "first_failure_receipt_sha256": "sha256:21128f8efd41e302fdd4ed952952a2618d599e379c3791ff2da49dcd51313128",
+      "first_packet_sha256": "3c1ff3c90e8bc7ceae6628d1db4ee91a178c5a72506f3fc97006bb48f14c4f1b",
+      "first_returncode": 1,
+      "id": "DEV-PREP-001-LOCATOR-ENUM",
+      "observed_error": "GateV1Error: unsupported source-origin locator kind: url",
+      "repair": "Separately identified preparation successor changes carrier locator enum url to web_uri only. Same selected root and raw/working source bytes.",
+      "semantic_subject_or_acceptance_changed": false,
+      "stage": "separate_predecessor_preparation",
+      "successor_packet_sha256": "sha256:8abd8b98eeec1bdc6cb9f1f0be0870fbf9ecdcfc6c1c3b8de76c2267636a44e2"
+    },
+    {
+      "cal_or_decision_exposed_before_repair": false,
+      "deviation_receipt_sha256": "sha256:02bb2706be325a0ef9aa6dff4c07d9722a4d46196b0b19fc7a3eff876691ffdc",
+      "first_failure_receipt_sha256": "sha256:1e9109c693e94f3986264aed0904faa534466b894ab8807c04d5e08c72c97905",
+      "first_returncode": 1,
+      "id": "DEV-SETUP-002-GATE-VENDOR",
+      "observed_error": "gate: checkout is dirty",
+      "repair": "Only eight verified fetched predecessor dependency files excluded locally; tracked Gate source and versioned ignore rules unchanged.",
+      "semantic_subject_or_acceptance_changed": false,
+      "stage": "setup_exact_subject_preflight",
+      "successful_retry_receipt_sha256": "sha256:72ce5ea4e0af03cec903f0204828b282228b41b0b1f3f70bc77d13701437d26a"
+    }
+  ],
+  "material_failed_commands_before_baseline": 2,
+  "minor_inspection_path_recovery": {
+    "false_pass_receipt_published": false,
+    "issue": "A pressure inventory first looked for RUN-1/RUN-2; no directories existed under those names.",
+    "recovery": "Inspected actual runner layout RUN1/RUN2 and required nonempty file sets before comparing all 41 artifacts."
+  },
+  "publication_document_whitespace_repair": {
+    "deviation_id": "DEV-PUBLICATION-001-EOF-WHITESPACE",
+    "first_failure_receipt_sha256": "sha256:21c926f1854d34d61ec124565e72d09f4fd28b99565a2a3ee1c35be19e5ce77e",
+    "first_stdout_sha256": "sha256:9332352620d6a4eed127053b95303449bd3c6593718eb71a0c9cacd1193bf7df",
+    "frozen_scientific_bytes_or_outcomes_changed": false,
+    "original_public_draft_retained": true,
+    "repair": "Removed an extra trailing blank line from the new result note.",
+    "same_index_followup_returncode": 2
+  },
+  "publication_hygiene_observation": {
+    "current_working_tree_path_and_secret_scans_passed": true,
+    "first_scan_receipt_sha256": "sha256:2ed16edf7fae5d0f9f955c74f505f1f9745a7dd1721a0bde679e1a14e07b35fc",
+    "first_stderr_sha256": "sha256:d07763063e1e473ba206c58e847ae0d983bfc5fe9b90320105d44584bfcd1a2b",
+    "first_stdout_sha256": "sha256:5fc2546eb7a3d81552b3e7392e606699d7f04b91189850f97a1192e76a2816ea",
+    "full_repository_history_scan_returncode": 1,
+    "historical_matches_preexist_evidence_commit": true,
+    "history_clean_claimed": false,
+    "history_rewritten": false,
+    "scan_occurred_before_any_new_commit": true,
+    "scanner_reporting_error": "printf: write error: Broken pipe while displaying historical findings; full finding count not established.",
+    "scope": "Evidence delta must pass the active staged-content guard. Historical cleanup is outside this bounded scientific task."
+  },
+  "receipt_descriptor_correction": {
+    "corrected_exact_descriptor_sha256": "sha256:0fb239aab771d87ce4749ba8e794bfad939a24e2d5c47b255d6cf6b86a6ceb10",
+    "correction": "Preserved a non-exact source_tree description and emitted a separate exact-tree descriptor. No scientific subject changed.",
+    "first_candidate_descriptor_sha256": "sha256:aa1d2eef6e33f6a5adff034dfc37b35a2dd7470ac11e3745c29c8a9b01a87984"
+  },
+  "schema": "cal-baseline-preserved-failures-public-v1",
+  "selected_packet_rerolled": false,
+  "target_semantics_repaired_during_baseline": false
+}
