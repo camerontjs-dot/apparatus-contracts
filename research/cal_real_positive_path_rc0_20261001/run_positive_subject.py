@@ -364,7 +364,7 @@ def main() -> int:
     args = ap.parse_args()
 
     args.contract_a = args.contract_a.resolve(strict=True)
-    args.target_freeze = args.target_review.resolve(strict=True)
+    args.target_freeze = args.target_freeze.resolve(strict=True)
     args.out_root = args.out_root.resolve()
     for name in (
         "contract_a_root", "eb_root", "contract_c_root", "rc2_root", "resolver_root",
@@ -379,7 +379,7 @@ def main() -> int:
 
     validate_with_contract_a_authority(args.python, args.contract_a_root, args.contract_a)
     contract_a = json.loads(args.contract_a.read_text(encoding="utf-8"))
-    target_paths = reviewed_targets(args.target_review, contract_a, args.contract_a)
+    target_paths = frozen_targets(args.target_freeze, contract_a, args.contract_a)
 
     args.out_root.mkdir(parents=True)
     first = execute_once(args, "RUN1", target_paths)
