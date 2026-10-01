@@ -1,0 +1,106 @@
+{
+  "commands": [
+    {
+      "command_with_output_root_placeholder": [
+        "${LOCAL_OUTPUT_ROOT}/venv/bin/python",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/gate/scripts/run_gate_production_slice_v1.py",
+        "${LOCAL_OUTPUT_ROOT}/preparation-successor-01/GATE-PACKET.json",
+        "--out-dir",
+        "${LOCAL_OUTPUT_ROOT}/baseline-001/gate-001",
+        "--implementation-identity",
+        "ers-free-real-source-preparation@89ca88c7f0a661601f7eb798b6759667fa20ab3f"
+      ],
+      "local_receipt_name": "GATE-001.COMMAND.json",
+      "original_receipt_sha256": "sha256:30d36a6949aee22236d664a4dd007c1c9d41879131b3eaa10420d60d4ce8087f",
+      "returncode": 0
+    },
+    {
+      "command_with_output_root_placeholder": [
+        "${LOCAL_OUTPUT_ROOT}/venv/bin/python",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/gate/scripts/run_gate_production_slice_v1.py",
+        "${LOCAL_OUTPUT_ROOT}/preparation-successor-01/GATE-PACKET.json",
+        "--out-dir",
+        "${LOCAL_OUTPUT_ROOT}/baseline-001/gate-002",
+        "--implementation-identity",
+        "ers-free-real-source-preparation@89ca88c7f0a661601f7eb798b6759667fa20ab3f"
+      ],
+      "local_receipt_name": "GATE-002.COMMAND.json",
+      "original_receipt_sha256": "sha256:0d3e9de82cf7082aca9cd75c2144868326db56976f9b9f8a36551c8353bb5449",
+      "returncode": 0
+    },
+    {
+      "command_with_output_root_placeholder": [
+        "${LOCAL_OUTPUT_ROOT}/venv/bin/python",
+        "-c",
+        "import json,sys;from validators.contract_a import validate_candidate;validate_candidate(json.load(open(sys.argv[1])))",
+        "${LOCAL_OUTPUT_ROOT}/baseline-001/gate-001/CONTRACT-A.json"
+      ],
+      "local_receipt_name": "GATE-001.A2-VALIDATION.json",
+      "original_receipt_sha256": "sha256:16990dd2d62fe2107876d30cc76a607dfa7c8137c8dd436044f6abd356eba4ea",
+      "returncode": 0
+    },
+    {
+      "command_with_output_root_placeholder": [
+        "${LOCAL_OUTPUT_ROOT}/venv/bin/python",
+        "-c",
+        "import json,sys;from validators.contract_a import validate_candidate;validate_candidate(json.load(open(sys.argv[1])))",
+        "${LOCAL_OUTPUT_ROOT}/baseline-001/gate-002/CONTRACT-A.json"
+      ],
+      "local_receipt_name": "GATE-002.A2-VALIDATION.json",
+      "original_receipt_sha256": "sha256:c7241b1ca288c098c4a3e19f3b86a2f661748ef8c4155f1f88f1aa9cd09015a3",
+      "returncode": 0
+    },
+    {
+      "command_with_output_root_placeholder": [
+        "${LOCAL_OUTPUT_ROOT}/venv/bin/python",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/helpers/research/first_real_input_evidence_to_decision_20260927/scripts/verify_target_review.py",
+        "--contract-a",
+        "${LOCAL_OUTPUT_ROOT}/baseline-001/gate-001/CONTRACT-A.json",
+        "--review",
+        "${LOCAL_OUTPUT_ROOT}/preparation-successor-01/independent-review/TARGET-REVIEW.json"
+      ],
+      "local_receipt_name": "TARGET-REVIEW-VERIFIED.json",
+      "original_receipt_sha256": "sha256:e23aed87b0dd4a94066599f503c3a4182b29e309481b34474785060cd8cc1c80",
+      "returncode": 0
+    },
+    {
+      "command_with_output_root_placeholder": [
+        "${LOCAL_OUTPUT_ROOT}/venv/bin/python",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/helpers/research/first_real_input_evidence_to_decision_20260927/scripts/run_current_subject.py",
+        "--contract-a",
+        "${LOCAL_OUTPUT_ROOT}/baseline-001/gate-001/CONTRACT-A.json",
+        "--target-review",
+        "${LOCAL_OUTPUT_ROOT}/preparation-successor-01/independent-review/TARGET-REVIEW.json",
+        "--out-root",
+        "${LOCAL_OUTPUT_ROOT}/baseline-001/a-to-d",
+        "--contract-a-root",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/contract_a",
+        "--eb-root",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/evidence_bundler",
+        "--cal-cli",
+        "${LOCAL_OUTPUT_ROOT}/venv/bin/claim-audit-v1-parent",
+        "--contract-c-root",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/contract_c_parent_bound",
+        "--rc2-root",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/contract_c_rc2",
+        "--resolver-root",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/contract_c_resolver",
+        "--consumer-root",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/contract_c_consumer",
+        "--decision-root",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/decision",
+        "--contract-d-root",
+        "${LOCAL_OUTPUT_ROOT}/checkouts/contract_d",
+        "--python",
+        "${LOCAL_OUTPUT_ROOT}/venv/bin/python",
+        "--node",
+        "/opt/homebrew/bin/node"
+      ],
+      "local_receipt_name": "A-TO-D.COMMAND.START.json",
+      "original_receipt_sha256": "sha256:a27945e2116a944c54994b4cd41f96faf04eacb4cbd23d725bb48fa5a09a33cc",
+      "returncode": 0
+    }
+  ],
+  "placeholder_notice": "Actual immutable local command receipts are hash-bound here. LOCAL_OUTPUT_ROOT is a redaction placeholder, not a claim that these displayed strings were executed literally.",
+  "schema": "cal-baseline-command-correspondence-public-v1"
+}

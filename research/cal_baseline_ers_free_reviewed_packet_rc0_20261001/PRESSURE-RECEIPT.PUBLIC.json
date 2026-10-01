@@ -1,0 +1,809 @@
+{
+  "all_artifact_replay": {
+    "differences": [],
+    "equal_file_count": 41,
+    "files": [
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::159eccddf206/audit_context.json",
+        "run1_sha256": "sha256:2509a74f15749026742b8cde8f6ba6a6fe422ed769a4a3b1f81d8dc848f31490",
+        "run2_sha256": "sha256:2509a74f15749026742b8cde8f6ba6a6fe422ed769a4a3b1f81d8dc848f31490"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::159eccddf206/contract_b_intake.snapshot.json",
+        "run1_sha256": "sha256:4b6a5c4dfd01bbfead54619df6e97e4872391ac6a83ca2e79b9280de675afeff",
+        "run2_sha256": "sha256:4b6a5c4dfd01bbfead54619df6e97e4872391ac6a83ca2e79b9280de675afeff"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::159eccddf206/input.target.json",
+        "run1_sha256": "sha256:416811675261a1f12e2c4c5ebd3d8fdaf769def57a3fea6fe0ca5a26b270a4c4",
+        "run2_sha256": "sha256:416811675261a1f12e2c4c5ebd3d8fdaf769def57a3fea6fe0ca5a26b270a4c4"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::159eccddf206/manifest.json",
+        "run1_sha256": "sha256:0f0197837f53d8ebb953c246b92636b99b3ee7d7e88236c05aa9c8837354792f",
+        "run2_sha256": "sha256:0f0197837f53d8ebb953c246b92636b99b3ee7d7e88236c05aa9c8837354792f"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::159eccddf206/report.md",
+        "run1_sha256": "sha256:a28c2e0d6d80186993fdb4d15634850b22af2772899648e1d45ee2ee71473bb7",
+        "run2_sha256": "sha256:a28c2e0d6d80186993fdb4d15634850b22af2772899648e1d45ee2ee71473bb7"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::159eccddf206/result.json",
+        "run1_sha256": "sha256:ac4a636c9b133a7177a62113ef3169f7f721bd59e15958b7dd345dd3f18f79ac",
+        "run2_sha256": "sha256:ac4a636c9b133a7177a62113ef3169f7f721bd59e15958b7dd345dd3f18f79ac"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::6af9182cd235/audit_context.json",
+        "run1_sha256": "sha256:e37e31c4125f3077683619ac4929f316708cb26941a516b725f0e6044a4e5af6",
+        "run2_sha256": "sha256:e37e31c4125f3077683619ac4929f316708cb26941a516b725f0e6044a4e5af6"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::6af9182cd235/contract_b_intake.snapshot.json",
+        "run1_sha256": "sha256:4b6a5c4dfd01bbfead54619df6e97e4872391ac6a83ca2e79b9280de675afeff",
+        "run2_sha256": "sha256:4b6a5c4dfd01bbfead54619df6e97e4872391ac6a83ca2e79b9280de675afeff"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::6af9182cd235/input.target.json",
+        "run1_sha256": "sha256:22797d998748039a7aa582c997b6727c1d2f11c01a009a82cf508104cd051aaf",
+        "run2_sha256": "sha256:22797d998748039a7aa582c997b6727c1d2f11c01a009a82cf508104cd051aaf"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::6af9182cd235/manifest.json",
+        "run1_sha256": "sha256:87373e770b72d70ea63a600d4400e937c4628ecc7aa9f06717aff51e288a2b6b",
+        "run2_sha256": "sha256:87373e770b72d70ea63a600d4400e937c4628ecc7aa9f06717aff51e288a2b6b"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::6af9182cd235/report.md",
+        "run1_sha256": "sha256:ea38fed74fbfc5cd633030d7b62464e2b2e45ca822c23784b805dcd14d076769",
+        "run2_sha256": "sha256:ea38fed74fbfc5cd633030d7b62464e2b2e45ca822c23784b805dcd14d076769"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/children/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::6af9182cd235/result.json",
+        "run1_sha256": "sha256:680cd6c60d1e54f8f026c26dea3275e9a21d6482e0ca69a2dbe0333891210fcd",
+        "run2_sha256": "sha256:680cd6c60d1e54f8f026c26dea3275e9a21d6482e0ca69a2dbe0333891210fcd"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/contract-c.json",
+        "run1_sha256": "sha256:2d37d54099f3c412ad798a151a3312058d842b24ac6ca38c9ca5ff20d61c50e3",
+        "run2_sha256": "sha256:2d37d54099f3c412ad798a151a3312058d842b24ac6ca38c9ca5ff20d61c50e3"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/manifest.json",
+        "run1_sha256": "sha256:8b58a075ffe917c21d2934a55b8ea92d09bb6925dd8ad3301e10272259079ede",
+        "run2_sha256": "sha256:8b58a075ffe917c21d2934a55b8ea92d09bb6925dd8ad3301e10272259079ede"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "cal/parent-result.json",
+        "run1_sha256": "sha256:757684fd2fcc159e0383f10efd731a0bc58893db6a89e880e3dd43252ba8858f",
+        "run2_sha256": "sha256:757684fd2fcc159e0383f10efd731a0bc58893db6a89e880e3dd43252ba8858f"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "consumer-inputs.json",
+        "run1_sha256": "sha256:912889f5a92b9550ab3da6d1d1128f27fc42102e49339876152c3da8f50913d1",
+        "run2_sha256": "sha256:912889f5a92b9550ab3da6d1d1128f27fc42102e49339876152c3da8f50913d1"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "contract-d.json",
+        "run1_sha256": "sha256:9ff7988891b65381103e5047becf235f4204a6fc9f76f86cdf3a5b01acdca088",
+        "run2_sha256": "sha256:9ff7988891b65381103e5047becf235f4204a6fc9f76f86cdf3a5b01acdca088"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "decision-target.json",
+        "run1_sha256": "sha256:5aef1a2a13577e73f24b4700748b5b588eb504eea924af63ec7d831e664a4eb8",
+        "run2_sha256": "sha256:5aef1a2a13577e73f24b4700748b5b588eb504eea924af63ec7d831e664a4eb8"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/CONTRACT_VERSION",
+        "run1_sha256": "sha256:1e5b51cde515396a9fa762909cf8ca6584ccc564b325d2eebeea76175fe95c4d",
+        "run2_sha256": "sha256:1e5b51cde515396a9fa762909cf8ca6584ccc564b325d2eebeea76175fe95c4d"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/SHA256SUMS",
+        "run1_sha256": "sha256:9099005d1e9dba7a19d351a666e9988d2e865e15e9c2941029f9df62dcb9ae4f",
+        "run2_sha256": "sha256:9099005d1e9dba7a19d351a666e9988d2e865e15e9c2941029f9df62dcb9ae4f"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/audit_config.yaml",
+        "run1_sha256": "sha256:3a5140c838aa62503a9af54190987e193eb9c3b7c2eaa77e65fedc20dfee2a7f",
+        "run2_sha256": "sha256:3a5140c838aa62503a9af54190987e193eb9c3b7c2eaa77e65fedc20dfee2a7f"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/bundle_manifest.yaml",
+        "run1_sha256": "sha256:e83ccbbb24c8d9a08e41e1bd26b74540d260c0b9de8dd7d735a8b740afdf4940",
+        "run2_sha256": "sha256:e83ccbbb24c8d9a08e41e1bd26b74540d260c0b9de8dd7d735a8b740afdf4940"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/claims/NASA-EQUATORIAL-DIAMETER-ORDER-001.yaml",
+        "run1_sha256": "sha256:bd3d5ca0b3e776e51dd827e8d629c3d832bd2266c1b2c4eb3ec22cf9bca5b515",
+        "run2_sha256": "sha256:bd3d5ca0b3e776e51dd827e8d629c3d832bd2266c1b2c4eb3ec22cf9bca5b515"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/claims/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::159eccddf206.yaml",
+        "run1_sha256": "sha256:e1a54a54148792721e3b3e5987477a8ea94aac2ab5f1d23865601c79f9fb018d",
+        "run2_sha256": "sha256:e1a54a54148792721e3b3e5987477a8ea94aac2ab5f1d23865601c79f9fb018d"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/claims/NASA-EQUATORIAL-DIAMETER-ORDER-001::pa::6af9182cd235.yaml",
+        "run1_sha256": "sha256:00af45d00e6287265f7d76d4228259f241fdedb331a746fb9e144c6322250b39",
+        "run2_sha256": "sha256:00af45d00e6287265f7d76d4228259f241fdedb331a746fb9e144c6322250b39"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet-notes/passages/passage:41b6090375e2798ec71404efeadc3a4c.yaml",
+        "run1_sha256": "sha256:75c807439beb200de00e73c6dc441f24b80657372057da670428654cc955538e",
+        "run2_sha256": "sha256:75c807439beb200de00e73c6dc441f24b80657372057da670428654cc955538e"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet-notes/passages/passage:b980a1b034ab41287b7dca1397074ab1.yaml",
+        "run1_sha256": "sha256:84ae98a7e14819d975ccf347f4d6ad49619522ad02bcddff7803a7e15219dd61",
+        "run2_sha256": "sha256:84ae98a7e14819d975ccf347f4d6ad49619522ad02bcddff7803a7e15219dd61"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet-notes/passages/passage:c88a9950e9f1822ccfa5d2e65fdcefb3.yaml",
+        "run1_sha256": "sha256:e4e0fd8898ad6c7830bec43362d90f37bddbcb3299c8bae817e541c83f8b7681",
+        "run2_sha256": "sha256:e4e0fd8898ad6c7830bec43362d90f37bddbcb3299c8bae817e541c83f8b7681"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet-notes/passages/passage:d10a11eac6deb9e93d7408dd3ad5bd0c.yaml",
+        "run1_sha256": "sha256:24249a6d8100e8fc29954c149a60be2406025e39cc66bdc29378e4657ef26625",
+        "run2_sha256": "sha256:24249a6d8100e8fc29954c149a60be2406025e39cc66bdc29378e4657ef26625"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet-notes/passages/passage:d42b878410d5224f672ceface1bd6951.yaml",
+        "run1_sha256": "sha256:e09d2d0f090171dbd1df804556dc32cc47c560c6f07370da4d09d226a3bc497e",
+        "run2_sha256": "sha256:e09d2d0f090171dbd1df804556dc32cc47c560c6f07370da4d09d226a3bc497e"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet-notes/passages/passage:d4e30acfde7b7ddc5a4141daa00ebc90.yaml",
+        "run1_sha256": "sha256:36ea196b70753fb1bac74b0ef69327d0f237ceef8ad03d9afb4db91263a21657",
+        "run2_sha256": "sha256:36ea196b70753fb1bac74b0ef69327d0f237ceef8ad03d9afb4db91263a21657"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet-notes/source_profile.yaml",
+        "run1_sha256": "sha256:e57329795b493ca4adb89658d24ed9d0aa5528ba53ed37a290eae969cae1f89b",
+        "run2_sha256": "sha256:e57329795b493ca4adb89658d24ed9d0aa5528ba53ed37a290eae969cae1f89b"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet/passages/passage:04b23a0cd3cf8b6acd2e92446787a224.yaml",
+        "run1_sha256": "sha256:558053aee486f0be593156c046827c5ab9e6151625893cba12180290ebfc153a",
+        "run2_sha256": "sha256:558053aee486f0be593156c046827c5ab9e6151625893cba12180290ebfc153a"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet/passages/passage:312dd97204739528c7da01e15d0beda3.yaml",
+        "run1_sha256": "sha256:9da6d8de865ccb1d4a7defbd50b30762c942f02eb6f20c912495aae88b71e9b1",
+        "run2_sha256": "sha256:9da6d8de865ccb1d4a7defbd50b30762c942f02eb6f20c912495aae88b71e9b1"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet/passages/passage:4d9ada67efa4abee12f31537c704fa1a.yaml",
+        "run1_sha256": "sha256:8d481ea69ca0f4d6e4d338d2a0109b40b82c41105ad90781dea1cb090878fcc8",
+        "run2_sha256": "sha256:8d481ea69ca0f4d6e4d338d2a0109b40b82c41105ad90781dea1cb090878fcc8"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet/passages/passage:643cb0b2b9c4bd2fe9e8be6fd8166576.yaml",
+        "run1_sha256": "sha256:c8f712b11a20d9a172dd963f802c84530817e954e3d4e9ea9c60e5aa866b9b3e",
+        "run2_sha256": "sha256:c8f712b11a20d9a172dd963f802c84530817e954e3d4e9ea9c60e5aa866b9b3e"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/evidence/planetary-factsheet/source_profile.yaml",
+        "run1_sha256": "sha256:9fe32cad47f0ab193c58cb18c48fe1ec968bfa106d711888150583b722d24e20",
+        "run2_sha256": "sha256:9fe32cad47f0ab193c58cb18c48fe1ec968bfa106d711888150583b722d24e20"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/extensions/contract-b-factual-context-v1.json",
+        "run1_sha256": "sha256:99da45564ef2c1c1a825060f309ad9918952cea4a814f38d42b193fbfacd3b89",
+        "run2_sha256": "sha256:99da45564ef2c1c1a825060f309ad9918952cea4a814f38d42b193fbfacd3b89"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/contract_b/validation_set_ref.yaml",
+        "run1_sha256": "sha256:e511f23a27d09d8d0eaa7f78e72f00d47993fc67d1a285328bc74e56d4d0e84d",
+        "run2_sha256": "sha256:e511f23a27d09d8d0eaa7f78e72f00d47993fc67d1a285328bc74e56d4d0e84d"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/native_eb_v1_package.json",
+        "run1_sha256": "sha256:8240ca5845b883068c1c9ba6a02e415989fb8d5162664024936d02e677bbd791",
+        "run2_sha256": "sha256:8240ca5845b883068c1c9ba6a02e415989fb8d5162664024936d02e677bbd791"
+      },
+      {
+        "byte_equivalent": true,
+        "relative_path": "eb/projection_receipt.json",
+        "run1_sha256": "sha256:925142d30464f398f9258c4bc10265ea208826ff9664e0917202296ce77f0018",
+        "run2_sha256": "sha256:925142d30464f398f9258c4bc10265ea208826ff9664e0917202296ce77f0018"
+      }
+    ],
+    "run1_file_count": 41,
+    "run2_file_count": 41,
+    "same_paths": true,
+    "schema": "cal-baseline-artifact-replay-pressure-v1"
+  },
+  "checks": {
+    "a_to_d_executions_completed": 2,
+    "all_emitted_file_pairs_byte_equal": 41,
+    "baseline_failures": 0,
+    "direct_frozen_c_consumer_checks_passed": 2,
+    "direct_released_d_consumer_checks_passed": 2,
+    "exact_downstream_checkouts_passed": 11,
+    "exact_pr152_helper_blobs_passed": 3,
+    "frozen_input_files_unchanged": 19,
+    "gate_a2_validations_passed": 2,
+    "gate_external_dependency_blobs_passed": 8,
+    "gate_runs_passed": 2,
+    "installed_cal_python_files_byte_equal": 69,
+    "live_pin_checks_post_run_passed": 20,
+    "live_pin_checks_pre_run_passed": 20,
+    "original_substitution_rejection_passed": 1,
+    "pinned_downstream_workfiles_passed": 21,
+    "preserved_predecessor_gate_failures": 1,
+    "preserved_setup_subject_verifier_failures": 1,
+    "pressure_substitution_rejection_passed": 1,
+    "released_contracts_verified": 3,
+    "required_artifact_identity_pairs_passed": 7,
+    "target_binding_verifier_passed": 1
+  },
+  "direct_consumer_results": {
+    "authorization_or_operation_performed": false,
+    "physically_invoked_frozen_c_and_released_d_consumers": true,
+    "results": [
+      {
+        "c_consumer_returncode": 0,
+        "c_parent_conclusion": "not_checkable",
+        "d_consumer_result": {
+          "decision_identity": "decision:sha256:8450948c16b16ac572fee320d4f667380a2d9c189aa3dfeb725819f16fa1bb7c",
+          "outcome": "hold"
+        },
+        "d_consumer_returncode": 0,
+        "run": 1
+      },
+      {
+        "c_consumer_returncode": 0,
+        "c_parent_conclusion": "not_checkable",
+        "d_consumer_result": {
+          "decision_identity": "decision:sha256:8450948c16b16ac572fee320d4f667380a2d9c189aa3dfeb725819f16fa1bb7c",
+          "outcome": "hold"
+        },
+        "d_consumer_returncode": 0,
+        "run": 2
+      }
+    ],
+    "schema": "cal-baseline-consumer-pressure-v1"
+  },
+  "eb_admission_after_output_changed": false,
+  "frozen_execution_authority": {
+    "branch": "research-infra/cal-baseline-ers-free-reviewed-packet-rc0-20261001",
+    "head": "1cc9efc52fa591846af473ee165a643f9ac41c22",
+    "pr": 153,
+    "protocol_sha256": "sha256:4654da884ac19a7c083e0a1b698d9e4d01f9b56957452770fb20dfffedb8d5e6",
+    "repository": "camerontjs-dot/apparatus-contracts",
+    "tree": "18a3f38c70b61456bedeb929440bbb688985556a"
+  },
+  "nonclaims": [
+    "No production authorization, execution, merge, release, promotion, or retag.",
+    "No ERS, Contract E, or ERS-inclusive equivalence evidence.",
+    "No universal CAL semantic correctness, source authority, or corpus completeness.",
+    "No natural claim discovery or general numeric-table interpretation qualification.",
+    "The zero-accepted-evidence path does not demonstrate factual support discrimination.",
+    "Separate target-fidelity review does not establish context purity without startup memory."
+  ],
+  "observed_eb_counts": {
+    "accepted_relationships": 0,
+    "candidate_relationships": 20,
+    "retained_relationships": 6,
+    "unique_candidate_passages": 10
+  },
+  "observed_evidence_vs_inference": {
+    "inference": "The admitted frozen real source packet traversed the exact controlled-local Gate and A through D path deterministically, with integrity rejection before EB emission. This supports only the preregistered bounded baseline disposition.",
+    "observed": "Two current Gate replays, released A2 validation, verified target bindings, two physical EB/CAL/Decision/D consumer paths, seven matching required identities, 41 matching emitted files, content-mismatch rejection before EB artifacts, post-run frozen hashes."
+  },
+  "observed_outcomes": {
+    "admission_changed_after_results": false,
+    "all_first_failures_preserved": true,
+    "authorization_performed": false,
+    "c_consumer_direct_rechecks": "PASS",
+    "cal_parent_conclusion": "not_checkable",
+    "contract_d_consumer_outcome": "hold",
+    "contract_e_invoked": false,
+    "decision_disposition": "hold",
+    "eb_accepted_relationships": 0,
+    "ers_invoked": false,
+    "ers_write_performed": false,
+    "execution_performed": false,
+    "selected_packet_rerolled": false,
+    "target_meaning_changed": false
+  },
+  "ownership": {
+    "app_recent_nonpinned_tasks_inspected": 50,
+    "conduit_pages": [
+      200,
+      200,
+      57
+    ],
+    "conduit_tasks_inspected": 457,
+    "fresh_attempt_output_root": true,
+    "machine_global_exclusivity_claimed": false,
+    "matching_gate_or_a_to_d_process_observed_before_execution": false,
+    "observed_competing_baseline_executor": false,
+    "owner_context_identity_sha256": "sha256:d4c1dc478ec6dc785e88646324fb93a874fd896ea9916310d02dc7aa5f998108",
+    "owner_receipt_sha256": "sha256:697667370cb9f181376bc0dced1be5318dd9c11ef2501e0739b07c22aabf5bdb",
+    "started_at": "2026-10-01T15:14:17.340288+00:00"
+  },
+  "post_execution_frozen_input_hashes": {
+    "all_match": true,
+    "files": [
+      {
+        "actual_sha256": "sha256:3a0cc72cf49728a4fb8dff8f5d1d0cdba2fd37ddacb556849afbe66ad6e61249",
+        "expected_sha256": "sha256:3a0cc72cf49728a4fb8dff8f5d1d0cdba2fd37ddacb556849afbe66ad6e61249",
+        "match": true,
+        "path": "preparation-successor-01/SELECTION.json"
+      },
+      {
+        "actual_sha256": "sha256:8abd8b98eeec1bdc6cb9f1f0be0870fbf9ecdcfc6c1c3b8de76c2267636a44e2",
+        "expected_sha256": "sha256:8abd8b98eeec1bdc6cb9f1f0be0870fbf9ecdcfc6c1c3b8de76c2267636a44e2",
+        "match": true,
+        "path": "preparation-successor-01/GATE-PACKET.json"
+      },
+      {
+        "actual_sha256": "sha256:93eae7a78d69899a51c8f4f473a7d503c5ac99055cb0c04b1b0bd2e6f773000e",
+        "expected_sha256": "sha256:93eae7a78d69899a51c8f4f473a7d503c5ac99055cb0c04b1b0bd2e6f773000e",
+        "match": true,
+        "path": "preparation-successor-01/INPUT-FREEZE.json"
+      },
+      {
+        "actual_sha256": "sha256:5a7637b065098b15725537b28018a6e74b3fe697f1c95b3a8a84e97cc79d9be1",
+        "expected_sha256": "sha256:5a7637b065098b15725537b28018a6e74b3fe697f1c95b3a8a84e97cc79d9be1",
+        "match": true,
+        "path": "preparation-successor-01/DEVIATION.json"
+      },
+      {
+        "actual_sha256": "sha256:75f820b142e67ccc349abeee268297ba960a1cdcbee00ad5dd93b3c861ac8c9c",
+        "expected_sha256": "sha256:75f820b142e67ccc349abeee268297ba960a1cdcbee00ad5dd93b3c861ac8c9c",
+        "match": true,
+        "path": "preparation-successor-01/source/SOURCE-CUSTODY.json"
+      },
+      {
+        "actual_sha256": "sha256:42bdc3f1dae470b85580c6ac66c353964a05d544ad2ac970a6b7d908337a6c3c",
+        "expected_sha256": "sha256:42bdc3f1dae470b85580c6ac66c353964a05d544ad2ac970a6b7d908337a6c3c",
+        "match": true,
+        "path": "preparation-successor-01/source/planetary-factsheet.raw.html"
+      },
+      {
+        "actual_sha256": "sha256:e81d67ae87ff35fd26a7dab7a876c19d9c7bb230a0417acf9d101974f185ae7f",
+        "expected_sha256": "sha256:e81d67ae87ff35fd26a7dab7a876c19d9c7bb230a0417acf9d101974f185ae7f",
+        "match": true,
+        "path": "preparation-successor-01/source/planetary-factsheet.txt"
+      },
+      {
+        "actual_sha256": "sha256:549150c04a2fd9bb90d68326adfd604e0f5f028b48c9572bf0972bce1bf87825",
+        "expected_sha256": "sha256:549150c04a2fd9bb90d68326adfd604e0f5f028b48c9572bf0972bce1bf87825",
+        "match": true,
+        "path": "preparation-successor-01/source/planetary-factsheet-notes.raw.html"
+      },
+      {
+        "actual_sha256": "sha256:27f593be10bb2201f6d44467c49002eb818f75bf1dc2c938d32ca63c323bfa3a",
+        "expected_sha256": "sha256:27f593be10bb2201f6d44467c49002eb818f75bf1dc2c938d32ca63c323bfa3a",
+        "match": true,
+        "path": "preparation-successor-01/source/planetary-factsheet-notes.txt"
+      },
+      {
+        "actual_sha256": "sha256:8a4a42b57020d710b0e68a57fac5d31d8a977e75bde2c7d535a656bacefabb41",
+        "expected_sha256": "sha256:8a4a42b57020d710b0e68a57fac5d31d8a977e75bde2c7d535a656bacefabb41",
+        "match": true,
+        "path": "preparation-successor-01/gate-001/CONTRACT-A.json"
+      },
+      {
+        "actual_sha256": "sha256:e8401dc94ac453d47371a693ae82df9f613f4675fe2e64fe1659012ee449241d",
+        "expected_sha256": "sha256:e8401dc94ac453d47371a693ae82df9f613f4675fe2e64fe1659012ee449241d",
+        "match": true,
+        "path": "preparation-successor-01/TARGET-AUTHOR-FREEZE.json"
+      },
+      {
+        "actual_sha256": "sha256:6e8fb9dcbb2e211137bad3541801ff11317256137d13a3dd54ea63c08ffe7b87",
+        "expected_sha256": "sha256:6e8fb9dcbb2e211137bad3541801ff11317256137d13a3dd54ea63c08ffe7b87",
+        "match": true,
+        "path": "preparation-successor-01/TARGET-REVIEW.AUTHOR-PENDING.json"
+      },
+      {
+        "actual_sha256": "sha256:416811675261a1f12e2c4c5ebd3d8fdaf769def57a3fea6fe0ca5a26b270a4c4",
+        "expected_sha256": "sha256:416811675261a1f12e2c4c5ebd3d8fdaf769def57a3fea6fe0ca5a26b270a4c4",
+        "match": true,
+        "path": "preparation-successor-01/targets/target-01.json"
+      },
+      {
+        "actual_sha256": "sha256:22797d998748039a7aa582c997b6727c1d2f11c01a009a82cf508104cd051aaf",
+        "expected_sha256": "sha256:22797d998748039a7aa582c997b6727c1d2f11c01a009a82cf508104cd051aaf",
+        "match": true,
+        "path": "preparation-successor-01/targets/target-02.json"
+      },
+      {
+        "actual_sha256": "sha256:df4eb5b84fb9b1f65a9a7f8245397d85a1b2aff6b19c3f5a456d83a6c5fc0903",
+        "expected_sha256": "sha256:df4eb5b84fb9b1f65a9a7f8245397d85a1b2aff6b19c3f5a456d83a6c5fc0903",
+        "match": true,
+        "path": "preparation-successor-01/independent-review/TARGET-REVIEW.json"
+      },
+      {
+        "actual_sha256": "sha256:a0c150b16609069be40c2493b7b9ba2bfa2bf7ccf4a670dc433f20f0196be242",
+        "expected_sha256": "sha256:a0c150b16609069be40c2493b7b9ba2bfa2bf7ccf4a670dc433f20f0196be242",
+        "match": true,
+        "path": "preparation-successor-01/independent-review/REVIEW-RECEIPT.json"
+      },
+      {
+        "actual_sha256": "sha256:5b4ecaa8a59c8673eaf92feb23c9f88e6213752b5077c43eaff23dfe4079400f",
+        "expected_sha256": "sha256:5b4ecaa8a59c8673eaf92feb23c9f88e6213752b5077c43eaff23dfe4079400f",
+        "match": true,
+        "path": "preparation-successor-01/independent-review/SOURCE-FIRST-JUDGMENT.json"
+      },
+      {
+        "actual_sha256": "sha256:cf75499cbb5af144427524f8b50318adcd7fc3d3978b74f4eb09be97494635e5",
+        "expected_sha256": "sha256:cf75499cbb5af144427524f8b50318adcd7fc3d3978b74f4eb09be97494635e5",
+        "match": true,
+        "path": "preparation-successor-01/independent-review/planetary-metric-notes.FETCH.json"
+      },
+      {
+        "actual_sha256": "sha256:88a8b66e5455c153f78a1f17a078cb52f10e968f6039899ea517d86841322e8d",
+        "expected_sha256": "sha256:88a8b66e5455c153f78a1f17a078cb52f10e968f6039899ea517d86841322e8d",
+        "match": true,
+        "path": "preparation-successor-01/independent-review/planetary-metric-notes.fetched.raw.html"
+      }
+    ],
+    "schema": "cal-baseline-input-hashes-pressure-v1"
+  },
+  "post_execution_installed_cal_py_files": {
+    "all_match": true,
+    "count": 69,
+    "receipt_sha256": "sha256:acb73e9eda3367b9c260385be59e0b3f99eaaf68f8b62b767927162ffcf6ac26"
+  },
+  "post_execution_pins": {
+    "all_checkouts_clean": true,
+    "all_pins_match": true,
+    "downstream_commit_and_tree_records": [
+      {
+        "expected_commit": "89ca88c7f0a661601f7eb798b6759667fa20ab3f",
+        "files": [
+          {
+            "actual_blob": "f7f2e48ffc61ba676ac1ed7629c5dcbc9e41e1e8",
+            "expected_blob": "f7f2e48ffc61ba676ac1ed7629c5dcbc9e41e1e8",
+            "match": true,
+            "path": "scripts/run_gate_production_slice_v1.py"
+          },
+          {
+            "actual_blob": "22fc914868cb9da36cfbba77e1c43cd557df46a1",
+            "expected_blob": "22fc914868cb9da36cfbba77e1c43cd557df46a1",
+            "match": true,
+            "path": "src/proposition_authoring/production_slice.py"
+          }
+        ],
+        "head": "89ca88c7f0a661601f7eb798b6759667fa20ab3f",
+        "head_match": true,
+        "role": "gate",
+        "tree": "50a4a2f9bc694aa71f1943637e63afad1e6ee883"
+      },
+      {
+        "expected_commit": "529c92b49a34d5c610618551a8737f019f9fa332",
+        "files": [
+          {
+            "actual_blob": "42a3b032446dc7b9eed8adfb7e66954af2088772",
+            "expected_blob": "42a3b032446dc7b9eed8adfb7e66954af2088772",
+            "match": true,
+            "path": "validators/contract_a.py"
+          },
+          {
+            "actual_blob": "42e5f5b3bf38d677445e9d01ea130ba604e53409",
+            "expected_blob": "42e5f5b3bf38d677445e9d01ea130ba604e53409",
+            "match": true,
+            "path": "validators/contract_a_rc2.py"
+          }
+        ],
+        "head": "529c92b49a34d5c610618551a8737f019f9fa332",
+        "head_match": true,
+        "role": "contract_a",
+        "tree": "a7981f122ff401780cfdafb799c4b7154aecaecf"
+      },
+      {
+        "expected_commit": "08ca896debd6d16fa21be2f178ed7cbe62395d00",
+        "files": [
+          {
+            "actual_blob": "d756f98ad410a2491be89bb73bbb9c7963724e50",
+            "expected_blob": "d756f98ad410a2491be89bb73bbb9c7963724e50",
+            "match": true,
+            "path": "scripts/run_v1_integration_candidate.py"
+          },
+          {
+            "actual_blob": "ddb16cd58baed833adfc4e81d7aef3745a5900f3",
+            "expected_blob": "ddb16cd58baed833adfc4e81d7aef3745a5900f3",
+            "match": true,
+            "path": "config/eb_v1_slice/contract_b_compatibility_carrier.json"
+          },
+          {
+            "actual_blob": "67c4ea3ce6e4680187743b12e42bdbff34e0d9bf",
+            "expected_blob": "67c4ea3ce6e4680187743b12e42bdbff34e0d9bf",
+            "match": true,
+            "path": "src/evidence_bundler/v1/contract_b.py"
+          }
+        ],
+        "head": "08ca896debd6d16fa21be2f178ed7cbe62395d00",
+        "head_match": true,
+        "role": "evidence_bundler",
+        "tree": "1248dc464c8ac06aa6a5554b9092d1f793a8b2c2"
+      },
+      {
+        "expected_commit": "c314e53bd91c0736aa4370a364673b069aceb43e",
+        "files": [],
+        "head": "c314e53bd91c0736aa4370a364673b069aceb43e",
+        "head_match": true,
+        "role": "contract_b",
+        "tree": "f3f142ec8cceb9aaf7d0c138c90b35c3576d77a1"
+      },
+      {
+        "expected_commit": "ddaf94551e38663920593cab89f9c60d43c1555f",
+        "files": [
+          {
+            "actual_blob": "b6d281590d372729b968ae75fec470c7186d6bd6",
+            "expected_blob": "b6d281590d372729b968ae75fec470c7186d6bd6",
+            "match": true,
+            "path": "src/claim_audit_lab/production_v1/parent_bound.py"
+          },
+          {
+            "actual_blob": "774178a12acce0ad7a453eb0ba85ec5e5b14fa1c",
+            "expected_blob": "774178a12acce0ad7a453eb0ba85ec5e5b14fa1c",
+            "match": true,
+            "path": "src/claim_audit_lab/production_v1/parent_cli.py"
+          },
+          {
+            "actual_blob": "268d0dc4dd22ddde3848141d62b7d719e48d374d",
+            "expected_blob": "268d0dc4dd22ddde3848141d62b7d719e48d374d",
+            "match": true,
+            "path": "src/claim_audit_lab/production_v1/semantic/decomposition.py"
+          }
+        ],
+        "head": "ddaf94551e38663920593cab89f9c60d43c1555f",
+        "head_match": true,
+        "role": "cal",
+        "tree": "1677a1de987a594f4ee8d2670d56943c5f189fbd"
+      },
+      {
+        "expected_commit": "c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec",
+        "files": [
+          {
+            "actual_blob": "df6b6ed410f52cafaeadfe1578d770f480a34b09",
+            "expected_blob": "df6b6ed410f52cafaeadfe1578d770f480a34b09",
+            "match": true,
+            "path": "research/contract_c_cal_v1_parent_recomposition_rc0_20260919/candidate_rc0.py"
+          }
+        ],
+        "head": "c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec",
+        "head_match": true,
+        "role": "contract_c_parent_bound",
+        "tree": "4739d58346e71b6468bd372a759b9da390e32109"
+      },
+      {
+        "expected_commit": "b42c827acb0a9fe65353354d709add0e27bab307",
+        "files": [
+          {
+            "actual_blob": "1d2ecd228cde807138013c33c8675c3003421d3c",
+            "expected_blob": "1d2ecd228cde807138013c33c8675c3003421d3c",
+            "match": true,
+            "path": "validators/contract_c_rc2.py"
+          }
+        ],
+        "head": "b42c827acb0a9fe65353354d709add0e27bab307",
+        "head_match": true,
+        "role": "contract_c_rc2",
+        "tree": "5d291d3852fe90251a948a7a5273e1462850820e"
+      },
+      {
+        "expected_commit": "1d33e0612befcf8016816197c90c062373796df9",
+        "files": [
+          {
+            "actual_blob": "1a408246fd3bef0758a958ae716b44ea74bc0689",
+            "expected_blob": "1a408246fd3bef0758a958ae716b44ea74bc0689",
+            "match": true,
+            "path": "research/contract_c2_current_cal_resolver_successor_rc0/RESOLVER.json"
+          }
+        ],
+        "head": "1d33e0612befcf8016816197c90c062373796df9",
+        "head_match": true,
+        "role": "contract_c_resolver",
+        "tree": "f6d612768598c2ea544f1206b9970627ac25ecd3"
+      },
+      {
+        "expected_commit": "12e7e640b229619501960b1b89cf4716d8d985b3",
+        "files": [
+          {
+            "actual_blob": "662e94c4445d2be9034e786711429394f217c0a6",
+            "expected_blob": "662e94c4445d2be9034e786711429394f217c0a6",
+            "match": true,
+            "path": "candidate/consumer.py"
+          }
+        ],
+        "head": "12e7e640b229619501960b1b89cf4716d8d985b3",
+        "head_match": true,
+        "role": "contract_c_consumer",
+        "tree": "0a3b5c4d6f0967f718db56137fbe175b9e430d14"
+      },
+      {
+        "expected_commit": "6cdb59c2ba41779ac954af56dd077574ba090013",
+        "files": [
+          {
+            "actual_blob": "83ab34bce30f874111500ed91f2c01421be9f9a0",
+            "expected_blob": "83ab34bce30f874111500ed91f2c01421be9f9a0",
+            "match": true,
+            "path": "src/parentBoundContractCDecision.js"
+          },
+          {
+            "actual_blob": "4e5a85aa1179e815b5e23e6524e2b2a314aab7d0",
+            "expected_blob": "4e5a85aa1179e815b5e23e6524e2b2a314aab7d0",
+            "match": true,
+            "path": "scripts/decision-engine-parent-bound-evaluate.mjs"
+          },
+          {
+            "actual_blob": "2225f73eb6eefd83609f0ba19e4786d1267dd527",
+            "expected_blob": "2225f73eb6eefd83609f0ba19e4786d1267dd527",
+            "match": true,
+            "path": "src/contractCDecision.js"
+          },
+          {
+            "actual_blob": "1562fb29da6679a0cf894e478cbdd4ae16e21a18",
+            "expected_blob": "1562fb29da6679a0cf894e478cbdd4ae16e21a18",
+            "match": true,
+            "path": "src/decisionMaterializer.js"
+          }
+        ],
+        "head": "6cdb59c2ba41779ac954af56dd077574ba090013",
+        "head_match": true,
+        "role": "decision",
+        "tree": "d4b75b63462451b5c258a13abf9ce2beb9e78098"
+      },
+      {
+        "expected_commit": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+        "files": [
+          {
+            "actual_blob": "564dcde5677df5ac8f86f21dc0ffd1692f44c9f0",
+            "expected_blob": "564dcde5677df5ac8f86f21dc0ffd1692f44c9f0",
+            "match": true,
+            "path": "validators/contract_d_core.py"
+          },
+          {
+            "actual_blob": "c03ef6c6f059cd03addf5e69b01025bb9a6af8d2",
+            "expected_blob": "c03ef6c6f059cd03addf5e69b01025bb9a6af8d2",
+            "match": true,
+            "path": "validators/contract_d_validate.py"
+          },
+          {
+            "actual_blob": "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68",
+            "expected_blob": "8b4ad5c9d6fc1145cf334d1416b5d52b9ed93c68",
+            "match": true,
+            "path": "validators/contract_d_consume.py"
+          }
+        ],
+        "head": "298a1a0f7b7b6d7712e11200d04faec3e1ca169b",
+        "head_match": true,
+        "role": "contract_d",
+        "tree": "36fbb6801f7a52def9b387b9011c0f4b18395705"
+      }
+    ],
+    "exact_helpers_and_gate_dependencies": {
+      "all_match": true,
+      "gate_external_dependencies": [
+        {
+          "git_blob": "b2684f1752a1eb841dd6ee85b1e81ae523b03810",
+          "match": true,
+          "path": "vendor/frozen/proposers.py",
+          "sha256": "sha256:5fa17a6b25f21db5ee3d47aa8ea3359eeae142eaf454bf4d076ff31f8b68ff78"
+        },
+        {
+          "git_blob": "ca2fbf63855f21551c2e1ebb46019768753746e4",
+          "match": true,
+          "path": "vendor/frozen/resolver_predecessor.py",
+          "sha256": "sha256:84df81b87a1750ef085bc6e6d50a4af439d8224484a5108bd7ff14149c2349a5"
+        },
+        {
+          "git_blob": "e51ec542898a0f40489e0140bbd0455e1429e0bb",
+          "match": true,
+          "path": "vendor/frozen/predecessor_fresh_roots.jsonl",
+          "sha256": "sha256:45056316e13cfe1a929c219c43d223ffef4897923227a2100af44b6bd199f8f6"
+        },
+        {
+          "git_blob": "da169fcc9b0efc096cbb3c68a744da9d7beaa03d",
+          "match": true,
+          "path": "vendor/frozen/predecessor_fresh_gold.jsonl",
+          "sha256": "sha256:668895fd344d1050259864f4eac36008f3731cc1793167d404b1fa23441b0236"
+        },
+        {
+          "git_blob": "e675b55559af17d50b65cd6af01ac23b0881bb43",
+          "match": true,
+          "path": "vendor/frozen/evaluator.py",
+          "sha256": "sha256:1091169da8e960cdf93242ee4c629c7a1a814009c8f80554f4a190f5b3fe989d"
+        },
+        {
+          "git_blob": "42e5f5b3bf38d677445e9d01ea130ba604e53409",
+          "match": true,
+          "path": "vendor/frozen/contract_a_rc2.py",
+          "sha256": "sha256:1f8e94b23af29efef6bf32daf2655a712b4f101e84360988e3755e80fbb19e24"
+        },
+        {
+          "git_blob": "ff5cddfeacf4511136a3dd3b47db1a794b631cd9",
+          "match": true,
+          "path": "vendor/frozen/contract_a_schema.json",
+          "sha256": "sha256:eeaf2a7ba87d46bdde4e3ca675949a58a6cb0a8b219a5c6bf50cb2cf7491e9da"
+        },
+        {
+          "git_blob": "2e7c37fca9aa6bdd1090fb527a663bdbe606ebcb",
+          "match": true,
+          "path": "vendor/frozen/contract_a_wire_spec.md",
+          "sha256": "sha256:02625b85fbed11730c5d600a32ca32d40861a1aceeec35dbc3ec1ede2cfba342"
+        }
+      ],
+      "helpers": [
+        {
+          "actual_blob": "e4afc030d1a01c2ea7fb640b25bb8cea31a12d5e",
+          "expected_blob": "e4afc030d1a01c2ea7fb640b25bb8cea31a12d5e",
+          "match": true,
+          "path": "SUBJECTS.json"
+        },
+        {
+          "actual_blob": "f5b06c6711e7799823155e5f8d95597940950b92",
+          "expected_blob": "f5b06c6711e7799823155e5f8d95597940950b92",
+          "match": true,
+          "path": "scripts/run_current_subject.py"
+        },
+        {
+          "actual_blob": "32b644de87fc23ac721a740a2db7ef34c56b4992",
+          "expected_blob": "32b644de87fc23ac721a740a2db7ef34c56b4992",
+          "match": true,
+          "path": "scripts/verify_target_review.py"
+        }
+      ]
+    }
+  },
+  "private_terminal_receipt_sha256": "sha256:087e7a6576a5f6e4c78fb5774df6bcd66d7d6ca8716885d8476500ccf70064c2",
+  "remaining_operator_decision": null,
+  "schema": "cal-baseline-pressure-public-v1",
+  "substitution_pressure": {
+    "emitted_files": [],
+    "missing_dependency_or_bad_invocation_explanation_rejected": true,
+    "observed_error": "ContractAValidationError: $.sources[0].content_sha256 mismatch",
+    "returncode": 1,
+    "same_mutated_input_sha256": "sha256:517cc932209e10b2f7d709a044e0d600ed018a2e0e224021a2f6fe096323ab99",
+    "same_stderr_as_original_control": true,
+    "stderr_sha256": "sha256:3bc3c74b57f551d47d537bca4268db05fb2e0f76c366be58f7880551b6b31e75"
+  },
+  "terminal_disposition": "SUPPORTED_FOR_BOUNDED_ERS_FREE_REAL_PACKET_BASELINE"
+}

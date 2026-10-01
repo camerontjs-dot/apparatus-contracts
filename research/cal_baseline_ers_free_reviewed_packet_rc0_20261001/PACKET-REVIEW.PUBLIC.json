@@ -1,0 +1,79 @@
+{
+  "active_families": [
+    "strict_comparison",
+    "direct_event_order"
+  ],
+  "default_eb_behavior_preserved": true,
+  "eb_admission_argument_supplied": false,
+  "packet": {
+    "contract_a_file_sha256": "sha256:8a4a42b57020d710b0e68a57fac5d31d8a977e75bde2c7d535a656bacefabb41",
+    "gate_packet_sha256": "sha256:8abd8b98eeec1bdc6cb9f1f0be0870fbf9ecdcfc6c1c3b8de76c2267636a44e2",
+    "handoff_sha256": "sha256:b59ba3b35d2b1d8b0378ac277703cd4a8867ec1e88b8ea34be577df0c3eeb843",
+    "root_text_sha256": "sha256:ae66a958afe720defb54370149d6b7cd73a8698ef14036da9d3d6de233ad7742",
+    "selection_receipt_sha256": "sha256:3a0cc72cf49728a4fb8dff8f5d1d0cdba2fd37ddacb556849afbe66ad6e61249",
+    "target_file_sha256": [
+      "sha256:416811675261a1f12e2c4c5ebd3d8fdaf769def57a3fea6fe0ca5a26b270a4c4",
+      "sha256:22797d998748039a7aa582c997b6727c1d2f11c01a009a82cf508104cd051aaf"
+    ],
+    "target_review_manifest_sha256": "sha256:df4eb5b84fb9b1f65a9a7f8245397d85a1b2aff6b19c3f5a456d83a6c5fc0903"
+  },
+  "private_packet_freeze_receipt_sha256": "sha256:bbacb42915c1220cdc60e0071ddad32fba5d866aa265b28e26a1ade8a89f0880",
+  "private_packet_source_and_target_bytes_published": false,
+  "review": {
+    "author_context_identity_sha256": "sha256:d4c1dc478ec6dc785e88646324fb93a874fd896ea9916310d02dc7aa5f998108",
+    "clarification_added_to_contract_a_or_eb": false,
+    "distinct_nonempty_contexts": true,
+    "generic_startup_memory_exposure_disclosed": true,
+    "independent_review_all_children": true,
+    "manifest_sha256": "sha256:df4eb5b84fb9b1f65a9a7f8245397d85a1b2aff6b19c3f5a456d83a6c5fc0903",
+    "meaning_review_does_not_establish_evidence_admission_or_engine_correctness": true,
+    "memory_free_context_attested": false,
+    "parent_history_inherited": false,
+    "review_only_clarification_raw_sha256": "sha256:88a8b66e5455c153f78a1f17a078cb52f10e968f6039899ea517d86841322e8d",
+    "review_only_clarification_source_url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/planetfact_notes.html#diam",
+    "reviewer_context_identity_sha256": "sha256:a072bb531b263cc80ffdf4a0d9ed5318dac81d1d4c768498eca0f91142ace4e3",
+    "semantic_fidelity_attested_all_children": true,
+    "semantic_review_receipt_sha256": "sha256:a0c150b16609069be40c2493b7b9ba2bfa2bf7ccf4a670dc433f20f0196be242",
+    "source_first_judgment_preceded_target_read": true,
+    "source_first_judgment_sha256": "sha256:5b4ecaa8a59c8673eaf92feb23c9f88e6213752b5077c43eaff23dfe4079400f"
+  },
+  "reviewed_children": 2,
+  "schema": "cal-baseline-packet-review-public-v1",
+  "selection_receipt_sha256": "sha256:3a0cc72cf49728a4fb8dff8f5d1d0cdba2fd37ddacb556849afbe66ad6e61249",
+  "selection_rule": "One NASA metric factsheet and its fixed property comparison were selected before Gate/CAL/Decision exposure. No replacement source or root after outcomes.",
+  "separate_frozen_eb_admission_present": false,
+  "separate_preparation_completed_before_baseline": true,
+  "source_bytes": [
+    {
+      "length_bytes": 2294,
+      "role": "SOURCE-CUSTODY.json",
+      "sha256": "sha256:75f820b142e67ccc349abeee268297ba960a1cdcbee00ad5dd93b3c861ac8c9c"
+    },
+    {
+      "length_bytes": 14363,
+      "role": "planetary-factsheet.raw.html",
+      "sha256": "sha256:42bdc3f1dae470b85580c6ac66c353964a05d544ad2ac970a6b7d908337a6c3c"
+    },
+    {
+      "length_bytes": 2226,
+      "role": "planetary-factsheet.txt",
+      "sha256": "sha256:e81d67ae87ff35fd26a7dab7a876c19d9c7bb230a0417acf9d101974f185ae7f"
+    },
+    {
+      "length_bytes": 14276,
+      "role": "planetary-factsheet-notes.raw.html",
+      "sha256": "sha256:549150c04a2fd9bb90d68326adfd604e0f5f028b48c9572bf0972bce1bf87825"
+    },
+    {
+      "length_bytes": 10581,
+      "role": "planetary-factsheet-notes.txt",
+      "sha256": "sha256:27f593be10bb2201f6d44467c49002eb818f75bf1dc2c938d32ca63c323bfa3a"
+    }
+  ],
+  "source_kind": "Frozen real NASA curated reference pages; manually authored factual conjunction; no synthetic PIPE fixtures.",
+  "source_urls": [
+    "https://nssdc.gsfc.nasa.gov/planetary/factsheet/",
+    "https://nssdc.gsfc.nasa.gov/planetary/factsheet/fact_notes.html"
+  ],
+  "used_family": "strict_comparison"
+}
