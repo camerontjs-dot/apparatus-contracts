@@ -123,12 +123,9 @@ jobs:
           python -m venv .venv-positive
           .venv-positive/bin/python -m pip install --upgrade pip
           .venv-positive/bin/python -m pip install \
-            'click>=8.1,<9' 'pydantic>=2.6,<3' 'PyYAML>=6,<7' \
-            'pypdf>=4,<7' 'pdfminer.six>=20231228,<20270000' \
-            'rank-bm25>=0.2.2,<0.3' 'typer>=0.12,<1'
-          .venv-positive/bin/python -m pip install -e authority/gate --no-deps
-          .venv-positive/bin/python -m pip install -e authority/eb --no-deps
-          .venv-positive/bin/python -m pip install -e authority/cal --no-deps
+            -e authority/gate \
+            -e authority/eb \
+            -e authority/cal
           .venv-positive/bin/python -m pip check
 
       - name: Gate replay and A2 validation
