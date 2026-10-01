@@ -1,0 +1,21 @@
+{
+  "schema": "cal-real-positive-path-source-provenance-v1",
+  "source_id": "bls-ted-union-membership-2025-normalized",
+  "source_url": "https://www.bls.gov/opub/ted/2026/black-workers-had-a-higher-union-membership-rate-than-white-asian-and-hispanic-workers-in-2025.htm",
+  "publisher": "U.S. Bureau of Labor Statistics",
+  "publication_date": "2026-03-17",
+  "retrieved_for_preregistration_date": "2026-10-01",
+  "representation": "Normalized factual representation of the four published 2025 union-membership rates used by the preregistered claim. This is not a raw HTML snapshot.",
+  "source_facts_used": {
+    "black_men_percent": 12.4,
+    "white_men_percent": 10.3,
+    "black_women_percent": 10.5,
+    "white_women_percent": 9.3
+  },
+  "selection_rule": "Selected before any Gate/EB/CAL outcome for this experiment because it supplies two explicit comparisons that fit CAL's already-qualified strict_comparison family.",
+  "nonclaims": [
+    "The representation does not establish universal BLS source authority for other questions.",
+    "The experiment does not test arbitrary natural-language claim authoring.",
+    "The experiment does not tune Evidence Bundler admission."
+  ]
+}
