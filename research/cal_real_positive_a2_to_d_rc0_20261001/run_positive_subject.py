@@ -266,6 +266,24 @@ def execute_once(args: argparse.Namespace, label: str, target_paths: dict[str, P
     target_path = root / "decision-target.json"
     target_path.write_bytes(canonical_bytes(decision_target))
 
+    # Durable pre-Decision evidence checkpoint. This is observability only:
+    # it records already-produced EB/CAL/Contract-C state before the
+    # independently qualified Decision/D1 boundary is invoked.
+    pre_decision = {
+        "schema": "cal-real-positive-a2-to-d-pre-decision-v1",
+        "contract_a_sha256": tagged_bytes(args.contract_a.read_bytes()),
+        "eb_native_package_sha256": tagged_bytes((eb_out / "native_eb_v1_package.json").read_bytes()),
+        "eb_contract_b_tree_sha256": tree_digest(eb_out / "contract_b"),
+        "eb_projection_receipt_sha256": tagged_bytes((eb_out / "projection_receipt.json").read_bytes()),
+        "eb_accepted_relationships": projection["counts"]["accepted_relationships"],
+        "cal_parent_conclusion": parent["parent_conclusion"],
+        "cal_parent_result_sha256": tagged_bytes(parent_bytes),
+        "contract_c_sha256": c_sha,
+        "decision_invoked": False,
+        "contract_d_emitted": False,
+    }
+    (root / "PRE-DECISION.json").write_bytes(canonical_bytes(pre_decision))
+
     d_path = root / "contract-d.json"
     de_cmd = [
         args.node,
