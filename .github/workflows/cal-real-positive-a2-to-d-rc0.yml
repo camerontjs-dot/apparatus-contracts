@@ -1,13 +1,10 @@
-name: CAL real positive A2-to-D RC1 apparatus recovery
+name: CAL real positive A2-to-D RC2 stage-receipt recovery
 
 on:
   pull_request:
     paths:
       - "research/cal_real_positive_a2_to_d_rc0_20261001/**"
       - ".github/workflows/cal-real-positive-a2-to-d-rc0.yml"
-  push:
-    branches:
-      - "research/cal-real-positive-a2-to-d-rc1-apparatus-recovery-20261001"
   workflow_dispatch:
 
 permissions:
@@ -91,8 +88,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: camerontjs-dot/apparatus-contracts
-          ref: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+          ref: contract-d-v1.0.0
           path: authority/contract-d
+          fetch-depth: 0
 
       - name: Verify exact authorities
         shell: bash
@@ -108,6 +106,8 @@ jobs:
           test "$(git -C authority/consumer rev-parse HEAD)" = "12e7e640b229619501960b1b89cf4716d8d985b3"
           test "$(git -C authority/decision rev-parse HEAD)" = "6cdb59c2ba41779ac954af56dd077574ba090013"
           test "$(git -C authority/contract-d rev-parse HEAD)" = "298a1a0f7b7b6d7712e11200d04faec3e1ca169b"
+          test "$(git -C authority/contract-d rev-parse refs/tags/contract-d-v1.0.0)" = "6eadd688b482f3c9fce2ce5e7a2841089d852096"
+          test "$(git -C authority/contract-d rev-parse 'contract-d-v1.0.0^{}')" = "298a1a0f7b7b6d7712e11200d04faec3e1ca169b"
 
       - name: Install exact runnable subjects
         run: |
@@ -236,10 +236,12 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cal-real-positive-a2-to-d-rc1-apparatus-recovery
+          name: cal-real-positive-a2-to-d-rc2-stage-receipt-recovery
           path: |
             build/TARGET-FREEZE.json
             build/pre-eb-targets/
+            build/a-to-d/RUN1/PRE-DECISION.json
+            build/a-to-d/RUN2/PRE-DECISION.json
             build/a-to-d/RUN-RECEIPT.json
             build/RESULT.json
           if-no-files-found: warn
