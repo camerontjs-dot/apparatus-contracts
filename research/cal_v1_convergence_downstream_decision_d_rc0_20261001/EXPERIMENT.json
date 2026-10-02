@@ -3,8 +3,10 @@
   "authority_issue": "https://github.com/camerontjs-dot/apparatus-contracts/issues/158",
   "authorization_performed": false,
   "component_changes_permitted": false,
-  "disposition": "NOT_RUN",
+  "disposition": "SUPPORTED_EXACT_CAL_CONVERGENCE_DOWNSTREAM_EQUIVALENCE",
   "evidence_layer": "paired integration reproduction of exposed controls",
+  "executed_freeze_commit": "fd4a8052364de37b6948e81cb7269e9409aaad69",
+  "executed_freeze_tree": "3eb8a5fb9577d47328f4339ccb81c78064621337",
   "execution_performed": false,
   "experiment_id": "cal-v1-convergence-downstream-decision-d-rc0-20261001-apparatus-r1",
   "freeze_state": "frozen_before_successor_decisive_exposure",
@@ -34,11 +36,16 @@
   "preserved_failed_freeze": "e0b94f8f6ad37d6b78a28d880666c19b9035f94c",
   "primary_factor": "exact CAL subject and its author-conform-execute ingress workflow",
   "question": "Does swapping exact CAL ddaf945 for 6bb0d60 through the same pinned upstream C Decision D path preserve exact bytes and fail-closed controls?",
-  "receipt_hashes": {},
+  "receipt_hashes": {
+    "first_failed_raw_receipt": "sha256:fdee8636e284d7abf704443a93d9279fbf53fdc6e97c0c94523f2b08ef0effce",
+    "local_raw_receipt": "sha256:f38d9da4de12a8a84c3e00a0c9e593d19533ad5d0ab029b2d9917f968ded6d87",
+    "local_result": "sha256:5e2bcc20763338c2de6850f14bca7eecd68293dddf5cbb98d152b29bc2838d1f",
+    "regression_receipt": "sha256:bb3d26883984fe9ec1a9d4ce6797a02b6c6d8d97e74b3f33e18d6b226bbad322"
+  },
   "schema": "cal-convergence-downstream-experiment-v1",
   "source_commit": "219235f25e20dff17d708d18fc0929acce1273fc",
   "source_tree": "4647a9ccf3d0f534e17b660878a3e0319d29dbbc",
-  "state": "active",
+  "state": "completed",
   "study_type": "confirmatory",
   "unit_of_analysis": "PIPE01-PIPE03 paired case and two frozen negative-control designs"
 }
