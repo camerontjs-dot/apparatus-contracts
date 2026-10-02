@@ -1,4 +1,4 @@
-name: CAL real positive A2-to-D RC0
+name: CAL real positive A2-to-D RC1 apparatus recovery
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
       - ".github/workflows/cal-real-positive-a2-to-d-rc0.yml"
   push:
     branches:
-      - "research/cal-real-positive-a2-to-d-rc0-20261001"
+      - "research/cal-real-positive-a2-to-d-rc1-apparatus-recovery-20261001"
   workflow_dispatch:
 
 permissions:
@@ -145,11 +145,11 @@ jobs:
           a=json.loads(a_path.read_text())
           rows=[]
           out=Path("build/pre-eb-targets")
-          for child in a["decomposition"]["children"]:
+          for index, child in enumerate(a["decomposition"]["children"], start=1):
               target=author_target(child["proposition_id"], child["text"])
               assert target["proposition"]["semantic_family"]=="strict_comparison", target
               raw=canonical_target_bytes(target)
-              p=out/f'{child["proposition_id"]}.json'
+              p=out/f"target-{index:02d}.json"
               p.write_bytes(raw)
               rows.append({
                   "proposition_id":child["proposition_id"],
@@ -189,7 +189,7 @@ jobs:
             --consumer-root authority/consumer \
             --decision-root authority/decision \
             --contract-d-root authority/contract-d \
-            --python .venv-positive/bin/python \
+            --python "$PWD/.venv-positive/bin/python" \
             --node "$(command -v node)"
 
       - name: Classify preregistered case
@@ -236,7 +236,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cal-real-positive-a2-to-d-rc0
+          name: cal-real-positive-a2-to-d-rc1-apparatus-recovery
           path: |
             build/TARGET-FREEZE.json
             build/pre-eb-targets/
