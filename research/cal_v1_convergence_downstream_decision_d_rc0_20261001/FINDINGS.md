@@ -167,3 +167,44 @@ The scientific harness blob, subjects, targets, controls, and byte discriminator
 remain unchanged. The valid apparatus-r1 local result above is preserved.
 Hosted successor results are separate receipts in Draft PR #160; no earlier
 failed run is relabeled.
+
+## Verified hosted successor receipt
+
+The separately frozen [push run 36961507754](https://github.com/camerontjs-dot/apparatus-contracts/actions/runs/36961507754)
+at `d35b68cca865f3ba96503bc81d3c23ba38704d1a`, tree
+`e774be2c87dff1e83a0e3c90ce75fcf96f78b04c`, completed successfully.
+Its [artifact 11207922919](https://github.com/camerontjs-dot/apparatus-contracts/actions/runs/36961507754/artifacts/11207922919)
+was downloaded and verified: ZIP digest
+`sha256:0f79b6e429ec1365b19035950da488080dad12338a5a99f52f3e5266e6d871b6`,
+internal transport archive digest
+`sha256:54498af29096e8738e113bc606be6948165d5ecaefb9b52a5c4d5041df4bc441`.
+
+All 932 archive members matched their manifest; all 434 command streams matched
+the 217-command receipt; both wheels matched recorded hashes. A supplementary
+mechanical check directly verified 330 pairs, complete native sets and identities,
+repeat outputs, replay errors/no D stdout, and the conformance stop trace.
+All 450 generated world files were also byte-identical across local macOS and
+hosted Linux, including A/EB/B artifacts and the complete native/downstream output.
+
+Hosted runtime: Python 3.11.16 / Node 22.23.3. Maintained regression again reported
+99 passed, 8 skipped, 1 warning. The
+[PR run 36961510781](https://github.com/camerontjs-dot/apparatus-contracts/actions/runs/36961510781)
+also passed; the push receipt is canonical. These are implementer-authored
+engineering receipts, not independent review.
+
+[HOSTED_RESULT.json](HOSTED_RESULT.json) is the exact hosted machine result:
+`sha256:2c5a3079e25010cdbbf501812c5e071fc84c074afd94c15e975038c01709a061`.
+Hosted raw receipt:
+`sha256:819ab5230336b02ed23ff101ec81902587fd35aedfafb75c16ac4ebe6966046b`.
+Result-record hashes differ from local because apparatus identity changed;
+scientific output bytes did not.
+
+One supplementary post-run custody assertion failed before completed direct
+verification: it compared entire A/B world file sets and included Arm B's four
+extra authoring/conformance receipts. This was classified
+`POST_RUN_CUSTODY_FILE_SET_OVERREACH` before a bounded checker correction.
+The correction requires all corresponding A/B bytes, exactly those four B-only
+files, authored/trusted byte equality and successful conformance receipts, and
+retains complete native/repeat/platform set equality. The first checker record
+and classification addendum remain preserved. The frozen scientific evaluator,
+cases, expected results, controls, and discriminator never changed.
