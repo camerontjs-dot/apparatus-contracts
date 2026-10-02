@@ -121,6 +121,12 @@ jobs:
       - name: Repository-maintained verification and regression
         run: |
           make VENV="$RUNNER_TEMP/cal-convergence-apparatus-regression" PYTHON="$(command -v python)" verify test
+      - name: Preserve native evidence inside a verified transport archive
+        if: always()
+        run: |
+          python research/cal_v1_convergence_downstream_decision_d_rc0_20261001/package_evidence.py \
+            --run-root "$RUNNER_TEMP/cal-convergence-downstream-rc0" \
+            --archive "$RUNNER_TEMP/cal-convergence-downstream-evidence.tar.gz"
       - name: Upload immutable raw qualification evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -129,15 +135,5 @@ jobs:
           if-no-files-found: error
           retention-days: 90
           path: |
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/receipt.json
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/result.json
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/paired-comparisons.json
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/first-failure.txt
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/installed-inspect-*.json
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/dependency-versions-*.json
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/dependencies-*.txt
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/commands/
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/worlds/
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/negative-controls/
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/dist-A/
-            ${{ runner.temp }}/cal-convergence-downstream-rc0/dist-B/
+            ${{ runner.temp }}/cal-convergence-downstream-evidence.tar.gz
+            ${{ runner.temp }}/cal-convergence-downstream-evidence.tar.gz.manifest.json

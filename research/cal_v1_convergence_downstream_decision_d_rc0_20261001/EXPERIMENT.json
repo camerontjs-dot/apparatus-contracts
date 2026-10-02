@@ -1,20 +1,20 @@
 {
-  "apparatus_correction": "APPARATUS_PACKAGED_FILE_SET_OVERREACH",
+  "apparatus_correction": "APPARATUS_HOSTED_ARTIFACT_FILENAME_TRANSPORT",
   "authority_issue": "https://github.com/camerontjs-dot/apparatus-contracts/issues/158",
   "authorization_performed": false,
   "component_changes_permitted": false,
-  "disposition": "SUPPORTED_EXACT_CAL_CONVERGENCE_DOWNSTREAM_EQUIVALENCE",
+  "disposition": "NOT_RUN",
   "evidence_layer": "paired integration reproduction of exposed controls",
-  "executed_freeze_commit": "fd4a8052364de37b6948e81cb7269e9409aaad69",
-  "executed_freeze_tree": "3eb8a5fb9577d47328f4339ccb81c78064621337",
   "execution_performed": false,
-  "experiment_id": "cal-v1-convergence-downstream-decision-d-rc0-20261001-apparatus-r1",
-  "freeze_state": "frozen_before_successor_decisive_exposure",
+  "experiment_id": "cal-v1-convergence-downstream-decision-d-rc0-20261001-apparatus-r2",
+  "freeze_state": "successor_transport_designed_NOT_FROZEN",
   "frozen_files": {
-    "../../.github/workflows/cal-v1-convergence-downstream-decision-d-rc0.yml": "sha256:4cc6564bb7d6cacbb28ff0b67e5f1b6b880f302bec69189482aa3e45a890ed1f",
+    "../../.github/workflows/cal-v1-convergence-downstream-decision-d-rc0.yml": "sha256:7dd2e4a7467af1867e6fd2a216de39b44fc04ec5c250dd15f4c888fe9698fb1b",
+    "DEVIATION_HOSTED_UPLOAD.md": "sha256:e67cbdbce517b24d31764dd34d6f45b8593abd61ff2bfd26b7d721c88d7b140b",
     "DEVIATION_RUN01.md": "sha256:9166657e9dea0b6bea2e2668760420e8d5c875d68e7c5bac6d8a93914c756a6a",
     "PREREGISTRATION.md": "sha256:587abeeb0abd26ae72b196b02a369dd235b3ecc04533a4436cc28e123e207dea",
     "SUBJECTS.json": "sha256:e76897bf93ff04ffd5fff318bcc725c45b1d43b9a9ba1a77eefda82385668db0",
+    "package_evidence.py": "sha256:d244dc3541fc373cc7c6c57381b4a43316df73eec0786d1037dca052e9f0ca1d",
     "run_qualification.py": "sha256:51dd0cba07ff4990300b71508715aa6dad9b42a1975515a51fc759e7dcdfe504",
     "source_pr123.py": "sha256:80a9c16884395817ff9cec86e0fa5112e6cd494ae5f539b75e181151a7806b46",
     "trusted-targets/C1.target.json": "sha256:f7a341852be2ad6cfac6dfe5f1f082450248a15989edc16e171e8e45f18d980c",
@@ -32,8 +32,15 @@
     "execution",
     "consumer repin"
   ],
-  "predecessor_experiment_id": "cal-v1-convergence-downstream-decision-d-rc0-20261001",
+  "predecessor_experiment_id": "cal-v1-convergence-downstream-decision-d-rc0-20261001-apparatus-r1",
   "preserved_failed_freeze": "e0b94f8f6ad37d6b78a28d880666c19b9035f94c",
+  "preserved_hosted_upload_failures": [
+    36960792497,
+    36960818148
+  ],
+  "preserved_r1_local_freeze": "fd4a8052364de37b6948e81cb7269e9409aaad69",
+  "preserved_r1_local_tree": "3eb8a5fb9577d47328f4339ccb81c78064621337",
+  "preserved_r1_terminal_head": "6655ed11e2218fb0244a60bc10ec98ce48456cd1",
   "primary_factor": "exact CAL subject and its author-conform-execute ingress workflow",
   "question": "Does swapping exact CAL ddaf945 for 6bb0d60 through the same pinned upstream C Decision D path preserve exact bytes and fail-closed controls?",
   "receipt_hashes": {
@@ -43,9 +50,9 @@
     "regression_receipt": "sha256:bb3d26883984fe9ec1a9d4ce6797a02b6c6d8d97e74b3f33e18d6b226bbad322"
   },
   "schema": "cal-convergence-downstream-experiment-v1",
-  "source_commit": "219235f25e20dff17d708d18fc0929acce1273fc",
-  "source_tree": "4647a9ccf3d0f534e17b660878a3e0319d29dbbc",
-  "state": "completed",
+  "source_commit": "6655ed11e2218fb0244a60bc10ec98ce48456cd1",
+  "source_tree": "d6967e225cba92f62ef7d4ddfbb6c83dd2c788a3",
+  "state": "designed",
   "study_type": "confirmatory",
   "unit_of_analysis": "PIPE01-PIPE03 paired case and two frozen negative-control designs"
 }

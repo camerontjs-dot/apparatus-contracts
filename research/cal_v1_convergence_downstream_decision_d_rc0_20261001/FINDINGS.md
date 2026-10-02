@@ -149,3 +149,21 @@ interface/compatibility/version and successor release-lock decisions; qualified
 release artifact custody and the authorized consumer-migration procedure.
 Representative accuracy evidence remains necessary before any validated-accuracy
 claim. The smallest next action is independent review of these exact receipts.
+
+## Hosted transport observation and apparatus-r2
+
+Both initial hosted runs ([push 36960792497](https://github.com/camerontjs-dot/apparatus-contracts/actions/runs/36960792497),
+[PR 36960818148](https://github.com/camerontjs-dot/apparatus-contracts/actions/runs/36960818148))
+completed the paired experiment and maintained regression but failed evidence
+upload. The uploader rejected `:` in an unchanged native Contract B filename;
+932 selected files were found and zero artifacts created. Neither is reported
+as a hosted artifact-custody pass.
+
+[DEVIATION_HOSTED_UPLOAD.md](DEVIATION_HOSTED_UPLOAD.md) records the classification
+before correction. The separately frozen apparatus-r2 changes only transport:
+a helper packages the same evidence files with original internal paths/bytes
+and rechecks every member SHA-256. Its local roundtrip covered all 932 files.
+The scientific harness blob, subjects, targets, controls, and byte discriminator
+remain unchanged. The valid apparatus-r1 local result above is preserved.
+Hosted successor results are separate receipts in Draft PR #160; no earlier
+failed run is relabeled.
