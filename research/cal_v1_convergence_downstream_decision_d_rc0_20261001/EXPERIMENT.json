@@ -7,7 +7,7 @@
   "evidence_layer": "paired integration reproduction of exposed controls",
   "execution_performed": false,
   "experiment_id": "cal-v1-convergence-downstream-decision-d-rc0-20261001-apparatus-r2",
-  "freeze_state": "successor_transport_designed_NOT_FROZEN",
+  "freeze_state": "frozen_before_hosted_transport_successor_exposure",
   "frozen_files": {
     "../../.github/workflows/cal-v1-convergence-downstream-decision-d-rc0.yml": "sha256:7dd2e4a7467af1867e6fd2a216de39b44fc04ec5c250dd15f4c888fe9698fb1b",
     "DEVIATION_HOSTED_UPLOAD.md": "sha256:e67cbdbce517b24d31764dd34d6f45b8593abd61ff2bfd26b7d721c88d7b140b",
@@ -50,9 +50,9 @@
     "regression_receipt": "sha256:bb3d26883984fe9ec1a9d4ce6797a02b6c6d8d97e74b3f33e18d6b226bbad322"
   },
   "schema": "cal-convergence-downstream-experiment-v1",
-  "source_commit": "6655ed11e2218fb0244a60bc10ec98ce48456cd1",
-  "source_tree": "d6967e225cba92f62ef7d4ddfbb6c83dd2c788a3",
-  "state": "designed",
+  "source_commit": "701ae28b9600d0443f83e1df7a4381f5d4f8c52c",
+  "source_tree": "127769a4823ea21ab91f5bb53c09f600f9a7bdae",
+  "state": "active",
   "study_type": "confirmatory",
   "unit_of_analysis": "PIPE01-PIPE03 paired case and two frozen negative-control designs"
 }
