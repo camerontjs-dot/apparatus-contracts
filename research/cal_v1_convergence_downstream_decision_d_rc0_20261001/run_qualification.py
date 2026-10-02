@@ -324,11 +324,22 @@ class Runner:
                 raise RuntimeError("expected one exact CAL wheel")
             wheel = wheels[0]
             checked = 0
+            absent_nonruntime_data = []
             with zipfile.ZipFile(wheel) as z:
+                members = set(z.namelist())
                 for rel, expected in self.subjects["subjects"][f"cal-{arm.lower()}"][
                     "blobs"
                 ].items():
                     if rel.startswith("src/claim_audit_lab/"):
+                        if rel[4:] not in members:
+                            if rel.endswith(".py") or rel.startswith(
+                                "src/claim_audit_lab/production_v1/"
+                            ):
+                                raise SubjectUnavailable(
+                                    f"required runtime file missing: {arm}/{rel}"
+                                )
+                            absent_nonruntime_data.append(rel)
+                            continue
                         if blob(z.read(rel[4:])) != expected:
                             raise SubjectUnavailable(
                                 f"packaged source bytes differ: {arm}/{rel}"
@@ -387,6 +398,7 @@ class Runner:
                 "wheel": str(wheel.relative_to(self.root)),
                 "sha256": digest(wheel.read_bytes()),
                 "source_blobs_checked": checked,
+                "absent_nonruntime_data": absent_nonruntime_data,
                 "clean_installed": True,
                 "module_provenance": provenance,
             }
