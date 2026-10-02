@@ -1,0 +1,20 @@
+{
+  "classification": "APPARATUS_PACKAGED_FILE_SET_OVERREACH",
+  "classified_before_correction": true,
+  "commands_recorded": 50,
+  "decisive_exposure": false,
+  "disposition": "INCONCLUSIVE_APPARATUS_INVALID",
+  "downstream": "NOT_RUN",
+  "failed_head": "e0b94f8f6ad37d6b78a28d880666c19b9035f94c",
+  "failed_tree": "b71768d5b494079548d91b960964dbdbe8da48bc",
+  "first_failure": {
+    "error": "\"There is no item named 'claim_audit_lab/ui/static/index.html' in the archive\"",
+    "phase": "build-and-clean-install",
+    "type": "KeyError"
+  },
+  "first_failure_trace_sha256": "sha256:70d84403ce3f9b2113f76c2671d902f98c48bc54929d0cd20e8ec8d707469a82",
+  "harness_blob": "d068764100208659ac4b26eed6ac48865385f419",
+  "privacy": "sanitized observation; original raw receipt retained privately",
+  "raw_receipt_sha256": "sha256:fdee8636e284d7abf704443a93d9279fbf53fdc6e97c0c94523f2b08ef0effce",
+  "schema": "preserved-first-run-failure-v1"
+}
