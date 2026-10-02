@@ -7,17 +7,18 @@
   "evidence_layer": "paired integration reproduction of exposed controls",
   "execution_performed": false,
   "experiment_id": "cal-v1-convergence-downstream-decision-d-rc0-20261001-apparatus-r1",
-  "freeze_state": "bounded_apparatus_correction_unfrozen",
+  "freeze_state": "frozen_before_successor_decisive_exposure",
   "frozen_files": {
     "../../.github/workflows/cal-v1-convergence-downstream-decision-d-rc0.yml": "sha256:4cc6564bb7d6cacbb28ff0b67e5f1b6b880f302bec69189482aa3e45a890ed1f",
+    "DEVIATION_RUN01.md": "sha256:9166657e9dea0b6bea2e2668760420e8d5c875d68e7c5bac6d8a93914c756a6a",
     "PREREGISTRATION.md": "sha256:587abeeb0abd26ae72b196b02a369dd235b3ecc04533a4436cc28e123e207dea",
     "SUBJECTS.json": "sha256:e76897bf93ff04ffd5fff318bcc725c45b1d43b9a9ba1a77eefda82385668db0",
-    "run_qualification.py": "sha256:94c54d47d1d547f5e1190c64287bde18a8df0b2f91377d8241a37ce443a2ab72",
+    "run_qualification.py": "sha256:51dd0cba07ff4990300b71508715aa6dad9b42a1975515a51fc759e7dcdfe504",
     "source_pr123.py": "sha256:80a9c16884395817ff9cec86e0fa5112e6cd494ae5f539b75e181151a7806b46",
     "trusted-targets/C1.target.json": "sha256:f7a341852be2ad6cfac6dfe5f1f082450248a15989edc16e171e8e45f18d980c",
     "trusted-targets/C2.target.json": "sha256:baa835920af21912332c0aa0f95079fa7d18e044ab2befe83f24b270693f5b7f"
   },
-  "harness_blob": "d068764100208659ac4b26eed6ac48865385f419",
+  "harness_blob": "4cb9a9b7ba276a04eb2018a031a6cd88bca92a57",
   "metric": "exact file-set and byte equality; zero false accepts",
   "non_claims": [
     "release readiness",
@@ -35,9 +36,9 @@
   "question": "Does swapping exact CAL ddaf945 for 6bb0d60 through the same pinned upstream C Decision D path preserve exact bytes and fail-closed controls?",
   "receipt_hashes": {},
   "schema": "cal-convergence-downstream-experiment-v1",
-  "source_commit": "d5f65087ad1f308ec108e9dec31776ad40990085",
-  "source_tree": "b948f8af598c9705825c3936750e5824952a1b1d",
-  "state": "designed",
+  "source_commit": "219235f25e20dff17d708d18fc0929acce1273fc",
+  "source_tree": "4647a9ccf3d0f534e17b660878a3e0319d29dbbc",
+  "state": "active",
   "study_type": "confirmatory",
   "unit_of_analysis": "PIPE01-PIPE03 paired case and two frozen negative-control designs"
 }
