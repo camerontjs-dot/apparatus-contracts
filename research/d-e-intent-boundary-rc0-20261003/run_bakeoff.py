@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
+ROOT = HERE.parents[1]
 CASES = HERE / "CASES.json"
 FREEZE = HERE / "FREEZE.json"
 RESULT = HERE / "RESULT.json"
