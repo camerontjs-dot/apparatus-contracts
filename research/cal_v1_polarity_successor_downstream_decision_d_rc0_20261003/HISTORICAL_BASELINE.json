@@ -1,0 +1,98 @@
+{
+  "schema": "cal-polarity-successor-downstream-baseline-v1",
+  "source": "issue #158 arm B worlds from the qualified local run; byte copies live under historical/",
+  "contract_a_handoff_sha256": "sha256:fdf23afe668f3d2f61f0c5398776507e3a448e86dccee7bddf6b920f561e08c4",
+  "unchanged_authority": {
+    "cal_freeze_commit": "e24e405f5336ee024674f39dba97255bb58a2dd9",
+    "cal_semantic_source_commit": "7cf0d2e50562ec4ce4082d1e1c058a11025b1a48",
+    "policy_sha256": "44ecc33519fa8911079595d322f5f0decbf0389af42e153ac32214931798e42c",
+    "policy_id": "decision-engine.contract-c.supported-claim-verification",
+    "policy_version": "1.0.0",
+    "effect_type": "knowledge.add_verified_tag",
+    "effect_version": "1",
+    "effect_params": {"scope": "claim"},
+    "target_content_sha256": "sha256:fe9a393b0c31f7e2f200cbefc08d9293e364f8a0810865a73003ec3502c387d0"
+  },
+  "successor_authority": {
+    "semantic_implementation_sha": "caa0048f8f511ec3c4aa1ce713766f2219a04bc1",
+    "policy_resolver_commit_sha": "292168222f83c67a24190b4846eebe84392e3d04",
+    "candidate_commit": "c183d2d12306ee30c509169a58db55e7430fe8c5",
+    "candidate_blob": "aeb50dee8d24bda5f62eb879654e80437a50912d",
+    "strict_instrument_version": "strict-comparison-polarity-rc0",
+    "predecessor_semantic_implementation_sha": "847cc970642bb648dc994b929c2053b5c9d4648c",
+    "predecessor_resolver_commit_sha": "1d33e0612befcf8016816197c90c062373796df9",
+    "predecessor_candidate_blob": "df6b6ed410f52cafaeadfe1578d770f480a34b09"
+  },
+  "cases": {
+    "PIPE01": {
+      "parent": "supported",
+      "decision": "clear",
+      "consumer": "candidate_for_authorization",
+      "reason_codes": ["contract_c_supported"],
+      "eb_native_package_sha256": "sha256:fd2c6a28bd5a2e49ba19af29d3beb64fe5153e5dc841b74d8c7cfc1b2706c947",
+      "contract_b_bundle_hash": "sha256:40b5becddb7dca77c0cdb3a9b26ea1ddc982efd3c0ece10990f3f01885c83811",
+      "historical_contract_c_sha256": "sha256:ba02ec570b0048832a2fc9f6b958f426b11e5dc0fe73cf1e12ae515d38ea23a0",
+      "historical_contract_d_sha256": "sha256:509862ec4b28ba211406eb21d9398f1fab7e153e0c7e12595d6ab8476d053e24",
+      "children": {
+        "C1": {
+          "conclusion": "supported",
+          "categorical_relation": "SUPPORTS",
+          "relation": "MORE_THAN",
+          "assertion_polarity": "positive"
+        },
+        "C2": {"conclusion": "supported", "instrument_id": "rc7fc-event-order", "instrument_version": "rc7fc-event-order-1"}
+      }
+    },
+    "PIPE02": {
+      "parent": "contradicted",
+      "decision": "hold",
+      "consumer": "hold",
+      "reason_codes": ["contract_c_reported_verdict_not_supported"],
+      "eb_native_package_sha256": "sha256:e4e756573d4d8d40478fa7ee5f1f5213f8f75951332218b36063d00e698d6724",
+      "contract_b_bundle_hash": "sha256:74a80bcb40d0252828836544e9f6aff10e74469628bb550b8c5a3da35031d3df",
+      "historical_contract_c_sha256": "sha256:60328dc4413a436b4559a975a60fe35e67e3e1253289ad7c63bca512af41374d",
+      "historical_contract_d_sha256": "sha256:8c7b28718691d6a84ecda4172051172e1c9ecf1d106cbc7e4a9132fda5ff9230",
+      "children": {
+        "C1": {
+          "conclusion": "contradicted",
+          "categorical_relation": "REFUTES",
+          "relation": "LESS_THAN",
+          "assertion_polarity": "positive"
+        },
+        "C2": {"conclusion": "supported", "instrument_id": "rc7fc-event-order", "instrument_version": "rc7fc-event-order-1"}
+      }
+    },
+    "PIPE03": {
+      "parent": "not_checkable",
+      "decision": "hold",
+      "consumer": "hold",
+      "reason_codes": ["contract_c_reported_verdict_not_supported"],
+      "eb_native_package_sha256": "sha256:1a336b12fc93f919ded88d55ed08a0f09931df43933a70aca3ab81a725b8459f",
+      "contract_b_bundle_hash": "sha256:cecce6fac68445b0025e54c1c2291daeae442fefec711313ea660c5c92b9c5fb",
+      "historical_contract_c_sha256": "sha256:f152754526aa7ea3b47401e9ae956786c73ae6795a53bfabc2a163474bc7f526",
+      "historical_contract_d_sha256": "sha256:12d9619bb4afc449ab5d8b01089940a9917ec28670fd4ed5e6602dd283abe55e",
+      "children": {
+        "C1": {
+          "conclusion": "supported",
+          "categorical_relation": "SUPPORTS",
+          "relation": "MORE_THAN",
+          "assertion_polarity": "positive"
+        },
+        "C2": {"conclusion": "not_checkable"}
+      }
+    }
+  },
+  "polarity_case": {
+    "case_id": "POLARITY",
+    "claim": "Alpha had a higher rate than Beta.",
+    "evidence": "Alpha did not have a higher rate than Beta.",
+    "source_id": "S-C1-NEGATE",
+    "relation": "MORE_THAN",
+    "assertion_polarity": "negative",
+    "categorical_relation": "REFUTES",
+    "child_conclusion": "contradicted",
+    "parent": "contradicted",
+    "decision": "hold",
+    "consumer": "hold"
+  }
+}
