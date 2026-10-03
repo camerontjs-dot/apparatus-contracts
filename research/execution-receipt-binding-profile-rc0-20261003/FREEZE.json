@@ -1,0 +1,12 @@
+{
+  "schema": "execution-receipt-binding-prefreeze/1",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION",
+  "base": "c3563cff66d2c85dcbf575c693056e2d8e4563d4",
+  "prefreeze_head": "87d7d83a9fd3df9aa9bf75252eaba58dd6a0e692",
+  "prefreeze_tree": "8606581301a63fe1d14c1168a8746e27bc010ea8",
+  "preregistration_blob": "027b46d1d0a70b0eb56c0a6dc39afb7f66062944",
+  "cases_blob": "d93b6be433280e43c8b92f41e68fbe1de62d4d48",
+  "implementation_present": false,
+  "evaluator_present": false,
+  "decisive_results_observed": false
+}
