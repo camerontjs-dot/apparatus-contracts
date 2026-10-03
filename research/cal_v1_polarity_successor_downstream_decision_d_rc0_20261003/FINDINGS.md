@@ -54,4 +54,4 @@ Representative accuracy, promotion acceptance, a public interface or version, me
 
 ## Next gate
 
-The next V1 gate is independent promotion review and operator acceptance, then a public interface and version decision, successor release lock, release-artifact custody, tag and release, and authorized consumer migration. Fresh blind accuracy is still unestablished. Parent-bound Contract C stays research-only. ERS pending review, Contract E, Authorization, and execution stay separate.
+This result does not open the next lane. CAL #193 and Draft PR #202, authentic strict-comparison target authoring, are still open. After that lane, the V1 gates named on CAL #185 are successor pressure or real-source evidence and a successor-specific independent review. Public interface, version, release lock, artifact custody, tag and release, and authorized consumer migration stay later. Fresh blind accuracy is still unestablished. Parent-bound Contract C stays research-only. ERS pending review, Contract E, Authorization, and execution stay separate.
