@@ -1,0 +1,20 @@
+{
+  "schema": "cal-polarity-successor-hosted-result-v1",
+  "disposition": "SUPPORTED_POLARITY_SUCCESSOR_DOWNSTREAM_DECISION_D_CONFORMANCE",
+  "executed_head": "6399a866add04bb313fafa57cebc0a40315bbe37",
+  "executed_tree": "f8f9fa0c1bec7f9207d1a094f25b1d9ced6dcd10",
+  "harness_blob": "4ddba0b2deee8ee5e39cc42c7bd1b58d5f79c01e",
+  "hosted_run": 37158294608,
+  "hosted_run_url": "https://github.com/camerontjs-dot/apparatus-contracts/actions/runs/37158294608",
+  "artifact": 11287000318,
+  "artifact_name": "cal-polarity-successor-downstream-6399a866add04bb313fafa57cebc0a40315bbe37",
+  "artifact_digest": "sha256:805251091248d9c6ed43e3a6058ae4186dda502549d9c3089ad3357c116e8b46",
+  "archive_sha256": "sha256:4b97cd87d610a07c201a7640060914d046926337e5884c93084e80571443de76",
+  "member_count": 697,
+  "member_mismatches": 0,
+  "result_sha256": "sha256:462f4d4890ccc074bdf8860860c4a4db63029bbe3d0b448f2106f11d2a4e8f87",
+  "local_result_sha256_match": true,
+  "commands": 162,
+  "authorization_performed": false,
+  "execution_performed": false
+}
