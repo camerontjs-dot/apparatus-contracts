@@ -369,3 +369,98 @@ The A–D North Stars are summaries of already canonical purpose/boundary semant
 The Contract E North Star is a proposed compression of the current research programme and must remain non-canonical until the Contract E evidence programme supports a promotion decision.
 
 H1–H4 are architectural hypotheses exposed by the cross-contract audit. They authorize investigation, not new contract letters, schemas, versions, or production behavior.
+
+
+---
+
+# Follow-up live triage — 2026-10-03
+
+This section records the first attempt to falsify H1–H4 against live repository state after the initial North-Star audit. It narrows the questions; it does not promote new contract authority.
+
+## H1 status — NARROWED; no new shared contract justified yet
+
+Additional live evidence:
+
+- Decision Engine's promoted Decision/Authorization EDR already assigns the requested operation to Authorization and execution to a later executor/receipt.
+- Cross-use-case RC1 safely authorized source-audit, citation, and task-dispatch Decisions by binding a requested action directly to the typed Decision effect. It did not require a shared `ExecutionIntent` contract.
+- Contract D 1.0.0 currently registers `knowledge.add_verified_tag@1`, `knowledge.cite_as_evidence@1`, and `task.dispatch@1`. The first has only `scope`; the latter two have no effect parameters.
+- The Contract E × ERS point-of-use experiment did require a richer immutable `ExecutionIntent` containing executable identity, entry point, arguments, input identities, environment constraints, side-effect targets, and target pre-state binding.
+- Contract E can authorize an opaque immutable target reference without owning the target object's internal schema.
+
+**Refined inference:** action materialization is real, but present evidence does not show that it must be a universal shared contract. A consumer/executor may own an immutable intent object and present its identity to Contract E. A new shared contract becomes justified only if legitimate independent producers/consumers must reconstruct or validate the same intent semantics across an apparatus boundary.
+
+**Next discriminator:** hold one Contract-D effect fixed and compare at least two materially different concrete action materializations. Ask whether Contract E can safely authorize them using an opaque immutable intent identity plus effect/target binding, and whether an independent consumer needs more than that identity to verify the authorized action.
+
+**Local-work threshold:** no local execution is required to design/freeze this discriminator. Local work is needed only when testing a real executor whose executable identity, environment, side-effect target, or pre-state must be observed from the machine.
+
+## H2 status — NARROWED; receipt machinery exists, cross-pipeline binding remains open
+
+Additional live evidence from `camerontjs-dot/mainframe-live@dbff8c39790ce70961de2310809e1bd737ccb7a9`:
+
+- the workstation control plane has persisted command receipts with idempotency key, task/project, command type, actor, authority class, source/contract identities, requested/accepted/completed timestamps, terminal state, result, result SHA-256, errors, and receipt events;
+- live dispatch revalidates task authority at approval time;
+- a successful live result records adapter/profile/task category, `applied=true`, outcome, changed files, verification, evidence-receipt pointer, and rollback availability;
+- a non-passing verifier produces a failed receipt rather than being treated as successful execution;
+- the task-status projection explicitly distinguishes run success from independent verification.
+
+**Refined inference:** the architecture does not lack execution receipts in general. MainFrame already contains a useful domain-specific receipt mechanism. The unresolved CAL-Pipeline question is whether a downstream execution receipt must bind the exact Contract-D Decision, Contract-E authorization evaluation/receipt, and any immutable execution intent strongly enough that a later reviewer can reconstruct **what was authorized versus what was actually attempted/applied**.
+
+Current MainFrame command receipts are task/packet/control-plane oriented. The inspected surface does not establish a generic D/E/intent binding.
+
+**Next discriminator:** define a schema-neutral execution-receipt obligation matrix and test the existing MainFrame receipt projection against it. The minimum candidate obligations are: exact authorization basis, exact action/intent identity, actor, target/pre-state, attempt identity, idempotency/replay state, start/end, applied/not-applied outcome, post-state or changed-state evidence, verification status/evidence, and failure/unknown state. Add fields only where reconstruction actually fails.
+
+**Local-work threshold:** static obligation/conformance analysis can be completed from GitHub. Local work begins only when a frozen candidate must be exercised against a real mutation to establish pre/post state, idempotency, rollback, or verifier behavior.
+
+## H3 status — CONFIRMED AS AN EXTERNAL TRUST BOUNDARY; current provenance experiment covers only part of it
+
+Contract E's frozen research semantics intentionally distinguish integrity from origin legitimacy. The point-of-use trust problem decomposes into at least four independently sourced inputs:
+
+1. **AuthorityState origin:** the root/configuration source that is allowed to define standing authority.
+2. **Evaluation time:** time supplied by the trusted runtime boundary, not by the caller asking for permission.
+3. **Subject/workload identity:** the actual actor/runtime identity, not an arbitrary caller string.
+4. **Target observation:** the current target/pre-state observed at point of use, not a stale caller assertion.
+
+The current evaluation-time provenance preregistration in Apparatus PR #130 already tests an important subset: a supervisor sources evaluation time, invokes Contract E itself, and binds the exact request/result transcript so caller-supplied time/result substitution cannot reach `shadow_ready`. PR #150 stopped before the matrix; the preserved successor question remains valid.
+
+MainFrame's current task-dispatch path is evidence that a local control plane can own some analogous responsibilities: it revalidates a reviewed authority source at approval time, sources its own timestamps, persists an actor/authority-bound receipt, and refuses when source authority is lost. That is a useful pattern, not proof that it is the Contract-E production mediator.
+
+**Refined inference:** do not add another Contract-E semantic predicate for trusted origin. The production integration needs a trusted point-of-use mediator/profile that obtains these inputs from configured/runtime-owned sources and then invokes E. Root legitimacy remains configuration/governance authority; E verifies the supplied state's applicability and integrity.
+
+**Next discriminator:** finish the already-preregistered fresh-process evaluation-time/request/result binding experiment first. Only after that passes is it useful to test concrete sources for AuthorityState, workload identity, clock, and target observation.
+
+**Local-work threshold:** the next matrix itself can be run in an isolated hosted environment if its exact frozen artifacts are available there. Machine-local work becomes necessary when the claim depends on OS/user identity, local keychain or credential ownership, local filesystem/current target observation, local clock boundary, or Conduit/MainFrame process identity.
+
+## H4 status — EXISTING APPARATUS CONFIRMED; shared-contract question deferred
+
+Live `camerontjs-dot/proposition-authoring@96efd44e9d6d2325b9bccc6d6ebdcdad9c8411b1` now states an explicit product responsibility:
+
+> EvidenceGate deterministically standardizes the exact evidence representations supplied with the claim: source identity, content and representation identity, provenance, declared classification/coverage, corpus declarations, explicit unknowns, and integrity. It does not decide whether evidence supports or refutes the claim.
+
+Gate V1.0.0 therefore already occupies the pre-retrieval evidence-world apparatus role that H4 initially described.
+
+Evidence Bundler issue #91 separately defines the downstream firewall: Gate hints may describe evidence/verification shape, while EB owns every causal translation into query construction, retrieval, selection, and admission. It explicitly forbids causal Gate→EB behavior until relevant upstream fields have `QUALIFIED_HINT` authority and a separate EB experiment is frozen.
+
+**Refined inference:** H4 is not a missing-apparatus problem. It is a future **cross-repository contract-placement** question. There is currently no need to create a new Apparatus Contract merely because EvidenceGate emits a standardized profile.
+
+A shared pre-retrieval contract becomes worth considering only when:
+
+1. at least one Gate field is separately qualified for downstream hint use;
+2. Evidence Bundler has a legitimate causal need for that field before retrieval;
+3. the value cannot be safely reconstructed from Contract A or another already-governing input;
+4. an independent EB consumer should be able to validate/use it without importing proposition-authoring internals.
+
+If those conditions are met, Contract A is probably the wrong home because its North Star intentionally excludes evidence-world trust/coverage characterization, and Contract B is temporally too late because it is emitted after EB work. That would be evidence for a distinct Gate→EB boundary, but not yet for any particular letter or schema.
+
+**Local-work threshold:** none for the current design question. The next evidence is repository/hosted experimental work: qualify specific fields and test frozen-pool EB consumption. Local work is needed only if a later retrieval experiment depends on machine-local corpus/index/runtime behavior that hosted execution cannot reproduce.
+
+## Revised programme order
+
+The North-Star audit now suggests this order:
+
+1. finish the existing Contract-E provenance discriminator rather than widening E;
+2. run the H1 intent-materialization representation discriminator without assuming a new contract;
+3. perform H2 execution-receipt obligation/conformance analysis against the existing MainFrame receipt;
+4. let the existing Gate/EB field-qualification programme decide whether H4 ever crosses the threshold for a shared contract;
+5. only then decide whether the contract alphabet needs to grow.
+
+This order prefers elimination and reuse over filling conceptual whitespace with new schemas.
