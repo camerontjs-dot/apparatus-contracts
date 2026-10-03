@@ -464,3 +464,137 @@ The North-Star audit now suggests this order:
 5. only then decide whether the contract alphabet needs to grow.
 
 This order prefers elimination and reuse over filling conceptual whitespace with new schemas.
+
+
+---
+
+# Bounded follow-up results — 2026-10-03
+
+The initial North-Star hypotheses have now been pushed through live repository review and, where useful, frozen hosted discriminators.
+
+## H1 — Decision effect → executable intent
+
+**Current bounded result:** `PROFILE_SPECIFIC_INTENT_VALIDATION_SUPPORTED; UNIVERSAL_INTENT_CONTRACT_NOT_JUSTIFIED`
+
+Research issue: #167  
+Frozen hosted bake-off: PR #169  
+Successful run: `37153922652`
+
+Observed on two action-materialization domains:
+
+- MainFrame task dispatch;
+- ERS pending-review shadow.
+
+The weak effect/target-only binder false-accepted all material action substitutions in the frozen matrix.
+
+A generic common intent envelope with identity-bearing implementation/input/environment/side-effect/pre-state fields also false-accepted those self-consistent semantic substitutions because it had no effect/domain-specific interpretation of the fields.
+
+An opaque native intent plus an effect/domain-specific validator had zero false accepts and zero false rejects. Adding the common envelope on top of that profile produced identical discrimination.
+
+**Inference:** the current evidence supports a common *obligation family* for action materialization, but not a universal shared wire schema. The load-bearing property is effect/domain-specific validation of the exact native action plus immutable identity binding.
+
+**Next discriminating evidence:** a real executor must consume the exact profile-validated action after Contract E and demonstrate that executable/arguments/side-effect/pre-state substitution cannot occur between authorization and application.
+
+That is now a machine/runtime question, not another representation question.
+
+## H2 — execution / verification receipt
+
+**Current bounded result:** `EXISTING_RECEIPT_CARRIER_SUPPORTED_FOR_BINDING_PROFILE_RESEARCH; NEW_RECEIPT_CONTRACT_NOT_JUSTIFIED`
+
+Research issue: #168  
+Frozen hosted bake-off: PR #170  
+Successful run: `37153925414`
+
+Live MainFrame already supplies the important lifecycle carrier semantics: durable receipt identity, idempotency, actor/authority class, authority recheck, requested/accepted/completed state, explicit refusal/failure/interruption, terminal result hash, changed files, verification/evidence pointers and recovery posture.
+
+The weak native-receipt-only consumer false-accepted Decision, Authorization, intent, pre-state, post-state and verifier substitution because those CAL-Pipeline bindings are not native receipt fields.
+
+A deterministic external binding sidecar tied to exact receipt ID/result hash and carrying exact D/E/intent/pre-state/post-state/verifier identities rejected every frozen substitution with zero false rejects.
+
+Inlining the same bindings into the MainFrame receipt produced identical discrimination.
+
+**Inference:** the missing property is a bounded CAL-Pipeline binding profile over the existing receipt, not evidence for replacing or expanding the native receipt schema.
+
+**Next discriminating evidence:** apply one harmless real action and establish exact pre-state, exact authorized intent, native receipt, exact post-state and verifier evidence under the sidecar binding. This requires a real executor/target.
+
+## H3 — trusted point-of-use provenance
+
+**Current bounded result:** `EXTERNAL_TRUST_BOUNDARY_CONFIRMED; CURRENT FROZEN MATRIX NOW REQUIRES LOCAL KEY CUSTODY`
+
+The Contract E core predicate should not be widened to infer trusted origin from hashes.
+
+The trusted mediator must independently source at least:
+
+- AuthorityState/root source;
+- evaluation time;
+- actor/workload identity;
+- target/pre-state observation.
+
+PR #130 already preregisters the first decisive subset: supervisor-owned time plus exact E request/result binding.
+
+The exact frozen ERS verifier/supervisor used by the current successor hard-pin issuer key identity:
+
+`sha256:e7f4581c2d58eecd0279f895cf3dd49df3098d092fa1e083731d802fcd1db259`
+
+and the supervisor refuses any private key that does not match it.
+
+The ERS freeze receipt records that this qualification-only key was generated before freeze and was not rotated. The current local keychain contains the matching key, but the private key has not been exported or used in the later discriminator.
+
+Changing the issuer now would create a new verifier/supervisor apparatus rather than executing the frozen scientific subject. The original preregistration allowed a new key **before** candidate freeze; that point has passed for this frozen successor.
+
+**Inference:** the next exact PR #130 matrix has reached a genuine local custody boundary. The local requirement is not “Contract E needs a Mac.” It is that the current frozen scientific subject requires the exact frozen issuer private key while preserving the existing verifier bytes.
+
+The fresh-process successor should still remove irrelevant earlier apparatus coupling: fresh interpreters, released-D check before research-profile import, a separate candidate process, and an empty dedicated sandbox rather than using whole-MainFrame metadata as the scientific property.
+
+## H4 — pre-retrieval evidence-world freeze
+
+**Current bounded result:** `NOT_ELIGIBLE_FOR_SHARED_CONTRACT_DECISION_YET`
+
+EvidenceGate already owns the pre-retrieval standardization apparatus role.
+
+At `proposition-authoring@96efd44e9d6d2325b9bccc6d6ebdcdad9c8411b1`, the feature registry defines:
+
+`IMPLEMENTED_SHADOW → QUALIFIED_DESCRIPTIVE → QUALIFIED_HINT → QUALIFIED_CAUSAL`
+
+and all relevant fields remain `IMPLEMENTED_SHADOW`.
+
+The V0 registry explicitly rejects hint/causal authority, and EB's own projection helper refuses fields below `QUALIFIED_HINT`.
+
+Evidence Bundler #91 independently preserves the same firewall.
+
+**Inference:** there is no current contract gap to solve. The shared Gate→EB boundary question becomes eligible only after a particular field is separately qualified as a hint and EB demonstrates a legitimate causal pre-retrieval need that cannot be reconstructed from Contract A or another existing authority.
+
+This is blocked on evidence, not local machine access.
+
+## Updated architecture pressure
+
+The evidence now favors this shape:
+
+```text
+Contract D
+  exact policy-selected effect
+        ↓
+effect/domain-specific action materializer
+  native immutable intent + validator/profile
+        ↓
+Contract E
+  point-of-use authorization of exact intent identity
+        ↓
+executor
+        ↓
+existing execution receipt
+  + CAL-Pipeline binding sidecar
+        ↓
+verification / reconstruction
+```
+
+This is still a research architecture, not canonical contract authority.
+
+The important change from the initial audit is what **did not** survive scrutiny:
+
+- no evidence yet for a universal execution-intent contract;
+- no evidence yet for a new execution-receipt contract;
+- no evidence that trusted-origin semantics should be pushed into Contract E;
+- no evidence yet that EvidenceGate needs a shared cross-repository contract.
+
+The remaining gaps are now concrete empirical boundaries rather than empty boxes in a diagram.
