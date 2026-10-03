@@ -1,0 +1,146 @@
+name: CAL polarity successor downstream Decision D RC0
+
+on:
+  push:
+    branches: [research/cal-v1-polarity-successor-downstream-decision-d-rc0-20261003]
+    paths:
+      - "research/cal_v1_polarity_successor_downstream_decision_d_rc0_20261003/**"
+      - ".github/workflows/cal-v1-polarity-successor-downstream-decision-d-rc0.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "research/cal_v1_polarity_successor_downstream_decision_d_rc0_20261003/**"
+      - ".github/workflows/cal-v1-polarity-successor-downstream-decision-d-rc0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout frozen apparatus
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Checkout exact CAL polarity product
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/claim-audit-lab
+          ref: 64b6c7702696c851057c1cf0b2c105b1c81db543
+          path: _subjects/cal
+          fetch-depth: 1
+      - name: Checkout exact contract-a
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 529c92b49a34d5c610618551a8737f019f9fa332
+          path: _subjects/contract-a
+          fetch-depth: 0
+      - name: Checkout exact contract-b
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: c314e53bd91c0736aa4370a364673b069aceb43e
+          path: _subjects/contract-b
+          fetch-depth: 1
+      - name: Checkout exact successor contract-c
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: c183d2d12306ee30c509169a58db55e7430fe8c5
+          path: _subjects/contract-c
+          fetch-depth: 1
+      - name: Checkout predecessor contract-c
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: c5b1d757f3a0ad4f6e2c3f6dbdc2dd2d3c1403ec
+          path: _subjects/contract-c-predecessor
+          fetch-depth: 1
+      - name: Checkout exact contract-c-consumer
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/research-scaffold-harness
+          ref: 12e7e640b229619501960b1b89cf4716d8d985b3
+          path: _subjects/contract-c-consumer
+          fetch-depth: 1
+      - name: Checkout exact contract-c-rc2
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: b42c827acb0a9fe65353354d709add0e27bab307
+          path: _subjects/contract-c-rc2
+          fetch-depth: 1
+      - name: Checkout successor resolver
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 292168222f83c67a24190b4846eebe84392e3d04
+          path: _subjects/contract-c-resolver
+          fetch-depth: 1
+      - name: Checkout predecessor resolver
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 1d33e0612befcf8016816197c90c062373796df9
+          path: _subjects/contract-c-resolver-predecessor
+          fetch-depth: 1
+      - name: Checkout exact contract-d
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/apparatus-contracts
+          ref: 298a1a0f7b7b6d7712e11200d04faec3e1ca169b
+          path: _subjects/contract-d
+          fetch-depth: 0
+      - name: Checkout exact decision
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/decision-engine
+          ref: cadef9e103edeba32f1247b99d81d5e25175bcd9
+          path: _subjects/decision
+          fetch-depth: 1
+      - name: Checkout exact eb
+        uses: actions/checkout@v4
+        with:
+          repository: camerontjs-dot/evidence-bundler
+          ref: 4e1f6fe00e7c350b28f52bfea14f1f8988847884
+          path: _subjects/eb
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: astral-sh/setup-uv@v6
+      - name: Compile the frozen harness
+        run: |
+          python -m py_compile research/cal_v1_polarity_successor_downstream_decision_d_rc0_20261003/run_qualification.py research/cal_v1_polarity_successor_downstream_decision_d_rc0_20261003/source_pr123.py research/cal_v1_polarity_successor_downstream_decision_d_rc0_20261003/package_evidence.py
+      - name: Execute polarity successor downstream qualification
+        run: |
+          python research/cal_v1_polarity_successor_downstream_decision_d_rc0_20261003/run_qualification.py \
+            --subjects-root "$GITHUB_WORKSPACE/_subjects" \
+            --run-root "$RUNNER_TEMP/cal-polarity-successor-downstream-rc0" \
+            --python "$(command -v python)" --node "$(command -v node)"
+      - name: Repository-maintained verification and regression
+        run: |
+          make VENV="$RUNNER_TEMP/cal-polarity-successor-regression" PYTHON="$(command -v python)" verify test
+      - name: Preserve native evidence inside a verified transport archive
+        if: always()
+        run: |
+          python research/cal_v1_polarity_successor_downstream_decision_d_rc0_20261003/package_evidence.py \
+            --run-root "$RUNNER_TEMP/cal-polarity-successor-downstream-rc0" \
+            --archive "$RUNNER_TEMP/cal-polarity-successor-downstream-evidence.tar.gz"
+      - name: Upload immutable raw qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cal-polarity-successor-downstream-${{ github.sha }}
+          if-no-files-found: error
+          retention-days: 90
+          path: |
+            ${{ runner.temp }}/cal-polarity-successor-downstream-evidence.tar.gz
+            ${{ runner.temp }}/cal-polarity-successor-downstream-evidence.tar.gz.manifest.json
