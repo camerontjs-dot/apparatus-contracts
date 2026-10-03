@@ -1,0 +1,21 @@
+{
+  "schema": "ers-05-fresh-process-successor-freeze/1",
+  "state": "FROZEN_BEFORE_DECISIVE_MATRIX",
+  "parent_pr": 150,
+  "parent_head": "f6ac1ecd3d1220834f6f5b245ab0d57aeca92e79",
+  "preregistration_commit": "19e701b3b1d94ac137f6c9852b63f00f9cf42a10",
+  "source_commit": "1f626090cb03d32294cfd02fb893ebd1defecc86",
+  "source_tree": "9cc37962c810eee0b62021857dec7603dab251ae",
+  "blobs": {
+    "preregistration": "2a2ebecf0d7947ff02ce285ea1cb6bd0fac9a382",
+    "fresh_released_d_preflight": "3b3512eb2f211ff6b6e541a624428ce5db9289b6",
+    "fresh_process_driver": "322e66fbe02bc3c2ef4b6a9157b3df37b3b969e2",
+    "inherited_scientific_runner": "45eab4fc9aba4b851020b649546b09272c249c36"
+  },
+  "decisive_matrix_observed": false,
+  "contract_e_evaluations": 0,
+  "supervisor_launches": 0,
+  "issuer_public_key_identity": "sha256:e7f4581c2d58eecd0279f895cf3dd49df3098d092fa1e083731d802fcd1db259",
+  "private_key_in_repository": false,
+  "local_execution_required_for_exact_frozen_key": true
+}

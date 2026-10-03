@@ -1,0 +1,56 @@
+name: Research ERS 05 fresh-process successor static check
+
+on:
+  push:
+    branches:
+      - research/ers-contract-e-eval-provenance-fresh-process-20261003
+  pull_request:
+    paths:
+      - 'research/ers-contract-e-evaluation-provenance-20261003/fresh-process-successor/**'
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile successor scripts only
+        run: |
+          python -m py_compile \
+            research/ers-contract-e-evaluation-provenance-20261003/fresh-process-successor/fresh_released_d_preflight.py \
+            research/ers-contract-e-evaluation-provenance-20261003/fresh-process-successor/run_fresh_process_successor.py
+      - name: Verify frozen source identities without scientific imports
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root = Path("research/ers-contract-e-evaluation-provenance-20261003/fresh-process-successor")
+          f = json.loads((root / "FREEZE.json").read_text())
+          assert f["decisive_matrix_observed"] is False
+          assert f["contract_e_evaluations"] == 0
+          assert f["supervisor_launches"] == 0
+          assert f["source_commit"] == "1f626090cb03d32294cfd02fb893ebd1defecc86"
+          for path, expected in {
+              root / "PREREGISTRATION.md": f["blobs"]["preregistration"],
+              root / "fresh_released_d_preflight.py": f["blobs"]["fresh_released_d_preflight"],
+              root / "run_fresh_process_successor.py": f["blobs"]["fresh_process_driver"],
+          }.items():
+              actual = subprocess.check_output(
+                  ["git", "rev-parse", f"{f['source_commit']}:{path.as_posix()}"],
+                  text=True,
+              ).strip()
+              assert actual == expected, (path, actual, expected)
+          runner = "research/ers-contract-e-evaluation-provenance-20260921/fixture-bound-identity-successor-rc0/reproduce_rc6_fixture_bound.py"
+          actual_runner = subprocess.check_output(
+              ["git", "rev-parse", f"HEAD:{runner}"], text=True
+          ).strip()
+          assert actual_runner == f["blobs"]["inherited_scientific_runner"]
+          print("STATIC_SUCCESSOR_CHECK: PASS")
+          PY
