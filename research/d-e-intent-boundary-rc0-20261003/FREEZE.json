@@ -1,0 +1,12 @@
+{
+  "schema": "d-e-intent-boundary-prefreeze/1",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION",
+  "base": "c3563cff66d2c85dcbf575c693056e2d8e4563d4",
+  "prefreeze_head": "0df2117ea6175f20a67e8748efd3f232b20f226b",
+  "prefreeze_tree": "02e4c3b9bf5e1785c331efd91940f5a9003f31b9",
+  "preregistration_blob": "e9a70c352892445abd3d339a4f898936bfa3dbf7",
+  "cases_blob": "eccf3520996b6c73d5d4a289eba2fe6f7ccf16c2",
+  "implementation_present": false,
+  "evaluator_present": false,
+  "decisive_results_observed": false
+}
