@@ -407,6 +407,15 @@ class Runner:
         self.checkpoint()
 
     def load_source(self) -> None:
+        self.phase = "constructor-import"
+        # Run 01 blocked here: the orchestrator interpreter could not import
+        # the preserved constructor. The clean environment already has that
+        # dependency set. EB source still comes from the exact subject tree.
+        site_packages = self.root / "env-S" / "lib" / "python3.11" / "site-packages"
+        if not site_packages.is_dir():
+            raise SubjectUnavailable("clean environment does not provide the constructor imports")
+        sys.path.insert(0, str(site_packages))
+        self.receipt["orchestrator_imports"] = "clean-env-S-site-packages"
         roots = {
             "CONTRACT_A_ROOT": "contract-a",
             "EB_ROOT": "eb",
