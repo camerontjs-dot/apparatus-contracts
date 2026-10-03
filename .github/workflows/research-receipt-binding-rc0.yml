@@ -1,0 +1,21 @@
+name: Research receipt binding RC0
+
+on:
+  push:
+    branches:
+      - research/execution-receipt-binding-profile-rc0-20261003
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python research/execution-receipt-binding-profile-rc0-20261003/run_bakeoff.py
