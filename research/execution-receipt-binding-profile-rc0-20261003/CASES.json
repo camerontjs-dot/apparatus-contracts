@@ -1,0 +1,222 @@
+{
+  "schema": "execution-receipt-binding-cases/1",
+  "frozen_before_implementation": true,
+  "receipt_fixture": {
+    "id": "receipt-fixture-001",
+    "idempotency_key": "idem-fixture-001",
+    "task_id": "task-fixture-001",
+    "project_id": "project-fixture",
+    "command_type": "dispatch_task",
+    "state": "completed",
+    "actor": "local-operator",
+    "authority_class": "reviewed-ready-packet",
+    "packet_id": "packet-fixture-001",
+    "contract_sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "source_sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "requested_at": "2026-10-03T20:00:00Z",
+    "accepted_at": "2026-10-03T20:00:01Z",
+    "completed_at": "2026-10-03T20:00:02Z",
+    "result": {
+      "schema_version": 1,
+      "dispatch": "live-graduated-tuple",
+      "adapter": "codex",
+      "profile": "bounded-code",
+      "task_category": "mechanical-edit",
+      "applied": true,
+      "outcome": "pass",
+      "changed_files": [
+        "src/qualified.py"
+      ],
+      "verification": {
+        "status": "approved-test-artifact-recorded",
+        "evidence_identity": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "evidence_receipt": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "rollback_available": true
+    },
+    "result_sha256": "__COMPUTE_FROM_RESULT__",
+    "error_code": null,
+    "error_message": null
+  },
+  "expected_bindings": {
+    "decision_identity": "decision:sha256:5555555555555555555555555555555555555555555555555555555555555555",
+    "authorization_evaluation_identity": "authorization-evaluation:sha256:6666666666666666666666666666666666666666666666666666666666666666",
+    "intent_identity": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+    "target_pre_state_identity": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+    "target_post_state_identity": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+    "verifier_identity": "verifier:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "verification_evidence_identity": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "cases": [
+    {
+      "id": "BASELINE",
+      "mutations": [],
+      "expected_valid": true
+    },
+    {
+      "id": "DECISION-SUBSTITUTION",
+      "mutations": [
+        {
+          "target": "binding.decision_identity",
+          "op": "set",
+          "value": "decision:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "AUTHORIZATION-SUBSTITUTION",
+      "mutations": [
+        {
+          "target": "binding.authorization_evaluation_identity",
+          "op": "set",
+          "value": "authorization-evaluation:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "INTENT-SUBSTITUTION",
+      "mutations": [
+        {
+          "target": "binding.intent_identity",
+          "op": "set",
+          "value": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "PRESTATE-SUBSTITUTION",
+      "mutations": [
+        {
+          "target": "binding.target_pre_state_identity",
+          "op": "set",
+          "value": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "POSTSTATE-SUBSTITUTION",
+      "mutations": [
+        {
+          "target": "binding.target_post_state_identity",
+          "op": "set",
+          "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "VERIFIER-SUBSTITUTION",
+      "mutations": [
+        {
+          "target": "binding.verifier_identity",
+          "op": "set",
+          "value": "verifier:sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "VERIFICATION-EVIDENCE-SUBSTITUTION",
+      "mutations": [
+        {
+          "target": "binding.verification_evidence_identity",
+          "op": "set",
+          "value": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "MISSING-DECISION",
+      "mutations": [
+        {
+          "target": "binding.decision_identity",
+          "op": "delete"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "MISSING-AUTHORIZATION",
+      "mutations": [
+        {
+          "target": "binding.authorization_evaluation_identity",
+          "op": "delete"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "MISSING-INTENT",
+      "mutations": [
+        {
+          "target": "binding.intent_identity",
+          "op": "delete"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "RECEIPT-ID-CROSSPAIR",
+      "mutations": [
+        {
+          "target": "receipt.id",
+          "op": "set",
+          "value": "receipt-other-999"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "RESULT-BYTES-MUTATION",
+      "mutations": [
+        {
+          "target": "receipt.result.changed_files",
+          "op": "set",
+          "value": [
+            "src/qualified.py",
+            "config/authority.json"
+          ]
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "COMPLETED-NOT-APPLIED",
+      "mutations": [
+        {
+          "target": "receipt.result.applied",
+          "op": "set",
+          "value": false
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "FAILED-CARRIER",
+      "mutations": [
+        {
+          "target": "receipt.state",
+          "op": "set",
+          "value": "failed"
+        }
+      ],
+      "expected_valid": false
+    },
+    {
+      "id": "INTERRUPTED-CARRIER",
+      "mutations": [
+        {
+          "target": "receipt.state",
+          "op": "set",
+          "value": "interrupted"
+        }
+      ],
+      "expected_valid": false
+    }
+  ]
+}
