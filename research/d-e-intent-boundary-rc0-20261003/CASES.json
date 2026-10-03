@@ -42,7 +42,9 @@
           "src/qualified.py"
         ],
         "create": [],
-        "pre_state_identity": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+        "pre_state_identity": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "arguments_identity": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "verification_identity": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
       }
     },
     "ers_pending_review": {
@@ -84,7 +86,17 @@
         "side_effect_targets": [
           "pending-review/claim-fixture-1.md"
         ],
-        "pre_state_identity": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        "pre_state_identity": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "arguments": [
+          "--claim-id",
+          "claim-fixture-1",
+          "--shadow"
+        ],
+        "input_identities": [
+          "decision:sha256:7777777777777777777777777777777777777777777777777777777777777777",
+          "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ]
       }
     }
   },
