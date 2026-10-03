@@ -1,0 +1,236 @@
+{
+  "schema": "d-e-intent-boundary-cases/1",
+  "frozen_before_implementation": true,
+  "domains": {
+    "mainframe_task_dispatch": {
+      "decision_identity": "decision:sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "effect": {
+        "type": "task.dispatch",
+        "version": "1"
+      },
+      "target_identity": "task:sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "profile": "mainframe.task-dispatch/1",
+      "baseline": {
+        "executor": "codex",
+        "agent_profile": "bounded-code",
+        "task_category": "mechanical-edit",
+        "arguments_identity": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "source_contract_identity": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "environment": {
+          "network": "disabled",
+          "workdir": "project-root",
+          "timeout_seconds": 600
+        },
+        "side_effect_scope": {
+          "editable": [
+            "src/qualified.py"
+          ],
+          "create": [],
+          "read_only": [
+            "tests/fixture.json"
+          ]
+        },
+        "verification_identity": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+        "pre_state_identity": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+      },
+      "profile_rules": {
+        "executor": "codex",
+        "agent_profile": "bounded-code",
+        "task_category": "mechanical-edit",
+        "network": "disabled",
+        "editable": [
+          "src/qualified.py"
+        ],
+        "create": [],
+        "pre_state_identity": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+      }
+    },
+    "ers_pending_review": {
+      "decision_identity": "decision:sha256:7777777777777777777777777777777777777777777777777777777777777777",
+      "effect": {
+        "type": "epistemic_audit.stage_pending_review",
+        "version": "1"
+      },
+      "target_identity": "claim:sha256:8888888888888888888888888888888888888888888888888888888888888888",
+      "profile": "ers.pending-review/1",
+      "baseline": {
+        "executable_identity": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "entry_point": "ers.contract_e.shadow_stage_pending_review",
+        "arguments": [
+          "--claim-id",
+          "claim-fixture-1",
+          "--shadow"
+        ],
+        "input_identities": [
+          "decision:sha256:7777777777777777777777777777777777777777777777777777777777777777",
+          "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ],
+        "environment": {
+          "mode": "shadow",
+          "network": "disabled",
+          "repository": "epistemic-research-system"
+        },
+        "side_effect_targets": [
+          "pending-review/claim-fixture-1.md"
+        ],
+        "pre_state_identity": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "profile_rules": {
+        "executable_identity": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "entry_point": "ers.contract_e.shadow_stage_pending_review",
+        "network": "disabled",
+        "mode": "shadow",
+        "side_effect_targets": [
+          "pending-review/claim-fixture-1.md"
+        ],
+        "pre_state_identity": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "MF-BASELINE",
+      "domain": "mainframe_task_dispatch",
+      "mutation": null,
+      "material": false,
+      "expected_profile_valid": true
+    },
+    {
+      "id": "MF-EXECUTOR-SWAP",
+      "domain": "mainframe_task_dispatch",
+      "mutation": {
+        "path": "executor",
+        "value": "unqualified-shell"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "MF-NETWORK-RELAX",
+      "domain": "mainframe_task_dispatch",
+      "mutation": {
+        "path": "environment.network",
+        "value": "enabled"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "MF-SCOPE-WIDEN",
+      "domain": "mainframe_task_dispatch",
+      "mutation": {
+        "path": "side_effect_scope.editable",
+        "value": [
+          "src/qualified.py",
+          "config/authority.json"
+        ]
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "MF-PRESTATE-STALE",
+      "domain": "mainframe_task_dispatch",
+      "mutation": {
+        "path": "pre_state_identity",
+        "value": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "MF-ARGUMENT-CHANGE",
+      "domain": "mainframe_task_dispatch",
+      "mutation": {
+        "path": "arguments_identity",
+        "value": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "ERS-BASELINE",
+      "domain": "ers_pending_review",
+      "mutation": null,
+      "material": false,
+      "expected_profile_valid": true
+    },
+    {
+      "id": "ERS-EXECUTABLE-SWAP",
+      "domain": "ers_pending_review",
+      "mutation": {
+        "path": "executable_identity",
+        "value": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "ERS-NETWORK-RELAX",
+      "domain": "ers_pending_review",
+      "mutation": {
+        "path": "environment.network",
+        "value": "enabled"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "ERS-SIDE-EFFECT-SWAP",
+      "domain": "ers_pending_review",
+      "mutation": {
+        "path": "side_effect_targets",
+        "value": [
+          "knowledge/stable/claim-fixture-1.md"
+        ]
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "ERS-PRESTATE-STALE",
+      "domain": "ers_pending_review",
+      "mutation": {
+        "path": "pre_state_identity",
+        "value": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "ERS-ARGUMENT-CHANGE",
+      "domain": "ers_pending_review",
+      "mutation": {
+        "path": "arguments",
+        "value": [
+          "--claim-id",
+          "claim-fixture-2",
+          "--shadow"
+        ]
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "CROSS-PROFILE",
+      "domain": "ers_pending_review",
+      "mutation": {
+        "path": "__profile__",
+        "value": "mainframe.task-dispatch/1"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    },
+    {
+      "id": "UNKNOWN-PROFILE",
+      "domain": "mainframe_task_dispatch",
+      "mutation": {
+        "path": "__profile__",
+        "value": "unknown.intent/99"
+      },
+      "material": true,
+      "expected_profile_valid": false
+    }
+  ]
+}
