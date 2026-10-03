@@ -4,6 +4,8 @@ This repository is the canonical home for shared contracts and contract-level re
 
 The maintained architecture is intentionally asymmetric. A contract exists only where producer/consumer evidence supports one; research candidates do not become canonical because they are convenient to draw as a pipeline.
 
+The repository-level and per-contract purpose map is captured in [`NORTH-STARS.md`](NORTH-STARS.md). It is a design audit, not a replacement for the canonical specifications, and it records candidate gaps where adjacent contract purposes leave a responsibility unowned.
+
 ## Current contract surfaces
 
 ### Contract A — upstream work object → [Evidence Bundler](https://github.com/camerontjs-dot/evidence-bundler)
@@ -81,6 +83,7 @@ The repository contains five different kinds of material. They should not be con
 Important top-level surfaces include:
 
 ```text
+NORTH-STARS.md                               repository + Contract A–E purpose/boundary audit
 APPARATUS-CONTRACT-SEPARATION.md             repository-wide boundary governance
 handoff-contract-v1.0.0.md                  legacy Contract A / original A+B authority
 contract-a-v2.0.0.md                         canonical Contract A 2.0.0 authority
