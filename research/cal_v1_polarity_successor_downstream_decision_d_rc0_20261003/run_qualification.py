@@ -41,7 +41,7 @@ SUPPORTED = "SUPPORTED_POLARITY_SUCCESSOR_DOWNSTREAM_DECISION_D_CONFORMANCE"
 FALSIFIED = "FALSIFIED_POLARITY_SUCCESSOR_DOWNSTREAM_CONFORMANCE"
 INVALID = "INCONCLUSIVE_APPARATUS_INVALID"
 BLOCKED = "BLOCKED_EXACT_SUBJECT_UNAVAILABLE"
-HASH_RE = re.compile(r"^(?:sha256:)?[0-9a-f]{64}$")
+HASH_RE = re.compile(r"^(?:sha256:)?(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 ID_PREFIXES = (
     "cal-child-result:",
     "measurement:",
@@ -589,6 +589,12 @@ class Runner:
             raise ScientificFailure("Decision policy changed")
         if decision["effect"]["type"] != self.baseline["unchanged_authority"]["effect_type"]:
             raise ScientificFailure("Contract D effect changed")
+        recomposition = contract_c["recomposition"]
+        unchanged = self.baseline["unchanged_authority"]
+        if recomposition["cal_freeze_commit"] != unchanged["cal_freeze_commit"]:
+            raise ScientificFailure("Contract C recomposition freeze commit drifted")
+        if recomposition["cal_semantic_source_commit"] != unchanged["cal_semantic_source_commit"]:
+            raise ScientificFailure("Contract C recomposition semantic source drifted")
 
     def attribute_case(self, case_id: str, execution: dict[str, Any]) -> dict[str, Any]:
         expected = self.baseline["cases"][case_id]
