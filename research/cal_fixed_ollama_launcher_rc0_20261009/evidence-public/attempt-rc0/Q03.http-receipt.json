@@ -1,0 +1,14 @@
+{
+  "ended_at": "2026-10-09T14:07:02.534305+00:00",
+  "headers": {
+    "Connection": "close",
+    "Content-Type": "application/json; charset=utf-8",
+    "Date": "Fri, 09 Oct 2026 14:07:02 GMT",
+    "Transfer-Encoding": "chunked"
+  },
+  "request_sha256": "40e77c83a3d592765c235de2dbfa2f19a3f8df9b96f9964e138a21369170afd7",
+  "response_sha256": "3af1a8ee3a75db7ac2ab75c6931b604d092951d698184260003b923f72720d0d",
+  "started_at": "2026-10-09T14:06:54.646068+00:00",
+  "status": 200,
+  "url": "http://127.0.0.1:11434/api/chat"
+}

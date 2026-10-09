@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "--context",
+    "desktop-linux",
+    "exec",
+    "9f44b093a6033d8adf46c0fd23a42dec6f9134c56ab95e23ec60438f645886b7",
+    "/bin/busybox",
+    "touch",
+    "/tmp/forbidden.txt"
+  ],
+  "ended_at": "2026-10-09T14:07:08.559038+00:00",
+  "environment_keys": [
+    "HOME",
+    "PATH"
+  ],
+  "exit_code": 1,
+  "started_at": "2026-10-09T14:07:08.493076+00:00",
+  "stderr_sha256": "1e71acfe4b59de2fe3d1c960e8015abc24eff163b24c51e78a5033a3be8873de",
+  "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "timed_out": false
+}

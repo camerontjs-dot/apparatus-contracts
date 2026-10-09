@@ -1,0 +1,26 @@
+{
+  "actor_inference_calls": 0,
+  "commit": "fb8516e588ec8f810458303f5f2abe0e8c36c106",
+  "freeze_sha256": "8b204a125270840dc1963e3c2fa202e7f21db4659586fedce282473d7890ba92",
+  "frozen_files": {
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/independent_packet_checker.py": "6b84015c19ab493483761c8ff8f885e3d63f0a0095f1e8d42c1105be4e91c448",
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/prepare_packet.py": "33376fe6b1f910ba6a07103b0292dbb9a2d940757318705fa0ac182779002e43",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/EXPECTED-Q03-PROMPT.txt": "6a85f69698413ac5a4a92922479bbd41cddcd07dbc2ec86b1b8501dc9f7174ea",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/MANIFEST.json": "f8c3cdb4716dacb611b0bbf49e30d5213d1a053f8abcb89e1fdb4e46edf99948",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/MODEL-REQUEST.json": "6c1ca561cbd0fb6e5df2ae4dedb42ca6e9ff1672903a5f3e44d693b70b070162",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/OBSERVED-manifest.json": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/OBSERVED-ollama-build-identity.json": "d02d9c43139f481ee6a776db1412917580c4cf7b8dc5eed2a4795a5c6dedae49",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/PARENT-PROTOCOL.md": "887ca9978779f75df576e8391c1565e1b746bc3fad69c7b0e0f350785cca7a7c",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/PROTOCOL.md": "d58d6037b426d71d6dbfef2759eac8e857d33644ae1a47496e00794fa167b4c4",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/PROVIDER-POSTAMBLE.txt": "f795e26d414b9674b70bb2a8ea4546fe423ad9238a0330a75fb148f4d4722029",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/PROVIDER.json": "a80bfdcd9720024506f4a3502e8254b10b2068d18d6e5e22aefb45ba4265ab7a",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/Q03-RENDER-REQUEST.json": "40e77c83a3d592765c235de2dbfa2f19a3f8df9b96f9964e138a21369170afd7",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/SOURCE-INVENTORY.json": "ee4ea7739a1cd827bf66e283390725e3db29632b65b2ccf26e789abb76411183",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/TOOL-PROFILE.json": "48b8971825823a41e2825780786ad9b824000421612ae236bdf5d5d68f6b5ccc",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/fixed_adapter.py": "f913d21bf5016571940c9bf340e93ad9af8450a996efbc9c6cefca343759e375",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/public-synthetic-source/data/marker.txt": "04d7c29ff732dcb8c993138ab73cfc3195ffd6e52a7cb26254bb3c2c9ba099c7",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/public-synthetic-source/instructions/request.txt": "fe139a5eee24ab24be7eb05af759de8f0f1705ebfd35b2d3958a304a7aa98987",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/qualify_once.py": "c61ed553e47632338f1c86b699316efb5b25dee25d1f7b4d45803fc095f633d4"
+  },
+  "started_at": "2026-10-09T14:06:54.615747+00:00"
+}

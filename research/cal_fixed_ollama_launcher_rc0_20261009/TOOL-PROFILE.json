@@ -1,0 +1,109 @@
+{
+  "binding": {
+    "read_packet_file": "fixed_adapter.FixedAdapter.read_packet_file -> fixed docker exec /bin/busybox cat -- /packet/<exact enum>",
+    "write_result": "fixed_adapter.FixedAdapter.write_result -> fixed docker exec /bin/busybox sh constant redirect /scratch/answer.txt; content via stdin"
+  },
+  "extensions": [],
+  "functions": [
+    {
+      "description": "Read one exact public synthetic input through the fixed Docker worker reader.",
+      "name": "read_packet_file",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "enum": [
+              "data/marker.txt",
+              "instructions/request.txt"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "description": "Write a bounded answer to the sole permitted scratch output.",
+      "name": "write_result",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "maxLength": 4096,
+            "type": "string"
+          },
+          "path": {
+            "enum": [
+              "answer.txt"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "content"
+        ],
+        "type": "object"
+      }
+    }
+  ],
+  "generated": [],
+  "hosted": [],
+  "inventory_basis": "Must be observed through Q03 render capture and fail-closed Q09; these empty categories are not a pass before those receipts.",
+  "mcp": [],
+  "native": [],
+  "schema": "cal-fixed-ollama-tool-profile/1",
+  "schema_normalization": "Ollama 0.40.0 api.ToolFunctionParameters/ToolProperty cannot render additionalProperties or maxLength. The transmitted schema omits those unsupported fields; the adapter independently enforces exact keys and 4096 UTF-8 bytes.",
+  "transmitted_and_expected_effective_tools": [
+    {
+      "function": {
+        "description": "Read one exact public synthetic input through the fixed Docker worker reader.",
+        "name": "read_packet_file",
+        "parameters": {
+          "properties": {
+            "path": {
+              "enum": [
+                "data/marker.txt",
+                "instructions/request.txt"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Write a bounded answer to the sole permitted scratch output.",
+        "name": "write_result",
+        "parameters": {
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "path": {
+              "enum": [
+                "answer.txt"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "curl",
+    "--noproxy",
+    "*",
+    "--max-time",
+    "5",
+    "--silent",
+    "--show-error",
+    "http://127.0.0.1:11434/api/version"
+  ],
+  "started_at": "2026-10-09T13:52:37.666842+00:00",
+  "ended_at": "2026-10-09T13:52:37.678662+00:00",
+  "exit_code": 0,
+  "stdout_sha256": "9c1005bac79a154c8437979ae0993302dda13d1aa7a267e36ac80a40c6c0080c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "curl",
+    "--noproxy",
+    "*",
+    "--max-time",
+    "5",
+    "--silent",
+    "--show-error",
+    "http://127.0.0.1:11434/api/ps"
+  ],
+  "ended_at": "2026-10-09T14:09:10.210396+00:00",
+  "exit_code": 0,
+  "scope": "post-stop custody only; no continued protocol measurement or rerun",
+  "started_at": "2026-10-09T14:09:10.187626+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "a6fe9ec6e26a38d99fca418b69826e0238b7a2bb319ff05eb153a6fcfd1fa28d"
+}

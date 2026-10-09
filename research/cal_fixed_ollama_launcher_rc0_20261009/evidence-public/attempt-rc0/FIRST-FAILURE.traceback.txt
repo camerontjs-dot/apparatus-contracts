@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<LOCAL_EVIDENCE_ROOT>/repo/research/cal_fixed_ollama_launcher_rc0_20261009/qualify_once.py", line 328, in finish
+    self.run()
+    ~~~~~~~~^^
+  File "<LOCAL_EVIDENCE_ROOT>/repo/research/cal_fixed_ollama_launcher_rc0_20261009/qualify_once.py", line 278, in run
+    self.check(connection.returncode != 0 and b"Network is unreachable" in connection.stderr, "EGRESS_REFUSAL_NOT_OBSERVED")
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<LOCAL_EVIDENCE_ROOT>/repo/research/cal_fixed_ollama_launcher_rc0_20261009/qualify_once.py", line 66, in check
+    raise Stop(reason)
+Stop: EGRESS_REFUSAL_NOT_OBSERVED

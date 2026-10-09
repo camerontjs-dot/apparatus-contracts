@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "docker",
+    "--context",
+    "desktop-linux",
+    "ps",
+    "-a",
+    "--no-trunc",
+    "--filter",
+    "id=9f44b093a6033d8adf46c0fd23a42dec6f9134c56ab95e23ec60438f645886b7",
+    "--format",
+    "{{json .}}"
+  ],
+  "ended_at": "2026-10-09T14:09:10.187264+00:00",
+  "exit_code": 0,
+  "scope": "post-stop custody only; no continued protocol measurement or rerun",
+  "started_at": "2026-10-09T14:09:10.108175+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
