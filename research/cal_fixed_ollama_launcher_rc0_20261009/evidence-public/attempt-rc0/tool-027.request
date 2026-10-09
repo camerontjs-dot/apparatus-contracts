@@ -1,0 +1,1 @@
+{"name": "write_result", "arguments": {"path": "/packet/data/marker.txt", "content": "PUBLIC-WRITE-CONTROL"}}

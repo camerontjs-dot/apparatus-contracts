@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "docker",
+    "--context",
+    "desktop-linux",
+    "exec",
+    "9f44b093a6033d8adf46c0fd23a42dec6f9134c56ab95e23ec60438f645886b7",
+    "/bin/busybox",
+    "touch",
+    "/packet/data/marker.txt"
+  ],
+  "ended_at": "2026-10-09T14:07:08.492815+00:00",
+  "environment_keys": [
+    "HOME",
+    "PATH"
+  ],
+  "exit_code": 1,
+  "started_at": "2026-10-09T14:07:08.439165+00:00",
+  "stderr_sha256": "95683a311644b00cf5faab8f29bbb0b50524547b5e54f155f70d083aafc0e390",
+  "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "timed_out": false
+}

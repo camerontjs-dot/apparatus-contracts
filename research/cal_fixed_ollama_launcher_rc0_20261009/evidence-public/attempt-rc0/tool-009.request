@@ -1,0 +1,1 @@
+{"function": {"index": 0, "name": "read_packet_file", "arguments": {"path": "data/marker.txt"}}}

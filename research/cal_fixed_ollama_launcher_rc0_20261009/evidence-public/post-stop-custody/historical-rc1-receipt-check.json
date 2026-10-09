@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-09T14:13:02.509100+00:00",
+  "original_rc1": {
+    "FREEZE.json": {
+      "actual_sha256": "dd34b1da4923fc6a91a5cecd2152f2cb9154c5a8c355eb04bd999c3925f2018b",
+      "expected_sha256": "dd34b1da4923fc6a91a5cecd2152f2cb9154c5a8c355eb04bd999c3925f2018b",
+      "matches": true
+    },
+    "controller/first-run.json": {
+      "actual_sha256": "c8dfa2d221de400e49d317aa63cb918df608e5bf1dd726c846399659ca466f25",
+      "expected_sha256": "c8dfa2d221de400e49d317aa63cb918df608e5bf1dd726c846399659ca466f25",
+      "matches": true
+    },
+    "controller/first-run.stderr": {
+      "actual_sha256": "c3307afb3aec3873dca949fb3f22c89eec4976b5db3ff8fbea3114179bd45957",
+      "expected_sha256": "c3307afb3aec3873dca949fb3f22c89eec4976b5db3ff8fbea3114179bd45957",
+      "matches": true
+    }
+  }
+}

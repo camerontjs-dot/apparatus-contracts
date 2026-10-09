@@ -1,0 +1,59 @@
+Name:	busybox
+Umask:	0022
+State:	R (running)
+Tgid:	13
+Ngid:	0
+Pid:	13
+PPid:	0
+TracerPid:	0
+Uid:	65532	65532	65532	65532
+Gid:	65532	65532	65532	65532
+FDSize:	64
+Groups:	65532 
+NStgid:	13
+NSpid:	13
+NSpgid:	13
+NSsid:	13
+Kthread:	0
+VmPeak:	    4052 kB
+VmSize:	    3996 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	    1540 kB
+VmRSS:	    1540 kB
+RssAnon:	     120 kB
+RssFile:	    1420 kB
+RssShmem:	       0 kB
+VmData:	     108 kB
+VmStk:	     132 kB
+VmExe:	    1060 kB
+VmLib:	    2436 kB
+VmPTE:	      36 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffff
+Threads:	1
+SigQ:	0/31737
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	0000000000000000
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	0000000000000000
+CapAmb:	0000000000000000
+NoNewPrivs:	1
+Seccomp:	2
+Seccomp_filters:	1
+Speculation_Store_Bypass:	vulnerable
+SpeculationIndirectBranch:	unknown
+Cpus_allowed:	ff
+Cpus_allowed_list:	0-7
+Mems_allowed:	1
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	12
+nonvoluntary_ctxt_switches:	0

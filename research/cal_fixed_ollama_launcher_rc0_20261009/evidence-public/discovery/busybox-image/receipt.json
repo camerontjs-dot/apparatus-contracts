@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "docker",
+    "image",
+    "inspect",
+    "busybox@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e"
+  ],
+  "started_at": "2026-10-09T13:52:37.563493+00:00",
+  "ended_at": "2026-10-09T13:52:37.583053+00:00",
+  "exit_code": 1,
+  "stdout_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "stderr_sha256": "3f785f83abacc161e347d1632555444da75a21f4033dcf20785f94c96720e6e1"
+}

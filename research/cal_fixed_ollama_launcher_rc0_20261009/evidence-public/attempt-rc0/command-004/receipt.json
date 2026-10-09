@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "docker",
+    "--context",
+    "desktop-linux",
+    "inspect",
+    "9f44b093a6033d8adf46c0fd23a42dec6f9134c56ab95e23ec60438f645886b7"
+  ],
+  "ended_at": "2026-10-09T14:07:07.904371+00:00",
+  "environment_keys": [
+    "HOME",
+    "PATH"
+  ],
+  "exit_code": 0,
+  "started_at": "2026-10-09T14:07:07.865559+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "bdb05960d0a2b5c7845e8bfcb99e07a558f770dd4f9a37f5390d8328c635f78f",
+  "timed_out": false
+}

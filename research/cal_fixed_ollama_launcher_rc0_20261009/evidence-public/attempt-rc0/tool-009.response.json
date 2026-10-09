@@ -1,0 +1,11 @@
+{
+  "ended_at": "2026-10-09T14:07:08.228008+00:00",
+  "result": {
+    "bytes": 32,
+    "content": "CAL-PUBLIC-SYNTHETIC-MARKER-001\n",
+    "path": "data/marker.txt",
+    "sha256": "04d7c29ff732dcb8c993138ab73cfc3195ffd6e52a7cb26254bb3c2c9ba099c7"
+  },
+  "started_at": "2026-10-09T14:07:08.164808+00:00",
+  "status": "OK"
+}

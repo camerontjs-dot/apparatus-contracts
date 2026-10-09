@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-09T14:10:45.403360+00:00",
+  "original_rc0": {
+    "commands/original-19-tests/receipt.json": {
+      "actual_sha256": "f4d583d6682bb070510babd758612c184a87777a407c50a28bf05c94551ea2ad",
+      "expected_sha256": "f4d583d6682bb070510babd758612c184a87777a407c50a28bf05c94551ea2ad",
+      "matches": true
+    },
+    "commands/original-19-tests/stderr": {
+      "actual_sha256": "80abed1d6233749031a7c49cec1343af225485251ad1eedea6cdd18a258f26a7",
+      "expected_sha256": "80abed1d6233749031a7c49cec1343af225485251ad1eedea6cdd18a258f26a7",
+      "matches": true
+    }
+  }
+}

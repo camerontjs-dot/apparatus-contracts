@@ -1,0 +1,11 @@
+{
+  "ended_at": "2026-10-09T14:07:08.293767+00:00",
+  "result": {
+    "bytes": 141,
+    "content": "Public synthetic launcher qualification only. Read data/marker.txt and write its exact bytes to answer.txt through the declared result tool.\n",
+    "path": "instructions/request.txt",
+    "sha256": "fe139a5eee24ab24be7eb05af759de8f0f1705ebfd35b2d3958a304a7aa98987"
+  },
+  "started_at": "2026-10-09T14:07:08.228250+00:00",
+  "status": "OK"
+}

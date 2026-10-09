@@ -1,0 +1,9 @@
+{
+  "file_count": 2,
+  "manifest_sha256": "f8c3cdb4716dacb611b0bbf49e30d5213d1a053f8abcb89e1fdb4e46edf99948",
+  "paths": [
+    "data/marker.txt",
+    "instructions/request.txt"
+  ],
+  "status": "STAGED_BYTES_CODE_ISOLATED_CHECK"
+}

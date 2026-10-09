@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "gh",
+    "pr",
+    "view",
+    "174",
+    "--repo",
+    "camerontjs-dot/apparatus-contracts",
+    "--json",
+    "headRefOid,isDraft,state"
+  ],
+  "ended_at": "2026-10-09T14:09:10.568125+00:00",
+  "exit_code": 0,
+  "scope": "post-stop custody only; no continued protocol measurement or rerun",
+  "started_at": "2026-10-09T14:09:10.210651+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "de60e1fb0ade175d29451d54c13ee31f64394610611d526782821ee21e0a1e59"
+}

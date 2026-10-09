@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "docker",
+    "pull",
+    "--platform",
+    "linux/arm64",
+    "busybox@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e"
+  ],
+  "started_at": "2026-10-09T13:54:16.288694+00:00",
+  "ended_at": "2026-10-09T13:54:20.071424+00:00",
+  "exit_code": 0,
+  "stdout_sha256": "3ad738010f0e03f20394ee79def4fbc744aaad3ac250de16b36e52ae70fccd8d",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

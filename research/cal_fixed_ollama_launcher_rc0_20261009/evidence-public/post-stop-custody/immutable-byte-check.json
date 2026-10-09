@@ -1,0 +1,83 @@
+{
+  "checked_at": "2026-10-09T14:09:11.185423+00:00",
+  "frozen_file_hashes": {
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/independent_packet_checker.py": "6b84015c19ab493483761c8ff8f885e3d63f0a0095f1e8d42c1105be4e91c448",
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/prepare_packet.py": "33376fe6b1f910ba6a07103b0292dbb9a2d940757318705fa0ac182779002e43",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/EXPECTED-Q03-PROMPT.txt": "6a85f69698413ac5a4a92922479bbd41cddcd07dbc2ec86b1b8501dc9f7174ea",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/MANIFEST.json": "f8c3cdb4716dacb611b0bbf49e30d5213d1a053f8abcb89e1fdb4e46edf99948",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/MODEL-REQUEST.json": "6c1ca561cbd0fb6e5df2ae4dedb42ca6e9ff1672903a5f3e44d693b70b070162",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/OBSERVED-manifest.json": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/OBSERVED-ollama-build-identity.json": "d02d9c43139f481ee6a776db1412917580c4cf7b8dc5eed2a4795a5c6dedae49",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/PARENT-PROTOCOL.md": "887ca9978779f75df576e8391c1565e1b746bc3fad69c7b0e0f350785cca7a7c",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/PROTOCOL.md": "d58d6037b426d71d6dbfef2759eac8e857d33644ae1a47496e00794fa167b4c4",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/PROVIDER-POSTAMBLE.txt": "f795e26d414b9674b70bb2a8ea4546fe423ad9238a0330a75fb148f4d4722029",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/PROVIDER.json": "a80bfdcd9720024506f4a3502e8254b10b2068d18d6e5e22aefb45ba4265ab7a",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/Q03-RENDER-REQUEST.json": "40e77c83a3d592765c235de2dbfa2f19a3f8df9b96f9964e138a21369170afd7",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/SOURCE-INVENTORY.json": "ee4ea7739a1cd827bf66e283390725e3db29632b65b2ccf26e789abb76411183",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/TOOL-PROFILE.json": "48b8971825823a41e2825780786ad9b824000421612ae236bdf5d5d68f6b5ccc",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/fixed_adapter.py": "f913d21bf5016571940c9bf340e93ad9af8450a996efbc9c6cefca343759e375",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/public-synthetic-source/data/marker.txt": "04d7c29ff732dcb8c993138ab73cfc3195ffd6e52a7cb26254bb3c2c9ba099c7",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/public-synthetic-source/instructions/request.txt": "fe139a5eee24ab24be7eb05af759de8f0f1705ebfd35b2d3958a304a7aa98987",
+    "research/cal_fixed_ollama_launcher_rc0_20261009/qualify_once.py": "c61ed553e47632338f1c86b699316efb5b25dee25d1f7b4d45803fc095f633d4"
+  },
+  "frozen_files_unchanged": true,
+  "new_execution_after_stop": "none; only owned-resource/read-only custody observations",
+  "original_snapshots": {
+    "research/cal_context_free_packet_macos_rc1_20261009/FINDINGS.md": {
+      "matches_frozen_parent": true,
+      "sha256": "de28345fe721966a0192b033fe24392d76b7df323210214d4d4fbbcca7ed70e9"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/FIRST_RUN_TESTS.txt": {
+      "matches_frozen_parent": true,
+      "sha256": "c3307afb3aec3873dca949fb3f22c89eec4976b5db3ff8fbea3114179bd45957"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/FREEZE.json": {
+      "matches_frozen_parent": true,
+      "sha256": "dd34b1da4923fc6a91a5cecd2152f2cb9154c5a8c355eb04bd999c3925f2018b"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/README.md": {
+      "matches_frozen_parent": true,
+      "sha256": "0006b8299753458f3ec52b7bdeb8ada44f4b2a6193afe62a1404e0a4c2554832"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/RESULT-PUBLIC.json": {
+      "matches_frozen_parent": true,
+      "sha256": "c7be61de5091d8e3e9e797a2c1065025d65ffd3fa193a3843931af85cd9ea713"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/README.md": {
+      "matches_frozen_parent": true,
+      "sha256": "a6568a91e61e26201b3118b34404ed2a08cf0fe6455e89b4cd397eea69f55596"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/independent_packet_checker.py": {
+      "matches_frozen_parent": true,
+      "sha256": "6b84015c19ab493483761c8ff8f885e3d63f0a0095f1e8d42c1105be4e91c448"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/prepare_packet.py": {
+      "matches_frozen_parent": true,
+      "sha256": "33376fe6b1f910ba6a07103b0292dbb9a2d940757318705fa0ac182779002e43"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/test_independent_packet_checker.py": {
+      "matches_frozen_parent": true,
+      "sha256": "e915728121c299fb3acb657c317e714a19412170ee827f99ce98f93b95d82881"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/test_prepare_packet.py": {
+      "matches_frozen_parent": true,
+      "sha256": "4d3aaed71cbef6ead66534ea0261b52533a05e905cfd0cac130d34d378da4bd7"
+    },
+    "research/cal_context_free_packet_macos_rc1_20261009/controller/run_first.py": {
+      "matches_frozen_parent": true,
+      "sha256": "c8e9d35f9ff16751e41079a92419c2fc9f893ce6ceb1bbd561b6879a55a832e0"
+    },
+    "research/cal_context_free_packet_rc0_20261008/README.md": {
+      "matches_frozen_parent": true,
+      "sha256": "a6568a91e61e26201b3118b34404ed2a08cf0fe6455e89b4cd397eea69f55596"
+    },
+    "research/cal_context_free_packet_rc0_20261008/prepare_packet.py": {
+      "matches_frozen_parent": true,
+      "sha256": "0bd6f6d6063d0f12fa9e9f88a9eb1cabe2fd4e3b9a256b370eefef94d468cfc5"
+    },
+    "research/cal_context_free_packet_rc0_20261008/test_prepare_packet.py": {
+      "matches_frozen_parent": true,
+      "sha256": "d6d96c99c1bf3306c87daa7b344682897f01c73dcb433c29208daafbb53fac34"
+    }
+  }
+}

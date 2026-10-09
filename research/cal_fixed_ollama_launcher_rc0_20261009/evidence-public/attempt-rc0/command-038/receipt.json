@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "docker",
+    "--context",
+    "desktop-linux",
+    "exec",
+    "9f44b093a6033d8adf46c0fd23a42dec6f9134c56ab95e23ec60438f645886b7",
+    "/bin/busybox",
+    "ip",
+    "-o",
+    "addr",
+    "show"
+  ],
+  "ended_at": "2026-10-09T14:07:08.624557+00:00",
+  "environment_keys": [
+    "HOME",
+    "PATH"
+  ],
+  "exit_code": 0,
+  "started_at": "2026-10-09T14:07:08.560499+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "23f14109baeacc2888b7bae1ca514bc6a0236f2025975cc86a13703436326b15",
+  "timed_out": false
+}

@@ -1,0 +1,1 @@
+{"name": "write_result", "arguments": {"path": "/tmp/forbidden.txt", "content": "PUBLIC-WRITE-CONTROL"}}
