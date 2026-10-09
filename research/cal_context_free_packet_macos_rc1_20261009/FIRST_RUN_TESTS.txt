@@ -1,0 +1,39 @@
+test_01_world_and_input_identity_positive (test_independent_packet_checker.PacketMacControls.test_01_world_and_input_identity_positive) ... ok
+test_02_true_copy_all_weak_baseline_rejected_for_extra_file (test_independent_packet_checker.PacketMacControls.test_02_true_copy_all_weak_baseline_rejected_for_extra_file) ... ok
+test_03_unexpected_world_file_rejected (test_independent_packet_checker.PacketMacControls.test_03_unexpected_world_file_rejected) ... ok
+test_04_mutated_allowed_bytes_rejected (test_independent_packet_checker.PacketMacControls.test_04_mutated_allowed_bytes_rejected) ... ok
+test_05_symlink_to_outside_world_rejected_after_real_insertion (test_independent_packet_checker.PacketMacControls.test_05_symlink_to_outside_world_rejected_after_real_insertion) ... ok
+test_06_fifo_nonregular_rejected (test_independent_packet_checker.PacketMacControls.test_06_fifo_nonregular_rejected) ... ok
+test_07_hardlinked_allowed_file_rejected (test_independent_packet_checker.PacketMacControls.test_07_hardlinked_allowed_file_rejected) ... ok
+test_08_unexpected_empty_directory_rejected (test_independent_packet_checker.PacketMacControls.test_08_unexpected_empty_directory_rejected) ... ok
+test_09_scratch_not_empty_rejected (test_independent_packet_checker.PacketMacControls.test_09_scratch_not_empty_rejected) ... ok
+test_10_modified_receipt_rejected (test_independent_packet_checker.PacketMacControls.test_10_modified_receipt_rejected) ... ok
+test_11_casefold_ambient_stores_blocked (test_independent_packet_checker.PacketMacControls.test_11_casefold_ambient_stores_blocked) ... ok
+test_12_casefold_file_alias_blocked_before_io (test_independent_packet_checker.PacketMacControls.test_12_casefold_file_alias_blocked_before_io) ... ok
+test_13_casefold_parent_alias_blocked_before_io (test_independent_packet_checker.PacketMacControls.test_13_casefold_parent_alias_blocked_before_io) ... ok
+test_14_prohibited_manifest_symlink_refused (test_independent_packet_checker.PacketMacControls.test_14_prohibited_manifest_symlink_refused) ... ok
+test_15_checker_has_no_target_verifier_import (test_independent_packet_checker.PacketMacControls.test_15_checker_has_no_target_verifier_import) ... ok
+test_added_world_file_rejected (test_prepare_packet.PacketTests.test_added_world_file_rejected) ... ok
+test_deterministic_prepare_receipts (test_prepare_packet.PacketTests.test_deterministic_prepare_receipts) ... ok
+test_duplicate_json_keys (test_prepare_packet.PacketTests.test_duplicate_json_keys) ... ok
+test_duplicate_path (test_prepare_packet.PacketTests.test_duplicate_path) ... ok
+test_existing_output_refused (test_prepare_packet.PacketTests.test_existing_output_refused) ... ok
+test_extra_empty_directory_rejected (test_prepare_packet.PacketTests.test_extra_empty_directory_rejected) ... ok
+test_manifest_mutation_breaks_receipt_identity (test_prepare_packet.PacketTests.test_manifest_mutation_breaks_receipt_identity) ... ok
+test_missing_source (test_prepare_packet.PacketTests.test_missing_source) ... ok
+test_modified_world_rejected (test_prepare_packet.PacketTests.test_modified_world_rejected) ... ok
+test_overlapping_paths_refused (test_prepare_packet.PacketTests.test_overlapping_paths_refused) ... ok
+test_pack_and_verify_withheld_not_exported (test_prepare_packet.PacketTests.test_pack_and_verify_withheld_not_exported) ... ok
+test_reject_unsafe_paths (test_prepare_packet.PacketTests.test_reject_unsafe_paths) ... ok
+test_source_digest_mismatch (test_prepare_packet.PacketTests.test_source_digest_mismatch) ... ok
+test_source_hardlink_refused (test_prepare_packet.PacketTests.test_source_hardlink_refused) ... ok
+test_source_parent_symlink_refused (test_prepare_packet.PacketTests.test_source_parent_symlink_refused) ... ok
+test_source_symlink_refused (test_prepare_packet.PacketTests.test_source_symlink_refused) ... ok
+test_unsorted_files (test_prepare_packet.PacketTests.test_unsorted_files) ... ok
+test_weak_copy_all_baseline_detected (test_prepare_packet.PacketTests.test_weak_copy_all_baseline_detected) ... ok
+test_world_symlink_rejected (test_prepare_packet.PacketTests.test_world_symlink_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.063s
+
+OK

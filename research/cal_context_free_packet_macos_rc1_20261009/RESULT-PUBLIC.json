@@ -1,0 +1,42 @@
+{
+  "actor_admission": "BLOCKED",
+  "candidate_after_sha256": {
+    "README.md": "a6568a91e61e26201b3118b34404ed2a08cf0fe6455e89b4cd397eea69f55596",
+    "independent_packet_checker.py": "6b84015c19ab493483761c8ff8f885e3d63f0a0095f1e8d42c1105be4e91c448",
+    "prepare_packet.py": "33376fe6b1f910ba6a07103b0292dbb9a2d940757318705fa0ac182779002e43",
+    "test_independent_packet_checker.py": "e915728121c299fb3acb657c317e714a19412170ee827f99ce98f93b95d82881",
+    "test_prepare_packet.py": "4d3aaed71cbef6ead66534ea0261b52533a05e905cfd0cac130d34d378da4bd7"
+  },
+  "candidate_before_sha256": {
+    "README.md": "a6568a91e61e26201b3118b34404ed2a08cf0fe6455e89b4cd397eea69f55596",
+    "independent_packet_checker.py": "6b84015c19ab493483761c8ff8f885e3d63f0a0095f1e8d42c1105be4e91c448",
+    "prepare_packet.py": "33376fe6b1f910ba6a07103b0292dbb9a2d940757318705fa0ac182779002e43",
+    "test_independent_packet_checker.py": "e915728121c299fb3acb657c317e714a19412170ee827f99ce98f93b95d82881",
+    "test_prepare_packet.py": "4d3aaed71cbef6ead66534ea0261b52533a05e905cfd0cac130d34d378da4bd7"
+  },
+  "expected_test_count": 34,
+  "experiment_id": "cal-packet-macos-synthetic-rc1-20261009",
+  "finished_utc": "2026-10-09T12:52:48.501818+00:00",
+  "machine": "arm64",
+  "nonclaims": [
+    "model_actor",
+    "docker",
+    "network_isolation",
+    "host_mcp",
+    "provider_context",
+    "blind_independent_reviewer"
+  ],
+  "python_version": "3.14.4",
+  "raw_receipt_sha256": "c8dfa2d221de400e49d317aa63cb918df608e5bf1dd726c846399659ca466f25",
+  "raw_stderr_sha256": "c3307afb3aec3873dca949fb3f22c89eec4976b5db3ff8fbea3114179bd45957",
+  "raw_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "receipt_scope": "Sanitized public projection only; raw argv/host details remain in local controller-only receipt.",
+  "release": "27.0.0",
+  "returncode": 0,
+  "run_id": "FIRST-RUN-ONLY",
+  "started_utc": "2026-10-09T12:52:48.386277+00:00",
+  "status": "PASS_BOUNDED_OFFLINE_PACKET_CONTROLS",
+  "system": "Darwin",
+  "tests_observed": 34,
+  "timed_out": false
+}
