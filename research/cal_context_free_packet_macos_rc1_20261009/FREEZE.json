@@ -1,0 +1,56 @@
+{
+  "baseline_candidate": {
+    "head": "7d9df68eff5d83d93aa6f07434d2f2e0d7fc2244",
+    "original_disposition": "APPARATUS_INVALID_PLATFORM_CONTROL",
+    "original_macOS_test_result": "18 pass, 1 setup error",
+    "pr": 174
+  },
+  "candidate_sha256": {
+    "README.md": "a6568a91e61e26201b3118b34404ed2a08cf0fe6455e89b4cd397eea69f55596",
+    "independent_packet_checker.py": "6b84015c19ab493483761c8ff8f885e3d63f0a0095f1e8d42c1105be4e91c448",
+    "prepare_packet.py": "33376fe6b1f910ba6a07103b0292dbb9a2d940757318705fa0ac182779002e43",
+    "test_independent_packet_checker.py": "e915728121c299fb3acb657c317e714a19412170ee827f99ce98f93b95d82881",
+    "test_prepare_packet.py": "4d3aaed71cbef6ead66534ea0261b52533a05e905cfd0cac130d34d378da4bd7"
+  },
+  "command_args": [
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    ".",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "controls": [
+    "allowed staged world",
+    "physically executed copy-all weak baseline",
+    "unexpected/changed bytes",
+    "actual symlink insertion",
+    "FIFO",
+    "hardlink",
+    "empty directory",
+    "stale scratch",
+    "receipt identity",
+    "casefold store and alias",
+    "original 19 regression controls"
+  ],
+  "evidence_scope": "source-informed, code-isolated checker and public-synthetic macOS file-custody only; not blinded independent qualification",
+  "expected_test_count": 34,
+  "experiment_id": "cal-packet-macos-synthetic-rc1-20261009",
+  "external_runner_sha256": "c8e9d35f9ff16751e41079a92419c2fc9f893ce6ceb1bbd561b6879a55a832e0",
+  "falsifier": "any failure, wrong rejection reason, missing output, unexpected bytes, or modified frozen object; preserve first run and stop",
+  "first_run_status": "FROZEN_BEFORE_EXECUTION",
+  "frozen_at_utc": "2026-10-09T12:52:41.681163+00:00",
+  "not_authorized": [
+    "model actor",
+    "Docker launch",
+    "MainFrame G89 retry",
+    "frozen CAL experiment change",
+    "canonical contract or release change",
+    "global host policy/permission change"
+  ],
+  "owner": "camerontjs-dot/apparatus-contracts#173",
+  "positive_gate": "all 34 tests execute with zero errors/failures, SHA identities unchanged"
+}
