@@ -1,0 +1,10 @@
+{
+  "compiler": "go1.26.0",
+  "module_identity_lines": [
+    "mod\tgithub.com/ollama/ollama\tv0.40.0+dirty\t",
+    "build\tvcs=git",
+    "build\tvcs.revision=0d0720e51fb2fd9aa58781c3d720c06d720c2e7b",
+    "build\tvcs.time=2026-10-06T17:46:39Z",
+    "build\tvcs.modified=true"
+  ]
+}
