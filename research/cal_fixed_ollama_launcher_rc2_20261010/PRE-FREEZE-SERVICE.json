@@ -1,0 +1,21 @@
+{
+  "controller_private_source_sha256": "8f39d680116c9ea17d0db73d5cfb9d661229072461a55893a02972b076429451",
+  "installed_provider_binary_sha256": "9d8ee8964971c91b4faaa84cf61aac9a9d5a568af6629d8fc1d2cb939f9ce07f",
+  "local_http": {
+    "status": 200,
+    "url": "http://127.0.0.1:11434/api/version",
+    "version": "0.40.0"
+  },
+  "model_manifest_sha256": "9cda952e5d8f43bd4ddd3954c82e404e6cc286e04ceb77fa536f9f7113d7b28d",
+  "observed_listener": "127.0.0.1:11434",
+  "schema": "cal-rc2-service-preflight-public/1",
+  "scope_nonclaims": [
+    "model inference",
+    "Q03 rendered tool profile pass",
+    "Docker containment",
+    "network denial",
+    "safe model actor admission"
+  ],
+  "status": "PASS_PRE_EXECUTION_AVAILABILITY_ONLY",
+  "worker_image_id": "sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83"
+}

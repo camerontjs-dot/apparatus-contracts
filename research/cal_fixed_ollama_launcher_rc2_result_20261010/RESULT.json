@@ -1,0 +1,134 @@
+{
+  "actor_admission": "BLOCKED",
+  "actor_inference_calls": 0,
+  "authorship": "same-controller source-informed implementation and external observation; no blind independent review",
+  "cells": {
+    "Q01": {
+      "completed_at": "2026-10-10T01:24:30.339334+00:00",
+      "details": {
+        "authorship": "code-isolated same-controller checker",
+        "new_packet": {
+          "file_count": 2,
+          "manifest_sha256": "6083659524a254fc4a7bbb3d6edd1ab82df8ef29491d5eb995a321827dd45da5",
+          "paths": [
+            "data/marker.txt",
+            "instructions/request.txt"
+          ],
+          "status": "STAGED_BYTES_CODE_ISOLATED_CHECK"
+        },
+        "reused_scope": "same exact #175 packet-code/hash controls; 34/34 is preserved, not rerun"
+      },
+      "status": "PASS_BOUNDED"
+    },
+    "Q02": {
+      "completed_at": "2026-10-10T01:24:30.343114+00:00",
+      "details": "actual copy-all rejected EXTRA_FILE for existing synthetic outside-world bytes",
+      "status": "PASS_BOUNDED"
+    },
+    "Q03": {
+      "completed_at": "2026-10-10T01:24:30.322888+00:00",
+      "details": {
+        "effective_tools": [
+          {
+            "function": {
+              "description": "Read one exact public synthetic input through the fixed Docker worker reader.",
+              "name": "read_packet_file",
+              "parameters": {
+                "properties": {
+                  "path": {
+                    "enum": [
+                      "data/marker.txt",
+                      "instructions/request.txt"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "function"
+          },
+          {
+            "function": {
+              "description": "Write a bounded answer to the sole permitted scratch output.",
+              "name": "write_result",
+              "parameters": {
+                "properties": {
+                  "content": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "enum": [
+                      "answer.txt"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "content"
+                ],
+                "type": "object"
+              }
+            },
+            "type": "function"
+          }
+        ],
+        "observed_additions": "pinned qwen3.5 tool-format postamble and empty thinking prefix",
+        "rendered_prompt_sha256": "6a85f69698413ac5a4a92922479bbd41cddcd07dbc2ec86b1b8501dc9f7174ea",
+        "request_sha256": "40e77c83a3d592765c235de2dbfa2f19a3f8df9b96f9964e138a21369170afd7",
+        "scope": "live render-only prompt + exact client/dispatch source; not binary attestation or inference fitness"
+      },
+      "status": "PASS_BOUNDED"
+    },
+    "Q04": {
+      "first_failure": {
+        "at": "2026-10-10T01:24:30.570624+00:00",
+        "cell": "Q04",
+        "reason": "'pins'",
+        "type": "KeyError"
+      },
+      "status": "FAIL_OR_UNKNOWN"
+    },
+    "Q05": {
+      "status": "NOT_RUN"
+    },
+    "Q06": {
+      "status": "NOT_RUN"
+    },
+    "Q07": {
+      "status": "NOT_RUN"
+    },
+    "Q08": {
+      "status": "NOT_RUN"
+    },
+    "Q09": {
+      "status": "NOT_RUN"
+    },
+    "Q10": {
+      "status": "NOT_RUN"
+    },
+    "Q11": {
+      "status": "NOT_RUN"
+    },
+    "Q12": {
+      "fresh_reset": "NOT_RUN",
+      "status": "OWNED_CLEANUP_ONLY"
+    },
+    "Q13": {
+      "reason": "Required first failure/unknown; actor admission not justified",
+      "status": "BLOCKED"
+    }
+  },
+  "finished_at": "2026-10-10T01:24:30.679705+00:00",
+  "first_failure": {
+    "at": "2026-10-10T01:24:30.570624+00:00",
+    "cell": "Q04",
+    "reason": "'pins'",
+    "type": "KeyError"
+  },
+  "status": "BLOCKED_FIRST_FAILURE"
+}
