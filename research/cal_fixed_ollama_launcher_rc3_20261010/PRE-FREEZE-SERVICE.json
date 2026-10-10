@@ -1,0 +1,18 @@
+{
+  "controller_only_raw_receipt_sha256": "4363ccfe37ed1a9a4130af84b2f699341b75cf73b8ac6942aefc1d51ca54514a",
+  "http_status": 200,
+  "local_endpoint": "127.0.0.1:11434",
+  "model_manifest_sha256": "9cda952e5d8f43bd4ddd3954c82e404e6cc286e04ceb77fa536f9f7113d7b28d",
+  "nonclaims": [
+    "render-only Q03 passed",
+    "worker confinement",
+    "network refusal",
+    "inference fitness",
+    "actor admission"
+  ],
+  "provider_binary_sha256": "9d8ee8964971c91b4faaa84cf61aac9a9d5a568af6629d8fc1d2cb939f9ce07f",
+  "schema": "cal-rc3-pre-freeze-service-public/1",
+  "status": "PASS_PRE_EXPOSURE_AVAILABILITY_ONLY",
+  "task_owned_listener_same_as_rc2": true,
+  "version": "0.40.0"
+}

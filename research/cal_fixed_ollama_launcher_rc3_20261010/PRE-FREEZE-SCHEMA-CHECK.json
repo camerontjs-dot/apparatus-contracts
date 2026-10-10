@@ -1,0 +1,25 @@
+{
+  "actual_image_id": "sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83",
+  "correct_image_binding_equal": true,
+  "corrected_missing_freeze_keys": [],
+  "corrected_source_uses_private_hash_bound_pins": true,
+  "external_private_pins_sha256": "9443f8151d10983350f9a8b7e184faf53ac8700610c619f00a5ccc99c4aca483",
+  "inference_calls": 0,
+  "mutated_wrong_image_binding_refused": true,
+  "nonclaims": [
+    "Q04 Docker worker configuration pass",
+    "Q08 isolation",
+    "Q09 dispatcher qualification",
+    "Q10 fresh-state",
+    "Q11 formal receipts",
+    "Q12 owned teardown",
+    "Q13 actor admission"
+  ],
+  "old_freeze_sha256": "b96731112f79768ccb76c6b9802a1fc13b1feaa196747ac4de8b8156a1b2c46c",
+  "old_missing_freeze_keys": [
+    "pins"
+  ],
+  "schema": "cal-rc3-pre-freeze-schema-discriminator/1",
+  "scope": "source freeze-field compatibility and image-id comparison sensitivity only",
+  "worker_containers_created": 0
+}
