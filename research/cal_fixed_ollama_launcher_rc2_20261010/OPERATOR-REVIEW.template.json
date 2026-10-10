@@ -1,0 +1,10 @@
+{
+  "attempt_ledger": "REQUIRED_EXISTING_ABSOLUTE_EXTERNAL_LEDGER_DIRECTORY",
+  "authority": "camerontjs-dot/apparatus-contracts#173",
+  "authorization": "ONE_ZERO_MODEL_PUBLIC_SYNTHETIC_QUALIFICATION",
+  "candidate_commit": "REQUIRED_FINAL_FREEZE_COMMIT",
+  "freeze_sha256": "REQUIRED_FREEZE_SHA256",
+  "receipt_directory": "REQUIRED_FRESH_ABSOLUTE_EXTERNAL_DIRECTORY",
+  "reviewed_at": "REQUIRED_ISO_UTC_TIMESTAMP",
+  "reviewer": "REQUIRED_OPERATOR_IDENTITY"
+}
