@@ -1,0 +1,44 @@
+{
+  "controller_private_remaining": [
+    "receipt index",
+    "worker inspect",
+    "full process/tool envelopes",
+    "original traceback with paths",
+    "owned-resource ledger",
+    "runtime pins"
+  ],
+  "first_status": "BLOCKED_FIRST_FAILURE_Q08_NETWORK_CONFIG_DRIFT",
+  "freeze_sha256": "0282429b8541b2bd3a4ec68fe4dfd9090d68a3d64a3737d87db1721490ee117b",
+  "frozen_candidate": "5c1079135a58331bb68cb21a2b6a2a3bdc96fa9e",
+  "model_inference_calls": 0,
+  "owned_docker_workers_created": 1,
+  "owned_worker_removed": true,
+  "preparation_commit": "7cbef633500e332cdd853785a076d202b198d56f",
+  "private_pins_sha256": "9443f8151d10983350f9a8b7e184faf53ac8700610c619f00a5ccc99c4aca483",
+  "public_exact_raw_copies": [
+    "FIRST-FAILURE.json",
+    "RESULT.json",
+    "Q08.network-observation.json"
+  ],
+  "q01_q07_pass_bounded": true,
+  "q08_pass": false,
+  "q09_q11_not_run": true,
+  "q12_cleanup_only": true,
+  "q13_actor_admission": "BLOCKED",
+  "raw_artifact_sha256": {
+    "FIRST-FAILURE.json": "3c103d87fa761d2ef8692f6e9fc17f2af8f1d57df4f552c7cc0b8725e112a68a",
+    "FIRST-FAILURE.traceback.txt": "8e30d9d77611fa95dc4606f2516a8dc501f47ccadc8a22f7d87bc0d9b4cb8ba7",
+    "OWNED-RESOURCES.json": "83a6241d0b7987804b9bfba108c47a7d717db0ae9318b6e5a2e5f7d585773c38",
+    "Q03.rendered-prompt.txt": "6a85f69698413ac5a4a92922479bbd41cddcd07dbc2ec86b1b8501dc9f7174ea",
+    "Q08.network-observation.json": "b22f667c372485619a0dd3b702909c4946ecf2df7ee7f89321c122d7f27805aa",
+    "RECEIPT-INDEX.json": "b151e41b47ee10ad0ce68be6707bc0b1772a686e4831487fd439a498dba9ae03",
+    "RESULT.json": "5c43da10c5ff6fa59f2ca6032ede40fe76a8ae97f374286373ad36ee2a87a581"
+  },
+  "raw_index_readback": "ALL_317_CHECKED_EXACT_SIZE_SHA256_PATH",
+  "raw_receipt_count": 317,
+  "schema": "cal-rc3-retrospective-first-stop-map/1",
+  "service_preflight_sha256": "4363ccfe37ed1a9a4130af84b2f699341b75cf73b8ac6942aefc1d51ca54514a",
+  "static_schema_preflight_sha256": "3e3bb9f3b05704c3ec9cc627f33049acaa33e18214d1e15453248277fe50cf89",
+  "wrapper_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "wrapper_stdout_sha256": "6cf4827d8462255ec5e4497c0ee84736b17646e90a61ec1afe3774c398f1bbca"
+}

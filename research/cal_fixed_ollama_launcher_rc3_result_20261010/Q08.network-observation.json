@@ -1,0 +1,89 @@
+{
+  "controller_loopback_boundary": {
+    "attempted": true,
+    "destination": [
+      "127.0.0.1",
+      11434
+    ],
+    "ended_ns": 1791596077335058052,
+    "errname": "ECONNREFUSED",
+    "errno": 111,
+    "family": "AF_INET",
+    "started_ns": 1791596077335031219,
+    "syscall": "connect_ex"
+  },
+  "interfaces": [
+    [
+      1,
+      "lo"
+    ],
+    [
+      2,
+      "tunl0"
+    ],
+    [
+      3,
+      "gre0"
+    ],
+    [
+      4,
+      "gretap0"
+    ],
+    [
+      5,
+      "erspan0"
+    ],
+    [
+      6,
+      "ip_vti0"
+    ],
+    [
+      7,
+      "ip6_vti0"
+    ],
+    [
+      8,
+      "sit0"
+    ],
+    [
+      9,
+      "ip6tnl0"
+    ],
+    [
+      10,
+      "ip6gre0"
+    ]
+  ],
+  "namespace": "net:[4026532559]",
+  "pid": 92,
+  "positive": {
+    "attempted": true,
+    "destination": [
+      "127.0.0.1",
+      34069
+    ],
+    "ended_ns": 1791596077334893677,
+    "errname": "SUCCESS",
+    "errno": 0,
+    "family": "AF_INET",
+    "received": "CAL-PUBLIC-SYNTHETIC-SOCKET-CONTROL\n",
+    "started_ns": 1791596077334416469,
+    "syscall": "connect_ex"
+  },
+  "route_v4": "Iface\tDestination\tGateway \tFlags\tRefCnt\tUse\tMetric\tMask\t\tMTU\tWindow\tIRTT                                                       \n",
+  "route_v6": "00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000001 80 00000000000000000000000000000000 00 00000000000000000000000000000000 00000000 00000002 00000000 80200001       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n",
+  "schema": "cal-network-observation/1",
+  "synthetic_egress": {
+    "attempted": true,
+    "destination": [
+      "192.0.2.1",
+      9
+    ],
+    "ended_ns": 1791596077335020885,
+    "errname": "ENETUNREACH",
+    "errno": 101,
+    "family": "AF_INET",
+    "started_ns": 1791596077335012344,
+    "syscall": "connect_ex"
+  }
+}
