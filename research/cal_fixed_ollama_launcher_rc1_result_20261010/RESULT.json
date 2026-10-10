@@ -1,0 +1,62 @@
+{
+  "actor_admission": "BLOCKED",
+  "actor_inference_calls": 0,
+  "authorship": "same-controller source-informed implementation and external observation; no blind independent review",
+  "cells": {
+    "Q01": {
+      "status": "NOT_RUN"
+    },
+    "Q02": {
+      "status": "NOT_RUN"
+    },
+    "Q03": {
+      "first_failure": {
+        "at": "2026-10-10T01:07:00.913085+00:00",
+        "cell": "Q03",
+        "reason": "PROVIDER_RENDER_OBSERVATION_FAILED",
+        "type": "Stop"
+      },
+      "status": "FAIL_OR_UNKNOWN"
+    },
+    "Q04": {
+      "status": "NOT_RUN"
+    },
+    "Q05": {
+      "status": "NOT_RUN"
+    },
+    "Q06": {
+      "status": "NOT_RUN"
+    },
+    "Q07": {
+      "status": "NOT_RUN"
+    },
+    "Q08": {
+      "status": "NOT_RUN"
+    },
+    "Q09": {
+      "status": "NOT_RUN"
+    },
+    "Q10": {
+      "status": "NOT_RUN"
+    },
+    "Q11": {
+      "status": "NOT_RUN"
+    },
+    "Q12": {
+      "fresh_reset": "NOT_RUN",
+      "status": "OWNED_CLEANUP_ONLY"
+    },
+    "Q13": {
+      "reason": "Required first failure/unknown; actor admission not justified",
+      "status": "BLOCKED"
+    }
+  },
+  "finished_at": "2026-10-10T01:07:00.915702+00:00",
+  "first_failure": {
+    "at": "2026-10-10T01:07:00.913085+00:00",
+    "cell": "Q03",
+    "reason": "PROVIDER_RENDER_OBSERVATION_FAILED",
+    "type": "Stop"
+  },
+  "status": "BLOCKED_FIRST_FAILURE"
+}

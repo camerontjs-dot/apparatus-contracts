@@ -1,0 +1,46 @@
+{
+  "created_container_count": 0,
+  "disposition": "BLOCKED_FIRST_FAILURE",
+  "external_index_readback": "VERIFIED_148_ENTRIES_BYTES_AND_SHA256",
+  "first_attempt_utc": "2026-10-10T01:07:00Z",
+  "freeze_sha256": "ae4f6c3e6508cb95fc719b0cdbf0763eef29f75e6f944745694e0ead8070097d",
+  "frozen_candidate_commit": "826772021fd34fb3738b2a5b21826794c19fdbaf",
+  "model_inference_calls": 0,
+  "no_actor_admission": true,
+  "nonclaims": [
+    "Q03 conformance",
+    "Q08 egress restriction",
+    "Q09 hidden dispatch",
+    "Q10 worker reset",
+    "Q11 formal control pass",
+    "Q12 reset",
+    "model tool fitness",
+    "production authority",
+    "isolation qualification"
+  ],
+  "pin_record_sha256": "9443f8151d10983350f9a8b7e184faf53ac8700610c619f00a5ccc99c4aca483",
+  "preparation_commit": "dd0d2713ee1ec707600ea468601eea9a01ef35fe",
+  "public_projection_notes": "Three published JSON files are exact byte copies of their audited raw counterparts because they contain no private absolute paths. Full raw receipts remain external and controller-only.",
+  "published_exact_raw_bytes": [
+    "FIRST-FAILURE.json",
+    "Q03.http-failure.json",
+    "RESULT.json"
+  ],
+  "raw_artifact_sha256": {
+    "FIRST-FAILURE.json": "8502fd104a69a3c15ca5ee9b3e774eaa5db249d4dfeef1f643b4cf51c298534f",
+    "FIRST-FAILURE.traceback.txt": "17c831c07797bcde774ca099e9ab73fd2a422c7c71a1c8bd794046e7c6998543",
+    "Q03.http-failure.json": "9e90085b14ab7e12a64fbfa734a588cb70a0ae6618caa38021a928090a42f441",
+    "RECEIPT-INDEX.json": "91bbc7a4c678b3c79090a26531bd41501e672fa8041123bba72b6304c4f5ea49",
+    "RESULT.json": "e75e192cde4921820c1efd1e0cfcba13d8c54eab7244dbad04301b67be250976"
+  },
+  "raw_receipt_count": 148,
+  "raw_wrapper_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "raw_wrapper_stdout_sha256": "e64a03007bd6a81ec4722f233de741fbbc9c8e9ff5247e7ebb69ef92e191c241",
+  "schema": "cal-fixed-ollama-rc1-poststop-receipt-map/1",
+  "unpublished_raw_bytes": [
+    "RECEIPT-INDEX.json",
+    "FIRST-FAILURE.traceback.txt",
+    "command receipts",
+    "controller-only runtime pins and review"
+  ]
+}

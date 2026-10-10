@@ -1,0 +1,6 @@
+{
+  "detail": "<urlopen error [Errno 61] Connection refused>",
+  "ended_at": "2026-10-10T01:07:00.912954+00:00",
+  "started_at": "2026-10-10T01:07:00.902112+00:00",
+  "type": "URLError"
+}
