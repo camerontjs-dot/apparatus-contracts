@@ -1,0 +1,6 @@
+{
+  "checked_files": 485,
+  "commands": 76,
+  "scope": "inventory, exact memory-ledger metadata, raw hashes, size, timestamps, HTTP and tool invariants",
+  "tools": 78
+}

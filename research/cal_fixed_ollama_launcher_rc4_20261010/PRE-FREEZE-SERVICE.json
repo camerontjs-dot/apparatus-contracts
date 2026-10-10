@@ -1,0 +1,19 @@
+{
+  "controller_private_initial_setup_error_sha256": "3cad06da18bfb1b218fa6598c813f905a448001aa555c733d82feb388320445b",
+  "controller_private_receipt_sha256": "f23565bbb9722f813a95b73871e9fb3301f4c6c2ec10b4376f01e455a51a431a",
+  "http_status": 200,
+  "http_version": "0.40.0",
+  "inference_calls": 0,
+  "initial_setup_error": "lsof parser read (LISTEN) as address; resolved before any freeze or worker run",
+  "literal_listener": "127.0.0.1:11434",
+  "model_manifest_sha256": "9cda952e5d8f43bd4ddd3954c82e404e6cc286e04ceb77fa536f9f7113d7b28d",
+  "nonclaims": [
+    "Q03",
+    "Q08",
+    "Q13",
+    "model tool use"
+  ],
+  "provider_binary_sha256": "9d8ee8964971c91b4faaa84cf61aac9a9d5a568af6629d8fc1d2cb939f9ce07f",
+  "schema": "cal-rc4-service-preflight-public/1",
+  "status": "PASS_PRE_EXECUTION_AVAILABILITY_ONLY"
+}

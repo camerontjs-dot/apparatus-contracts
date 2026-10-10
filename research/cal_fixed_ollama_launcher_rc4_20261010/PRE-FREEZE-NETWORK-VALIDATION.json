@@ -1,0 +1,18 @@
+{
+  "actual_test_file_sha256": "1c6ea8f57fb2559d2260ffe57dee55892263fb39458bb79d5ee86c3dc9ffd108",
+  "actual_validator_sha256": "ff9622f8f82570920d83402ad8b4544a9b42fbb23e14feb03580e5496cf58053",
+  "control_sensitivity": "mutation tests reject admin-UP/running/carrier/operstate-up non-loopback links, nonloopback v4/v6 routes or IPv6 address; weak route-only baseline fails to detect admin-UP link",
+  "errors": 0,
+  "failures": 0,
+  "nonclaims": [
+    "actual worker flags",
+    "Q08 containment",
+    "model actor admission",
+    "independent authorship"
+  ],
+  "raw_stderr_sha256": "0517e6fa720811890fef9fd60aac55d5010f0c8dc69a94f71048031b46762ac7",
+  "raw_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "result": "PASS_SYNTHETIC_DEVELOPMENT_CONTROLS_ONLY",
+  "schema": "cal-rc4-pre-freeze-network-validator-controls/1",
+  "tests_observed": 17
+}

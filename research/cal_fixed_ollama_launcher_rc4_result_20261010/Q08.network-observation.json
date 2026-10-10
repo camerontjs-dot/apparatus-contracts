@@ -1,0 +1,152 @@
+{
+  "controller_loopback_boundary": {
+    "attempted": true,
+    "destination": [
+      "127.0.0.1",
+      11434
+    ],
+    "ended_ns": 1791603577754269626,
+    "errname": "ECONNREFUSED",
+    "errno": 111,
+    "family": "AF_INET",
+    "started_ns": 1791603577754247376,
+    "syscall": "connect_ex"
+  },
+  "interfaces": [
+    [
+      1,
+      "lo"
+    ],
+    [
+      2,
+      "tunl0"
+    ],
+    [
+      3,
+      "gre0"
+    ],
+    [
+      4,
+      "gretap0"
+    ],
+    [
+      5,
+      "erspan0"
+    ],
+    [
+      6,
+      "ip_vti0"
+    ],
+    [
+      7,
+      "ip6_vti0"
+    ],
+    [
+      8,
+      "sit0"
+    ],
+    [
+      9,
+      "ip6tnl0"
+    ],
+    [
+      10,
+      "ip6gre0"
+    ]
+  ],
+  "ipv6_ifaddr": "00000000000000000000000000000001 01 80 10 80       lo\n",
+  "link_state": [
+    {
+      "flags": 9,
+      "index": 1,
+      "name": "lo",
+      "operstate": "unknown"
+    },
+    {
+      "flags": 128,
+      "index": 2,
+      "name": "tunl0",
+      "operstate": "down"
+    },
+    {
+      "flags": 128,
+      "index": 3,
+      "name": "gre0",
+      "operstate": "down"
+    },
+    {
+      "flags": 4098,
+      "index": 4,
+      "name": "gretap0",
+      "operstate": "down"
+    },
+    {
+      "flags": 4098,
+      "index": 5,
+      "name": "erspan0",
+      "operstate": "down"
+    },
+    {
+      "flags": 128,
+      "index": 6,
+      "name": "ip_vti0",
+      "operstate": "down"
+    },
+    {
+      "flags": 128,
+      "index": 7,
+      "name": "ip6_vti0",
+      "operstate": "down"
+    },
+    {
+      "flags": 128,
+      "index": 8,
+      "name": "sit0",
+      "operstate": "down"
+    },
+    {
+      "flags": 128,
+      "index": 9,
+      "name": "ip6tnl0",
+      "operstate": "down"
+    },
+    {
+      "flags": 128,
+      "index": 10,
+      "name": "ip6gre0",
+      "operstate": "down"
+    }
+  ],
+  "namespace": "net:[4026532559]",
+  "pid": 90,
+  "positive": {
+    "attempted": true,
+    "destination": [
+      "127.0.0.1",
+      33343
+    ],
+    "ended_ns": 1791603577754116376,
+    "errname": "SUCCESS",
+    "errno": 0,
+    "family": "AF_INET",
+    "received": "CAL-PUBLIC-SYNTHETIC-SOCKET-CONTROL\n",
+    "started_ns": 1791603577753656459,
+    "syscall": "connect_ex"
+  },
+  "route_v4": "Iface\tDestination\tGateway \tFlags\tRefCnt\tUse\tMetric\tMask\t\tMTU\tWindow\tIRTT                                                       \n",
+  "route_v6": "00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000001 80 00000000000000000000000000000000 00 00000000000000000000000000000000 00000000 00000002 00000000 80200001       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n",
+  "schema": "cal-network-observation/2",
+  "synthetic_egress": {
+    "attempted": true,
+    "destination": [
+      "192.0.2.1",
+      9
+    ],
+    "ended_ns": 1791603577754236667,
+    "errname": "ENETUNREACH",
+    "errno": 101,
+    "family": "AF_INET",
+    "started_ns": 1791603577754228542,
+    "syscall": "connect_ex"
+  }
+}

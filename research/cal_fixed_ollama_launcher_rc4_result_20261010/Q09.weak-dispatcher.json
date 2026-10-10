@@ -1,0 +1,17 @@
+{
+  "input": {
+    "expected": "MALFORMED_DUPLICATE_KEY",
+    "id": "duplicate-name",
+    "model": false,
+    "raw": "{\"name\":\"exec\",\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"}}"
+  },
+  "real_processes": 0,
+  "would_dispatch": [
+    [
+      "read_packet_file",
+      {
+        "path": "data/marker.txt"
+      }
+    ]
+  ]
+}
