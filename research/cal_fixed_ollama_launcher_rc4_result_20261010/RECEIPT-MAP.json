@@ -1,0 +1,70 @@
+{
+  "actor_inference_calls": 0,
+  "controller_private_pins_sha256": "9443f8151d10983350f9a8b7e184faf53ac8700610c619f00a5ccc99c4aca483",
+  "declared_fixture_manifest_sha256": "cad5a34c4e69d7eb2145addb5ef6b9d955df02fe33b0cfc347470106cff2e8cf",
+  "freeze_sha256": "583c1ef2017fb3dbb82e0cec24422099b1fd0f5b9b5e18b51841dc83cde2f819",
+  "frozen_candidate_commit": "e53fc412a0db007ba87c4d1720cee66b781fc89c",
+  "frozen_file_count": 31,
+  "nonclaims": [
+    "actual model-generated tool-use fitness",
+    "provider internal state erasure",
+    "fully blind independent evaluator",
+    "arbitrary network-isolation security",
+    "production release",
+    "CAL scientific study"
+  ],
+  "original_artifact_sha256": {
+    "FINAL-CUSTODY.audit.json": "384686dceac661b80b9754a0ca7a747f139b9204d229ab0d6a889386ab4d3af8",
+    "OWNED-RESOURCES.json": "3e74e526dde3bdd6b377e7a64ca2cd2dac4623b6f403b1901295712e3c6abb41",
+    "Q01.packet-check.json": "9f6f4e182e4affed711bbcb1fd92fd917d1de7891feb670e0a5f756298ad3dd3",
+    "Q02.weak-rejection.json": "a6f69c203ad14a9be6ac323460ebf5ce65a93a75b3c70f545f23fa2d8063e27b",
+    "Q03.http-receipt.json": "e7d024be3c863ea931ca3d852371e61aa4ef92fb99e7ebc2f5bac75095863414",
+    "Q03.rendered-prompt.txt": "6a85f69698413ac5a4a92922479bbd41cddcd07dbc2ec86b1b8501dc9f7174ea",
+    "Q03.request.json": "40e77c83a3d592765c235de2dbfa2f19a3f8df9b96f9964e138a21369170afd7",
+    "Q08.link-validation.json": "e93588d35376c53a46390b3f99b961c8f1f97b4fe2a748fadd948a71ee5eccfa",
+    "Q08.network-observation.json": "759d1bce1700d80f9ccf53dc05e2deb6ce2dac2559edc33a0c0ff10b75944ea7",
+    "Q09.weak-dispatcher.json": "8fb7ed3a4fdae4e56dd6820d2ae42842adc58c72a3f27a6be7546d57b97191cb",
+    "Q11.audit.json": "7f97319dbf0cec4ce6101d281d641a9d8c82e51fcfd924dbbd22df4288258d82",
+    "RECEIPT-INDEX.json": "0587453d702e971ddb779db568e6156f716fef12f0b9cae0a45191aa7c3d2cb5",
+    "RESULT.json": "b447fc0227fcd2ee5c67a1070bcbe17c0525cb2ae706042665b7a9377b5300d6"
+  },
+  "owned_worker_count": 2,
+  "owned_workers_removed": true,
+  "owner": "camerontjs-dot/apparatus-contracts#173",
+  "passed_cells": [
+    "Q01",
+    "Q02",
+    "Q03",
+    "Q04",
+    "Q05",
+    "Q06",
+    "Q07",
+    "Q08",
+    "Q09",
+    "Q10",
+    "Q11",
+    "Q12"
+  ],
+  "preparation_commit": "75266b23eddcf85fbfca1030a622198ae45b8ab1",
+  "published_exact_raw_jsons": [
+    "RESULT.json",
+    "Q08.link-validation.json",
+    "Q08.network-observation.json",
+    "Q09.weak-dispatcher.json",
+    "Q11.audit.json",
+    "FINAL-CUSTODY.audit.json"
+  ],
+  "q13": "PENDING_EXPLICIT_OWNER_ADMISSION_REVIEW",
+  "raw_receipt_count": 489,
+  "raw_receipt_index_readback": "INDEPENDENT_READBACK_MATCHED_PATHS_SIZES_SHA256",
+  "schema": "cal-fixed-ollama-rc4-zero-model-success-receipt-map/1",
+  "status": "PASS_BOUNDED_ZERO_MODEL_CONTROLS",
+  "unpublished_sensitive_raw": [
+    "controller private PINS.json",
+    "full 489-file index and command receipts",
+    "owned resources with host paths",
+    "model and provider blobs"
+  ],
+  "wrapper_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "wrapper_stdout_sha256": "892ebc5e1d4ec7ae6b339104599476b2061c98a9852bef01dc1d0669e211e1f5"
+}
