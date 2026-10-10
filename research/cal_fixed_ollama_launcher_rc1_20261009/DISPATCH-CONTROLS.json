@@ -1,0 +1,314 @@
+[
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "exec-direct",
+    "model": false,
+    "raw": "{\"name\":\"exec\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "exec-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"exec\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "shell-direct",
+    "model": false,
+    "raw": "{\"name\":\"shell\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "shell-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"shell\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "read_file-direct",
+    "model": false,
+    "raw": "{\"name\":\"read_file\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "read_file-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_file\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "mcp-exec-direct",
+    "model": false,
+    "raw": "{\"name\":\"mcp-exec\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "mcp-exec-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"mcp-exec\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "mcp__host__exec-direct",
+    "model": false,
+    "raw": "{\"name\":\"mcp__host__exec\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "mcp__host__exec-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"mcp__host__exec\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "code-mode-direct",
+    "model": false,
+    "raw": "{\"name\":\"code-mode\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "code-mode-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"code-mode\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "generate_tool-direct",
+    "model": false,
+    "raw": "{\"name\":\"generate_tool\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "generate_tool-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"generate_tool\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "web_search-direct",
+    "model": false,
+    "raw": "{\"name\":\"web_search\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "web_search-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"web_search\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "docker-direct",
+    "model": false,
+    "raw": "{\"name\":\"docker\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "docker-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"docker\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "unknown-direct",
+    "model": false,
+    "raw": "{\"name\":\"unknown\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "unknown-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"unknown\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "example_function_name-direct",
+    "model": false,
+    "raw": "{\"name\":\"example_function_name\",\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "example_function_name-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"example_function_name\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "extra-arg",
+    "model": false,
+    "raw": "{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\",\"extra\":1}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "extra-arg-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\",\"extra\":1}}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "wrong-path-type",
+    "model": false,
+    "raw": "{\"name\":\"read_packet_file\",\"arguments\":{\"path\":12}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "wrong-path-type-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":12}}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "wrong-content-type",
+    "model": false,
+    "raw": "{\"name\":\"write_result\",\"arguments\":{\"path\":\"answer.txt\",\"content\":false}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "wrong-content-type-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"write_result\",\"arguments\":{\"path\":\"answer.txt\",\"content\":false}}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "arguments-list",
+    "model": false,
+    "raw": "{\"name\":\"read_packet_file\",\"arguments\":[]}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "arguments-list-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":[]}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "missing-path",
+    "model": false,
+    "raw": "{\"name\":\"read_packet_file\",\"arguments\":{}}"
+  },
+  {
+    "expected": "MALFORMED_ARGUMENTS",
+    "id": "missing-path-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":{}}}"
+  },
+  {
+    "expected": "MALFORMED_UTF8",
+    "id": "surrogate-content",
+    "model": false,
+    "raw": "{\"name\":\"write_result\",\"arguments\":{\"path\":\"answer.txt\",\"content\":\"\\ud800\"}}"
+  },
+  {
+    "expected": "MALFORMED_UTF8",
+    "id": "surrogate-content-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"write_result\",\"arguments\":{\"path\":\"answer.txt\",\"content\":\"\\ud800\"}}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "name-list",
+    "model": false,
+    "raw": "{\"name\":[],\"arguments\":{}}"
+  },
+  {
+    "expected": "AUTHORIZATION_TOOL_DENIED",
+    "id": "name-list-model",
+    "model": true,
+    "raw": "{\"function\":{\"name\":[],\"arguments\":{}}}"
+  },
+  {
+    "expected": "MALFORMED_JSON",
+    "id": "truncated",
+    "model": false,
+    "raw": "{\"name\":"
+  },
+  {
+    "expected": "MALFORMED_JSON",
+    "id": "nan",
+    "model": false,
+    "raw": "{\"name\":NaN,\"arguments\":{}}"
+  },
+  {
+    "expected": "MALFORMED_ENVELOPE",
+    "id": "array",
+    "model": false,
+    "raw": "[]"
+  },
+  {
+    "expected": "MALFORMED_ENVELOPE",
+    "id": "missing-name",
+    "model": false,
+    "raw": "{\"arguments\":{}}"
+  },
+  {
+    "expected": "MALFORMED_ENVELOPE",
+    "id": "extra-envelope",
+    "model": false,
+    "raw": "{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"},\"shell\":\"true\"}"
+  },
+  {
+    "expected": "MALFORMED_DUPLICATE_KEY",
+    "id": "duplicate-name",
+    "model": false,
+    "raw": "{\"name\":\"exec\",\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"}}"
+  },
+  {
+    "expected": "MALFORMED_DUPLICATE_KEY",
+    "id": "duplicate-path",
+    "model": false,
+    "raw": "{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"/etc/passwd\",\"path\":\"data/marker.txt\"}}"
+  },
+  {
+    "expected": "MALFORMED_DUPLICATE_KEY",
+    "id": "duplicate-function",
+    "model": true,
+    "raw": "{\"function\":{},\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"}}}"
+  },
+  {
+    "expected": "MALFORMED_DUPLICATE_KEY",
+    "id": "duplicate-model-arg",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"/etc/passwd\",\"path\":\"data/marker.txt\"}}}"
+  },
+  {
+    "expected": "MALFORMED_MODEL_CALL",
+    "id": "model-extra",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"}},\"native\":true}"
+  },
+  {
+    "expected": "MALFORMED_MODEL_CALL",
+    "id": "model-index-bool",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"},\"index\":true}}"
+  },
+  {
+    "expected": "MALFORMED_MODEL_CALL",
+    "id": "model-index-negative",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"},\"index\":-1}}"
+  },
+  {
+    "expected": "MALFORMED_MODEL_CALL",
+    "id": "model-id-type",
+    "model": true,
+    "raw": "{\"id\":42,\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"}}}"
+  },
+  {
+    "expected": "MALFORMED_MODEL_CALL",
+    "id": "model-function-list",
+    "model": true,
+    "raw": "{\"function\":[]}"
+  },
+  {
+    "expected": "MALFORMED_MODEL_CALL",
+    "id": "model-missing-args",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\"}}"
+  },
+  {
+    "expected": "MALFORMED_MODEL_CALL",
+    "id": "model-extra-function",
+    "model": true,
+    "raw": "{\"function\":{\"name\":\"read_packet_file\",\"arguments\":{\"path\":\"data/marker.txt\"},\"command\":\"true\"}}"
+  }
+]
