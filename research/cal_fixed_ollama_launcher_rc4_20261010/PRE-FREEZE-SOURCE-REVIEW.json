@@ -1,0 +1,19 @@
+{
+  "first_error_not_a_scientific_run": true,
+  "first_static_check_setup_error": "an unfrozen independent source-review script incorrectly expected two instead of three occurrences of the receipt name; an AssertionError stopped that development check before the corrected review passed",
+  "identical_fixed_adapter_and_prior_controls": true,
+  "new_link_receipt_reference_count": 3,
+  "not_claimed": [
+    "Q08 actual worker flags",
+    "Q09-Q12 behavioral pass",
+    "model inference fitness",
+    "actor admission"
+  ],
+  "parent_frozen_candidate": "5c1079135a58331bb68cb21a2b6a2a3bdc96fa9e",
+  "q03_expected_prompt_sha256": "6a85f69698413ac5a4a92922479bbd41cddcd07dbc2ec86b1b8501dc9f7174ea",
+  "q08_new_validator_sha256": "ff9622f8f82570920d83402ad8b4544a9b42fbb23e14feb03580e5496cf58053",
+  "q08_worker_instrumentation_added": true,
+  "q11_new_link_receipt_required": true,
+  "schema": "cal-rc4-pre-freeze-source-review/1",
+  "status": "PASS_SOURCE_DIFF_STATIC_ONLY"
+}

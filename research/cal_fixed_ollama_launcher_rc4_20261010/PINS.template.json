@@ -1,0 +1,34 @@
+{
+  "controller_home": "REQUIRED_ABSOLUTE_HOME",
+  "docker_binary": {
+    "path": "REQUIRED_ABSOLUTE_DOCKER",
+    "sha256": "REQUIRED_SHA256"
+  },
+  "docker_context": "desktop-linux",
+  "docker_endpoint": "REQUIRED_EXACT_UNIX_SOCKET_ENDPOINT",
+  "docker_engine": "29.5.2",
+  "image_architecture": "arm64",
+  "image_config_env": null,
+  "image_family_intent": "Official Python 3.14 slim bookworm; must resolve exact linux/arm64 digest before freeze",
+  "image_id": "REQUIRED_LOCAL_IMAGE_ID",
+  "image_os": "linux",
+  "image_platform": "linux/arm64",
+  "image_ref": "REQUIRED_EXACT_LOCAL_IMAGE_ID",
+  "model_blob_directory": "REQUIRED_ABSOLUTE_BLOB_DIRECTORY",
+  "model_manifest": {
+    "path": "REQUIRED_ABSOLUTE_MANIFEST",
+    "sha256": "9cda952e5d8f43bd4ddd3954c82e404e6cc286e04ceb77fa536f9f7113d7b28d"
+  },
+  "platform": "REQUIRED_EXACT_PLATFORM_PLATFORM",
+  "provider_binary": {
+    "path": "/Applications/Ollama.app/Contents/Resources/ollama",
+    "sha256": "9d8ee8964971c91b4faaa84cf61aac9a9d5a568af6629d8fc1d2cb939f9ce07f"
+  },
+  "python": "REQUIRED_EXACT_SYS_VERSION",
+  "python_binary": {
+    "path": "REQUIRED_ABSOLUTE_PYTHON",
+    "sha256": "REQUIRED_SHA256"
+  },
+  "worker_config_env": null,
+  "worker_python_version": "REQUIRED_IMAGE_CONFIG_PYTHON_VERSION"
+}

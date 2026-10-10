@@ -1,0 +1,14 @@
+{
+  "experiment_id": "cal-fixed-ollama-public-synthetic-rc4-20261010",
+  "files": [
+    {
+      "path": "data/marker.txt",
+      "sha256": "04d7c29ff732dcb8c993138ab73cfc3195ffd6e52a7cb26254bb3c2c9ba099c7"
+    },
+    {
+      "path": "instructions/request.txt",
+      "sha256": "fe139a5eee24ab24be7eb05af759de8f0f1705ebfd35b2d3958a304a7aa98987"
+    }
+  ],
+  "schema": "cal-context-free-packet-rc0"
+}
