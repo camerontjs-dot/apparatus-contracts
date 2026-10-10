@@ -1,0 +1,80 @@
+{
+  "api_version": "0.40.0",
+  "authentication": null,
+  "binary": {
+    "path": "/Applications/Ollama.app/Contents/Resources/ollama",
+    "sha256": "9d8ee8964971c91b4faaa84cf61aac9a9d5a568af6629d8fc1d2cb939f9ce07f",
+    "size": 52191760
+  },
+  "cloud_binding": null,
+  "endpoint": "http://127.0.0.1:11434/api/chat",
+  "messages_layer": null,
+  "model": "qwen3.5:9b",
+  "model_blobs": [
+    {
+      "digest": "sha256:be595b49fe22012bd1f5605ec14c7ffa58331783a88a4fd8c22e5fc8ec42cf9f",
+      "matches": true,
+      "mediaType": "application/vnd.docker.container.image.v1+json",
+      "observed_sha256": "be595b49fe22012bd1f5605ec14c7ffa58331783a88a4fd8c22e5fc8ec42cf9f",
+      "observed_size": 475,
+      "size": 475
+    },
+    {
+      "digest": "sha256:dec52a44569a2a25341c4e4d3fee25846eed4f6f0b936278e3a3c900bb99d37c",
+      "matches": true,
+      "mediaType": "application/vnd.ollama.image.model",
+      "observed_sha256": "dec52a44569a2a25341c4e4d3fee25846eed4f6f0b936278e3a3c900bb99d37c",
+      "observed_size": 6594462816,
+      "size": 6594462816
+    },
+    {
+      "digest": "sha256:7339fa418c9ad3e8e12e74ad0fd26a9cc4be8703f9c110728a992b193be85cb2",
+      "matches": true,
+      "mediaType": "application/vnd.ollama.image.license",
+      "observed_sha256": "7339fa418c9ad3e8e12e74ad0fd26a9cc4be8703f9c110728a992b193be85cb2",
+      "observed_size": 11355,
+      "size": 11355
+    },
+    {
+      "digest": "sha256:9371364b27a52acac9d87f88bd93c9db1174d8d6ec57f6888925cdc1788871ff",
+      "matches": true,
+      "mediaType": "application/vnd.ollama.image.params",
+      "observed_sha256": "9371364b27a52acac9d87f88bd93c9db1174d8d6ec57f6888925cdc1788871ff",
+      "observed_size": 65,
+      "size": 65
+    },
+    {
+      "digest": "sha256:ff48aba880b8178e0322aedb40a494c8898fa73cafa4b0d330181fc6f0cf1a90",
+      "matches": true,
+      "mediaType": "application/vnd.ollama.manifest.list.v2+json",
+      "observed_sha256": "ff48aba880b8178e0322aedb40a494c8898fa73cafa4b0d330181fc6f0cf1a90",
+      "observed_size": 464,
+      "size": 464
+    },
+    {
+      "digest": "sha256:2e16a80fe3d77d431d295466415848403c8c266667ee5d7d8991ee445b4e1311",
+      "matches": true,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "observed_sha256": "2e16a80fe3d77d431d295466415848403c8c266667ee5d7d8991ee445b4e1311",
+      "observed_size": 741,
+      "size": 741
+    },
+    {
+      "digest": "sha256:c97eb11d70b1acdc88af01eef566c1fe4f7fbe93eb1afc06871132f293ff425a",
+      "matches": true,
+      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+      "observed_sha256": "c97eb11d70b1acdc88af01eef566c1fe4f7fbe93eb1afc06871132f293ff425a",
+      "observed_size": 940,
+      "size": 940
+    }
+  ],
+  "model_inference_in_qualification": false,
+  "model_manifest_sha256": "9cda952e5d8f43bd4ddd3954c82e404e6cc286e04ceb77fa536f9f7113d7b28d",
+  "parser": "qwen3.5",
+  "proxies": false,
+  "redirects": false,
+  "renderer": "qwen3.5",
+  "source_version_commit": "0d0720e51fb2fd9aa58781c3d720c06d720c2e7b",
+  "system_layer": null,
+  "template": "{{ .Prompt }}"
+}

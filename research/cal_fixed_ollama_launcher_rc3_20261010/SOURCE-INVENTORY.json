@@ -1,0 +1,55 @@
+{
+  "codex": "ordinary engineering builder; not a selected isolated actor",
+  "embedding_models": "not viable chat transports",
+  "local_binary_source_reproducibility": "not proven; exact installed binary separately hashed",
+  "observed_source_objects": [
+    {
+      "git_blob": "e19de536fdaf350af615f24b52a2af9fedf44e54",
+      "path": "api/types.go",
+      "sha256": "75369e029dcfc815013243b1e728fcff32514a3b38b26f3288eb1ee2b7fa4d1b"
+    },
+    {
+      "git_blob": "90ed6789a49f58221cefaa6b9c1a92347b3aba48",
+      "path": "server/routes.go",
+      "sha256": "94829abc324d6116e2efe500795843f71ffb0a88c5d03315be4a690e3b1b1878"
+    },
+    {
+      "git_blob": "17b50efc652865d9098801d0ab27570be7060cc0",
+      "path": "server/prompt.go",
+      "sha256": "79411c4e15ff27fb8bac4dcd96076407e035ec407c0ab1a1840035f9668b4654"
+    },
+    {
+      "git_blob": "7df4dd179322ce3540c8717663adf89e2c92a961",
+      "path": "server/images.go",
+      "sha256": "550d1c3f870cacec72f0484f543c53a8f442dd136499c89c30ba37d923d4eda7"
+    },
+    {
+      "git_blob": "f55e1905ef4287e59044c0fb89a8326f2f19f304",
+      "path": "model/renderers/qwen35.go",
+      "sha256": "69bca99b53a3db8d599bb9ec8eadf65ce9a72868566a89bfac44d31fe3b565e0"
+    },
+    {
+      "git_blob": "f344b3291e87809e7035158a8bd7969976da3202",
+      "path": "model/renderers/renderer.go",
+      "sha256": "6098106fb2029204670c68a03c74dcb9d64fa33190f9f04e672b31c1f34679a5"
+    },
+    {
+      "git_blob": "325ebb727b18f51879376e95ff0d4a33ec2614ae",
+      "path": "model/renderers/json.go",
+      "sha256": "8477b2bb938867319042410af36957971a6c7aec53f12f1fb85d11bf2a121650"
+    },
+    {
+      "git_blob": "277ce25e8ad120772d19c846eb76bb0a9d844a0f",
+      "path": "model/parsers/qwen35.go",
+      "sha256": "c369a5220e11c89f32ed6efce659c7c735f7b10490606015b23a89b77cc54405"
+    },
+    {
+      "git_blob": "2f468731385877f50f9c3044e02eea56306459c6",
+      "path": "model/parsers/qwen3coder.go",
+      "sha256": "85a405aa5eea15a121824ddaf859c681040fea9d8c641447ec94afa519fa6202"
+    }
+  ],
+  "other_listeners": "not attached; no sbx/MCP/Conduit path selected",
+  "selected_model": "smallest already-installed completion + tools capability model by bytes",
+  "source_commit": "0d0720e51fb2fd9aa58781c3d720c06d720c2e7b"
+}
