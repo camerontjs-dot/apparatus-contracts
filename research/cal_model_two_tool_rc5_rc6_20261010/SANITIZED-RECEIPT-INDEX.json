@@ -1,0 +1,89 @@
+{
+  "date_utc": "2026-10-11T02:16:01.420621+00:00",
+  "diagnostics": {
+    "gemma4_think_false_native_tool_returned_literal_backslash_n": true,
+    "model_vs_ollama_parser_root_cause": "UNKNOWN",
+    "native_think_false_missing_u000a": true,
+    "native_think_false_original_sha256": "2b9d9517831131cc18bf38b06f939d0f097388a93d1f0fae7cd2edd230ce9ae7",
+    "plain_json_text_original_sha256": "55b7833d23d91aad292edbe5b93859e8f2297ceb84a3b2a02b8bfc17b63b9b98",
+    "plain_json_text_preserved_u000a": true,
+    "qwen_think_true_native_tool_returned_literal_backslash_n": true,
+    "two_model_native_tool_original_sha256": "5e605ea56cf075d0c89a9e1c7a46dc5a9349e087820827e041c4d04518e294ed"
+  },
+  "historical_first_results_retained": true,
+  "independent_blind_scientific_evaluation": "NOT_RUN",
+  "known_public_synthetic": true,
+  "no_production_changes": true,
+  "original_frozen_rc4_commit": "e53fc412a0db007ba87c4d1720cee66b781fc89c",
+  "original_frozen_rc4_packet_manifest_sha256": "cad5a34c4e69d7eb2145addb5ef6b9d955df02fe33b0cfc347470106cff2e8cf",
+  "original_frozen_rc4_tree": "09641245faf3af524f8c74845c5d3f3d4c8c8fb4",
+  "owner": "camerontjs-dot/apparatus-contracts#173",
+  "provider_identity": "Ollama 0.40.0 pinned c97eb11... model digest, host-trusted",
+  "q13_admission": "BLOCKED_PENDING_EXPLICIT_OWNER_REVIEW",
+  "qualified_for_model_tool_use": "NO",
+  "raw_first_evidence_private": true,
+  "results": {
+    "rc5": {
+      "actual_answer_length": 31,
+      "actual_model_generated_tool_names": [
+        "read_packet_file",
+        "read_packet_file",
+        "write_result"
+      ],
+      "actual_model_requests": 2,
+      "actual_worker_config_checks_passed": 15,
+      "actual_worker_config_checks_total": 15,
+      "answer_byte_exact": false,
+      "controller_source_sha256": "1a58a9f33fc56d079cbf9317222c9e6b71e85bacf1edbe320c6d6c7ee15ac430",
+      "expected_answer_length": 32,
+      "external_checker_source_sha256": "4bc794134a84aeaaafc7b762db0f2ed329efdc81d885c866739e7328073b70f0",
+      "first_external_disposition": "NOT_QUALIFIED_REQUIRED_EVIDENCE_FAILED_OR_MISSING",
+      "first_external_failed": [
+        "MISSING_OR_MALFORMED_OR_INCONSISTENT_EVIDENCE"
+      ],
+      "first_external_passed": 0,
+      "first_external_total": 1,
+      "first_external_verdict_sha256": "302766f24da18737fa1bcd39b46d6715377ed07ef9d592bcc4df61d7e0b11f34",
+      "first_result": "FAIL_NOT_QUALIFIED",
+      "freeze_sha256": "dbf3e6e3347661db402b45c529a1c65e9be1c5cc531d6f160e7b37a291565083",
+      "original_first_result_sha256": "68ca57642a959b2cea4a3df62d45e7b653389b8d30a211c1e56425dcef778ff4",
+      "posthoc_link_validator_sha256": "cfe094a1156a50fea1f4eacfb9de23bdf8aa05b14358f6eb4b1447b736c2881b",
+      "same_worker_socket_checks_passed": 4,
+      "same_worker_socket_checks_total": 4,
+      "task_owned_worker_cleaned": true
+    },
+    "rc6": {
+      "actual_answer_length": 31,
+      "actual_model_generated_tool_names": [
+        "read_packet_file",
+        "read_packet_file",
+        "write_result"
+      ],
+      "actual_model_requests": 2,
+      "actual_worker_config_checks_passed": 15,
+      "actual_worker_config_checks_total": 15,
+      "answer_byte_exact": false,
+      "controller_source_sha256": "b24ab22d300579dbd1245205ad46bbb19fd68b7b2a2fdd966e885832e047789d",
+      "expected_answer_length": 32,
+      "external_checker_source_sha256": "e788a11762706c77023124e7cb96a95abd221017e600b4775834f5d537416761",
+      "first_external_disposition": "NOT_QUALIFIED_REQUIRED_EVIDENCE_FAILED_OR_MISSING",
+      "first_external_failed": [
+        "model_first_trace_completed",
+        "answer_original_bytes_exact_expected",
+        "all_answer_checks_true",
+        "answer_exact_approved_sha256"
+      ],
+      "first_external_passed": 41,
+      "first_external_total": 45,
+      "first_external_verdict_sha256": "4e21021b34f96e86e4c7066e5e1e3886ce23e6f52894f1fe03cbcb500526ab17",
+      "first_result": "FAIL_NOT_QUALIFIED",
+      "freeze_sha256": "211d43572564729fe666a592d303aa21d970a57033e1141a65dcbcd96d0aa17e",
+      "original_first_result_sha256": "a2603543c61ca7e1b71e7c45f046629e602917285cd1b7133a3289227dbe80c8",
+      "posthoc_link_validator_sha256": "210d8a5a0e5dd2790dd407550fe0a828a9fb1ab37271cf189f14050ac9a9a02b",
+      "same_worker_socket_checks_passed": 4,
+      "same_worker_socket_checks_total": 4,
+      "task_owned_worker_cleaned": true
+    }
+  },
+  "schema": "cal-rc5-rc6-sanitized-result-index/v1"
+}
