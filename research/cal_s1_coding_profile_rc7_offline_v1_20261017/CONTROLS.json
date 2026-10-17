@@ -1,0 +1,37 @@
+{
+  "schema": "cal-rc7-offline-controls/v1",
+  "owner": "apparatus-contracts#173",
+  "initial_controls_prepared_before_implementation": true,
+  "revision_note": "Observer separation and finalization controls added after source review; initial controls and source hashes retained in development history.",
+  "transport": "FAKE_RUNTIME_ONLY",
+  "representation": "cal-s1-lines-v1: UTF-8 encode LF.join(lines) plus final LF; empty array encodes empty file; no trimming or escape reinterpretation",
+  "positive_properties": [
+    "seven exact immutable allowlisted reads with observed byte hashes",
+    "candidate.py is the only scratch write, read back independently after each write",
+    "literal quotes, backslashes, indentation, Unicode, blank lines and final LF preserved",
+    "fixed development operation with controller-selected evaluator and cases",
+    "fresh invocation binding and complete ordered synthetic event transcripts from a separate controller observer interface",
+    "missing independent observer refuses even a complete forged runtime receipt",
+    "immutable candidate snapshot supplied to fixed test interface; observed consumed hash must match",
+    "controller finalization refuses a verdict invalidated by candidate rewrite"
+  ],
+  "refusal_properties": [
+    "wrong or extra paths, traversal, symlink and hardlink entries",
+    "unknown versions, tools, fields, duplicate JSON keys, malformed types, nonfinite values",
+    "oversized request, read, write, feedback or observation",
+    "missing runtime, missing candidate, stale scratch, missing observations",
+    "changed candidate, replayed receipts, duplicate or skipped cases, wrong evaluator",
+    "stdout PASS or exit zero without independent evaluator and per-case observations"
+  ],
+  "valid_shaped_weak_controls": [
+    "valid-shaped placeholder bytes with a separate synthetic observer failed-case transcript",
+    "synthetic runtime returns plausible PASS and exit zero; separate fake observer returns no events",
+    "separate fake observer returns an early-exit transcript with no case events",
+    "complete-looking forged receipt returned by synthetic runtime without separate observer evidence",
+    "candidate writer drops final LF despite well-formed write request"
+  ],
+  "claim_ceiling": "OFFLINE_PROFILE_PREPARATION_ONLY",
+  "causal_consumption_limit": "FakeObserver supplies synthetic transcripts. No candidate Python, designated CAL evaluator or real process/case observer is executed. Expected/observed identifiers in these fixtures are not evidence of actual causal consumption.",
+  "q13": "NOT_ADMITTED",
+  "live_runtime": "NOT_RUN"
+}

@@ -1,0 +1,21 @@
+{
+  "base_commit": "beb4477dc3e87b03cec9eaa186a17042b4cac765",
+  "dependent_cal_metadata_only": {
+    "head": "a10e61f0d4be26ebb93a2b798d1a5f46470cc42c",
+    "source_or_labels_read": false,
+    "staging_manifest_sha256": "de1df6d7da410ea3e58607d4ff967024bdf2cf6e28123961e1ad84e1c4aa62b4"
+  },
+  "packet_code_reused_unchanged": true,
+  "rc4_rc6_inspection_only_no_runtime_import": true,
+  "retained_source_sha256": {
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/independent_packet_checker.py": "6b84015c19ab493483761c8ff8f885e3d63f0a0095f1e8d42c1105be4e91c448",
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/prepare_packet.py": "33376fe6b1f910ba6a07103b0292dbb9a2d940757318705fa0ac182779002e43",
+    "research/cal_fixed_ollama_launcher_rc4_20261010/FREEZE.json": "583c1ef2017fb3dbb82e0cec24422099b1fd0f5b9b5e18b51841dc83cde2f819",
+    "research/cal_fixed_ollama_launcher_rc4_20261010/TOOL-PROFILE.json": "908b1a180fcfacd19c3e18f0aa97a69939bb554d4bb0144ac4c4d7444db2e560",
+    "research/cal_fixed_ollama_launcher_rc4_20261010/fixed_adapter.py": "9229694ad76a39715fb1c9b1b10a670ada33120f541a4826135af4735b06d676",
+    "research/cal_fixed_ollama_launcher_rc4_20261010/network_state_validator.py": "ff9622f8f82570920d83402ad8b4544a9b42fbb23e14feb03580e5496cf58053",
+    "research/cal_fixed_ollama_launcher_rc4_20261010/worker_control.py": "f158cc853a324ead88a627e00aca4eed66ae74c989382a811934ea82aac5d2d4",
+    "research/cal_model_two_tool_rc5_rc6_20261010/rc6_external_checker.py": "e788a11762706c77023124e7cb96a95abd221017e600b4775834f5d537416761",
+    "research/cal_model_two_tool_rc5_rc6_20261010/rc6_model_controller.py": "b24ab22d300579dbd1245205ad46bbb19fd68b7b2a2fdd966e885832e047789d"
+  }
+}
