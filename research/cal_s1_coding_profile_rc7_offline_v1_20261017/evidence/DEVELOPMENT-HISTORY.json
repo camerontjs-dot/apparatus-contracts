@@ -1,0 +1,94 @@
+{
+  "classification": "OFFLINE_PROFILE_PREPARATION_ONLY",
+  "historical_stop": {
+    "path": "../cal_s1_coding_profile_rc7_20261017/QUALIFICATION_STOP.json",
+    "q13": "NOT_ADMITTED",
+    "retried": false,
+    "sha256": "e5215e134c38e4630ac5649b19b133528f22918171674ea195a1fdfd7098a87d",
+    "status": "BLOCKED_PREFLIGHT_TOOL_SAFETY_DENIAL"
+  },
+  "non_claims": [
+    "No actual candidate Python or CAL evaluator ran",
+    "No live observer/runtime binding exists",
+    "No container/model or runtime-preflight action occurred",
+    "No scientific independence or qualification"
+  ],
+  "schema": "cal-rc7-offline-development-history/v1",
+  "stages": [
+    {
+      "errors": 1,
+      "exception": "ModuleNotFoundError: offline_profile",
+      "exit": 1,
+      "id": "01-before-implementation",
+      "outcome": "IMPORT_ERROR_EXPECTED_IMPLEMENTATION_ABSENT",
+      "raw_external_log_sha256": "2ee72593870aa5f76c699bc09061bc0c27a21afa1364595bde51deeb20e76021",
+      "tests_reported": 1
+    },
+    {
+      "exit": 0,
+      "id": "02-initial-implementation",
+      "log_sha256": "9eb79942914a0bee3594fbfbf9bb4d5cbf47397a7515c31a8f7bd7d62485c2de",
+      "outcome": "PASS_TESTS_NOT_INDEPENDENT_EXECUTION_ATTRIBUTION",
+      "published_log": "INITIAL-50-TESTS.txt",
+      "source_sha256": {
+        "CONTROLS.json": "d14ebc5193f013433673b0a81c9137215f76d9070427dc5298b42de1c783e5a4",
+        "completion_check.py": "457d100b09bca24cbf60e0d20f79d82c7a042984955d8e12194d2254a765349d",
+        "offline_profile.py": "eda41fa605d8a290f69e8a004db84dd8122c1228f94a70b2c11cc5802ffb20ab",
+        "test_offline_profile.py": "87e132d084d1ae16eb43e9f590db370864ea9f47aa7f9ca426602aaa1908455c"
+      },
+      "tests": 50
+    },
+    {
+      "exit": 0,
+      "id": "03-supplemental",
+      "log_sha256": "1bc4247e3ea6dbb76c5f05a9517c97e85ec3c6ba8d9ae21efabebfd4ac0f75a8",
+      "outcome": "PASS_TESTS_SAME_WITNESS_DESIGN_GAP",
+      "published_log": "INITIAL-71-TESTS.txt",
+      "tests": 71
+    },
+    {
+      "evidence_type": "SOURCE_INFORMED_AGENT_REVIEW",
+      "findings": [
+        "executor received observer callback and could produce entire witness transcript without evaluator execution",
+        "pre/post file hashes did not bind consumed bytes against swap/restore",
+        "prior verdict needed explicit current-candidate finalization",
+        "optional feedback receipt and total history needed bounds"
+      ],
+      "id": "04-source-review",
+      "observed_model": "UNKNOWN",
+      "outcome": "INITIAL_WITNESS_DESIGN_REJECTED",
+      "requested_model": "gpt-6-luna",
+      "response": "executor receives no callback; separate observer interface required; immutable snapshot and consumed hash; finalization invalidated on rewrite; feedback and history bounds; live binding remains absent",
+      "source_snapshots_preserved": "controller output 02-source; initial implementation hashes above"
+    },
+    {
+      "external_receipt_sha256": "a6134d9c2688f24e2fa113b468a7c5433458872b8520efe4d71c89e40eb9228a",
+      "id": "05-revised-source",
+      "outcome": "PASS_83_OFFLINE_SYNTHETIC_CONTROLS_ONLY"
+    },
+    {
+      "corrections": [
+        "synthetic wording corrected",
+        "test-module evaluator/observer token explained",
+        "same-instance executor/observer wiring refused and tested",
+        "aggregate event accessor no longer uses request envelope bound"
+      ],
+      "evidence_type": "SOURCE_INFORMED_AGENT_REVIEW",
+      "id": "06-source-review-followup",
+      "observed_model": "UNKNOWN",
+      "outcome": "CORRECTED_DECLARED_IDENTITY_AND_TRANSCRIPT_WORDING",
+      "requested_model": "gpt-6-luna",
+      "residual_limits": [
+        "provider identity is declared, not code authenticated",
+        "objects are bounded after serialization, not a hostile transport memory guarantee",
+        "separate in-process fixtures do not establish actual observer independence"
+      ]
+    },
+    {
+      "id": "07-final-reviewed-source",
+      "outcome": "PASS_84_OFFLINE_SYNTHETIC_CONTROLS_ONLY",
+      "receipt": "final/RESULTS.json",
+      "receipt_sha256": "34a1a5aee162d329de5188419e6a060c7819104090036c23a47c37b54970a746"
+    }
+  ]
+}

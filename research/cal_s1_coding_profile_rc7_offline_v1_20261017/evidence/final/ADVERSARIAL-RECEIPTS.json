@@ -1,0 +1,157 @@
+[
+  {
+    "control": "positive_synthetic_transcript",
+    "decisions": [
+      {
+        "request_sha256": "aee66fc3320cff82f7961a8e34f010e56c0d043c36044e4092ad666ef89861f2",
+        "status": "ACCEPTED"
+      },
+      {
+        "request_sha256": "fae93eb8c9b043fd372e6d87fa65b3130debb710e18fb7cf34f8fb7b7d9970f9",
+        "status": "ACCEPTED"
+      }
+    ],
+    "evidence_layer": "SYNTHETIC_FAKE_RUNTIME",
+    "expected": "ACCEPTED_SYNTHETIC_ONLY",
+    "matched": true,
+    "observed": "ACCEPTED_SYNTHETIC_ONLY",
+    "observer_events": 8,
+    "reason": null
+  },
+  {
+    "control": "plausible_pass_no_case_execution",
+    "decisions": [
+      {
+        "request_sha256": "aee66fc3320cff82f7961a8e34f010e56c0d043c36044e4092ad666ef89861f2",
+        "status": "ACCEPTED"
+      },
+      {
+        "reason": "EXECUTION_OBSERVATIONS_MISSING_OR_EXTRA",
+        "request_sha256": "fae93eb8c9b043fd372e6d87fa65b3130debb710e18fb7cf34f8fb7b7d9970f9",
+        "status": "REFUSED"
+      }
+    ],
+    "evidence_layer": "SYNTHETIC_FAKE_RUNTIME",
+    "expected": "REFUSED",
+    "matched": true,
+    "observed": "REFUSED",
+    "observer_events": 0,
+    "reason": "EXECUTION_OBSERVATIONS_MISSING_OR_EXTRA"
+  },
+  {
+    "control": "early_exit_before_cases",
+    "decisions": [
+      {
+        "request_sha256": "aee66fc3320cff82f7961a8e34f010e56c0d043c36044e4092ad666ef89861f2",
+        "status": "ACCEPTED"
+      },
+      {
+        "reason": "EXECUTION_OBSERVATIONS_MISSING_OR_EXTRA",
+        "request_sha256": "fae93eb8c9b043fd372e6d87fa65b3130debb710e18fb7cf34f8fb7b7d9970f9",
+        "status": "REFUSED"
+      }
+    ],
+    "evidence_layer": "SYNTHETIC_FAKE_RUNTIME",
+    "expected": "REFUSED",
+    "matched": true,
+    "observed": "REFUSED",
+    "observer_events": 2,
+    "reason": "EXECUTION_OBSERVATIONS_MISSING_OR_EXTRA"
+  },
+  {
+    "control": "well_shaped_weak_candidate_failed_case",
+    "decisions": [
+      {
+        "request_sha256": "0b8f16fcf151efc886365c68f58d10495a9ede3d49333534701010bf3dec6b29",
+        "status": "ACCEPTED"
+      },
+      {
+        "reason": "EXECUTION_OBSERVATIONS_MISMATCH_OR_FAILED_CASE",
+        "request_sha256": "fae93eb8c9b043fd372e6d87fa65b3130debb710e18fb7cf34f8fb7b7d9970f9",
+        "status": "REFUSED"
+      }
+    ],
+    "evidence_layer": "SYNTHETIC_FAKE_RUNTIME",
+    "expected": "REFUSED",
+    "matched": true,
+    "observed": "REFUSED",
+    "observer_events": 8,
+    "reason": "EXECUTION_OBSERVATIONS_MISMATCH_OR_FAILED_CASE"
+  },
+  {
+    "control": "fully_forged_runtime_receipt",
+    "decisions": [
+      {
+        "request_sha256": "aee66fc3320cff82f7961a8e34f010e56c0d043c36044e4092ad666ef89861f2",
+        "status": "ACCEPTED"
+      },
+      {
+        "reason": "EXECUTION_OBSERVATIONS_MISSING_OR_EXTRA",
+        "request_sha256": "fae93eb8c9b043fd372e6d87fa65b3130debb710e18fb7cf34f8fb7b7d9970f9",
+        "status": "REFUSED"
+      }
+    ],
+    "evidence_layer": "SYNTHETIC_FAKE_RUNTIME",
+    "expected": "REFUSED",
+    "matched": true,
+    "observed": "REFUSED",
+    "observer_events": 0,
+    "reason": "EXECUTION_OBSERVATIONS_MISSING_OR_EXTRA"
+  },
+  {
+    "control": "missing_external_observer",
+    "decisions": [
+      {
+        "request_sha256": "aee66fc3320cff82f7961a8e34f010e56c0d043c36044e4092ad666ef89861f2",
+        "status": "ACCEPTED"
+      },
+      {
+        "reason": "INDEPENDENT_OBSERVER_MISSING",
+        "request_sha256": "fae93eb8c9b043fd372e6d87fa65b3130debb710e18fb7cf34f8fb7b7d9970f9",
+        "status": "REFUSED"
+      }
+    ],
+    "evidence_layer": "SYNTHETIC_FAKE_RUNTIME",
+    "expected": "REFUSED",
+    "matched": true,
+    "observed": "REFUSED",
+    "observer_events": 0,
+    "reason": "INDEPENDENT_OBSERVER_MISSING"
+  },
+  {
+    "control": "write_drops_terminal_lf",
+    "decisions": [
+      {
+        "reason": "WRITE_BYTES_DRIFT",
+        "request_sha256": "aee66fc3320cff82f7961a8e34f010e56c0d043c36044e4092ad666ef89861f2",
+        "status": "REFUSED"
+      }
+    ],
+    "evidence_layer": "SYNTHETIC_FAKE_RUNTIME",
+    "expected": "REFUSED",
+    "matched": true,
+    "observed": "REFUSED",
+    "observer_events": 0,
+    "reason": "WRITE_BYTES_DRIFT"
+  },
+  {
+    "control": "different_consumed_candidate",
+    "decisions": [
+      {
+        "request_sha256": "aee66fc3320cff82f7961a8e34f010e56c0d043c36044e4092ad666ef89861f2",
+        "status": "ACCEPTED"
+      },
+      {
+        "reason": "EXECUTION_OBSERVATIONS_MISMATCH_OR_FAILED_CASE",
+        "request_sha256": "fae93eb8c9b043fd372e6d87fa65b3130debb710e18fb7cf34f8fb7b7d9970f9",
+        "status": "REFUSED"
+      }
+    ],
+    "evidence_layer": "SYNTHETIC_FAKE_RUNTIME",
+    "expected": "REFUSED",
+    "matched": true,
+    "observed": "REFUSED",
+    "observer_events": 8,
+    "reason": "EXECUTION_OBSERVATIONS_MISMATCH_OR_FAILED_CASE"
+  }
+]

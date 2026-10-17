@@ -1,0 +1,80 @@
+{
+  "advancement_readiness": "BLOCKED_AT_LIVE_RUNTIME_BOUNDARY",
+  "blockers": [
+    "documented platform-supported resolution for denied preflight",
+    "separately reviewed exact-profile live execution authority",
+    "independently observed real evaluator/case/candidate execution",
+    "effective runtime/model restrictions and first-run receipts",
+    "explicit exact-profile Q13 admission decision"
+  ],
+  "candidate_id": "cal-rc7-offline-v1-20261017",
+  "component_evidence": {
+    "errors": 0,
+    "evidence_layer": "OFFLINE_SYNTHETIC_INTERFACES_AND_FILE_CUSTODY",
+    "failures": 0,
+    "path": "evidence/final/RESULTS.json",
+    "sha256": "34a1a5aee162d329de5188419e6a060c7819104090036c23a47c37b54970a746",
+    "tests": 84
+  },
+  "delegation": {
+    "measured_cost_savings": "NOT_MEASURED",
+    "observed_model": "UNKNOWN",
+    "requested_default": "gpt-6-luna",
+    "tasks": [
+      "source-informed legacy/revision review",
+      "bounded offline controls authoring"
+    ]
+  },
+  "evaluator_identities": {
+    "actual_CAL_evaluator_execution": "NOT_RUN",
+    "completion_checker_sha256": "1466585e3405360f25e6127ba02d21f9d2a638754ea1162b30b736d9e9f4e514",
+    "fake_evaluator_and_observer_declared_token": "3cf7e7a2ed75f58803537e686db6c0dce77e04aa5cd0b34261252a99e08f5f8a",
+    "unit_test_runner_sha256": "d81fe134ab475de8a522f1d2742554ee7f7fd482814c06a42c4b4f5cdda2b898"
+  },
+  "excluded_scope": [
+    "production",
+    "contracts",
+    "CAL evaluators or candidate",
+    "calibration and held-out sources and labels",
+    "runtime/provider/model/image pins",
+    "shared environment configuration",
+    "predecessor source and stop records"
+  ],
+  "freeze_state": "NOT_A_SCIENTIFIC_FREEZE",
+  "fresh_blind_or_acceptance_evidence": "NOT_RUN",
+  "included_scope": [
+    "research/cal_s1_coding_profile_rc7_offline_v1_20261017/"
+  ],
+  "lifecycle_state": "OFFLINE_PREPARED_SOURCE_SNAPSHOT",
+  "non_claims": [
+    "source identity is not live runtime identity",
+    "declared observer token is not code authentication",
+    "in-process fake interfaces establish no confinement or causal consumption",
+    "tests are not scientific qualification"
+  ],
+  "owner": "apparatus-contracts#173",
+  "q13": "NOT_ADMITTED",
+  "qualification_status": "BLOCKED_PREFLIGHT_TOOL_SAFETY_DENIAL",
+  "replay_evidence": "NOT_RUN",
+  "schema": "cal-rc7-offline-source-snapshot/v1",
+  "source_base_commit": "beb4477dc3e87b03cec9eaa186a17042b4cac765",
+  "source_commit": "3cea1335d174c635008f05157d1dce96ab63dfe8",
+  "source_sha256": {
+    "CONTROLS.json": "266d743835885efe7c275f215d5681a2c7e47ccf7f9cdaf76cb309f0eb21cea6",
+    "NEXT_OWNER_PROMPT.md": "804f46490e5c67f41b520471ef423541f0f23a807c23936e0d4b423912f0fc89",
+    "README.md": "6277060966ae03bc06c9aa347f6ab7f281848a34fa1adf546f7535e639bb5887",
+    "completion_check.py": "1466585e3405360f25e6127ba02d21f9d2a638754ea1162b30b736d9e9f4e514",
+    "evidence/DEVELOPMENT-HISTORY.json": "58d4172c2e1c74a882b4c444910830bd5e61369c84962800140d01dcbac7450f",
+    "evidence/INITIAL-50-TESTS.txt": "9eb79942914a0bee3594fbfbf9bb4d5cbf47397a7515c31a8f7bd7d62485c2de",
+    "evidence/INITIAL-71-TESTS.txt": "1bc4247e3ea6dbb76c5f05a9517c97e85ec3c6ba8d9ae21efabebfd4ac0f75a8",
+    "evidence/REUSE-IDENTITIES.json": "e6916b7a928d6a86ef49ad7cbfaf6092e04e916d2b328f0172a1306c7ec50e4d",
+    "evidence/final/ADVERSARIAL-RECEIPTS.json": "459c265a51594c00467b5655807936f860fada870e0bd7600c182990730279ce",
+    "evidence/final/RESULTS.json": "34a1a5aee162d329de5188419e6a060c7819104090036c23a47c37b54970a746",
+    "evidence/final/TESTS.txt": "0723a8d5b7a7165e9e958a9173bf4bcd4b7cab9889d4cfae6166250aede50ff9",
+    "offline_profile.py": "993440800afc8cde1d8e403449efbc0fd3d5cd6a59c7dd9c8bda756151be868e",
+    "run_offline_tests.py": "d81fe134ab475de8a522f1d2742554ee7f7fd482814c06a42c4b4f5cdda2b898",
+    "test_offline_profile.py": "3cf7e7a2ed75f58803537e686db6c0dce77e04aa5cd0b34261252a99e08f5f8a",
+    "test_supplemental.py": "db51eae595c3a162e09f9a267f8af46c85b3b43b28f5d2837c7ec54ca3be977a"
+  },
+  "source_tree": "7b95ab561e0768941244157187b6c2c26b831972"
+}

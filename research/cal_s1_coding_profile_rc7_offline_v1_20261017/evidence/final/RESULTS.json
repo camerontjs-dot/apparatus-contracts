@@ -1,0 +1,375 @@
+{
+  "actual_candidate_or_CAL_evaluator_execution": "NOT_RUN",
+  "adapter_execution": "FAKE_RUNTIME_INTERFACE",
+  "adversarial_receipts_sha256": "459c265a51594c00467b5655807936f860fada870e0bd7600c182990730279ce",
+  "cases": [
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_adapter_allows_rewrite_of_its_named_candidate"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_candidate_mutation_during_test_run_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_dispatch_budget_refuses_after_256_operations"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_dispatch_refuses_duplicate_json_keys"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_dispatch_refuses_malformed_json"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_dispatch_refuses_nonfinite_json_number"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_dispatch_refuses_oversize_envelope"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_dispatch_refuses_unknown_tool"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_dispatch_refuses_unknown_top_level_key"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_dispatch_refuses_unknown_version"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_duplicate_case_receipt_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_early_exit_after_evaluator_start_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_empty_line_array_writes_empty_bytes"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_external_untracked_candidate_drift_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_forged_complete_return_receipt_is_ignored"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_malformed_event_missing_identity_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_missing_case_receipt_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_missing_observer_provider_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_missing_runtime_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_observer_identity_mismatch_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_observer_transcript_consumed_different_candidate_even_when_runtime_restores"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_oversized_observer_event_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_pass_result_cannot_finalize_after_candidate_rewrite"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_passed_result_finalizes"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_profile_accepts_exactly_seven_sorted_synthetic_paths"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_profile_rejects_malformed_observer_identity"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_profile_rejects_traversal_path"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_profile_rejects_unsorted_paths"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_profile_rejects_unsupported_suffix"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_profile_rejects_wrong_path_count"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_refuses_absolute_path"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_refuses_entry_with_symlinked_ancestor"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_refuses_extra_argument"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_refuses_hardlinked_entry"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_refuses_hash_mismatch"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_refuses_symlink_entry"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_refuses_traversal"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_refuses_unlisted_path"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_read_returns_exact_bytes_and_hash"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_refused_request_counts_toward_256_dispatch_budget"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_replayed_event_with_old_run_id_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_second_run_uses_fresh_run_id"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_stale_candidate_at_construction_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_stdout_pass_and_exit_zero_without_witness_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_success_requires_exact_evaluator_and_case_event_order"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_test_operation_refuses_unknown_arguments"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_test_operation_requires_a_candidate_write"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_valid_shaped_weak_candidate_fails_case_evidence"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_witness_run_budget_refuses_after_32_runs"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_accepts_exact_byte_limit"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_preserves_quotes_backslashes_indentation_empty_lines_and_unicode"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_candidate_hardlink"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_candidate_symlink"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_embedded_cr"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_embedded_lf"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_other_candidate_path"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_oversize_output"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_surrogate"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_unicode_line_separators"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_refuses_wrong_argument_shape"
+    },
+    {
+      "status": "PASS",
+      "test": "test_offline_profile.OfflineProfileTests.test_write_reply_identifies_exact_candidate_bytes"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.PacketCustodyIntegrationTests.test_builder_stages_only_allowlist_and_independent_checker_accepts"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.PacketCustodyIntegrationTests.test_independent_checker_rejects_extra_synthetic_staged_world_file"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.PacketCustodyIntegrationTests.test_independent_checker_rejects_stale_scratch_entry"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_all_seven_allowlisted_reads_return_exact_text_and_digest"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_boolean_exit_code_is_not_integer_success"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_boolean_integer_case_result_is_not_boolean_pass"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_external_scratch_drift_after_write_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_extra_envelope_tool_key_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_extra_test_operation_argument_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_extra_witness_event_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_extra_witness_event_key_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_hash_matching_non_utf8_packet_bytes_are_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_malformed_runtime_feedback_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_missing_allowlisted_packet_entry_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_oversize_optional_receipt_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_oversize_packet_read_is_refused_even_with_matching_profile_hash"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_oversize_stdout_feedback_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_runtime_read_exception_fails_closed"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_runtime_test_exception_fails_closed"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_same_instance_executor_observer_wiring_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_valid_shaped_writer_that_drops_final_lf_fails_byte_drift"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_write_without_readback_is_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_supplemental.SupplementalAdapterTests.test_wrong_evaluator_candidate_and_profile_bindings_are_refused"
+    }
+  ],
+  "classification": "OFFLINE_PROFILE_PREPARATION_ONLY",
+  "completed_utc": "2026-10-17T17:17:59.511798+00:00",
+  "engine": "python.stdlib.unittest",
+  "errors": 0,
+  "execution_observer": "SEPARATE_FAKE_OBSERVER_INTERFACE",
+  "failures": 0,
+  "independence": "source-informed subagent tests/review; parent ran unittest; no blind scientific independence",
+  "live_qualification": "NOT_RUN",
+  "log_path_sanitization": "repository display root replaced; original controller logs retained externally",
+  "log_sha256": "0723a8d5b7a7165e9e958a9173bf4bcd4b7cab9889d4cfae6166250aede50ff9",
+  "passed": true,
+  "platform": "darwin",
+  "python_version": "3.14.4 (main, Apr  7 2026, 13:13:20) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "q13": "NOT_ADMITTED",
+  "qualification_stop": "BLOCKED_PREFLIGHT_TOOL_SAFETY_DENIAL",
+  "retained_dependency_sha256": {
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/independent_packet_checker.py": "6b84015c19ab493483761c8ff8f885e3d63f0a0095f1e8d42c1105be4e91c448",
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/prepare_packet.py": "33376fe6b1f910ba6a07103b0292dbb9a2d940757318705fa0ac182779002e43"
+  },
+  "schema": "cal-rc7-offline-source-tests/v1",
+  "skipped": 0,
+  "source_sha256": {
+    "CONTROLS.json": "266d743835885efe7c275f215d5681a2c7e47ccf7f9cdaf76cb309f0eb21cea6",
+    "completion_check.py": "1466585e3405360f25e6127ba02d21f9d2a638754ea1162b30b736d9e9f4e514",
+    "offline_profile.py": "993440800afc8cde1d8e403449efbc0fd3d5cd6a59c7dd9c8bda756151be868e",
+    "run_offline_tests.py": "d81fe134ab475de8a522f1d2742554ee7f7fd482814c06a42c4b4f5cdda2b898",
+    "test_offline_profile.py": "3cf7e7a2ed75f58803537e686db6c0dce77e04aa5cd0b34261252a99e08f5f8a",
+    "test_supplemental.py": "db51eae595c3a162e09f9a267f8af46c85b3b43b28f5d2837c7ec54ca3be977a"
+  },
+  "source_unchanged": true,
+  "started_utc": "2026-10-17T17:17:59.469102+00:00",
+  "tests_run": 84
+}
