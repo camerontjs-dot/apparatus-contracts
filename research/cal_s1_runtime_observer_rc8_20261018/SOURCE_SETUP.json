@@ -1,0 +1,34 @@
+{
+  "base_commit": "64844bd88b5f84b62c27c04f2be6fff6c7c1f1d2",
+  "current_runtime_pins": null,
+  "files": {
+    "APPROVAL.template.json": "f887b57b16602807a2924a9d2a6fea7f42898a2737d9d732645b0180bc1f058b",
+    "DEVELOPMENT_REVIEW.json": "195e3d2de7e0f1ed2138819df8d83f42be17ce6f819d5cc6840c932a875b2be0",
+    "NEXT_OWNER_PROMPT.md": "31c3ff9bd98f84034aef0d16eeca698d61dd6c563627875fc708cf7ac715472b",
+    "PINS.template.json": "aee8bf82a469d16378b5fcbf29423a7b00245c951e0272566d30d60d0aa8d24f",
+    "QUALIFICATION_PLAN.json": "f1b736e752f44d89e09c9b4d1f8c36468b1da6d1027529f02d7e8b47615a0f7a",
+    "README.md": "bf1cd4077d4a743b657c3cddb50d917da49dbd8cd89d384fc0871ad412e0ca52",
+    "SPECIMENS.json": "80a28237d88798bbfd64fd41926418871e6e814b9a3bf5bf434a1ecc24c8a6f9",
+    "SUPPORT_REQUEST.md": "411c66c976550c311e6e0ffbc62c275b7de6ee8e3d9f44100cb8573a3c7411de",
+    "check_phase_a.py": "2a108992dbdc029c819d93c132bbc5f70017f66120e82043d4b24df901ad4d12",
+    "execution_binding.py": "08c4ea50adb30cfc7408f0e5fcb4bc9114ca74dd6cbddd3ba81beab5d211a46c",
+    "host_evaluator.py": "3d9a28aa149a891fe43b7dc5e5d225caa3ceb5e3a26ef7e2a96c167fba836501",
+    "source_checks.py": "5537fc07ebc264af79515f3b2495e0725072f34c564c23722f352103d32cc50a",
+    "test_binding.py": "14e78a73200518f3a0aa245453af0398207208c86827c87a56f23438d6713d64",
+    "test_checker.py": "12b79afdf2f19a2193cebf04f6ce73e60d54479cad78ee8a41716384df8a2cb4"
+  },
+  "guest_program_sha256": "388bbd7f95015968002718593212e8d9aaf627d34cac996e24a002d3da706e5d",
+  "model_inference": false,
+  "owner": "apparatus-contracts#173",
+  "phase": "PUBLIC_SYNTHETIC_RUNTIME_OBSERVER_ONLY",
+  "platform_resolution": null,
+  "q13_admission": false,
+  "retained_dependencies_git_blobs": {
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/independent_packet_checker.py": "26ed7584504cd19b176df4bb934fbffd18c9ed60",
+    "research/cal_context_free_packet_macos_rc1_20261009/candidate/prepare_packet.py": "473c5382ff9b11d9c9c364c57f58bcc4a10ad472",
+    "research/cal_fixed_ollama_launcher_rc4_20261010/network_state_validator.py": "b2415f0a59ecd7b50e7c9ea82f3a4679f7a9307a",
+    "research/cal_fixed_ollama_launcher_rc4_20261010/worker_control.py": "2938f75974b76b4aad87bbd28dd6754d2b10f246"
+  },
+  "schema": "cal-rc8-source-setup-v1",
+  "scientific_runtime_freeze": false
+}

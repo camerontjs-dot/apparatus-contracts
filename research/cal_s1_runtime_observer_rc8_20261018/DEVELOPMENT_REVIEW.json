@@ -1,0 +1,20 @@
+{
+  "class": "SOURCE_REVIEW_DURING_UNFROZEN_PREPARATION",
+  "issues_corrected_before_source_freeze": [
+    "Cleanup failure could mask the first creation/execution exception; retain primary error and append cleanup state.",
+    "Cleanup required task-owner label and full returned ID to avoid removing an unverified resource.",
+    "Source-only approval did not bind runtime selection; add separately reviewed runtime-pin digest and controller/engine identity checks.",
+    "Requested stdin hash did not distinguish incomplete delivery; capture bytes sent and reject incomplete input.",
+    "Evidence output must not overlap the source tree.",
+    "Reuse #175 exact packet builder/checker rather than constructing a parallel custody mechanism."
+  ],
+  "observed_runtime_failures": [],
+  "remaining_review_limits": [
+    "live command capture, container behavior and model behavior unexecuted",
+    "fully forged host evidence is not authenticated by the code-isolated checker",
+    "approval-record shape checks do not authenticate a platform response",
+    "phase B actual coding tool/model binding remains separate"
+  ],
+  "schema": "cal-rc8-source-review-notes-v1",
+  "test_history": "45, 46, 48 and 60 source tests passed as controls were added; raw native logs preserved in task receipt directory. No scientific frozen attempt was made or repaired."
+}
