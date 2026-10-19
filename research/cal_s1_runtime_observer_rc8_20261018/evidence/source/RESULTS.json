@@ -1,0 +1,272 @@
+{
+  "actual_candidate_execution": "NOT_RUN",
+  "actual_docker_execution": "NOT_RUN",
+  "cases": [
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_added_host_mount_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_bool_is_not_exit_code"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_capture_correct_answer"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_capture_inverted_time"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_capture_missing_pid"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_complete_forged_event_not_answer"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_config_mutation_matrix"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_constructor_stops_before_runtime_read"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_correct_answer_with_forged_receipt_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_default_gate_refuses"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_different_packet_source"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_duplicate_key_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_early_exit_zero_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_expected_config_accepts_synthetic_record_only"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_frozen_specimens_are_data_not_imported"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_gate_checks_exact_run_review"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_gate_checks_platform_reference"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_gate_checks_response_hash"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_gate_rejects_source_drift"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_gate_shape_is_not_authentication"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_incomplete_input_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_journal_does_not_import_candidate_stdout_as_events"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_journal_refuses_existing_output"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_large_feedback_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_malformed_utf8"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_missing_runtime_environment_pins_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_mount_option_injection_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_no_evaluator_or_controller_mount_in_argv"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_nonzero_not_turned_into_pass"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_numeric_value_wrong_type"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_oversize_file_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_plausible_stdout_pass_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_primary_failure_is_retained_when_worker_not_created"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_print_noise_before_correct_answer_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_reused_packet_builder_and_checker"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_run_stops_without_output_or_attempt"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_runtime_pin_changes_not_covered_by_source_only_approval"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_rw_packet_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_scalar_is_not_answer"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_symlink_candidate_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_tampered_expected_packet_digest_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_unpinned_image_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_unsupported_context_refused"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_worker_name_is_controller_generated"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_wrong_container_id"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_wrong_image"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_wrong_owner"
+    },
+    {
+      "status": "PASS",
+      "test": "test_binding.SourceOnlyTests.test_wrong_well_shaped_answer_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_candidate_artifact_drift_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_changed_raw_bytes_fail_digest_check"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_coherent_synthetic_fixture_passes_integrity_not_authentication"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_coherently_rehashed_fake_pass_is_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_coherently_rehashed_forged_receipt_is_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_coherently_rehashed_wrong_answer_does_not_pass"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_failed_cleanup_is_not_success"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_input_substitution_rejected_even_with_new_hash"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_large_coherently_rehashed_answer_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_missing_invocation_does_not_count_as_case"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_q13_overclaim_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_source_drift_rejected"
+    },
+    {
+      "status": "PASS",
+      "test": "test_checker.PeerCheckerTests.test_summary_cannot_replace_observed_outcomes"
+    }
+  ],
+  "errors": 0,
+  "evidence_class": "SOURCE_TESTS_AND_SYNTHETIC_CAPTURE_RECORDS_ONLY",
+  "failures": 0,
+  "log_sha256": "ba14668fed80b37d78340ad22e777bd0b4ac41bb4b4bc61188adba0851d3e362",
+  "model_inference": "NOT_RUN",
+  "observation_limit": "fake captures exercise code; not actual runtime observations",
+  "passed": true,
+  "platform": "darwin",
+  "python": "3.14.4",
+  "q13_admitted": false,
+  "schema": "cal-rc8-source-tests-v1",
+  "skipped": 0,
+  "source_sha256": {
+    "check_phase_a.py": "2a108992dbdc029c819d93c132bbc5f70017f66120e82043d4b24df901ad4d12",
+    "execution_binding.py": "08c4ea50adb30cfc7408f0e5fcb4bc9114ca74dd6cbddd3ba81beab5d211a46c",
+    "host_evaluator.py": "3d9a28aa149a891fe43b7dc5e5d225caa3ceb5e3a26ef7e2a96c167fba836501",
+    "source_checks.py": "5537fc07ebc264af79515f3b2495e0725072f34c564c23722f352103d32cc50a",
+    "test_binding.py": "14e78a73200518f3a0aa245453af0398207208c86827c87a56f23438d6713d64",
+    "test_checker.py": "12b79afdf2f19a2193cebf04f6ce73e60d54479cad78ee8a41716384df8a2cb4"
+  },
+  "subprocess_guard_attempts": 0,
+  "tests_run": 61
+}

@@ -1,0 +1,69 @@
+{
+  "authority": "User requested resolution and qualification setup; this does not supply a platform determination or qualify an unobserved profile.",
+  "base_head": "64844bd88b5f84b62c27c04f2be6fff6c7c1f1d2",
+  "base_pr": 184,
+  "execution_freeze": {
+    "attempt_custody_root": "external controller location; single authoritative parent, private, not worker mounted",
+    "current_runtime_pins": null,
+    "scientific_runtime_freeze": false,
+    "separate_exact_run_review": null,
+    "source_inventory": "SOURCE_SETUP.json"
+  },
+  "not_changed": [
+    "RC4",
+    "failed RC5/RC6",
+    "denied RC7",
+    "offline #184",
+    "CAL #213/#214 data and evaluators",
+    "production",
+    "contracts A-E",
+    "synthesis weights",
+    "shared project-env helper",
+    "consumer pins"
+  ],
+  "owner": "apparatus-contracts#173",
+  "permission": {
+    "platform_resolution": null,
+    "prior_stop_preserved": true,
+    "record": "SUPPORT_REQUEST.md",
+    "submission": "NOT_SUBMITTED_BROWSER_CONTEXT_UNAVAILABLE",
+    "support_case": null
+  },
+  "phase_a": {
+    "cal_source_access": false,
+    "candidate_interface": "analyze(claim,evidence) returns one JSON value object; fixed guest program, no model-selected command",
+    "cases_per_specimen": 3,
+    "first_unexpected_result": "stop; preserve primary error and cleanup notes; no edit-and-rescore",
+    "independent_checker": "check_phase_a.py recomputes from raw controller capture; integrity only, host custody remains trusted",
+    "limits": {
+      "candidate_bytes": 32768,
+      "candidate_command_seconds": 10,
+      "case_input_bytes": 16384,
+      "combined_process_stream_bytes": 65536,
+      "container_cpus": 1,
+      "container_memory_bytes": 268435456,
+      "container_pids": 64,
+      "probe_command_seconds": 10
+    },
+    "maximum_decisive_attempts": 1,
+    "model_inference": false,
+    "name": "PUBLIC_SYNTHETIC_RUNTIME_OBSERVER_ONLY",
+    "negative_required": "15 specified rejections across wrong-value, fake-PASS, exit-zero, forged-event, extra-field specimens",
+    "planned_case_controls": 18,
+    "positive_required": "3 correct answers from the working specimen",
+    "q13_admission": false,
+    "runtime_failure": "never count as an intended negative semantic verdict",
+    "runtime_required": "actual pinned image/executable/controller/version, exact config and mounts, same-worker positive and negative network probes, exact packet/candidate input hashes, bounded captures, confirmed task-owned cleanup, unique worker per case",
+    "specimen_file": "SPECIMENS.json",
+    "specimens": 6
+  },
+  "phase_b": {
+    "depends_on": "accepted phase-A first evidence and separate source/model/tool freeze",
+    "no_silent_change": "Do not remove #184 fake-Witness refusal in place. Use a separately identified adapter successor and preserve its read/write/feedback/burn rules.",
+    "required_work": "wire the #184 versioned three-operation coding profile to a task-fit concrete binding; observe actual generated reads, LF line-array writes and fixed exposed-test calls, adversarial source data and denied operations, full effective tools and context boundaries",
+    "state": "NOT_IMPLEMENTED_OR_ADMITTED_BY_THIS_PHASE"
+  },
+  "purpose": "Distinguish externally evaluated correct candidate output from plausible false completion using an actual restricted runtime after the execution stop is resolved.",
+  "schema": "cal-rc8-qualification-setup-v1",
+  "state": "PREPARED_SOURCE_ONLY_LIVE_BLOCKED"
+}

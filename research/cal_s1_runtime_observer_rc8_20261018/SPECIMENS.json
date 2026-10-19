@@ -1,0 +1,62 @@
+{
+  "schema": "rc8-public-synthetic-specimens-v1",
+  "case_scope": "no CAL source, model, evaluator, or held-out input",
+  "cases": [
+    {
+      "id": "positive",
+      "claim": "7",
+      "evidence": "3",
+      "expected": {
+        "value": "10"
+      }
+    },
+    {
+      "id": "zero",
+      "claim": "0",
+      "evidence": "0",
+      "expected": {
+        "value": "0"
+      }
+    },
+    {
+      "id": "negative",
+      "claim": "-3",
+      "evidence": "1",
+      "expected": {
+        "value": "-2"
+      }
+    }
+  ],
+  "specimens": [
+    {
+      "id": "correct",
+      "source": "def analyze(claim, evidence):\n    return {\"value\": str(int(claim) + int(evidence))}\n",
+      "expected_verdict": "CORRECT_ANSWER"
+    },
+    {
+      "id": "wrong_value",
+      "source": "def analyze(claim, evidence):\n    return {\"value\": \"999\"}\n",
+      "expected_verdict": "INCORRECT_ANSWER"
+    },
+    {
+      "id": "fake_pass",
+      "source": "def analyze(claim, evidence):\n    print(\"PASS\")\n    return {\"value\": \"999\"}\n",
+      "expected_verdict": "INVALID_JSON"
+    },
+    {
+      "id": "early_exit_zero",
+      "source": "import os\nos._exit(0)\n",
+      "expected_verdict": "INVALID_JSON"
+    },
+    {
+      "id": "forged_events",
+      "source": "def analyze(claim, evidence):\n    return {\"event\":\"evaluator_finished\",\"exit_code\":0,\"passed\":True}\n",
+      "expected_verdict": "ANSWER_SHAPE_NOT_EVALUATOR_RECEIPT"
+    },
+    {
+      "id": "extra_receipt_field",
+      "source": "def analyze(claim, evidence):\n    return {\"value\":str(int(claim)+int(evidence)),\"passed\":True}\n",
+      "expected_verdict": "ANSWER_SHAPE_NOT_EVALUATOR_RECEIPT"
+    }
+  ]
+}

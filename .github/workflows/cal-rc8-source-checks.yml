@@ -1,0 +1,41 @@
+name: CAL RC8 source preparation checks
+
+on:
+  push:
+    branches: [research-infra/cal-runtime-observer-rc8-20261018]
+  pull_request:
+    paths:
+      - research/cal_s1_runtime_observer_rc8_20261018/**
+      - .github/workflows/cal-rc8-source-checks.yml
+
+permissions:
+  contents: read
+
+jobs:
+  source-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test source and simulated captures; subprocess launches disabled
+        run: |
+          python -B research/cal_s1_runtime_observer_rc8_20261018/source_checks.py --output /tmp/cal-rc8-source-results
+      - name: Require the missing platform decision to block readiness without runtime access
+        shell: bash
+        run: |
+          set +e
+          cd research/cal_s1_runtime_observer_rc8_20261018
+          python -B host_evaluator.py --readiness --approval APPROVAL.template.json --source-manifest SOURCE_SETUP.json > /tmp/cal-rc8-source-results/READINESS.json
+          status=$?
+          set -e
+          test "$status" = 2
+          python -c 'import json; r=json.load(open("/tmp/cal-rc8-source-results/READINESS.json")); assert r["reason"] == "PLATFORM_RESOLUTION_MISSING"; assert r["q13_admitted"] is False'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cal-rc8-source-checks-not-live-qualification
+          path: /tmp/cal-rc8-source-results/
+          if-no-files-found: error
